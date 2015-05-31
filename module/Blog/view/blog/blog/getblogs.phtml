@@ -1,0 +1,32 @@
+<?php
+if(!empty($blogs)) {
+    foreach ($blogs as $blog) {
+        echo $blog['first_name']." ".$blog['second_name'];
+        echo "<img style='width:200px' src=" . $blog["file_name"] . ">";
+        echo "<div>" . $blog["blog_content"] . "</div>";
+        echo "<hr>";
+    }
+$offset +=5;
+    echo "<button value='get more' class='blogs_more' offset=".$offset.">get More</button>";
+}
+else {
+    echo "NO MORE BLOGS";
+}
+
+?>
+<script type="text/javascript">
+
+    $(function(){
+
+        $(".blogs_more").bind("click",function(){
+            $.ajax({
+                type: "POST",
+                url: "blog/getblogs",
+                data : {offset : $(this).attr("offset")}
+
+            })
+                .done(function( data ) {
+                    $("#list_blogs").append(data);
+                });
+        })    });
+</script>

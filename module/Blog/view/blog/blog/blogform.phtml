@@ -1,0 +1,30 @@
+<div>
+
+    <textarea id="new_blog_text" style="width: 300px;height: 300px;">
+
+    </textarea>
+    <p>only jpg and png</p>
+    <input type="file" value="attach_file" id="blog_attach_file">
+    <button value="save" id="blog_save" name="blog_image">SAVE</button>
+</div>
+<script type="text/javascript">
+    $(function(){
+       $("#blog_save").bind("click",function () {
+            var text = $("#new_blog_text").val();
+           var e = document.getElementById("blog_attach_file");
+            var files= e.files;
+            var file=files[0];
+            var data = new FormData();
+            data.append('file',file);
+           data.append('text',text);
+            var url  = "blog/saveblog";
+            var request = new XMLHttpRequest();
+            var xmlupload=request.upload;
+            xmlupload.addEventListener('load',alert("blog created"),false);
+            request.open("POST", url, true);
+            request.send(data);
+
+
+       });
+    });
+</script>

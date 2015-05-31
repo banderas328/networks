@@ -1,0 +1,20 @@
+<?php
+if(isset($requests)) {
+    foreach ($requests as $request) {
+        if ($request['status'] == 0) {
+            if (isset($request['avatar'])) {
+                echo "<img style='max-width:100px;' src=" . $request['avatar'] . ">";
+            }
+            echo $request["first_name"] . " " . $request["second_name"];
+            echo "<a class='friend_request' href=" . $this->url('friends', array('action' => 'addfriend', 'user_id' => $request['user_id'])) . ">Add to friends</a>";
+        }
+        if ($request['status'] == 1) {
+            if (isset($request['avatar'])) {
+                echo "<img style='max-width:100px;' src=" . $request['avatar'] . ">";
+            }
+            echo $request["first_name"] . " " . $request["second_name"];
+            echo "<a class='friend_request' href=" . $this->url('friends', array('action' => 'cancelfriend', 'user_id' => $request['user_id'])) . ">Cancel</a>";
+        }
+    }
+}
+?>

@@ -1,0 +1,34 @@
+<?php
+if($friends)
+    foreach($friends as $friend){
+        echo "<div class='network_point' style='cursor:pointer;' user_id=".$friend['user_id'].">";
+        echo "<img src='assets/images/icons/icon_32_computer.png'>";
+        echo $friend['first_name'];
+        echo $friend['second_name'];
+        echo "</div>";
+    }
+?>
+<script type="text/javascript">
+
+
+    $(function() {
+        $(".network_point").bind("click",function(){
+            var user_id = $(this).attr('user_id');
+            get_network_point(user_id);
+
+        })
+
+
+    });
+    function get_network_point(user_id) {
+        $.ajax({
+            type: "POST",
+            url: "network/getnetworkpoint",
+            data: {user_id:user_id}
+        })
+            .done(function(data) {
+                $("#network").html(data);
+            });
+
+    }
+</script>

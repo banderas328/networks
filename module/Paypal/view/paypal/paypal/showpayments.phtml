@@ -1,0 +1,46 @@
+<?php
+       foreach ($this->payments as $row) {
+           echo "<span class='transaction' payment_id='". $row->id. "'> ".$row->payment_id."  status    ".$row->payment_status ."</span>";
+           echo "<br>";
+     }
+?>
+<script type="text/javascript">
+
+    $(function(){
+
+        $('.transaction').bind('click',function(){
+            get_payment(this);
+
+        });
+    });
+    function get_payment(element){
+        var payment_id = $(element).attr("payment_id");
+        $.ajax({
+            type: "POST",
+            url:  "paypal/getpayment",
+            data:{payment_id : payment_id}
+        })
+            .done(function( data ) {
+              alert(data);
+                $(function(){
+                    $.ajax({
+                        type: "GET",
+                        url: "paypal/showpayments"
+
+                    })
+                        .done(function( data ) {
+                            $("#complited_transactions").html(data);
+                        });
+                    $.ajax({
+                        type: "GET",
+                        url: "payment/getfinishedpayments"
+
+                    })
+                        .done(function( data ) {
+                            $("#finished_payments").html(data);
+                        });
+                });
+            });
+
+    }
+</script>

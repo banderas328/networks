@@ -1,0 +1,64 @@
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('paypal', array('action' => 'makepayment')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('address_line1'));
+echo "<br/>";
+echo $this->formRow($form->get('address_line2'));
+echo "<br/>";
+echo $this->formRow($form->get('city'));
+echo "<br/>";
+echo $this->formRow($form->get('state'));
+echo "<br/>";
+echo $this->formRow($form->get('postal_code'));
+echo "<br/>";
+echo $this->formRow($form->get('country'));
+echo "<br/>";
+echo $this->formRow($form->get('phone'));
+echo "<br/>";
+echo $this->formRow($form->get('card_number'));
+echo "<br/>";
+echo $this->formRow($form->get('expire_month'));
+echo "<br/>";
+echo $this->formRow($form->get('expire_year'));
+echo "<br/>";
+echo $this->formRow($form->get('cvv'));
+echo "<br/>";
+echo $this->formRow($form->get('first_name'));
+echo "<br/>";
+echo $this->formRow($form->get('last_name'));
+echo "<br/>";
+echo $this->formRow($form->get('quantity'));
+echo "<br/>";
+echo $this->formRow($form->get('card'));
+echo "<br/>";
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
+
+?>
+<script type="text/javascript">
+
+    $(function(){
+
+        $( "#payment" ).on( "submit", function( event ) {
+            event.preventDefault();
+            make_payment( $( this ).serialize());
+
+
+        });
+    });
+    function make_payment(data) {
+        $.ajax({
+            type: "POST",
+            url: "paypal/makepayment",
+            data: data
+        })
+            .done(function(data) {
+              alert(data);
+
+            });
+
+    }
+</script>

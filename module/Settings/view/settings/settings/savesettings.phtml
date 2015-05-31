@@ -1,0 +1,72 @@
+<?php
+// module/Settings/view/user/user/savesettings.phtml:
+$title = 'General user Settings';
+$this->headTitle($title);
+?>
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+    <form id="avatar_form" action="settings/savessettings" method="post">
+        <input type="file"  name="avatar" id="avatar">
+        <input type="submit" value="Submit">
+    </form>
+<script type="text/javascript">
+
+//    function initiate(){
+
+ //   }
+$(function () {
+    var my_avatar = document.getElementById('avatar');
+    my_avatar.addEventListener('change',upload,false);
+});
+    function upload(e) {
+        var files= e.target.files;
+        var file=files[0];
+        var data = new FormData();
+        data.append('avatar',file);
+        var url  = "settings/savesettings";
+        var request = new XMLHttpRequest();
+        var xmlupload=request.upload;
+//        xmlupload.addEventListener('loadstart',start,false);
+//        xmlupload.addEventListener('progress',status,false);
+         xmlupload.addEventListener('load',show,false);
+        request.open("POST", url, true);
+        request.send(data);
+    }
+    function show() {
+        console.info('done');
+
+    }
+    window.addEventListener('load',initiate ,false);
+</script>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('settings', array('action' => 'savesettings')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('sex'));
+echo "<br/>";
+echo $this->formRow($form->get('birthdate'));
+echo "<br/>";
+echo $this->formRow($form->get('first_name'));
+echo "<br/>";
+echo $this->formRow($form->get('second_name'));
+echo "<br/>";
+echo $this->formRow($form->get('job'));
+echo "<br/>";
+echo $this->formRow($form->get('country'));
+echo "<br/>";
+echo $this->formRow($form->get('city'));
+echo "<br/>";
+echo $this->formRow($form->get('about'));
+echo "<br/>";
+echo $this->formRow($form->get('skype'));
+echo "<br/>";
+echo $this->formRow($form->get('phone'));
+echo "<br/>";
+echo $this->formRow($form->get('site'));
+echo "<br/>";
+echo $this->formRow($form->get('visibility'));
+echo "<br/>";
+echo "<button value='save' name='save' id='save_general_settings'>save</button>";
+//echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();

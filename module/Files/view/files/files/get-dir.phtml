@@ -1,0 +1,163 @@
+<?php
+$user  = $_SESSION['user'];
+$lang = $user['user']->lang;
+
+if(!$is_root) {
+    ?>
+    <form id="file_directory_form"  method="post">
+        <input type="file"  name="file" id="file_to_directory">
+    </form>
+    <input type="text" id="directory_name">
+    <button value="create dir" id="create_dir"><?php echo $this->translate("Create_Directory",false,$lang);?></button>
+    <input type="hidden" value="<?php echo $current_directory?>" id="current_directory">
+    <br/>
+    <h3 class='parent_directory' style='cursor:pointer;position: absolute;top: 25px;left: 300px;' dir_key=<?php echo $current_directory?>><img  style='cursor:pointer;'src='assets/images/icons/go-back-icon.png' width='50px' height='50px'/></h3>
+<?php
+}
+?>
+<?php
+foreach($dirs as  $dir_key => $dir_value) {
+    echo "<div style='margin-left: 20px;'><img src='assets/images/icons/folder.png' width='50px' height='50px'/><h3 style='cursor:pointer;margin-top: -8px;margin-left: 5px;' dir_key=".$dir_value['id']." class='directory'>".$dir_value['path']."     </h3><span class='delete_directory' dir=".$dir_value['id'].">".$this->translate('Delete_Directory',false,$lang)."</span></div>" ;
+    echo "<p class='share_dir' dir=".$dir_value['id'].">share dir</p><p class='share_dir_with_password' dir=".$dir_value['id'].">share dir with password</p><input type='text' class='input_password' dir=".$dir_value['id']."><input type='button' value='save_password' dir=".$dir_value['id']." class='dir_save_pass'>";
+}
+if($filesInDir) {
+    foreach($filesInDir as  $file) {
+        echo "<h2 style='display:inline;' class='file_delete_string' file=".$file['id'].">".$file['file_title']."     ".$file['type']."<span class='delete_file' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span><a href='/files/downloadFile/id/".$file['id']."' class='download_file' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></h2></br>";
+        echo "<span file=".$file['id']." class='sellfile'> <h3>sell file</h3><input type='text' class='file_cost' value='file cost'><textarea>file desription</textarea><input type='text' class='tags' value='tags ( comma separated)'></span>";
+    }
+}
+?>
+<script type="text/javascript">
+    $(function() {
+        $(".sellfile").bind('click',function(){
+
+
+            var file_id = $(this).attr('file');
+            sell_file(file_id);
+        });
+        $(".delete_directory").bind("click",delete_category);
+        $('.delete_file').bind("click",delete_file);
+        $('#file_to_directory').bind('change',upload_file_to_directory);
+        $(".share_dir").bind("click",share_directory);
+        $(".dir_save_pass").bind("click",share_directory_with_password)
+        $(".parent_directory").bind("click",function(){
+            var dir_key = $(this).attr('dir_key');
+            $.ajax({
+                type: "POST",
+                url: "files/getParentDir",
+                data: {dir_key : dir_key}
+            })
+                .done(function( data ) {
+                    $("#hard_drive").html(data);
+                });
+        });
+        $('.directory').bind("click",function(){
+            var dir_key = $(this).attr('dir_key');
+            show_directory(dir_key);
+        });
+        $("#create_dir").bind("click",function(){
+            var directory_name = $("#directory_name").val();
+            var current_directory = $("#current_directory").val();
+
+            $.ajax({
+                type: "POST",
+                url: "files/createDir",
+                data: {current_directory : current_directory,directory_name : directory_name}
+
+            })
+                .done(function( data ) {
+                    var current_directory = $("#current_directory").val();
+                    show_directory(current_directory);
+
+                });
+        });
+
+    });
+    function sell_file(file_id) {
+
+        alert(file_id);
+
+
+    }
+    function share_directory () {
+        $.ajax({
+            type: "POST",
+            url: "files/shareDir",
+            data: {dir : $(this).attr("dir")}
+        })
+            .done(function( data ) {
+                alert(data);
+            });
+
+    }
+    function share_directory_with_password (){
+        var dir = $(this).attr("dir");
+        var password  = $(".input_password[dir="+dir+"]").val();
+
+        $.ajax({
+            type: "POST",
+            url: "files/shareDirWithPassword",
+            data: {dir : $(this).attr("dir"), password : password}
+        })
+            .done(function( data ) {
+                alert(data);
+            });
+
+
+    }
+    function upload_file_to_directory(e) {
+        var files= e.target.files;
+        var file=files[0];
+        var data = new FormData();
+        data.append('file',file);
+        var current_directory = $("#current_directory").val();
+        data.append('to_directory',current_directory);
+        var url  = "files/saveFile";
+        var request = new XMLHttpRequest();
+        var xmlupload=request.upload;
+        xmlupload.addEventListener('load',refresh_drive_with_delay(file),false);
+        request.open("POST", url, true);
+        request.send(data);
+    }
+    function show_directory(dir) {
+        $.ajax({
+            type: "POST",
+            url: "files/getDir",
+            data: {dir_key : dir}
+        })
+            .done(function( data ) {
+                $("#hard_drive").html(data);
+            });
+
+    }
+    function refresh_drive_with_delay(){
+        var current_directory = $("#current_directory").val();
+        setTimeout(function() { show_directory(current_directory)}, 2000)
+    }
+    function delete_file () {
+        var current_directory = $("#current_directory").val();
+        var file_id = $(this).attr("file");
+
+        $.ajax({
+            type: "POST",
+            url: "files/deleteFile",
+            data: {file_id : file_id , current_directory : current_directory }
+        })
+            .done(function( data ) {
+                $(".file_delete_string[file="+data+"]").remove();
+            });
+    }
+    function delete_category(){
+
+        var dir = $(this).attr('dir');
+        $.ajax({
+            type: "POST",
+            url: "files/deleteDirectory",
+            data: {dir : dir  }
+        })
+            .done(function( data ) {
+               refresh_drive_with_delay();
+            });
+    }
+
+</script>

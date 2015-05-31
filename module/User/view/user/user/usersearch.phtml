@@ -1,0 +1,68 @@
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('user', array('action' => 'usersearch')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+
+echo $this->formRow($form->get('sex'));
+echo $this->formRow($form->get('birthdate'));
+echo $this->formRow($form->get('first_name'));
+echo $this->formRow($form->get('second_name'));
+echo $this->formRow($form->get('job'));
+echo $this->formRow($form->get('country'));
+echo $this->formRow($form->get('city'));
+echo $this->formRow($form->get('skype'));
+echo $this->formRow($form->get('phone'));
+echo $this->formRow($form->get('site'));
+
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
+?>
+
+
+
+<?php
+if($this->paginator) {
+if (count($this->paginator)): ?>
+    <ul>
+        <?php foreach ($this->paginator as $item): ?>
+            <?php $vars = get_object_vars($item);?>
+            <?php echo "<img src=".$vars['avatar'].">"; ?>
+            <li><?php echo $vars['first_name'];?></li>
+            <li><?php echo $vars['second_name'];?></li>
+            <li><a class="friend_request" href="/friends/addfriendrequest/<?php echo $vars['user_id']; ?>">Add To Friends</a></li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif;
+}
+?>
+<script type="text/javascript">
+   $(function() {
+        $('.friend_request').bind('click',function () {
+
+            var url = $(this).attr('href');
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json"
+            })
+                .done(function(data) {
+                    if(data == 'have') {
+                    var have = '<div id="have_request" title="Friend request"><p>You already send request to this user</p></div>';
+                        $('body').append(have);
+                        $('#have_request').dialog();
+                    }
+                });
+
+            return false;
+
+        });
+    });
+</script>
+
+<?php
+if($this->paginator) {
+echo $this->paginationControl($this->paginator,'Sliding', array('partial/paginator.phtml','Settings'), array('route' => 'userSearch'));
+}?>
+

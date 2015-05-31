@@ -1,0 +1,15 @@
+
+<script type="text/javascript">
+    $(function(){
+
+        $.ajax({
+            type: "POST",
+            url: "network/getnetworkfolder",
+            data: {dir_key:<?php echo $dir_key; ?>,user_id:<?php echo $user_id; ?>}
+            }
+        )
+            .done(function(data) {
+                $("#network").html(data);
+            });
+    });
+</script>

@@ -1,0 +1,12 @@
+<script type="text/javascript">
+</script>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('messages', array('action' => 'addmessageform')));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+
+echo $this->formRow($form->get('text'));
+echo "<button value='save' name='save' id='save_general_settings'>save</button>";
+echo $this->form()->closeTag();

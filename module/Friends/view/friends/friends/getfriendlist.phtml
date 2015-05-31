@@ -1,0 +1,47 @@
+<button value="refresh" id="friends_refresh">refresh</button>
+<?php
+if($friends)
+foreach($friends as $friend){
+    echo "<img style='width:80px;height:80px;'src=".$friend['avatar'].">";
+    echo $friend['first_name'];
+    echo $friend['second_name'];
+    echo "<button class='send_message' to_user='".$friend['user_id']."' value='send_message'>send message</button>";
+    echo "<br>";
+
+}
+?>
+<div id="message_to_user_from_user_list" title="Enter message">
+<textarea class="message_to_user_area" style="width: 400px;height: 120px" maxlength="500"></textarea>
+<button class="submit" id="message_to_user_from_user_list_button">send</button>
+</div>
+<script type="text/javascript">
+
+    $(function() {
+
+        $(".send_message").bind("click",function(){
+            send_message_from_user_list(this);
+        });
+
+    });
+    function send_message_from_user_list(element) {
+        var to_user = $(element).attr('to_user');
+        $('.message_to_user_area').val("");
+        $("#message_to_user_from_user_list").dialog( { width: 500,height:200
+            });
+        $("#message_to_user_from_user_list_button").attr("to_user",to_user);
+        $( "#message_to_user_from_user_list_button").unbind( "click" );
+        $("#message_to_user_from_user_list_button").bind("click",function(){
+            var text = $(".message_to_user_area").val();
+            $.ajax({
+                type: "POST",
+                url: "messages/addmessage",
+                data : {text :text , to_user : $(this).attr('to_user')}
+            });
+
+
+
+        });
+
+
+    }
+</script>

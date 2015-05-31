@@ -1,0 +1,780 @@
+<?php $user  = $_SESSION['user'];
+$lang = $user['user']->lang;
+?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv=Content-Type content="text/html;charset=UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="JavaScript desktop environment built with jQuery." />
+    <title>jQuery Desktop</title>
+  <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/desktop.css" />
+    <link rel="stylesheet" href="jquery-ui/jquery-ui.css" />
+    <link rel="stylesheet" href="jquery-ui/jquery-ui.structure.css" />
+    <link rel="stylesheet" href="jquery-ui/jquery-ui.theme.css" />
+    <script type="text/javascript" src="jquery-ui/external/jquery/jquery.js"></script>
+    <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.desktop.js"></script>
+</head>
+<body>
+<div class="abs" id="wrapper">
+<div class="abs" id="desktop">
+<a class="abs icon" style="left:180px;top:420px;" href="#icon_dock_drive">
+    <img src="assets/images/icons/icon_32_drive.png" />
+    <?php echo $this->translate("Hard_Drive",false,$lang);?>
+</a>
+    <a class="abs icon" style="left:340px;top:360px;" href="#icon_dock_money">
+        <img src="assets/images/icons/3.png" />
+        <?php echo $this->translate("Money",false,$lang);?>
+    </a>
+    <a class="abs icon" style="left:420px;top:360px;" href="#icon_dock_payment">
+        <img src="assets/images/icons/payment.png" />
+        <?php echo $this->translate("Payments",false,$lang);?>
+    </a>
+<a class="abs icon" style="left:260px;top:420px;" href="#icon_dock_disc">
+    <img src="assets/images/icons/icon_32_disc.png" />
+    <?php echo $this->translate("Audio",false,$lang);?>
+</a>
+<a class="abs icon" style="left:340px;top:420px;" href="#icon_dock_network">
+    <img src="assets/images/icons/icon_32_network.png" />
+    <?php echo $this->translate("Network",false,$lang);?>
+</a>
+<a class="abs icon" style="left:420px;top:420px;" href="#icon_dock_settings">
+    <img src="assets/images/icons/setting.png" />
+    <?php echo $this->translate("Settings",false,$lang);?>
+</a>
+<a class="abs icon" style="left:740px;top:420px;" href="#icon_dock_search">
+    <img src="assets/images/icons/search.png" />
+    <?php echo $this->translate("Search",false,$lang);?>
+</a>
+<a class="abs icon" style="left:500px;top:420px;" href="#icon_dock_users">
+    <img src="assets/images/icons/users.png" />
+    <?php echo $this->translate("Users",false,$lang);?>
+</a>
+<a class="abs icon" style="left:580px;top:420px;" href="#icon_dock_messages">
+    <img src="assets/images/icons/messages.png" />
+    <?php echo $this->translate("Messages",false,$lang);?>
+</a>
+<a class="abs icon" style="left:660px;top:420px;" href="#icon_dock_blogs">
+    <img src="assets/images/icons/blogs.png" />
+    <?php echo $this->translate("Notes",false,$lang);?>
+</a>
+<a class="abs icon" style="left:820px;top:420px;" href="#icon_dock_admins">
+    <img src="assets/images/icons/admin-icon.png" />
+    <?php echo $this->translate("Admin",false,$lang);?>
+</a>
+<div id="window_drive" class="abs window">
+    <div class="abs window_inner">
+        <div class="window_top">
+          <span class="float_left">
+            <img src="assets/images/icons/icon_16_drive.png" />
+            Hard Drive
+          </span>
+          <span class="float_right">
+            <a href="#" class="window_min"></a>
+            <a href="#" class="window_resize"></a>
+            <a href="#icon_dock_drive" class="window_close"></a>
+          </span>
+        </div>
+        <div class="abs window_content">
+            <div class="window_aside">
+                Storage in use: 119.1 GB
+            </div>
+            <div class="window_main" id="hard_drive">
+            </div>
+            <script type="text/javascript" src="js/pages/main/files.js"></script>
+        </div>
+        <div class="abs window_bottom">
+            Free: 80.9 GB
+        </div>
+    </div>
+    <span class="abs ui-resizable-handle ui-resizable-se"></span>
+</div>
+    <div id="window_money" class="window">
+        <div >
+            <div class="window_top">
+          <span class="float_left">
+            <img src="assets/images/icons/3.png" />
+            Money
+          </span>
+          <span class="float_right">
+            <a href="#" class="window_min"></a>
+            <a href="#" class="window_resize"></a>
+            <a href="#icon_dock_drive" class="window_close"></a>
+          </span>
+            </div>
+            <div  id="money_accordion">
+                <h3>send transaction</h3>
+                <div  id="money_transaction">
+                    <script type="text/javascript" src="js/pages/main/money_window.js"></script>
+                </div>
+                <h3>show registerd transactions</h3>
+                <div  id="complited_transactions">
+                    <script type="text/javascript" src="js/pages/main/show_transactions.js"></script>
+                </div>
+                <h3>finish approved transactions</h3>
+                <div id="finished_payments">
+                    <script type="text/javascript" src="js/pages/main/payments.js"></script>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+<div id="window_disc" class="abs window">
+<div class="abs window_inner">
+<div class="window_top">
+          <span class="float_left">
+            <img src="assets/images/icons/icon_16_disc.png" />
+            Audio CD - Title of Album
+          </span>
+          <span class="float_right">
+            <a href="#" class="window_min"></a>
+            <a href="#" class="window_resize"></a>
+            <a href="#icon_dock_disc" class="window_close"></a>
+          </span>
+</div>
+<div class="abs window_content">
+<div class="window_aside align_center">
+    <img src="assets/images/misc/album_cover.jpg" />
+    <br />
+    <em>Title of Album</em>
+</div>
+<div class="window_main">
+<table class="data">
+<thead>
+<tr>
+    <th class="shrink">
+        &nbsp;
+    </th>
+    <th class="shrink">
+        Track
+    </th>
+    <th>
+        Song Name
+    </th>
+    <th class="shrink">
+        Length
+    </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>
+        <img src="assets/images/icons/icon_16_music.png" />
+    </td>
+    <td class="align_center">
+        01
+    </td>
+    <td>
+        Track One
+    </td>
+    <td class="align_right">
+        3:50
+    </td>
+</tr>
+<tr>
+    <td>
+        <img src="assets/images/icons/icon_16_music.png" />
+    </td>
+    <td class="align_center">
+        02
+    </td>
+    <td>
+        Track Two
+    </td>
+    <td class="align_right">
+        3:50
+    </td>
+</tr>
+<tr>
+    <td>
+        <img src="assets/images/icons/icon_16_music.png" />
+    </td>
+    <td class="align_center">
+        03
+    </td>
+    <td>
+        Track Three
+    </td>
+    <td class="align_right">
+        4:02
+    </td>
+</tr>
+<tr>
+    <td>
+        <img src="assets/images/icons/icon_16_music.png" />
+    </td>
+    <td class="align_center">
+        04
+    </td>
+    <td>
+        Track Four
+    </td>
+    <td class="align_right">
+        3:47
+    </td>
+</tr>
+<tr>
+    <td>
+        <img src="assets/images/icons/icon_16_music.png" />
+    </td>
+    <td class="align_center">
+        05
+    </td>
+    <td>
+        Track Five
+    </td>
+    <td class="align_right">
+        4:38
+    </td>
+</tr>
+<tr>
+    <td>
+        <img src="assets/images/icons/icon_16_music.png" />
+    </td>
+    <td class="align_center">
+        06
+    </td>
+    <td>
+        Track Six
+    </td>
+    <td class="align_right">
+        3:16
+    </td>
+</tr>
+<tr>
+    <td>
+        <img src="assets/images/icons/icon_16_music.png" />
+    </td>
+    <td class="align_center">
+        07
+    </td>
+    <td>
+        Track Seven
+    </td>
+    <td class="align_right">
+        3:53
+    </td>
+</tr>
+<tr>
+    <td>
+        <img src="assets/images/icons/icon_16_music.png" />
+    </td>
+    <td class="align_center">
+        08
+    </td>
+    <td>
+        Track Eight
+    </td>
+    <td class="align_right">
+        1:41
+    </td>
+</tr>
+<tr>
+    <td>
+        <img src="assets/images/icons/icon_16_music.png" />
+    </td>
+    <td class="align_center">
+        09
+    </td>
+    <td>
+        Track Nine
+    </td>
+    <td class="align_right">
+        3:40
+    </td>
+</tr>
+<tr>
+    <td>
+        <img src="assets/images/icons/icon_16_music.png" />
+    </td>
+    <td class="align_center">
+        10
+    </td>
+    <td>
+        Track Ten
+    </td>
+    <td class="align_right">
+        4:33
+    </td>
+</tr>
+<tr>
+    <td>
+        <img src="assets/images/icons/icon_16_music.png" />
+    </td>
+    <td class="align_center">
+        11
+    </td>
+    <td>
+        Track Eleven
+    </td>
+    <td class="align_right">
+        3:49
+    </td>
+</tr>
+<tr>
+    <td>
+        <img src="assets/images/icons/icon_16_music.png" />
+    </td>
+    <td class="align_center">
+        12
+    </td>
+    <td>
+        Track Twelve
+    </td>
+    <td class="align_right">
+        1:11
+    </td>
+</tr>
+<tr>
+    <td class="shrink">
+        <img src="assets/images/icons/icon_16_music.png" />
+    </td>
+    <td class="align_center">
+        13
+    </td>
+    <td>
+        Track Thirteen
+    </td>
+    <td class="align_right">
+        6:17
+    </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="abs window_bottom">
+    Genre: Rock/Rap
+</div>
+</div>
+<span class="abs ui-resizable-handle ui-resizable-se"></span>
+</div>
+<div id="window_network" class="abs window">
+<div class="abs window_inner">
+<div class="window_top">
+          <span class="float_left">
+            <img src="assets/images/icons/icon_16_network.png" />
+            Network
+          </span>
+          <span class="float_right">
+            <a href="#" class="window_min"></a>
+            <a href="#" class="window_resize"></a>
+            <a href="#icon_dock_network" class="window_close"></a>
+          </span>
+</div>
+<div class="abs" id="network">
+
+</div>
+<script type="text/javascript" src="js/pages/main/network.js"></script>
+</div>
+<span class="abs ui-resizable-handle ui-resizable-se"></span>
+</div>
+</div>
+<div class="abs" id="bar_top">
+    <span class="float_right" id="clock"></span>
+    <div style="margin-right:10px" class="float_right">
+        <span class="lang" lang="en"><img style="border:1px solid black;" src="assets/images/icons/british-flag.jpg" /></span>
+        <span class="lang" lang="ru"><img style="border:1px solid black;" src="assets/images/icons/russia-flag.gif" /></span>
+        <script type="text/javascript" src="js/pages/main/lang.js"></script>
+
+    </div>
+    <span class="float_right" id="clock"></span>
+    <ul>
+        <li>
+            <a class="menu_trigger" href="#">jQuery Desktop</a>
+            <ul class="menu">
+                <li>
+                    <a href="http://www.amazon.com/dp/0596159773?tag=sons-20">jQuery Cookbook</a>
+                </li>
+                <li>
+                    <a href="http://jqueryenlightenment.com/">jQuery Enlightenment</a>
+                </li>
+                <li>
+                    <a href="http://jquery.com/">jQuery Home</a>
+                </li>
+                <li>
+                    <a href="http://jquerymobile.com/">jQuery Mobile</a>
+                </li>
+                <li>
+                    <a href="http://jqueryui.com/">jQuery UI</a>
+                </li>
+                <li>
+                    <a href="http://learningjquery.com/">Learning jQuery</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a class="menu_trigger" href="#">HTML5 Resources</a>
+            <ul class="menu">
+                <li>
+                    <a href="http://diveintohtml5.info/">Dive Into HTML5</a>
+                </li>
+                <li>
+                    <a href="http://www.alistapart.com/articles/get-ready-for-html-5/">Get Ready for HTML5</a>
+                </li>
+                <li>
+                    <a href="http://html5boilerplate.com/">HTML5 Boilerplate</a>
+                </li>
+                <li>
+                    <a href="http://html5doctor.com/">HTML5 Doctor</a>
+                </li>
+                <li>
+                    <a href="http://html5.org/">HTML5 Intro</a>
+                </li>
+                <li>
+                    <a href="http://www.zeldman.com/superfriends/">HTML5 Super Friends</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a class="menu_trigger" href="#">Code</a>
+            <ul class="menu">
+                <li>
+                    <a href="assets/css/desktop.css">Desktop - CSS</a>
+                </li>
+                <li>
+                    <a href="assets/js/jquery.desktop.js">Desktop - JavaScript</a>
+                </li>
+                <li>
+                    <a href="http://github.com/nathansmith/jQuery-Desktop">GitHub Repository</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a class="menu_trigger" href="#">Credits</a>
+            <ul class="menu">
+                <li>
+                    <a href="http://sonspring.com/journal/jquery-desktop">Demo built by Nathan Smith</a>
+                </li>
+                <li>
+                    <a href="http://adrian-rodriguez.net/">Wallpaper by Adrian Rodriguez</a>
+                </li>
+                <li>
+                    <a href="http://tango.freedesktop.org/Tango_Desktop_Project">Icons - Tango Desktop Project</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+</div>
+<div class="abs" id="bar_bottom">
+    <a class="float_left" href="#" id="show_desktop" title="Show Desktop">
+        <img src="assets/images/icons/icon_22_desktop.png" />
+    </a>
+    <ul id="dock">
+        <li id="icon_dock_money">
+            <a href="#window_money">
+                <img src="assets/images/icons/3.png" />
+                Money
+            </a>
+        </li>
+        <li id="icon_dock_payment">
+            <a href="#window_payment">
+                <img src="assets/images/icons/payment.png" />
+                Money
+            </a>
+        </li>
+        <li id="icon_dock_drive">
+            <a href="#window_drive">
+                <img src="assets/images/icons/icon_22_drive.png" />
+                Hard Drive
+            </a>
+        </li>
+        <li id="icon_dock_disc">
+            <a href="#window_disc">
+                <img src="assets/images/icons/icon_22_disc.png" />
+                Audio CD
+            </a>
+        </li>
+        <li id="icon_dock_network">
+            <a href="#window_network">
+                <img src="assets/images/icons/icon_22_network.png" />
+                Network
+            </a>
+        </li>
+        <li id="icon_dock_settings">
+            <a href="#window_settings">
+                Setting
+            </a>
+        </li>
+        <li id="icon_dock_search">
+            <a href="#window_search">
+                <?php echo $this->translate("Search","false",'ru');?>
+            </a>
+        </li>
+        <li id="icon_dock_users">
+            <a href="#window_users">
+                Users
+            </a>
+        </li>
+        <li id="icon_dock_messages">
+            <a href="#window_messages">
+                Messages
+            </a>
+        </li>
+        <li id="icon_dock_admins">
+            <a href="#window_admins">
+                Admin
+            </a>
+        </li>
+        <li id="icon_dock_blogs">
+            <a href="#window_blogs">
+                Blogs
+            </a>
+        </li>
+    </ul>
+    <a class="float_right" href="http://www.firehost.com/?ref=spon_nsmith_desktop-sonspring" title="Secure Hosting">
+        <img src="assets/images/misc/firehost.png" />
+    </a>
+</div>
+<div id="window_settings" class="abs window_settings window" >
+    <div class="abs window_inner">
+        <div class="window_top">
+          <span class="float_left">
+            <img src="assets/images/icons/setting_22.png" />
+            Settings
+          </span>
+          <span class="float_right">
+            <a href="#icon_dock_settings" class="window_close" id="close_settings"></a>
+          </span>
+        </div>
+        <div class="abs">
+
+            <div id="accordion" >
+                <h3>Settings</h3>
+                <div>
+                    <p id="general-settings">
+                        Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                        ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                        amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                        odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+                    </p>
+                </div>
+                <h3>Section 2</h3>
+                <div>
+                    <p>
+                        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                        suscipit faucibus urna.
+                    </p>
+                </div>
+                <h3>Section 3</h3>
+                <div>
+                    <p>
+                        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                        suscipit faucibus urna.
+                    </p>
+                </div>
+                <h3>Section 4</h3>
+                <div>
+                    <p>
+                        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                        suscipit faucibus urna.
+                    </p>
+                </div>
+
+            </div>
+            <script type="text/javascript" src="js/pages/main/settings.js"></script>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="window_search" class="abs window_search window">
+    <div class="abs window_inner">
+        <div class="window_top">
+          <span class="float_left">
+            Search
+          </span>
+          <span class="float_right">
+            <a href="#icon_dock_search" class="window_close" id="close_search"></a>
+          </span>
+        </div>
+        <div class="abs">
+
+            <div id="accordion_search">
+
+
+                <h3>Google Search</h3>
+                <div>
+                    <p>
+                       <input type="text" id="google_search_input"/>
+                        <button value="search" id="google_search_button">search</button>
+                    </p>
+                </div>
+                <h3>User Search</h3>
+                <div id="user_search_div">
+                    <script type="text/javascript" src="js/pages/main/search.js"></script>
+                </div>
+                <h3>Section 4</h3>
+                <div>
+                    <p>
+                        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                        suscipit faucibus urna.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="window_users" class="abs window_users window">
+    <div class="abs window_inner">
+        <div class="window_top">
+          <span class="float_left">
+            Users
+          </span>
+          <span class="float_right">
+            <a href="#icon_dock_users" class="window_close" id="close_users"></a>
+          </span>
+        </div>
+        <div class="abs">
+
+            <div id="accordion_users">
+                <h3>Friend List</h3>
+                <div id="friend_list">
+                    <script type="text/javascript" src="js/pages/main/friends.js"></script>
+                </div>
+                <h3>Requests</h3>
+                <div id="friends_requets">
+                    <p>
+                        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                        suscipit faucibus urna.
+                    </p>
+                    <script type="text/javascript" src="js/pages/main/users.js"></script>
+                </div>
+
+                <h3>Section 4</h3>
+                <div>
+                    <p>
+                        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                        suscipit faucibus urna.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="window_messages" class="abs window_messages window">
+    <div class="abs window_inner">
+        <div class="window_top">
+          <span class="float_left">
+            Messages
+          </span>
+          <span class="float_right">
+            <a href="#icon_dock_messages" class="window_close" id="close_messages"></a>
+          </span>
+        </div>
+        <div class="abs">
+
+            <div id="accordion_messages">
+                <h3>Chats</h3>
+                <div id="chats">
+                    <script type="text/javascript" src="js/pages/main/messages.js"></script>
+                </div>
+
+                <h3>Chanels</h3>
+                <div id="chanels">
+                    <script type="text/javascript" src="js/pages/main/chanels.js"></script>
+                </div>
+                <h3>Private Chanels</h3>
+                <div id="private_chanels">
+                    <script type="text/javascript" src="js/pages/main/private_chanels.js"></script>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div id="window_admins" class="abs window_admins window">
+    <div class="abs window_inner">
+        <div class="window_top">
+          <span class="float_left">
+            Admin
+          </span>
+          <span class="float_right">
+            <a href="#icon_dock_admin" class="window_close" ></a>
+          </span>
+        </div>
+        <div class="abs">
+            <div id="accordion_admin">
+                <h3>Private Chanels</h3>
+                <div id="private_chanels_admin">
+                    <script type="text/javascript" src="js/pages/main/private_chanels_admin.js"></script>
+                </div>
+                <h3>other</h3>
+                <div id="private_chanels_admin">
+                 lorem ipsum
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="window_blogs" class="abs window_blogs window">
+    <div class="abs window_inner">
+        <div class="window_top">
+          <span class="float_left">
+            Notes
+          </span>
+          <span class="float_right">
+            <a href="#icon_dock_blogs" class="window_close" ></a>
+          </span>
+        </div>
+        <div class="abs">
+           <div id="accordion_blogs">
+                <h3>Create Blog</h3>
+                <div id="new_blog">
+                </div>
+                <h3>Lists Blogs</h3>
+                <div id="list_blogs">
+                </div>
+            </div>
+            <script type="text/javascript" src="js/pages/main/blogs.js"></script>
+        </div>
+    </div>
+</div>
+    <div id="window_payment" class="abs window_payment window">
+        <div class="abs window_inner">
+            <div class="window_top">
+          <span class="float_left">
+            Payment
+          </span>
+          <span class="float_right">
+            <a href="#icon_dock_payment" class="window_close" ></a>
+          </span>
+            </div>
+            <div class="abs">
+                <div id="accordion_payemnts">
+
+                    <h3>Wallet</h3>
+                    <div id="wallet">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
