@@ -23,15 +23,13 @@ foreach($dirs as  $dir_key => $dir_value) {
 if($filesInDir) {
     foreach($filesInDir as  $file) {
         echo "<h2 style='display:inline;' class='file_delete_string' file=".$file['id'].">".$file['file_title']."     ".$file['type']."<span class='delete_file' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span><a href='/files/downloadFile/id/".$file['id']."' class='download_file' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></h2></br>";
-        echo "<span file=".$file['id']." class='sellfile'> <h3>sell file</h3><input type='text' class='file_cost' value='file cost'><textarea>file desription</textarea><input type='text' class='tags' value='tags ( comma separated)'></span>";
+        echo "<span > <h3 file=".$file['id']." class='sellfile'>sell file</h3><input type='text' class='file_cost' file=".$file['id']." value='file cost'><textarea file=".$file['id'].">file desription</textarea><input type='text' class='tags' file=".$file['id']." value='tags ( comma separated)'></span>";
     }
 }
 ?>
 <script type="text/javascript">
     $(function() {
         $(".sellfile").bind('click',function(){
-
-
             var file_id = $(this).attr('file');
             sell_file(file_id);
         });
@@ -74,10 +72,17 @@ if($filesInDir) {
 
     });
     function sell_file(file_id) {
-
-        alert(file_id);
-
-
+       var cost = $('.file_cost[file='+file_id+']').val();
+       var description = $('textarea[file='+file_id+']').val();
+       var tags = $(".tags[file="+file_id+"]").val();
+        $.ajax({
+            type: "POST",
+            url: "files/sellFile",
+            data: {file_id : file_id,cost: cost,description: description,tags:tags}
+        })
+            .done(function( data ) {
+                alert(data);
+            });
     }
     function share_directory () {
         $.ajax({

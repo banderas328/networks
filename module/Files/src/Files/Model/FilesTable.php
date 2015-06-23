@@ -61,11 +61,14 @@ class FilesTable
 //        return $results;
 //    }
 
-   public function downloadFile($adapter,$fileId,$userId) {
+
+
+   public function getFile($adapter,$fileId,$userId) {
        $fileId = (int) $fileId;
        $userId = (int) $userId;
        $sql = "SELECT  * FROM files  WHERE user_id='".$userId."' and id = '".$fileId."'";
        $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+
        return $resultSet->toArray();
    }
 
@@ -97,6 +100,8 @@ class FilesTable
         }
         return false;
     }
+
+
 
 
 }

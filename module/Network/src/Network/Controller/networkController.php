@@ -218,7 +218,7 @@ class  networkController extends Controller\preloaderController
         $isUsersFriends = $this->getFriendsTable()->isUsersFriends($userId,$frinendId,$friends->getAdapter());
         if(!empty($isUsersFriends->toArray())) {
             $files = new Files();
-            $file = $this->getFilesTable()->downloadFile($files->getAdapter(),$fileId,$frinendId)[0];
+            $file = $this->getFilesTable()->getFile($files->getAdapter(),$fileId,$frinendId)[0];
             $path  = $_SERVER['DOCUMENT_ROOT'].$file['file_name'];
             $fileName = $path;
             if (file_exists($fileName)) {

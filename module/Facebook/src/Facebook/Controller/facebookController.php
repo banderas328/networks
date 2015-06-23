@@ -17,6 +17,7 @@ use Facebook\Controller\FacebookRequest;
 use Facebook\Controller\GraphUser;
 use Facebook\Controller\FacebookRequestException;
 use Facebook\Controller\FacebookSession;
+//use Facebook\FacebookSession;
 
 
 class  facebookController extends AbstractActionController {
@@ -85,38 +86,45 @@ class  facebookController extends AbstractActionController {
     public function loginAction(){
         session_start();
 
-       $actual_link = ("http://$_SERVER[HTTP_HOST]");
-        $scopes = urlencode('public_profile,user_friends,email,user_about_me,user_actions.books,user_actions.fitness
-            ,user_actions.music,user_actions.news,user_actions.video,user_activities,user_birthday,user_education_history,user_events,user_groups,
-            ,user_games_activity,user_hometown,user_interests,user_likes,user_location,user_photos,user_posts,user_relationships,user_relationship_details,
-            user_religion_politics,user_status,user_tagged_places,user_videos,user_website,user_work_history,read_friendlists,read_insights,read_mailbox,
-            read_page_mailboxes,read_stream,manage_notifications,publish_actions');
+        $actual_link = urlencode("http://".$_SERVER['HTTP_HOST']);
+        var_dump($actual_link);
+        $scopes = urlencode(
+            'public_profile,user_friends,email,user_about_me,user_actions.books,user_actions.fitness
+            ,user_actions.music,user_actions.news,user_actions.video,user_birthday,user_education_history,user_events,user_groups,
+            ,user_games_activity,user_hometown,user_likes,user_location,user_photos,user_posts,user_relationships,user_relationship_details,
+            user_religion_politics,user_status,user_tagged_places,user_videos,user_website,user_work_history,read_insights,read_mailbox,
+            read_page_mailboxes,read_stream,manage_notifications,publish_actions'
+
+        ) ;
 
 
 
-        FacebookSession::setDefaultApplication('1421006771545109', '86b7fb92856f8b35eeb190814153a22e');
 
-        $helper = new FacebookRedirectLoginHelper($actual_link."?scope=".$scopes);
+        FacebookSession::setDefaultApplication('612215468881429', '2b2cdbbdb07048e1d955e2e9a2bd33ae');
 
-        $loginUrl = $helper->getLoginUrl();
-        var_dump($loginUrl);
+// If you already have a valid access token:
+     //   $session = new FacebookSession('access-token');
+
+// If you're making app-level requests:
+        $session = FacebookSession::newAppSession();
+       // FacebookSession::setDefaultApplication('1421006771545109', '86b7fb92856f8b35eeb190814153a22e');
+
+      //  $helper = new FacebookRedirectLoginHelper($actual_link."&scope=".$scopes);
+
+       // $loginUrl = $helper->getLoginUrl();
+      //  var_dump($loginUrl);
+       //// die();
+      //  header("Location:".$loginUrl);
+       // die();
+       // $params = urlencode($params);
+      //  $facebook = new FacebookRedirectLoginHelper('1421006771545109',$actual_link,"&scope=".$scopes);
+        $url = 'https://www.facebook.com/v2.3/dialog/oauth?client_id=612215468881429&redirect_uri='.$actual_link."&scope=".$scopes;
+var_dump($url);
+       //  $facebook->getLoginUrl($params);
+      //  var_dump($facebook->getLoginUrl());
+        //    header('Location:'.  );
         die();
-        header("Location:".$loginUrl);
-        die();
-
-     $facebook = new FacebookRedirectLoginHelper(
-
-         $params = array(
-             'scope' => 'read_stream, friends_likes',
-             'redirect_uri' => '52.11.234.214'
-         )
-     );
-       // $facebook->getLoginUrl();
-        var_dump($facebook->getLoginUrl());
-    //    header('Location:'.  );
-        die();
-
-    }
+      }
 
 
 

@@ -4,6 +4,9 @@ namespace Files\Controller;
 use Files\Form\FilesForm;
 use Files\Model\Files;
 use Files\Model\FileSystem;
+use Files\Model\PayedFiles;
+use Files\Model\FilesToTagsTable;
+use Tags\Model\TagsTable;
 use Network\Model\Network;
 use Network\Model\NetworkTable;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -19,6 +22,9 @@ class  filesController extends Controller\preloaderController {
 	protected $filesTable;
     protected $filesystemTable;
     protected $networkTable;
+    protected $payedfileTable;
+    protected $tagsTable;
+    protected $filesToTagsTable;
 
 	function __construct() {
         //not
@@ -130,7 +136,7 @@ class  filesController extends Controller\preloaderController {
         $userId = $user_session->user->id;
         $fileId = $this->getEvent()->getRouteMatch()->getParam('value');
         $files = new Files();
-        $file = $this->getFilesTable()->downloadFile($files->getAdapter(),$fileId,$userId)[0];
+        $file = $this->getFilesTable()->getFile($files->getAdapter(),$fileId,$userId)[0];
         $path  = $_SERVER['DOCUMENT_ROOT'].$file['file_name'];
         $fileName = $path;
 
@@ -146,6 +152,34 @@ class  filesController extends Controller\preloaderController {
             exit;
         }
         die();
+    }
+
+    public function sellFileAction() {
+
+
+        $this->layout('layout/only_form');
+        $requestData = $this->getRequest()->getPost();
+        $fileId = $requestData->file_id;
+        $cost = $requestData->cost;
+        $description = $requestData->description;
+        $tags = $requestData->tags;
+       // $adapter = $this->getPayedFilesTable()->getAdapter();
+        $user_session = new Container('user');
+        $userId = $user_session->user->id;
+        $file = new Files();
+        $fileData = $this->getFilesTable()->getFile($file->getAdapter(),$fileId,$userId);
+        $fileId = $fileData[0]["id"];
+       // $payedFiles = new PayedFiles();
+        $this->getPayedFilesTable()->saveFileForPay($fileId,$description,$cost);
+        $tags = explode(",",$tags);
+     //  var_dump($tags);
+        $tagsIds = $this->getTagsTable()->updateTags($tags);
+      //  die("hello");
+        $this->getFilesToTagsTable()->updateFileTags($fileId,$tagsIds);
+
+      //  die();
+        die();
+
     }
 
     public function deleteFileAction() {
@@ -243,6 +277,15 @@ class  filesController extends Controller\preloaderController {
 		return $this->filesTable;
 	}
 
+    public function getPayedFilesTable()
+    {
+        if (!$this->payedfileTable) {
+            $sm = $this->getServiceLocator();
+            $this->payedfileTable = $sm->get('Files\Model\PayedFilesTable');
+        }
+        return $this->payedfileTable;
+    }
+
     public function getFileSystemTable()
     {
         if (!$this->filesystemTable) {
@@ -259,6 +302,22 @@ class  filesController extends Controller\preloaderController {
             $this->networkTable = $sm->get('Network\Model\NetworkTable');
         }
         return $this->networkTable;
+    }
+    public function getTagsTable()
+    {
+        if (!$this->tagsTable) {
+            $sm = $this->getServiceLocator();
+            $this->tagsTable = $sm->get('Tags\Model\TagsTable');
+        }
+        return $this->tagsTable;
+    }
+    public function getFilesToTagsTable()
+    {
+        if (!$this->filesToTagsTable) {
+            $sm = $this->getServiceLocator();
+            $this->filesToTagsTable = $sm->get('Files\Model\FilesToTagsTable');
+        }
+        return $this->filesToTagsTable;
     }
 
 
