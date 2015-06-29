@@ -23,7 +23,7 @@ foreach($dirs as  $dir_key => $dir_value) {
 if($filesInDir) {
     foreach($filesInDir as  $file) {
         echo "<h2 style='display:inline;' class='file_delete_string' file=".$file['id'].">".$file['file_title']."     ".$file['type']."<span class='delete_file' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span><a href='/files/downloadFile/id/".$file['id']."' class='download_file' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></h2></br>";
-        echo "<span > <h3 file=".$file['id']." class='sellfile'>sell file</h3><input type='text' class='file_cost' file=".$file['id']." value='file cost'><textarea file=".$file['id'].">file desription</textarea><input type='text' class='tags' file=".$file['id']." value='tags ( comma separated)'></span>";
+        echo "<span > <h3 file=".$file['id']." class='sellfile'>sell file</h3>file cost <input type='text' class='file_cost' file=".$file['id']." value='".$file['cost']."'>file description<textarea file=".$file['id'].">".$file['description']."</textarea><input type='text' class='tags' file=".$file['id']." value='tags ( comma separated)'></span>";
     }
 }
 ?>
@@ -137,7 +137,7 @@ if($filesInDir) {
     }
     function refresh_drive_with_delay(){
         var current_directory = $("#current_directory").val();
-        setTimeout(function() { show_directory(current_directory)}, 2000)
+        setTimeout(function() { show_directory(current_directory)}, 2000);
     }
     function delete_file () {
         var current_directory = $("#current_directory").val();
@@ -149,7 +149,8 @@ if($filesInDir) {
             data: {file_id : file_id , current_directory : current_directory }
         })
             .done(function( data ) {
-                $(".file_delete_string[file="+data+"]").remove();
+                var current_directory = $("#current_directory").val();
+                setTimeout(function() { show_directory(current_directory)}, 2000);
             });
     }
     function delete_category(){

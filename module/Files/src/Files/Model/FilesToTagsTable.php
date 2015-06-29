@@ -25,6 +25,10 @@ class FilesToTagsTable
             $this->tableGateway->insert(array('file_id'=> $fileId,"tag_id" => $tag));
         }
     }
+    public function deleteFileTags($file_id) {
+
+        return $this->tableGateway->delete(array("file_id" => $file_id));
+    }
 
 
 

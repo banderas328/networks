@@ -2,148 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="85df11e7-538d-43b4-9869-f571c0b00fd7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/Entities/AccessToken.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Paypal/src/Paypal/PayPalLib/production/CreatePayment.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/HttpClients/certs/DigiCertHighAssuranceEVRootCA.pem" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookAuthorizationException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookCanvasLoginHelper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookClientException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/HttpClients/FacebookCurl.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/HttpClients/FacebookCurlHttpClient.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/HttpClients/FacebookGuzzleHttpClient.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/HttpClients/FacebookHttpable.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookJavaScriptLoginHelper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookOtherException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookPageTabHelper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookPermissionException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookRedirectLoginHelper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookRequest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookRequestException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookResponse.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookSDKException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookServerException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookSession.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookSignedRequestFromInputHelper.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/HttpClients/FacebookStream.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/HttpClients/FacebookStreamHttpClient.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookThrottleException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/GraphAlbum.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/GraphLocation.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/GraphObject.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/GraphPage.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/GraphSessionInfo.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/GraphUser.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/GraphUserPage.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Paypal/src/Paypal/Form/PaymentForm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/Entities/SignedRequest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/view/facebook/facebook/index.phtml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Facebook/view/facebook/facebook/login.phtml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/pages/main/money_window.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/networks_amazon.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/module/Paypal/view/paypal/paypal/paymentform.phtml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/changelog.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/composer.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/composer.lock" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/composer.phar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/examples/example.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/examples/with_js_sdk.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/readme.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/src/base_facebook.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/src/facebook.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/src/fb_ca_chain_bundle.crt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/tests/bootstrap.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/tests/tests.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/autoload.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/bin/phpunit" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/composer/ClassLoader.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/composer/autoload_classmap.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/composer/autoload_namespaces.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/composer/autoload_psr4.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/composer/autoload_real.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/composer/include_paths.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/composer/installed.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/phpunit/php-code-coverage" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/phpunit/php-file-iterator" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/phpunit/php-text-template" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/phpunit/php-timer" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/phpunit/php-token-stream" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/phpunit/phpunit" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/phpunit/phpunit-mock-objects" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/cgi/facebook/vendor/symfony/yaml/Symfony/Component/Yaml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/CONTRIBUTING.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/README-GIT.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/bin/autoload_example.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/bin/autoload_examples.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/bin/createAutoloadTestClasses.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Authentication/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Barcode/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Cache/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Captcha/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Code/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Config/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Console/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Crypt/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Db/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Debug/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Di/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Di/TODO" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Dom/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Escaper/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/EventManager/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Feed/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/File/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Filter/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Form/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Http/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/I18n/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/InputFilter/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Json/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Ldap/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Loader/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Log/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Mail/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Math/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Memory/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Mime/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/ModuleManager/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Mvc/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Mvc/Service/ViewFeedRendererFactory.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Mvc/Service/ViewJsonRendererFactory.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Navigation/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Paginator/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Permissions/Acl/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Permissions/Rbac/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/ProgressBar/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Serializer/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Server/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/ServiceManager/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Session/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Soap/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Stdlib/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Tag/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Test/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Text/Figlet/zend-framework.flf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Text/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Uri/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Validator/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/Version/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/View/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/module/SpeckPaypal/vendor/zendframework/zendframework/library/Zend/XmlRpc/README.md" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/.htaccess" afterPath="$PROJECT_DIR$/public/.htaccess" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Paypal/src/Paypal/PayPalLib/production/AuthorizePayment.php" afterPath="$PROJECT_DIR$/module/Paypal/src/Paypal/PayPalLib/production/AuthorizePayment.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Network/src/Network/Model/NetworkTable.php" afterPath="$PROJECT_DIR$/module/Network/src/Network/Model/NetworkTable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/facebookController.php" afterPath="$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/facebookController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Application/view/layout/main.phtml" afterPath="$PROJECT_DIR$/module/Application/view/layout/main.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Network/src/Network/Controller/networkController.php" afterPath="$PROJECT_DIR$/module/Network/src/Network/Controller/networkController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Paypal/src/Paypal/Controller/paypalController.php" afterPath="$PROJECT_DIR$/module/Paypal/src/Paypal/Controller/paypalController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Settings/view/settings/settings/savesettings.phtml" afterPath="$PROJECT_DIR$/module/Settings/view/settings/settings/savesettings.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Files/src/Files/Model/FilesTable.php" afterPath="$PROJECT_DIR$/module/Files/src/Files/Model/FilesTable.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Files/src/Files/Model/FilesToTagsTable.php" afterPath="$PROJECT_DIR$/module/Files/src/Files/Model/FilesToTagsTable.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Files/src/Files/Model/PayedFilesTable.php" afterPath="$PROJECT_DIR$/module/Files/src/Files/Model/PayedFilesTable.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Files/src/Files/Controller/filesController.php" afterPath="$PROJECT_DIR$/module/Files/src/Files/Controller/filesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/Files/view/files/files/get-dir.phtml" afterPath="$PROJECT_DIR$/module/Files/view/files/files/get-dir.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="networks_amazon.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -168,41 +32,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="folder.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/assets/images/icons/folder.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="users.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/assets/images/icons/users.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="setting_22.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/assets/images/icons/setting_22.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="setting.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/assets/images/icons/setting.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="search.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/assets/images/icons/search.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="russia-flag.gif" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/assets/images/icons/russia-flag.gif">
           <provider selected="true" editor-type-id="images">
@@ -227,19 +56,80 @@
       <file leaf-file-name="paypalController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/module/Paypal/src/Paypal/Controller/paypalController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="600">
-              <caret line="17" column="115" selection-start-line="17" selection-start-column="115" selection-end-line="17" selection-end-column="115" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="1485">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="money_window.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="money_window.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/pages/main/money_window.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.12" vertical-offset="0" max-vertical-offset="875">
-              <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+              <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="filesController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module/Files/src/Files/Controller/filesController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="21.865385" vertical-offset="1947" max-vertical-offset="4935">
+              <caret line="54" column="61" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="61" />
+              <folding>
+                <element signature="e#35#60#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FilesToTagsTable.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module/Files/src/Files/Model/FilesToTagsTable.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-16.875" vertical-offset="0" max-vertical-offset="750">
+              <caret line="29" column="15" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PayedFilesTable.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module/Files/src/Files/Model/PayedFilesTable.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-17.5" vertical-offset="0" max-vertical-offset="585">
+              <caret line="30" column="11" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FilesTable.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/module/Files/src/Files/Model/FilesTable.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-19.75" vertical-offset="711" max-vertical-offset="1635">
+              <caret line="81" column="87" selection-start-line="81" selection-start-column="87" selection-end-line="81" selection-end-column="87" />
+              <folding>
+                <marker date="1435590373220" expanded="true" signature="2191:2263" placeholder="SELECT * FRO..files..." />
+                <marker date="1435590373220" expanded="true" signature="2533:2772" placeholder="SELECT * ,fi..files..." />
+                <marker date="1435590373220" expanded="true" signature="2806:2984" placeholder="SELECT *,fil..files..." />
+                <marker date="1435590373220" expanded="true" signature="3272:3325" placeholder="SELECT * FRO..files..." />
+                <marker date="1435590373220" expanded="true" signature="3624:3676" placeholder="DELETE FROM ..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get-dir.phtml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/module/Files/view/files/files/get-dir.phtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.025" vertical-offset="1665" max-vertical-offset="2610">
+              <caret line="152" column="82" selection-start-line="152" selection-start-column="82" selection-end-line="152" selection-end-column="82" />
+              <folding>
+                <marker date="1435590939396" expanded="true" signature="803:821" placeholder="..." />
+                <marker date="1435590939396" expanded="true" signature="904:953" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -252,8 +142,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/module/PayPal/src/PayPal/PayPalLib/production/bootstrap.php" />
-        <option value="$PROJECT_DIR$/composer_old.json" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/vendor/autoload.php" />
         <option value="$PROJECT_DIR$/module/PayPal/src/PayPal/Model/Paypal.php" />
@@ -300,6 +188,11 @@
         <option value="$PROJECT_DIR$/public/js/pages/main/money_window.js" />
         <option value="$PROJECT_DIR$/module/Paypal/view/paypal/paypal/paymentform.phtml" />
         <option value="$PROJECT_DIR$/module/Paypal/src/Paypal/Controller/paypalController.php" />
+        <option value="$PROJECT_DIR$/module/Files/src/Files/Model/PayedFilesTable.php" />
+        <option value="$PROJECT_DIR$/module/Files/src/Files/Controller/filesController.php" />
+        <option value="$PROJECT_DIR$/module/Files/src/Files/Model/FilesToTagsTable.php" />
+        <option value="$PROJECT_DIR$/module/Files/src/Files/Model/FilesTable.php" />
+        <option value="$PROJECT_DIR$/module/Files/view/files/files/get-dir.phtml" />
       </list>
     </option>
   </component>
@@ -308,10 +201,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="65" />
-    <option name="y" value="82" />
-    <option name="width" value="1845" />
-    <option name="height" value="998" />
+    <option name="x" value="49" />
+    <option name="y" value="24" />
+    <option name="width" value="1871" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -336,7 +229,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -393,138 +285,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="page" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="icons" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="module" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -543,376 +303,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Settings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="module" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Settings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="settings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="settings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="module" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Settings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Settings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="module" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Settings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Settings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Form" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="module" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Settings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Settings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="module" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Paypal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="module" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Paypal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="paypal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="paypal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="module" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Paypal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Paypal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="module" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Paypal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Paypal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Form" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="module" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Paypal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Paypal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="module" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Network" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="module" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="module" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="module" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="networks_amazon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="module" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
+              <option name="myItemId" value="Tags" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -995,13 +392,20 @@
       <option name="project" value="LOCAL" />
       <updated>1426946016869</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="tags,files">
+      <created>1435079209547</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1435079209547</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="82" width="1845" height="998" extended-state="0" />
-    <editor active="true" />
+    <frame x="49" y="24" width="1871" height="1056" extended-state="6" />
+    <editor active="false" />
     <layout>
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32793522" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1009,11 +413,10 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2498645" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24959914" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.500271" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.499729" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32795697" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1044,7 +447,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="facebook,paypal" />
-    <option name="LAST_COMMIT_MESSAGE" value="facebook,paypal" />
+    <MESSAGE value="tags,files" />
+    <option name="LAST_COMMIT_MESSAGE" value="tags,files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1059,34 +463,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookSDKException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="255">
-          <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/GraphSessionInfo.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="1485">
-          <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/Entities/AccessToken.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.2083334" vertical-offset="1" max-vertical-offset="5460">
-          <caret line="23" column="30" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/FacebookSession.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.0833333" vertical-offset="1" max-vertical-offset="5280">
-          <caret line="26" column="24" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/module/Facebook/src/Facebook/Controller/Entities/SignedRequest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="5715">
@@ -1267,7 +643,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-25.0" vertical-offset="990" max-vertical-offset="11250">
           <caret line="106" column="62" selection-start-line="106" selection-start-column="45" selection-end-line="106" selection-end-column="62" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1300,11 +675,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/images/icons/1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/images/icons/2.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
@@ -1376,17 +746,68 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/module/Paypal/src/Paypal/Controller/paypalController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="600">
-          <caret line="17" column="115" selection-start-line="17" selection-start-column="115" selection-end-line="17" selection-end-column="115" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="1485">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/pages/main/money_window.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12" vertical-offset="0" max-vertical-offset="875">
-          <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Files/src/Files/Model/FilesTable.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.75" vertical-offset="711" max-vertical-offset="1635">
+          <caret line="81" column="87" selection-start-line="81" selection-start-column="87" selection-end-line="81" selection-end-column="87" />
+          <folding>
+            <marker date="1435590373220" expanded="true" signature="2191:2263" placeholder="SELECT * FRO..files..." />
+            <marker date="1435590373220" expanded="true" signature="2533:2772" placeholder="SELECT * ,fi..files..." />
+            <marker date="1435590373220" expanded="true" signature="2806:2984" placeholder="SELECT *,fil..files..." />
+            <marker date="1435590373220" expanded="true" signature="3272:3325" placeholder="SELECT * FRO..files..." />
+            <marker date="1435590373220" expanded="true" signature="3624:3676" placeholder="DELETE FROM ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Files/src/Files/Model/PayedFilesTable.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.5" vertical-offset="0" max-vertical-offset="585">
+          <caret line="30" column="11" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Files/src/Files/Controller/filesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="21.865385" vertical-offset="1947" max-vertical-offset="4935">
+          <caret line="54" column="61" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="61" />
+          <folding>
+            <element signature="e#35#60#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Files/src/Files/Model/FilesToTagsTable.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.875" vertical-offset="0" max-vertical-offset="750">
+          <caret line="29" column="15" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/module/Files/view/files/files/get-dir.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.025" vertical-offset="1665" max-vertical-offset="2610">
+          <caret line="152" column="82" selection-start-line="152" selection-start-column="82" selection-end-line="152" selection-end-column="82" />
+          <folding>
+            <marker date="1435590939396" expanded="true" signature="803:821" placeholder="..." />
+            <marker date="1435590939396" expanded="true" signature="904:953" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

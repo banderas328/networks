@@ -74,13 +74,12 @@ class FilesTable
 
 
    public function getDirFiles($adapter,$dir,$userId) {
-       $user_session = new Container('user');
        $userId = (int) $userId;
        $dir = (int) $dir;
        if($dir)
-           $sql = "SELECT  * ,files.id as id FROM files left join users_filesystem on users_filesystem.id = files.directory WHERE users_filesystem.user_id='".$userId."' and files.directory = '".$dir."'";
+           $sql = "SELECT  * ,files.id as id FROM files left join users_filesystem on users_filesystem.id = files.directory left join payed_files on files.id = payed_files.file_id  WHERE users_filesystem.user_id='".$userId."' and files.directory = '".$dir."'";
        else
-           $sql = "SELECT  *,files.id as id FROM files  WHERE files.user_id='".$userId."' and files.directory = '".$dir."' group by files.id";
+           $sql = "SELECT  *,files.id as id FROM files  left join payed_files on files.id = payed_files.file_id  WHERE files.user_id='".$userId."' and files.directory = '".$dir."' group by files.id";
        $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
        if(!empty($resultSet->toArray())) return $resultSet->toArray();
        else return false;

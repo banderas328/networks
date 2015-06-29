@@ -27,6 +27,9 @@ class PayedFilesTable
        }
        $this->tableGateway->insert($data);
    }
+    public function deleteFileForPay($fileId) {
+     return  $this->tableGateway->delete(array("file_id" => $fileId));
+    }
 
 
 

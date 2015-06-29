@@ -163,21 +163,15 @@ class  filesController extends Controller\preloaderController {
         $cost = $requestData->cost;
         $description = $requestData->description;
         $tags = $requestData->tags;
-       // $adapter = $this->getPayedFilesTable()->getAdapter();
         $user_session = new Container('user');
         $userId = $user_session->user->id;
         $file = new Files();
         $fileData = $this->getFilesTable()->getFile($file->getAdapter(),$fileId,$userId);
         $fileId = $fileData[0]["id"];
-       // $payedFiles = new PayedFiles();
         $this->getPayedFilesTable()->saveFileForPay($fileId,$description,$cost);
         $tags = explode(",",$tags);
-     //  var_dump($tags);
         $tagsIds = $this->getTagsTable()->updateTags($tags);
-      //  die("hello");
         $this->getFilesToTagsTable()->updateFileTags($fileId,$tagsIds);
-
-      //  die();
         die();
 
     }
@@ -188,7 +182,11 @@ class  filesController extends Controller\preloaderController {
         $files = new Files();
         $user_session = new Container('user');
         $userId = $user_session->user->id;
-        $this->getFilesTable()->deleteFile($files->getAdapter(),$file_id,$userId);
+       if($this->getFilesTable()->deleteFile($files->getAdapter(),$file_id,$userId)){
+
+           $this->getPayedFilesTable()->deleteFileForPay($file_id);
+           $this->getFilesToTagsTable()->deleteFileTags($file_id);
+       }
           die(json_encode($file_id));
     }
 
