@@ -18,7 +18,8 @@ return array(
         'Paypal',
         'Facebook',
         'Payment',
-        'Tags'
+        'Tags',
+        'Market'
     ),
 
     // These are various options for the listeners attached to the ModuleManager
