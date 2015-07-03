@@ -320,7 +320,6 @@ class  networkController extends Controller\preloaderController
     }
     public function getUserSharedDirs($dirKey,$userId){
         $filesystem = new FileSystem();
-       // $parentDir = $this->getFileSystemTable()->getUserParentDir($filesystem->getAdapter(),$dirKey,$userId);
         $dirs =   $this->getFileSystemTable()->getUserDirs($filesystem->getAdapter(),$dirKey,$userId);
         $dirs = $this->nonAuthedFoldersFilter($dirs);
         if(!$dirs) return false;

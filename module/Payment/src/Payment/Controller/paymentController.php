@@ -21,6 +21,7 @@ class  paymentController extends Controller\preloaderController
     protected $walletTable;
 
     public function __construct(){
+
     }
 
     public function getFinishedPaymentsAction(){
@@ -64,6 +65,7 @@ class  paymentController extends Controller\preloaderController
         }
         die();
     }
+
     public function getPaypalTable()
     {
         if (!$this->paypalTable) {
@@ -72,6 +74,7 @@ class  paymentController extends Controller\preloaderController
         }
         return $this->paypalTable;
     }
+
     public function getWalletTable()
     {
         if (!$this->walletTable) {
