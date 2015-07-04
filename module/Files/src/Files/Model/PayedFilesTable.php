@@ -31,6 +31,29 @@ class PayedFilesTable
      return  $this->tableGateway->delete(array("file_id" => $fileId));
     }
 
+    public function getPayedFiles($files,$adapter) {
+        $filesIds = array();
+        foreach($files as $file) {
+            $filesIds[] = $file["file_id"];
+
+        }
+        $filesIds = array_unique($filesIds);
+        $where = "";
+         foreach($filesIds as $file_key => $file_value) {
+
+             if($file_key !=  0) {
+                 $where .= "OR file_id = ".$file_value;
+                 continue;
+             }
+             $where .= "file_id = ".$file_value;
+         }
+        $sql = "select * from payed_files left join files on payed_files.file_id = files.id where ".$where;
+        $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+        $resultSet = $resultSet->toArray();
+        return $resultSet;
+
+    }
+
 
 
 }

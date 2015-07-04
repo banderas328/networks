@@ -3,7 +3,7 @@ namespace Files\Model;
 
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
-//use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Db\Adapter;
 
@@ -20,8 +20,8 @@ class FilesToTags
     public function exchangeArray($data)
     {
         $this->id = (isset($data['id'])) ? $data['id'] : null;
-		$this->file_name = (isset($data['tag_id'])) ? $data['tag_id'] : null;
-        $this->user_id = (isset($data['file_id'])) ? $data['file_id'] : null;
+		$this->tag_id = (isset($data['tag_id'])) ? $data['tag_id'] : null;
+        $this->file_id = (isset($data['file_id'])) ? $data['file_id'] : null;
 
     }
 
@@ -39,16 +39,17 @@ class FilesToTags
     {
 
 
+           return $this->inputFilter;
     }
 
     public function getAdapter()
     {
         $config = new \Zend\Config\Config(include CONFIG_DIR . '/global.php');
         $adapter = new \Zend\Db\Adapter\Adapter (array(
-            'driver' => $config->adapter["userfiles"]->driver,
-            'database' => $config->adapter["userfiles"]->database,
-            'username' => $config->adapter["userfiles"]->username,
-            'password' => $config->adapter["userfiles"]->password,
+            'driver' => $config->adapter["filestotags"]->driver,
+            'database' => $config->adapter["filestotags"]->database,
+            'username' => $config->adapter["filestotags"]->username,
+            'password' => $config->adapter["filestotags"]->password,
         ));
         return $adapter;
 

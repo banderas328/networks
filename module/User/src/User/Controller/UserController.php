@@ -160,7 +160,7 @@ class UserController extends Controller\preloaderController
             $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
             $paginator->setItemCountPerPage($limitForPage);
         }
-        return array('form' => $form , 'paginator' => $paginator);
+        return array('form' => $form , 'paginator' => $paginator , 'div' => "usersearchdiv");
     }
 	public function userPageAction(){
 		$settings = new Settings();

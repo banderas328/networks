@@ -11,7 +11,15 @@ class TagsController extends AbstractActionController
     protected $tagsTable;
 
 
-
+    public function tagCloudAction(){
+        $this->layout('layout/only_form');
+        $limitForPage = 5;
+        $page = (int)$this->params()->fromQuery('page', 1);
+        $paginator = $this->getTagsTable()->getTagsCloud($limitForPage,$page);
+        $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+        $paginator->setItemCountPerPage($limitForPage);
+        return array('paginator' => $paginator,'page' => $page , 'div' => "tagcloud");
+    }
 
 
 

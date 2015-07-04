@@ -1,10 +1,11 @@
+
 <?php if ($this->pageCount): ?>
     <div class="pagination pagination-centered">
         <ul>
             <!-- Previous page link -->
             <?php if (isset($this->previous)): ?>
                 <li>
-                    <a href="<?php echo $this->url($this->route); ?>?page=<?php echo $this->previous; ?>">
+                    <a class='paginator' href="<?php echo $this->url($this->route); ?>?page=<?php echo $this->previous; ?>">
                         <<
                     </a>
                 </li>
@@ -19,7 +20,7 @@
             <?php foreach ($this->pagesInRange as $page): ?>
                 <?php if ($page != $this->current): ?>
                     <li>
-                        <a href="<?php echo $this->url($this->route);?>?page=<?php echo $page; ?>">
+                        <a  class='paginator' href="<?php echo $this->url($this->route);?>?page=<?php echo $page; ?>">
                             <?php echo $page; ?>
                         </a>
                     </li>
@@ -33,7 +34,7 @@
             <!-- Next page link -->
             <?php if (isset($this->next)): ?>
                 <li>
-                    <a href="<?php echo $this->url($this->route); ?>?page=<?php echo $this->next; ?>">
+                    <a class='paginator' href="<?php echo $this->url($this->route); ?>?page=<?php echo $this->next; ?>">
                         >>
                     </a>
                 </li>
@@ -47,3 +48,21 @@
         </ul>
     </div>
 <?php endif; ?>
+<script type="text/javascript">
+    $(function(){
+        $(".paginator").bind("click",function(){
+
+            var url = $(this).attr('href');
+            $.ajax({
+                type: "GET",
+                url: url
+
+            })
+                .done(function( data ) {
+                    $("#<?php echo $this->div;?>").html(data);
+                });
+            return false;
+        });
+    });
+
+</script>

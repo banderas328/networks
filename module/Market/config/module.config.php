@@ -2,21 +2,21 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-        //   'Settings\Controller\Settings' => 'Settings\Controller\AlbumController',
+           'Market\Controller\Market' => 'Market\Controller\MarketController',
         ),
     ),
     'router' => array(
         'routes' => array(
-            'user' => array(
+            'market' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/user[/:action][/:id]',
+                    'route'    => '/market[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Settings\Controller\Settings',
+                        'controller' => 'Market\Controller\Market',
                         'action'     => 'index',
                     ),
                 ),
@@ -26,7 +26,7 @@ return array(
 
     'view_manager' => array(
         'template_path_stack' => array(
-            'user' => __DIR__ . '/../view',
+            'market' => __DIR__ . '/../view',
         ),
     ),
 );

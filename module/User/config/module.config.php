@@ -23,18 +23,17 @@ return array(
 
             ),
 
-            //////////////////////////////////
-            'userSearch' => array(
+            'usersearch' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/user/userSearch',
+                    'route'    => '/user/usersearch',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
                         'controller' => 'User\Controller\User',
-                        'action'     => 'userSearch',
+                        'action'     => 'usersearch',
                     ),
                 ),
 

@@ -17,7 +17,7 @@ return array(
                     ),
                     'defaults' => array(
                         'controller' => 'Tags\Controller\Tags',
-                        'action'     => 'index',
+                        'action'     => 'tagcloud',
                     ),
                 ),
             ),
