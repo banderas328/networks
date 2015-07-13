@@ -41,7 +41,7 @@ class Module
                         $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                         $resultSetPrototype = new ResultSet();
                         $resultSetPrototype->setArrayObjectPrototype(new Market());
-                        return new TableGateway('market', $dbAdapter, null, $resultSetPrototype);
+                        return new TableGateway('market_files', $dbAdapter, null, $resultSetPrototype);
                     },
                 'Files\Model\FilesToTagsTable' =>  function($sm) {
                     $tableGateway = $sm->get('FilesToTagsTableGateway');

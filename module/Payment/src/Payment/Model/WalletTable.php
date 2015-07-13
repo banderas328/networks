@@ -5,8 +5,8 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Session\Container;
 use Zend\Db\Sql\Sql;
 
-//use Zend\Db\Adapter\Driver\ResultInterface;
-//use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\Adapter\Driver\ResultInterface;
+use Zend\Db\ResultSet\ResultSet;
 
 
 class WalletTable
@@ -15,11 +15,20 @@ class WalletTable
 
     public function __construct(TableGateway $tableGateway)
     {
-        $this->tableGateway = $tableGateway;
+       $this->tableGateway = $tableGateway;
+
     }
 
-  public function getWallet($data) {
-      return $this->tableGateway->select($data);
+  public function getWallet($data,$needAll = false) {
+
+      $result = $this->tableGateway->select($data);
+      $result = $result->current();
+      if(!$needAll)
+      return $result->balance;
+
+
+      $result = array('balance' => $result->balance , "user_id" => $result->user_id , 'id' => $result->id);
+      return $result;
   }
     public function updateWallet($data) {
         $this->tableGateway->update($data,array('id' => $data['id']));

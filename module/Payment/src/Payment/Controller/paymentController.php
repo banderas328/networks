@@ -66,6 +66,15 @@ class  paymentController extends Controller\preloaderController
         die();
     }
 
+    public function getWalletAction(){
+        $user_session = new Container('user');
+        $userId = $user_session->user->id;
+        $data = array("user_id" => $userId);
+        $wallet =   $this->getWalletTable()->getWallet($data);
+        echo $wallet;
+        die();
+    }
+
     public function getPaypalTable()
     {
         if (!$this->paypalTable) {

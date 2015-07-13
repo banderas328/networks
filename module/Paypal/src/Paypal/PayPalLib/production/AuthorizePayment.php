@@ -78,6 +78,5 @@ $transactions = $payment->getTransactions();
 
 $relatedResources = $transactions[0]->getRelatedResources();
 $authorization = $relatedResources[0]->getAuthorization();
-var_dump($authorization);
 die();
 return $authorization;

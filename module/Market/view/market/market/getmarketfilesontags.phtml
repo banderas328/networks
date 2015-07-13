@@ -4,8 +4,35 @@ foreach($this->files as $file) {
     echo "<br>";
     echo $file["cost"];
     echo "<br>";
+    echo "<span class='bue_file_button' file_to_sell_id=".$file['file_id'].">bue</span>";
     echo $file["description"];
     echo "<br>";
 
 }
 ?>
+<script type="text/javascript">
+    $(function(){
+        $('.bue_file_button').bind("click",function(){
+            var file_id = $(this).attr("file_to_sell_id");
+            $.ajax({
+                type: "POST",
+                url:  "market/buefile",
+                data:{file_id : file_id}
+            })
+                .done(function( data ) {
+                 alert(data);
+                    $(function() {
+                        $.ajax({
+                            type: "GET",
+                            url: "payment/getwallet"
+
+                        })
+                            .done(function( data ) {
+                                $("#wallet").html(data);
+                            });
+
+                    });
+                });
+        });
+    });
+</script>

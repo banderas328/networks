@@ -71,7 +71,6 @@ class  facebookController extends AbstractActionController {
                 $friendsList = (new FacebookRequest(
                     $session->getAccessToken(), 'GET', '/100002460515272/friendlists'
                 ))->execute()->getGraphObject(GraphUser::className());
-               var_dump($friendsList) ;
 
             } catch(FacebookRequestException $e) {
                 echo "Exception occured, code: " . $e->getCode();

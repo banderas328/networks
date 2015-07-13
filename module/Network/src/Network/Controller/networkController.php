@@ -60,7 +60,6 @@ class  networkController extends Controller\preloaderController
         $userId = $user_session->user->id;
         $friends = new Friends();
         $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
-        var_dump($friends->toArray());
         if($friends) $friends = $friends->toArray();
         else $friends = false;
         return @array('friends' => $friends);
