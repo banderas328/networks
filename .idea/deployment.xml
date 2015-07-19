@@ -5,7 +5,7 @@
       <paths name="amazon">
         <serverdata>
           <mappings>
-            <mapping deploy="/networks" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/networks_amazon" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

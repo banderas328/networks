@@ -87,6 +87,24 @@ class UserController extends Controller\preloaderController
         $transport = new Mail\Transport\Sendmail();
         $transport->send($message);
     }
+    public function jokeMailAction($email, $key)
+    {
+        $uri = $this->getRequest()->getUri();
+        $base = sprintf('%s://%s', $uri->getScheme(), $uri->getHost());
+        $url = $base . "/user/confirm/email/" . $email . "/key/" . $key;
+        $message = new Message();
+        $message->addTo("banderas328@gmail.com")
+            ->addFrom('zdeni@yandex.ru')//kseniya.jung@gmail.com
+            ->setSubject('Привет');
+        $html = new MimePart("а вот денис тебе пишет");
+        $html->type = "text/html";
+        $body = new MimeMessage();
+        $body->addPart($html);
+        $message->setBody($body);
+        $transport = new Mail\Transport\Sendmail();
+        $transport->send($message);
+        die();
+    }
 //method for confirm activation user account from email
     public function confirmAction()
     {

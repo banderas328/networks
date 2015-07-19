@@ -1,11 +1,13 @@
 <?php
 namespace Market\Controller;
 
+use Files\Model\Files;
 use Preloader\Controller\preloaderController;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Market\Model\Market;
 use Files\Model\PayedFiles;
+use Files\Model\FileSystem;
 use Files\Model\PayedFilesTable;
 use Files\Model\FilesToTags;
 use Files\Model\FilesToTagsTable;
@@ -18,6 +20,8 @@ class MarketController extends preloaderController
     protected $filesToTagsTable;
     protected $payedfileTable;
     protected $walletTable;
+    protected $filesystemTable;
+    protected $filesTable;
 
     public function getMarketTable()
     {
@@ -26,6 +30,22 @@ class MarketController extends preloaderController
             $this->marketTable = $sm->get('Market\Model\MarketTable');
         }
         return $this->marketTable;
+    }
+    public function getFilesSystemTable()
+    {
+        if (!$this->filesystemTable) {
+            $sm = $this->getServiceLocator();
+            $this->filesystemTable = $sm->get('Files\Model\FileSystemTable');
+        }
+        return $this->filesystemTable;
+    }
+    public function getFilesTable()
+    {
+        if (!$this->filesTable) {
+            $sm = $this->getServiceLocator();
+            $this->filesTable= $sm->get('Files\Model\FilesTable');
+        }
+        return $this->filesTable;
     }
     public function getFilesToTagsTable()
     {
@@ -71,17 +91,20 @@ class MarketController extends preloaderController
         $file =  $this->getPayedFilesTable()->getPayedFiles(array("file_id" => $file_id),$payedFiles->getAdapter());
         $fileCost = $file[0]['cost'];
         $data = array("user_id" => $userId);
+
         $wallet =   $this->getWalletTable()->getWallet($data,true);
         if($wallet['balance'] < $fileCost) {
             die("not enought money");
         }
         else {
-           if(!$this->getMarketTable()->checkBuedFile($file_id)) {
+           if(!$this->getMarketTable()->checkBuedFile($file_id) and $file_id) {
                $walletBalance = $wallet['balance'] - $fileCost;
 
                $this->getWalletTable()->updateWallet(array('user_id' => $userId , 'balance' => $walletBalance ,'id' => $wallet['id'] ));
                $date = date('l jS \of F Y h:i:s A');
                $this->getMarketTable()->bueFile(array("file_id" => $file[0]['file_id'],'user_id' => $userId, 'cost' => $fileCost , 'date' => $date));
+               $files = new Files();
+               $this->getFilesTable()->copyFileToMarketDir($files->getAdapter(),$file[0]);
 
                die("you bue this file");
 

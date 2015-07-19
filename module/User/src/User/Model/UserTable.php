@@ -36,9 +36,15 @@ class UserTable
         $id = (int)$user->id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
+            $userId =  $this->tableGateway->lastInsertValue;
+            $adapter = $user->getAdapter();
+            $sql = "insert into users_filesystem (path,parent_path,user_id) values ('market','0',".$userId.")";
+            $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         } else {
             if ($this->getUser($id)) {
                 $this->tableGateway->update($data, array('id' => $id));
+
+
             } else {
                 throw new \Exception('Form id does not exist');
             }

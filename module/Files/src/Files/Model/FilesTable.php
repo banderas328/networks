@@ -48,6 +48,32 @@ class FilesTable
 
     }
 
+    public function copyFileToMarketDir($adapter,$data){
+        $user_session = new Container('user');
+        $userId = $user_session->user->id;
+        $path = "/userfiles";
+        $fileName = microtime();
+        $file = $path . '/' . $userId . $fileName . $data['file_title'];
+        $sql = "select id from users_filesystem where path='market' and user_id = ".$userId;
+        $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+        $dirId = $result->toArray()[0]['id'];
+        if(copy(getcwd() . "/public/" .$data["file_name"], getcwd() . "/public/" . $file)) {
+            $fileDb['user_id'] = $userId;
+            $fileDb['directory'] = $dirId;
+            $fileDb['file_title'] = $data['file_title'];
+            $fileDb['file_name'] = $file;
+            $fileDb['type'] = $data['type'];
+            $this->tableGateway->insert($fileDb);
+        }
+        else {
+
+            die("fuck");
+        }
+
+
+
+    }
+
 //    public function getFile($fileId, $adapter)
 //    {
 //        $user_session = new Container('user');

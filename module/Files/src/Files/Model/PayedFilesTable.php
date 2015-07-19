@@ -42,7 +42,7 @@ class PayedFilesTable
          foreach($filesIds as $file_key => $file_value) {
                $file_value = (int) $file_value;
              if($file_key !=  0) {
-                 $where .= "OR file_id = ".$file_value;
+                 $where .= " OR file_id = ".$file_value;
                  continue;
              }
              $where .= "file_id = ".$file_value;
