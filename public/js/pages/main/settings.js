@@ -2,8 +2,8 @@ $(function() {
     $('#close_settings').click(function(){
         $('#window_settings').hide();
     });
-    $('#window_settings').draggable();
-    $( "#accordion" ).accordion();
+    //$('#window_settings').draggable();
+   // $( "#accordion" ).accordion();
     $.ajax({
         type: "GET",
         url: "settings/savesettings",

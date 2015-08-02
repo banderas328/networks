@@ -1,17 +1,23 @@
 <?php
+echo "<table id='file_market_table'>";
+echo "<thead><th>Name</th><th>File Cost</th><th>File Description</th><th>Action</th></thead>";
+echo "<tbody>";
 foreach($this->files as $file) {
-    echo $file["file_title"];
-    echo "<br>";
-    echo $file["cost"];
-    echo "<br>";
-    echo "<span class='bue_file_button' file_to_sell_id=".$file['file_id'].">bue</span>";
-    echo $file["description"];
-    echo "<br>";
-
+    echo "<tr>";
+    echo "<td>".$file["file_title"]."</td>>";
+    echo "<td>".$file["cost"]."</td>";
+    echo "<td>".$file["description"]."</td>";
+    echo "<td><span class='bue_file_button' file_to_sell_id=".$file['file_id'].">bue</span></td>";
+    echo "</tr>";
 }
+echo "</tbody>";
+echo "</table>";
 ?>
+<script type="text/javascript" src="js/datatable/js/plugin.js"></script>
+<link rel="stylesheet" href="js/datatable/css/jquery.dataTables.css" />
 <script type="text/javascript">
     $(function(){
+        $('#file_market_table').DataTable();
         $('.bue_file_button').bind("click",function(){
             var file_id = $(this).attr("file_to_sell_id");
             $.ajax({

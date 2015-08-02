@@ -84,9 +84,7 @@ class  facebookController extends AbstractActionController {
 
     public function loginAction(){
         session_start();
-
         $actual_link = urlencode("http://".$_SERVER['HTTP_HOST']);
-        var_dump($actual_link);
         $scopes = urlencode(
             'public_profile,user_friends,email,user_about_me,user_actions.books,user_actions.fitness
             ,user_actions.music,user_actions.news,user_actions.video,user_birthday,user_education_history,user_events,user_groups,
@@ -95,33 +93,8 @@ class  facebookController extends AbstractActionController {
             read_page_mailboxes,read_stream,manage_notifications,publish_actions'
 
         ) ;
-
-
-
-
-        FacebookSession::setDefaultApplication('612215468881429', '2b2cdbbdb07048e1d955e2e9a2bd33ae');
-
-// If you already have a valid access token:
-     //   $session = new FacebookSession('access-token');
-
-// If you're making app-level requests:
-        $session = FacebookSession::newAppSession();
-       // FacebookSession::setDefaultApplication('1421006771545109', '86b7fb92856f8b35eeb190814153a22e');
-
-      //  $helper = new FacebookRedirectLoginHelper($actual_link."&scope=".$scopes);
-
-       // $loginUrl = $helper->getLoginUrl();
-      //  var_dump($loginUrl);
-       //// die();
-      //  header("Location:".$loginUrl);
-       // die();
-       // $params = urlencode($params);
-      //  $facebook = new FacebookRedirectLoginHelper('1421006771545109',$actual_link,"&scope=".$scopes);
         $url = 'https://www.facebook.com/v2.3/dialog/oauth?client_id=612215468881429&redirect_uri='.$actual_link."&scope=".$scopes;
-var_dump($url);
-       //  $facebook->getLoginUrl($params);
-      //  var_dump($facebook->getLoginUrl());
-        //    header('Location:'.  );
+            header('Location:'.$url  );
         die();
       }
 

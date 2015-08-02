@@ -763,3 +763,30 @@ th.shrink {
     cursor: pointer;
     color: #66bb00;
 }
+
+/* my styles */
+#setting_table  {
+clear: both;
+}
+#setting_table tr td {
+   height: 50px;
+   padding-top: 20px;
+
+
+}
+#setting_table input,#setting_table select,#setting_table textarea {
+    position: relative;
+
+    float: right;
+    margin-right: 50%;
+}
+#setting_table textarea  {
+    max-height: 400px;
+    max-width: 400px;
+}
+#settings_content {
+    background-image: none;
+}
+#setting_table tr td#about_me_setting {
+    height: 100px;
+}

@@ -88,6 +88,7 @@ class SettingsForm extends Form
             ),
             'options' => array(
                 'label' => 'About',
+                'maxlength','300'
             ),
         ));
         $this->add(array(

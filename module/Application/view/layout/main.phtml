@@ -10,9 +10,12 @@ $lang = $user['user']->lang;
     <title>jQuery Desktop</title>
   <link rel="stylesheet" href="assets/css/reset.css" />
     <link rel="stylesheet" href="assets/css/desktop.css" />
+
     <link rel="stylesheet" href="jquery-ui/jquery-ui.css" />
     <link rel="stylesheet" href="jquery-ui/jquery-ui.structure.css" />
     <link rel="stylesheet" href="jquery-ui/jquery-ui.theme.css" />
+    <link rel="stylesheet" href="css/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="css/bootstrap/css/bootstrap-responsive.css" />
     <script type="text/javascript" src="jquery-ui/external/jquery/jquery.js"></script>
     <script type="text/javascript" src="jquery-ui/jquery-ui.js"></script>
     <script type="text/javascript" src="assets/js/jquery.desktop.js"></script>
@@ -32,10 +35,10 @@ $lang = $user['user']->lang;
         <img src="assets/images/icons/payment.png" />
         <?php echo $this->translate("Market",false,$lang);?>
     </a>
-<a class="abs icon" style="left:260px;top:420px;" href="#icon_dock_disc">
-    <img src="assets/images/icons/icon_32_disc.png" />
-    <?php echo $this->translate("Audio",false,$lang);?>
-</a>
+<!--<a class="abs icon" style="left:260px;top:420px;" href="#icon_dock_disc">-->
+<!--    <img src="assets/images/icons/icon_32_disc.png" />-->
+<!--    --><?php //echo $this->translate("Audio",false,$lang);?>
+<!--</a>-->
 <a class="abs icon" style="left:340px;top:420px;" href="#icon_dock_network">
     <img src="assets/images/icons/icon_32_network.png" />
     <?php echo $this->translate("Network",false,$lang);?>
@@ -124,236 +127,236 @@ $lang = $user['user']->lang;
     </div>
 
 
-<div id="window_disc" class="abs window">
-<div class="abs window_inner">
-<div class="window_top">
-          <span class="float_left">
-            <img src="assets/images/icons/icon_16_disc.png" />
-            Audio CD - Title of Album
-          </span>
-          <span class="float_right">
-            <a href="#" class="window_min"></a>
-            <a href="#" class="window_resize"></a>
-            <a href="#icon_dock_disc" class="window_close"></a>
-          </span>
-</div>
-<div class="abs window_content">
-<div class="window_aside align_center">
-    <img src="assets/images/misc/album_cover.jpg" />
-    <br />
-    <em>Title of Album</em>
-</div>
-<div class="window_main">
-<table class="data">
-<thead>
-<tr>
-    <th class="shrink">
-        &nbsp;
-    </th>
-    <th class="shrink">
-        Track
-    </th>
-    <th>
-        Song Name
-    </th>
-    <th class="shrink">
-        Length
-    </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-    <td>
-        <img src="assets/images/icons/icon_16_music.png" />
-    </td>
-    <td class="align_center">
-        01
-    </td>
-    <td>
-        Track One
-    </td>
-    <td class="align_right">
-        3:50
-    </td>
-</tr>
-<tr>
-    <td>
-        <img src="assets/images/icons/icon_16_music.png" />
-    </td>
-    <td class="align_center">
-        02
-    </td>
-    <td>
-        Track Two
-    </td>
-    <td class="align_right">
-        3:50
-    </td>
-</tr>
-<tr>
-    <td>
-        <img src="assets/images/icons/icon_16_music.png" />
-    </td>
-    <td class="align_center">
-        03
-    </td>
-    <td>
-        Track Three
-    </td>
-    <td class="align_right">
-        4:02
-    </td>
-</tr>
-<tr>
-    <td>
-        <img src="assets/images/icons/icon_16_music.png" />
-    </td>
-    <td class="align_center">
-        04
-    </td>
-    <td>
-        Track Four
-    </td>
-    <td class="align_right">
-        3:47
-    </td>
-</tr>
-<tr>
-    <td>
-        <img src="assets/images/icons/icon_16_music.png" />
-    </td>
-    <td class="align_center">
-        05
-    </td>
-    <td>
-        Track Five
-    </td>
-    <td class="align_right">
-        4:38
-    </td>
-</tr>
-<tr>
-    <td>
-        <img src="assets/images/icons/icon_16_music.png" />
-    </td>
-    <td class="align_center">
-        06
-    </td>
-    <td>
-        Track Six
-    </td>
-    <td class="align_right">
-        3:16
-    </td>
-</tr>
-<tr>
-    <td>
-        <img src="assets/images/icons/icon_16_music.png" />
-    </td>
-    <td class="align_center">
-        07
-    </td>
-    <td>
-        Track Seven
-    </td>
-    <td class="align_right">
-        3:53
-    </td>
-</tr>
-<tr>
-    <td>
-        <img src="assets/images/icons/icon_16_music.png" />
-    </td>
-    <td class="align_center">
-        08
-    </td>
-    <td>
-        Track Eight
-    </td>
-    <td class="align_right">
-        1:41
-    </td>
-</tr>
-<tr>
-    <td>
-        <img src="assets/images/icons/icon_16_music.png" />
-    </td>
-    <td class="align_center">
-        09
-    </td>
-    <td>
-        Track Nine
-    </td>
-    <td class="align_right">
-        3:40
-    </td>
-</tr>
-<tr>
-    <td>
-        <img src="assets/images/icons/icon_16_music.png" />
-    </td>
-    <td class="align_center">
-        10
-    </td>
-    <td>
-        Track Ten
-    </td>
-    <td class="align_right">
-        4:33
-    </td>
-</tr>
-<tr>
-    <td>
-        <img src="assets/images/icons/icon_16_music.png" />
-    </td>
-    <td class="align_center">
-        11
-    </td>
-    <td>
-        Track Eleven
-    </td>
-    <td class="align_right">
-        3:49
-    </td>
-</tr>
-<tr>
-    <td>
-        <img src="assets/images/icons/icon_16_music.png" />
-    </td>
-    <td class="align_center">
-        12
-    </td>
-    <td>
-        Track Twelve
-    </td>
-    <td class="align_right">
-        1:11
-    </td>
-</tr>
-<tr>
-    <td class="shrink">
-        <img src="assets/images/icons/icon_16_music.png" />
-    </td>
-    <td class="align_center">
-        13
-    </td>
-    <td>
-        Track Thirteen
-    </td>
-    <td class="align_right">
-        6:17
-    </td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="abs window_bottom">
-    Genre: Rock/Rap
-</div>
-</div>
-<span class="abs ui-resizable-handle ui-resizable-se"></span>
-</div>
+<!--<div id="window_disc" class="abs window">-->
+<!--<div class="abs window_inner">-->
+<!--<div class="window_top">-->
+<!--          <span class="float_left">-->
+<!--            <img src="assets/images/icons/icon_16_disc.png" />-->
+<!--            Audio CD - Title of Album-->
+<!--          </span>-->
+<!--          <span class="float_right">-->
+<!--            <a href="#" class="window_min"></a>-->
+<!--            <a href="#" class="window_resize"></a>-->
+<!--            <a href="#icon_dock_disc" class="window_close"></a>-->
+<!--          </span>-->
+<!--</div>-->
+<!--<div class="abs window_content">-->
+<!--<div class="window_aside align_center">-->
+<!--    <img src="assets/images/misc/album_cover.jpg" />-->
+<!--    <br />-->
+<!--    <em>Title of Album</em>-->
+<!--</div>-->
+<!--<div class="window_main">-->
+<!--<table class="data">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--    <th class="shrink">-->
+<!--        &nbsp;-->
+<!--    </th>-->
+<!--    <th class="shrink">-->
+<!--        Track-->
+<!--    </th>-->
+<!--    <th>-->
+<!--        Song Name-->
+<!--    </th>-->
+<!--    <th class="shrink">-->
+<!--        Length-->
+<!--    </th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--<tr>-->
+<!--    <td>-->
+<!--        <img src="assets/images/icons/icon_16_music.png" />-->
+<!--    </td>-->
+<!--    <td class="align_center">-->
+<!--        01-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        Track One-->
+<!--    </td>-->
+<!--    <td class="align_right">-->
+<!--        3:50-->
+<!--    </td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>-->
+<!--        <img src="assets/images/icons/icon_16_music.png" />-->
+<!--    </td>-->
+<!--    <td class="align_center">-->
+<!--        02-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        Track Two-->
+<!--    </td>-->
+<!--    <td class="align_right">-->
+<!--        3:50-->
+<!--    </td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>-->
+<!--        <img src="assets/images/icons/icon_16_music.png" />-->
+<!--    </td>-->
+<!--    <td class="align_center">-->
+<!--        03-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        Track Three-->
+<!--    </td>-->
+<!--    <td class="align_right">-->
+<!--        4:02-->
+<!--    </td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>-->
+<!--        <img src="assets/images/icons/icon_16_music.png" />-->
+<!--    </td>-->
+<!--    <td class="align_center">-->
+<!--        04-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        Track Four-->
+<!--    </td>-->
+<!--    <td class="align_right">-->
+<!--        3:47-->
+<!--    </td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>-->
+<!--        <img src="assets/images/icons/icon_16_music.png" />-->
+<!--    </td>-->
+<!--    <td class="align_center">-->
+<!--        05-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        Track Five-->
+<!--    </td>-->
+<!--    <td class="align_right">-->
+<!--        4:38-->
+<!--    </td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>-->
+<!--        <img src="assets/images/icons/icon_16_music.png" />-->
+<!--    </td>-->
+<!--    <td class="align_center">-->
+<!--        06-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        Track Six-->
+<!--    </td>-->
+<!--    <td class="align_right">-->
+<!--        3:16-->
+<!--    </td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>-->
+<!--        <img src="assets/images/icons/icon_16_music.png" />-->
+<!--    </td>-->
+<!--    <td class="align_center">-->
+<!--        07-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        Track Seven-->
+<!--    </td>-->
+<!--    <td class="align_right">-->
+<!--        3:53-->
+<!--    </td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>-->
+<!--        <img src="assets/images/icons/icon_16_music.png" />-->
+<!--    </td>-->
+<!--    <td class="align_center">-->
+<!--        08-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        Track Eight-->
+<!--    </td>-->
+<!--    <td class="align_right">-->
+<!--        1:41-->
+<!--    </td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>-->
+<!--        <img src="assets/images/icons/icon_16_music.png" />-->
+<!--    </td>-->
+<!--    <td class="align_center">-->
+<!--        09-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        Track Nine-->
+<!--    </td>-->
+<!--    <td class="align_right">-->
+<!--        3:40-->
+<!--    </td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>-->
+<!--        <img src="assets/images/icons/icon_16_music.png" />-->
+<!--    </td>-->
+<!--    <td class="align_center">-->
+<!--        10-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        Track Ten-->
+<!--    </td>-->
+<!--    <td class="align_right">-->
+<!--        4:33-->
+<!--    </td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>-->
+<!--        <img src="assets/images/icons/icon_16_music.png" />-->
+<!--    </td>-->
+<!--    <td class="align_center">-->
+<!--        11-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        Track Eleven-->
+<!--    </td>-->
+<!--    <td class="align_right">-->
+<!--        3:49-->
+<!--    </td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td>-->
+<!--        <img src="assets/images/icons/icon_16_music.png" />-->
+<!--    </td>-->
+<!--    <td class="align_center">-->
+<!--        12-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        Track Twelve-->
+<!--    </td>-->
+<!--    <td class="align_right">-->
+<!--        1:11-->
+<!--    </td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--    <td class="shrink">-->
+<!--        <img src="assets/images/icons/icon_16_music.png" />-->
+<!--    </td>-->
+<!--    <td class="align_center">-->
+<!--        13-->
+<!--    </td>-->
+<!--    <td>-->
+<!--        Track Thirteen-->
+<!--    </td>-->
+<!--    <td class="align_right">-->
+<!--        6:17-->
+<!--    </td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="abs window_bottom">-->
+<!--    Genre: Rock/Rap-->
+<!--</div>-->
+<!--</div>-->
+<!--<span class="abs ui-resizable-handle ui-resizable-se"></span>-->
+<!--</div>-->
 <div id="window_network" class="abs window">
 <div class="abs window_inner">
 <div class="window_top">
@@ -532,62 +535,73 @@ $lang = $user['user']->lang;
         <img src="assets/images/misc/firehost.png" />
     </a>
 </div>
-<div id="window_settings" class="abs window_settings window" >
-    <div class="abs window_inner">
-        <div class="window_top">
+<!--<div id="window_settings" class="abs window_settings window" >-->
+<!--    <div class="abs window_inner">-->
+<!--        <div class="window_top">-->
+<!--          <span class="float_left">-->
+<!--            <img src="assets/images/icons/setting_22.png" />-->
+<!--            Settings-->
+<!--          </span>-->
+<!--          <span class="float_right">-->
+<!--            <a href="#" class="window_min"></a>-->
+<!--            <a href="#" class="window_resize"></a>-->
+<!--            <a href="#icon_dock_settings" class="window_close" id="close_settings"></a>-->
+<!--          </span>-->
+<!--          </span>-->
+<!--        </div>-->
+<!--        <div class="window_aside">-->
+<!--            Storage in use: 119.1 GB-->
+<!--        </div>-->
+<!--        <div class="window_main" id="hard_drive">-->
+<!--            <div id="accordion" >-->
+<!--                <div>-->
+<!--                    <p id="general-settings">-->
+<!--                    </p>-->
+<!--                </div>-->
+<!--        </div>-->
+<!--            ///////////////-->
+<!---->
+<!--            <div class="abs window_content">-->
+<!--                <div class="window_aside">-->
+<!--                    Settings-->
+<!--                </div>-->
+<!--                <div class="window_main" id="general-settings">-->
+<!--                </div>-->
+<!--                <script type="text/javascript" src="js/pages/main/files.js"></script>-->
+<!--            </div>-->
+<!--            ///////////-->
+<!---->
+<!---->
+<!--            <script type="text/javascript" src="js/pages/main/settings.js"></script>-->
+<!---->
+<!--    </div>-->
+<!--</div>-->
+    <div id="window_settings" class="abs window">
+        <div class="abs window_inner">
+            <div class="window_top">
           <span class="float_left">
             <img src="assets/images/icons/setting_22.png" />
             Settings
           </span>
           <span class="float_right">
-            <a href="#icon_dock_settings" class="window_close" id="close_settings"></a>
+            <a href="#" class="window_min"></a>
+            <a href="#" class="window_resize"></a>
+            <a href="#icon_dock_drive" class="window_close"></a>
           </span>
-        </div>
-        <div class="abs">
-
-            <div id="accordion" >
-                <h3>Settings</h3>
-                <div>
-                    <p id="general-settings">
-                        Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
-                        ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
-                        amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
-                        odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-                    </p>
-                </div>
-                <h3>Section 2</h3>
-                <div>
-                    <p>
-                        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-                        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-                        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-                        suscipit faucibus urna.
-                    </p>
-                </div>
-                <h3>Section 3</h3>
-                <div>
-                    <p>
-                        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-                        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-                        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-                        suscipit faucibus urna.
-                    </p>
-                </div>
-                <h3>Section 4</h3>
-                <div>
-                    <p>
-                        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-                        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-                        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-                        suscipit faucibus urna.
-                    </p>
-                </div>
-
             </div>
-            <script type="text/javascript" src="js/pages/main/settings.js"></script>
+            <div class="abs window_content" id="settings_content">
+                <div>
+                    <div id="general-settings">
+                    </div>
+                </div>
+                <script type="text/javascript" src="js/pages/main/settings.js"></script>
+            </div>
+            <div class="abs window_bottom">
+               Settings
+            </div>
         </div>
+        <span class="abs ui-resizable-handle ui-resizable-se"></span>
     </div>
-</div>
 
 
 
@@ -598,6 +612,7 @@ $lang = $user['user']->lang;
             Search
           </span>
           <span class="float_right">
+               <a href="#" class="window_min"></a>
             <a href="#icon_dock_search" class="window_close" id="close_search"></a>
           </span>
         </div>
@@ -617,15 +632,7 @@ $lang = $user['user']->lang;
                 <div id="user_search_div">
                     <script type="text/javascript" src="js/pages/main/search.js"></script>
                 </div>
-                <h3>Section 4</h3>
-                <div>
-                    <p>
-                        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-                        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-                        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-                        suscipit faucibus urna.
-                    </p>
-                </div>
+
 
             </div>
 
@@ -639,6 +646,9 @@ $lang = $user['user']->lang;
             Users
           </span>
           <span class="float_right">
+<!--            <a href="#icon_dock_users" class="window_close" id="close_users"></a>-->
+            <a href="#" class="window_min"></a>
+<!--            <a href="#" class="window_resize"></a>-->
             <a href="#icon_dock_users" class="window_close" id="close_users"></a>
           </span>
         </div>
@@ -652,24 +662,9 @@ $lang = $user['user']->lang;
                 <h3>Requests</h3>
                 <div id="friends_requets">
                     <p>
-                        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-                        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-                        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-                        suscipit faucibus urna.
                     </p>
                     <script type="text/javascript" src="js/pages/main/users.js"></script>
                 </div>
-
-                <h3>Section 4</h3>
-                <div>
-                    <p>
-                        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-                        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-                        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-                        suscipit faucibus urna.
-                    </p>
-                </div>
-
             </div>
         </div>
 
@@ -683,6 +678,7 @@ $lang = $user['user']->lang;
           </span>
           <span class="float_right">
             <a href="#icon_dock_messages" class="window_close" id="close_messages"></a>
+              <a href="#" class="window_min"></a>
           </span>
         </div>
         <div class="abs">
@@ -708,30 +704,77 @@ $lang = $user['user']->lang;
         </div>
     </div>
 </div>
-<div id="window_admins" class="abs window_admins window">
-    <div class="abs window_inner">
-        <div class="window_top">
+<!--<div id="window_admins" class="abs window_admins window">-->
+<!--    <div class="abs window_inner">-->
+<!--        <div class="window_top">-->
+<!--          <span class="float_left">-->
+<!--            Admin-->
+<!--          </span>-->
+<!--          <span class="float_right">-->
+<!--                <a href="#" class="window_min"></a>-->
+<!--               <a href="#" class="window_resize"></a>-->
+<!--            <a href="#icon_dock_admin" class="window_close" ></a>-->
+<!---->
+<!--          </span>-->
+<!---->
+<!--<!--        <div class="abs">-->-->
+<!--<!--            <div id="accordion_admin">-->-->
+<!--<!--                <h3>Private Chanels</h3>-->-->
+<!--<!--                <div id="private_chanels_admin">-->-->
+<!--<!--                    <script type="text/javascript" src="js/pages/main/private_chanels_admin.js"></script>-->-->
+<!--<!--                </div>-->-->
+<!--<!--            </div>-->-->
+<!--<!--        </div>-->-->
+<!--        <div class="abs window_content">-->
+<!--            <div class="window_aside">-->
+<!--                Administer admin chanels-->
+<!--            </div>-->
+<!--            <div id="private_chanels_admin">-->
+<!--                <script type="text/javascript" src="js/pages/main/private_chanels_admin.js"></script>-->
+<!--            </div>-->
+<!--           </div>-->
+<!--        </div>-->
+<!--    <span class="abs ui-resizable-handle ui-resizable-se"></span>-->
+<!--</div>-->
+<!--    </div>-->
+<!--    -->
+
+    ///////////////////////////////
+
+    <div id="window_admins" class="abs window">
+        <div class="abs window_inner">
+            <div class="window_top">
           <span class="float_left">
-            Admin
+           Administration
           </span>
           <span class="float_right">
-            <a href="#icon_dock_admin" class="window_close" ></a>
+            <a href="#" class="window_min"></a>
+            <a href="#" class="window_resize"></a>
+            <a href="#icon_dock_drive" class="window_close"></a>
           </span>
-        </div>
-        <div class="abs">
-            <div id="accordion_admin">
-                <h3>Private Chanels</h3>
-                <div id="private_chanels_admin">
-                    <script type="text/javascript" src="js/pages/main/private_chanels_admin.js"></script>
+            </div>
+            <div class="abs window_content">
+                <div class="window_aside">
+                    admin
                 </div>
-                <h3>other</h3>
-                <div id="private_chanels_admin">
-                 lorem ipsum
+                <div class="window_main" id="private_chanels_admin">
                 </div>
+                <script type="text/javascript" src="js/pages/main/private_chanels_admin.js"></script>
+            </div>
+            <div class="abs window_bottom">
+                Free: 80.9 GB
             </div>
         </div>
+        <span class="abs ui-resizable-handle ui-resizable-se"></span>
     </div>
-</div>
+
+
+
+
+
+
+
+    ///////////////////
 <div id="window_blogs" class="abs window_blogs window">
     <div class="abs window_inner">
         <div class="window_top">
@@ -740,6 +783,7 @@ $lang = $user['user']->lang;
           </span>
           <span class="float_right">
             <a href="#icon_dock_blogs" class="window_close" ></a>
+               <a href="#" class="window_min"></a>
           </span>
         </div>
         <div class="abs">

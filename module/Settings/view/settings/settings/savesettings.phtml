@@ -4,9 +4,9 @@ $title = 'General user Settings';
 $this->headTitle($title);
 ?>
     <h1><?php echo $this->escapeHtml($title); ?></h1>
-    <form id="avatar_form" action="settings/savessettings" method="post">
-        <input type="file"  name="avatar" id="avatar">
-        <input type="submit" value="Submit">
+    <form id="avatar_form" class="form-horizontal" action="settings/savessettings" method="post">
+        <input type="file"  name="avatar" id="avatar" >
+        <input type="submit" value="Submit" class='btn btn-primary'>
     </form>
 <script type="text/javascript">
 
@@ -38,35 +38,56 @@ $(function () {
     window.addEventListener('load',initiate ,false);
 </script>
 <?php
+echo '<table id="setting_table" class="table table-hover"';
 $form = $this->form;
 $form->setAttribute('action', $this->url('settings', array('action' => 'savesettings')));
 $form->prepare();
-
 echo $this->form()->openTag($form);
+echo "<tr><td>";
 echo $this->formRow($form->get('sex'));
-echo "<br/>";
+echo "</td></tr>";
+echo "<tr><td>";
 echo $this->formRow($form->get('birthdate'));
-echo "<br/>";
+echo "</td></tr>";
+echo "<tr><td>";
 echo $this->formRow($form->get('first_name'));
-echo "<br/>";
+echo "</td></tr>";
+echo "<tr><td>";
 echo $this->formRow($form->get('second_name'));
-echo "<br/>";
+echo "</td></tr>";
+echo "<tr><td>";
 echo $this->formRow($form->get('job'));
-echo "<br/>";
+echo "</td></tr>";
+echo "<tr><td>";
 echo $this->formRow($form->get('country'));
-echo "<br/>";
+echo "</td></tr>";
+echo "<tr><td>";
 echo $this->formRow($form->get('city'));
-echo "<br/>";
+echo "</td></tr>";
+echo "<tr><td id='about_me_setting'>";
 echo $this->formRow($form->get('about'));
-echo "<br/>";
+echo "</td></tr>";
+echo "<tr><td>";
 echo $this->formRow($form->get('skype'));
-echo "<br/>";
+echo "</td></tr>";
+echo "<tr><td>";
 echo $this->formRow($form->get('phone'));
-echo "<br/>";
+echo "</td></tr>";
+echo "<tr><td>";
 echo $this->formRow($form->get('site'));
-echo "<br/>";
+echo "</td></tr>";
+echo "<tr><td>";
 echo $this->formRow($form->get('visibility'));
-echo "<br/>";
-echo "<button value='save' name='save' id='save_general_settings'>save</button>";
+echo "</td></tr>";
+echo "<tr><td>";
+echo "<button value='save' name='save' class='btn btn-primary' id='save_general_settings'>save</button>";
+echo "</td></tr>";
+echo '</table>';
 //echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
+?>
+<script type="text/javascript" >
+    $(function () {
+       $("#user_general_settings").addClass("form-horizontal")
+    });
+</script>
