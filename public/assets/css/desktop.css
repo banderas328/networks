@@ -790,3 +790,21 @@ clear: both;
 #setting_table tr td#about_me_setting {
     height: 100px;
 }
+.dir_wraper {
+    width: 300px;
+    display: block;
+    margin-top: 10px;
+    margin-left: 10px;
+    position: relative;
+}
+.dir_actions_icon {
+    float: right;
+    position: relative;
+    right: 20%;
+    top : -45px;
+    cursor: pointer;
+}
+.directory_actions {
+    display: none;
+
+}
