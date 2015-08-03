@@ -5,10 +5,10 @@ $lang = $user['user']->lang;
 if(!$is_root) {
     ?>
     <form id="file_directory_form"  method="post">
-        <input type="file"  name="file" id="file_to_directory">
+        <input type="file"  name="file" id="file_to_directory"> <p>upload file</p>
     </form>
     <input type="text" id="directory_name">
-    <button value="create dir" id="create_dir"><?php echo $this->translate("Create_Directory",false,$lang);?></button>
+    <button value="create dir" class='btn btn-primary' id="create_dir"><?php echo $this->translate("Create_Directory",false,$lang);?></button>
     <input type="hidden" value="<?php echo $current_directory?>" id="current_directory">
     <br/>
     <h3 class='parent_directory' style='cursor:pointer;position: absolute;top: 25px;left: 300px;' dir_key=<?php echo $current_directory?>><img  style='cursor:pointer;'src='assets/images/icons/go-back-icon.png' width='50px' height='50px'/></h3>
@@ -36,8 +36,21 @@ if(!$is_root) {
 }
 if($filesInDir) {
     foreach($filesInDir as  $file) {
-        echo "<h2 style='display:inline;' class='file_delete_string' file=".$file['id'].">".$file['file_title']."     ".$file['type']."<span class='delete_file' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span><a href='/files/downloadFile/id/".$file['id']."' class='download_file' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></h2></br>";
-        echo "<span > <h3 file=".$file['id']." class='sellfile'>sell file</h3>file cost <input type='text' class='file_cost' file=".$file['id']." value='".$file['cost']."'>file description<textarea file=".$file['id'].">".$file['description']."</textarea><input type='text' class='tags' file=".$file['id']." value='tags ( comma separated)'></span>";
+        echo "<div class='file_wraper'>";
+        echo "<p style='display:inline;' class='file_delete_string' file=".$file['id'].">"
+            .$file['file_title']."     ".$file['type'].
+            "<div class='file_div_action'><span class='delete_file btn btn-primary' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span>
+            <span><a href='/files/downloadFile/id/".$file['id']."' class='download_file btn btn-primary' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></span>
+            <img  class='file_actions_icon' file=".$file['id']." src='assets/images/icons/setting.png'/></div></p>";
+
+        echo "<span class='file_actions' file=".$file['id'].">
+
+         <p> <input type='text' class='file_cost' placeholder='file cost' file=".$file['id']." value='".$file['cost']."'></p>
+        <p> <textarea placeholder='file description'  maxsize='400' file=".$file['id'].">".$file['description']."</textarea></p>
+        <p><input type='text'  placeholder='tags (comma separated)' class='tags' file=".$file['id']." value=''></p>
+        <h3 file=".$file['id']." class='sellfile btn btn-primary'>sell file</h3>
+        </span>";
+        echo "</div>";
     }
 }
 ?>
@@ -51,6 +64,10 @@ if($filesInDir) {
         $('.dir_actions_icon').bind('click',function(){
           var dir =   $(this).attr("dir");
             $(".directory_actions[dir="+dir+"]").slideToggle();
+        });
+        $('.file_actions_icon').bind('click',function(){
+            var file =   $(this).attr("file");
+            $(".file_actions[file="+file+"]").slideToggle();
         });
         $(".delete_directory").bind("click",delete_category);
         $('.delete_file').bind("click",delete_file);

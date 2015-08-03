@@ -808,3 +808,64 @@ clear: both;
     display: none;
 
 }
+.file_wraper {
+    margin-left: 20px;
+}
+.file_wraper span  {
+   padding-left: 10px;
+}
+.file_wraper a {
+}
+.file_actions {
+    display: none;
+}
+.file_wraper {
+    width:350px;
+}
+.file_actions_icon {
+}
+.file_actions h3 {
+    cursor: pointer;
+}
+.file_actions  {
+    margin-top: 20px;
+}
+.file_actions textarea {
+    max-width: 350px;
+    max-height: 200px;
+}
+.file_actions textarea,.file_actions input {
+    float: right;
+}
+.file_wraper {
+    width: 350px;
+    clear: both;
+}
+.file_wraper h3 {
+    clear: both;
+}
+.file_div_action {
+    width: 300px;
+}
+.parent_directory img{
+    position: relative;
+    left:240px;
+    top:70px;
+}
+#create_dir {
+    position: relative;
+    bottom: 5px;
+    left:20px;
+}
+#directory_name {
+    position: relative;
+    left:10px;
+}
+#file_to_directory {
+    position: relative;
+    top:5px;
+    left:10px;
+}
+#file_directory_form p {
+    position: relative;left: 10px;
+}
