@@ -7,12 +7,12 @@
     <orderEntry type="module-library">
       <library name="PHARS">
         <CLASSES>
-          <root url="phar://$MODULE_DIR$/module/Paypal/src/Paypal/PayPalLib/composer.phar" />
           <root url="phar://$MODULE_DIR$/composer.phar" />
+          <root url="phar://$MODULE_DIR$/module/Paypal/src/Paypal/PayPalLib/composer.phar" />
         </CLASSES>
         <SOURCES>
-          <root url="phar://$MODULE_DIR$/module/Paypal/src/Paypal/PayPalLib/composer.phar" />
           <root url="phar://$MODULE_DIR$/composer.phar" />
+          <root url="phar://$MODULE_DIR$/module/Paypal/src/Paypal/PayPalLib/composer.phar" />
         </SOURCES>
       </library>
     </orderEntry>

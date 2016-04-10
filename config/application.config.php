@@ -19,7 +19,8 @@ return array(
         'Facebook',
         'Payment',
         'Tags',
-        'Market'
+        'Market',
+        'Form'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

@@ -1,0 +1,40 @@
+<?php
+
+if (!$this->formExists)  {
+?>
+   <a href="#" id="create_user_form">create your form</a>
+
+<?php
+}
+else {
+    ?>
+    <a href="#" id="edit_user_form">edit your form</a>
+    <?php
+
+}?>
+<script type="text/javascript">
+
+
+    $(function () {
+        $("#create_user_form").bind("click",function(e){
+            $.ajax({
+                type: "POST",
+                url: "form/createform"
+
+            })
+                .done(function( data ) {
+                    $.ajax({
+                        type: "POST",
+                        url: "form/index"
+
+                    })
+                        .done(function( data ) {
+                            $("#form_div").html(data);
+                        });
+                });
+
+            return false;
+
+        });
+    })
+</script>
