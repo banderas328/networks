@@ -1,4 +1,4 @@
-deliver_messages/*
+/*
 SQLyog Ultimate v11.24 (64 bit)
 MySQL - 5.6.20 : Database - networks
 *********************************************************************

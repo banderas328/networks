@@ -56,7 +56,9 @@ class FilesTable
         $file = $path . '/' . $userId . $fileName . $data['file_title'];
         $sql = "select id from users_filesystem where path='market' and user_id = ".$userId;
         $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+        var_dump( $result->toArray());
         $dirId = $result->toArray()[0]['id'];
+
         if(copy(getcwd() . "/public/" .$data["file_name"], getcwd() . "/public/" . $file)) {
             $fileDb['user_id'] = $userId;
             $fileDb['directory'] = $dirId;

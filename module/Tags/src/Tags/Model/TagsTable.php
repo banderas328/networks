@@ -28,10 +28,12 @@ class TagsTable
                 $returnTags[] =  $this->tableGateway->lastInsertValue;;
             }
             else {
+                var_dump($result);
 
                 $returnTags[] = $result[0]["id"];
             }
         }
+        var_dump($returnTags);
         return $returnTags;
 
 

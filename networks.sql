@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.10
+-- version 4.6.0
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: May 31, 2015 at 06:41 PM
--- Server version: 5.5.41-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.9
+-- Хост: localhost
+-- Время создания: Май 15 2016 г., 21:21
+-- Версия сервера: 10.1.13-MariaDB
+-- Версия PHP: 5.6.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,26 +14,26 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `networks`
+-- База данных: `networks`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `album`
+-- Структура таблицы `album`
 --
 
-CREATE TABLE IF NOT EXISTS `album` (
+CREATE TABLE `album` (
   `id` int(11) NOT NULL,
   `artist` varchar(100) COLLATE utf8_bin NOT NULL,
   `title` varchar(100) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `album`
+-- Дамп данных таблицы `album`
 --
 
 INSERT INTO `album` (`id`, `artist`, `title`) VALUES
@@ -46,18 +46,18 @@ INSERT INTO `album` (`id`, `artist`, `title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `blogs`
+-- Структура таблицы `blogs`
 --
 
-CREATE TABLE IF NOT EXISTS `blogs` (
+CREATE TABLE `blogs` (
   `id` int(11) NOT NULL,
   `blog_content` text COLLATE utf8_bin NOT NULL,
   `user_id` int(11) NOT NULL,
   `date` varchar(50) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `blogs`
+-- Дамп данных таблицы `blogs`
 --
 
 INSERT INTO `blogs` (`id`, `blog_content`, `user_id`, `date`) VALUES
@@ -83,17 +83,17 @@ INSERT INTO `blogs` (`id`, `blog_content`, `user_id`, `date`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `blog_attachment`
+-- Структура таблицы `blog_attachment`
 --
 
-CREATE TABLE IF NOT EXISTS `blog_attachment` (
+CREATE TABLE `blog_attachment` (
   `id` int(11) NOT NULL,
   `file_name` varchar(250) COLLATE utf8_bin NOT NULL,
   `blog_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `blog_attachment`
+-- Дамп данных таблицы `blog_attachment`
 --
 
 INSERT INTO `blog_attachment` (`id`, `file_name`, `blog_id`) VALUES
@@ -103,18 +103,18 @@ INSERT INTO `blog_attachment` (`id`, `file_name`, `blog_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chanels`
+-- Структура таблицы `chanels`
 --
 
-CREATE TABLE IF NOT EXISTS `chanels` (
+CREATE TABLE `chanels` (
   `id` int(11) NOT NULL,
   `chanel_name` varchar(45) DEFAULT NULL,
   `private` tinyint(4) DEFAULT '0',
   `password` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `chanels`
+-- Дамп данных таблицы `chanels`
 --
 
 INSERT INTO `chanels` (`id`, `chanel_name`, `private`, `password`) VALUES
@@ -125,17 +125,17 @@ INSERT INTO `chanels` (`id`, `chanel_name`, `private`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chanels_admins`
+-- Структура таблицы `chanels_admins`
 --
 
-CREATE TABLE IF NOT EXISTS `chanels_admins` (
+CREATE TABLE `chanels_admins` (
   `id` int(11) NOT NULL,
   `admins` int(10) DEFAULT NULL,
   `chanel_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `chanels_admins`
+-- Дамп данных таблицы `chanels_admins`
 --
 
 INSERT INTO `chanels_admins` (`id`, `admins`, `chanel_id`) VALUES
@@ -144,17 +144,17 @@ INSERT INTO `chanels_admins` (`id`, `admins`, `chanel_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chanels_deliver_messages`
+-- Структура таблицы `chanels_deliver_messages`
 --
 
-CREATE TABLE IF NOT EXISTS `chanels_deliver_messages` (
+CREATE TABLE `chanels_deliver_messages` (
   `id` int(11) NOT NULL,
   `message_id` varchar(250) DEFAULT NULL,
   `delivered` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `chanels_deliver_messages`
+-- Дамп данных таблицы `chanels_deliver_messages`
 --
 
 INSERT INTO `chanels_deliver_messages` (`id`, `message_id`, `delivered`) VALUES
@@ -201,19 +201,19 @@ INSERT INTO `chanels_deliver_messages` (`id`, `message_id`, `delivered`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chanels_messages`
+-- Структура таблицы `chanels_messages`
 --
 
-CREATE TABLE IF NOT EXISTS `chanels_messages` (
+CREATE TABLE `chanels_messages` (
   `id` int(11) NOT NULL,
   `message` varchar(45) DEFAULT NULL,
   `from_user` int(11) DEFAULT NULL,
   `to_chanel` int(11) DEFAULT NULL,
   `date` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `chanels_messages`
+-- Дамп данных таблицы `chanels_messages`
 --
 
 INSERT INTO `chanels_messages` (`id`, `message`, `from_user`, `to_chanel`, `date`) VALUES
@@ -260,17 +260,17 @@ INSERT INTO `chanels_messages` (`id`, `message`, `from_user`, `to_chanel`, `date
 -- --------------------------------------------------------
 
 --
--- Table structure for table `deliver_messages`
+-- Структура таблицы `deliver_messages`
 --
 
-CREATE TABLE IF NOT EXISTS `deliver_messages` (
+CREATE TABLE `deliver_messages` (
   `id` int(11) NOT NULL,
   `message_id` int(11) DEFAULT NULL,
   `dilivered` int(1) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `deliver_messages`
+-- Дамп данных таблицы `deliver_messages`
 --
 
 INSERT INTO `deliver_messages` (`id`, `message_id`, `dilivered`) VALUES
@@ -393,42 +393,67 @@ INSERT INTO `deliver_messages` (`id`, `message_id`, `dilivered`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `files`
+-- Структура таблицы `files`
 --
 
-CREATE TABLE IF NOT EXISTS `files` (
+CREATE TABLE `files` (
   `id` int(11) NOT NULL,
   `file_name` varchar(250) COLLATE utf8_bin NOT NULL,
   `file_title` varchar(250) COLLATE utf8_bin NOT NULL,
   `user_id` int(11) NOT NULL,
   `directory` int(11) NOT NULL,
   `type` varchar(50) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `files`
+-- Дамп данных таблицы `files`
 --
 
 INSERT INTO `files` (`id`, `file_name`, `file_title`, `user_id`, `directory`, `type`) VALUES
 (1, '/userfiles/435560bebab301c30Z4-UNBvYc.jpg', '30Z4-UNBvYc.jpg', 43, 19, 'image/jpeg'),
 (2, '/userfiles/435564a2fdbc22230Z4-UNBvYc.jpg', '30Z4-UNBvYc.jpg', 43, 20, 'image/jpeg'),
-(3, '/userfiles/435565f11d30e7830Z4-UNBvYc.jpg', '30Z4-UNBvYc.jpg', 43, 21, 'image/jpeg');
+(3, '/userfiles/435565f11d30e7830Z4-UNBvYc.jpg', '30Z4-UNBvYc.jpg', 43, 21, 'image/jpeg'),
+(4, '/userfiles/445738c9b764558Ð ÐµÐ·ÑŽÐ¼Ðµ.docx', 'Ð ÐµÐ·ÑŽÐ¼Ðµ.docx', 44, 18, 'application/octet-stream');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `friends`
+-- Структура таблицы `files_to_tags`
 --
 
-CREATE TABLE IF NOT EXISTS `friends` (
+CREATE TABLE `files_to_tags` (
+  `id` int(11) NOT NULL,
+  `file_id` int(11) NOT NULL,
+  `tag_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Дамп данных таблицы `files_to_tags`
+--
+
+INSERT INTO `files_to_tags` (`id`, `file_id`, `tag_id`) VALUES
+(1, 3, 0),
+(2, 3, 0),
+(11, 4, 2),
+(12, 4, 3),
+(13, 2, 4),
+(14, 2, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `friends`
+--
+
+CREATE TABLE `friends` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `friend_id` int(11) NOT NULL,
   `status` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `friends`
+-- Дамп данных таблицы `friends`
 --
 
 INSERT INTO `friends` (`id`, `user_id`, `friend_id`, `status`) VALUES
@@ -437,19 +462,19 @@ INSERT INTO `friends` (`id`, `user_id`, `friend_id`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `messages`
+-- Структура таблицы `messages`
 --
 
-CREATE TABLE IF NOT EXISTS `messages` (
+CREATE TABLE `messages` (
   `id` int(11) NOT NULL,
   `from_user` int(11) DEFAULT NULL,
   `to_user` int(11) DEFAULT NULL,
   `text` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `date` varchar(10) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `messages`
+-- Дамп данных таблицы `messages`
 --
 
 INSERT INTO `messages` (`id`, `from_user`, `to_user`, `text`, `date`) VALUES
@@ -572,19 +597,19 @@ INSERT INTO `messages` (`id`, `from_user`, `to_user`, `text`, `date`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `network`
+-- Структура таблицы `network`
 --
 
-CREATE TABLE IF NOT EXISTS `network` (
+CREATE TABLE `network` (
   `id` int(11) NOT NULL,
   `path_id` int(11) NOT NULL,
   `is_public` int(11) NOT NULL,
   `is_password` int(11) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `network`
+-- Дамп данных таблицы `network`
 --
 
 INSERT INTO `network` (`id`, `path_id`, `is_public`, `is_password`, `password`) VALUES
@@ -597,23 +622,32 @@ INSERT INTO `network` (`id`, `path_id`, `is_public`, `is_password`, `password`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `payed_files`
+-- Структура таблицы `payed_files`
 --
 
-CREATE TABLE IF NOT EXISTS `payed_files` (
+CREATE TABLE `payed_files` (
   `id` int(11) NOT NULL,
   `file_id` int(10) NOT NULL,
   `cost` int(11) NOT NULL,
   `description` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Дамп данных таблицы `payed_files`
+--
+
+INSERT INTO `payed_files` (`id`, `file_id`, `cost`, `description`) VALUES
+(1, 3, 10, 0),
+(2, 4, 100, 0),
+(3, 2, 500, 0);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `payed_files_to_tags`
+-- Структура таблицы `payed_files_to_tags`
 --
 
-CREATE TABLE IF NOT EXISTS `payed_files_to_tags` (
+CREATE TABLE `payed_files_to_tags` (
   `id` int(11) NOT NULL,
   `tag_id` int(10) NOT NULL,
   `file_id` int(10) NOT NULL
@@ -622,19 +656,19 @@ CREATE TABLE IF NOT EXISTS `payed_files_to_tags` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `paypal`
+-- Структура таблицы `paypal`
 --
 
-CREATE TABLE IF NOT EXISTS `paypal` (
+CREATE TABLE `paypal` (
   `id` int(11) NOT NULL,
   `payment_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `payment_status` varchar(250) DEFAULT '0',
   `user_id` int(11) NOT NULL,
   `total` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `paypal`
+-- Дамп данных таблицы `paypal`
 --
 
 INSERT INTO `paypal` (`id`, `payment_id`, `payment_status`, `user_id`, `total`) VALUES
@@ -655,18 +689,18 @@ INSERT INTO `paypal` (`id`, `payment_id`, `payment_status`, `user_id`, `total`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `private_chanels_requests`
+-- Структура таблицы `private_chanels_requests`
 --
 
-CREATE TABLE IF NOT EXISTS `private_chanels_requests` (
+CREATE TABLE `private_chanels_requests` (
   `id` int(11) NOT NULL,
   `chanel_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `confirmed` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `private_chanels_requests`
+-- Дамп данных таблицы `private_chanels_requests`
 --
 
 INSERT INTO `private_chanels_requests` (`id`, `chanel_id`, `user_id`, `confirmed`) VALUES
@@ -675,21 +709,32 @@ INSERT INTO `private_chanels_requests` (`id`, `chanel_id`, `user_id`, `confirmed
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tags`
+-- Структура таблицы `tags`
 --
 
-CREATE TABLE IF NOT EXISTS `tags` (
+CREATE TABLE `tags` (
   `id` int(11) NOT NULL,
-  `name` int(11) NOT NULL
+  `name` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Дамп данных таблицы `tags`
+--
+
+INSERT INTO `tags` (`id`, `name`) VALUES
+(1, 'test'),
+(2, '123'),
+(3, 'tst'),
+(4, 'anton'),
+(5, 'alyona');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Структура таблицы `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `login` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `email` varchar(250) COLLATE utf8_bin DEFAULT NULL,
@@ -697,10 +742,10 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email_key` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `activated` tinyint(1) DEFAULT '0',
   `lang` varchar(2) COLLATE utf8_bin DEFAULT 'en'
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `user`
+-- Дамп данных таблицы `user`
 --
 
 INSERT INTO `user` (`id`, `login`, `email`, `password`, `email_key`, `activated`, `lang`) VALUES
@@ -711,18 +756,18 @@ INSERT INTO `user` (`id`, `login`, `email`, `password`, `email_key`, `activated`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users_filesystem`
+-- Структура таблицы `users_filesystem`
 --
 
-CREATE TABLE IF NOT EXISTS `users_filesystem` (
+CREATE TABLE `users_filesystem` (
   `id` int(11) NOT NULL,
   `path` varchar(45) DEFAULT NULL,
   `parent_path` varchar(45) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users_filesystem`
+-- Дамп данных таблицы `users_filesystem`
 --
 
 INSERT INTO `users_filesystem` (`id`, `path`, `parent_path`, `user_id`) VALUES
@@ -737,10 +782,10 @@ INSERT INTO `users_filesystem` (`id`, `path`, `parent_path`, `user_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_settings`
+-- Структура таблицы `user_settings`
 --
 
-CREATE TABLE IF NOT EXISTS `user_settings` (
+CREATE TABLE `user_settings` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `avatar` varchar(250) COLLATE utf8_bin DEFAULT NULL,
@@ -756,10 +801,10 @@ CREATE TABLE IF NOT EXISTS `user_settings` (
   `phone` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `site` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `visibility` tinyint(1) DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `user_settings`
+-- Дамп данных таблицы `user_settings`
 --
 
 INSERT INTO `user_settings` (`id`, `user_id`, `avatar`, `sex`, `birthdate`, `first_name`, `second_name`, `job`, `country`, `city`, `about`, `skype`, `phone`, `site`, `visibility`) VALUES
@@ -770,250 +815,272 @@ INSERT INTO `user_settings` (`id`, `user_id`, `avatar`, `sex`, `birthdate`, `fir
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wallet`
+-- Структура таблицы `wallet`
 --
 
-CREATE TABLE IF NOT EXISTS `wallet` (
+CREATE TABLE `wallet` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `balance` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `wallet`
+-- Дамп данных таблицы `wallet`
 --
 
 INSERT INTO `wallet` (`id`, `user_id`, `balance`) VALUES
 (3, 43, '7611');
 
 --
--- Indexes for dumped tables
+-- Индексы сохранённых таблиц
 --
 
 --
--- Indexes for table `album`
+-- Индексы таблицы `album`
 --
 ALTER TABLE `album`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `blogs`
+-- Индексы таблицы `blogs`
 --
 ALTER TABLE `blogs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `blog_attachment`
+-- Индексы таблицы `blog_attachment`
 --
 ALTER TABLE `blog_attachment`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `chanels`
+-- Индексы таблицы `chanels`
 --
 ALTER TABLE `chanels`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `chanels_admins`
+-- Индексы таблицы `chanels_admins`
 --
 ALTER TABLE `chanels_admins`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `chanels_deliver_messages`
+-- Индексы таблицы `chanels_deliver_messages`
 --
 ALTER TABLE `chanels_deliver_messages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `chanels_messages`
+-- Индексы таблицы `chanels_messages`
 --
 ALTER TABLE `chanels_messages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `deliver_messages`
+-- Индексы таблицы `deliver_messages`
 --
 ALTER TABLE `deliver_messages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `files`
+-- Индексы таблицы `files`
 --
 ALTER TABLE `files`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `friends`
+-- Индексы таблицы `files_to_tags`
+--
+ALTER TABLE `files_to_tags`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `friends`
 --
 ALTER TABLE `friends`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `messages`
+-- Индексы таблицы `messages`
 --
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `network`
+-- Индексы таблицы `network`
 --
 ALTER TABLE `network`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `payed_files`
+-- Индексы таблицы `payed_files`
 --
 ALTER TABLE `payed_files`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `payed_files_to_tags`
+-- Индексы таблицы `payed_files_to_tags`
 --
 ALTER TABLE `payed_files_to_tags`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `paypal`
+-- Индексы таблицы `paypal`
 --
 ALTER TABLE `paypal`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `private_chanels_requests`
+-- Индексы таблицы `private_chanels_requests`
 --
 ALTER TABLE `private_chanels_requests`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user`
+-- Индексы таблицы `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users_filesystem`
+-- Индексы таблицы `users_filesystem`
 --
 ALTER TABLE `users_filesystem`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user_settings`
+-- Индексы таблицы `user_settings`
 --
 ALTER TABLE `user_settings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `wallet`
+-- Индексы таблицы `wallet`
 --
 ALTER TABLE `wallet`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT для сохранённых таблиц
 --
 
 --
--- AUTO_INCREMENT for table `album`
+-- AUTO_INCREMENT для таблицы `album`
 --
 ALTER TABLE `album`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT for table `blogs`
+-- AUTO_INCREMENT для таблицы `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
--- AUTO_INCREMENT for table `blog_attachment`
+-- AUTO_INCREMENT для таблицы `blog_attachment`
 --
 ALTER TABLE `blog_attachment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
--- AUTO_INCREMENT for table `chanels`
+-- AUTO_INCREMENT для таблицы `chanels`
 --
 ALTER TABLE `chanels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `chanels_admins`
+-- AUTO_INCREMENT для таблицы `chanels_admins`
 --
 ALTER TABLE `chanels_admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `chanels_deliver_messages`
+-- AUTO_INCREMENT для таблицы `chanels_deliver_messages`
 --
 ALTER TABLE `chanels_deliver_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
--- AUTO_INCREMENT for table `chanels_messages`
+-- AUTO_INCREMENT для таблицы `chanels_messages`
 --
 ALTER TABLE `chanels_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
--- AUTO_INCREMENT for table `deliver_messages`
+-- AUTO_INCREMENT для таблицы `deliver_messages`
 --
 ALTER TABLE `deliver_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=149;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 --
--- AUTO_INCREMENT for table `files`
+-- AUTO_INCREMENT для таблицы `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `friends`
+-- AUTO_INCREMENT для таблицы `files_to_tags`
+--
+ALTER TABLE `files_to_tags`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT для таблицы `friends`
 --
 ALTER TABLE `friends`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT for table `messages`
+-- AUTO_INCREMENT для таблицы `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=149;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 --
--- AUTO_INCREMENT for table `network`
+-- AUTO_INCREMENT для таблицы `network`
 --
 ALTER TABLE `network`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT for table `payed_files`
+-- AUTO_INCREMENT для таблицы `payed_files`
 --
 ALTER TABLE `payed_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `payed_files_to_tags`
+-- AUTO_INCREMENT для таблицы `payed_files_to_tags`
 --
 ALTER TABLE `payed_files_to_tags`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `paypal`
+-- AUTO_INCREMENT для таблицы `paypal`
 --
 ALTER TABLE `paypal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
--- AUTO_INCREMENT for table `private_chanels_requests`
+-- AUTO_INCREMENT для таблицы `private_chanels_requests`
 --
 ALTER TABLE `private_chanels_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT для таблицы `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
--- AUTO_INCREMENT for table `users_filesystem`
+-- AUTO_INCREMENT для таблицы `users_filesystem`
 --
 ALTER TABLE `users_filesystem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
--- AUTO_INCREMENT for table `user_settings`
+-- AUTO_INCREMENT для таблицы `user_settings`
 --
 ALTER TABLE `user_settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- AUTO_INCREMENT for table `wallet`
+-- AUTO_INCREMENT для таблицы `wallet`
 --
 ALTER TABLE `wallet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

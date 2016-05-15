@@ -16,6 +16,7 @@ class User
     public $password;
     public $email_key;
     public $activated;
+    public $lang;
     protected $inputFilter;
 
 
@@ -27,6 +28,7 @@ class User
         $this->password = (isset($data['password'])) ? $data['password'] : null;
         $this->email_key = (isset($data['email_key'])) ? $data['email_key'] : null;
         $this->activated = (isset($data['activated'])) ? $data['activated'] : null;
+        $this->lang = (isset($data['lang'])) ? $data['lang'] : null;
 }
 
     public function getArrayCopy()

@@ -82,7 +82,7 @@ class MarketController extends preloaderController
         return array('files' => $files);
     }
 
-    public function bueFileAction(){
+    public function byeFileAction(){
         $this->layout('layout/only_form');
         $user_session = new Container('user');
         $userId = $user_session->user->id;

@@ -7,22 +7,22 @@ foreach($this->files as $file) {
     echo "<td>".$file["file_title"]."</td>>";
     echo "<td>".$file["cost"]."</td>";
     echo "<td>".$file["description"]."</td>";
-    echo "<td><span class='bue_file_button' file_to_sell_id=".$file['file_id'].">bue</span></td>";
+    echo "<td><span class='bye_file_button' file_to_sell_id=".$file['file_id'].">bye</span></td>";
     echo "</tr>";
 }
 echo "</tbody>";
 echo "</table>";
 ?>
-<script type="text/javascript" src="js/datatable/js/plugin.js"></script>
-<link rel="stylesheet" href="js/datatable/css/jquery.dataTables.css" />
+<script type="text/javascript" src="/js/datatable/js/plugin.js"></script>
+<link rel="stylesheet" href="/js/datatable/css/jquery.dataTables.css" />
 <script type="text/javascript">
     $(function(){
         $('#file_market_table').DataTable();
-        $('.bue_file_button').bind("click",function(){
+        $('.bye_file_button').bind("click",function(){
             var file_id = $(this).attr("file_to_sell_id");
             $.ajax({
                 type: "POST",
-                url:  "market/buefile",
+                url:  "market/byefile",
                 data:{file_id : file_id}
             })
                 .done(function( data ) {

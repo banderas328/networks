@@ -34,7 +34,8 @@ class PayedFilesTable
     public function getPayedFiles($files,$adapter) {
         $filesIds = array();
         foreach($files as $file) {
-            $filesIds[] = $file["file_id"];
+            //var_dump($file);
+            $filesIds[] = $file;
 
         }
         $filesIds = array_unique($filesIds);
