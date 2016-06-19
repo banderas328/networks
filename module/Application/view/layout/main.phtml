@@ -586,12 +586,15 @@ $lang = $user['user']->lang;
           <span class="float_right">
             <a href="#" class="window_min"></a>
             <a href="#" class="window_resize"></a>
-            <a href="#icon_dock_drive" class="window_close"></a>
+            <a href="#icon_dock_setting" class="window_close"></a>
           </span>
             </div>
             <div class="abs window_content" id="settings_content">
+                <div class="window_aside">
+                    User Settings
+                </div>
                 <div>
-                    <div id="general-settings">
+                    <div class="window_main" id="general-settings">
                     </div>
                 </div>
                 <script type="text/javascript" src="js/pages/main/settings.js"></script>
@@ -639,36 +642,87 @@ $lang = $user['user']->lang;
         </div>
     </div>
 </div>
-<div id="window_users" class="abs window_users window">
+<div id="window_users" class="abs window">
     <div class="abs window_inner">
         <div class="window_top">
           <span class="float_left">
             Users
           </span>
           <span class="float_right">
-<!--            <a href="#icon_dock_users" class="window_close" id="close_users"></a>-->
             <a href="#" class="window_min"></a>
-<!--            <a href="#" class="window_resize"></a>-->
+            <a href="#" class="window_resize"></a>
             <a href="#icon_dock_users" class="window_close" id="close_users"></a>
           </span>
         </div>
-        <div class="abs">
+        <div class="abs window_content" id="users_content">
+<!--            <div class="abs window_content" id="settings_content">-->
+<!--                <div class="window_aside">-->
+<!--                    User Settings-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <div class="window_main" id="general-settings">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <script type="text/javascript" src="js/pages/main/settings.js"></script>-->
+<!--            </div>-->
+<!--            <div class="abs window_bottom">-->
+<!--                Settings-->
+<!--            </div>-->
 
-            <div id="accordion_users">
-                <h3>Friend List</h3>
+                                <div class="window_aside">
+                                    Friends
+                                </div>
+            <div class="window_main" id="friends_tabs">
+                <ul>
+                    <li><a href="#friend_list">Friend List</a></li>
+                    <li><a href="#friends_requets">Requests</a></li>
+                </ul>
                 <div id="friend_list">
                     <script type="text/javascript" src="js/pages/main/friends.js"></script>
                 </div>
-                <h3>Requests</h3>
                 <div id="friends_requets">
                     <p>
+
                     </p>
                     <script type="text/javascript" src="js/pages/main/users.js"></script>
                 </div>
-            </div>
-        </div>
 
+            </div>
+
+
+
+            </div>
+            <div class="abs window_bottom">
+                                Friends
+                            </div>
+
+                    </div>
+    <span class="abs ui-resizable-handle ui-resizable-se"></span>
     </div>
+                <!--    <div class="abs window_inner">-->
+<!--        <div class="window_top">-->
+<!--          <span class="float_left">-->
+<!--            <img src="assets/images/icons/setting_22.png" />-->
+<!--            Settings-->
+<!--          </span>-->
+<!--          <span class="float_right">-->
+<!--            <a href="#" class="window_min"></a>-->
+<!--            <a href="#" class="window_resize"></a>-->
+<!--            <a href="#icon_dock_drive" class="window_close"></a>-->
+<!--          </span>-->
+<!--        </div>-->
+<!--        <div class="abs window_content" id="settings_content">-->
+<!--            <div>-->
+<!--                <div id="general-settings">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <script type="text/javascript" src="js/pages/main/settings.js"></script>-->
+<!--        </div>-->
+<!--        <div class="abs window_bottom">-->
+<!--            Settings-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <span class="abs ui-resizable-handle ui-resizable-se"></span>-->
 </div>
 <div id="window_messages" class="abs window_messages window">
     <div class="abs window_inner">

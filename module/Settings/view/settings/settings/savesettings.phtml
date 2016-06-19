@@ -38,7 +38,7 @@ $(function () {
     //window.addEventListener('load',initiate ,false);
 </script>
 <?php
-echo '<table id="setting_table" class="table table-hover"';
+echo '<table id="setting_table" class="table"';
 $form = $this->form;
 $form->setAttribute('action', $this->url('settings', array('action' => 'savesettings')));
 $form->prepare();
@@ -52,7 +52,7 @@ echo "</td></tr>";
 echo "<tr><td>";
 echo $this->formRow($form->get('first_name'));
 echo "</td></tr>";
-echo "<tr><td>";
+echo "<tr><td class='second-name'>";
 echo $this->formRow($form->get('second_name'));
 echo "</td></tr>";
 echo "<tr><td>";
