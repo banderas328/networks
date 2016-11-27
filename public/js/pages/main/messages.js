@@ -3,7 +3,7 @@ $(function() {
         $('#window_messages').hide();
     });
     $('#window_messages').draggable();
-    $( "#accordion_messages" ).accordion();
+    $( "#messages_tabs" ).tabs();
     $.ajax({
         type: "GET",
         url: "messages/getListMessagesCounts"

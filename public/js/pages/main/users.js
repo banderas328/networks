@@ -1,9 +1,4 @@
 $(function() {
-    //$('#close_users').click(function(){
-    //    $('#window_users').hide();
-    //});
-    //$('#window_users').draggable();
-    //$( "#users_content" ).accordion();
     $('#friends_tabs').tabs();
     $.ajax({
         type: "GET",
