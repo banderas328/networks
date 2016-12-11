@@ -1,5 +1,5 @@
 $(function() {
-    $('#accordion_blogs').accordion();
+    $('#notes_tabs').tabs();
 
     $.ajax({
         type: "GET",

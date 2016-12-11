@@ -8,7 +8,7 @@ $(function() {
         $('#window_search').hide();
     });
     $('#window_search').draggable();
-    $( "#accordion_search" ).accordion();
+    $( "#search_tabs" ).tabs();
     $.ajax({
         type: "GET",
         url: "user/usersearch"

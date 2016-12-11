@@ -21,7 +21,7 @@ $lang = $user['user']->lang;
     <script type="text/javascript" src="assets/js/jquery.desktop.js"></script>
 </head>
 <body>
-< class="abs" id="wrapper">
+<div class="abs" id="wrapper">
 <div class="abs" id="desktop">
     <a class="abs icon" style="left:180px;top:420px;" href="#icon_dock_drive">
         <img src="assets/images/icons/icon_32_drive.png"/>
@@ -64,87 +64,7 @@ $lang = $user['user']->lang;
         <?php echo $this->translate("Admin", false, $lang); ?>
     </a>
 
-    <div id="window_drive" class="abs window">
-        <div class="abs window_inner">
-            <div class="window_top">
-          <span class="float_left">
-            <img src="assets/images/icons/icon_16_drive.png"/>
-            Hard Drive
-          </span>
-          <span class="float_right">
-            <a href="#" class="window_min"></a>
-            <a href="#" class="window_resize"></a>
-            <a href="#icon_dock_drive" class="window_close"></a>
-          </span>
-            </div>
-            <div class="abs window_content">
-                <div class="window_aside">
-                    Storage in use: 119.1 GB
-                </div>
-                <div class="window_main" id="hard_drive">
-                </div>
-                <script type="text/javascript" src="js/pages/main/files.js"></script>
-            </div>
-            <div class="abs window_bottom">
-                Free: 80.9 GB
-            </div>
-        </div>
-        <span class="abs ui-resizable-handle ui-resizable-se"></span>
-    </div>
-    <div id="window_money" class="window">
-        <div>
-            <div class="window_top">
-          <span class="float_left">
-            <img src="assets/images/icons/3.png"/>
-            Money
-          </span>
-          <span class="float_right">
-            <a href="#" class="window_min"></a>
-            <a href="#" class="window_resize"></a>
-            <a href="#icon_dock_drive" class="window_close"></a>
-          </span>
-            </div>
-            <div id="money_accordion">
-                <h3>send transaction</h3>
 
-                <div id="money_transaction">
-                    <script type="text/javascript" src="js/pages/main/money_window.js"></script>
-                </div>
-                <h3>show registerd transactions</h3>
-
-                <div id="complited_transactions">
-                    <script type="text/javascript" src="js/pages/main/show_transactions.js"></script>
-                </div>
-                <h3>finish approved transactions</h3>
-
-                <div id="finished_payments">
-                    <script type="text/javascript" src="js/pages/main/payments.js"></script>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-    <div id="window_network" class="abs window">
-        <div class="abs window_inner">
-            <div class="window_top">
-          <span class="float_left">
-            <img src="assets/images/icons/icon_16_network.png"/>
-            Network
-          </span>
-          <span class="float_right">
-            <a href="#" class="window_min"></a>
-            <a href="#" class="window_resize"></a>
-            <a href="#icon_dock_network" class="window_close"></a>
-          </span>
-            </div>
-            <div class="abs" id="network">
-
-            </div>
-            <script type="text/javascript" src="js/pages/main/network.js"></script>
-        </div>
-        <span class="abs ui-resizable-handle ui-resizable-se"></span>
-    </div>
 </div>
 <div class="abs" id="bar_top">
     <span class="float_right" id="clock"></span>
@@ -306,6 +226,54 @@ $lang = $user['user']->lang;
         <img src="assets/images/misc/firehost.png"/>
     </a>
 </div>
+    <div id="window_drive" class="abs window">
+        <div class="abs window_inner">
+            <div class="window_top">
+          <span class="float_left">
+            <img src="assets/images/icons/icon_16_drive.png"/>
+            Hard Drive
+          </span>
+          <span class="float_right">
+            <a href="#" class="window_min"></a>
+            <a href="#" class="window_resize"></a>
+            <a href="#icon_dock_drive" class="window_close"></a>
+          </span>
+            </div>
+            <div class="abs window_content">
+                <div class="window_aside">
+                    Storage in use: 119.1 GB
+                </div>
+                <div class="window_main" id="hard_drive">
+                </div>
+                <script type="text/javascript" src="js/pages/main/files.js"></script>
+            </div>
+            <div class="abs window_bottom">
+                Free: 80.9 GB
+            </div>
+        </div>
+        <span class="abs ui-resizable-handle ui-resizable-se"></span>
+    </div>
+
+    <div id="window_network" class="abs window">
+        <div class="abs window_inner">
+            <div class="window_top">
+          <span class="float_left">
+            <img src="assets/images/icons/icon_16_network.png"/>
+            Network
+          </span>
+          <span class="float_right">
+            <a href="#" class="window_min"></a>
+            <a href="#" class="window_resize"></a>
+            <a href="#icon_dock_network" class="window_close"></a>
+          </span>
+            </div>
+            <div class="abs" id="network">
+
+            </div>
+            <script type="text/javascript" src="js/pages/main/network.js"></script>
+        </div>
+        <span class="abs ui-resizable-handle ui-resizable-se"></span>
+    </div>
 <div id="window_settings" class="abs window">
     <div class="abs window_inner">
         <div class="window_top">
@@ -335,35 +303,82 @@ $lang = $user['user']->lang;
     </div>
     <span class="abs ui-resizable-handle ui-resizable-se"></span>
 </div>
-<div id="window_search" class="abs window_search window">
+    <div id="window_money" class="window">
+        <div class="abs window_inner">
+            <div class="window_top">
+          <span class="float_left">
+            <img src="assets/images/icons/3.png"/>
+            Money
+          </span>
+          <span class="float_right">
+            <a href="#" class="window_min"></a>
+            <a href="#" class="window_resize"></a>
+            <a href="#icon_dock_money" class="window_close"></a>
+          </span>
+        </div>
+            <div  class="window_content abs" id="money_content">
+                <div class="window_aside">
+                    Money
+                </div>
+                <div id="money_tabs" class="window_main">
+                    <ul>
+                        <li><a href="#money_transaction">Send transaction</a></li>
+                        <li><a href="#complited_transactions">Show registerd transactions</a></li>
+                        <li><a href="#finished_payments">Finish approved transactions</a></li>
+                    </ul>
+                <div id="money_transaction">
+                    <script type="text/javascript" src="js/pages/main/money_window.js"></script>
+                </div>
+                <div id="complited_transactions">
+                    <script type="text/javascript" src="js/pages/main/show_transactions.js"></script>
+                </div>
+                <div id="finished_payments">
+                    <script type="text/javascript" src="js/pages/main/payments.js"></script>
+                </div>
+</div>
+            </div>
+            <div class="abs window_bottom">
+                Money
+            </div>
+        </div>
+        <span class="abs ui-resizable-handle ui-resizable-se"></span>
+    </div>
+<div id="window_search" class="abs  window">
     <div class="abs window_inner">
         <div class="window_top">
           <span class="float_left">
             Search
           </span>
           <span class="float_right">
-               <a href="#" class="window_min"></a>
+            <a href="#" class="window_min"></a>
+            <a href="#" class="window_resize"></a>
             <a href="#icon_dock_search" class="window_close" id="close_search"></a>
           </span>
         </div>
-        <div class="abs">
-            <div id="accordion_search">
-                <h3>Google Search</h3>
+        <div class="window_content abs" id="search_content">
+            <div class="window_aside">
+                Search
+            </div>
+            <div id="search_tabs" class="window_main">
 
-                <div>
-                    <p>
+                <ul>
+                    <li><a href="#google_search">Google Search</a></li>
+                    <li><a href="#user_search_div">User Search</a></li>
+                </ul>
+                <div id="google_search">
                         <input type="text" id="google_search_input"/>
                         <button value="search" id="google_search_button">search</button>
-                    </p>
                 </div>
-                <h3>User Search</h3>
-
                 <div id="user_search_div">
                     <script type="text/javascript" src="js/pages/main/search.js"></script>
                 </div>
             </div>
         </div>
+        <div class="abs window_bottom">
+            Search
+        </div>
     </div>
+    <span class="abs ui-resizable-handle ui-resizable-se"></span>
 </div>
 <div id="window_users" class="abs window">
     <div class="abs window_inner">
@@ -411,12 +426,11 @@ $lang = $user['user']->lang;
             <a href="#" class="window_min"></a>
             <a href="#" class="window_resize"></a>
             <a href="#icon_dock_messages" class="window_close" id="close_messages"></a>
-
           </span>
         </div>
         <div class="abs window_content" id="messages_content">
             <div class="window_aside">
-               Messages
+                Messages
             </div>
             <div class="window_main" id="messages_tabs">
                 <ul>
@@ -438,13 +452,9 @@ $lang = $user['user']->lang;
         <div class="abs window_bottom">
             Messages
         </div>
-        </div>
-        <span class="abs ui-resizable-handle ui-resizable-se"></span>
     </div>
-
-
-
-
+    <span class="abs ui-resizable-handle ui-resizable-se"></span>
+</div>
 <div id="window_admins" class="abs window">
     <div class="abs window_inner">
         <div class="window_top">
@@ -457,50 +467,66 @@ $lang = $user['user']->lang;
             <a href="#icon_dock_drive" class="window_close"></a>
           </span>
         </div>
-        <div class="abs window_content">
+        <div class="abs window_content" id="admins_content">
             <div class="window_aside">
-                admin
+                Administration
             </div>
-            <div class="window_main" id="private_chanels_admin">
+            <div class="window_main" id="private_chanels_tabs">
+                <ul>
+                    <li><a href="#private_chanels_admin">Private Chanels</a></li>
+                </ul>
+                <div id="private_chanels_admin">
+                    <script type="text/javascript" src="js/pages/main/private_chanels_admin.js"></script>
+                </div>
             </div>
-            <script type="text/javascript" src="js/pages/main/private_chanels_admin.js"></script>
         </div>
         <div class="abs window_bottom">
-            Free: 80.9 GB
+            Administration
         </div>
     </div>
     <span class="abs ui-resizable-handle ui-resizable-se"></span>
 </div>
-<div id="window_blogs" class="abs window_blogs window">
+<div id="window_blogs" class="abs window">
     <div class="abs window_inner">
         <div class="window_top">
           <span class="float_left">
             Notes
           </span>
           <span class="float_right">
-            <a href="#icon_dock_blogs" class="window_close"></a>
-               <a href="#" class="window_min"></a>
+            <a href="#" class="window_min"></a>
+            <a href="#" class="window_resize"></a>
+              <a href="#icon_dock_blogs" class="window_close"></a>
           </span>
         </div>
-        <div class="abs">
-            <div id="accordion_blogs">
-                <h3>Create Blog</h3>
-
+        <div class="abs window_content" id="notes_content">
+            <div class="window_aside">
+                Notes
+            </div>
+            <div class="abs window_main" id="notes_tabs">
+                <ul>
+                    <li><a href="#new_blog">Create Blog</a></li>
+                    <li><a href="#list_blogs">Lists Blogs</a></li>
+                    <li><a href="#form_div">Form</a></li>
+                </ul>
                 <div id="new_blog">
                 </div>
-                <h3>Lists Blogs</h3>
-
                 <div id="list_blogs">
                 </div>
-                <h3>Form</h3>
-
                 <div id="form_div">
                 </div>
+                <script type="text/javascript" src="js/pages/main/blogs.js"></script>
+
             </div>
-            <script type="text/javascript" src="js/pages/main/blogs.js"></script>
+
+        </div>
+        </div>
+        <div class="abs window_bottom">
+            Notes
         </div>
     </div>
+    <span class="abs ui-resizable-handle ui-resizable-se"></span>
 </div>
+
 <div id="window_payment" class="abs window_payment window">
     <div class="abs window_inner">
         <div class="window_top">

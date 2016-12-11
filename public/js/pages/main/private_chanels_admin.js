@@ -1,4 +1,5 @@
 $(function() {
+    $('#private_chanels_tabs').tabs();
     $.ajax({
         type: "GET",
         url: "chanels/getPrivateChanelsRequests"

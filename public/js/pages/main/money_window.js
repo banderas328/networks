@@ -1,5 +1,5 @@
 $(function() {
-    $('#money_accordion').accordion();
+    $('#money_tabs').tabs();
     $.ajax({
         type: "GET",
         url: "paypal/paymentform"
