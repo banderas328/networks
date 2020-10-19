@@ -5,7 +5,10 @@ use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
 //use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
-use Zend\Db\Adapter;
+//use Zend\Db\Adapter;
+use Zend\Config\Config;
+use Zend\Config\Factory;
+//use Zend\Db\Adapter;
 
 
 class User
@@ -94,7 +97,7 @@ class User
                 ),
                 'validators' => array(
                     array(
-                        'name' => 'Db\NoRecordExists',
+                        'name' => 'Zend\Validator\Db\NoRecordExists',
                         'options' => array(
                             'table' => 'user',
                             'field' => 'email',
@@ -120,12 +123,16 @@ class User
 
     public function getAdapter()
     {
-        $config = new \Zend\Config\Config(include CONFIG_DIR . '/global.php');
+        $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
+      //  $config = Factory::fromFile(glob('config/autoload/global.php'));
+      //  var_dump($config->database["params"]->host);
+      //  die();
         $adapter = new \Zend\Db\Adapter\Adapter (array(
-            'driver' => $config->adapter["userfiles"]->driver,
-            'database' => $config->adapter["userfiles"]->database,
-            'username' => $config->adapter["userfiles"]->username,
-            'password' => $config->adapter["userfiles"]->password,
+            'driver' => $config->database->driver,
+            'dsn' => $config->database->dsn,
+            'database' => $config->database["params"]->database,
+            'username' => $config->database["params"]->username,
+            'password' => $config->database["params"]->password,
         ));
         return $adapter;
 

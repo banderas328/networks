@@ -11,6 +11,8 @@ use Zend\Db\ResultSet\ResultSet;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Db\Sql\Predicate\Like;
 use Zend\Session\Container;
+use Zend\Config\Config;
+use Zend\Config\Factory;
 
 
 
@@ -19,9 +21,21 @@ class UserTable
 {
     protected $tableGateway;
 
-    public function __construct(TableGateway $tableGateway)
+    public function __construct()
     {
-        $this->tableGateway = $tableGateway;
+        $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
+        //  $config = Factory::fromFile(glob('config/autoload/global.php'));
+        //  var_dump($config->database["params"]->host);
+        //  die();
+        $adapter = new \Zend\Db\Adapter\Adapter (array(
+            'driver' => $config->database->driver,
+            'dsn' => $config->database->dsn,
+            'database' => $config->database["params"]->database,
+            'username' => $config->database["params"]->username,
+            'password' => $config->database["params"]->password,
+        ));
+       // return $adapter;
+        $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("user",$adapter);
     }
 
 

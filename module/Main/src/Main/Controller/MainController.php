@@ -16,14 +16,14 @@ class MainController extends Controller\preloaderController
     public function indexAction()
     {
         parent::__construct();
-        $this->setLocale();
+      //  $this->setLocale();
         $this->layout('layout/main');
 
     }
 
     public function setLocale () {
-        $loc = $this->getServiceLocator();
-        $translator = new Translator();
+     //   $loc = $this->getServiceLocator();
+     //   $translator = new Translator();
         $user_session = new Container('user');
         if($user_session->user) {
             $lang = $user_session->user->lang;

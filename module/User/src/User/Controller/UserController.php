@@ -72,6 +72,7 @@ class UserController extends Controller\preloaderController
 //method for sending email to activate user accout after registation
     public function sendRegistrationMail($email, $key)
     {
+        return true;
         $uri = $this->getRequest()->getUri();
         $base = sprintf('%s://%s', $uri->getScheme(), $uri->getHost());
         $url = $base . "/user/confirm/email/" . $email . "/key/" . $key;
@@ -190,16 +191,16 @@ class UserController extends Controller\preloaderController
     public function getUserTable()
     {
         if (!$this->userTable) {
-            $sm = $this->getServiceLocator();
-            $this->userTable = $sm->get('User\Model\UserTable');
+           // $sm = $this->getServiceLocator();
+            $this->userTable = new \User\Model\UserTable;
         }
         return $this->userTable;
     }
 	public function getSettingsTable()
 	{
 		if (!$this->settingsTable) {
-			$sm = $this->getServiceLocator();
-			$this->settingsTable = $sm->get('Settings\Model\SettingsTable');
+			//$sm = $this->getServiceLocator();
+			$this->settingsTable = new Settings\Model\SettingsTable;
 		}
 		return $this->settingsTable;
 	}
