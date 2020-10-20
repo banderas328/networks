@@ -7,15 +7,25 @@ use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Select as Select;
 //use Zend\Db\Adapter\Driver\ResultInterface;
 //use Zend\Db\ResultSet\ResultSet;
+use Zend\Config\Config;
+use Zend\Config\Factory;
 
 
 class FilesToTagsTable
 {
     protected $tableGateway;
 
-    public function __construct(TableGateway $tableGateway)
+    public function __construct()
     {
-        $this->tableGateway = $tableGateway;
+        $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
+        $adapter = new \Zend\Db\Adapter\Adapter (array(
+            'driver' => $config->database->driver,
+            'dsn' => $config->database->dsn,
+            'database' => $config->database["params"]->database,
+            'username' => $config->database["params"]->username,
+            'password' => $config->database["params"]->password,
+        ));
+        $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("files_to_tags",$adapter);
     }
 
     public function updateFileTags($fileId,$tags) {

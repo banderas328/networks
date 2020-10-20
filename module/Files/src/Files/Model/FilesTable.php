@@ -4,6 +4,9 @@ namespace Files\Model;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Session\Container;
 use Zend\Db\Sql\Sql;
+use Zend\Config\Config;
+use Zend\Config\Factory;
+
 
 //use Zend\Db\Adapter\Driver\ResultInterface;
 //use Zend\Db\ResultSet\ResultSet;
@@ -13,9 +16,17 @@ class FilesTable
 {
     protected $tableGateway;
 
-    public function __construct(TableGateway $tableGateway)
+    public function __construct()
     {
-        $this->tableGateway = $tableGateway;
+        $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
+        $adapter = new \Zend\Db\Adapter\Adapter (array(
+            'driver' => $config->database->driver,
+            'dsn' => $config->database->dsn,
+            'database' => $config->database["params"]->database,
+            'username' => $config->database["params"]->username,
+            'password' => $config->database["params"]->password,
+        ));
+        $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("files",$adapter);
     }
 
 //    public function getUserFiles($adapter)
@@ -109,7 +120,7 @@ class FilesTable
        else
            $sql = "SELECT  *,files.id as id FROM files  left join payed_files on files.id = payed_files.file_id  WHERE files.user_id='".$userId."' and files.directory = '".$dir."' group by files.id";
        $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-       if(!empty($resultSet->toArray())) return $resultSet->toArray();
+       if(!empty($resultSet->buffer())) return $resultSet->buffer();
        else return false;
    }
 
@@ -117,8 +128,9 @@ class FilesTable
         $fileId =  (int) $fileId;
         $sql = "SELECT * FROM files where id=".$fileId." and user_id=".$userId;
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-        if(!empty($resultSet->toArray())) {
-            $file = $resultSet->toArray()[0];
+        if(!empty($resultSet->buffer())) {
+            //var_dump($resultSet->buffer()->toArray());die();
+            $file = $resultSet->buffer()->toArray()[0];
             $fileName  = $_SERVER['DOCUMENT_ROOT'].$file["file_name"];
             @ unlink($fileName);
             $sql = "DELETE FROM files  where id=".$fileId." and user_id=".$userId;

@@ -200,7 +200,7 @@ class UserController extends Controller\preloaderController
 	{
 		if (!$this->settingsTable) {
 			//$sm = $this->getServiceLocator();
-			$this->settingsTable = new Settings\Model\SettingsTable;
+			$this->settingsTable = new \Settings\Model\SettingsTable;
 		}
 		return $this->settingsTable;
 	}

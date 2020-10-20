@@ -63,7 +63,7 @@ class  filesController extends Controller\preloaderController {
     }
 
     public function getParentDirAction(){
-        $this->setLocale();
+        //$this->setLocale();
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $dirKey = (int) $request->getPost()->dir_key;
@@ -187,7 +187,7 @@ class  filesController extends Controller\preloaderController {
         $userId = $user_session->user->id;
        if($this->getFilesTable()->deleteFile($files->getAdapter(),$file_id,$userId)){
 
-           $this->getPayedFilesTable()->deleteFileForPay($file_id);
+         //  $this->getPayedFilesTable()->deleteFileForPay($file_id);
            $this->getFilesToTagsTable()->deleteFileTags($file_id);
        }
           die(json_encode($file_id));
@@ -272,8 +272,9 @@ class  filesController extends Controller\preloaderController {
 	public function getFilesTable()
 	{
 		if (!$this->filesTable) {
-			$sm = $this->getServiceLocator();
-			$this->filesTable = $sm->get('Files\Model\FilesTable');
+// 			$sm = $this->getServiceLocator();
+// 			$this->filesTable = $sm->get('Files\Model\FilesTable');
+		    $this->filesTable  = new \Files\Model\FilesTable;
 		}
 		return $this->filesTable;
 	}
@@ -290,8 +291,9 @@ class  filesController extends Controller\preloaderController {
     public function getFileSystemTable()
     {
         if (!$this->filesystemTable) {
-            $sm = $this->getServiceLocator();
-            $this->filesystemTable = $sm->get('Files\Model\FileSystemTable');
+//             $sm = $this->getServiceLocator();
+//             $this->filesystemTable = $sm->get('Files\Model\FileSystemTable');
+            $this->filesystemTable = new \Files\Model\FileSystemTable;
         }
         return $this->filesystemTable;
     }
@@ -315,8 +317,9 @@ class  filesController extends Controller\preloaderController {
     public function getFilesToTagsTable()
     {
         if (!$this->filesToTagsTable) {
-            $sm = $this->getServiceLocator();
-            $this->filesToTagsTable = $sm->get('Files\Model\FilesToTagsTable');
+          //  $sm = $this->getServiceLocator();
+           // $this->filesToTagsTable = $sm->get('Files\Model\FilesToTagsTable');
+            $this->filesToTagsTable = new \Files\Model\FilesToTagsTable;
         }
         return $this->filesToTagsTable;
     }
