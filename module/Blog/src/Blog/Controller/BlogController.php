@@ -50,11 +50,18 @@ class BlogController extends Controller\preloaderController
         else $offset = 0;
         $friends = new Friends();
         $friends = $this->getFriendsTable()->getFriends($userId,$friends->getAdapter());
-        $blog = new Blog();
-        $blogs = $this->getBlogTable()->getBlogs($userId,$friends->toArray(),$offset,$blog->getAdapter());
-      //      echo "<pre>";
-      //  var_dump($blogs->toArray());
-        return array("blogs" => $blogs->toArray() , 'user_id' => $userId , 'offset' => $offset);
+        if($friends) {
+            $blog = new Blog();
+            
+            $blogs = $this->getBlogTable()->getBlogs($userId,$friends->toArray(),$offset,$blog->getAdapter());
+            //      echo "<pre>";
+            //  var_dump($blogs->toArray());
+            return array("blogs" => $blogs->toArray() , 'user_id' => $userId , 'offset' => $offset);
+        }
+      else {
+          return array("blogs" => [] , 'user_id' => $userId , 'offset' => $offset);
+          
+      }
     }
 
 
@@ -67,8 +74,9 @@ class BlogController extends Controller\preloaderController
     public function getBlogTable()
     {
         if (!$this->blogTable) {
-            $sm = $this->getServiceLocator();
-            $this->blogTable = $sm->get('Blog\Model\BlogTable');
+         //   $sm = $this->getServiceLocator();
+         //   $this->blogTable = $sm->get('Blog\Model\BlogTable');
+            $this->blogTable = new \Blog\Model\BlogTable;
         }
         return $this->blogTable;
     }
@@ -76,8 +84,9 @@ class BlogController extends Controller\preloaderController
     public function getFriendsTable()
     {
         if (!$this->friendsTable) {
-            $sm = $this->getServiceLocator();
-            $this->friendsTable = $sm->get('Friends\Model\FriendsTable');
+            //$sm = $this->getServiceLocator();
+           // $this->friendsTable = $sm->get('Friends\Model\FriendsTable');
+            $this->friendsTable = new \Friends\Model\FriendsTable;
         }
         return $this->friendsTable;
     }

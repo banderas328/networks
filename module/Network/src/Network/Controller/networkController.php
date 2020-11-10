@@ -23,32 +23,36 @@ class  networkController extends Controller\preloaderController
     public function getFriendsTable()
     {
         if (!$this->friendsTable) {
-            $sm = $this->getServiceLocator();
-            $this->friendsTable = $sm->get('Friends\Model\FriendsTable');
+         //   $sm = $this->getServiceLocator();
+         //   $this->friendsTable = $sm->get('Friends\Model\FriendsTable');
+            $this->friendsTable = new \Friends\Model\FriendsTable;
         }
         return $this->friendsTable;
     }
     public function getNetworkTable()
     {
         if (!$this->networkTable) {
-            $sm = $this->getServiceLocator();
-            $this->networkTable = $sm->get('Network\Model\NetworkTable');
+           // $sm = $this->getServiceLocator();
+            //$this->networkTable = $sm->get('Network\Model\NetworkTable');
+            $this->networkTable = new \Network\Model\NetworkTable;
         }
         return $this->networkTable;
     }
     public function getFileSystemTable()
     {
         if (!$this->filesystemTable) {
-            $sm = $this->getServiceLocator();
-            $this->filesystemTable = $sm->get('Files\Model\FileSystemTable');
+         //   $sm = $this->getServiceLocator();
+           // $this->filesystemTable = $sm->get('Files\Model\FileSystemTable');
+            $this->filesystemTable = new \Files\Model\FileSystemTable;
         }
         return $this->filesystemTable;
     }
 
     public function getFilesTable(){
         if (!$this->filesTable) {
-            $sm = $this->getServiceLocator();
-            $this->filesTable = $sm->get('Files\Model\FilesTable');
+         //   $sm = $this->getServiceLocator();
+          //  $this->filesTable = $sm->get('Files\Model\FilesTable');
+            $this->filesTable  = new \Files\Model\FilesTable;
         }
         return $this->filesTable;
 

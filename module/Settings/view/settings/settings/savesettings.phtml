@@ -4,7 +4,7 @@ $title = 'General user Settings';
 $this->headTitle($title);
 ?>
     <h1><?php echo $this->escapeHtml($title); ?></h1>
-    <form id="avatar_form" class="form-horizontal" action="settings/savessettings" method="post">
+    <form id="avatar_form" class="form-horizontal" action="settings/savesettings" method="post">
         <input type="file"  name="avatar" id="avatar" >
         <input type="submit" value="Submit" class='btn btn-primary'>
     </form>
@@ -14,22 +14,40 @@ $this->headTitle($title);
 
  //   }
 $(function () {
-    var my_avatar = document.getElementById('avatar');
-    my_avatar.addEventListener('change',upload,false);
+	$('#avatar').bind('change',upload_avatar);
 });
-    function upload(e) {
-        var files= e.target.files;
-        var file=files[0];
-        var data = new FormData();
-        data.append('avatar',file);
-        var url  = "settings/savesettings";
-        var request = new XMLHttpRequest();
-        var xmlupload=request.upload;
-//        xmlupload.addEventListener('loadstart',start,false);
-//        xmlupload.addEventListener('progress',status,false);
-         xmlupload.addEventListener('load',show,false);
-        request.open("POST", url, true);
-        request.send(data);
+//     function upload(e) {
+//         var files= e.target.files;
+//         var file=files[0];
+//         var $input = $("#avatar");
+//         var fd = new FormData;
+
+//         fd.append('avatar', $input.prop('files')[0]);
+
+//         $.ajax({
+//             url: 'settings/savesettings',
+//             data: fd,
+//             processData: false,
+//             contentType: false,
+//             type: 'POST',
+//             success: function (data) {
+//                 alert(data);
+//             }
+//         });
+        function upload_avatar(e) {
+            alert("hello");
+            var files= e.target.files;
+            var file=files[0];
+            var data = new FormData();
+            data.append('avatar',file);
+
+
+            var url  = "settings/savesettings";
+            var request = new XMLHttpRequest();
+            var xmlupload=request.upload;
+            request.open("POST", url, true);
+            request.send(data);
+        
     }
     function show() {
         console.info('done');
@@ -38,51 +56,38 @@ $(function () {
     //window.addEventListener('load',initiate ,false);
 </script>
 <?php
-echo '<table id="setting_table" class="table"';
+
 $form = $this->form;
 $form->setAttribute('action', $this->url('settings', array('action' => 'savesettings')));
 $form->prepare();
 echo $this->form()->openTag($form);
-echo "<tr><td>";
+
 echo $this->formRow($form->get('sex'));
-echo "</td></tr>";
-echo "<tr><td>";
+
 echo $this->formRow($form->get('birthdate'));
-echo "</td></tr>";
-echo "<tr><td>";
+
 echo $this->formRow($form->get('first_name'));
-echo "</td></tr>";
-echo "<tr><td class='second-name'>";
+
 echo $this->formRow($form->get('second_name'));
-echo "</td></tr>";
-echo "<tr><td>";
+
 echo $this->formRow($form->get('job'));
-echo "</td></tr>";
-echo "<tr><td>";
+
 echo $this->formRow($form->get('country'));
-echo "</td></tr>";
-echo "<tr><td>";
+
 echo $this->formRow($form->get('city'));
-echo "</td></tr>";
-echo "<tr><td id='about_me_setting'>";
+
 echo $this->formRow($form->get('about'));
-echo "</td></tr>";
-echo "<tr><td>";
+
 echo $this->formRow($form->get('skype'));
-echo "</td></tr>";
-echo "<tr><td>";
+
 echo $this->formRow($form->get('phone'));
-echo "</td></tr>";
-echo "<tr><td>";
+
 echo $this->formRow($form->get('site'));
-echo "</td></tr>";
-echo "<tr><td>";
+
 echo $this->formRow($form->get('visibility'));
-echo "</td></tr>";
-echo "<tr><td>";
+
 echo "<button value='save' name='save' class='btn btn-primary' id='save_general_settings'>save</button>";
-echo "</td></tr>";
-echo '</table>';
+
 //echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
 ?>

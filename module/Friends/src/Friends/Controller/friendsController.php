@@ -16,8 +16,9 @@ class  friendsController extends Controller\preloaderController
     public function getFriendsTable()
     {
         if (!$this->friendsTable) {
-            $sm = $this->getServiceLocator();
-            $this->friendsTable = $sm->get('Friends\Model\FriendsTable');
+           // $sm = $this->getServiceLocator();
+           // $this->friendsTable = $sm->get('Friends\Model\FriendsTable');
+            $this->friendsTable = new \Friends\Model\FriendsTable;
         }
         return $this->friendsTable;
     }

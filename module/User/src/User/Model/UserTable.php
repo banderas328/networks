@@ -13,6 +13,7 @@ use Zend\Db\Sql\Predicate\Like;
 use Zend\Session\Container;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Zend\Db\Sql\Sql;
 
 
 
@@ -96,17 +97,28 @@ class UserTable
     public function searchUser($data,$adapter,$page,$limit,$paginated=false) {
         if($paginated) {
             $select = new Select();
-            $select->from('user_settings');  // base table
+            $select->from('user_settings');
+            $select->columns(array("first_name","second_name",'avatar','job','country','city','phone','about'));
+            // base table
+         //   var_dump($data);
+         $whereArray = [];
             foreach($data as $key => $value) {
                 if(($value != "") && ($key != 'submit') && ($key != 'visibility')) {
-					$select->where->like($key, "%".$value."%");
-                    $select->where->like('visibility', "1");
+                    $whereArray[$key] =  $value;
+					//$select->where->like($key, "%".$value."%");
+                    //$select->where->like('visibility', "0");
                 }
             }
+            $whereArray['visibility'] = "0";
+            $select->where($whereArray);
             if($page != 1) {
                 $select->offset($page *  $limit);
             }
             $select->limit($limit);
+            
+         //   var_dump($select->getSqlString());
+         //   $sql = new Sql($this->tableGateway->getAdapter());
+       //     $select = $sql->getSqlStringForSqlObject($select);
 
             $resultSetPrototype = new ResultSet();
             $resultSetPrototype->setArrayObjectPrototype(new Settings());

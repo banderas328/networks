@@ -10,6 +10,8 @@ use Chanels\Model\ChanelsMessages;
 use Chanels\Model\Chanels;
 use Chanels\Model\ChanelsTable;
 use Preloader\Controller;
+use Zend\Config\Config;
+use Zend\Config\Factory;
 
 
 class ChanelsController extends Controller\preloaderController
@@ -90,8 +92,9 @@ class ChanelsController extends Controller\preloaderController
     public function getChanelsTable()
     {
         if (!$this->chanelsTable) {
-            $sm = $this->getServiceLocator();
-            $this->chanelsTable = $sm->get('Chanels\Model\ChanelsTable');
+            //$sm = $this->getServiceLocator();
+           // $this->chanelsTable = $sm->get('Chanels\Model\ChanelsTable');
+            $this->chanelsTable = new \Chanels\Model\ChanelsTable;
         }
         return $this->chanelsTable;
     }
@@ -99,8 +102,9 @@ class ChanelsController extends Controller\preloaderController
     public function getChanelsMessagesTable()
     {
         if (!$this->chanelsMessagesTable) {
-            $sm = $this->getServiceLocator();
-            $this->chanelsMessagesTable = $sm->get('Chanels\Model\ChanelsMessagesTable');
+            //$sm = $this->getServiceLocator();
+            //$this->chanelsMessagesTable = $sm->get('Chanels\Model\ChanelsMessagesTable');
+            $this->chanelsMessagesTable = new \Chanels\Model\ChanelsMessagesTable;
         }
         return $this->chanelsMessagesTable;
     }

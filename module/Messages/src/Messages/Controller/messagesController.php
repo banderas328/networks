@@ -35,15 +35,22 @@ class  messagesController extends Controller\preloaderController {
         $friends = new Friends();
         $friendsTable = $this->getFriendsTable();
         $friendsList = @$friendsTable->getFriends($userId,$friends->getAdapter(),$messagesCounts->toArray());
-        return array('data' => @$friendsList->toArray());
+        if($friendsList) {
+        $data = $friendsList->buffer();
+        return array('data' => $data );
+        }
+        else {
+            return array('data' => [] );
+        }
     }
 
     public function getMessagesTable()
     {
 
         if (!$this->messagesTable) {
-            $sm = $this->getServiceLocator();
-            $this->messagesTable = $sm->get('Messages\Model\MessagesTable');
+           // $sm = $this->getServiceLocator();
+           // $this->messagesTable = $sm->get('Messages\Model\MessagesTable');
+            $this->messagesTable = new \Messages\Model\MessagesTable;
         }
         return $this->messagesTable;
     }
@@ -52,8 +59,9 @@ class  messagesController extends Controller\preloaderController {
     {
 
         if (!$this->friendsTable) {
-            $sm = $this->getServiceLocator();
-            $this->friendsTable = $sm->get('Friends\Model\FriendsTable');
+           // $sm = $this->getServiceLocator();
+           // $this->friendsTable = $sm->get('Friends\Model\FriendsTable');
+            $this->friendsTable = new \Friends\Model\FriendsTable;
         }
         return $this->friendsTable;
     }

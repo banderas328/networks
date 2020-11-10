@@ -6,13 +6,26 @@ use Zend\Session\Container;
 use Zend\Db\Sql\Sql;
 //use Zend\Db\Adapter\Driver\ResultInterface;
 //use Zend\Db\ResultSet\ResultSet;
+use Zend\Config\Config;
+use Zend\Config\Factory;
+
+
 
 
 class FriendsTable {
 	protected $tableGateway;
 
-	public function __construct(TableGateway $tableGateway) {
-		$this->tableGateway = $tableGateway;
+	public function __construct() {
+	    $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
+	    $adapter = new \Zend\Db\Adapter\Adapter (array(
+	        'driver' => $config->database->driver,
+	        'dsn' => $config->database->dsn,
+	        'database' => $config->database["params"]->database,
+	        'username' => $config->database["params"]->username,
+	        'password' => $config->database["params"]->password,
+	    ));
+	    $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("friends",$adapter);
+
 	}
 
 	public function addFriendRequest($userId,$friendId,$adapter) {

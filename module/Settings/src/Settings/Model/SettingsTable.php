@@ -6,6 +6,8 @@ use Zend\Session\Container;
 use Zend\Db\Sql\Sql;
 //use Zend\Db\Adapter\Driver\ResultInterface;
 //use Zend\Db\ResultSet\ResultSet;
+use Zend\Config\Config;
+use Zend\Config\Factory;
 
 
 
@@ -13,9 +15,17 @@ class SettingsTable
 {
     protected $tableGateway;
 
-    public function __construct(TableGateway $tableGateway)
+    public function __construct()
     {
-        $this->tableGateway = $tableGateway;
+        $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
+        $adapter = new \Zend\Db\Adapter\Adapter (array(
+            'driver' => $config->database->driver,
+            'dsn' => $config->database->dsn,
+            'database' => $config->database["params"]->database,
+            'username' => $config->database["params"]->username,
+            'password' => $config->database["params"]->password,
+        ));
+        $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("user_settings",$adapter);
     }
 
 
@@ -54,8 +64,7 @@ class SettingsTable
             $file = $path. '/' .$fileName;
             move_uploaded_file($settings['avatar']['tmp_name'], getcwd(). "/public/". $file.$settings['avatar']['name']);
             if($this->is_image(getcwd(). "/public/".$file.$settings['avatar']['name'])) {
-                exec("convert ".getcwd(). "/public/".$file.$settings['avatar']['name']." 50% ".getcwd(). "/public/".$file.$settings['avatar']['name']);
-                $data['avatar'] = $file.$settings['avatar']['name'];
+                       $data['avatar'] = $file.$settings['avatar']['name'];
             }
             else {
                 @unlink(getcwd(). "/public/".$file.$settings['avatar']['name']);

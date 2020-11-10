@@ -172,12 +172,14 @@ class UserController extends Controller\preloaderController
             }
             $user = new User();
             $dbAdapter  = $user->getAdapter();
+
             $user_session = new Container('user_search');
             $user_session->user_search = $data;
             $page = (int)$this->params()->fromQuery('page', 1);
             $paginator = $this->getUserTable()->searchUser($data,$dbAdapter,$limitForPage,$page,true);
             $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
             $paginator->setItemCountPerPage($limitForPage);
+         //   var_dump($paginator);
         }
         return array('form' => $form , 'paginator' => $paginator , 'div' => "usersearchdiv");
     }
