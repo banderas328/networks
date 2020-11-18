@@ -2,7 +2,7 @@
 
 <?php
 foreach($dirs as  $dir_key => $dir_value) {
-    echo "<div style='margin-left: 20px;'><img src='assets/images/icons/folder.png' width='50px' height='50px'/><h3 style='cursor:pointer;margin-top: -8px;margin-left: 5px;' dir_key=".$dir_value['path_id']." class='network_directory'>".$dir_value['path']."</h3></div>" ;
+    echo "<div style='margin-left: 20px;'><img src='assets/images/icons/folder.png' width='50px' height='50px'/><h3 style='cursor:pointer;margin-top: -8px;margin-left: 5px;' dir_key=".$dir_value['id']." class='network_directory'>".$dir_value['path']."</h3></div>" ;
 
 }
 if($filesInDir) {
@@ -28,6 +28,7 @@ $(function(){
             .done(function (data) {
                 $("#network").html(data);
 
+
             });
     }
 
@@ -41,6 +42,7 @@ $(function(){
         )
             .done(function (data) {
                 $("#network").html(data);
+
 
             });
 

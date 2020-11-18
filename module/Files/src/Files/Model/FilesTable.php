@@ -45,7 +45,7 @@ class FilesTable
     {
         $user_session = new Container('user');
         $userId = $user_session->user->id;
-        $path = "/userfiles";
+        $path = "userfiles/".$userId;
         $fileName = uniqid();
         $file = $path . '/' . $userId . $fileName . $data['file']['name'];
         if(move_uploaded_file($data['file']['tmp_name'], getcwd() . "/public/" . $file)) {

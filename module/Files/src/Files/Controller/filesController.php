@@ -6,9 +6,9 @@ use Files\Model\Files;
 use Files\Model\FileSystem;
 use Files\Model\PayedFiles;
 use Files\Model\FilesToTagsTable;
+use Network\Model\NetworkTable;
 use Tags\Model\TagsTable;
 use Network\Model\Network;
-use Network\Model\NetworkTable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Session\Container;
@@ -301,8 +301,8 @@ class  filesController extends Controller\preloaderController {
     public function getNetworkTable()
     {
         if (!$this->networkTable) {
-            $sm = $this->getServiceLocator();
-            $this->networkTable = $sm->get('Network\Model\NetworkTable');
+          //  $sm = $this->getServiceLocator();
+            $this->networkTable = new \Network\Model\NetworkTable;
         }
         return $this->networkTable;
     }

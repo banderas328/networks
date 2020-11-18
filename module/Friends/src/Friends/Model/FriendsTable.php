@@ -55,7 +55,9 @@ class FriendsTable {
             'status' => 1
 
         );
-        if($this->tableGateway->update($data, array('user_id' => $userId , 'friend_id' => $friendId))) {
+        var_dump($userId);
+        var_dump($friendId);
+        if($this->tableGateway->update($data, array('user_id' => $friendId , 'friend_id' => $userId))) {
             return true;
         }
         else {
@@ -84,8 +86,8 @@ class FriendsTable {
         $select = $sql->select();
         $select->from('friends')
              ->join(array('user_settings' => 'user_settings'),     // join table with alias
-            'friends.friend_id = user_settings.user_id');
-        $select->where(array('friends.user_id' => $userId));
+            'friends.user_id = user_settings.user_id');
+        $select->where(array('friends.friend_id' => $userId,"status" => 0));
         $selectString = $sql->getSqlStringForSqlObject($select);
         $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
         return $results;
@@ -114,6 +116,7 @@ class FriendsTable {
         else {
             $needIds = $userIds;
         }
+        
         foreach($needIds as $needIdKey => $needIdValue) {
             if($needIdValue == $requestUser) {
                 unset($needIds[$needIdKey]);

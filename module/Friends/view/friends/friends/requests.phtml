@@ -1,6 +1,7 @@
 <?php
-if(isset($requests)) {
-    foreach ($requests as $request) {
+
+if(isset($friends)) {
+    foreach ($friends as $request) {
         if ($request['status'] == 0) {
             if (isset($request['avatar'])) {
                 echo "<img style='max-width:100px;' src=" . $request['avatar'] . ">";

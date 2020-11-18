@@ -36,8 +36,8 @@ class BlogTable
                 $fileName = uniqid();
                 $file = $path . '/' . $fileName;
                 move_uploaded_file($post['file']['tmp_name'], getcwd() . "/public/" . $file . $post['file']['name']);
-                if($this->is_image(getcwd(). "/public/".$file . $post['file']['name']) and ($post['file']["size"] < 200000)) {
-                    exec("convert ".getcwd(). "/public/".$file . $post['file']['name']." 50% ".getcwd(). "/public/".$file . $post['file']['name']);
+                if(($post['file']["size"] < 200000)) {
+                   
                     $data['file_name'] =$file . $post['file']['name'];
                 }
                 else {

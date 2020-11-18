@@ -50,7 +50,7 @@ class FileSystemTable {
         $dirKey = (int) $dirKey;
         $sql = "SELECT  * FROM users_filesystem WHERE user_id='".$userId."' and id = '".$dirKey."'";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-        if(!empty($resultSet->toArray()[0]['parent_path'])) return $resultSet->toArray()[0]['parent_path'];
+        if(!empty($resultSet->buffer()->toArray()[0]['parent_path'])) return $resultSet->buffer()->toArray()[0]['parent_path'];
         else return false;
     }
 
@@ -66,8 +66,10 @@ class FileSystemTable {
 
     public function getChildDirs($adapter,$dirId,$userId) {
         $dirs = $this->getChildDirsList($dirId,$userId,false);
+      //  var_dump($dirs);
         $dirs = $this->sortDirs($dirs);
         $dirs[] = $dirId;
+
         return $dirs;
     }
 
@@ -83,12 +85,16 @@ class FileSystemTable {
     public function getChildDirsList($dirId,$userId,$allDirs) {
         $dirId = (int) $dirId;
         $userId = (int) $userId;
+//         var_dump($dirId);
+//         var_dump($userId);
         $sql  = "SELECT id from users_filesystem where parent_path = ".$dirId." and user_id = ".$userId;
+      //  echo "SELECT id from users_filesystem where parent_path = ".$dirId." and user_id = ".$userId;
         $fileSystem = new FileSystem();
         $fileSystem->getAdapter();
         $adapter = $fileSystem->getAdapter();
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-        $dirs = $resultSet->toArray();
+        $dirs = $resultSet->buffer()->toArray();
+    //    var_dump($dirs);
         if(!empty($dirs)) {
             $allDirs[] = $dirs;
             foreach($dirs as $dir) {

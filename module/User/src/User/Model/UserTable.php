@@ -55,6 +55,8 @@ class UserTable
             $adapter = $user->getAdapter();
             $sql = "insert into users_filesystem (path,parent_path,user_id) values ('market','0',".$userId.")";
             $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+            $path = "/userfiles/".$userId;
+            mkdir($path, 0777, true);
         } else {
             if ($this->getUser($id)) {
                 $this->tableGateway->update($data, array('id' => $id));
@@ -98,7 +100,7 @@ class UserTable
         if($paginated) {
             $select = new Select();
             $select->from('user_settings');
-            $select->columns(array("first_name","second_name",'avatar','job','country','city','phone','about'));
+            $select->columns(array("user_id","first_name","second_name",'avatar','job','country','city','phone','about'));
             // base table
          //   var_dump($data);
          $whereArray = [];

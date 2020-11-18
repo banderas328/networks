@@ -29,6 +29,7 @@ class  friendsController extends Controller\preloaderController
         $user_session = new Container('user');
         $userId = $user_session->user->id;
         $friends = new Friends();
+        
         $this->getFriendsTable()->addFriendRequest($userId, $friendId, $friends->getAdapter());
         return false;
     }

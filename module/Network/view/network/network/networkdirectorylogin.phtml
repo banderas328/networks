@@ -1,5 +1,6 @@
 
 <script type="text/javascript">
+
     $(function(){
 
         $.ajax({
@@ -10,6 +11,8 @@
         )
             .done(function(data) {
                 $("#network").html(data);
+                $(".network_directory").bind("click",get_network_directory);
+                $(".parent_directory_network").bind("click",get_network_parent_directory);
             });
     });
 </script>

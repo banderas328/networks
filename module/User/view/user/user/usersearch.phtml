@@ -31,6 +31,7 @@ if (count($this->paginator)): ?>
             <?php echo "<img src=".$vars['avatar'].">"; ?>
             <li><?php echo $vars['first_name'];?></li>
             <li><?php echo $vars['second_name'];?></li>
+           <li><?php var_dump($vars);?></li>
             <li><a class="friend_request" href="/friends/addfriendrequest/<?php echo $vars['user_id']; ?>">Add To Friends</a></li>
         <?php endforeach; ?>
     </ul>
@@ -40,6 +41,7 @@ if (count($this->paginator)): ?>
 <script type="text/javascript">
    $(function() {
         $('.friend_request').bind('click',function () {
+            alert("hello");
 
             var url = $(this).attr('href');
             $.ajax({
