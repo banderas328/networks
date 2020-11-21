@@ -18,6 +18,17 @@ class ChanelsController extends Controller\preloaderController
 {
     protected $chanelsTable;
     protected $chanelsMessagesTable;
+    
+    
+    public function createChanelAction(){
+        $this->layout('layout/only_form');
+        $request = $this->getRequest();
+        $chanels = new  Chanels();
+        if ($request->isPost()) {
+            $this->getChanelsTable()->createChanel($request, $chanels->getAdapter());
+        }
+        return false;
+    }
 
     public function indexPublicAction()
     {
@@ -75,7 +86,7 @@ class ChanelsController extends Controller\preloaderController
     {
         $request = $this->getRequest();
         $chanels = new  Chanels();
-        if(!$this->getChanelsTable()->checkIsUserIsChanelAdmin($chanels->getAdapter(),$request)) die('try more');
+        if(!$this->getChanelsTable()->checkIsUserIsChanelAdmin($chanels->getAdapter(),$request)) die('try more :))');
         $this->getChanelsTable()->denyAccessUserToChanel($chanels->getAdapter(),$request);
         die();
     }

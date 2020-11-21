@@ -30,7 +30,7 @@ class MessagesTable {
 
     public function addMessage($request,$adapter){
 
-        $text = $request->getPost()->text;
+        $text = htmlspecialchars ($request->getPost()->text);
         $text  = substr ($text,0,250);
         $to_user = $request->getPost()->to_user;
         $user_session = new Container('user');
@@ -69,7 +69,7 @@ class MessagesTable {
     public function markMessagesAsDileverd($messages,$adapter){
 
         $needMark = array();
-        foreach($messages as $message) {
+        foreach($messages->buffer() as $message) {
             $needMark[] = $message['message_id'];
         }
 //        $user_session = new Container('user');

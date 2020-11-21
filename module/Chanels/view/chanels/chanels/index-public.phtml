@@ -9,6 +9,7 @@
         $(function() {
             $(".join_chanel").bind("click",function () {
                     console.info(this);
+                    var to_chanel = { to_chanel : false  , date : false};
                     send_message_from_user_chanel(this);
                  return false;
                 }
@@ -39,6 +40,7 @@
             $(".close_chanel").bind("click",function(){
                 var to_chanel = $(this).attr('to_chanel');
                 $(".message_to_user_from_chanel_list[to_chanel="+to_chanel+"]").remove();
+                var to_chanel = { to_chanel : false  , date : false};
 
             })
             $(".message_to_user_from_chanel_list[to_chanel="+to_chanel.to_chanel+"]").show();

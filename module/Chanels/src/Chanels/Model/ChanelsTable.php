@@ -5,6 +5,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Session\Container;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Zend\Db\Sql\Sql;
 
 class ChanelsTable
 {
@@ -31,7 +32,8 @@ class ChanelsTable
     public function fetchAllPrivate($adapter)
     {
 
-        $sql = "SELECT  * FROM chanels left join private_chanels_requests on chanels.id = private_chanels_requests.chanel_id  WHERE chanels.private = 1 group by chanels.id";
+        $sql = "SELECT  * FROM chanels left join private_chanels_requests on chanels.id = private_chanels_requests.chanel_id 
+ WHERE chanels.private = 1 ";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet;
     }
@@ -55,7 +57,7 @@ class ChanelsTable
         $chanel_id = (int) $request->getPost()->chanel_id;
         $sql = "SELECT * FROM chanels_admins WHERE chanel_id=".$chanel_id." AND admins=".$userId;
         $resultSet =  $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-        if(!empty($resultSet->toArray())) return true;
+        if(!empty($resultSet->buffer()->toArray())) return true;
         return false;
 
 
@@ -82,12 +84,20 @@ class ChanelsTable
 
     public function checkUserHaveAccessToChanel($adapter,$request){
 
-        $chanel_id = (int) $request->getPost()->chanel_id;
+        $chanel_id = (int) $request->getPost()->to_chanel;
         $user_session = new Container('user');
         $userId = $user_session->user->id;
+        
         $sql = "SELECT * FROM private_chanels_requests WHERE chanel_id=".$chanel_id." and user_id=".$userId." and confirmed=1";
         $resultSet =  $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-        if(!$resultSet->toArray()) return false;
+        if(!$resultSet->buffer()->toArray()) {
+            $sql = "SELECT * FROM chanels_admins WHERE admins=".$userId;
+            $resultSet =  $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+            if(!$resultSet->buffer()->toArray()) {
+                
+                return false;
+            }
+        }
         return true;
     }
 
@@ -97,6 +107,20 @@ class ChanelsTable
         $userId = $user_session->user->id;
         $sql = "INSERT INTO private_chanels_requests (user_id,chanel_id) values ($userId,$to_chanel)";
         $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+    }
+    
+    public function createChanel($request,$adapter) {
+        
+        $chanel_name = $request->getPost()->chanel_name;
+        $is_private = (int) $request->getPost()->is_private;
+        $data = ['chanel_name' => $chanel_name,'private' => $is_private];
+        $this->tableGateway->insert($data);
+        $chanelId =  $this->tableGateway->lastInsertValue;
+        $user_session = new Container('user');
+        $userId = $user_session->user->id;
+        $sql = "INSERT INTO chanels_admins (admins,chanel_id) values ($userId,$chanelId)";
+        $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+        die("chanel created");
     }
 
 }

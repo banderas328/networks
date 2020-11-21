@@ -436,7 +436,8 @@ $lang = $user['user']->lang;
                 <ul>
                     <li><a href="#chats">Chats</a></li>
                     <li><a href="#chanels">Chanels</a></li>
-                    <li><a href="#private_chanels">Chats</a></li>
+                    <li><a href="#private_chanels">Private Chanels</a></li>
+                    <li><a href="#create_chanel">Create Chanel</a></li>
                 </ul>
                 <div id="chats">
                     <script type="text/javascript" src="js/pages/main/messages.js"></script>
@@ -446,6 +447,14 @@ $lang = $user['user']->lang;
                 </div>
                 <div id="private_chanels">
                     <script type="text/javascript" src="js/pages/main/private_chanels.js"></script>
+                </div>
+                 <div id="create_chanel">
+                    <div>
+                     <input name="chanel_name" type="text" id="chanel_name">
+                     <input name="is_private" type="checkbox" id="is_private"> is private
+                     <button id="create_chanel_submit">create chanel</button>
+                    </div>
+                    <script type="text/javascript" src="js/pages/main/create_chanel.js"></script>
                 </div>
             </div>
         </div>

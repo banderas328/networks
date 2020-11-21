@@ -37,19 +37,6 @@ class ChanelsMessages
     }
     public function getAdapter()
     {
-//         $config = new \Zend\Config\Config(include CONFIG_DIR . '/global.php');
-//         $adapter = new \Zend\Db\Adapter\Adapter (array(
-//             'driver' => $config->adapter["userfiles"]->driver,
-//             'database' => $config->adapter["userfiles"]->database,
-//             'username' => $config->adapter["userfiles"]->username,
-//             'password' => $config->adapter["userfiles"]->password,
-//             'options' => array(
-//                 \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'',
-//                 \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET CHARACTER SET \'UTF8\''
-//             )
-//         ));
-
-//         return $adapter;
         $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
         $adapter = new \Zend\Db\Adapter\Adapter (array(
             'driver' => $config->database->driver,

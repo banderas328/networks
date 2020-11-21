@@ -40,9 +40,8 @@ class  syncController extends AbstractActionController {
 
     public function syncChanelPrivateAction(){
         if(!$this->isUserCanAccessToChanel()) {
-            die("try more");
+            die("try more :)");
         }
-        die("tut");
         $messages = $this->checkNewChanelsMessages();
         $messages["chanels_messages_private"] = $messages;
         echo json_encode($messages);
@@ -64,16 +63,16 @@ class  syncController extends AbstractActionController {
         $messages = new Messages();
         $freshMessages = $this->getMessagesTable()->checkNewMessages($messages->getAdapter());
         $this->getMessagesTable()->markMessagesAsDileverd($freshMessages,$messages->getAdapter());
-        return $freshMessages->toArray();
+        return $freshMessages->buffer()->toArray();
     }
 
     public function checkNewChanelsMessages(){
-        if($this->isPrivateChanel()) die("try more");
+        //if($this->isPrivateChanel()) die("try more :)");
         $this->layout('layout/only_form');
         $messages = new ChanelsMessages();
         $request = $this->getRequest();
         $freshMessages =  $this->getChanelsMessagesTable()->checkNewMessages($messages->getAdapter(),$request);
-        return $freshMessages->toArray();
+        return $freshMessages->buffer()->toArray();
     }
     public function checkNewPrivateChanelsMessages(){
         $this->layout('layout/only_form');
@@ -104,8 +103,7 @@ class  syncController extends AbstractActionController {
     public function getChanelsTable()
     {
         if (!$this->chanelsTable) {
-            $sm = $this->getServiceLocator();
-            $this->chanelsTable = $sm->get('Chanels\Model\ChanelsTable');
+            $this->chanelsTable = new \Chanels\Model\ChanelsTable;
         }
         return $this->chanelsTable;
     }
@@ -113,24 +111,21 @@ class  syncController extends AbstractActionController {
     public function getMessagesTable()
     {
         if (!$this->messagesTable) {
-            $sm = $this->getServiceLocator();
-            $this->messagesTable = $sm->get('Messages\Model\MessagesTable');
+            $this->messagesTable = new \Messages\Model\MessagesTable;
         }
         return $this->messagesTable;
     }
     public function getChanelsMessagesTable()
     {
         if (!$this->chanelsMessagesTable) {
-            $sm = $this->getServiceLocator();
-            $this->chanelsMessagesTable = $sm->get('Chanels\Model\ChanelsMessagesTable');
+            $this->chanelsMessagesTable = new \Chanels\Model\ChanelsMessagesTable;
         }
         return $this->chanelsMessagesTable;
     }
     public function getUsersTable()
     {
         if (!$this->usersTable) {
-            $sm = $this->getServiceLocator();
-            $this->usersTable = $sm->get('User\Model\UserTable');
+            $this->usersTable = new \User\Model\UserTable;
         }
         return $this->usersTable;
     }

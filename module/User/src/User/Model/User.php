@@ -124,9 +124,6 @@ class User
     public function getAdapter()
     {
         $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
-      //  $config = Factory::fromFile(glob('config/autoload/global.php'));
-      //  var_dump($config->database["params"]->host);
-      //  die();
         $adapter = new \Zend\Db\Adapter\Adapter (array(
             'driver' => $config->database->driver,
             'dsn' => $config->database->dsn,
