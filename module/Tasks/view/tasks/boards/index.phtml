@@ -1,0 +1,37 @@
+create board
+<div id="create_board">
+name
+<input type="text" name="board_name" id="board_name"/>
+users
+<input type="text" name="users_allowed" id="users_allowed"/>
+statuses
+<textarea  name="statuses" id="statuses">todo,in progress,done</textarea>
+admin
+
+<button id="add_board">add board</button>
+</div>
+
+<script type="text/javascript">
+$(function() {
+$("#add_board").bind("click",function(){
+var board_name = $("#board_name").val();
+var users = $("#users_allowed").val();
+var statuses = $("#statuses").val();
+
+$.ajax({
+	type: "POST",
+    url: "boards/createBoard",
+    dataType: "json",
+    data: {"board_name":board_name,"users_allowed":users,"statuses":statuses}
+})
+    .done(function( data ) {
+        $("#tasks_transaction").html(data);
+    });
+
+	
+});
+
+	
+});
+
+</script>

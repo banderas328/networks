@@ -8,6 +8,8 @@
 html,
 body {
   overflow: hidden;
+	font-family: "Roboto";
+	font-weight:500;
 }
 
 body {
@@ -74,7 +76,7 @@ div.ui-resizable-handle {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   -webkit-background-clip: padding-box;
-  color: black;
+  color: white;
   font-size: 11px;
   font-weight: bold;
   line-height: 1.3;
@@ -92,8 +94,8 @@ div.ui-resizable-handle {
   background: url(../images/gui/trans_black.png) no-repeat -99999px -99999px;
   display: block;
   margin: 0 auto 5px;
-  width: 32px;
-  height: 32px;
+  width: 64px;
+  height: 64px;
 }
 
 .icon:hover,
@@ -113,7 +115,7 @@ div.ui-resizable-handle {
 
 .window {
   background: #fff;
-  border: 1px solid #000;
+/*  border: 1px solid #9E9E9E;*/
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -273,7 +275,9 @@ div.ui-resizable-handle {
 }
 
 .window_top {
-  background: #333 url(../images/gui/bar_bottom.png) repeat-x;
+	  border-bottom: 1px solid #F5F5F5;
+
+	background-color:white;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   -moz-border-radius-topleft: 5px;
@@ -281,23 +285,23 @@ div.ui-resizable-handle {
   -webkit-border-top-left-radius: 5px;
   -webkit-border-top-right-radius: 5px;
   -webkit-background-clip: padding-box;
-  color: #fff;
-  font-weight: bold;
+
   overflow: hidden;
   line-height: 30px;
   padding: 0 10px;
-  text-shadow: #000 0 1px 1px;
+
   height: 30px;
 }
 
 .window_top img {
+width :20px;
   float: left;
   margin: 6px 5px 0 0;
 }
 
 .window_bottom {
-  background: #fff url(../images/gui/bar_top.png) repeat-x left bottom;
-  border-top: 1px solid #bbb;
+ /* background: #fff url(../images/gui/bar_top.png) repeat-x left bottom;
+  border-top: 1px solid #bbb;*/
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
@@ -306,7 +310,7 @@ div.ui-resizable-handle {
   -webkit-border-bottom-right-radius: 5px;
   -webkit-background-clip: padding-box;
   font-size: 11px;
-  font-weight: bold;
+ 
   line-height: 20px;
   overflow: hidden;
   text-align: center;
@@ -330,36 +334,57 @@ div.ui-resizable-handle {
   margin: 6px 0 0 5px;
   width: 28px;
   height: 15px;
-}
-
-.window_min:hover {
-  background-position: 0 -15px;
-}
-
-.window_resize {
-  background-position: -28px 0;
-}
-
-.window_resize:hover {
-  background-position: -28px -15px;
+	cursor:pointer;
 }
 
 .window_close {
-  background-position: -56px 0;
+
+	
+	background:white url(../images/gui/window_close.png) no-repeat;
+ background-position: 0 0;
+
+}
+.window_resize {
+
+	
+	background:white url(../images/gui/window_open.png) no-repeat;
+ background-position: 0 0;
+	background-size:90%;
+
+}
+.window_min {
+
+	
+	background:white url(../images/gui/window_min.png) no-repeat;
+ background-position: 0 -6px;
+
+}
+
+
+.window_min:hover {
+  background-position: 0 -6px;
+}
+
+.window_resize {
+  background-position: 3px -3px;
+}
+
+.window_resize:hover {
+  background-position: 3px -3px;
+}
+
+.window_close {
+  background-position: -3px -6px;
 }
 
 .window_close:hover {
-  background-position: -56px -15px;
-  box-shadow: #f00 0 0 10px;
-  -moz-box-shadow: #f00 0 0 10px;
-  -webkit-box-shadow: #f00 0 0 10px;
+  background-position: -3px -6px;
+
 }
 
 .window_min:hover,
 .window_resize:hover {
-  box-shadow: #09f 0 0 10px;
-  -moz-box-shadow: #09f 0 0 10px;
-  -webkit-box-shadow: #09f 0 0 10px;
+
 }
 
 .window_inner {
@@ -371,7 +396,7 @@ div.ui-resizable-handle {
 }
 
 .window_content {
-  background: url(../images/gui/window_content.gif) repeat-y;
+ /* background: url(../images/gui/window_content.gif) repeat-y;*/
   line-height: 1.5;
   overflow: auto;
   top: 32px;
@@ -385,6 +410,8 @@ div.ui-resizable-handle {
   font-size: 11px;
   padding: 10px 12px 10px 10px;
   width: 150px;
+	background-color:#F5F5F5;
+	height:100%;
 }
 
 .window_main {
@@ -794,7 +821,7 @@ clear: both;
 }
 .dir_wraper {
     width: 300px;
-    display: block;
+    display: inline;
     margin-top: 10px;
     margin-left: 10px;
     position: relative;
@@ -840,8 +867,9 @@ clear: both;
     float: right;
 }
 .file_wraper {
-    width: 350px;
-    clear: both;
+        width: auto;
+    display: inline-block;
+
 }
 .file_wraper h3 {
     clear: both;
@@ -871,3 +899,18 @@ clear: both;
 #file_directory_form p {
     position: relative;left: 10px;
 }
+.directory {
+	font-weght:normal;
+	font-size:15px;
+	display:block;
+	line-height: 10px;
+}
+.directory_wrapper {
+    width: auto;
+    display: inline-block;
+}
+.file_image {
+	width : 60px;
+	
+}
+.directory_actions ,.file_div_action {display:none;}

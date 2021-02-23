@@ -27,10 +27,10 @@ $lang = $user['user']->lang;
         <img src="assets/images/icons/icon_32_drive.png"/>
         <?php echo $this->translate("Hard_Drive", false, $lang); ?>
     </a>
-  <!--    <a class="abs icon" style="left:340px;top:360px;" href="#icon_dock_money">
-<!--         <img src="assets/images/icons/3.png"/> -->
-        <?php // echo $this->translate("Money", false, $lang); ?>
-<!--     </a> -->
+      <a class="abs icon" style="left: 264px;top: 420px;" href="#icon_dock_money">
+       <img src="assets/images/icons/3.png"/>
+        <?php  echo $this->translate("Task Manager", false, $lang); ?>
+     </a> 
     <!--  <a class="abs icon" style="left:420px;top:360px;" href="#icon_dock_payment">
 <!--         <img src="assets/images/icons/payment.png"/> -->
         <?php // echo $this->translate("Market", false, $lang); ?>
@@ -161,12 +161,12 @@ $lang = $user['user']->lang;
         <img src="assets/images/icons/icon_22_desktop.png"/>
     </a>
     <ul id="dock">
-<!--         <li id="icon_dock_money"> -->
-<!--             <a href="#window_money"> -->
-<!--                 <img src="assets/images/icons/3.png"/> -->
-<!--                 Money -->
-<!--             </a> -->
-<!--         </li> -->
+        <li id="icon_dock_money">
+            <a href="#window_money">
+                <img src="assets/images/icons/3.png"/>
+                Money
+            </a>
+        </li>
 <!--         <li id="icon_dock_payment"> -->
 <!--             <a href="#window_payment"> -->
 <!--                 <img src="assets/images/icons/payment.png"/> -->
@@ -230,6 +230,7 @@ $lang = $user['user']->lang;
         <div class="abs window_inner">
             <div class="window_top">
           <span class="float_left">
+          <img class="parent_directory" dir_key='0' src="assets/images/gui/left.png"/>
             <img src="assets/images/icons/icon_16_drive.png"/>
             Hard Drive
           </span>
@@ -303,46 +304,38 @@ $lang = $user['user']->lang;
     </div>
     <span class="abs ui-resizable-handle ui-resizable-se"></span>
 </div>
-<!--     <div id="window_money" class="window"> -->
-<!--         <div class="abs window_inner"> -->
-<!--             <div class="window_top"> -->
-<!--           <span class="float_left"> -->
-<!--             <img src="assets/images/icons/3.png"/> -->
-<!--             Money -->
-<!--           </span> -->
-<!--           <span class="float_right"> -->
-<!--             <a href="#" class="window_min"></a> -->
-<!--             <a href="#" class="window_resize"></a> -->
-<!--             <a href="#icon_dock_money" class="window_close"></a> -->
-<!--           </span> -->
-<!--         </div> -->
-<!--             <div  class="window_content abs" id="money_content"> -->
-<!--                 <div class="window_aside"> -->
-<!--                     Money -->
-<!--                 </div> -->
-<!--                 <div id="money_tabs" class="window_main"> -->
-<!--                     <ul> -->
-<!--                         <li><a href="#money_transaction">Send transaction</a></li> -->
-<!--                         <li><a href="#complited_transactions">Show registerd transactions</a></li> -->
-<!--                         <li><a href="#finished_payments">Finish approved transactions</a></li> -->
-<!--                     </ul> -->
-<!-- <!--                 <div id="money_transaction"> --> -->
-<!-- <!--                     <script type="text/javascript" src="js/pages/main/money_window.js"></script> --> -->
-<!-- <!--                 </div> --> -->
-<!-- <!--                 <div id="complited_transactions"> --> -->
-<!-- <!--                     <script type="text/javascript" src="js/pages/main/show_transactions.js"></script> --> -->
-<!-- <!--                 </div> --> -->
-<!-- <!--                 <div id="finished_payments"> --> -->
-<!-- <!--                     <script type="text/javascript" src="js/pages/main/payments.js"></script> --> -->
-<!-- <!--                 </div> --> -->
-<!-- </div> -->
-<!--             </div> -->
-<!--             <div class="abs window_bottom"> -->
-<!--                 Money -->
-<!--             </div> -->
-<!--         </div> -->
-<!--         <span class="abs ui-resizable-handle ui-resizable-se"></span> -->
-<!--     </div> -->
+    <div id="window_money" class="abs  window">
+        <div class="abs window_inner">
+            <div class="window_top">
+          <span class="float_left">
+            <img src="assets/images/icons/3.png"/>
+             Tasks
+          </span>
+          <span class="float_right">
+            <a href="#" class="window_min"></a>
+            <a href="#" class="window_resize"></a>
+            <a href="#icon_dock_money" class="window_close"></a>
+          </span>
+        </div>
+            <div  class="window_content abs" id="money_content">
+                <div class="window_aside">
+                    Tasks
+                </div>
+                <div id="money_tabs" class="window_main">
+              
+                    
+                <div id="tasks_transaction"> 
+                     <script type="text/javascript" src="js/pages/main/tasks_window.js"></script> 
+                </div> 
+
+</div>
+            </div>
+            <div class="abs window_bottom">
+                Money
+            </div>
+        </div>
+        <span class="abs ui-resizable-handle ui-resizable-se"></span>
+    </div>
 <div id="window_search" class="abs  window">
     <div class="abs window_inner">
         <div class="window_top">

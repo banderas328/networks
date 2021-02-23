@@ -1,6 +1,7 @@
 <?php
 $user  = $_SESSION['user'];
 $lang = $user['user']->lang;
+$user_id = $user['user']->id;
 
 if(!$is_root) {
     ?>
@@ -10,21 +11,22 @@ if(!$is_root) {
     <input type="text" id="directory_name">
     <button value="create dir" class='btn btn-primary' id="create_dir"><?php echo $this->translate("Create_Directory",false,$lang);?></button>
     <input type="hidden" value="<?php echo $current_directory?>" id="current_directory">
-    <br/>
-    <h3 class='parent_directory' style='cursor:pointer;position: absolute;top: 25px;left: 300px;' dir_key=<?php echo $current_directory?>><img  style='cursor:pointer;'src='assets/images/icons/go-back-icon.png' width='50px' height='50px'/></h3>
+        
 <?php
 }
 ?>
 <?php
 foreach($dirs as  $dir_key => $dir_value) {
     echo "<div class='dir_wraper'>
-<img src='assets/images/icons/folder.png' width='50px' height='50px'/>
-<h3 style='cursor:pointer;margin-top: -8px;margin-left: 5px;' dir_key=".$dir_value['id']." class='directory'>".$dir_value['path']." </h3>
+<div class='directory_wrapper'>
+<img src='assets/images/icons/folder.png' width='50px' height='50px' dir=".$dir_value['id']." class='folder_action'/>
 
+<div  dir_key=".$dir_value['id']." class='directory' >".$dir_value['path']." </div>
+</div>
 
 " ;
 if(!$is_root) {
-    echo "<img class='dir_actions_icon' dir=".$dir_value['id']." src='assets/images/icons/setting.png'/>";
+    //echo "<img class='dir_actions_icon' dir=".$dir_value['id']." src='assets/images/icons/setting.png'/>";
     echo "<div class='directory_actions' dir=".$dir_value["id"]."><p class='delete_directory' dir=".$dir_value['id'].">".$this->translate('Delete_Directory',false,$lang)."</p>
     <p class='share_dir' dir=" . $dir_value['id'] . ">share dir</p>
     <p class='share_dir_with_password' dir=" . $dir_value['id'] . ">share dir with password</p>
@@ -36,38 +38,61 @@ if(!$is_root) {
 }
 if($filesInDir) {
     foreach($filesInDir as  $file) {
-        echo "<div class='file_wraper'>";
-        echo "<p style='display:inline;' class='file_delete_string' file=".$file['id'].">"
-            .$file['file_title']."     ".$file['type'].
-            "<div class='file_div_action'><span class='delete_file btn btn-primary' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span>
+        //var_dump($file);
+        if(($file['type'] != "image/jpeg") and ($file['type'] != "image/png")) {
+        echo "<div class='file_wraper' file=".$file['id'].">";
+        echo "<div class='file_block'  file=".$file['id']."><p>"
+            .$file['file_title']."</p><div class='file_div_action' file=".$file['id'].">
+<span class='delete_file btn btn-primary' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span>
             <span><a href='/files/downloadFile/id/".$file['id']."' class='download_file btn btn-primary' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></span>
-            <img  class='file_actions_icon' file=".$file['id']." src='assets/images/icons/setting.png'/></div></p>";
+</div></div>";
 
-        echo "<span class='file_actions' file=".$file['id'].">
-
-         <p> <input type='text' class='file_cost' placeholder='file cost' file=".$file['id']." value='".$file['cost']."'></p>
-        <p> <textarea placeholder='file description'  maxsize='400' file=".$file['id'].">".$file['description']."</textarea></p>
-        <p><input type='text'  placeholder='tags (comma separated)' class='tags' file=".$file['id']." value=''></p>
-        <h3 file=".$file['id']." class='sellfile btn btn-primary'>sell file</h3>
-        </span>";
         echo "</div>";
+        }
+        else {
+            echo "<div class='file_wraper' file=".$file['id'].">";
+            echo "<div class='file_block' file=".$file['id'].">"
+            ."<img src=".$file['file_name']." class='file_image'><p>".$file['file_title']."</p><div class='file_div_action' file=".$file['id'].">
+<span class='delete_file btn btn-primary' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span>
+            <span><a href='/files/downloadFile/id/".$file['id']."' class='download_file btn btn-primary' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></span>
+</div></div>";
+            
+            echo "</div>";
+        }
     }
 }
 ?>
 <script type="text/javascript">
+document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
+
+// $(document).mousedown(function(e){ 
+//   if( e.button == 2 ) { //2  - правый клик, 3 - средний клик
+//     alert('Right mouse button!'); 
+//     return false; 
+//   } 
+//   return true; 
+// }); 
     $(function() {
-        $(".directory_actions").slideUp();
-        $(".sellfile").bind('click',function(){
-            var file_id = $(this).attr('file');
-            sell_file(file_id);
-        });
-        $('.dir_actions_icon').bind('click',function(){
-          var dir =   $(this).attr("dir");
-            $(".directory_actions[dir="+dir+"]").slideToggle();
-        });
+        $(".parent_directory").attr("dir_key",<?php echo $current_directory?>)
+        $('.folder_action').mousedown(function(e){ 
+      	  if( e.button == 2 ) { //2  - правый клик, 3 - средний клик
+    		  var dir =   $(this).attr("dir");
+    		  $(".directory_actions[dir="+dir+"]").slideToggle();
+  		    return false; 
+  		  } 
+  		  return true; 
+  		}); 
+        $('.file_wraper').mousedown(function(e){ 
+      	  if( e.button == 2 ) { //2  - правый клик, 3 - средний клик
+    		  var file =   $(this).attr("file");
+    		  $(".file_div_action[file="+file+"]").slideToggle();
+  		    return false; 
+  		  } 
+  		  return true; 
+  		}); 
         $('.file_actions_icon').bind('click',function(){
             var file =   $(this).attr("file");
-            $(".file_actions[file="+file+"]").slideToggle();
+            $(".file_div_action[file="+file+"]").slideToggle();
         });
         $(".delete_directory").bind("click",delete_category);
         $('.delete_file').bind("click",delete_file);
