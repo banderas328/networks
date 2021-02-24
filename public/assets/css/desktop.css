@@ -869,6 +869,7 @@ clear: both;
 .file_wraper {
         width: auto;
     display: inline-block;
+	position:relative;
 
 }
 .file_wraper h3 {
@@ -911,6 +912,13 @@ clear: both;
 }
 .file_image {
 	width : 60px;
+}
+.directory_actions ,.file_actions {display:none;}
+.visible-block {
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    background-color: white;
 	
 }
-.directory_actions ,.file_div_action {display:none;}

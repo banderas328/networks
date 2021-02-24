@@ -18,21 +18,21 @@ if(!$is_root) {
 <?php
 foreach($dirs as  $dir_key => $dir_value) {
     echo "<div class='dir_wraper'>
-<div class='directory_wrapper'>
-<img src='assets/images/icons/folder.png' width='50px' height='50px' dir=".$dir_value['id']." class='folder_action'/>
-
-<div  dir_key=".$dir_value['id']." class='directory' >".$dir_value['path']." </div>
-</div>
+               <div class='directory_wrapper'>
+                   <img src='assets/images/icons/folder.png' width='50px' height='50px' dir=".$dir_value['id']." class='folder_action'/>
+                       <div  dir_key=".$dir_value['id']." class='directory' >".$dir_value['path']." </div>
+                </div>
 
 " ;
 if(!$is_root) {
-    //echo "<img class='dir_actions_icon' dir=".$dir_value['id']." src='assets/images/icons/setting.png'/>";
-    echo "<div class='directory_actions' dir=".$dir_value["id"]."><p class='delete_directory' dir=".$dir_value['id'].">".$this->translate('Delete_Directory',false,$lang)."</p>
-    <p class='share_dir' dir=" . $dir_value['id'] . ">share dir</p>
-    <p class='share_dir_with_password' dir=" . $dir_value['id'] . ">share dir with password</p>
-    <input type='text' class='input_password' dir=" . $dir_value['id'] . ">
-    <input type='button' value='save password and share' dir=" . $dir_value['id'] . " class='dir_save_pass btn btn-primary'>
-    </div>";
+    
+           echo "<div class='directory_actions' dir=".$dir_value["id"].">
+                    <p class='delete_directory' dir=".$dir_value['id'].">".$this->translate('Delete_Directory',false,$lang)."</p>
+                    <p class='share_dir' dir=" . $dir_value['id'] . ">share dir</p>
+                    <p class='share_dir_with_password' dir=" . $dir_value['id'] . ">share dir with password</p>
+                    <input type='text' class='input_password' dir=" . $dir_value['id'] . ">
+                     <input type='button' value='save password and share' dir=" . $dir_value['id'] . " class='dir_save_pass btn btn-primary'>
+                 </div>";
 }
     echo "</div>";
 }
@@ -40,60 +40,64 @@ if($filesInDir) {
     foreach($filesInDir as  $file) {
         //var_dump($file);
         if(($file['type'] != "image/jpeg") and ($file['type'] != "image/png")) {
-        echo "<div class='file_wraper' file=".$file['id'].">";
-        echo "<div class='file_block'  file=".$file['id']."><p>"
-            .$file['file_title']."</p><div class='file_div_action' file=".$file['id'].">
-<span class='delete_file btn btn-primary' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span>
-            <span><a href='/files/downloadFile/id/".$file['id']."' class='download_file btn btn-primary' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></span>
-</div></div>";
+            echo "<div class='file_wraper' file=".$file['id'].">";
+            echo "<p class='file_block'  file=".$file['id']."> ".$file['file_title']."</p>";
+                  echo "<div class='file_actions' file=".$file['id'].">";
+                  echo          "<p class='file_div_action' file=".$file['id']."><span class='delete_file btn btn-primary' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span></p>";
+                  echo          "<p><a href='/files/downloadFile/id/".$file['id']."' class='download_file btn btn-primary' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></p>";
+                  echo "</div>";
+            echo "</div>";
 
-        echo "</div>";
+       
         }
         else {
             echo "<div class='file_wraper' file=".$file['id'].">";
-            echo "<div class='file_block' file=".$file['id'].">"
-            ."<img src=".$file['file_name']." class='file_image'><p>".$file['file_title']."</p><div class='file_div_action' file=".$file['id'].">
-<span class='delete_file btn btn-primary' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span>
-            <span><a href='/files/downloadFile/id/".$file['id']."' class='download_file btn btn-primary' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></span>
-</div></div>";
-            
+            echo "<p class='file_block'  file=".$file['id']."> ".$file['file_title']."<img src='".$file['file_name']."' class='file_image' /></p>";
+            echo "<div class='file_actions' file=".$file['id'].">";
+            echo          "<p class='file_div_action' file=".$file['id']."><span class='delete_file btn btn-primary' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span></p>";
+            echo          "<p><a href='/files/downloadFile/id/".$file['id']."' class='download_file btn btn-primary' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></p>";
+            echo "</div>";
             echo "</div>";
         }
+       
     }
 }
 ?>
 <script type="text/javascript">
 document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
-
-// $(document).mousedown(function(e){ 
-//   if( e.button == 2 ) { //2  - правый клик, 3 - средний клик
-//     alert('Right mouse button!'); 
-//     return false; 
-//   } 
-//   return true; 
-// }); 
     $(function() {
         $(".parent_directory").attr("dir_key",<?php echo $current_directory?>)
         $('.folder_action').mousedown(function(e){ 
       	  if( e.button == 2 ) { //2  - правый клик, 3 - средний клик
     		  var dir =   $(this).attr("dir");
-    		  $(".directory_actions[dir="+dir+"]").slideToggle();
+    		  if(!$(".directory_actions[dir="+dir+"]").hasClass("visible-block")) {
+    			  $(".directory_actions").removeClass("visible-block");
+    			  $(".file_actions").removeClass("visible-block");
+    			  $(".directory_actions[dir="+dir+"]").addClass("visible-block");
+    		  }
+    		  else {
+    			  $(".directory_actions[dir="+dir+"]").removeClass("visible-block");
+        		  }
   		    return false; 
   		  } 
   		  return true; 
   		}); 
-        $('.file_wraper').mousedown(function(e){ 
+        $('.file_block').mousedown(function(e){ 
       	  if( e.button == 2 ) { //2  - правый клик, 3 - средний клик
     		  var file =   $(this).attr("file");
-    		  $(".file_div_action[file="+file+"]").slideToggle();
+    		  if(!$(".file_actions[file="+file+"]").hasClass("visible-block")) {
+    			  $(".file_actions").removeClass("visible-block");
+    			  $(".directory_actions").removeClass("visible-block");
+    			  $(".file_actions[file="+file+"]").addClass("visible-block");
+    			  }
+    		  else {
+    			  $(".file_actions[file="+file+"]").removeClass("visible-block");
+        		  }
+    		
   		    return false; 
   		  } 
   		  return true; 
   		}); 
-        $('.file_actions_icon').bind('click',function(){
-            var file =   $(this).attr("file");
-            $(".file_div_action[file="+file+"]").slideToggle();
-        });
         $(".delete_directory").bind("click",delete_category);
         $('.delete_file').bind("click",delete_file);
         $('#file_to_directory').bind('change',upload_file_to_directory);
