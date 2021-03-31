@@ -30,6 +30,7 @@ class SettingsController extends Controller\preloaderController
             unset($userSettings[0]['avatar']);
             $form->setData($userSettings[0]);
         }
+
    
         if ($request->isPost()) {
             $form->setInputFilter($settings->getInputFilter());
@@ -37,6 +38,7 @@ class SettingsController extends Controller\preloaderController
                 $request->getPost()->toArray(),
                 $request->getFiles()->toArray()
             );
+            var_dump($post);
 
             $form->setData($post);
          

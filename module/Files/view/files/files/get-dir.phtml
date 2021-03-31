@@ -136,19 +136,19 @@ document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
         });
 
     });
-    function sell_file(file_id) {
-       var cost = $('.file_cost[file='+file_id+']').val();
-       var description = $('textarea[file='+file_id+']').val();
-       var tags = $(".tags[file="+file_id+"]").val();
-        $.ajax({
-            type: "POST",
-            url: "files/sellFile",
-            data: {file_id : file_id,cost: cost,description: description,tags:tags}
-        })
-            .done(function( data ) {
-                alert(data);
-            });
-    }
+//     function sell_file(file_id) {
+//        var cost = $('.file_cost[file='+file_id+']').val();
+//        var description = $('textarea[file='+file_id+']').val();
+//        var tags = $(".tags[file="+file_id+"]").val();
+//         $.ajax({
+//             type: "POST",
+//             url: "files/sellFile",
+//             data: {file_id : file_id,cost: cost,description: description,tags:tags}
+//         })
+//             .done(function( data ) {
+//                 alert(data);
+//             });
+//     }
     function share_directory () {
         $.ajax({
             type: "POST",

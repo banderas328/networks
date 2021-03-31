@@ -411,7 +411,7 @@ width :20px;
   padding: 10px 12px 10px 10px;
   width: 150px;
 	background-color:#F5F5F5;
-	height:100%;
+	
 }
 
 .window_main {
@@ -913,7 +913,8 @@ clear: both;
 .file_image {
 	width : 60px;
 }
-.directory_actions ,.file_actions {display:none;}
+.directory_actions ,.file_actions {display:none;    background-color: white;
+    z-index: 100;}
 .visible-block {
     display: block;
     position: absolute;
