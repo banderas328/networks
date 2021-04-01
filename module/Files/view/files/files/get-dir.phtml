@@ -5,6 +5,7 @@ $user_id = $user['user']->id;
 
 if(!$is_root) {
     ?>
+    <span id="paste_file_to_directory">paste file</span>
     <form id="file_directory_form"  method="post">
         <input type="file"  name="file" id="file_to_directory"> <p>upload file</p>
     </form>
@@ -44,7 +45,8 @@ if($filesInDir) {
             echo "<p class='file_block'  file=".$file['id']."> ".$file['file_title']."</p>";
                   echo "<div class='file_actions' file=".$file['id'].">";
                   echo          "<p class='file_div_action' file=".$file['id']."><span class='delete_file btn btn-primary' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span></p>";
-                  echo          "<p><a href='/files/downloadFile/id/".$file['id']."' class='download_file btn btn-primary' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></p>";
+                  echo          "<p class='file_div_action' file=".$file['id']."><span class='move_file ' file=".$file['id'].">".$this->translate('Move File',false,$lang)."</span></p>";
+                  echo          "<p><a href='/files/downloadFile/id/".$file['id']."' class='download_file ' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></p>";
                   echo "</div>";
             echo "</div>";
 
@@ -54,8 +56,9 @@ if($filesInDir) {
             echo "<div class='file_wraper' file=".$file['id'].">";
             echo "<p class='file_block'  file=".$file['id']."> ".$file['file_title']."<img src='".$file['file_name']."' class='file_image' /></p>";
             echo "<div class='file_actions' file=".$file['id'].">";
-            echo          "<p class='file_div_action' file=".$file['id']."><span class='delete_file btn btn-primary' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span></p>";
-            echo          "<p><a href='/files/downloadFile/id/".$file['id']."' class='download_file btn btn-primary' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></p>";
+            echo          "<p class='file_div_action' file=".$file['id']."><span class='delete_file ' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span></p>";
+            echo          "<p class='file_div_action' file=".$file['id']."><span class='move_file ' file=".$file['id'].">".$this->translate('Move File',false,$lang)."</span></p>";
+            echo          "<p><a href='/files/downloadFile/id/".$file['id']."' class='download_file ' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></p>";
             echo "</div>";
             echo "</div>";
         }
@@ -66,6 +69,30 @@ if($filesInDir) {
 <script type="text/javascript">
 document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
     $(function() {
+        if(window.need_to_paste_file == true) {
+        	$("#paste_file_to_directory").addClass("pastpaste_file_to_directory");
+        	$("#paste_file_to_directory").bind("click",function(){
+                    var file_id = window.need_to_paste_file_id;
+                  
+                    var current_directory = $("#current_directory").val();
+                    $.ajax({
+                        type: "POST",
+                        url: "files/moveFile",
+                        data: {file_id : file_id , current_directory : current_directory }
+                    })
+                        .done(function( data ) {
+                        	window.need_to_paste_file = false;
+                        	window.need_to_paste_file_id = false;
+                        	$("#paste_file_to_directory").removeClass("paste_file_to_directory");
+                            var current_directory = $("#current_directory").val();
+                           setTimeout(function() { show_directory(current_directory)}, 500);
+                            //console.info(data);
+                        });
+
+            	});
+
+
+            }
         $(".parent_directory").attr("dir_key",<?php echo $current_directory?>)
         $('.folder_action').mousedown(function(e){ 
       	  if( e.button == 2 ) { //2  - правый клик, 3 - средний клик
@@ -100,6 +127,7 @@ document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
   		}); 
         $(".delete_directory").bind("click",delete_category);
         $('.delete_file').bind("click",delete_file);
+        $('.move_file').bind("click",move_file);
         $('#file_to_directory').bind('change',upload_file_to_directory);
         $(".share_dir").bind("click",share_directory);
         $(".dir_save_pass").bind("click",share_directory_with_password)
@@ -202,7 +230,7 @@ document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
     }
     function refresh_drive_with_delay(){
         var current_directory = $("#current_directory").val();
-        setTimeout(function() { show_directory(current_directory)}, 2000);
+        setTimeout(function() { show_directory(current_directory)}, 500);
     }
     function delete_file () {
         var current_directory = $("#current_directory").val();
@@ -215,9 +243,16 @@ document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
         })
             .done(function( data ) {
                 var current_directory = $("#current_directory").val();
-                setTimeout(function() { show_directory(current_directory)}, 2000);
+                setTimeout(function() { show_directory(current_directory)}, 500);
             });
     }
+
+    function move_file(){
+           var file_id = $(this).attr("file");
+           $("#paste_file_to_directory").addClass("pastpaste_file_to_directory");
+           window.need_to_paste_file = true;
+           window.need_to_paste_file_id = file_id;
+       }
     function delete_category(){
 
         var dir = $(this).attr('dir');

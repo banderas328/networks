@@ -250,6 +250,19 @@ class  filesController extends Controller\preloaderController {
         echo  json_encode($result);
         die();
     }
+    
+    public function moveFileAction(){
+        
+        $this->layout('layout/only_form');
+        $request = $this->getRequest();
+        $fileId = (int)$request->getPost()->file_id;
+        $requiredDirId = (int)$request->getPost()->current_directory;
+        $user_session = new Container('user');
+        $userId = $user_session->user->id;
+        $files = new Files();
+        $dir  = $this->getFilesTable()->moveFileToSyste($fileId,$requiredDirId,$userId,$files->getAdapter());
+        die();
+    }
 
 
     public function setLocale () {
@@ -323,6 +336,8 @@ class  filesController extends Controller\preloaderController {
         }
         return $this->filesToTagsTable;
     }
+    
+    
 
 
 

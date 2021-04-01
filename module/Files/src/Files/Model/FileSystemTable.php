@@ -65,7 +65,7 @@ class FileSystemTable {
 
 
     public function getChildDirs($adapter,$dirId,$userId) {
-        $dirs = $this->getChildDirsList($dirId,$userId,false);
+        $dirs = $this->getChildDirsList((int)$dirId,$userId,false);
       //  var_dump($dirs);
         $dirs = $this->sortDirs($dirs);
         $dirs[] = $dirId;
@@ -75,7 +75,7 @@ class FileSystemTable {
 
     public function deleteDirWithChilds($adapter,$dirs) {
        foreach($dirs as $dir) {
-           $sql  = "delete from users_filesystem where id=".$dir;
+           $sql  = "delete from users_filesystem where id=".(int)$dir;
            $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
        }
         return true;
@@ -138,7 +138,7 @@ class FileSystemTable {
             if($i != 0) {
                 $sqlIn .= ",";
             }
-            $sqlIn .= $dir;
+            $sqlIn .= (int)$dir;
             $i++;
         }
         $sqlIn .= ")";
@@ -146,5 +146,7 @@ class FileSystemTable {
         $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         return $result;
     }
+    
+
 
 }

@@ -10,12 +10,10 @@ body {
   overflow: hidden;
 	font-family: "Roboto";
 	font-weight:500;
+	 background: #222;
 }
 
-body {
-  background: #222;
-  font: 12px/1 'Lucida Grande', Arial, 'Liberation Sans', FreeSans, sans-serif;
-}
+
 
 a {
   text-decoration: none;
@@ -921,5 +919,9 @@ clear: both;
     top: 10px;
     left: 0px;
     background-color: white;
+	
+}
+.pastpaste_file_to_directory {
+	border : 1px solid red;
 	
 }

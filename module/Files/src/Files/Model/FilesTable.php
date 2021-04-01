@@ -140,7 +140,13 @@ class FilesTable
         return false;
     }
 
-
+    public function moveFileToSyste($fileId,$requiredDirId,$userId,$adapter){
+        $sql  = "UPDATE files set directory=".$requiredDirId." WHERE id=".$fileId." and user_id=".$userId;
+        $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+        return $result;
+        
+        
+    }
 
 
 }
