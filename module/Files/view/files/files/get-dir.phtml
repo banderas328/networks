@@ -5,7 +5,7 @@ $user_id = $user['user']->id;
 
 if(!$is_root) {
     ?>
-    <span id="paste_file_to_directory">paste file</span>
+    <span id="paste">paste</span>
     <form id="file_directory_form"  method="post">
         <input type="file"  name="file" id="file_to_directory"> <p>upload file</p>
     </form>
@@ -30,6 +30,7 @@ if(!$is_root) {
            echo "<div class='directory_actions' dir=".$dir_value["id"].">
                     <p class='delete_directory' dir=".$dir_value['id'].">".$this->translate('Delete_Directory',false,$lang)."</p>
                     <p class='share_dir' dir=" . $dir_value['id'] . ">share dir</p>
+                    <p class='move_dir' dir=" . $dir_value['id'] . ">move dir</p>
                     <p class='share_dir_with_password' dir=" . $dir_value['id'] . ">share dir with password</p>
                     <input type='text' class='input_password' dir=" . $dir_value['id'] . ">
                      <input type='button' value='save password and share' dir=" . $dir_value['id'] . " class='dir_save_pass btn btn-primary'>
@@ -70,8 +71,8 @@ if($filesInDir) {
 document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
     $(function() {
         if(window.need_to_paste_file == true) {
-        	$("#paste_file_to_directory").addClass("pastpaste_file_to_directory");
-        	$("#paste_file_to_directory").bind("click",function(){
+        	$("#paste").addClass("pastpaste_file_to_directory");
+        	$("#paste").bind("click",function(){
                     var file_id = window.need_to_paste_file_id;
                   
                     var current_directory = $("#current_directory").val();
@@ -83,9 +84,10 @@ document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
                         .done(function( data ) {
                         	window.need_to_paste_file = false;
                         	window.need_to_paste_file_id = false;
-                        	$("#paste_file_to_directory").removeClass("paste_file_to_directory");
+                        	$("#paste").removeClass("pastpaste_file_to_directory");
                             var current_directory = $("#current_directory").val();
-                           setTimeout(function() { show_directory(current_directory)}, 500);
+                           //setTimeout(function() { show_directory(current_directory)}, 500);
+                            show_directory(current_directory);
                             //console.info(data);
                         });
 
@@ -93,6 +95,36 @@ document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
 
 
             }
+
+        if(window.need_to_paste_dir == true) {
+        	$("#paste").addClass("pastpaste_file_to_directory");
+        	$("#paste").bind("click",function(){
+                    var dir_id = window.need_to_paste_dir_id;
+                  
+                    var current_directory = $("#current_directory").val();
+                    $.ajax({
+                        type: "POST",
+                        url: "files/moveDirectory",
+                        data: {dir_id : dir_id , current_directory : current_directory }
+                    })
+                        .done(function( data ) {
+                        	window.need_to_paste_file = false;
+                        	window.need_to_paste_file_id = false;
+                        	$("#paste").removeClass("pastpaste_file_to_directorys");
+                            var current_directory = $("#current_directory").val();
+                        //   setTimeout(function() { show_directory(current_directory)}, 500);
+                             show_directory(current_directory);
+                            //console.info(data);
+                        });
+
+            	});
+
+
+            }
+
+
+
+    
         $(".parent_directory").attr("dir_key",<?php echo $current_directory?>)
         $('.folder_action').mousedown(function(e){ 
       	  if( e.button == 2 ) { //2  - правый клик, 3 - средний клик
@@ -125,7 +157,8 @@ document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
   		  } 
   		  return true; 
   		}); 
-        $(".delete_directory").bind("click",delete_category);
+        $(".delete_directory").bind("click",delete_directory);
+        $(".move_dir").bind("click",move_directory);
         $('.delete_file').bind("click",delete_file);
         $('.move_file').bind("click",move_file);
         $('#file_to_directory').bind('change',upload_file_to_directory);
@@ -249,11 +282,11 @@ document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
 
     function move_file(){
            var file_id = $(this).attr("file");
-           $("#paste_file_to_directory").addClass("pastpaste_file_to_directory");
+           $("#paste").addClass("pastpaste_file_to_directory");
            window.need_to_paste_file = true;
            window.need_to_paste_file_id = file_id;
        }
-    function delete_category(){
+    function delete_directory(){
 
         var dir = $(this).attr('dir');
         $.ajax({
@@ -264,6 +297,12 @@ document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
             .done(function( data ) {
                refresh_drive_with_delay();
             });
+    }
+    function move_directory(){
+        var dir_id = $(this).attr("dir");
+        $("#paste").addClass("pastpaste_file_to_directory");
+        window.need_to_paste_dir = true;
+        window.need_to_paste_dir_id = dir_id;
     }
 
 </script>

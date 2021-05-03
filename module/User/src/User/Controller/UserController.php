@@ -1,6 +1,14 @@
 <?php
 namespace User\Controller;
 
+require_once $_SERVER["DOCUMENT_ROOT"].'/../vendor/phpmailer/phpmailer/src/Exception.php';
+require_once $_SERVER["DOCUMENT_ROOT"].'/../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require_once $_SERVER["DOCUMENT_ROOT"].'/../vendor/phpmailer/phpmailer/src/SMTP.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+
 use User\Form\UserRegisterForm;
 use User\Form\UserAuthForm;
 use User\Form\UserSearchForm;
@@ -72,21 +80,44 @@ class UserController extends Controller\preloaderController
 //method for sending email to activate user accout after registation
     public function sendRegistrationMail($email, $key)
     {
-        return true;
+
         $uri = $this->getRequest()->getUri();
         $base = sprintf('%s://%s', $uri->getScheme(), $uri->getHost());
         $url = $base . "/user/confirm/email/" . $email . "/key/" . $key;
-        $message = new Message();
-        $message->addTo($email)
-            ->addFrom('banderas328@gmail.com')
-            ->setSubject('Networks Activation');
-        $html = new MimePart("This is the message to activate user account on networks service please follow this link <a href='" . $url . "'>activate</a>");
-        $html->type = "text/html";
-        $body = new MimeMessage();
-        $body->addPart($html);
-        $message->setBody($body);
-        $transport = new Mail\Transport\Sendmail();
-        $transport->send($message);
+//         $message = new Message();
+//         $message->addTo($email)
+//             ->addFrom('banderas328@gmail.com')
+//             ->setSubject('Networks Activation');
+//         $html = new MimePart("This is the message to activate user account on networks service please follow this link <a href='" . $url . "'>activate</a>");
+//         $html->type = "text/html";
+//         $body = new MimeMessage();
+//         $body->addPart($html);
+//         $message->setBody($body);
+//         $transport = new Mail\Transport\Sendmail();
+//         $transport->send($message);
+        try {
+            $mail = new PHPMailer(true);
+            //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'anton.zhavrid.minsk@gmail.com';
+            $mail->Password   = '5lxdiOlVcLBf';
+            $mail->Port = 587;
+            $mail->setFrom("anton.zhavrid.minsk@gmail.com","Anton Zhavrid");
+            $mail->addAddress($email,"");//Кому отправляем
+            //$mail->addReplyTo("kudaotvetit@yandex.ru","Имя кому писать при ответе");
+            $mail->SMTPSecure = 'tls';
+            $mail->isHTML(true);//HTML формат
+            $mail->Subject = "Octopus activation";
+            $mail->Body    = "This is the message to activate user account on networks service please follow this link <a href='" . $url . "'>activate</a>";
+            $mail->AltBody = "welcome";
+            
+            $mail->send();
+            return true;
+        } catch (Exception $e) {
+            echo "send error: {$mail->ErrorInfo}";
+        }
     }
     public function jokeMailAction($email, $key)
     {
@@ -188,6 +219,14 @@ class UserController extends Controller\preloaderController
 		$settings->getAdapter();
 		$userSettings = $this->getSettingsTable()->getCurrentUserSettings($settings->getAdapter());
 		return array('settings' => $userSettings->toArray() );
+	}
+	
+	public function userLogoutAction(){
+	    
+
+	    unset($_SESSION['user']);
+	    return $this->redirect()->toRoute('user/login');
+	    
 	}
 
     public function getUserTable()

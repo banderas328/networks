@@ -52,11 +52,11 @@ class UserTable
         if ($id == 0) {
             $this->tableGateway->insert($data);
             $userId =  $this->tableGateway->lastInsertValue;
+            
             $adapter = $user->getAdapter();
             $sql = "insert into users_filesystem (path,parent_path,user_id) values ('market','0',".$userId.")";
             $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-            $path = "/userfiles/".$userId;
-            mkdir($path, 0777, true);
+            $path = $_SERVER["DOCUMENT_ROOT"]."/userfiles/".$userId;
         } else {
             if ($this->getUser($id)) {
                 $this->tableGateway->update($data, array('id' => $id));

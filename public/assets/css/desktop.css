@@ -4,11 +4,17 @@
 * {
   cursor: default;
 }
+@font-face {
+    font-family: 'Roboto';
+    src: url('../Roboto/Roboto-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
 
 html,
 body {
   overflow: hidden;
-	font-family: "Roboto";
+font-family: "Roboto";
 	font-weight:500;
 	 background: #222;
 }
@@ -330,9 +336,10 @@ width :20px;
   float: left;
   font-size: 0;
   margin: 6px 0 0 5px;
-  width: 28px;
-  height: 15px;
+    width: 28px;
+    height: 20px;
 	cursor:pointer;
+
 }
 
 .window_close {
@@ -340,6 +347,7 @@ width :20px;
 	
 	background:white url(../images/gui/window_close.png) no-repeat;
  background-position: 0 0;
+	background-size: contain;
 
 }
 .window_resize {
@@ -347,36 +355,37 @@ width :20px;
 	
 	background:white url(../images/gui/window_open.png) no-repeat;
  background-position: 0 0;
-	background-size:90%;
+background-size: contain;
 
 }
 .window_min {
 
 	
 	background:white url(../images/gui/window_min.png) no-repeat;
- background-position: 0 -6px;
+background-size: contain;background-position: 0 0px;
 
 }
 
 
 .window_min:hover {
-  background-position: 0 -6px;
+background-position: 0px 0px;
 }
 
 .window_resize {
-  background-position: 3px -3px;
+   background-position: 1px -1px;
 }
 
-.window_resize:hover {
-  background-position: 3px -3px;
+.window_resize {
+ background-position: 1px -1px;
 }
 
 .window_close {
-  background-position: -3px -6px;
+    background-position: 1px -1px;
+	width: 28px;
 }
 
 .window_close:hover {
-  background-position: -3px -6px;
+   background-position: 1px -1px;
 
 }
 

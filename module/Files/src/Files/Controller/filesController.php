@@ -214,6 +214,23 @@ class  filesController extends Controller\preloaderController {
         $this->getFileSystemTable()->deleteDirWithChilds($fileSystem->getAdapter(),$dirs);
         die();
     }
+    
+    public function moveDirectoryAction()
+    {
+        $request = $this->getRequest();
+        $dirId = (int)$request->getPost()->dir_id;
+        $dirIdCurrent = (int)$request->getPost()->current_directory;
+        $fileSystem = new FileSystem();
+        $user_session = new Container('user');
+        $userId = $user_session->user->id;
+//         $dirs = $this->getFileSystemTable()->getChildDirs($fileSystem->getAdapter(), $dirId, $userId);
+        $files = new Files();
+//         $user_session = new Container('user');
+//         $userId = $user_session->user->id;
+
+        $this->getFileSystemTable()->moveDir($fileSystem->getAdapter(),$dirId,$dirIdCurrent,$userId);
+        die();
+    }
 
     public function shareDirAction(){
         $this->layout('layout/only_form');

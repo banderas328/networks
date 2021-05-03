@@ -147,6 +147,16 @@ class FileSystemTable {
         return $result;
     }
     
+    public function moveDir($adapter,$dirId,$currentDirId,$userId){
+        $dirId = (int)$dirId;
+        $currentDirId = (int)$currentDirId;
+        
+        $sql  = "UPDATE users_filesystem set parent_path=".$currentDirId." WHERE  user_id=".$userId." and id=".$dirId;
+        echo "$sql";
+            $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+            return $result;
+    }
+    
 
 
 }
