@@ -48,7 +48,6 @@ class SettingsTable
             'site' => $settings['site'],
             'visibility' => $settings['visibility'],
         );
-        var_dump($settings);
         if($settings['avatar']['tmp_name']) {
             $sql = new Sql($adapter, 'user_settings');
             $select = $sql->select();

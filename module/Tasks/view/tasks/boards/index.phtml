@@ -1,5 +1,20 @@
+<div id="boards_div">
+ <div class="col col-3">
+<ul class="connected">
+<?php
+foreach($boards as  $board) {
+    echo '<li>'.$board["name"].'</li>';
+
+}
+?>
+</ul>
+</div>
+</div>
+<div id="create_board" class="col col-12">
+<span class="create_board_button">+</span>
+
+
 create board
-<div id="create_board">
 name
 <input type="text" name="board_name" id="board_name"/>
 users
@@ -12,17 +27,28 @@ admin
 </div>
 
 <script type="text/javascript">
+function bind_boards_events(){
+	$('.connected').sortable({
+		connectWith: '.connected'
+	});
+
+}
 $(function() {
+	$(".create_board_button").on("click", function(){
+
+var markup = ' <div class="col col-3"><ul class="connected"></ul></div>';
+$( "#boards_div" ).append(markup);
+bind_boards_events();
+
+		});
+	bind_boards_events();
 $("#add_board").bind("click",function(){
 var board_name = $("#board_name").val();
-var users = $("#users_allowed").val();
-var statuses = $("#statuses").val();
-
 $.ajax({
 	type: "POST",
     url: "boards/createBoard",
     dataType: "json",
-    data: {"board_name":board_name,"users_allowed":users,"statuses":statuses}
+    data: {"board_name":board_name}
 })
     .done(function( data ) {
         $("#tasks_transaction").html(data);

@@ -928,9 +928,35 @@ clear: both;
     top: 10px;
     left: 0px;
     background-color: white;
-	
 }
 .pastpaste_file_to_directory {
 	border : 1px solid red;
-	
+}
+.board {
+	display:inline;
+	border:1px solid black;
+	width:300px;
+}
+.connected {
+	border:1px solid black;
+	width:300px;
+	min-height: 200px;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: 1px solid #93c3cd;
+    background: #93c3cd url(images/ui-bg_diagonals-small_50_93c3cd_40x40.png) 50% 50% repeat;
+    font-weight: bold;
+    color: #333333;
+    width: 250px;
+}
+.board-item-gragable {
+	border:1px solid black;
+	position:fixed;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+}
+#create_board {
+	display:block;
 }

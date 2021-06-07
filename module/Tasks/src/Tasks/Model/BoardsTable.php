@@ -14,6 +14,7 @@ class BoardsTable
 {
     
     protected $tableGateway;
+    protected $adapter;
     
     public function __construct()
     {
@@ -26,20 +27,25 @@ class BoardsTable
             'password' => $config->database["params"]->password,
         ));
         $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("boards",$adapter);
+        $this->adapter = $adapter;
     }
     
     public function createBoard($request, $adapter) {
         
         $board_name =  $request->getPost()->board_name;
-        $users =  $request->getPost()->users_allowed;
-        $statuses =  $request->getPost()->statuses;
         $user_session = new Container('user');
         $admin = $user_session->user->id;
-        $data = ["admin" => $admin,"users_allowed" => $users,"statuses" => $statuses,"name" => $board_name];
-        $this->tableGateway->insert($data);
-        
-        
-        
+        $data = ["admin" => $admin,"name" => $board_name];
+        $this->tableGateway->insert($data);       
+    }
+    
+    public function getBoards(){
+        $user_session = new Container('user');
+        $user_id = $user_session->user->id;
+        $sql = "SELECT  * FROM board_users left join boards on board_users.board_id = boards.id   WHERE user_id='".$user_id."'";
+        $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+        $boards =   $resultSet->toArray();
+        return $boards;
     }
 }
     

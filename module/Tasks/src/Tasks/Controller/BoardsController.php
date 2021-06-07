@@ -17,6 +17,9 @@ class BoardsController extends Controller\preloaderController
     
     public function indexAction(){
         $this->layout('layout/only_form');
+        $boards = $this->getBoardsTable()->getBoards();
+        return @array('boards' => $boards);
+        
     }
     
     public function createBoardAction(){
@@ -33,8 +36,6 @@ class BoardsController extends Controller\preloaderController
     {
         
         if (!$this->getBoardsTable) {
-            // $sm = $this->getServiceLocator();
-            // $this->friendsTable = $sm->get('Friends\Model\FriendsTable');
             $this->getBoardsTable = new \Tasks\Model\BoardsTable;
         }
         return $this->getBoardsTable;
