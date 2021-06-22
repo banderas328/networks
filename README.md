@@ -1,9 +1,6 @@
-ZendSkeletonApplication
-=======================
-
 Introduction
 ------------
-core of networks project.
+core of octopus project. Cloud os. 
 
 Installation
 ------------
