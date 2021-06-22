@@ -1,6 +1,6 @@
 Introduction
 ------------
-core of octopus project. Cloud os. 
+Core of octopus project. Cloud os. 
 
 Installation
 ------------
