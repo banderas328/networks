@@ -3,12 +3,12 @@ ZendSkeletonApplication
 
 Introduction
 ------------
-This is a simple, skeleton application using the ZF2 MVC layer and module
-systems. This application is meant to be used as a starting place for those
-looking to get their feet wet with ZF2.
+core of networks project.
 
 Installation
 ------------
+
+"composer install" in main directory
 
 Using Composer (recommended)
 ----------------------------
@@ -30,34 +30,8 @@ Alternately, clone the repository and manually invoke `composer` using the shipp
 (The `self-update` directive is to ensure you have an up-to-date `composer.phar`
 available.)
 
-Another alternative for downloading the project is to grab it via `curl`, and
-then pass it to `tar`:
-
-    cd my/project/dir
-    curl -#L https://github.com/zendframework/ZendSkeletonApplication/tarball/master | tar xz --strip-components=1
-
-You would then invoke `composer` to install dependencies per the previous
-example.
-
-Using Git submodules
---------------------
-Alternatively, you can install using native git submodules:
-
-    git clone git://github.com/zendframework/ZendSkeletonApplication.git --recursive
 
 Web Server Setup
-----------------
-
-### PHP CLI Server
-
-The simplest way to get started if you are using PHP 5.4 or above is to start the internal PHP cli-server in the root directory:
-
-    php -S 0.0.0.0:8080 -t public/ public/index.php
-
-This will start the cli-server on port 8080, and bind it to all network
-interfaces.
-
-**Note: ** The built-in CLI server is *for development only*.
 
 ### Apache Setup
 
