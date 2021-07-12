@@ -231,30 +231,36 @@ $lang = $user['user']->lang;
     </a>
 </div>
     <div id="window_drive" class="abs window">
-        <div class="abs window_inner">
+        <div class="window_inner">
             <div class="window_top">
-          <span class="float_left">
-          <img class="parent_directory" dir_key='0' src="assets/images/gui/left.png"/>
-            <img src="assets/images/icons/icon_16_drive.png"/>
-            Hard Drive
-          </span>
-          <span class="float_right">
-            <a href="#" class="window_min"></a>
-            <a href="#" class="window_resize"></a>
-            <a href="#icon_dock_drive" class="window_close"></a>
-          </span>
+                <div class="window_top-left">
+                    <div class="window_top-arrows">
+                        <a href="#" dir_key='0' class="parent_directory window_top-arrows-left"></a>
+                        <a href="#" class="sibling_directory window_top-arrows-right"></a>
+                    </div>
+                    <div class="window_top-tab-info">
+                  <span class="window_top-tab-info-image">
+                      <img src="assets/images/icons/hard-drive-main2.png" alt="Hard Drive" />
+                  </span>
+                        <span class="window_top-tab-info-name">
+                      Hard Drive
+                  </span>
+                    </div>
+                </div>
+                <div class="window_top-right">
+                    <div class="toolbar-controls">
+                        <a href="#" class="window_min"><i></i></a>
+                        <a href="#" class="window_resize"><i></i></a>
+                        <a href="#icon_dock_drive" class="window_close"><i></i></a>
+                    </div>
+                </div>
             </div>
-            <div class="abs window_content">
-                <div class="window_aside">
-                    Storage in use: 119.1 GB
-                </div>
-                <div class="window_main" id="hard_drive">
-                
-                </div>
+            <div class="window_content">
+                <div class="window_main" id="hard_drive"></div>
                 <script type="text/javascript" src="js/pages/main/files.js"></script>
             </div>
-            <div class="abs window_bottom">
-                Free: 80.9 GB
+            <div class="window_bottom">
+                <div class="window_bottom-storage">Storage in use: 119.1 GB</div>
             </div>
         </div>
         <span class="abs ui-resizable-handle ui-resizable-se"></span>
@@ -264,7 +270,7 @@ $lang = $user['user']->lang;
         <div class="abs window_inner">
             <div class="window_top">
           <span class="float_left">
-            <img src="assets/images/icons/icon_16_network.png"/>
+            <img src="assets/images/icons/hard-drive-main.png" alt="Hard Drive" />
             Network
           </span>
           <span class="float_right">
