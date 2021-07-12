@@ -131,7 +131,6 @@ div.ui-resizable-handle {
   top: 30px;
   left: 120px;
   z-index: 11;
-    min-height: 230px;
 }
 .window_settings {
     background: #fff;
@@ -278,173 +277,156 @@ div.ui-resizable-handle {
 .window_full .ui-resizable-se {
   display: none;
 }
-/** --------------------------------------------- MAIN WINDOW STYLES ------------------------------------- **/
-.window_inner {
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
+
 .window_top {
-    border-bottom: 1px solid #E9E9E9;
-	background: #ffffff;
-    border-radius: 5px 5px 0 0;
-    padding: 12px 18px;
-    height: 40px;
-    box-sizing: border-box;
-    box-shadow: 0 0.5px 0 rgba(0, 0, 0, 0.15), inset 0 -0.5px 0 rgba(0, 0, 0, 0.05);
-    display: flex;
-    justify-content: space-between;
+	  border-bottom: 1px solid #F5F5F5;
+
+	background-color:white;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-background-clip: padding-box;
+
+  overflow: hidden;
+  line-height: 30px;
+  padding: 0 10px;
+
+  height: 30px;
 }
-.window_top-left {
-    display: flex;
+
+.window_top img {
+width :20px;
+  float: left;
+  margin: 6px 5px 0 0;
 }
-.window_top-arrows {
-    display: flex;
-    justify-content: space-between;
-    min-width: 52px;
+
+.window_bottom {
+ /* background: #fff url(../images/gui/bar_top.png) repeat-x left bottom;
+  border-top: 1px solid #bbb;*/
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-background-clip: padding-box;
+  font-size: 11px;
+ 
+  line-height: 20px;
+  overflow: hidden;
+  text-align: center;
+  text-shadow: #fff 0 1px 1px;
+  height: 20px;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
 }
-.window_top-arrows-left {
-    display: inline-block;
-    cursor: pointer;
-    width: 9px;
-    height: 16px;
-    background: url('../images/sprites/toolbar/toolbar_sprites.png') -141px -10px;
-    margin-right: 32px;
+
+.window_min,
+.window_resize,
+.window_close {
+  background: url(../images/gui/window_buttons.gif) no-repeat;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -webkit-background-clip: padding-box;
+  float: left;
+  font-size: 0;
+  margin: 6px 0 0 5px;
+    width: 28px;
+    height: 20px;
+	cursor:pointer;
+
 }
-.window_top-arrows-left:hover {
-    background-position: -97px -78px;
-}
-.window_top-arrows-right {
-    display: inline-block;
-    cursor: pointer;
-    width: 9px;
-    height: 16px;
-    background: url('../images/sprites/toolbar/toolbar_sprites.png') -39px -78px;
-    margin-right: 32px;
-}
-.window_top-arrows-right:hover {
-    background-position: -10px -78px;
-}
-.window_top-tab-info {
-    display: flex;
-}
-.window_top-tab-info-image {
-    margin-top: 2px;
-    margin-right: 12px;
-}
-.window_top-tab-info-image img {
-    vertical-align: top;
-}
-.window_top-tab-info-name {
-    font-size: 15px;
-    line-height: 15px;
-}
-.toolbar-controls {
-    display: flex;
-    justify-content: space-between;
-}
-.window_min, .window_resize, .window_close {
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.window_min i, .window_resize i, .window_close i {
-    background-image: url('../images/sprites/toolbar/toolbar_sprites.png');
-    display: inline-block;
-    cursor: inherit;
-}
-.window_min i {
-    width: 16px;
-    height: 2px;
-    background-position: -82px -114px;
-}
-.window_min:hover i {
-    background-position: -46px -114px;
+
+.window_close {
+
+	
+	background:white url(../images/gui/window_close.png) no-repeat;
+ background-position: 0 0;
+	background-size: contain;
+
 }
 .window_resize {
-margin-left: 26px;
+
+	
+	background:white url(../images/gui/window_open.png) no-repeat;
+ background-position: 0 0;
+background-size: contain;
+
 }
-.window_resize i {
-    width: 14px;
-    height: 14px;
-    background-position: -10px -44px;
+.window_min {
+
+	
+	background:white url(../images/gui/window_min.png) no-repeat;
+background-size: contain;background-position: 0 0px;
+
 }
-.window_resize:hover i {
-    background-position: -44px -10px;
+
+
+.window_min:hover {
+background-position: 0px 0px;
 }
+
+.window_resize {
+   background-position: 1px -1px;
+}
+
+.window_resize {
+ background-position: 1px -1px;
+}
+
 .window_close {
-    margin-left: 26px;
+    background-position: 1px -1px;
+	width: 28px;
 }
-.window_close i {
-    width: 14px;
-    height: 14px;
-    background-position: -78px -44px;
+
+.window_close:hover {
+   background-position: 1px -1px;
+
 }
-.window_close:hover i {
-    background-position: -78px -10px;
+
+.window_min:hover,
+.window_resize:hover {
+
 }
+
+.window_inner {
+  padding: 1px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 .window_content {
-    display: flex;
-    flex: 1;
-    overflow-y: auto;
+ /* background: url(../images/gui/window_content.gif) repeat-y;*/
+  line-height: 1.5;
+  overflow: auto;
+  top: 32px;
+  left: 1px;
+  right: 1px;
+  bottom: 23px;
 }
+
+.window_aside {
+  float: left;
+  font-size: 11px;
+  padding: 10px 12px 10px 10px;
+  width: 150px;
+	background-color:#F5F5F5;
+	
+}
+
 .window_main {
-    background: #fff;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
+  background: #fff;
+  margin: 0 0 0 173px;
+  min-height: 100%;
 }
-.window_bottom {
-    background: #fff;
-    border-top: 1px solid #E9E9E9;
-    border-radius: 0 0 5px 5px;
-    display: flex;
-    height: 32px;
-    align-items: center;
-}
-.window_bottom-storage {
-    color: #BFBFBF;
-    font-size: 13px;
-    line-height: 13px;
-    margin-left: 16px;
-}
-/** --------------------------------------------- FOLDERS STYLES ------------------------------------- **/
-.dir-folder-wrapper {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-.create-wrapper {
-    width: 100%;
-}
-.dir_wraper {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 26px 16px;
-}
-.folder_wrapper {
-    margin: 0 16px 20px;
-    width: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.folder-image {
-    background-image: url('../images/icons/folder-main.svg');
-    background-repeat: no-repeat;
-    width: 68px;
-    height: 56px;
-}
-.folder-name {
-    font-size: 12px;
-    line-height: 14px;
-    color: #333333;
-    margin-top: 16px;
-}
+
 .window_full .window_top,
 .window_full .window_bottom {
   border-radius: 0;
@@ -844,7 +826,13 @@ clear: both;
 #setting_table tr td#about_me_setting {
     height: 100px;
 }
-
+.dir_wraper {
+    width: 300px;
+    display: inline;
+    margin-top: 10px;
+    margin-left: 10px;
+    position: relative;
+}
 .dir_actions_icon {
     float: right;
     position: relative;
@@ -917,13 +905,17 @@ clear: both;
     left:10px;
 }
 #file_directory_form p {
-    position: relative;
+    position: relative;left: 10px;
 }
 .directory {
 	font-weght:normal;
 	font-size:15px;
 	display:block;
 	line-height: 10px;
+}
+.directory_wrapper {
+    width: auto;
+    display: inline-block;
 }
 .file_image {
 	width : 60px;
