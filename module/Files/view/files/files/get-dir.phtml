@@ -5,37 +5,23 @@ $user_id = $user['user']->id;
 
 if(!$is_root) {
     ?>
-    <div class="uploade-wrapper">
-        <div class="upload-file">
-            <span id="paste">paste</span>
-            <form id="file_directory_form"  method="post">
-                <input type="file"  name="file" id="file_to_directory"> <p>upload file</p>
-            </form>
-        </div>
-    </div>
+    <span id="paste">paste</span>
+    <form id="file_directory_form"  method="post">
+        <input type="file"  name="file" id="file_to_directory"> <p>upload file</p>
+    </form>
+    <input type="text" id="directory_name">
+    <button value="create dir" class='btn btn-primary' id="create_dir"><?php echo $this->translate("Create_Directory",false,$lang);?></button>
+    <input type="hidden" value="<?php echo $current_directory?>" id="current_directory">
+        
 <?php
-}
-?>
-<div class="dir-folder-wrapper">
-<?php
-    if(!$is_root) {
-    ?>
-    <div class="create-wrapper">
-        <div class="create-folder">
-            <input type="text" id="directory_name" />
-            <button value="create dir" class='btn btn-primary' id="create_dir"><?php echo $this->translate("Create_Directory",false,$lang);?></button>
-            <input type="hidden" value="<?php echo $current_directory?>" id="current_directory" />
-        </div>
-    </div>
-    <?php
 }
 ?>
 <?php
 foreach($dirs as  $dir_key => $dir_value) {
     echo "<div class='dir_wraper'>
-               <div class='directory_wrapper folder_wrapper'>
-                   <div class='folder_action folder-image' dir=".$dir_value['id']."></div>
-                   <div  dir_key=".$dir_value['id']." class='directory folder-name' >".$dir_value['path']." </div>                     
+               <div class='directory_wrapper'>
+                   <img src='assets/images/icons/folder.png' width='50px' height='50px' dir=".$dir_value['id']." class='folder_action'/>
+                       <div  dir_key=".$dir_value['id']." class='directory' >".$dir_value['path']." </div>
                 </div>
 
 " ;
@@ -81,9 +67,8 @@ if($filesInDir) {
     }
 }
 ?>
-</div>
 <script type="text/javascript">
-document.oncontextmenu = function() {return false;}; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
     $(function() {
         if(window.need_to_paste_file == true) {
         	$("#paste").addClass("pastpaste_file_to_directory");
@@ -142,7 +127,7 @@ document.oncontextmenu = function() {return false;}; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅп
     
         $(".parent_directory").attr("dir_key",<?php echo $current_directory?>)
         $('.folder_action').mousedown(function(e){ 
-      	  if( e.button == 2 ) { //2  - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, 3 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+      	  if( e.button == 2 ) { //2  - правый клик, 3 - средний клик
     		  var dir =   $(this).attr("dir");
     		  if(!$(".directory_actions[dir="+dir+"]").hasClass("visible-block")) {
     			  $(".directory_actions").removeClass("visible-block");
@@ -157,7 +142,7 @@ document.oncontextmenu = function() {return false;}; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅп
   		  return true; 
   		}); 
         $('.file_block').mousedown(function(e){ 
-      	  if( e.button == 2 ) { //2  - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, 3 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+      	  if( e.button == 2 ) { //2  - правый клик, 3 - средний клик
     		  var file =   $(this).attr("file");
     		  if(!$(".file_actions[file="+file+"]").hasClass("visible-block")) {
     			  $(".file_actions").removeClass("visible-block");
