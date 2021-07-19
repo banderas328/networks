@@ -11,19 +11,23 @@ foreach($boards as  $board) {
 </div>
 </div>
 <div id="create_board" class="col col-12">
-<span class="create_board_button">+</span>
+<span class="create_board_button">+ create column</span>
+<span class="create_board_button">+ create task</span>
 
 
-create board
-name
-<input type="text" name="board_name" id="board_name"/>
-users
-<input type="text" name="users_allowed" id="users_allowed"/>
-statuses
-<textarea  name="statuses" id="statuses">todo,in progress,done</textarea>
-admin
 
-<button id="add_board">add board</button>
+<div id="create_project">
+<input type="text" name="project_name" id="project_name"/>
+<input type="button" value="create project"/>
+</div>
+
+
+</div>
+<div class="task_popup">
+<input type="text" name="task_name">
+<input type="text" name="task_description">
+<input type="text" name="task_file">
+<input type="button" name="task_save">
 </div>
 
 <script type="text/javascript">
