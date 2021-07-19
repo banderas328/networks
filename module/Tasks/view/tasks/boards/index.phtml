@@ -12,22 +12,18 @@ foreach($boards as  $board) {
 </div>
 <div id="create_board" class="col col-12">
 <span class="create_board_button">+ create column</span>
-<span class="create_board_button">+ create task</span>
+<span class="create_task_button">+ create task</span>
 
 
-
-<div id="create_project">
-<input type="text" name="project_name" id="project_name"/>
-<input type="button" value="create project"/>
-</div>
 
 
 </div>
-<div class="task_popup">
-<input type="text" name="task_name">
-<input type="text" name="task_description">
-<input type="text" name="task_file">
-<input type="button" name="task_save">
+<div id="task_popup">
+<input type="text" name="task_name" placeholder="task name" id="task_name">
+<input type="text" name="task_members" placeholder="task members" id="task_members">
+<input type="text" name="task_description" placeholder="task description" id="#task_description">
+<input type="text" name="task_file" placeholder="task file" id="task_file">
+<input type="button" name="task_save" value="create_task"	id="create_task">
 </div>
 
 <script type="text/javascript">
@@ -38,13 +34,21 @@ function bind_boards_events(){
 
 }
 $(function() {
-	$(".create_board_button").on("click", function(){
-
-var markup = ' <div class="col col-3"><ul class="connected"></ul></div>';
-$( "#boards_div" ).append(markup);
-bind_boards_events();
-
-		});
+$(".create_board_button").on("click", function(){
+	var markup = ' <div class="col col-3"><ul class="connected"></ul></div>';
+	$( "#boards_div" ).append(markup);
+	bind_boards_events();
+});
+$(".create_task_button").on("click" , function(){
+		$("#task_popup").show();
+});
+$("#create_task").on("click",function(){
+var task_name = $("#task_name").val();
+var task_description = $("#task_description").val();
+var task_file = #("#task_file").val();
+var task_members = #("#task_members").val();
+	
+});
 	bind_boards_events();
 $("#add_board").bind("click",function(){
 var board_name = $("#board_name").val();

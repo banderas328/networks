@@ -960,3 +960,7 @@ clear: both;
 #create_board {
 	display:block;
 }
+#task_popup {
+	
+	display:none;
+}
