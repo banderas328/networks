@@ -3,7 +3,7 @@
 <?php
 if($friends)
 foreach($friends as $friend){
-    echo "<span style='border:3px solid black;min-width:350px;min-height:400px;' userId='".$friend["user_id"]."'><img style='width:80px;height:80px;'src=".$friend['avatar'].">";
+    echo "<span class='user_container' userId='".$friend["user_id"]."'><img style='width:80px;height:80px;'src=".$friend['avatar'].">";
     echo $friend['first_name'];
     echo $friend['second_name'];
     echo "<button class='send_message' to_user='".$friend['user_id']."' value='send_message'>send message</button>";

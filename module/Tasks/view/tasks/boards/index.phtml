@@ -22,9 +22,9 @@ foreach ($boards as $board) {
 	 <span id="task_members_lsit"></span>
 	 <input	type="hidden" name="task_members" placeholder="task members"id="task_members"> 
 	 <input type="text" name="task_description" placeholder="task description" id="#task_description">
-	 <input	type="text" name="task_file" placeholder="task file" id="task_file"> 
-	 <input	type="button" name="task_save" value="create_task" id="create_task">
-	 <span class="members"></span>
+	 <input	type="file" name="task_file" placeholder="task file" id="task_file"> 
+ 	 <input	type="button" name="task_save" value="create_task" id="create_task">
+ 	 <input type="button" value="save task" id="save_task"/>
 </div>
 
 <script type="text/javascript">
@@ -42,10 +42,41 @@ $(".create_board_button").on("click", function(){
 });
 $(".create_task_button").on("click" , function(){
 		$("#task_popup").show();
-		alert("tut");
 		refresh_members_list();
 
 		
+});
+$("#task_popup #save_task").on("click",function(){
+   var task_name =  $("#task_name").val();
+   var members_list = [];
+   var task_members_lsit =  $("#task_members_lsit .user_container").each(function( index, e ) {
+	   alert( $(e).attr("userId"));
+	   members_list.push($(e).attr("userId"));
+	   
+	   
+   });
+   console.info(members_list);
+   var task_description =  $("#task_description").val();
+   var files= $("#task_file").prop('files');
+   console.info(files);
+   var file=files[0];
+   var data = new FormData();
+   data.append('file',file);
+   data.append('members_list',members_list);
+   data.append('task_name',task_name);
+   data.append('task_description',task_description);
+
+   console.info(data);
+   return false;
+
+   var url  = "files/saveFile";
+   var request = new XMLHttpRequest();
+   var xmlupload=request.upload;
+   xmlupload.addEventListener('load',refresh_drive_with_delay(file),false);
+   request.open("POST", url, true);
+   request.send(data);
+
+	
 });
 function refresh_members_list(){
 
