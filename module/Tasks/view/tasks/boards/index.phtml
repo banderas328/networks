@@ -1,29 +1,30 @@
 <div id="boards_div">
- <div class="col col-3">
-<ul class="connected">
+	<div class="col col-3">
+		<ul class="connected">
 <?php
-foreach($boards as  $board) {
-    echo '<li>'.$board["name"].'</li>';
-
+foreach ($boards as $board) {
+    echo '<li>' . $board["name"] . '</li>';
 }
 ?>
 </ul>
-</div>
+	</div>
 </div>
 <div id="create_board" class="col col-12">
-<span class="create_board_button">+ create column</span>
-<span class="create_task_button">+ create task</span>
+	<span class="create_board_button">+ create column</span> <span
+		class="create_task_button">+ create task</span>
 
 
 
 
 </div>
 <div id="task_popup">
-<input type="text" name="task_name" placeholder="task name" id="task_name">
-<input type="text" name="task_members" placeholder="task members" id="task_members">
-<input type="text" name="task_description" placeholder="task description" id="#task_description">
-<input type="text" name="task_file" placeholder="task file" id="task_file">
-<input type="button" name="task_save" value="create_task"	id="create_task">
+	 <input type="text" name="task_name" placeholder="task name" id="task_name"> 
+	 <span id="task_members_lsit"></span>
+	 <input	type="hidden" name="task_members" placeholder="task members"id="task_members"> 
+	 <input type="text" name="task_description" placeholder="task description" id="#task_description">
+	 <input	type="text" name="task_file" placeholder="task file" id="task_file"> 
+	 <input	type="button" name="task_save" value="create_task" id="create_task">
+	 <span class="members"></span>
 </div>
 
 <script type="text/javascript">
@@ -41,12 +42,34 @@ $(".create_board_button").on("click", function(){
 });
 $(".create_task_button").on("click" , function(){
 		$("#task_popup").show();
+		alert("tut");
+		refresh_members_list();
+
+		
 });
+function refresh_members_list(){
+
+	 $.ajax({
+	        type: "GET",
+	        url: "friends/getfriendForMemberlist",
+	        async:false
+
+	    })
+	        .done(function( data ) {
+	            $("#task_members_lsit").html(data);
+	            $(".friends_refresh").bind("click",function(){
+
+	                refresh_friends_list();
+	            });
+
+	        });
+	
+}
 $("#create_task").on("click",function(){
 var task_name = $("#task_name").val();
 var task_description = $("#task_description").val();
-var task_file = #("#task_file").val();
-var task_members = #("#task_members").val();
+var task_file = $("#task_file").val();
+var task_members = $("#task_members").val();
 	
 });
 	bind_boards_events();

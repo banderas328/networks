@@ -76,4 +76,14 @@ class  friendsController extends Controller\preloaderController
         else $friends = false;
         return @array('friends' => $friends);
     }
+    public function getfriendForMemberlistAction(){
+        $this->layout('layout/only_form');
+        $user_session = new Container('user');
+        $userId = $user_session->user->id;
+        $friends = new Friends();
+        $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
+        if($friends) $friends = $friends->toArray();
+        else $friends = false;
+        return @array('friends' => $friends);
+    }
 }

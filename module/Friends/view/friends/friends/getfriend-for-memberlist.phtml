@@ -1,12 +1,13 @@
-<button value="refresh" class="friends_refresh">refresh</button>
+<button value="refresh" class="members_refresh">refresh</button>
 <div>
 <?php
 if($friends)
 foreach($friends as $friend){
-    echo "<span><img style='width:80px;height:80px;'src=".$friend['avatar'].">";
+    echo "<span style='border:3px solid black;min-width:350px;min-height:400px;' userId='".$friend["user_id"]."'><img style='width:80px;height:80px;'src=".$friend['avatar'].">";
     echo $friend['first_name'];
     echo $friend['second_name'];
     echo "<button class='send_message' to_user='".$friend['user_id']."' value='send_message'>send message</button>";
+    echo '<input type="button" value="Add User To This Task" userId='.$friend["user_id"].' class="add_user_to_task"/>"';
     echo "</span>";
 
 }
@@ -14,9 +15,19 @@ foreach($friends as $friend){
 </div>
 <div id="message_to_user_from_user_list" title="Enter message">
 <textarea class="message_to_user_area" style="width: 400px;height: 120px" maxlength="500"></textarea>
+
 <button class="submit" id="message_to_user_from_user_list_button">send</button>
 </div>
 <script type="text/javascript">
+    $(".add_user_to_task").on("click", function(){
+//         alert($(this).attr("userId"));
+        var user_id = $(this).attr("userId");
+        var member_markup = $("span[userId='"+user_id+"']").html();
+        $("#task_members_lsit").append(member_markup);
+        
+
+
+        });
 
     $(function() {
 
