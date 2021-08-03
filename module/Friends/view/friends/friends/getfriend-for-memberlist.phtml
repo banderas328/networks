@@ -20,7 +20,6 @@ foreach($friends as $friend){
 </div>
 <script type="text/javascript">
     $(".add_user_to_task").on("click", function(){
-//         alert($(this).attr("userId"));
         var user_id = $(this).attr("userId");
         var member_markup = $("span[userId='"+user_id+"']").html();
         $("#task_members_lsit").append(member_markup);

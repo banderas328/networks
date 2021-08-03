@@ -50,10 +50,7 @@ $("#task_popup #save_task").on("click",function(){
    var task_name =  $("#task_name").val();
    var members_list = [];
    var task_members_lsit =  $("#task_members_lsit .user_container").each(function( index, e ) {
-	   alert( $(e).attr("userId"));
 	   members_list.push($(e).attr("userId"));
-	   
-	   
    });
    console.info(members_list);
    var task_description =  $("#task_description").val();
