@@ -10,7 +10,7 @@ use Zend\Config\Config;
 use Zend\Config\Factory;
 
 
-class Boards
+class Tasks
 {
     public $id;
     public $board_id;
@@ -33,7 +33,6 @@ class Boards
         $this->name = (isset($data['name'])) ? $data['name'] : null;
         $this->description = (isset($data['description'])) ? $data['description'] : null;
         $this->parent_task = (isset($data['parent_task'])) ? $data['parent_task'] : null;
-        $this->attachments = (isset($data['attachments'])) ? $data['attachments'] : null;
         $this->is_archive = (isset($data['is_archive'])) ? $data['is_archive'] : null;
     }
     public function getArrayCopy()

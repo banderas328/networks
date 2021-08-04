@@ -10,7 +10,7 @@ use Zend\Config\Config;
 use Zend\Config\Factory;
 
 
-class BoardsTable
+class TasksTable
 {
     
     protected $tableGateway;
@@ -31,6 +31,7 @@ class BoardsTable
     }
     
     public function createTask($request, $adapter) {
+        var_dump($_FILES);
         var_dump($_REQUEST);die();
         $board_name =  $request->getPost()->board_name;
         $user_session = new Container('user');

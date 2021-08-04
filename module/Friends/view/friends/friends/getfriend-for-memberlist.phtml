@@ -3,25 +3,21 @@
 <?php
 if($friends)
 foreach($friends as $friend){
-    echo "<span class='user_container' userId='".$friend["user_id"]."'><img style='width:80px;height:80px;'src=".$friend['avatar'].">";
-    echo $friend['first_name'];
-    echo $friend['second_name'];
-    echo "<button class='send_message' to_user='".$friend['user_id']."' value='send_message'>send message</button>";
-    echo '<input type="button" value="Add User To This Task" userId='.$friend["user_id"].' class="add_user_to_task"/>"';
+    echo "<span class='user_container_block' userId='".$friend["user_id"]."'>";
+    echo "<p class='member_name' userId='".$friend['user_id']."'><div userId='".$friend['user_id']."' class='user_container'>".$friend['first_name']." ".$friend['second_name']."</div></p>";
+    echo '<input type="button" value="Add User To This Task" userId='.$friend["user_id"].' class="add_user_to_task">';
     echo "</span>";
 
 }
 ?>
 </div>
-<div id="message_to_user_from_user_list" title="Enter message">
-<textarea class="message_to_user_area" style="width: 400px;height: 120px" maxlength="500"></textarea>
-
-<button class="submit" id="message_to_user_from_user_list_button">send</button>
-</div>
 <script type="text/javascript">
     $(".add_user_to_task").on("click", function(){
         var user_id = $(this).attr("userId");
-        var member_markup = $("span[userId='"+user_id+"']").html();
+        console.info(user_id);
+        var member_name = $(".user_container[userId="+user_id+"]").text();
+        var member_markup =  "<div userId="+user_id+">"+member_name+"</div";
+   
         $("#task_members_lsit").append(member_markup);
         
 
