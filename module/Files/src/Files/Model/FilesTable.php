@@ -41,7 +41,7 @@ class FilesTable
 //        return $results;
 //    }
 
-    public function saveUserFile($adapter, $data)
+    public function saveUserFile($data)
     {
         $user_session = new Container('user');
         $userId = $user_session->user->id;
@@ -55,8 +55,8 @@ class FilesTable
             $fileDb['file_name'] = $file;
             $fileDb['type'] = $data["file"]['type'];
             $this->tableGateway->insert($fileDb);
+            return $this->tableGateway->lastInsertValue;
         }
-
     }
 
     public function copyFileToMarketDir($adapter,$data){
@@ -67,7 +67,6 @@ class FilesTable
         $file = $path . '/' . $userId . $fileName . $data['file_title'];
         $sql = "select id from users_filesystem where path='market' and user_id = ".$userId;
         $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-        var_dump( $result->toArray());
         $dirId = $result->toArray()[0]['id'];
 
         if(copy(getcwd() . "/public/" .$data["file_name"], getcwd() . "/public/" . $file)) {

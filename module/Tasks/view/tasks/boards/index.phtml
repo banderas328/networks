@@ -68,8 +68,8 @@ $("#task_popup #save_task").on("click",function(){
    xmlupload.addEventListener('load',function(){
 
 		    $.ajax({
-		        type: "GET",
-		        url: "boards/index"
+		        type: "POST",
+		        url: "tasks/index"
 		    })
 		        .done(function( data ) {
 		            $("#tasks_transaction").html(data);

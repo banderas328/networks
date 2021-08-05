@@ -1,1 +1,129 @@
-banderas
+<div id="boards_div">
+    <div class="col col-3">
+        <ul class="connected">
+            <?php
+            foreach ($tasks as $task) {
+                echo '<li>' . $task["task_name"] . $task["description"].'</li>';
+            }
+            ?>
+        </ul>
+    </div>
+</div>
+<div id="create_board" class="col col-12">
+    <span class="create_board_button">+ create column</span> <span
+            class="create_task_button">+ create task</span>
+
+
+
+
+</div>
+<div id="task_popup">
+
+    <span id="members_lsit"></span>
+    <span id="task_members_lsit"></span>
+    <input type="text" name="task_name" placeholder="task name" id="task_name">
+    <input	type="hidden" name="task_members" placeholder="task members"id="task_members">
+    <textarea name="task_description" placeholder="task description" id="task_description"></textarea>
+    <input	type="file" name="task_file" placeholder="task file" id="task_file">
+    <input	type="button" name="task_save" value="create_task" id="create_task">
+    <input type="button" value="save task" id="save_task"/>
+</div>
+
+<script type="text/javascript">
+    function bind_boards_events(){
+        $('.connected').sortable({
+            connectWith: '.connected'
+        });
+
+    }
+    $(function() {
+        $(".create_board_button").on("click", function(){
+            var markup = ' <div class="col col-3"><ul class="connected"></ul></div>';
+            $( "#boards_div" ).append(markup);
+            bind_boards_events();
+        });
+        $(".create_task_button").on("click" , function(){
+            $("#task_popup").show();
+            refresh_members_list();
+
+
+        });
+        $("#task_popup #save_task").on("click",function(){
+            var task_name =  $("#task_name").val();
+            var members_list = [];
+            var task_members_lsit =  $("#task_members_lsit div").each(function( index, e ) {
+                members_list.push($(e).attr("userId"));
+            });
+            var task_description =  $("#task_description").val();
+            var files= $("#task_file").prop('files');
+            var file=files[0];
+            var data = new FormData();
+            data.append('file',file);
+            data.append('members_list',members_list);
+            data.append('task_name',task_name);
+            data.append('task_description',task_description);
+            var url  = "tasks/createTask";
+            var request = new XMLHttpRequest();
+            var xmlupload=request.upload;
+            xmlupload.addEventListener('load',function(){
+
+                $.ajax({
+                    type: "POST",
+                    url: "tasks/index"
+                })
+                    .done(function( data ) {
+                        $("#tasks_transaction").html(data);
+                    });
+
+
+
+
+            },false);
+            request.open("POST", url, true);
+            request.send(data);
+        });
+        function refresh_members_list(){
+
+            $.ajax({
+                type: "GET",
+                url: "friends/getfriendForMemberlist",
+                async:false
+
+            })
+                .done(function( data ) {
+                    $("#members_lsit").html(data);
+                    $(".friends_refresh").bind("click",function(){
+
+                        refresh_members_list();
+                    });
+
+                });
+
+        }
+        $("#create_task").on("click",function(){
+            var task_name = $("#task_name").val();
+            var task_description = $("#task_description").val();
+            var task_file = $("#task_file").val();
+            var task_members = $("#task_members").val();
+
+        });
+        bind_boards_events();
+        $("#add_board").bind("click",function(){
+            var board_name = $("#board_name").val();
+            $.ajax({
+                type: "POST",
+                url: "boards/createBoard",
+                dataType: "json",
+                data: {"board_name":board_name}
+            })
+                .done(function( data ) {
+                    $("#tasks_transaction").html(data);
+                });
+
+
+        });
+
+
+    });
+
+</script>

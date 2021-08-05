@@ -16,9 +16,10 @@ class TasksController extends Controller\preloaderController
     protected $tasksTable;
     
     public function indexAction(){
+        $board_id = 0;//NEED TO BE RECIVED HERE
         $this->layout('layout/only_form');
-        $boards = $this->getTasksTable()->getTasks();
-        return @array('tasks' => tasks);
+        $tasks = $this->getTasksTable()->getTasksForBoard($board_id);
+        return @array('tasks' => $tasks);
         
     }
     
@@ -26,9 +27,12 @@ class TasksController extends Controller\preloaderController
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $boards = new  Tasks();
-        if ($request->isPost()) {
+        $request = array_merge_recursive(
+            $request->getPost()->toArray(),
+            $request->getFiles()->toArray()
+            );
+
             $this->getTasksTable()->createTask($request, $boards->getAdapter());
-        }
         return false;
     }
     
