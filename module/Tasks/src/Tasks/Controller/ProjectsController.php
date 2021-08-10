@@ -1,0 +1,45 @@
+<?php
+namespace Tasks\Controller;
+
+use Tasks\Model\Projects;
+use Zend\View\Model\ViewModel;
+use Tasks\Model\Boards;
+use Tasks\Model\BoardsTable;
+use Preloader\Controller;
+use Zend\Config\Config;
+use Zend\Config\Factory;
+
+
+
+class ProjectsController extends Controller\preloaderController
+{
+    
+    protected $projectsTable;
+    
+    public function indexAction(){
+        $this->layout('layout/only_form');
+        $projets = $this->getProjectsTable()->getProjects();
+        return @array('projets' => $projets);
+        
+    }
+    
+    public function createProjectAction(){
+        $this->layout('layout/only_form');
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $this->getProjectsTable()->createProject($request);
+        }
+        echo json_encode("project created");
+        die();
+    }
+    
+    public function getProjectsTable()
+    {
+        if (!$this->projectsTable) {
+            $this->projectsTable = new \Tasks\Model\ProjectsTable;
+        }
+        return $this->projectsTable;
+    }
+    
+}
+

@@ -35,10 +35,10 @@ class BoardsController extends Controller\preloaderController
     public function getBoardsTable()
     {
         
-        if (!$this->getBoardsTable) {
-            $this->getBoardsTable = new \Tasks\Model\BoardsTable;
+        if (!$this->boardsTable) {
+            $this->boardsTable = new \Tasks\Model\BoardsTable;
         }
-        return $this->getBoardsTable;
+        return $this->boardsTable;
     }
     
 }

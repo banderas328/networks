@@ -14,42 +14,12 @@ foreach($friends as $friend){
 <script type="text/javascript">
     $(".add_user_to_task").on("click", function(){
         var user_id = $(this).attr("userId");
-        console.info(user_id);
+   ddsole.info(user_id);
         var member_name = $(".user_container[userId="+user_id+"]").text();
         var member_markup =  "<div userId="+user_id+">"+member_name+"</div";
-   
         $("#task_members_lsit").append(member_markup);
-        
-
-
-        });
-
-    $(function() {
-
-        $(".send_message").bind("click",function(){
-            send_message_from_user_list(this);
-        });
-
-    });
-    function send_message_from_user_list(element) {
-        var to_user = $(element).attr('to_user');
-        $('.message_to_user_area').val("");
-        $("#message_to_user_from_user_list").dialog( { width: 500,height:200
-            });
-        $("#message_to_user_from_user_list_button").attr("to_user",to_user);
-        $( "#message_to_user_from_user_list_button").unbind( "click" );
-        $("#message_to_user_from_user_list_button").bind("click",function(){
-            var text = $(".message_to_user_area").val();
-            $.ajax({
-                type: "POST",
-                url: "messages/addmessage",
-                data : {text :text , to_user : $(this).attr('to_user')}
-            });
-
-
-
         });
 
 
-    }
+
 </script>

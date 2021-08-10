@@ -66,7 +66,7 @@ class TasksTable
         $taskMemebrsTable = new \Tasks\Model\TasksMembersTable();
         if (count($memberList)) {
             foreach ($memberList as $member) {
-                $taskMemebrsTable->saveMemberToTask(['user_id' => $member, "task_id" => $taskID]);
+                $taskMemebrsTable->saveMemberToTask(['user_id' => (int)$member, (int)"task_id" => $taskID]);
             }
         }
 

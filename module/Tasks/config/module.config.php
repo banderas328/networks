@@ -4,10 +4,25 @@ return array(
         'invokables' => array(
            'Tasks\Controller\Tasks' => 'Tasks\Controller\TasksController',
            'Tasks\Controller\Boards' => 'Tasks\Controller\BoardsController',
+            'Projects\Controller\Projects' => 'Tasks\Controller\ProjectsController',
         ),
     ),
     'router' => array(
         'routes' => array(
+            'projects' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/projects[/:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Projects\Controller\Projects',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
             'boards' => array(
                 'type'    => 'segment',
                 'options' => array(

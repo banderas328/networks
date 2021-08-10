@@ -1,0 +1,80 @@
+<div id="projects_div">
+	<div class="col col-3">
+		<ul class="connected">
+<?php
+if(isset($projets)){
+foreach ($projets as $projets) {
+    echo '<li>' . $projets["project_name"] . '</li>';
+}}
+?>
+</ul>
+	</div>
+</div>
+<div id="projects_div" class="col col-12">
+<span id="create_project_button">+ create project</span>
+</div>
+<div id="project_popup">
+    <span id="project_members_list"></span>
+    <span id="project_members"></span>
+    <input type="text" name="project_name" placeholder="project name" id="project_name">
+    <textarea name="project_description" placeholder="project description" id="project_description"></textarea>
+    <input	type="button" name="project_save" value="save project" id="create_project">
+</div>
+<script type="text/javascript">
+
+    function refresh_project_members_list(){
+
+        $.ajax({
+            type: "GET",
+            url: "friends/getfriendForProjectMemberlist",
+            async:false
+
+        })
+            .done(function( data ) {
+                $("#project_members_list").html(data);
+            });
+
+    }
+
+    $(function(){
+        $("#create_project_button").on("click" , function(){
+            $("#project_popup").show();
+            refresh_project_members_list();
+        });
+
+    });
+
+    $("#project_popup #create_project").on("click",function(){
+        var project_name =  $("#project_name").val();
+        var members_list = [];
+        var task_members_lsit =  $("#project_members div").each(function( index, e ) {
+            members_list.push($(e).attr("userId"));
+        });
+        var project_description =  $("#project_description").val();
+        var data = {"project_name":project_name,"members_list":members_list,"project_description":project_description};
+
+
+            $.ajax({
+                type: "POST",
+                url: "projects/createProject",
+                dataType: "json",
+                data: data
+            }).done(function()  {
+                $.ajax({
+                    type: "GET",
+                    url: "projects/index"
+                })
+                    .done(function( data ) {
+                        $("#tasks_transaction").html(data);
+                    });
+
+            }).fail(function()  {
+            alert("Sorry. Server unavailable. ");
+        });
+
+    });
+
+</script>
+
+
+

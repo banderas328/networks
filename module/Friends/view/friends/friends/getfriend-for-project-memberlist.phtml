@@ -1,0 +1,31 @@
+<button value="refresh" class="members_refresh">refresh</button>
+<div>
+<?php
+if($friends)
+foreach($friends as $friend){
+    echo "<span userId='".$friend["user_id"]."'>";
+    echo "<p class='member_name' userId='".$friend['user_id']."'><div userId='".$friend['user_id']."' class='user_container_project'>".$friend['first_name']." ".$friend['second_name']."</div></p>";
+    echo '<input type="button" value="Add User To This Project" userId='.$friend["user_id"].' class="add_user_to_project">';
+    echo "</span>";
+
+}
+?>
+</div>
+<script type="text/javascript">
+    $(".add_user_to_project").on("click", function(){
+        var user_id = $(this).attr("userId");
+        console.info(user_id);
+        var member_name = $(".user_container_project[userId="+user_id+"]").text();
+        var member_markup =  "<div userId="+user_id+">"+member_name+"</div";
+        if($("#project_members div[userId="+user_id+"]").html()) {
+            alert("user already added");
+
+        }
+        else {
+            $("#project_members").append(member_markup);
+        }
+        });
+
+
+
+</script>

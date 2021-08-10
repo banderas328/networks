@@ -960,7 +960,7 @@ clear: both;
 #create_board {
 	display:block;
 }
-#task_popup {
+#task_popup,#project_popup {
 	
 	display:none;
 }

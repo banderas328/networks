@@ -15,6 +15,7 @@ class MainController extends Controller\preloaderController
 
     public function indexAction()
     {
+
         parent::__construct();
       //  $this->setLocale();
         $this->layout('layout/main');
