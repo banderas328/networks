@@ -28,7 +28,7 @@ class BoardsTable
         $this->adapter = $adapter;
     }
     
-    public function createBoard($request, $adapter) {
+    public function createBoard($request) {
         
         $board_name =  $request->getPost()->board_name;
         $user_session = new Container('user');
@@ -44,6 +44,22 @@ class BoardsTable
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $boards =   $resultSet->toArray();
         return $boards;
+    }
+    public function getProjectBoards($request){
+        $project_id =  (int)$request->getPost()->project_id;
+        $user_session = new Container('user');
+        $user_id = $user_session->user->id;
+        $sql = "SELECT * FROM `project_members` left join projects on project_members.project_id = projects.id
+                left join boards on projects.id = boards.project_id
+                WHERE project_members.user_id='".$user_id."' and boards.project_id = '".$project_id."'";
+        $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+        $boards =   $resultSet->toArray();
+
+        return $boards;
+
+
+
+
     }
 }
     

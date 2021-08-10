@@ -15,7 +15,8 @@ class ProjectsController extends Controller\preloaderController
 {
     
     protected $projectsTable;
-    
+    protected $boardsTable;
+
     public function indexAction(){
         $this->layout('layout/only_form');
         $projets = $this->getProjectsTable()->getProjects();
@@ -32,6 +33,8 @@ class ProjectsController extends Controller\preloaderController
         echo json_encode("project created");
         die();
     }
+
+
     
     public function getProjectsTable()
     {
@@ -39,6 +42,14 @@ class ProjectsController extends Controller\preloaderController
             $this->projectsTable = new \Tasks\Model\ProjectsTable;
         }
         return $this->projectsTable;
+    }
+
+    public function getBoardsTable()
+    {
+        if (!$this->boardsTable) {
+            $this->boardsTable = new \Tasks\Model\BoardsTable;
+        }
+        return $this->boardsTable;
     }
     
 }

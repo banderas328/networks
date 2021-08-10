@@ -10,12 +10,7 @@
     </div>
 </div>
 <div id="create_board" class="col col-12">
-    <span class="create_board_button">+ create column</span> <span
-            class="create_task_button">+ create task</span>
-
-
-
-
+    <span class="create_task_button">+ create task</span>
 </div>
 <div id="task_popup">
 
@@ -30,18 +25,9 @@
 </div>
 
 <script type="text/javascript">
-    function bind_boards_events(){
-        $('.connected').sortable({
-            connectWith: '.connected'
-        });
 
-    }
     $(function() {
-        $(".create_board_button").on("click", function(){
-            var markup = ' <div class="col col-3"><ul class="connected"></ul></div>';
-            $( "#boards_div" ).append(markup);
-            bind_boards_events();
-        });
+
         $(".create_task_button").on("click" , function(){
             $("#task_popup").show();
             refresh_members_list();

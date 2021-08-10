@@ -1,10 +1,10 @@
 <div id="projects_div">
 	<div class="col col-3">
-		<ul class="connected">
+		<ul class="projects_list">
 <?php
 if(isset($projets)){
-foreach ($projets as $projets) {
-    echo '<li>' . $projets["project_name"] . '</li>';
+foreach ($projets as $project) {
+    echo '<li class="open_project" projectId="'.$project["id"].'">' . $project["project_name"] . '<span class="open_project" projectId="'.$project["id"].'">open</span></li>';
 }}
 ?>
 </ul>
@@ -21,6 +21,27 @@ foreach ($projets as $projets) {
     <input	type="button" name="project_save" value="save project" id="create_project">
 </div>
 <script type="text/javascript">
+
+    $(function(){
+        $(".open_project").on("click",function(){
+            var project_id = $(this).attr("projectId");
+            $.ajax({
+                type: "POST",
+                url: "boards/index",
+                async:false,
+                data : {"project_id":project_id}
+
+            })
+                .done(function( data ) {
+                   $("#tasks_transaction").html(data);
+                });
+
+        });
+    });
+
+        $('.projects_list').sortable({});
+
+
 
     function refresh_project_members_list(){
 

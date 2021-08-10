@@ -17,17 +17,20 @@ class BoardsController extends Controller\preloaderController
     
     public function indexAction(){
         $this->layout('layout/only_form');
-        $boards = $this->getBoardsTable()->getBoards();
-        return @array('boards' => $boards);
-        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $boards =  $this->getBoardsTable()->getProjectBoards($request);
+            return @array('boards' => $boards);
+        }
+        return false;
     }
-    
+
     public function createBoardAction(){
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $boards = new  Boards();
         if ($request->isPost()) {
-            $this->getBoardsTable()->createBoard($request, $boards->getAdapter());
+            $this->getBoardsTable()->createBoard($request);
         }
         return false;
     }
