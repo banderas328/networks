@@ -31,8 +31,14 @@ class BoardsController extends Controller\preloaderController
         $boards = new  Boards();
         if ($request->isPost()) {
             $this->getBoardsTable()->createBoard($request);
+            $project_id =  $request->getPost()->project_id;
+            $boards =  $this->getBoardsTable()->getProjectBoards($request);
+            $view = new ViewModel(array(
+                'boards' => $boards,
+            ));
+            $view->setTemplate('tasks/boards/index');
+            return $view;
         }
-        return false;
     }
     
     public function getBoardsTable()

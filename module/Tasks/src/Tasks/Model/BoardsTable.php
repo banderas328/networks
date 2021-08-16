@@ -31,9 +31,9 @@ class BoardsTable
     public function createBoard($request) {
         
         $board_name =  $request->getPost()->board_name;
+        $project_id =  $request->getPost()->project_id;
         $user_session = new Container('user');
-        $admin = $user_session->user->id;
-        $data = ["admin" => $admin,"name" => $board_name];
+        $data = ["name" => $board_name,"project_id" => $project_id];
         $this->tableGateway->insert($data);       
     }
     

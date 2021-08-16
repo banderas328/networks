@@ -23,9 +23,9 @@ class Boards
     public function exchangeArray($data)
     {
         $this->id = (isset($data['id'])) ? $data['id'] : null;
-        $this->admin = (isset($data['admin'])) ? $data['admin'] : null;
-        $this->users_allowed = (isset($data['users_allowed'])) ? $data['users_allowed'] : null;
-        $this->statuses = (isset($data['statuses'])) ? $data['statuses'] : null;
+      //  $this->admin = (isset($data['admin'])) ? $data['admin'] : null;
+       // $this->users_allowed = (isset($data['users_allowed'])) ? $data['users_allowed'] : null;
+       // $this->statuses = (isset($data['statuses'])) ? $data['statuses'] : null;
         $this->name = (isset($data['name'])) ? $data['name'] : null;
     }
     public function getArrayCopy()

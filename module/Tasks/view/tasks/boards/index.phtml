@@ -7,7 +7,8 @@ foreach ($boards as $board) {
 ?>
 </div>
 <div id="create_board" class="col col-12">
-	<span class="create_board_button">+ create column</span>
+    <input type="text" id="board_name_input" placeholder="board name">
+	<span id="create_board_button" project_id=<?php echo $board["project_id"];?>>+ create column</span>
 </div>
 
 <div id="create_board" class="col col-12">
@@ -74,22 +75,23 @@ function bind_boards_events(){
 	// });
 }
 $(function() {
-    $("#add_board").bind("click",function(){
-        var board_name = $("#board_name").val();
+    $("#create_board_button").bind("click",function(){
+        var board_name = $("#board_name_input").val();
+        var project_id = $(this).attr("project_id");
         $.ajax({
             type: "POST",
             url: "boards/createBoard",
-            dataType: "json",
-            data: {"board_name":board_name}
+            data: {"board_name":board_name,"project_id":project_id}
         })
-            .done(function( data ) {
-                $("#tasks_transaction").html(data);
+            .done(function(data) {
+                        $("#tasks_transaction").html(data);
+                        alert("eee");
             });
     });
-$(".create_board_button").on("click", function(){
-	var markup = ' <div class="col col-3"><ul class="connected"></ul></div>';
-	$( "#boards_div" ).append(markup);
-});
+// $(".create_board_button").on("click", function(){
+// 	var markup = ' <div class="col col-3"><ul class="connected"></ul></div>';
+// 	$( "#boards_div" ).append(markup);
+// });
     bind_boards_events();
 
 });
