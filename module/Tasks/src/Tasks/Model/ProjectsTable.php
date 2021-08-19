@@ -51,7 +51,7 @@ class ProjectsTable
     public function getProjects(){
         $user_session = new Container('user');
         $user_id = $user_session->user->id;
-        $sql = "SELECT * FROM `project_members` left join projects on project_members.project_id = projects.id WHERE project_members.user_id='".$user_id."'";
+        $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id WHERE projects_members.user_id='".$user_id."'";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $projects =   $resultSet->toArray();
         return $projects;

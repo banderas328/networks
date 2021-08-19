@@ -21,7 +21,6 @@ foreach ($projets as $project) {
     <input	type="button" name="project_save" value="save project" id="create_project">
 </div>
 <script type="text/javascript">
-
     $(function(){
         $(".open_project").on("click",function(){
             var project_id = $(this).attr("projectId");
@@ -30,39 +29,28 @@ foreach ($projets as $project) {
                 url: "boards/index",
                 async:false,
                 data : {"project_id":project_id}
-
             })
                 .done(function( data ) {
                    $("#tasks_transaction").html(data);
                 });
-
-        });
+         });
     });
-
-        $('.projects_list').sortable({});
-
-
-
-    function refresh_project_members_list(){
-
+  $('.projects_list').sortable({});
+  function refresh_project_members_list(){
         $.ajax({
             type: "GET",
             url: "friends/getfriendForProjectMemberlist",
             async:false
-
         })
             .done(function( data ) {
                 $("#project_members_list").html(data);
             });
-
     }
-
     $(function(){
         $("#create_project_button").on("click" , function(){
             $("#project_popup").show();
             refresh_project_members_list();
         });
-
     });
 
     $("#project_popup #create_project").on("click",function(){
@@ -73,8 +61,6 @@ foreach ($projets as $project) {
         });
         var project_description =  $("#project_description").val();
         var data = {"project_name":project_name,"members_list":members_list,"project_description":project_description};
-
-
             $.ajax({
                 type: "POST",
                 url: "projects/createProject",
@@ -88,14 +74,8 @@ foreach ($projets as $project) {
                     .done(function( data ) {
                         $("#tasks_transaction").html(data);
                     });
-
             }).fail(function()  {
             alert("Sorry. Server unavailable. ");
         });
-
     });
-
 </script>
-
-
-

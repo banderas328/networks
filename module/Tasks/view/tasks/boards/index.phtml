@@ -2,7 +2,9 @@
 <?php
 if(isset($boards)) {
 foreach ($boards as $board) {
-    echo '<div  project_id="'.$board["project_id"].'" board_id="'.$board["id"].'">'.$board["name"] .'<ul class="connected"></ul></div>';
+    echo '<div  project_id="'.$board["project_id"].'" board_id="'.$board["id"].'">'.$board["name"] .'<ul class="connected"></ul>
+               <span class="delete_board" project_id="'.$board["project_id"].'" board_id="'.$board["id"].'">delete</span>
+          </div>';
 }}
 ?>
 </div>
@@ -10,7 +12,6 @@ foreach ($boards as $board) {
     <input type="text" id="board_name_input" placeholder="board name">
 	<span id="create_board_button" project_id=<?php echo $board["project_id"];?>>+ create column</span>
 </div>
-
 <div id="create_board" class="col col-12">
     <span class="create_task_button">+ create task</span>
 </div>
@@ -23,7 +24,38 @@ foreach ($boards as $board) {
     <input	type="file" name="task_file" placeholder="task file" id="task_file">
     <input type="button" value="save task" id="save_task"/>
 </div>
+<input type="hidden" name="project_id" id="project_id_container" value="<?php echo $board["project_id"];?>">
 <script type="text/javascript">
+    function refresh_members_list(){
+        $.ajax({
+            type: "GET",
+            url: "friends/getfriendForMemberlist",
+            async:false
+        })
+            .done(function( data ) {
+                $("#members_list").html(data);
+            });
+    }
+    $(".delete_board").on("click",function() {
+        $.ajax({
+            type: "POST",
+            url: "boards/deleteBoard",
+            data: {"board_id": $(this).attr("board_id"),"project_id":$(this).attr("project_id")}
+        })
+            .done(function () {
+                var project_id = $("input[name=project_id]").val();
+                $.ajax({
+                    type: "POST",
+                    url: "boards/index",
+                    async:false,
+                    data : {"project_id":project_id}
+                })
+                    .done(function( data ) {
+                        $("#tasks_transaction").html(data);
+                    });
+
+            });
+    });
     $(".create_task_button").on("click" , function(){
         $("#task_popup").show();
         refresh_members_list();
@@ -35,11 +67,13 @@ foreach ($boards as $board) {
             members_list.push($(e).attr("userId"));
         });
         var task_description =  $("#task_description").val();
+        var project_id = $("input[name=project_id]").val();
         var files= $("#task_file").prop('files');
         var file=files[0];
         var data = new FormData();
         data.append('file',file);
         data.append('members_list',members_list);
+        data.append('project_id',project_id);
         data.append('task_name',task_name);
         data.append('task_description',task_description);
         var url  = "tasks/createTask";
@@ -48,7 +82,9 @@ foreach ($boards as $board) {
         xmlupload.addEventListener('load',function(){
             $.ajax({
                 type: "POST",
-                url: "tasks/index"
+                url: "boards/index",
+                async:false,
+                data : {"project_id":project_id}
             })
                 .done(function( data ) {
                     $("#tasks_transaction").html(data);
@@ -58,22 +94,29 @@ foreach ($boards as $board) {
         request.send(data);
     });
 
-function bind_boards_events(){
-	// $('.connected').sortable({
-	// 	connectWith: '.connected',
-    //     receive: function( event, ui ) {
-	// 	    var board_id = $(this).attr("board_id");
-	// 	    var childrens = array();
-	// 	    $( event.target).children().each(function(childrens) {
-    //          $(this).attr("board_id",$(this).parent().attr("board_id"));
-    //          console.info($(this).parent().attr("board_id"));
-    //         // console.info($(this).attr("board_id"));
-    //         }
-    //         );
-	// 	    $(event.target).addClass("connected");
-    //     }
-	// });
+    function get_project_tasks(){
+        var project_id = $("#project_id_container").val();
+        $.ajax({
+            type: "POST",
+            url: "tasks/index",
+            data: {"project_id":project_id}
+        })
+            .done(function(data) {
+              data = JSON.parse(data);
+                for (const [key, value] of Object.entries(data)) {
+                  //  console.info(`${key}: ${value}`);
+                    for (const [key_task, value_task] of Object.entries(value)) {
+                        console.info(value_task);
+                        var board_id = value_task.board_id;
+                        $("div[board_id="+board_id+"] ul").append( '<li>'+value_task.name+ '</li>');
+                    }
+                }
+                $('.connected').sortable({
+                    connectWith: '.connected'
+                });
+            });
 }
+
 $(function() {
     $("#create_board_button").bind("click",function(){
         var board_name = $("#board_name_input").val();
@@ -85,15 +128,9 @@ $(function() {
         })
             .done(function(data) {
                         $("#tasks_transaction").html(data);
-                        alert("eee");
             });
     });
-// $(".create_board_button").on("click", function(){
-// 	var markup = ' <div class="col col-3"><ul class="connected"></ul></div>';
-// 	$( "#boards_div" ).append(markup);
-// });
-    bind_boards_events();
-
+    get_project_tasks();
 });
 
 </script>

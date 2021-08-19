@@ -14,7 +14,6 @@ foreach($friends as $friend){
 <script type="text/javascript">
     $(".add_user_to_project").on("click", function(){
         var user_id = $(this).attr("userId");
-        console.info(user_id);
         var member_name = $(".user_container_project[userId="+user_id+"]").text();
         var member_markup =  "<div userId="+user_id+">"+member_name+"</div";
         if($("#project_members div[userId="+user_id+"]").html()) {

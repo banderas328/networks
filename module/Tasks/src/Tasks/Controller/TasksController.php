@@ -16,11 +16,12 @@ class TasksController extends Controller\preloaderController
     protected $tasksTable;
     
     public function indexAction(){
-        $board_id = 0;//NEED TO BE RECIVED HERE
+        $project_id = $this->getRequest()->getPost()->project_id;
         $this->layout('layout/only_form');
-        $tasks = $this->getTasksTable()->getTasksForBoard($board_id);
-        return @array('tasks' => $tasks);
-        
+        echo json_encode($this->getTasksTable()->getTasksForProject($project_id));
+        return false;
+        //return @array('tasks' => $tasks);
+
     }
     
     public function createTaskAction(){

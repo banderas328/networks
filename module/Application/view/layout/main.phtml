@@ -319,16 +319,21 @@ $lang = $user['user']->lang;
           <span class="float_right">
             <a href="#" class="window_min"></a>
             <a href="#" class="window_resize"></a>
-            <a href="#icon_dock_money" class="window_close"></a>
+            <a href="#icon_dock_tasks" class="window_close"></a>
           </span>
         </div>
-            <div  class="window_content abs" id="money_content">
+            <div  class="window_content abs" id="tasks_content">
                 <div class="window_aside">
-                    Tasks
+
                 </div>
-                <div id="money_tabs" class="window_main">
-              
-                    
+                <div id="tasks_tabs" class="window_main">
+
+                    <span id="go_to_projects">Go To Projects</span>
+                    <script type="text/javascript">
+                    $("#go_to_projects").bind("click", function () {
+                    refresh_boards();
+                    });
+                    </script>
                 <div id="tasks_transaction"> 
                      <script type="text/javascript" src="js/pages/main/tasks_window.js"></script> 
                 </div> 
@@ -336,7 +341,7 @@ $lang = $user['user']->lang;
 </div>
             </div>
             <div class="abs window_bottom">
-                Money
+               Task Manager
             </div>
         </div>
         <span class="abs ui-resizable-handle ui-resizable-se"></span>

@@ -40,6 +40,15 @@ class BoardsController extends Controller\preloaderController
             return $view;
         }
     }
+
+    public function deleteBoardAction(){
+        $this->layout('layout/only_form');
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $this->getBoardsTable()->deleteBoard($request);
+        }
+        return false;
+    }
     
     public function getBoardsTable()
     {

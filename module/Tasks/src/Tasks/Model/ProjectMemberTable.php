@@ -24,7 +24,7 @@ class ProjectMemberTable
             'username' => $config->database["params"]->username,
             'password' => $config->database["params"]->password,
         ));
-        $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("project_members",$adapter);
+        $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("projects_members",$adapter);
         $this->adapter = $adapter;
     }
     
