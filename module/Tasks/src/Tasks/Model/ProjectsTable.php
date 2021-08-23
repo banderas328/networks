@@ -51,10 +51,20 @@ class ProjectsTable
     public function getProjects(){
         $user_session = new Container('user');
         $user_id = $user_session->user->id;
-        $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id WHERE projects_members.user_id='".$user_id."'";
+        $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id WHERE projects_members.user_id='".$user_id."' order by projects.sort_order";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $projects =   $resultSet->toArray();
         return $projects;
+    }
+
+    public function updateProjectsInBoard($request){
+        $projects_list = $request->getPost()->projects_list;
+        foreach ($projects_list as $project) {
+            var_dump($project);
+            $this->tableGateway->update($project, ['id' => $project["id"]]);
+        }
+
+
     }
 }
     

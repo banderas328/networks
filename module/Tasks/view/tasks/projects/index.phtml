@@ -35,7 +35,21 @@ foreach ($projets as $project) {
                 });
          });
     });
-  $('.projects_list').sortable({});
+  $('.projects_list').sortable({
+
+      update: function( event, ui ) {
+          var projects_list = [];
+          $(event.target).find("li").each(function( index, e ) {
+              projects_list.push({"sort_order":index,"id":$(e).attr("projectId")});
+          });
+          console.info(projects_list);
+          $.ajax({
+              type: "POST",
+              url: "projects/updateProjectsInBoard",
+              data: {"projects_list":projects_list}
+          })
+      }
+  });
   function refresh_project_members_list(){
         $.ajax({
             type: "GET",

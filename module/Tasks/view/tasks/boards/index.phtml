@@ -104,15 +104,25 @@ foreach ($boards as $board) {
             .done(function(data) {
               data = JSON.parse(data);
                 for (const [key, value] of Object.entries(data)) {
-                  //  console.info(`${key}: ${value}`);
                     for (const [key_task, value_task] of Object.entries(value)) {
-                        console.info(value_task);
                         var board_id = value_task.board_id;
-                        $("div[board_id="+board_id+"] ul").append( '<li>'+value_task.name+ '</li>');
+                        $("div[board_id="+board_id+"] ul").append( '<li task_id="'+ value_task.id +'" board_id="'+ value_task.board_id +'">'+value_task.name+ '</li>');
                     }
                 }
                 $('.connected').sortable({
-                    connectWith: '.connected'
+                    connectWith: '.connected',
+                    update: function( event, ui ) {
+                        var task_list = [];
+                        $(event.target).find("li").each(function( index, e ) {
+                            task_list.push({"sort_order":index,"id":$(e).attr("task_id"),"board_id":$(e).parent().parent().attr("board_id")});
+                        });
+                        console.info(task_list);
+                        $.ajax({
+                            type: "POST",
+                            url: "tasks/updateTasksInBoard",
+                            data: {"task_list":task_list}
+                        })
+                    }
                 });
             });
 }

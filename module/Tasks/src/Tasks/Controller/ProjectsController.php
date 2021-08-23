@@ -34,6 +34,14 @@ class ProjectsController extends Controller\preloaderController
         die();
     }
 
+    public function updateProjectsInBoardAction(){
+
+        $this->layout('layout/only_form');
+        $request = $this->getRequest();
+        $this->getProjectsTable()->updateProjectsInBoard($request);
+        return false;
+    }
+
 
     
     public function getProjectsTable()

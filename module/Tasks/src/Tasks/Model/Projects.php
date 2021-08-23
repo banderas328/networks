@@ -15,6 +15,7 @@ class Projects
     public $id;
     public $project_name;
     public $project_description;
+    public $sort_order;
 
     protected $inputFilter;
     
@@ -23,6 +24,7 @@ class Projects
         $this->id = (isset($data['id'])) ? $data['id'] : null;
         $this->project_name = (isset($data['project_name'])) ? $data['project_name'] : null;
         $this->project_description = (isset($data['project_description'])) ? $data['project_description'] : null;
+        $this->sort_order = (isset($data['sort_order'])) ? $data['sort_order'] : null;
     }
     public function getArrayCopy()
     {

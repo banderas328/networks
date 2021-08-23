@@ -28,7 +28,6 @@ class BoardsController extends Controller\preloaderController
     public function createBoardAction(){
         $this->layout('layout/only_form');
         $request = $this->getRequest();
-        $boards = new  Boards();
         if ($request->isPost()) {
             $this->getBoardsTable()->createBoard($request);
             $project_id =  $request->getPost()->project_id;
@@ -48,6 +47,11 @@ class BoardsController extends Controller\preloaderController
             $this->getBoardsTable()->deleteBoard($request);
         }
         return false;
+    }
+
+    public function updateBoardAction(){
+//TODO ?
+
     }
     
     public function getBoardsTable()
