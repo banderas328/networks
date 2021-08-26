@@ -25,6 +25,7 @@ foreach ($boards as $board) {
     <input type="button" value="save task" id="save_task"/>
 </div>
 <input type="hidden" name="project_id" id="project_id_container" value="<?php echo $board["project_id"];?>">
+<div id="open_task_popup"></div>
 <script type="text/javascript">
     function refresh_members_list(){
         $.ajax({
@@ -106,9 +107,23 @@ foreach ($boards as $board) {
                 for (const [key, value] of Object.entries(data)) {
                     for (const [key_task, value_task] of Object.entries(value)) {
                         var board_id = value_task.board_id;
-                        $("div[board_id="+board_id+"] ul").append( '<li task_id="'+ value_task.id +'" board_id="'+ value_task.board_id +'">'+value_task.name+ '</li>');
+                        $("div[board_id="+board_id+"] ul").append( '<li task_id="'+ value_task.id +'" board_id="'+
+                            value_task.board_id +'">'+value_task.name+ '<span task_id="'
+                            + value_task.id +'" class="open_task">open</span></li>');
                     }
                 }
+                $(".open_task").bind("click",function(){
+                    var task_id = $(this).attr("task_id");
+                    $.ajax({
+                        type: "POST",
+                        url: "tasks/getTask",
+                        data: {"task_id":task_id}
+                    }).done(function (data){
+                      $("#open_task_popup").html(data);
+
+                    });
+
+                });
                 $('.connected').sortable({
                     connectWith: '.connected',
                     update: function( event, ui ) {
@@ -116,7 +131,6 @@ foreach ($boards as $board) {
                         $(event.target).find("li").each(function( index, e ) {
                             task_list.push({"sort_order":index,"id":$(e).attr("task_id"),"board_id":$(e).parent().parent().attr("board_id")});
                         });
-                        console.info(task_list);
                         $.ajax({
                             type: "POST",
                             url: "tasks/updateTasksInBoard",

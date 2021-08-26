@@ -63,6 +63,27 @@ class TasksTable
             }
         }
     }
+    public function getTask(int $task_id){
+        $task_sql = "SELECT  * FROM tasks where id=".$task_id;
+        $resultSet = $this->adapter->query($task_sql, $this->adapter::QUERY_MODE_EXECUTE);
+        $task = $resultSet->toArray();
+        $sub_task_sql = "SELECT  * FROM tasks where parent_task=".$task_id;
+        $resultSet = $this->adapter->query($sub_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
+        $task["sub_tasks"] = $resultSet->toArray();
+        $sub_task_sql = "SELECT  * FROM tasks_users left join user_settings on tasks_users.user_id = user_settings.user_id where tasks_users.task_id=".$task_id;
+        $resultSet = $this->adapter->query($sub_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
+        $task["users"] = $resultSet->toArray();
+        $files_task_sql = "SELECT  * FROM tasks_files where task_id=".$task_id;
+        $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
+        $files = $resultSet->toArray();
+        foreach ($files as $file){
+
+            $files_task_sql = "SELECT  * FROM files where id=".$file["id"];
+            $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
+            $task["files"][]  = $resultSet->toArray();
+        }
+        return $task[0];
+   }
 
     public function getTasksForProject(int $project_id)
     {
