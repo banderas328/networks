@@ -60,7 +60,6 @@ class ProjectsTable
     public function updateProjectsInBoard($request){
         $projects_list = $request->getPost()->projects_list;
         foreach ($projects_list as $project) {
-            var_dump($project);
             $this->tableGateway->update($project, ['id' => $project["id"]]);
         }
 

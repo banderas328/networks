@@ -22,30 +22,24 @@ class SettingsController extends Controller\preloaderController
         $form->get('submit')->setValue('Save Settings');
         $request = $this->getRequest();
         $settings = new Settings();
-        $userSettings = $this->getSettingsTable()->getCurrentUserSettings($settings->getAdapter());
+        $userSettings = $this->getSettingsTable()->getCurrentUserSettings();
         $userSettings = $userSettings->toArray();
-     //   var_dump($userSettings);
         if(isset($userSettings[0]['id'])) {
-            unset($userSettings[0]['id']);
-            unset($userSettings[0]['avatar']);
             $form->setData($userSettings[0]);
         }
-
-   
         if ($request->isPost()) {
             $form->setInputFilter($settings->getInputFilter());
-            $post = array_merge_recursive(
+            $data = array_merge_recursive(
+                $userSettings,
                 $request->getPost()->toArray(),
                 $request->getFiles()->toArray()
             );
-            var_dump($post);
 
-            $form->setData($post);
-         
             if ($form->isValid()) {
-                  $data = $form->getData();
-                  $settings->exchangeArray($data);
-                  $this->getSettingsTable()->saveGeneralSettings($data,$settings->getAdapter());
+                  $this->getSettingsTable()->saveGeneralSettings($data);
+            }
+            else {
+                die("error");
             }
         }
         return array('form' => $form);

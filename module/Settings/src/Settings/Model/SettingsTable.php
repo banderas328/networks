@@ -14,10 +14,11 @@ use Zend\Config\Factory;
 class SettingsTable
 {
     protected $tableGateway;
+    protected $adapter;
 
     public function __construct()
     {
-        $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
+        $config = new Config(Factory::fromFile('config/autoload/global.php'), true);
         $adapter = new \Zend\Db\Adapter\Adapter (array(
             'driver' => $config->database->driver,
             'dsn' => $config->database->dsn,
@@ -25,15 +26,20 @@ class SettingsTable
             'username' => $config->database["params"]->username,
             'password' => $config->database["params"]->password,
         ));
-        $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("user_settings",$adapter);
+        $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("user_settings", $adapter);
+        $this->adapter = $adapter;
     }
 
 
-    public function saveGeneralSettings($settings,$adapter)
+    public function saveGeneralSettings($settings)
     {
+        if(isset($settings[0])) {
+            $files = $settings["file"];
+            $settings = $settings[0];
+            $settings["file"] = $files;
+        }
         $user_session = new Container('user');
         $userId = $user_session->user->id;
-
         $data = array(
             'sex' => $settings['sex'],
             'birthdate' => $settings['birthdate'],
@@ -48,12 +54,10 @@ class SettingsTable
             'site' => $settings['site'],
             'visibility' => $settings['visibility'],
         );
-        if($settings['avatar']['tmp_name']) {
-            $sql = new Sql($adapter, 'user_settings');
-            $select = $sql->select();
-            $select->where(array('user_id' => $userId));
-            $selectString = $sql->getSqlStringForSqlObject($select);
-            $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+
+        if($settings['file']['tmp_name']) {
+            $sql = "SELECT  * FROM user_settings where user_id=".$userId;
+            $results = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
              $results = $results->toArray();
             if(isset($results[0]['avatar'])) {
                 @unlink(getcwd(). "/public".$results[0]['avatar']);
@@ -62,21 +66,17 @@ class SettingsTable
             $path =  "/img/avatars";
             $fileName = uniqid();
             $file = $path. '/' .$fileName;
-            move_uploaded_file($settings['avatar']['tmp_name'], getcwd(). "/public/". $file.$settings['avatar']['name']);
-            if($this->is_image(getcwd(). "/public/".$file.$settings['avatar']['name'])) {
-                       $data['avatar'] = $file.$settings['avatar']['name'];
+            move_uploaded_file($settings['file']['tmp_name'], getcwd(). "/public/". $file.$settings['file']['name']);
+            if($this->is_image(getcwd(). "/public/".$file.$settings['file']['name'])) {
+                       $data['avatar'] = $file.$settings['file']['name'];
             }
             else {
-                @unlink(getcwd(). "/public/".$file.$settings['avatar']['name']);
+                @unlink(getcwd(). "/public/".$file.$settings['file']['name']);
             }
 
         }
-        $sql = new Sql($adapter);
-        $select = $sql->select();
-        $select->from('user_settings');
-        $select->where(array('user_id' => $userId));
-        $selectString = $sql->getSqlStringForSqlObject($select);
-        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        $sql = "SELECT  * FROM user_settings where user_id=".$userId;
+        $results = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         if ($results->toArray()) {
             $this->tableGateway->update($data, array('user_id' => $userId));
         } else {
@@ -85,14 +85,11 @@ class SettingsTable
         }
     return true;
     }
-    public function getCurrentUserSettings($adapter){
+    public function getCurrentUserSettings(){
         $user_session = new Container('user');
         $userId = $user_session->user->id;
-        $sql = new Sql($adapter, 'user_settings');
-        $select = $sql->select();
-        $select->where(array('user_id' => $userId));
-        $selectString = $sql->getSqlStringForSqlObject($select);
-        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+        $sql = "SELECT  * FROM user_settings where user_id=".$userId;
+        $results = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         return $results;
     }
 

@@ -27,6 +27,10 @@ class TasksController extends Controller\preloaderController
     public function createTaskAction(){
         $this->layout('layout/only_form');
         $request = $this->getRequest();
+        $request = array_merge_recursive(
+            $request->getPost()->toArray(),
+            $request->getFiles()->toArray()
+        );
         $this->getTasksTable()->createTask($request);
         return false;
     }

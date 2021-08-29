@@ -29,7 +29,10 @@ class TasksTable
 
     public function createTask(array $data)
     {
+        $user_session = new Container('user');
+        $user_id = $user_session->user->id;
         $memberList = $data["members_list"];
+        $memberList .= ",".$user_id;
         $data["to_directory"] = 0;
         $fileTable = new \Files\Model\FilesTable;
         if (isset($data['file']['tmp_name'])) $fileID = $fileTable->saveUserFile($data);
@@ -48,7 +51,7 @@ class TasksTable
             "board_id" => $board_id,
         ];
         $this->tableGateway->insert($data);
-        $taskID = $this->tableGateway->lastInsertValue[0];
+        $taskID = $this->tableGateway->lastInsertValue;
         if (isset($fileID)) {
             $dataFile["file_id"] = $fileID;
             $dataFile["task_id"] = $taskID;
@@ -66,7 +69,7 @@ class TasksTable
     public function getTask(int $task_id){
         $task_sql = "SELECT  * FROM tasks where id=".$task_id;
         $resultSet = $this->adapter->query($task_sql, $this->adapter::QUERY_MODE_EXECUTE);
-        $task = $resultSet->toArray();
+        $task = $resultSet->toArray()[0];
         $sub_task_sql = "SELECT  * FROM tasks where parent_task=".$task_id;
         $resultSet = $this->adapter->query($sub_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
         $task["sub_tasks"] = $resultSet->toArray();
@@ -77,12 +80,11 @@ class TasksTable
         $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
         $files = $resultSet->toArray();
         foreach ($files as $file){
-
             $files_task_sql = "SELECT  * FROM files where id=".$file["id"];
             $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
             $task["files"][]  = $resultSet->toArray();
         }
-        return $task[0];
+        return $task;
    }
 
     public function getTasksForProject(int $project_id)
@@ -120,7 +122,6 @@ class TasksTable
     public function updateATasksInBoard($request){
         $task_list = $request->getPost()->task_list;
         foreach ($task_list as $task) {
-            var_dump($task);
             $this->tableGateway->update($task, ['id' => $task["id"]]);
         }
     }

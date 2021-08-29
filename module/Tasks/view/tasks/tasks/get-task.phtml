@@ -1,4 +1,18 @@
 <div id="task_block">
-    <span id="task_name"><?php echo $task["name"];?></span>
-    <span id="task_description"><?php echo $task["description"];?></span>
+    <span id="task_name">Task name: <?php echo $task["name"];?></span>
+    <br/>
+    <span id="task_description">Description: <?php echo $task["description"];?></span>
+    <br/>
+    <span id="task_description">Description: <?php echo $task["status"];?></span>
+    <div class="task_members">
+    <?php foreach ($task["users"] as $user) {
+
+           echo "<span>".$user["first_name"].",".$user["second_name"]."</span>";
+           echo "<img src=".$user["avatar"]."/>";
+    }?>
+    </div>
+    <?php
+    echo "<pre>";
+    var_dump($task);
+    ?>
 </div>

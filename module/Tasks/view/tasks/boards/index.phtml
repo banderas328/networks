@@ -120,6 +120,20 @@ foreach ($boards as $board) {
                         data: {"task_id":task_id}
                     }).done(function (data){
                       $("#open_task_popup").html(data);
+                        $( "#open_task_popup" ).dialog({
+                            resizable: true,
+                            height: "auto",
+                            width: 400,
+                            modal: false,
+                            buttons: {
+                                "Delete all items": function() {
+                                    $( this ).dialog( "close" );
+                                },
+                                Cancel: function() {
+                                    $( this ).dialog( "close" );
+                                }
+                            }
+                        });
 
                     });
 

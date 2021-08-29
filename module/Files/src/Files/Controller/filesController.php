@@ -167,11 +167,9 @@ class  filesController extends Controller\preloaderController {
         $userId = $user_session->user->id;
         $file = new Files();
         $fileData = $this->getFilesTable()->getFile($file->getAdapter(),$fileId,$userId);
-        var_dump($fileData);
         $fileId = $fileData[0]["id"];
         $this->getPayedFilesTable()->saveFileForPay($fileId,$description,$cost);
         $tags = explode(",",$tags);
-        var_dump($tags);
         echo "test";
         $tagsIds = $this->getTagsTable()->updateTags($tags);
         $this->getFilesToTagsTable()->updateFileTags($fileId,$tagsIds);

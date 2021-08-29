@@ -34,7 +34,7 @@ class Settings
     {
         $this->id = (isset($data['id'])) ? $data['id'] : null;
         $this->user_id = (isset($data['user_id'])) ? $data['user_id'] : null;
-       // $this->avatar = (isset($data['avatar'])) ? $data['avatar'] : null;
+        $this->avatar = (isset($data['avatar'])) ? $data['avatar'] : null;
         $this->sex = (isset($data['sex'])) ? $data['sex'] : null;
         $this->birthdate = (isset($data['birthdate'])) ? $data['birthdate'] : null;
         $this->first_name = (isset($data['first_name'])) ? $data['first_name'] : null;
@@ -45,7 +45,6 @@ class Settings
         $this->about = (isset($data['about'])) ? $data['about'] : null;
         $this->skype = (isset($data['skype'])) ? $data['skype'] : null;
         $this->about = (isset($data['phone'])) ? $data['phone'] : null;
-        $this->about = (isset($data['site'])) ? $data['site'] : null;
         $this->visibility = (isset($data['visibility'])) ? $data['visibility'] : 1;
 
     }
