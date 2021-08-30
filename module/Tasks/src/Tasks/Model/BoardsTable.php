@@ -70,10 +70,6 @@ class BoardsTable
         $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $data = ["id" => $board_id];
         $this->tableGateway->delete($data);
-
-
-
-
     }
 }
     

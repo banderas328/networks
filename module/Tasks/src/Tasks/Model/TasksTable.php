@@ -80,9 +80,9 @@ class TasksTable
         $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
         $files = $resultSet->toArray();
         foreach ($files as $file){
-            $files_task_sql = "SELECT  * FROM files where id=".$file["id"];
+            $files_task_sql = "SELECT  * FROM files where id=".$file["file_id"];
             $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
-            $task["files"][]  = $resultSet->toArray();
+            $task["files"][]  = $resultSet->toArray()[0];
         }
         return $task;
    }

@@ -1,18 +1,24 @@
 <div id="task_block">
-    <span id="task_name">Task name: <?php echo $task["name"];?></span>
-    <br/>
-    <span id="task_description">Description: <?php echo $task["description"];?></span>
-    <br/>
-    <span id="task_description">Description: <?php echo $task["status"];?></span>
+    <h3 id="task_name">Task name: <?php echo $task["name"];?></h3>
+
+    <h4 id="task_description">Description: <?php echo $task["description"];?></h4>
+
+    <h4 id="task_description">Status: <?php echo $task["status"];?></h4>
     <div class="task_members">
     <?php foreach ($task["users"] as $user) {
 
-           echo "<span>".$user["first_name"].",".$user["second_name"]."</span>";
-           echo "<img src=".$user["avatar"]."/>";
+           echo "<span>".$user["first_name"]." ".$user["second_name"].",</span>";
+           echo "<img src='".$user["avatar"]."'/>";
     }?>
     </div>
+    <div>
+        <h3>Attached Files</h3>
     <?php
     echo "<pre>";
-    var_dump($task);
+    foreach ($task["files"] as $file) {
+
+        echo $file["file_title"]."<br/>";
+    }
     ?>
+    </div>
 </div>

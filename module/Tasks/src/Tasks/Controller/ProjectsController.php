@@ -19,8 +19,7 @@ class ProjectsController extends Controller\preloaderController
 
     public function indexAction(){
         $this->layout('layout/only_form');
-        $projets = $this->getProjectsTable()->getProjects();
-        return @array('projets' => $projets);
+        return @array('projets' => $this->getProjectsTable()->getProjects());
         
     }
     
