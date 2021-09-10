@@ -1,4 +1,4 @@
-$(function() {
+function refresh_network() {
     $.ajax({
         type: "GET",
         url: "network/networkindex"
@@ -8,4 +8,10 @@ $(function() {
             $("#network").html(data);
         });
 
+}
+$(function() {
+    refresh_network();
+
 });
+
+

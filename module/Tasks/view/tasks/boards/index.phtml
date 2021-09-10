@@ -2,7 +2,7 @@
 <?php
 if(isset($boards)) {
 foreach ($boards as $board) {
-    echo '<div  project_id="'.$board["project_id"].'" board_id="'.$board["id"].'">'.$board["name"] .'<ul class="connected"></ul>
+    echo '<div  project_id="'.$board["project_id"].'" board_id="'.$board["id"].'"><span>'.$board["name"] .'</span></span><ul class="connected board"></ul>
                <span class="delete_board" project_id="'.$board["project_id"].'" board_id="'.$board["id"].'">delete</span>
           </div>';
 }}
@@ -10,9 +10,10 @@ foreach ($boards as $board) {
 </div>
 <div id="create_board" class="col col-12">
     <input type="text" id="board_name_input" placeholder="board name">
-	<span id="create_board_button" project_id=<?php echo $board["project_id"];?>>+ create column</span>
+	<span id="create_board_button" project_id=<?php echo $project_id;?>>+ create column</span>
 </div>
-<div id="create_board" class="col col-12">
+
+<div id="create_task" class="col col-12">
     <span class="create_task_button">+ create task</span>
 </div>
 <div id="task_popup">
@@ -24,7 +25,7 @@ foreach ($boards as $board) {
     <input	type="file" name="task_file" placeholder="task file" id="task_file">
     <input type="button" value="save task" id="save_task"/>
 </div>
-<input type="hidden" name="project_id" id="project_id_container" value="<?php echo $board["project_id"];?>">
+<input type="hidden" name="project_id" id="project_id_container" value="<?php echo $project_id;?>">
 <div id="open_task_popup"></div>
 <script type="text/javascript">
     function refresh_members_list(){
@@ -108,8 +109,7 @@ foreach ($boards as $board) {
                     for (const [key_task, value_task] of Object.entries(value)) {
                         var board_id = value_task.board_id;
                         $("div[board_id="+board_id+"] ul").append( '<li task_id="'+ value_task.id +'" board_id="'+
-                            value_task.board_id +'">'+value_task.name+ '<span task_id="'
-                            + value_task.id +'" class="open_task">open</span></li>');
+                            value_task.board_id +'" class="open_task">'+value_task.name+ '</li>');
                     }
                 }
                 $(".open_task").bind("click",function(){
@@ -126,9 +126,6 @@ foreach ($boards as $board) {
                             width: 400,
                             modal: false,
                             buttons: {
-                                "Delete all items": function() {
-                                    $( this ).dialog( "close" );
-                                },
                                 Cancel: function() {
                                     $( this ).dialog( "close" );
                                 }

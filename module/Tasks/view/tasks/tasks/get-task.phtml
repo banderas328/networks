@@ -1,9 +1,19 @@
-<div id="task_block">
+<div id="task_block" >
     <h3 id="task_name">Task name: <?php echo $task["name"];?></h3>
 
     <h4 id="task_description">Description: <?php echo $task["description"];?></h4>
 
-    <h4 id="task_description">Status: <?php echo $task["status"];?></h4>
+    <h4 id="task_description">Status: <?php echo $task["status"];?>
+    <select id="task_status">
+        <option value="edit">Edit</option>
+        <option value="new">New</option>
+        <option value="urgent">Urgent</option>
+        <option value="major">Major</option>
+        <option value="normal">Normal</option>
+        <option value="low">Low</option>
+        <option value="hold">Hold</option>
+    </select>
+    </h4>
     <div class="task_members">
     <?php foreach ($task["users"] as $user) {
 
@@ -14,11 +24,63 @@
     <div>
         <h3>Attached Files</h3>
     <?php
-    echo "<pre>";
+    if(isset($task["files"]))
     foreach ($task["files"] as $file) {
 
-        echo $file["file_title"]."<br/>";
+        echo "<a href='".$file["file_name"]."'>".$file["file_title"]."</a><br/>";
     }
     ?>
+        <?php
+        if(isset($task["sub_tasks"]))
+            foreach ($task["sub_tasks"] as $sub_task) {
+
+              echo "<p>".$sub_task["description"]." status : ".$sub_task["status"]."</p>";
+            }
+        ?>
     </div>
+    <textarea id="sub_task"></textarea>
+    <input	type="file" name="task_file" placeholder="task file" id="task_file_update" />
+    <input type="button" name="update task" value="update task" id="update_task" task_id="<?php echo $task["id"];?>"/>
 </div>
+<script type="text/javascript">
+
+    $(function (){
+
+        $("#update_task").on("click",function (){
+            var task_id = $(this).attr("task_id");
+            var text = $("#sub_task").val();
+
+            var status = $("#task_status").val();
+
+
+
+            var files= $("#task_file_update").prop('files');
+            var file=files[0];
+            var data = new FormData();
+            data.append('file',file);
+            data.append('parent_task',task_id);
+            data.append('description',text);
+            data.append('status',status);
+
+            var project_id = $("input[name=project_id]").val();
+            var url  = "tasks/updateTask";
+            var request = new XMLHttpRequest();
+            var xmlupload=request.upload;
+            xmlupload.addEventListener('load',function(){
+                $.ajax({
+                    type: "POST",
+                    url: "boards/index",
+                    async:false,
+                    data : {"project_id":project_id}
+                })
+                    .done(function( data ) {
+                        $("#tasks_transaction").html(data);
+                    });
+            },false);
+            request.open("POST", url, true);
+            request.send(data);
+
+
+        })
+    })
+</script>

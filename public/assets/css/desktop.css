@@ -933,14 +933,10 @@ clear: both;
 	border : 1px solid red;
 }
 .board {
-	display:inline;
-	border:1px solid black;
-	width:300px;
-}
-.connected {
-	border:1px solid black;
-	width:300px;
-	min-height: 200px;
+	display:block;
+    border:1px solid black;
+    min-width:300px;
+    min-height: 300px;
 }
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
     border: 1px solid #93c3cd;
@@ -963,4 +959,8 @@ clear: both;
 #task_popup,#project_popup,#open_task_popup {
 	
 	display:none;
+}
+.task_members img {
+    max-width: 50px;
+    border-radius: 10px;
 }

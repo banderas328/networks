@@ -50,7 +50,9 @@ class FilesTable
         $file = $path . '/' . $userId . $fileName . $data['file']['name'];
         if(move_uploaded_file($data['file']['tmp_name'], getcwd() . "/public/" . $file)) {
             $fileDb['user_id'] = $userId;
+            if(isset($data["to_directory"]))
             $fileDb['directory'] = $data["to_directory"];
+            else $fileDb['directory']  = 0;
             $fileDb['file_title'] = $data["file"]['name'];
             $fileDb['file_name'] = $file;
             $fileDb['type'] = $data["file"]['type'];

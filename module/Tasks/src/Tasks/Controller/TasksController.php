@@ -49,6 +49,16 @@ class TasksController extends Controller\preloaderController
         $task = $this->getTasksTable()->getTask($task_id);
         return @array('task' => $task);
     }
+
+    public function updateTaskAction(){
+        $request = $this->getRequest();
+        $request = array_merge_recursive(
+            $request->getPost()->toArray(),
+            $request->getFiles()->toArray()
+        );
+        $this->getTasksTable()->updateTask($request);
+        return false;
+    }
     
     public function getTasksTable()
     {

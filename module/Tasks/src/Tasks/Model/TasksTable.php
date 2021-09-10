@@ -7,6 +7,7 @@ use Zend\Config\Config;
 use Zend\Config\Factory;
 
 
+
 class TasksTable
 {
 
@@ -44,6 +45,11 @@ class TasksTable
                 left join projects on boards.project_id = projects.id WHERE projects.id=" . $project_id;
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $board_id = $resultSet->toArray()[0]['board_id'];
+        if(!$board_id) {
+            $data = ["name" => "todo","project_id" => $project_id];
+            $board = new BoardsTable();
+            $board_id = (int)$board->createBoardFromArray($data);
+        }
         $data = [
             "description" => $description,
             "name" => $task_name,
@@ -70,12 +76,13 @@ class TasksTable
         $task_sql = "SELECT  * FROM tasks where id=".$task_id;
         $resultSet = $this->adapter->query($task_sql, $this->adapter::QUERY_MODE_EXECUTE);
         $task = $resultSet->toArray()[0];
-        $sub_task_sql = "SELECT  * FROM tasks where parent_task=".$task_id;
+        $sub_task_sql = "SELECT  * FROM tasks where parent_task = ".$task_id;
         $resultSet = $this->adapter->query($sub_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
         $task["sub_tasks"] = $resultSet->toArray();
         $sub_task_sql = "SELECT  * FROM tasks_users left join user_settings on tasks_users.user_id = user_settings.user_id where tasks_users.task_id=".$task_id;
         $resultSet = $this->adapter->query($sub_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
         $task["users"] = $resultSet->toArray();
+
         $files_task_sql = "SELECT  * FROM tasks_files where task_id=".$task_id;
         $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
         $files = $resultSet->toArray();
@@ -87,8 +94,9 @@ class TasksTable
         return $task;
    }
 
-    public function getTasksForProject(int $project_id)
+    public function getTasksForProject($project_id)
     {
+        $project_id = (int) $project_id;
         $user_session = new Container('user');
         $user_id = $user_session->user->id;
         $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id FROM tasks 
@@ -124,6 +132,21 @@ class TasksTable
         foreach ($task_list as $task) {
             $this->tableGateway->update($task, ['id' => $task["id"]]);
         }
+    }
+
+    public function updateTask($data){
+        $fileTable = new \Files\Model\FilesTable;
+        $data["name"] = "update";
+        if (isset($data['file']['tmp_name'])) $fileID = $fileTable->saveUserFile($data);
+        unset($data['file']);
+        $this->tableGateway->insert($data);
+        if (isset($fileID)) {
+            $dataFile["file_id"] = $fileID;
+            $dataFile["task_id"] = $data["parent_task"];
+            $fileTable = new \Tasks\Model\TasksFilesTable();
+            $fileTable->saveFileToTask($dataFile);
+        }
+
     }
 }
 

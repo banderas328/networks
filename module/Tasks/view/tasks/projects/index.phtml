@@ -2,8 +2,8 @@
 	<div class="col col-3">
 		<ul class="projects_list">
 <?php
-if(isset($projets)){
-foreach ($projets as $project) {
+if(isset($projects)){
+foreach ($projects as $project) {
     echo '<li class="open_project" projectId="'.$project["id"].'">' . $project["project_name"] . '<span class="open_project" projectId="'.$project["id"].'">open</span></li>';
 }}
 ?>
