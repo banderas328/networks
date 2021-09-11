@@ -40,11 +40,12 @@ class TasksTable
         $task_name = $data["task_name"];
         $description = $data["task_description"];
         $project_id = (int)$data["project_id"];
-        $sql = "SELECT MIN(tasks.board_id) AS board_id  FROM tasks 
-                left join boards on boards.id = tasks.board_id 
-                left join projects on boards.project_id = projects.id WHERE projects.id=" . $project_id;
+        $sql = "SELECT MIN(boards.id) AS board_id  FROM boards WHERE boards.project_id=".$project_id;
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $board_id = $resultSet->toArray()[0]['board_id'];
+        echo "###";
+        var_dump($board_id);
+        echo "###";
         if(!$board_id) {
             $data = ["name" => "todo","project_id" => $project_id];
             $board = new BoardsTable();

@@ -30,11 +30,12 @@
         echo "<a href='".$file["file_name"]."'>".$file["file_title"]."</a><br/>";
     }
     ?>
+        <H1>Comments</H1>
         <?php
         if(isset($task["sub_tasks"]))
             foreach ($task["sub_tasks"] as $sub_task) {
 
-              echo "<p>".$sub_task["description"]." status : ".$sub_task["status"]."</p>";
+              echo "<p style='border: 1px solid darkred'>".$sub_task["description"]." status : ".$sub_task["status"]."</p>";
             }
         ?>
     </div>

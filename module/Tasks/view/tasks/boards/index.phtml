@@ -10,7 +10,7 @@ foreach ($boards as $board) {
 </div>
 <div id="create_board" class="col col-12">
     <input type="text" id="board_name_input" placeholder="board name">
-	<span id="create_board_button" project_id=<?php echo $project_id;?>>+ create column</span>
+	<span id="create_board_button" project_id='<?php if(isset($project_id)) echo $project_id;?>'>+ create column</span>
 </div>
 
 <div id="create_task" class="col col-12">
@@ -23,9 +23,8 @@ foreach ($boards as $board) {
     <input	type="hidden" name="task_members" placeholder="task members"id="task_members">
     <textarea name="task_description" placeholder="task description" id="task_description"></textarea>
     <input	type="file" name="task_file" placeholder="task file" id="task_file">
-    <input type="button" value="save task" id="save_task"/>
+    <input type="button" value="save task" id="save_task" project_id='<?php if(isset($project_id)) echo $project_id;?>'/>
 </div>
-<input type="hidden" name="project_id" id="project_id_container" value="<?php echo $project_id;?>">
 <div id="open_task_popup"></div>
 <script type="text/javascript">
     function refresh_members_list(){
@@ -69,7 +68,7 @@ foreach ($boards as $board) {
             members_list.push($(e).attr("userId"));
         });
         var task_description =  $("#task_description").val();
-        var project_id = $("input[name=project_id]").val();
+        var project_id = $("#create_board_button").attr("project_id");
         var files= $("#task_file").prop('files');
         var file=files[0];
         var data = new FormData();
@@ -97,7 +96,7 @@ foreach ($boards as $board) {
     });
 
     function get_project_tasks(){
-        var project_id = $("#project_id_container").val();
+        var project_id = $("#create_board_button").attr("project_id");
         $.ajax({
             type: "POST",
             url: "tasks/index",
@@ -163,6 +162,7 @@ $(function() {
         })
             .done(function(data) {
                         $("#tasks_transaction").html(data);
+                        get_project_tasks();
             });
     });
     get_project_tasks();
