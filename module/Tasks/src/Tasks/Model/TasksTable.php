@@ -43,9 +43,6 @@ class TasksTable
         $sql = "SELECT MIN(boards.id) AS board_id  FROM boards WHERE boards.project_id=".$project_id;
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $board_id = $resultSet->toArray()[0]['board_id'];
-        echo "###";
-        var_dump($board_id);
-        echo "###";
         if(!$board_id) {
             $data = ["name" => "todo","project_id" => $project_id];
             $board = new BoardsTable();
@@ -136,17 +133,24 @@ class TasksTable
     }
 
     public function updateTask($data){
+        if(isset($data["data"])) $data = $data["data"];
         $fileTable = new \Files\Model\FilesTable;
-        $data["name"] = "update";
+        if(!isset($data["name"])) $data["name"] = "update";
         if (isset($data['file']['tmp_name'])) $fileID = $fileTable->saveUserFile($data);
         unset($data['file']);
-        $this->tableGateway->insert($data);
+        if(!isset($data["id"])) {
+            $this->tableGateway->insert($data);
+        }
+        else {
+            $this->tableGateway->update($data,["id = " . (int)$data["id"]]);
+        }
         if (isset($fileID)) {
             $dataFile["file_id"] = $fileID;
             $dataFile["task_id"] = $data["parent_task"];
             $fileTable = new \Tasks\Model\TasksFilesTable();
             $fileTable->saveFileToTask($dataFile);
         }
+        return $data;
 
     }
 }

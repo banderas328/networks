@@ -51,15 +51,17 @@ class TasksController extends Controller\preloaderController
     }
 
     public function updateTaskAction(){
+        $this->layout('layout/only_form');
         $request = $this->getRequest();
         $request = array_merge_recursive(
             $request->getPost()->toArray(),
             $request->getFiles()->toArray()
         );
-        $this->getTasksTable()->updateTask($request);
+        echo json_encode($this->getTasksTable()->updateTask($request));
         return false;
     }
-    
+
+
     public function getTasksTable()
     {
         

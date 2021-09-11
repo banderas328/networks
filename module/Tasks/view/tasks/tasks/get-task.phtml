@@ -1,83 +1,170 @@
-<div id="task_block" >
-    <h3 id="task_name">Task name: <?php echo $task["name"];?></h3>
+<div id="task_block">
+    <input type="hidden" value="<?php echo $task["id"]; ?>" name="task_id" id="task_id_popup">
+    <h3 id="task_name_block">Task name: <span class="task_name_value"><?php echo $task["name"]; ?></span><span
+                class="edit_task_name"> : edit</span></h3>
 
-    <h4 id="task_description">Description: <?php echo $task["description"];?></h4>
+    <h4 id="task_description_block">Description: <span
+                class="task_description_value"><?php echo $task["description"]; ?></span><span
+                class="edit_task_description"> : edit</span></h4>
 
-    <h4 id="task_description">Status: <?php echo $task["status"];?>
-    <select id="task_status">
-        <option value="edit">Edit</option>
-        <option value="new">New</option>
-        <option value="urgent">Urgent</option>
-        <option value="major">Major</option>
-        <option value="normal">Normal</option>
-        <option value="low">Low</option>
-        <option value="hold">Hold</option>
-    </select>
+    <h4 id="task_description">Status: <?php echo $task["status"]; ?>
+        <select id="task_status">
+            <option value="edit">Edit</option>
+            <option value="new">New</option>
+            <option value="urgent">Urgent</option>
+            <option value="major">Major</option>
+            <option value="normal">Normal</option>
+            <option value="low">Low</option>
+            <option value="hold">Hold</option>
+        </select>
     </h4>
     <div class="task_members">
-    <?php foreach ($task["users"] as $user) {
+        <?php foreach ($task["users"] as $user) {
 
-           echo "<span>".$user["first_name"]." ".$user["second_name"].",</span>";
-           echo "<img src='".$user["avatar"]."'/>";
-    }?>
+            echo "<span>" . $user["first_name"] . " " . $user["second_name"] . ",</span>";
+            echo "<img src='" . $user["avatar"] . "'/>";
+        } ?>
     </div>
     <div>
         <h3>Attached Files</h3>
-    <?php
-    if(isset($task["files"]))
-    foreach ($task["files"] as $file) {
+        <?php
+        if (isset($task["files"]))
+            foreach ($task["files"] as $file) {
 
-        echo "<a href='".$file["file_name"]."'>".$file["file_title"]."</a><br/>";
-    }
-    ?>
+                echo "<a href='" . $file["file_name"] . "'>" . $file["file_title"] . "</a><br/>";
+            }
+        ?>
         <H1>Comments</H1>
         <?php
-        if(isset($task["sub_tasks"]))
+        if (isset($task["sub_tasks"]))
             foreach ($task["sub_tasks"] as $sub_task) {
 
-              echo "<p style='border: 1px solid darkred'>".$sub_task["description"]." status : ".$sub_task["status"]."</p>";
+                echo "<p style='border: 1px solid darkred'>" . $sub_task["description"] . " status : " . $sub_task["status"] . "</p>";
             }
         ?>
     </div>
     <textarea id="sub_task"></textarea>
-    <input	type="file" name="task_file" placeholder="task file" id="task_file_update" />
-    <input type="button" name="update task" value="update task" id="update_task" task_id="<?php echo $task["id"];?>"/>
+    <input type="file" name="task_file" placeholder="task file" id="task_file_update"/>
+    <input type="button" name="update task" value="update task" id="update_task" task_id="<?php echo $task["id"]; ?>"/>
 </div>
 <script type="text/javascript">
 
-    $(function (){
+    $(function () {
 
-        $("#update_task").on("click",function (){
+        $(".edit_task_name").on("click", function () {
+            var tast_name = $(".task_name_value").text();
+            var html_string = '<input type="text" id="task_name_input" name="task_name" value="' + tast_name + '"/><span class="edit_save_task_name">save</span>';
+            $("#task_name_block").html(html_string);
+            $(".edit_save_task_name").on("click", function () {
+                var data = {"name": $("#task_name_input").val(), "id": $("#task_id_popup").val()};
+                $.ajax({
+                    type: "POST",
+                    url: "tasks/updateTask",
+                    async: false,
+                    data: {data}
+                })
+                    .done(function (data) {
+                        console.info(data);
+                        data = JSON.parse(data);
+                        $.ajax({
+                            type: "POST",
+                            url: "tasks/getTask",
+                            data: {"task_id": data.id}
+                        }).done(function (data) {
+                            $("#open_task_popup").html(data);
+                            $("#open_task_popup").dialog({
+                                resizable: true,
+                                height: "auto",
+                                width: 600,
+                                modal: false,
+                                buttons: {
+                                    Cancel: function () {
+                                        $(this).dialog("close");
+                                    }
+                                }
+                            });
+
+                        });
+                    });
+
+
+            });
+
+
+        });
+
+        $(".edit_task_description").on("click", function () {
+            var test_description = $(".task_description_value").text();
+            console.info(test_description);
+            var html_string = '<textarea id="task_description_input" name="task_description">'+test_description+'</textarea><span class="edit_save_task_description">save</span>';
+            $("#task_description_block").html(html_string);
+            $(".edit_save_task_description").on("click", function () {
+                var data = {"description": $("#task_description_input").val(), "id": $("#task_id_popup").val()};
+                $.ajax({
+                    type: "POST",
+                    url: "tasks/updateTask",
+                    async: false,
+                    data: {data}
+                })
+                    .done(function (data) {
+                        data = JSON.parse(data);
+                        $.ajax({
+                            type: "POST",
+                            url: "tasks/getTask",
+                            data: {"task_id": data.id}
+                        }).done(function (data) {
+                            $("#open_task_popup").html(data);
+                            $("#open_task_popup").dialog({
+                                resizable: true,
+                                height: "auto",
+                                width: 600,
+                                modal: false,
+                                buttons: {
+                                    Cancel: function () {
+                                        $(this).dialog("close");
+                                    }
+                                }
+                            });
+
+                        });
+                    });
+
+
+            });
+
+
+        });
+
+        $("#update_task").on("click", function () {
             var task_id = $(this).attr("task_id");
             var text = $("#sub_task").val();
 
             var status = $("#task_status").val();
 
 
-
-            var files= $("#task_file_update").prop('files');
-            var file=files[0];
+            var files = $("#task_file_update").prop('files');
+            var file = files[0];
             var data = new FormData();
-            data.append('file',file);
-            data.append('parent_task',task_id);
-            data.append('description',text);
-            data.append('status',status);
+            data.append('file', file);
+            data.append('parent_task', task_id);
+            data.append('description', text);
+            data.append('status', status);
 
             var project_id = $("input[name=project_id]").val();
-            var url  = "tasks/updateTask";
+            var url = "tasks/updateTask";
             var request = new XMLHttpRequest();
-            var xmlupload=request.upload;
-            xmlupload.addEventListener('load',function(){
+            var xmlupload = request.upload;
+            xmlupload.addEventListener('load', function () {
                 $.ajax({
                     type: "POST",
                     url: "boards/index",
-                    async:false,
-                    data : {"project_id":project_id}
+                    async: false,
+                    data: {"project_id": project_id}
                 })
-                    .done(function( data ) {
+                    .done(function (data) {
                         $("#tasks_transaction").html(data);
                     });
-            },false);
+            }, false);
             request.open("POST", url, true);
             request.send(data);
 
