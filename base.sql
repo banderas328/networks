@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 29 2021 г., 11:47
+-- Время создания: Сен 15 2021 г., 22:10
 -- Версия сервера: 10.3.22-MariaDB
 -- Версия PHP: 7.4.5
 
@@ -252,7 +252,8 @@ CREATE TABLE `projects` (
   `id` int(11) NOT NULL,
   `project_name` varchar(255) COLLATE utf8_bin NOT NULL,
   `project_description` text COLLATE utf8_bin NOT NULL,
-  `sort_order` int(11) NOT NULL DEFAULT 0
+  `sort_order` int(11) NOT NULL DEFAULT 0,
+  `is_archive` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -265,18 +266,6 @@ CREATE TABLE `projects_members` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `projects_users`
---
-
-CREATE TABLE `projects_users` (
-  `id` int(11) NOT NULL,
-  `project_id` int(10) NOT NULL,
-  `user_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -515,12 +504,6 @@ ALTER TABLE `projects_members`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `projects_users`
---
-ALTER TABLE `projects_users`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Индексы таблицы `tags`
 --
 ALTER TABLE `tags`
@@ -684,12 +667,6 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT для таблицы `projects_members`
 --
 ALTER TABLE `projects_members`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT для таблицы `projects_users`
---
-ALTER TABLE `projects_users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
