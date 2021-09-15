@@ -25,6 +25,9 @@ foreach ($boards as $board) {
     <input	type="file" name="task_file" placeholder="task file" id="task_file">
     <input type="button" value="save task" id="save_task" project_id='<?php if(isset($project_id)) echo $project_id;?>'/>
 </div>
+<div id="task_manager_arhive"><span id="load_archive">load archive</span>
+    <div id="task_manager_arhive_block"></div>
+</div>
 <div id="open_task_popup"></div>
 <script type="text/javascript">
     function refresh_members_list(){
@@ -37,6 +40,16 @@ foreach ($boards as $board) {
                 $("#members_list").html(data);
             });
     }
+    $("#load_archive").on("click",function(){
+        var project_id = $("#create_board_button").attr("project_id");
+        $.ajax({
+            type: "POST",
+            url: "tasks/loadProjectArchive",
+            data: {"project_id":project_id}
+        }).done(function (data){
+            $("#task_manager_arhive_block").html(data);
+        });
+    });
     $(".delete_board").on("click",function() {
         $.ajax({
             type: "POST",

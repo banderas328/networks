@@ -4,7 +4,8 @@
 <?php
 if(isset($projects)){
 foreach ($projects as $project) {
-    echo '<li class="open_project" projectId="'.$project["id"].'">' . $project["project_name"] . '<span class="open_project" projectId="'.$project["id"].'">open</span></li>';
+    echo '<li class="open_project" projectId="'.$project["id"].'">' . $project["project_name"] .
+        '<span class="open_project" projectId="'.$project["id"].'">open</span><span class="archive_project" projectId="'.$project["id"].'">archive</span></li>';
 }}
 ?>
 </ul>
@@ -20,8 +21,74 @@ foreach ($projects as $project) {
     <textarea name="project_description" placeholder="project description" id="project_description"></textarea>
     <input	type="button" name="project_save" value="save project" id="create_project">
 </div>
+
+<div class="projects_archive">
+<span id="load_projects_archive">load projects archive</span>
+    <div id="projects_archive_block"></div>
+
+</div>
 <script type="text/javascript">
     $(function(){
+        $("#load_projects_archive").on("click" , function (){
+            $(function () {
+                $.ajax({
+                    type: "GET",
+                    url: "projects/loadProjectsArchive"
+                })
+                    .done(function (data) {
+                        data = JSON.parse(data);
+                        for (const [key, value] of Object.entries(data)) {
+                                $("#projects_archive_block").append('<div>'+value.project_name+":"
+                                    + value.project_description+'<span class="delete_project"  project_id="'+ value.id +'">delete</span>' +
+                                    '<span class="restore_project"  project_id="'+ value.id +'">restore</span></div>');
+                        }
+                        $(".restore_project").on("click",function (){
+                            $.ajax({
+                                type: "POST",
+                                url: "projects/updateProject",
+                                async:false,
+                                data : {"id":$(this).attr("project_id"),"is_archive" : 0}
+                            })
+                                .done(function( data ) {
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "projects/index"
+                                    })
+                                        .done(function (data) {
+                                            $("#tasks_transaction").html(data);
+                                        });
+                                });
+                        });
+
+                        $(".delete_project").on("click",function (){
+                            $.ajax({
+                                type: "POST",
+                                url: "projects/deleteProject",
+                                async:false,
+                                data : {"id":$(this).attr("project_id")}
+                            })
+                                .done(function( data ) {
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "projects/index"
+                                    })
+                                        .done(function (data) {
+                                            $("#tasks_transaction").html(data);
+                                        });
+                                });
+                        })
+                    });
+
+            });
+        });
+
+
+        $("#create_project_button").on("click" , function(){
+            $("#project_popup").show();
+            refresh_project_members_list();
+        });
+    });
+
         $(".open_project").on("click",function(){
             var project_id = $(this).attr("projectId");
             $.ajax({
@@ -31,10 +98,34 @@ foreach ($projects as $project) {
                 data : {"project_id":project_id}
             })
                 .done(function( data ) {
-                   $("#tasks_transaction").html(data);
+
+                            $("#tasks_transaction").html(data);
+                        });
+                });
+
+
+
+
+        $(".archive_project").on("click",function(){
+            var project_id = $(this).attr("projectId");
+            $.ajax({
+                type: "POST",
+                url: "projects/updateProject",
+                async:false,
+                data : {"id":project_id,"is_archive" : 1}
+            })
+                .done(function( data ) {
+                    $.ajax({
+                        type: "GET",
+                        url: "projects/index"
+                    })
+                        .done(function (data) {
+                            $("#tasks_transaction").html(data);
+                        });
                 });
          });
-    });
+
+
   $('.projects_list').sortable({
 
       update: function( event, ui ) {
@@ -60,12 +151,7 @@ foreach ($projects as $project) {
                 $("#project_members_list").html(data);
             });
     }
-    $(function(){
-        $("#create_project_button").on("click" , function(){
-            $("#project_popup").show();
-            refresh_project_members_list();
-        });
-    });
+
 
     $("#project_popup #create_project").on("click",function(){
         var project_name =  $("#project_name").val();

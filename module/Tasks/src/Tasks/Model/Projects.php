@@ -25,6 +25,7 @@ class Projects
         $this->project_name = (isset($data['project_name'])) ? $data['project_name'] : null;
         $this->project_description = (isset($data['project_description'])) ? $data['project_description'] : null;
         $this->sort_order = (isset($data['sort_order'])) ? $data['sort_order'] : null;
+        $this->is_archive = (isset($data['is_archive'])) ? $data['is_archive'] : null;
     }
     public function getArrayCopy()
     {

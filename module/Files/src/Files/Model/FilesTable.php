@@ -15,6 +15,7 @@ use Zend\Config\Factory;
 class FilesTable
 {
     protected $tableGateway;
+    protected $adapter;
 
     public function __construct()
     {
@@ -26,6 +27,7 @@ class FilesTable
             'username' => $config->database["params"]->username,
             'password' => $config->database["params"]->password,
         ));
+        $this->adapter = $adapter;
         $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("files",$adapter);
     }
 
@@ -125,9 +127,10 @@ class FilesTable
        else return false;
    }
 
-    public function deleteFile($adapter,$fileId,$userId) {
+    public function deleteFile($adapter = false,$fileId,$userId) {
         $fileId =  (int) $fileId;
         $sql = "SELECT * FROM files where id=".$fileId." and user_id=".$userId;
+        if(!$adapter) $adapter = $this->adapter;
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         if(!empty($resultSet->buffer())) {
             //var_dump($resultSet->buffer()->toArray());die();

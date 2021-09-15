@@ -46,10 +46,33 @@
     <textarea id="sub_task"></textarea>
     <input type="file" name="task_file" placeholder="task file" id="task_file_update"/>
     <input type="button" name="update task" value="update task" id="update_task" task_id="<?php echo $task["id"]; ?>"/>
+    <input type="button" name="archive task" value="archive task" id="archive_task" task_id="<?php echo $task["id"]; ?>"/>
 </div>
 <script type="text/javascript">
 
     $(function () {
+        $("#archive_task").on("click", function(){
+
+            var data = {"is_archive": "1", "id": $("#task_id_popup").val()};
+            $.ajax({
+                type: "POST",
+                url: "tasks/updateTask",
+                data: {data}
+            }).done(function () {
+                $("#open_task_popup").dialog("close");
+                var project_id = $("#create_board_button").attr("project_id");
+                $.ajax({
+                    type: "POST",
+                    url: "boards/index",
+                    async: false,
+                    data: {"project_id": project_id}
+                })
+                    .done(function (data) {
+                        $("#tasks_transaction").html(data);
+                    });
+            });
+        });
+
 
         $(".edit_task_name").on("click", function () {
             var tast_name = $(".task_name_value").text();
@@ -64,7 +87,6 @@
                     data: {data}
                 })
                     .done(function (data) {
-                        console.info(data);
                         data = JSON.parse(data);
                         $.ajax({
                             type: "POST",
@@ -95,7 +117,6 @@
 
         $(".edit_task_description").on("click", function () {
             var test_description = $(".task_description_value").text();
-            console.info(test_description);
             var html_string = '<textarea id="task_description_input" name="task_description">'+test_description+'</textarea><span class="edit_save_task_description">save</span>';
             $("#task_description_block").html(html_string);
             $(".edit_save_task_description").on("click", function () {
@@ -136,12 +157,10 @@
         });
 
         $("#update_task").on("click", function () {
+
             var task_id = $(this).attr("task_id");
             var text = $("#sub_task").val();
-
             var status = $("#task_status").val();
-
-
             var files = $("#task_file_update").prop('files');
             var file = files[0];
             var data = new FormData();
@@ -155,6 +174,7 @@
             var request = new XMLHttpRequest();
             var xmlupload = request.upload;
             xmlupload.addEventListener('load', function () {
+                var project_id = $("#create_board_button").attr("project_id");
                 $.ajax({
                     type: "POST",
                     url: "boards/index",
@@ -162,6 +182,7 @@
                     data: {"project_id": project_id}
                 })
                     .done(function (data) {
+                        $("#open_task_popup").dialog("close");
                         $("#tasks_transaction").html(data);
                     });
             }, false);

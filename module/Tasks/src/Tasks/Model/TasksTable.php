@@ -2,15 +2,13 @@
 
 namespace Tasks\Model;
 
+use Files\Model\FilesTable;
 use Zend\Session\Container;
 use Zend\Config\Config;
 use Zend\Config\Factory;
 
-
-
 class TasksTable
 {
-
     protected $tableGateway;
     protected $adapter;
 
@@ -80,7 +78,6 @@ class TasksTable
         $sub_task_sql = "SELECT  * FROM tasks_users left join user_settings on tasks_users.user_id = user_settings.user_id where tasks_users.task_id=".$task_id;
         $resultSet = $this->adapter->query($sub_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
         $task["users"] = $resultSet->toArray();
-
         $files_task_sql = "SELECT  * FROM tasks_files where task_id=".$task_id;
         $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
         $files = $resultSet->toArray();
@@ -101,7 +98,29 @@ class TasksTable
                 left join boards on boards.id = tasks.board_id 
                 left join projects on boards.project_id = projects.id
                 left join projects_members on projects_members.project_id = projects.id
-                WHERE projects_members.project_id='" . $project_id . "' and projects_members.user_id = " . $user_id;
+                WHERE tasks.is_archive = '0' and projects_members.project_id='" . $project_id . "' and projects_members.user_id = " . $user_id;
+        $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+        $tasks = $resultSet->toArray();
+        $columns = [];
+        foreach ($tasks as $task) {
+            $columns[$task["board_id"]][] = $task;
+        }
+        foreach ($columns as &$column) {
+            usort($column, array($this, 'taskSort'));
+        }
+        return $columns;
+    }
+
+    public function getArhiveForProject($project_id)
+    {
+        $project_id = (int) $project_id;
+        $user_session = new Container('user');
+        $user_id = $user_session->user->id;
+        $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id,tasks.description FROM tasks 
+                left join boards on boards.id = tasks.board_id 
+                left join projects on boards.project_id = projects.id
+                left join projects_members on projects_members.project_id = projects.id
+                WHERE tasks.is_archive = '1' and projects_members.project_id='" . $project_id . "' and projects_members.user_id = " . $user_id;
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $tasks = $resultSet->toArray();
         $columns = [];
@@ -135,7 +154,6 @@ class TasksTable
     public function updateTask($data){
         if(isset($data["data"])) $data = $data["data"];
         $fileTable = new \Files\Model\FilesTable;
-        if(!isset($data["name"])) $data["name"] = "update";
         if (isset($data['file']['tmp_name'])) $fileID = $fileTable->saveUserFile($data);
         unset($data['file']);
         if(!isset($data["id"])) {
@@ -151,8 +169,41 @@ class TasksTable
             $fileTable->saveFileToTask($dataFile);
         }
         return $data;
-
     }
+
+    public function deleteTask(int $task_id){
+        $files_task_sql = "SELECT  * FROM tasks_files where task_id=".$task_id;
+        $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
+        $files = $resultSet->toArray();
+        $user_session = new Container('user');
+        $user_id = $user_session->user->id;
+        foreach ($files as $file){
+            $files_task_sql = "SELECT  * FROM files where id=".$file["file_id"];
+            $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
+            $task["files"][]  = $resultSet->toArray()[0];
+            $filesTable = new FilesTable();
+            $filesTable->deleteFile(false,$file["file_id"],$user_id);
+        }
+        $delete_sql = "DELETE FROM tasks_files where task_id=".$task_id;
+        $this->adapter->query($delete_sql, $this->adapter::QUERY_MODE_EXECUTE);
+        $delete_sql = "DELETE FROM tasks where id=".$task_id;
+        $this->adapter->query($delete_sql, $this->adapter::QUERY_MODE_EXECUTE);
+        $delete_sql = "DELETE FROM tasks where parent_task=".$task_id;
+        $this->adapter->query($delete_sql, $this->adapter::QUERY_MODE_EXECUTE);
+        $delete_sql = "DELETE FROM tasks_users where task_id=".$task_id;
+        $this->adapter->query($delete_sql, $this->adapter::QUERY_MODE_EXECUTE);
+    }
+
+//    public function isUserHaveAccessToTask($task_id,$user_id){
+//
+//        $sql = "SELECT  tasks.id FROM tasks
+//                left join boards on boards.id = tasks.board_id
+//                left join projects on boards.project_id = projects.id
+//                left join projects_members on projects_members.project_id = projects.id
+//                WHERE projects_members.user_id = " . $user_id . " and tasks.id = ".$task_id;
+//        $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+//
+//    } TODO ADD SECURITY CHECK WITH ACL
 }
 
 

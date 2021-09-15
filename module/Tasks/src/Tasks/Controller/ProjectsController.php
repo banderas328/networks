@@ -22,6 +22,12 @@ class ProjectsController extends Controller\preloaderController
         return @array('projects' => $this->getProjectsTable()->getProjects());
         
     }
+
+    public function loadProjectsArchiveAction(){
+        $this->layout('layout/only_form');
+        echo json_encode($this->getProjectsTable()->getArchiveProjects());
+        return false;
+    }
     
     public function createProjectAction(){
         $this->layout('layout/only_form');
@@ -39,6 +45,23 @@ class ProjectsController extends Controller\preloaderController
         $request = $this->getRequest();
         $this->getProjectsTable()->updateProjectsInBoard($request);
         return false;
+    }
+
+    public function deleteProjectAction(){
+
+        $this->layout('layout/only_form');
+        $request = $this->getRequest();
+        $this->getProjectsTable()->daleteProject($request);
+        return false;
+
+    }
+
+    public function updateProjectAction(){
+        $this->layout('layout/only_form');
+        $request = $this->getRequest()->getPost()->toArray();
+        $this->getProjectsTable()->updateProject($request);
+        return false;
+
     }
 
 

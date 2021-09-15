@@ -51,10 +51,40 @@ class ProjectsTable
     public function getProjects(){
         $user_session = new Container('user');
         $user_id = $user_session->user->id;
-        $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id WHERE projects_members.user_id='".$user_id."' order by projects.sort_order";
+        $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id 
+                WHERE projects_members.user_id='".$user_id."' and is_archive = '0' order by projects.sort_order";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $projects =   $resultSet->toArray();
         return $projects;
+    }
+
+    public function getArchiveProjects(){
+        $user_session = new Container('user');
+        $user_id = $user_session->user->id;
+        $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id 
+                WHERE projects_members.user_id='".$user_id."' and is_archive = '1' order by projects.sort_order";
+        $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+        $projects =   $resultSet->toArray();
+        return $projects;
+
+    }
+
+    public function daleteProject($request){
+        $project_id =  $request->getPost()->id;
+        $tasksTable = new TasksTable();
+        $tasks = $tasksTable->getTasksForProject($project_id);
+        foreach ($tasks as $task_key => $task_value){
+            foreach ($task_value as $task_body) {
+                $tasksTable->deleteTask($task_body["id"]);
+            }
+
+        }
+        $delete_sql = "DELETE FROM projects where id=".$project_id;
+        $this->adapter->query($delete_sql, $this->adapter::QUERY_MODE_EXECUTE);
+        $delete_sql = "DELETE FROM projects_members where project_id=".$project_id;
+        $this->adapter->query($delete_sql, $this->adapter::QUERY_MODE_EXECUTE);
+
+
     }
 
     public function updateProjectsInBoard($request){
@@ -62,8 +92,10 @@ class ProjectsTable
         foreach ($projects_list as $project) {
             $this->tableGateway->update($project, ['id' => $project["id"]]);
         }
+    }
 
-
+    public function updateProject(array $data){
+        $this->tableGateway->update($data, ['id' => $data["id"]]);
     }
 }
     

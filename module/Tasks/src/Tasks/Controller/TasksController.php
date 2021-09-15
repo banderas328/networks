@@ -61,10 +61,21 @@ class TasksController extends Controller\preloaderController
         return false;
     }
 
+    public function loadProjectArchiveAction(){
+        $this->layout('layout/only_form');
+        return @array('tasks' => $this->getTasksTable()->getArhiveForProject($this->getRequest()->getPost()->project_id));
+    }
+
+    public function deleteTaskAction(){
+        $this->layout('layout/only_form');
+        $request = $this->getRequest();
+        $this->getTasksTable()->deleteTask($request->getPost()->data["task_id"]);
+        return false;
+    }
+
 
     public function getTasksTable()
     {
-        
         if (!$this->getTasksTable) {
             $this->getTasksTable = new \Tasks\Model\TasksTable;
         }
