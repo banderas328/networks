@@ -3,11 +3,11 @@
 $title = 'General user Settings';
 $this->headTitle($title);
 ?>
-    <h1><?php echo $this->escapeHtml($title); ?></h1>
+   <!-- <h1><?php echo $this->escapeHtml($title); ?></h1>
     <form id="avatar_form" class="form-horizontal" action="settings/savesettings" method="post">
         <input type="file"  name="avatar" id="avatar" >
         <input type="submit" value="Submit" class='btn btn-primary'>
-    </form>
+    </form> -->
 <script type="text/javascript">
 
 //    function initiate(){
@@ -85,7 +85,7 @@ echo $this->formRow($form->get('site'));
 
 echo $this->formRow($form->get('visibility'));
 
-echo "<button value='save' name='save' class='btn btn-primary' id='save_general_settings'>save</button>";
+echo "<button value='save' name='save' class='btn btn-primary settings-save' id='save_general_settings'>save</button>";
 
 //echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();

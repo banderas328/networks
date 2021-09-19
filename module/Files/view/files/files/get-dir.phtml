@@ -6,20 +6,22 @@ $user_id = $user['user']->id;
 if(!$is_root) {
     ?>
     <span id="paste">paste</span>
-    <form id="file_directory_form"  method="post">
-        <input type="file"  name="file" id="file_to_directory"> <p>upload file</p>
-    </form>
-    <input type="text" id="directory_name">
-    <button value="create dir" class='btn btn-primary' id="create_dir"><?php echo $this->translate("Create_Directory",false,$lang);?></button>
-    <input type="hidden" value="<?php echo $current_directory?>" id="current_directory">
+    <div class="hard-drive-form-wrapper">
+        <form id="file_directory_form"  method="post">
+            <input type="file"  name="file" id="file_to_directory"> <p>upload file</p>
+        </form>
+        <input type="text" id="directory_name">
+        <button value="create dir" class='btn btn-primary' id="create_dir"><?php echo $this->translate("Create_Directory",false,$lang);?></button>
+        <input type="hidden" value="<?php echo $current_directory?>" id="current_directory">
+    </div>
         
 <?php
 }
 ?>
 <?php
 foreach($dirs as  $dir_key => $dir_value) {
-    echo "<div class='dir_wraper'>
-               <div class='directory_wrapper'>
+    echo "<div class='dir_wraper hard-drive-dir-wrapper'>
+               <div class='directory_wrapper hard-drive-directory-inner'>
                    <img src='assets/images/icons/folder.png' width='50px' height='50px' dir=".$dir_value['id']." class='folder_action'/>
                        <div  dir_key=".$dir_value['id']." class='directory' >".$dir_value['path']." </div>
                 </div>
@@ -27,13 +29,15 @@ foreach($dirs as  $dir_key => $dir_value) {
 " ;
 if(!$is_root) {
     
-           echo "<div class='directory_actions' dir=".$dir_value["id"].">
-                    <p class='delete_directory' dir=".$dir_value['id'].">".$this->translate('Delete_Directory',false,$lang)."</p>
-                    <p class='share_dir' dir=" . $dir_value['id'] . ">share dir</p>
-                    <p class='move_dir' dir=" . $dir_value['id'] . ">move dir</p>
-                    <p class='share_dir_with_password' dir=" . $dir_value['id'] . ">share dir with password</p>
+           echo "<div class='directory_actions hard-dropdown' dir=".$dir_value["id"].">
+                    <p class='delete_directory hard-dropdown-items' dir=".$dir_value['id'].">".$this->translate('Delete_Directory',false,$lang)."</p>
+                    <p class='share_dir hard-dropdown-items' dir=" . $dir_value['id'] . ">share dir</p>
+                    <p class='move_dir hard-dropdown-items' dir=" . $dir_value['id'] . ">move dir</p>
+                    <p class='share_dir_with_password hard-dropdown-items' dir=" . $dir_value['id'] . ">share dir with password</p>
+                    <div class='hard-dropdown-form'>
                     <input type='text' class='input_password' dir=" . $dir_value['id'] . ">
                      <input type='button' value='save password and share' dir=" . $dir_value['id'] . " class='dir_save_pass btn btn-primary'>
+                     </div>
                  </div>";
 }
     echo "</div>";
@@ -68,7 +72,7 @@ if($filesInDir) {
 }
 ?>
 <script type="text/javascript">
-document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
+document.oncontextmenu = function() {return false;}; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     $(function() {
         if(window.need_to_paste_file == true) {
         	$("#paste").addClass("pastpaste_file_to_directory");
@@ -123,7 +127,7 @@ document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
     
         $(".parent_directory").attr("dir_key",<?php echo $current_directory?>)
         $('.folder_action').mousedown(function(e){ 
-      	  if( e.button == 2 ) { //2  - правый клик, 3 - средний клик
+      	  if( e.button == 2 ) { //2  - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, 3 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     		  var dir =   $(this).attr("dir");
     		  if(!$(".directory_actions[dir="+dir+"]").hasClass("visible-block")) {
     			  $(".directory_actions").removeClass("visible-block");
@@ -138,7 +142,7 @@ document.oncontextmenu = function() {return false;}; //отключить выпадающее меню
   		  return true; 
   		}); 
         $('.file_block').mousedown(function(e){ 
-      	  if( e.button == 2 ) { //2  - правый клик, 3 - средний клик
+      	  if( e.button == 2 ) { //2  - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, 3 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     		  var file =   $(this).attr("file");
     		  if(!$(".file_actions[file="+file+"]").hasClass("visible-block")) {
     			  $(".file_actions").removeClass("visible-block");
