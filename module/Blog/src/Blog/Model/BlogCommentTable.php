@@ -32,7 +32,8 @@ class BlogCommentTable
     public function getComments($data){
      $offset  = (int)$data["comment_count"];
      $blog_id = (int)$data["blog_id"];
-     $sql = "select * from blog_comment left join user_settings on user_settings.user_id = blog_comment.user_id where blog_id=".$blog_id." limit 3 offset ".$offset;
+     $sql = "select * from blog_comment left join user_settings on user_settings.user_id = blog_comment.user_id 
+      where blog_id=".$blog_id." order by blog_comment.id desc limit 3 offset ".$offset;
      $results = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
      return $results->toArray();
 
