@@ -41,7 +41,6 @@ class SettingsTable
         $user_session = new Container('user');
         $userId = $user_session->user->id;
         $data = array(
-            'sex' => $settings['sex'],
             'birthdate' => $settings['birthdate'],
             'first_name' => $settings['first_name'],
             'second_name' => $settings['second_name'],

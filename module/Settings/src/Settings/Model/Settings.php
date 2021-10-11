@@ -15,7 +15,6 @@ class Settings
     public $id;
     public $user_id;
     public $avatar;
-    public $sex;
     public $birthdate;
     public $first_name;
     public $second_name;
@@ -35,7 +34,6 @@ class Settings
         $this->id = (isset($data['id'])) ? $data['id'] : null;
         $this->user_id = (isset($data['user_id'])) ? $data['user_id'] : null;
         $this->avatar = (isset($data['avatar'])) ? $data['avatar'] : null;
-        $this->sex = (isset($data['sex'])) ? $data['sex'] : null;
         $this->birthdate = (isset($data['birthdate'])) ? $data['birthdate'] : null;
         $this->first_name = (isset($data['first_name'])) ? $data['first_name'] : null;
         $this->second_name = (isset($data['second_name'])) ? $data['second_name'] : null;

@@ -63,7 +63,8 @@ class BlogTable
     }
         $sqlIn .= ")";
 
-        $sql = "select * from blogs
+        $sql = "select blogs.id as blog_id,blogs.blog_content,user_settings.first_name,
+       user_settings.second_name,blog_attachment.file_name from blogs
                left JOIN blog_attachment
                on blogs.id = blog_attachment.blog_id
                 left JOIN user_settings

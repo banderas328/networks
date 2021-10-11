@@ -1,32 +1,90 @@
 <?php
-if(!empty($blogs)) {
+if (!empty($blogs)) {
     foreach ($blogs as $blog) {
-        echo $blog['first_name']." ".$blog['second_name'];
+        echo $blog['first_name'] . " " . $blog['second_name'];
         echo "<img style='width:200px' src=" . $blog["file_name"] . ">";
         echo "<div>" . $blog["blog_content"] . "</div>";
-        echo "<hr>";
+        echo '<textarea rows="10" cols="45" name="blog_comment" class="comment_blog_body" blog_id="'.$blog["blog_id"].'"></textarea>';
+        echo "<button class='comment_blog' blog_id='".$blog["blog_id"]."'>comment</button>";
+        echo "<button class='show_comments' blog_id='".$blog["blog_id"]."'>show comments</button>";
+        echo "<div class='blog_comments' blog_id='".$blog["blog_id"]."'></div>";
+        echo "<br>";
+
     }
-$offset +=5;
-    echo "<button value='get more' class='blogs_more' offset=".$offset.">get More</button>";
-}
-else {
+    $offset += 5;
+    echo "<button value='get more' class='blogs_more' offset=" . $offset . ">get More</button>";
+} else {
     echo "NO MORE BLOGS";
 }
-
 ?>
 <script type="text/javascript">
+    $(function () {
+        $(".show_comments").on("click",function(){
+            var blog_id = $(".show_comments").attr("blog_id");
+            load_comments(blog_id);
 
-    $(function(){
+        });
 
-        $(".blogs_more").bind("click",function(){
+        function load_comments(blog_id){
+
+            var comment_count = $('.blog_comments span').length;
+            var data = {"blog_id":blog_id,"comment_count":comment_count};
+            $.ajax({
+                type: "POST",
+                url: "blog/getComments",
+                data: data
+            })
+                .done(function (data) {
+                    data = JSON.parse(data);
+                    blog_id = false;
+                    $( data).each(function( index ) {
+                        var avatar =  data[index].avatar;
+                        var first_name  = data[index].first_name;
+                        var second_name  = data[index].second_name;
+                        var comment  = data[index].comment;
+                        var blog_id  = data[index].blog_id;
+                        var comment_string = "<span style='display: block;'><img style='width: 50px;' src='"+avatar+"'>"+""+first_name+" "+second_name+":"+comment+"</span>";
+                        $(".blog_comments[blog_id="+blog_id+"]").append(comment_string);
+
+                    });
+                    if(data[0] != undefined) {
+                        $(".blog_comments[blog_id="+data[0].blog_id+"]").append("<button blog_id='"+data[0].blog_id+"' class='more_comments'>more</button>");
+                        $(".more_comments").on("click",function (){
+                            var blog_id = $(this).attr("blog_id");
+                            $(this).remove();
+                            load_comments(blog_id);
+                        });
+                    }
+
+
+
+                });
+
+        }
+
+        $(".comment_blog").on("click",function(){
+            var blog_id = $(this).attr("blog_id");
+            var content_blog = $("textarea[blog_id="+blog_id+"]").val();
+            var data =  {"blog_id":blog_id,"comment":content_blog}
+            $.ajax({
+                type: "POST",
+                url: "blog/addCommentToBlog",
+                data: data
+            })
+                .done(function (data) {
+                    alert(data);
+                });
+        });
+
+        $(".blogs_more").bind("click", function () {
             $.ajax({
                 type: "POST",
                 url: "blog/getblogs",
-                data : {offset : $(this).attr("offset")}
-
+                data: {offset: $(this).attr("offset")}
             })
-                .done(function( data ) {
+                .done(function (data) {
                     $("#list_blogs").append(data);
                 });
-        })    });
+        })
+    });
 </script>

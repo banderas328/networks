@@ -22,8 +22,4 @@ class BlogAttachmentTable
         ));
         $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("blog_attachment",$adapter);
     }
-
-
-
-
 }

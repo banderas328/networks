@@ -1,7 +1,10 @@
 <?php
+
 namespace Blog\Controller;
 
 
+use Blog\Model\BlogComment;
+use Blog\Model\BlogCommentTable;
 use Friends\Model\Friends;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -16,19 +19,14 @@ class BlogController extends Controller\preloaderController
     protected $blogTable;
     protected $friendsTable;
 
+    public function blogFormAction()
+    {
+        $this->layout('layout/only_form');
+    }
 
-
-
-   public function blogFormAction () {
-       $this->layout('layout/only_form');
-
-
-   }
-
-    public function saveBlogAction(){
+    public function saveBlogAction()
+    {
         $request = $this->getRequest();
-        $text = $request->getPost()->text;
-        //$blog = new Blog();
         $user_session = new Container('user');
         $userId = $user_session->user->id;
         $post = array_merge_recursive(
@@ -36,46 +34,32 @@ class BlogController extends Controller\preloaderController
             $request->getFiles()->toArray()
         );
         $blog = new Blog();
-        $this->getBlogTable()->saveBlog($post,$userId,$blog->getAdapter());
+        $this->getBlogTable()->saveBlog($post, $userId, $blog->getAdapter());
         die();
-
-}
-
-
-    public function getBlogsAction(){
-        $this->layout('layout/only_form');
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
-        if(isset($this->getRequest()->getPost()->offset)) $offset = (int) $this->getRequest()->getPost()->offset;
-        else $offset = 0;
-        $friends = new Friends();
-        $friends = $this->getFriendsTable()->getFriends($userId,$friends->getAdapter());
-        if($friends) {
-            $blog = new Blog();
-            
-            $blogs = $this->getBlogTable()->getBlogs($userId,$friends->toArray(),$offset,$blog->getAdapter());
-            //      echo "<pre>";
-            //  var_dump($blogs->toArray());
-            return array("blogs" => $blogs->toArray() , 'user_id' => $userId , 'offset' => $offset);
-        }
-      else {
-          return array("blogs" => [] , 'user_id' => $userId , 'offset' => $offset);
-          
-      }
     }
 
 
-
-
-
-
-
+    public function getBlogsAction()
+    {
+        $this->layout('layout/only_form');
+        $user_session = new Container('user');
+        $userId = $user_session->user->id;
+        if (isset($this->getRequest()->getPost()->offset)) $offset = (int)$this->getRequest()->getPost()->offset;
+        else $offset = 0;
+        $friends = new Friends();
+        $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
+        if ($friends) {
+            $blog = new Blog();
+            $blogs = $this->getBlogTable()->getBlogs($userId, $friends->toArray(), $offset, $blog->getAdapter());
+            return array("blogs" => $blogs->toArray(), 'user_id' => $userId, 'offset' => $offset);
+        } else {
+            return array("blogs" => [], 'user_id' => $userId, 'offset' => $offset);
+        }
+    }
 
     public function getBlogTable()
     {
         if (!$this->blogTable) {
-         //   $sm = $this->getServiceLocator();
-         //   $this->blogTable = $sm->get('Blog\Model\BlogTable');
             $this->blogTable = new \Blog\Model\BlogTable;
         }
         return $this->blogTable;
@@ -84,14 +68,31 @@ class BlogController extends Controller\preloaderController
     public function getFriendsTable()
     {
         if (!$this->friendsTable) {
-            //$sm = $this->getServiceLocator();
-           // $this->friendsTable = $sm->get('Friends\Model\FriendsTable');
             $this->friendsTable = new \Friends\Model\FriendsTable;
         }
         return $this->friendsTable;
     }
 
+    public function addCommentToBlogAction()
+    {
+        $this->layout('layout/only_form');
+        $user_session = new Container('user');
+        $userId = $user_session->user->id;
+        $data = $this->getRequest()->getPost()->toArray();
+        $data["user_id"] = $userId;
+        $blogComment = new BlogCommentTable();
+        $blogComment->addComment($data);
+        die();
+    }
 
+    public function getCommentsAction(){
+        $this->layout('layout/only_form');
+        $data = $this->getRequest()->getPost()->toArray();
+        $blogComment = new BlogCommentTable();
+        echo json_encode($blogComment->getComments($data));
+        die();
+
+    }
 
 
 }
