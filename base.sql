@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Сен 15 2021 г., 22:10
+-- Время создания: Окт 12 2021 г., 21:32
 -- Версия сервера: 10.3.22-MariaDB
 -- Версия PHP: 7.4.5
 
@@ -43,6 +43,19 @@ CREATE TABLE `blogs` (
 CREATE TABLE `blog_attachment` (
   `id` int(11) NOT NULL,
   `file_name` varchar(250) COLLATE utf8_bin NOT NULL,
+  `blog_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `blog_comment`
+--
+
+CREATE TABLE `blog_comment` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `comment` text COLLATE utf8_bin NOT NULL,
   `blog_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -359,17 +372,13 @@ CREATE TABLE `user_settings` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `avatar` varchar(250) COLLATE utf8_bin DEFAULT NULL,
-  `sex` tinyint(4) DEFAULT NULL,
-  `birthdate` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `first_name` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `second_name` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `job` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `country` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `city` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `about` text COLLATE utf8_bin DEFAULT NULL,
-  `skype` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `phone` varchar(250) COLLATE utf8_bin DEFAULT NULL,
-  `site` varchar(250) COLLATE utf8_bin DEFAULT NULL,
   `visibility` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -399,6 +408,12 @@ ALTER TABLE `blogs`
 -- Индексы таблицы `blog_attachment`
 --
 ALTER TABLE `blog_attachment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `blog_comment`
+--
+ALTER TABLE `blog_comment`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -565,6 +580,12 @@ ALTER TABLE `blogs`
 -- AUTO_INCREMENT для таблицы `blog_attachment`
 --
 ALTER TABLE `blog_attachment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `blog_comment`
+--
+ALTER TABLE `blog_comment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

@@ -1,3 +1,5 @@
+<div id="user_profile"></div>
+
 <button value="refresh" class="friends_refresh">refresh</button>
 <div>
 <?php
@@ -7,6 +9,7 @@ foreach($friends as $friend){
     echo $friend['first_name'];
     echo $friend['second_name'];
     echo "<button class='send_message' to_user='".$friend['user_id']."' value='send_message'>send message</button>";
+    echo "<button class='show_profile' user_id='".$friend['user_id']."' >show profile</button>";
     echo "</span>";
 
 }
@@ -17,14 +20,29 @@ foreach($friends as $friend){
 <button class="submit" id="message_to_user_from_user_list_button">send</button>
 </div>
 <script type="text/javascript">
-
     $(function() {
-
         $(".send_message").bind("click",function(){
             send_message_from_user_list(this);
         });
 
+        $(".show_profile").on("click",function(){
+            show_user_profile($(this).attr("user_id"));
+
+        });
     });
+
+    function show_user_profile(userId){
+        $.ajax({
+            type: "POST",
+            url: "settings/getUserSettings",
+            data : {"user_id":userId}
+        }).done(function(data){
+            $("#user_profile").html(data);
+
+            $("#user_profile").dialog();
+        });
+
+    }
     function send_message_from_user_list(element) {
         var to_user = $(element).attr('to_user');
         $('.message_to_user_area').val("");
@@ -39,11 +57,6 @@ foreach($friends as $friend){
                 url: "messages/addmessage",
                 data : {text :text , to_user : $(this).attr('to_user')}
             });
-
-
-
         });
-
-
     }
 </script>

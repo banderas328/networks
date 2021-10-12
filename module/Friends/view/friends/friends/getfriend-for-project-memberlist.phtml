@@ -7,7 +7,6 @@ foreach($friends as $friend){
     echo "<p class='member_name' userId='".$friend['user_id']."'><div userId='".$friend['user_id']."' class='user_container_project'>".$friend['first_name']." ".$friend['second_name']."</div></p>";
     echo '<input type="button" value="Add User To This Project" userId='.$friend["user_id"].' class="add_user_to_project">';
     echo "</span>";
-
 }
 ?>
 </div>
@@ -24,7 +23,4 @@ foreach($friends as $friend){
             $("#project_members").append(member_markup);
         }
         });
-
-
-
 </script>

@@ -15,16 +15,13 @@ class Settings
     public $id;
     public $user_id;
     public $avatar;
-    public $birthdate;
     public $first_name;
     public $second_name;
     public $job;
     public $country;
     public $city;
     public $about;
-    public $skype;
     public $phone;
-    public $site;
     public $visibility;
     protected $inputFilter;
 
@@ -34,15 +31,12 @@ class Settings
         $this->id = (isset($data['id'])) ? $data['id'] : null;
         $this->user_id = (isset($data['user_id'])) ? $data['user_id'] : null;
         $this->avatar = (isset($data['avatar'])) ? $data['avatar'] : null;
-        $this->birthdate = (isset($data['birthdate'])) ? $data['birthdate'] : null;
         $this->first_name = (isset($data['first_name'])) ? $data['first_name'] : null;
         $this->second_name = (isset($data['second_name'])) ? $data['second_name'] : null;
         $this->job = (isset($data['job'])) ? $data['job'] : null;
         $this->country = (isset($data['country'])) ? $data['country'] : null;
         $this->city = (isset($data['city'])) ? $data['city'] : null;
         $this->about = (isset($data['about'])) ? $data['about'] : null;
-        $this->skype = (isset($data['skype'])) ? $data['skype'] : null;
-        $this->about = (isset($data['phone'])) ? $data['phone'] : null;
         $this->visibility = (isset($data['visibility'])) ? $data['visibility'] : 1;
 
     }

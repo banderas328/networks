@@ -1077,3 +1077,6 @@ clear: both;
 .user-tabs .ui-tabs-nav .ui-tabs-active .users-tab-link {
     color: #ffffff;
 }
+#user_profile {
+    display: none;
+}

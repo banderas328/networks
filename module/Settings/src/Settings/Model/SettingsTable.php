@@ -41,7 +41,6 @@ class SettingsTable
         $user_session = new Container('user');
         $userId = $user_session->user->id;
         $data = array(
-            'birthdate' => $settings['birthdate'],
             'first_name' => $settings['first_name'],
             'second_name' => $settings['second_name'],
             'job' => $settings['job'],
@@ -91,7 +90,10 @@ class SettingsTable
         $results = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         return $results;
     }
-
+    public function getUserSettings(int $userID){
+        $sql = "SELECT  * FROM user_settings where user_id=".$userID;
+        return $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE)->toArray()[0];
+    }
  public   function is_image($path)
     {
         $a = getimagesize($path);

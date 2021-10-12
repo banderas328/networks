@@ -1,58 +1,26 @@
 <?php
-// module/Settings/view/user/user/savesettings.phtml:
 $title = 'General user Settings';
 $this->headTitle($title);
 ?>
-   <!-- <h1><?php echo $this->escapeHtml($title); ?></h1>
-    <form id="avatar_form" class="form-horizontal" action="settings/savesettings" method="post">
+  <h1>Load avatar</h1>
+   <form id="avatar_form" class="form-horizontal" action="settings/savesettings" method="post">
         <input type="file"  name="avatar" id="avatar" >
-        <input type="submit" value="Submit" class='btn btn-primary'>
-    </form> -->
+   </form>
 <script type="text/javascript">
-
-//    function initiate(){
-
- //   }
 $(function () {
 	$('#avatar').bind('change',upload_avatar);
 });
-//     function upload(e) {
-//         var files= e.target.files;
-//         var file=files[0];
-//         var $input = $("#avatar");
-//         var fd = new FormData;
-
-//         fd.append('avatar', $input.prop('files')[0]);
-
-//         $.ajax({
-//             url: 'settings/savesettings',
-//             data: fd,
-//             processData: false,
-//             contentType: false,
-//             type: 'POST',
-//             success: function (data) {
-//                 alert(data);
-//             }
-//         });
         function upload_avatar(e) {
             var files= e.target.files;
             var file=files[0];
             var data = new FormData();
             data.append('file',file);
-
-
             var url  = "settings/savesettings";
             var request = new XMLHttpRequest();
             var xmlupload=request.upload;
             request.open("POST", url, true);
             request.send(data);
-        
     }
-    function show() {
-        console.info('done');
-
-    }
-    //window.addEventListener('load',initiate ,false);
 </script>
 <?php
 
@@ -60,33 +28,15 @@ $form = $this->form;
 $form->setAttribute('action', $this->url('settings', array('action' => 'savesettings')));
 $form->prepare();
 echo $this->form()->openTag($form);
-
-
-echo $this->formRow($form->get('birthdate'));
-
 echo $this->formRow($form->get('first_name'));
-
 echo $this->formRow($form->get('second_name'));
-
-echo $this->formRow($form->get('job'));
-
-echo $this->formRow($form->get('country'));
-
-echo $this->formRow($form->get('city'));
-
 echo $this->formRow($form->get('about'));
-
-echo $this->formRow($form->get('skype'));
-
+echo $this->formRow($form->get('job'));
+echo $this->formRow($form->get('country'));
+echo $this->formRow($form->get('city'));
 echo $this->formRow($form->get('phone'));
-
-echo $this->formRow($form->get('site'));
-
 echo $this->formRow($form->get('visibility'));
-
 echo "<button value='save' name='save' class='btn btn-primary settings-save' id='save_general_settings'>save</button>";
-
-//echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
 ?>
 <script type="text/javascript" >

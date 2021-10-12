@@ -45,13 +45,18 @@ class SettingsController extends Controller\preloaderController
         return array('form' => $form);
     }
 
+    public function getUserSettingsAction(){
+        $this->layout('layout/only_form');
+        $request = $this->getRequest();
+        $userId = $request->getPost()->user_id;
+        return ["settings" => $this->getSettingsTable()->getUserSettings($userId)];
+    }
+
 
 
     public function getSettingsTable()
     {
         if (!$this->settingsTable) {
-           // $sm = $this->getServiceLocator();
-          //  $this->settingsTable = $sm->get('Settings\Model\SettingsTable');
             $this->settingsTable = new \Settings\Model\SettingsTable;
         }
         return $this->settingsTable;
