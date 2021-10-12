@@ -4,17 +4,13 @@ $form->setAttribute('action', $this->url('user', array('action' => 'usersearch')
 $form->prepare();
 
 echo $this->form()->openTag($form);
-
-echo $this->formRow($form->get('sex'));
-echo $this->formRow($form->get('birthdate'));
 echo $this->formRow($form->get('first_name'));
 echo $this->formRow($form->get('second_name'));
 echo $this->formRow($form->get('job'));
 echo $this->formRow($form->get('country'));
 echo $this->formRow($form->get('city'));
-echo $this->formRow($form->get('skype'));
 echo $this->formRow($form->get('phone'));
-echo $this->formRow($form->get('site'));
+
 
 echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
