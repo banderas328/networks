@@ -892,6 +892,7 @@ clear: both;
     position: relative;
     bottom: 5px;
     left:20px;
+    height: 40px;
 }
 #directory_name {
     position: relative;
@@ -964,6 +965,8 @@ clear: both;
 
 .hard-drive-form-wrapper {
     display: flex;
+    padding: 15px 0 0 0;
+    border-bottom: 1px solid #dddddd;
 }
 .hard-drive-dir-wrapper {
     float: left;
@@ -1079,4 +1082,120 @@ clear: both;
 }
 #user_profile {
     display: none;
+}
+.load-avatar {
+    padding: 0 16px;
+    font-size: 32px;
+}
+/* -------------------------- TASK MANAGER ------------------------- */
+#tasks_content {
+    padding: 15px 30px 30px 30px;
+}
+#go_to_projects {
+    margin-bottom: 10px;
+    display: block;
+}
+#projects_div ul {
+    margin: 0;
+    border-top: 1px solid #dddddd;
+}
+#projects_div ul li {
+    margin: 0 0 7px 0;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #dddddd;
+    padding: 5px 0;
+}
+.open_project {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: normal;
+}
+.archive_project {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: normal;
+}
+#create_project_button {
+    background: linear-gradient(90deg, #1FCBE1 0%, #05E1A3 98.48%);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 10px 0;
+    display: inline-block;
+}
+#load_projects_archive {
+    background: #EB5757;
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #fff;
+}
+#create_board {
+    padding-bottom: 20px;
+    display: block;
+}
+#create_task {
+    display: block;
+    margin-bottom: 20px;
+}
+#create_task .create_task_button {
+    background: linear-gradient(90deg, #1FCBE1 0%, #05E1A3 98.48%);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+#task_manager_arhive {
+    display: block;
+}
+#load_archive {
+    background: #EB5757;
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #fff;
+}
+#projects_archive_block {
+    padding-top: 10px;
+}
+#projects_archive_block div  {
+    padding-bottom: 5px;
+}
+#projects_archive_block div  .delete_project {
+    margin-left: 5px;
+    color: red;
+}
+#projects_archive_block div .restore_project {
+    margin-left: 5px;
+}
+.board-wrapper {
+    display: flex;
+    padding: 15px 0 20px 0;
+}
+.board-wrapper > div {
+    margin-right: 20px;
+    padding-right: 20px;
+    border-right: 1px solid #dddddd;
+    position: relative;
+    min-width: 100px;
+}
+.board-wrapper > div > span {
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+.delete_board {
+    position: absolute;
+    right: 15px;
+    top: 0;
+    font-size: 12px !important;
+    text-transform: lowercase !important;
+    color: red;
+}
+.board-wrapper > div > ul {
+    margin: 0;
+    border: none;
 }
