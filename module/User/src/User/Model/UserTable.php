@@ -84,7 +84,6 @@ class UserTable
             'email',
             'password'
         );
-
         $authAdapter
             ->setIdentity($email)
             ->setCredential($password);

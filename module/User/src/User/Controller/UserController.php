@@ -58,7 +58,7 @@ class UserController extends Controller\preloaderController
                 $data["email_key"] = $key;
                 $user->exchangeArray($data);
                 $this->getUserTable()->registerUser($user);
-                $this->sendRegistrationMail($request->getPost("email"), $key);
+               // $this->sendRegistrationMail($request->getPost("email"), $key);
                 $view = new ViewModel();
                 $view->setTemplate('user/user/registred.phtml');
                 return $view;
@@ -105,10 +105,10 @@ class UserController extends Controller\preloaderController
             $mail->Password   = '5lxdiOlVcLBf';
             $mail->Port = 587;
             $mail->setFrom("anton.zhavrid.minsk@gmail.com","Anton Zhavrid");
-            $mail->addAddress($email,"");//Кому отправляем
-            //$mail->addReplyTo("kudaotvetit@yandex.ru","Имя кому писать при ответе");
+            $mail->addAddress($email,"");//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            //$mail->addReplyTo("kudaotvetit@yandex.ru","пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
             $mail->SMTPSecure = 'tls';
-            $mail->isHTML(true);//HTML формат
+            $mail->isHTML(true);//HTML пїЅпїЅпїЅпїЅпїЅпїЅ
             $mail->Subject = "Octopus activation";
             $mail->Body    = "This is the message to activate user account on networks service please follow this link <a href='" . $url . "'>activate</a>";
             $mail->AltBody = "welcome";

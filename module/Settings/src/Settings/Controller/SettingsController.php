@@ -30,13 +30,14 @@ class SettingsController extends Controller\preloaderController
         if ($request->isPost()) {
             $form->setInputFilter($settings->getInputFilter());
             $data = array_merge_recursive(
-                $userSettings,
+                $userSettings[0],
                 $request->getPost()->toArray(),
                 $request->getFiles()->toArray()
             );
 
             if ($form->isValid()) {
                   $this->getSettingsTable()->saveGeneralSettings($data);
+                $form->setData($data);
             }
             else {
                 die("error");
