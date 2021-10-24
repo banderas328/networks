@@ -2,7 +2,7 @@
 <?php
 if(isset($boards)) {
 foreach ($boards as $board) {
-    echo '<div  project_id="'.$board["project_id"].'" board_id="'.$board["id"].'"><span>'.$board["name"] .'</span></span><ul class="connected board"></ul>
+    echo '<div  class="board_div" project_id="'.$board["project_id"].'" board_id="'.$board["id"].'"><span>'.$board["name"] .'</span></span><ul class="connected board"></ul>
                <span class="delete_board" project_id="'.$board["project_id"].'" board_id="'.$board["id"].'">delete</span>
           </div>';
 }}
@@ -10,7 +10,7 @@ foreach ($boards as $board) {
 </div>
 <div id="create_board" class="col col-12">
     <input type="text" id="board_name_input" placeholder="board name">
-	<span id="create_board_button" project_id='<?php if(isset($project_id)) echo $project_id;?>'>+ create column</span>
+	<span id="create_board_button" project_id='<?php if(isset($board["project_id"])) echo $board["project_id"];?>'>+ create column</span>
 </div>
 
 <div id="create_task" class="col col-12">
@@ -23,7 +23,7 @@ foreach ($boards as $board) {
     <input	type="hidden" name="task_members" placeholder="task members"id="task_members">
     <textarea name="task_description" placeholder="task description" id="task_description"></textarea>
     <input	type="file" name="task_file" placeholder="task file" id="task_file">
-    <input type="button" value="save task" id="save_task" project_id='<?php if(isset($project_id)) echo $project_id;?>'/>
+    <input type="button" value="save task" id="save_task" project_id='<?php if(isset($board["project_id"])) echo $board["project_id"]?>'/>
 </div>
 <div id="task_manager_arhive"><span id="load_archive">load archive</span>
     <div id="task_manager_arhive_block"></div>
@@ -57,7 +57,7 @@ foreach ($boards as $board) {
             data: {"board_id": $(this).attr("board_id"),"project_id":$(this).attr("project_id")}
         })
             .done(function () {
-                var project_id = $("input[name=project_id]").val();
+                var project_id = $(".board_div").attr("project_id");
                 $.ajax({
                     type: "POST",
                     url: "boards/index",
@@ -175,7 +175,7 @@ $(function() {
         })
             .done(function(data) {
                         $("#tasks_transaction").html(data);
-                        get_project_tasks();
+                       // get_project_tasks();
             });
     });
     get_project_tasks();

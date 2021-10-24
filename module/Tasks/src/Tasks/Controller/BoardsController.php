@@ -20,7 +20,7 @@ class BoardsController extends Controller\preloaderController
         $request = $this->getRequest();
         if ($request->isPost()) {
             $boards =  $this->getBoardsTable()->getProjectBoards($request);
-            return @array('boards' => $boards,"project_id" => $request->getPost()->project_id);
+            return @array('boards' => $boards);
         }
         return false;
     }
