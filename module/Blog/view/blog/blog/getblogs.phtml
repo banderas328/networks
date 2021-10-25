@@ -1,14 +1,22 @@
 <?php
 if (!empty($blogs)) {
     foreach ($blogs as $blog) {
+        echo "<div class='block_div'>";
         echo $blog['first_name'] . " " . $blog['second_name'];
-        echo "<img style='width:200px' src=" . $blog["file_name"] . ">";
+        echo "<br>";
+        echo "<img style='width:500px' src=" . $blog["file_name"] . ">";
+        echo "<br>";
         echo "<div>" . $blog["blog_content"] . "</div>";
+        echo "<br>";
         echo '<textarea rows="10" cols="45" name="blog_comment" class="comment_blog_body" blog_id="'.$blog["blog_id"].'"></textarea>';
+        echo "<br>";
         echo "<button class='comment_blog' blog_id='".$blog["blog_id"]."'>comment</button>";
+        echo "<br>";
         echo "<button class='show_comments' blog_id='".$blog["blog_id"]."'>show comments</button>";
+        echo "<br>";
         echo "<div class='blog_comments' blog_id='".$blog["blog_id"]."'></div>";
         echo "<br>";
+        echo "</div>";
 
     }
     $offset += 5;
@@ -20,13 +28,12 @@ if (!empty($blogs)) {
 <script type="text/javascript">
     $(function () {
         $(".show_comments").on("click",function(){
-            var blog_id = $(".show_comments").attr("blog_id");
+            var blog_id = $(this).attr("blog_id");
             load_comments(blog_id);
 
         });
 
         function load_comments(blog_id){
-
             var comment_count = $('.blog_comments span').length;
             var data = {"blog_id":blog_id,"comment_count":comment_count};
             $.ajax({

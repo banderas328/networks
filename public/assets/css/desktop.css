@@ -1199,9 +1199,7 @@ clear: both;
     margin: 0;
     border: none;
 }
-.friend_block  {
+.friend_block,.block_div  {
     display: block;
-}
-.friend_block span {
-margin: 15px;
+    margin-top: 15px;
 }
