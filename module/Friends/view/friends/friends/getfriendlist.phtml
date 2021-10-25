@@ -5,12 +5,14 @@
 <?php
 if($friends)
 foreach($friends as $friend){
+    echo "<div class='friend_block'>";
     echo "<span><img style='width:80px;height:80px;'src=".$friend['avatar'].">";
     echo $friend['first_name'];
     echo $friend['second_name'];
     echo "<button class='send_message' to_user='".$friend['user_id']."' value='send_message'>send message</button>";
     echo "<button class='show_profile' user_id='".$friend['user_id']."' >show profile</button>";
     echo "</span>";
+    echo "</div>";
 
 }
 ?>

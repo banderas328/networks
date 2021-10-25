@@ -1200,3 +1200,9 @@ clear: both;
     margin: 0;
     border: none;
 }
+.friend_block  {
+    display: block;
+}
+.friend_block span {
+margin: 15px;
+}
