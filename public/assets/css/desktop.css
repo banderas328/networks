@@ -632,6 +632,8 @@ th.shrink {
 #bar_bottom li a img {
   float: left;
   margin: 4px 5px 0 -5px;
+    width: 30px;
+;
 }
 
 #bar_bottom .float_left img,
