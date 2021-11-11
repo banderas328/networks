@@ -35,6 +35,10 @@ class MessagesTable {
         $to_user = $request->getPost()->to_user;
         $user_session = new Container('user');
         $userId = $user_session->user->id;
+        //var_dump($user_session->user);
+        $sql = "SELECT  first_name,second_name FROM user_settings WHERE user_id = '".$userId."'";
+        $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+        $user_info = $resultSet->toArray()[0];
         $date = date_create();
         $date = date_timestamp_get($date);
         $data = array('to_user' => $to_user,'from_user' => $userId,'text'=>$text,'date' => $date);
@@ -42,9 +46,13 @@ class MessagesTable {
         $id = $this->tableGateway->lastInsertValue;
         $sql = "INSERT INTO deliver_messages (message_id,dilivered) values ($id,null)";
         $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+        $sql = "insert into notifications (text,html_id,user_id) values 
+                ('you have new message from ".$user_info["first_name"]." ".$user_info["second_name"]."','test',$userId)";
+        $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
     }
 
     public function getMessagesCounts($userId,$adapter) {
+        $userId = (int) $userId;
         $sql = "SELECT COUNT(to_user),to_user as user,from_user FROM messages WHERE from_user = '".$userId."'  GROUP BY (to_user)";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet;
@@ -72,14 +80,12 @@ class MessagesTable {
         foreach($messages->buffer() as $message) {
             $needMark[] = $message['message_id'];
         }
-//        $user_session = new Container('user');
-//        $userId = $user_session->user->id;
         if(count($needMark) >= 1)
         {
             $lastElement = end($needMark);
             $where = " WHERE ";
             foreach ($needMark as $message) {
-                    $where .= " message_id = '" . $message . "'";
+                    $where .= " message_id = '" . (int)$message . "'";
                     if($message != $lastElement and (count($needMark) > 1)) {
                         $where .= " OR ";
                 }

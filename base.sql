@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Окт 12 2021 г., 21:32
+-- Время создания: Ноя 11 2021 г., 21:10
 -- Версия сервера: 10.3.22-MariaDB
 -- Версия PHP: 7.4.5
 
@@ -202,6 +202,19 @@ CREATE TABLE `network` (
   `is_password` int(11) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `text` varchar(255) COLLATE utf8_bin NOT NULL,
+  `html_id` varchar(255) COLLATE utf8_bin NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -483,6 +496,12 @@ ALTER TABLE `network`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `payed_files`
 --
 ALTER TABLE `payed_files`
@@ -652,6 +671,12 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT для таблицы `network`
 --
 ALTER TABLE `network`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `notifications`
+--
+ALTER TABLE `notifications`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
