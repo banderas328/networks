@@ -2,7 +2,7 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-           'Tasks\Controller\Tasks' => 'Tasks\Controller\TasksController',
+           'Tasks\Controller\Notifications' => 'Tasks\Controller\TasksController',
            'Tasks\Controller\Boards' => 'Tasks\Controller\BoardsController',
             'Projects\Controller\Projects' => 'Tasks\Controller\ProjectsController',
         ),
@@ -32,12 +32,12 @@ return array(
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Tasks\Controller\Boards',
+                        'controller' => 'Notifications\Controller\Boards',
                         'action'     => 'index',
                     ),
                 ),
             ),
-            
+
             'tasks' => array(
                 'type'    => 'segment',
                 'options' => array(
@@ -47,12 +47,12 @@ return array(
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Tasks\Controller\Tasks',
+                        'controller' => 'Notifications\Controller\Notifications',
                         'action'     => 'index',
                     ),
                 ),
             ),
-            
+
         ),
     ),
 

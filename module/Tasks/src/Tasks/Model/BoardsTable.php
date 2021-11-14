@@ -31,16 +31,13 @@ class BoardsTable
     public function createBoard($request) {
         $board_name =  $request->getPost()->board_name;
         $project_id =  $request->getPost()->project_id;
-//        $user_session = new Container('user');
         $data = ["name" => $board_name,"project_id" => $project_id];
         $this->tableGateway->insert($data);       
     }
 
     public function createBoardFromArray(array $data){
-
         $this->tableGateway->insert($data);
         return $this->tableGateway->lastInsertValue;
-
     }
     
 //    public function getBoards(){

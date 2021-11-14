@@ -23,8 +23,6 @@ class  messagesController extends Controller\preloaderController {
     }
 
 
-
-
     public function getListMessagesCountsAction(){
         $this->layout('layout/only_form');
         $user_session = new Container('user');
@@ -46,10 +44,7 @@ class  messagesController extends Controller\preloaderController {
 
     public function getMessagesTable()
     {
-
         if (!$this->messagesTable) {
-           // $sm = $this->getServiceLocator();
-           // $this->messagesTable = $sm->get('Messages\Model\MessagesTable');
             $this->messagesTable = new \Messages\Model\MessagesTable;
         }
         return $this->messagesTable;
@@ -57,10 +52,7 @@ class  messagesController extends Controller\preloaderController {
 
     public function getFriendsTable()
     {
-
         if (!$this->friendsTable) {
-           // $sm = $this->getServiceLocator();
-           // $this->friendsTable = $sm->get('Friends\Model\FriendsTable');
             $this->friendsTable = new \Friends\Model\FriendsTable;
         }
         return $this->friendsTable;

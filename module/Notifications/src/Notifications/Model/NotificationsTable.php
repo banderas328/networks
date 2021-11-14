@@ -32,6 +32,14 @@ class NotificationsTable
         $this->tableGateway->insert($data);
     }
 
+    public function getNotifications(){
+        $user_session = new Container('user');
+        $user_id = $user_session->user->id;
+        $sql = "select * from notifications where user_id = ".$user_id." order by id desc limit 20 ";
+        $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+        return  $resultSet->toArray();
+    }
+
 
 
 

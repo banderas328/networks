@@ -83,12 +83,10 @@ $lang = $user['user']->lang;
 <!--    </div>-->
     <span class="float_right" id="clock"></span>
     <ul>
-        <li>
-            <a class="menu_trigger" href="#">Octopus Desktop</a>
-<!--            <ul class="menu">-->
-<!--                <li>-->
-<!--                    <a href="http://www.amazon.com/dp/0596159773?tag=sons-20">jQuery Cookbook</a>-->
-<!--                </li>-->
+        <li id="notifications_block">
+            <a class="menu_trigger" href="#" >Notifications</a>
+         <ul class="menu">
+
 <!--                <li>-->
 <!--                    <a href="http://jqueryenlightenment.com/">jQuery Enlightenment</a>-->
 <!--                </li>-->
@@ -104,8 +102,35 @@ $lang = $user['user']->lang;
 <!--                <li>-->
 <!--                    <a href="http://learningjquery.com/">Learning jQuery</a>-->
 <!--                </li>-->
-<!--            </ul>-->
+         </ul>
         </li>
+        <script type="text/javascript">
+            function sync_notifications(){
+
+                $.ajax({
+                    type: "POST",
+                    url: "notifications/index",
+                    dataType: "json",
+                    data: {}
+                })
+                    .done(function(data) {
+                        $( data ).each(function( index,value ) {
+                            var notification_id =  value.id + "notification";
+                            var notification_text = $("#"+notification_id).text();
+                            if(notification_text.length == 0) {
+                                var markup = "<li><a id='"+notification_id+"'>"+value.text+"</a></li>";
+                                $("#notifications_block .menu").append(markup);
+
+                            }
+                        });
+                        setTimeout(sync_notifications, 5000);
+                    });
+
+            }
+            $(function (){sync_notifications();})
+
+
+        </script>
         <li>
             <a class="menu_trigger" href="#">Manual</a>
 <!--            <ul class="menu">-->

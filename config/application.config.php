@@ -40,8 +40,8 @@ return array(
         'Tags',
        // 'Market',
         'Form',
+      'Notifications',
         'Tasks',
-        'Notifications'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

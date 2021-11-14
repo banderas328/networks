@@ -35,7 +35,6 @@ class MessagesTable {
         $to_user = $request->getPost()->to_user;
         $user_session = new Container('user');
         $userId = $user_session->user->id;
-        //var_dump($user_session->user);
         $sql = "SELECT  first_name,second_name FROM user_settings WHERE user_id = '".$userId."'";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         $user_info = $resultSet->toArray()[0];
@@ -46,8 +45,8 @@ class MessagesTable {
         $id = $this->tableGateway->lastInsertValue;
         $sql = "INSERT INTO deliver_messages (message_id,dilivered) values ($id,null)";
         $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-        $sql = "insert into notifications (text,html_id,user_id) values 
-                ('you have new message from ".$user_info["first_name"]." ".$user_info["second_name"]."','test',$userId)";
+        $sql = "insert into notifications (text,html_id,user_id) values /*todo change to transaction methods*/
+                ('you have new message from ".$user_info["first_name"]." ".$user_info["second_name"]."','test',$to_user)";
         $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
     }
 
@@ -70,7 +69,7 @@ class MessagesTable {
     public function checkOldMessages($adapter){
         $user_session = new Container('user');
         $userId = $user_session->user->id;
-        $sql = "SELECT *,messages.id as message_id FROM messages LEFT JOIN deliver_messages on messages.id = deliver_messages.message_id LEFT JOIN user_settings on messages.from_user = user_settings.user_id WHERE  (to_user = $userId OR from_user = $userId)  AND dilivered = 1 ORDER BY messages.date ASC LIMIT 20";
+        $sql = "SELECT *,messages.id as message_id, '".$userId."' as 'current_user' FROM messages LEFT JOIN deliver_messages on messages.id = deliver_messages.message_id LEFT JOIN user_settings on messages.from_user = user_settings.user_id WHERE  (to_user = $userId OR from_user = $userId)  AND dilivered = 1 ORDER BY messages.id ASC LIMIT 20";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet;
     }
