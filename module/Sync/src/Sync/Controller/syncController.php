@@ -30,7 +30,8 @@ class  syncController extends AbstractActionController {
     }
 
     public function syncChanelAction(){
-        $messages = $this->checkNewMessages();
+        $messages = new Messages();
+        $messages = $this->checkNewMessages($messages->getAdapter());
         $messages["simple_messages"] = $messages;
         $messages = $this->checkNewChanelsMessages();
         $messages["chanels_messages"] = $messages;
@@ -67,7 +68,6 @@ class  syncController extends AbstractActionController {
     }
 
     public function checkNewChanelsMessages(){
-        //if($this->isPrivateChanel()) die("try more :)");
         $this->layout('layout/only_form');
         $messages = new ChanelsMessages();
         $request = $this->getRequest();
@@ -84,7 +84,8 @@ class  syncController extends AbstractActionController {
     public function getOldMessagesAction(){
         $this->layout('layout/only_form');
         $messages = new Messages();
-        $oldMessages = $this->getMessagesTable()->checkOldMessages($messages->getAdapter());
+        $request = $this->getRequest();
+        $oldMessages = $this->getMessagesTable()->checkOldMessages($messages->getAdapter(),$request);
         echo json_encode(@$oldMessages->toArray());
         die();
 

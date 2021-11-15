@@ -43,6 +43,9 @@ class ProjectsTable
         if (count($memberList)) {
             foreach ($memberList as $member) {
                 $projectMembersTable->saveMemberToProject(['user_id' =>$member,"project_id" => $projectID]);
+                /*todo change to transaction methods*/
+                $sql = "insert into notifications (text,html_id,user_id) values ('you have new project:  " . $project_name . "','test',".$member.")";
+                $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
             }
         }
         return true;

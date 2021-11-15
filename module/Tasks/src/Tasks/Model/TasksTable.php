@@ -65,8 +65,14 @@ class TasksTable
         if (count($memberList)) {
             foreach ($memberList as $member) {
                 $taskMemebrsTable->saveMemberToTask(['user_id' => (int)$member, "task_id" => $taskID]);
+                $sql = "select project_name from projects where id=".$project_id;
+                $project_name = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE)->toArray()[0]["project_name"];
+                /*todo change to transaction methods*/
+                $sql = "insert into notifications (text,html_id,user_id) values ('you have new task: " . $task_name . " in project :".$project_name."','test',".$member.")";
+                $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
             }
         }
+
     }
     public function getTask(int $task_id){
         $task_sql = "SELECT  * FROM tasks where id=".$task_id;

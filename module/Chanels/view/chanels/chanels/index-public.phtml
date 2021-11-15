@@ -5,11 +5,10 @@
         <br/>
     <?php  endforeach; ?>
     <script type="text/javascript">
-        var to_chanel = { to_chanel : false  , date : false};
+        window.to_chanel = { to_chanel : false  , date : false};
         $(function() {
             $(".join_chanel").bind("click",function () {
-                    console.info(this);
-                    var to_chanel = { to_chanel : false  , date : false};
+                    window.to_chanel = { to_chanel : false  , date : false};
                     send_message_from_user_chanel(this);
                  return false;
                 }
@@ -17,19 +16,14 @@
         });
 
         function send_message_from_user_chanel(element) {
-            to_chanel.to_chanel  = $(element).attr("to_chanel");
-           // console.info(element);
-            console.info(to_chanel);
-
+            window.to_chanel.to_chanel  = $(element).attr("to_chanel");
             $('.message_to_user_area_chanel').val("");
             $(".message_to_user_from_chanel_list").remove();
             var chat_html = '<div class="message_to_user_from_chanel_list" style="display:hide;" title="Enter message" to_chanel='+  to_chanel.to_chanel +'><p class="close_chanel" to_chanel='+to_chanel.to_chanel+'>X</p><div class="message_box" to_chanel='+to_chanel.to_chanel+'></div><div class="chanel" to_chanel='+to_chanel.to_chanel+'><textarea class="message_to_user_area_chanel"  maxlength="500" to_chanel='+to_chanel.to_chanel+'></textarea><button class="submit" class="chanel_button" to_chanel='+to_chanel.to_chanel+'>send</button></div></div>';
-
-            $(".message_to_user_from_chanel_list[to_chanel="+to_chanel.to_chanel+"]").remove();
+            $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel.to_chanel+"]").remove();
             $('body').append(chat_html);
-            //console.info(to_chanel.to_chanel);
-            $(".message_to_user_from_chanel_list[to_chanel="+to_chanel.to_chanel+"]").addClass('new_chanel');
-            $(".message_to_user_from_chanel_list[to_chanel="+to_chanel.to_chanel+"]").draggable();
+            $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel.to_chanel+"]").addClass('new_chanel');
+            $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel.to_chanel+"]").draggable();
             $(".message_to_user_from_chanel_list").bind("click",function() {
                // $(this).addClass("window");
             });
@@ -40,10 +34,9 @@
             $(".close_chanel").bind("click",function(){
                 var to_chanel = $(this).attr('to_chanel');
                 $(".message_to_user_from_chanel_list[to_chanel="+to_chanel+"]").remove();
-                var to_chanel = { to_chanel : false  , date : false};
-
+                window.to_chanel = { to_chanel : false  , date : false};
             })
-            $(".message_to_user_from_chanel_list[to_chanel="+to_chanel.to_chanel+"]").show();
+            $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel.to_chanel+"]").show();
             sync_chanel();
         }
 
@@ -52,35 +45,27 @@
                 type: "POST",
                 url: "sync/syncchanel",
                 dataType: "json",
-                data: {to_chanel : to_chanel.to_chanel , date : to_chanel.date}
+                data: {to_chanel : window.to_chanel.to_chanel , date : window.to_chanel.date}
             })
                 .done(function(data) {
                     $.each(data.chanels_messages, function (index,message) {
-                        console.info(message);
                         $(".message_box[to_chanel="+message.to_chanel+"]").append("<p class='old_message'>"+message.first_name+" "+message.second_name+":"+message.message+"</p>");
-                        to_chanel.date  = message.date;
-                        var height =  $(".old_message").length;
-                        height = height*20+1000;
+                        window.to_chanel.date  = message.date;
                         $(".message_box[to_chanel="+message.to_chanel+"]").animate({ scrollTop: 10000}, 200);
 
                     });
                     setTimeout(sync_chanel, 3000);
                 });
-
         }
         function send_to_chanel(element) {
-
-           // var to_chanel = to_chanel.to_chanel;
-            console.info(to_chanel.to_chanel);
-            var text = $('.message_to_user_area_chanel[to_chanel='+ to_chanel.to_chanel+']').val();
-            $('.message_to_user_area_chanel[to_chanel='+ to_chanel.to_chanel+']').val("");
-            $(".message_box[to_chanel="+ to_chanel.to_chanel+"]").append("you:"+text+"<br/>");
-            $('.message_to_user_from_user_chanel_button[to_chanel='+ to_chanel.to_chanel+']').val("");
-            $(".message_box[to_chanel="+ to_chanel.to_chanel+"]").animate({ scrollTop: 10000}, 50);
+            var text = $('.message_to_user_area_chanel[to_chanel='+ window.to_chanel.to_chanel+']').val();
+            $('.message_to_user_area_chanel[to_chanel='+ window.to_chanel.to_chanel+']').val("");
+            $('.message_to_user_from_user_chanel_button[to_chanel='+ window.to_chanel.to_chanel+']').val("");
+            $(".message_box[to_chanel="+ window.to_chanel.to_chanel+"]").animate({ scrollTop: 10000}, 50);
             $.ajax({
                 type: "POST",
                 url: "chanels/addmessagetochanel",
-                data : {text :text , to_chanel :  to_chanel.to_chanel }
+                data : {text :text , to_chanel :  window.to_chanel.to_chanel }
             });
         }
     </script>

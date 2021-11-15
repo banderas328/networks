@@ -40,17 +40,17 @@ if($data)
 
         })
         $(".message_to_user_from_chat_list[with_user="+to_user+"]").show();
-        get_old_messages();
+        get_old_messages(to_user);
         sync_chat();
     }
 
-    function get_old_messages() {
+    function get_old_messages(to_user) {
 
         $.ajax({
             type: "POST",
             url: "sync/getoldmessages",
             dataType: "json",
-            data: {}
+            data: {"with_user":to_user}
         })
             .done(function(data) {
                 console.info(data);
@@ -70,7 +70,7 @@ if($data)
 
 
     });}
-    function sync_chat(){
+    function sync_chat(to_user){
 
         $.ajax({
             type: "POST",

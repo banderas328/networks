@@ -4,7 +4,7 @@ return array(
         'invokables' => array(
            'Tasks\Controller\Notifications' => 'Tasks\Controller\TasksController',
            'Tasks\Controller\Boards' => 'Tasks\Controller\BoardsController',
-            'Projects\Controller\Projects' => 'Tasks\Controller\ProjectsController',
+            'Tasks\Controller\Projects' => 'Tasks\Controller\ProjectsController',
         ),
     ),
     'router' => array(
@@ -18,7 +18,7 @@ return array(
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Projects\Controller\Projects',
+                        'controller' => 'Tasks\Controller\Projects',
                         'action'     => 'index',
                     ),
                 ),
@@ -32,7 +32,7 @@ return array(
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Notifications\Controller\Boards',
+                        'controller' => 'Tasks\Controller\Boards',
                         'action'     => 'index',
                     ),
                 ),
@@ -47,7 +47,7 @@ return array(
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Notifications\Controller\Notifications',
+                        'controller' => 'Tasks\Controller\Notifications',
                         'action'     => 'index',
                     ),
                 ),

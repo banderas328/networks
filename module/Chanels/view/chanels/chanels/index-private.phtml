@@ -1,46 +1,47 @@
 <?php foreach ($chanels as $chanel) : ?>
-<?php echo $chanel->first_name; ?>&nbsp<?php echo $chanel->second_name; ?>
+    <?php echo $chanel->first_name; ?>&nbsp<?php echo $chanel->second_name; ?>
     <?php echo $this->escapeHtml($chanel->chanel_name); ?>
     <?php
-    
+
     //var_dump($chanel);
     if (!$chanel->confirmed and $chanel->chanel_id) {
         ?>
         Please Wait
-    <?php
+        <?php
     } elseif (!$chanel->confirmed) {
 
         ?>
-        <a class="join_chanel_request" to_chanel="<?php echo $chanel->chanel_id; ?>" href="<?php   echo $this->url('chanels',
-            array('action' => 'join_chanel_request', 'id' => $chanel->chanel_id));?>">Make Request</a>
-    <?php
+        <a class="join_chanel_request" to_chanel="<?php echo $chanel->chanel_id; ?>"
+           href="<?php echo $this->url('chanels',
+               array('action' => 'join_chanel_request', 'id' => $chanel->chanel_id)); ?>">Make Request</a>
+        <?php
     } else {
         ?>
         <a class="join_chanel_private" to_chanel="<?php echo $chanel->chanel_id; ?>" href="
                       <?php
         echo $this->url('chanels',
-            array('action' => 'join_chanel', 'id' => $chanel->chanel_id));?>">Join Chanel</a>
-    <?php
+            array('action' => 'join_chanel', 'id' => $chanel->chanel_id)); ?>">Join Chanel</a>
+        <?php
     }
     ?>
     <br/>
 <?php endforeach; ?>
 <script type="text/javascript">
-    //var to_chanel = { to_chanel : false  , date : false};
-     window.to_chanel_private = { to_chanel : false  , date : false};
+    window.to_chanel_private = {to_chanel: false, date: false};
     $(function () {
         $(".join_chanel_request").bind("click", function () {
                 send_to_chanel_request(this);
                 return false;
             }
         );
-        $(".join_chanel_private").bind("click",function () {
-        	window.to_chanel_private = { to_chanel : false  , date : false};
+        $(".join_chanel_private").bind("click", function () {
+                window.to_chanel_private = {to_chanel: false, date: false};
                 send_message_from_private_chanel(this);
                 return false;
             }
         );
     });
+
     function send_to_chanel_request(element) {
         var to_chanel = $(element).attr("to_chanel");
         $.ajax({
@@ -50,77 +51,63 @@
             data: {to_chanel: to_chanel}
         })
             .done(function (data) {
-               // alert(data);
+                // alert(data);
+            });
+    }
+    function send_message_from_private_chanel(element) {
+        window.to_chanel_private.to_chanel = $(element).attr("to_chanel");
+        $('.message_to_user_area_chanel').val("");
+        $(".message_to_user_from_chanel_list").remove();
+        var chat_html = '<div class="message_to_user_from_chanel_list" style="display:hide;" title="Enter message" to_chanel=' + to_chanel_private.to_chanel + '><p class="close_chanel" to_chanel=' + to_chanel_private.to_chanel + '>X</p><div class="message_box" to_chanel=' + to_chanel_private.to_chanel + '></div><div class="chanel" to_chanel=' + to_chanel_private.to_chanel + '><textarea class="message_to_user_area_chanel"  maxlength="500" to_chanel=' + to_chanel_private.to_chanel + '></textarea><button class="submit" class="chanel_button" to_chanel=' + window.to_chanel_private.to_chanel + '>send</button></div></div>';
+
+        $(".message_to_user_from_chanel_list[to_chanel=" + window.to_chanel_private.to_chanel + "]").remove();
+        $('body').append(chat_html);
+        $(".message_to_user_from_chanel_list[to_chanel=" + window.to_chanel_private.to_chanel + "]").addClass('new_chanel');
+        $(".message_to_user_from_chanel_list[to_chanel=" + window.to_chanel_private.to_chanel + "]").draggable();
+        $(".message_to_user_from_chanel_list").find('button').addClass("message_to_user_from_user_chanel_button");
+        $(".message_to_user_from_user_chanel_button").bind("click", function () {
+            send_to_chanel_private();
+        });
+        $(".close_chanel").bind("click", function () {
+            var to_chanel = $(this).attr('to_chanel');
+            $(".message_to_user_from_chanel_list[to_chanel=" + to_chanel + "]").remove();
+            window.to_chanel_private = {to_chanel: false, date: false};
+        })
+        $(".message_to_user_from_chanel_list[to_chanel=" + window.to_chanel_private.to_chanel + "]").show();
+        sync_chanel_private();
+    }
+
+    function sync_chanel_private() {
+        $.ajax({
+            type: "POST",
+            url: "sync/syncchanelprivate",
+            dataType: "json",
+            data: {to_chanel: window.to_chanel_private.to_chanel, date: window.to_chanel_private.date}
+        })
+            .done(function (data) {
+                $.each(data, function (index, message) {
+                    $(".message_box[to_chanel=" + message.to_chanel + "]").append("<p class='old_message'>" + message.first_name + " " + message.second_name + ":" + message.message + "</p>");
+                    if (typeof message.date !== "undefined") {
+                        window.to_chanel_private.date = message.date;
+                    }
+                    $(".message_box[to_chanel=" + message.to_chanel + "]").animate({scrollTop: 10000}, 200);
+                });
+                setTimeout(sync_chanel_private, 3000);
             });
     }
 
-
-        function send_message_from_private_chanel(element) {
-        	window.to_chanel_private.to_chanel  = $(element).attr("to_chanel");
-            $('.message_to_user_area_chanel').val("");
-            $(".message_to_user_from_chanel_list").remove();
-            var chat_html = '<div class="message_to_user_from_chanel_list" style="display:hide;" title="Enter message" to_chanel='+  to_chanel_private.to_chanel +'><p class="close_chanel" to_chanel='+to_chanel_private.to_chanel+'>X</p><div class="message_box" to_chanel='+to_chanel_private.to_chanel+'></div><div class="chanel" to_chanel='+to_chanel_private.to_chanel+'><textarea class="message_to_user_area_chanel"  maxlength="500" to_chanel='+to_chanel_private.to_chanel+'></textarea><button class="submit" class="chanel_button" to_chanel='+window.to_chanel_private.to_chanel+'>send</button></div></div>';
-
-            $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel_private.to_chanel+"]").remove();
-            $('body').append(chat_html);
-            //console.info(to_chanel.to_chanel);
-            $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel_private.to_chanel+"]").addClass('new_chanel');
-            $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel_private.to_chanel+"]").draggable();
-            $(".message_to_user_from_chanel_list").bind("click",function() {
-               // $(this).addClass("window");
-            });
-            $(".message_to_user_from_chanel_list").find('button').addClass("message_to_user_from_user_chanel_button");
-            $(".message_to_user_from_user_chanel_button").bind("click",function(){
-                send_to_chanel_private();
-            });
-            $(".close_chanel").bind("click",function(){
-                var to_chanel = $(this).attr('to_chanel');
-                $(".message_to_user_from_chanel_list[to_chanel="+to_chanel+"]").remove();
-                window.to_chanel_private = { to_chanel : false  , date : false};
-
-            })
-            $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel_private.to_chanel+"]").show();
-            sync_chanel_private();
-        }
-
-        function sync_chanel_private(){
-            $.ajax({
-                type: "POST",
-                url: "sync/syncchanelprivate",
-                dataType: "json",
-                data: {to_chanel : window.to_chanel_private.to_chanel,date : window.to_chanel_private.date}
-            })
-                .done(function(data) {
-                  
-                	$.each(data, function (index,message) {
-                    	console.info(message.date);
-
-                        
-                        $(".message_box[to_chanel="+message.to_chanel+"]").append("<p class='old_message'>"+message.first_name+" "+message.second_name+":"+message.message+"</p>");
-                        if(typeof message.date !== "undefined") {
-                        window.to_chanel_private.date  = message.date;
-                        }
-                        $(".message_box[to_chanel="+message.to_chanel+"]").animate({ scrollTop: 10000}, 200);
-
-                    });
-                    setTimeout(sync_chanel_private, 3000);
-                });
-
-        }
-        function send_to_chanel_private(element) {
-
-
-            var text = $('.message_to_user_area_chanel[to_chanel='+ window.to_chanel_private.to_chanel+']').val();
-            $('.message_to_user_area_chanel[to_chanel='+ window.to_chanel_private.to_chanel+']').val("");
-            $(".message_box[to_chanel="+ window.to_chanel_private.to_chanel+"]").append("you:"+text+"<br/>");
-            $('.message_to_user_from_user_chanel_button[to_chanel='+ window.to_chanel_private.to_chanel+']').val("");
-            $(".message_box[to_chanel="+ window.to_chanel_private.to_chanel+"]").animate({ scrollTop: 10000}, 50);
-            $.ajax({
-                type: "POST",
-                url: "chanels/addmessagetochanel",
-                data : {text :text , to_chanel :  window.to_chanel_private.to_chanel }
-            });
-        }
-    </script>
+    function send_to_chanel_private(element) {
+        var text = $('.message_to_user_area_chanel[to_chanel=' + window.to_chanel_private.to_chanel + ']').val();
+        $('.message_to_user_area_chanel[to_chanel=' + window.to_chanel_private.to_chanel + ']').val("");
+        //  $(".message_box[to_chanel="+ window.to_chanel_private.to_chanel+"]").append("you:"+text+"<br/>");
+        $('.message_to_user_from_user_chanel_button[to_chanel=' + window.to_chanel_private.to_chanel + ']').val("");
+        $(".message_box[to_chanel=" + window.to_chanel_private.to_chanel + "]").animate({scrollTop: 10000}, 50);
+        $.ajax({
+            type: "POST",
+            url: "chanels/addmessagetochanel",
+            data: {text: text, to_chanel: window.to_chanel_private.to_chanel}
+        });
+    }
+</script>
 
 

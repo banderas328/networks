@@ -43,10 +43,8 @@ class ChanelsMessagesTable
     }
 
     public function checkNewMessages($adapter,$request){
-        $to_chanel = (int) $request->getPost()->to_chanel;
-      //  var_dump($date);
-        $date =   (int)$request->getPost()->date;
-      //  var_dump($date);
+        $to_chanel =  $request->getPost()->to_chanel;
+        $date =   $request->getPost()->date;
         $sql = "SELECT *,chanels_messages.id as message_id FROM chanels_messages
         LEFT JOIN chanels_deliver_messages on chanels_messages.id = chanels_deliver_messages.message_id
          LEFT JOIN user_settings on chanels_messages.from_user = user_settings.user_id
