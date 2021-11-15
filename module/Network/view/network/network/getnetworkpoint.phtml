@@ -1,7 +1,7 @@
 <h3 class='parent_directory_network' style='cursor:pointer;position: absolute;top: 25px;left: 300px;' dir_key=<?php echo $current_directory?>><img  style='cursor:pointer;'src='assets/images/icons/go-back-icon.png' width='50px' height='50px'/></h3>
 <?php
 foreach($dirs as  $dir_key => $dir_value) {
-    echo "<div style='margin-left: 20px;'><img src='assets/images/icons/folder.png' width='50px' height='50px'/><h3 style='cursor:pointer;margin-top: -8px;margin-left: 5px;' user_id=".$dir_value['user_id']." dir_key=".$dir_value['path_id']." class='network_directory'>".$dir_value['path']."     </h3></div>" ;
+    echo "<div style='margin-left: 20px;'><img src='assets/images/icons/folder.png' width='50px' height='50px'/><span style='cursor:pointer;margin-top: -8px;margin-left: 5px;' user_id=".$dir_value['user_id']." dir_key=".$dir_value['path_id']." class='network_directory'>".$dir_value['path']."</span></div>" ;
 
 }
 ?>

@@ -2,12 +2,12 @@
 
 <?php
 foreach($dirs as  $dir_key => $dir_value) {
-    echo "<div style='margin-left: 20px;'><img src='assets/images/icons/folder.png' width='50px' height='50px'/><h3 style='cursor:pointer;margin-top: -8px;margin-left: 5px;' dir_key=".$dir_value['id']." class='network_directory'>".$dir_value['path']."</h3></div>" ;
+    echo "<div style='margin-left: 20px;'><img src='assets/images/icons/folder.png' width='50px' height='50px'/><span style='cursor:pointer;margin-top: -8px;margin-left: 5px;' dir_key=".$dir_value['id']." class='network_directory'>".$dir_value['path']."</span></div>" ;
 
 }
 if($filesInDir) {
     foreach($filesInDir as  $file) {
-        echo "<h2 style='display:inline;' class='file_delete_string' file=".$file['id'].">".$file['file_title']."     ".$file['type']."<a href='/network/downloadFile/".$user_id."/".$file['id']."' class='download_file' fileId=".$file['id'].">".$this->translate('Download_File')."</a></h2></br>";
+        echo "<span style='display:inline;' class='file_delete_string' file=".$file['id'].">".$file['file_title']."     ".$file['type']."<a href='/network/downloadFile/".$user_id."/".$file['id']."' class='download_file' fileId=".$file['id'].">download file</a></span></br>";
     }
 }
 ?>

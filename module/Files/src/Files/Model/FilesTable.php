@@ -109,9 +109,7 @@ class FilesTable
        $fileId = (int) $fileId;
        $userId = (int) $userId;
        $sql = "SELECT  * FROM files  WHERE user_id='".$userId."' and id = '".$fileId."'";
-       $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-
-       return $resultSet->toArray();
+       return  $this->adapter->query($sql, $adapter::QUERY_MODE_EXECUTE)->toArray();
    }
 
 

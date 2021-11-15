@@ -125,7 +125,7 @@ class  filesController extends Controller\preloaderController {
             $request->getFiles()->toArray()
         );
         $files = new Files();
-        $this->getFilesTable()->saveUserFile($files->getAdapter(),$post);
+        $this->getFilesTable()->saveUserFile($post);
 
         die();
     }
@@ -139,7 +139,6 @@ class  filesController extends Controller\preloaderController {
         $file = $this->getFilesTable()->getFile($files->getAdapter(),$fileId,$userId)[0];
         $path  = $_SERVER['DOCUMENT_ROOT'].$file['file_name'];
         $fileName = $path;
-
         if (file_exists($fileName)) {
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');

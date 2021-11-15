@@ -23,8 +23,6 @@ class  networkController extends Controller\preloaderController
     public function getFriendsTable()
     {
         if (!$this->friendsTable) {
-         //   $sm = $this->getServiceLocator();
-         //   $this->friendsTable = $sm->get('Friends\Model\FriendsTable');
             $this->friendsTable = new \Friends\Model\FriendsTable;
         }
         return $this->friendsTable;
@@ -32,8 +30,6 @@ class  networkController extends Controller\preloaderController
     public function getNetworkTable()
     {
         if (!$this->networkTable) {
-           // $sm = $this->getServiceLocator();
-            //$this->networkTable = $sm->get('Network\Model\NetworkTable');
             $this->networkTable = new \Network\Model\NetworkTable;
         }
         return $this->networkTable;
@@ -41,8 +37,6 @@ class  networkController extends Controller\preloaderController
     public function getFileSystemTable()
     {
         if (!$this->filesystemTable) {
-         //   $sm = $this->getServiceLocator();
-           // $this->filesystemTable = $sm->get('Files\Model\FileSystemTable');
             $this->filesystemTable = new \Files\Model\FileSystemTable;
         }
         return $this->filesystemTable;
@@ -50,8 +44,6 @@ class  networkController extends Controller\preloaderController
 
     public function getFilesTable(){
         if (!$this->filesTable) {
-         //   $sm = $this->getServiceLocator();
-          //  $this->filesTable = $sm->get('Files\Model\FilesTable');
             $this->filesTable  = new \Files\Model\FilesTable;
         }
         return $this->filesTable;
@@ -231,17 +223,16 @@ class  networkController extends Controller\preloaderController
         if(!empty($isUsersFriends->toArray())) {
             $files = new Files();
             $file = $this->getFilesTable()->getFile($files->getAdapter(),$fileId,$frinendId)[0];
-            $path  = $_SERVER['DOCUMENT_ROOT'].$file['file_name'];
-            $fileName = $path;
-            if (file_exists($fileName)) {
+            $path  = $_SERVER['DOCUMENT_ROOT']."/".$file['file_name'];
+            if (file_exists($path)) {
                 header('Content-Description: File Transfer');
                 header('Content-Type: application/octet-stream');
                 header('Content-Disposition: attachment; filename='.$file['file_title']);
                 header('Expires: 0');
                 header('Cache-Control: must-revalidate');
                 header('Pragma: public');
-                header('Content-Length: ' . filesize($fileName));
-                readfile($fileName);
+                header('Content-Length: ' . filesize($path));
+                readfile($path);
                 exit;
             }
         }
