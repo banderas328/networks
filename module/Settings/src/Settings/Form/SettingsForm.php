@@ -16,26 +16,6 @@ class SettingsForm extends Form
         $file->setLabel('Avatar Image Upload')
             ->setAttribute('id', 'image-file');
         $this->add($file);
-
-        $selectSex = new Element\Select('sex');
-        $selectSex->setLabel('Sex');
-        $selectSex->setValueOptions(array(
-            '0' => 'Male',
-            '1' => 'Female',
-
-        ));
-        $this->add($selectSex);
-
-
-        $this->add(array(
-            'name' => 'birthdate',
-            'attributes' => array(
-                'type' => 'text',
-            ),
-            'options' => array(
-                'label' => 'Birthdate',
-            ),
-        ));
         $this->add(array(
             'name' => 'first_name',
             'attributes' => array(
@@ -92,30 +72,12 @@ class SettingsForm extends Form
             ),
         ));
         $this->add(array(
-            'name' => 'skype',
-            'attributes' => array(
-                'type' => 'text',
-            ),
-            'options' => array(
-                'label' => 'Skype',
-            ),
-        ));
-        $this->add(array(
             'name' => 'phone',
             'attributes' => array(
                 'type' => 'text',
             ),
             'options' => array(
                 'label' => 'Phone',
-            ),
-        ));
-        $this->add(array(
-            'name' => 'site',
-            'attributes' => array(
-                'type' => 'text',
-            ),
-            'options' => array(
-                'label' => 'Site',
             ),
         ));
         $selectSex = new Element\Select('visibility');

@@ -36,8 +36,10 @@ class SettingsController extends Controller\preloaderController
             );
 
             if ($form->isValid()) {
-                  $this->getSettingsTable()->saveGeneralSettings($data);
-                $form->setData($data);
+                $this->getSettingsTable()->saveGeneralSettings($data);
+                $userSettings = $this->getSettingsTable()->getCurrentUserSettings();
+                $userSettings = $userSettings->toArray()[0];
+                $form->setData($userSettings);
             }
             else {
                 die("error");
