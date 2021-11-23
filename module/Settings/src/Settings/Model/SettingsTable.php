@@ -36,15 +36,14 @@ class SettingsTable
     {
         $files = $settings["file"];
         if ($files) $settings["file"] = $files;
-        if (isset($settings["first_name"][1])) $settings["first_name"] = $settings["first_name"][1];
-
-        if (isset($settings["second_name"][1])) $settings["second_name"] = $settings["second_name"][1];
-        if (isset($settings["job"][1])) $settings["job"] = $settings["job"][1];
-        if (isset($settings["country"][1])) $settings["country"] = $settings["country"][1];
-        if (isset($settings["city"][1])) $settings["city"] = $settings["city"][1];
-        if (isset($settings["about"][1])) $settings["about"] = $settings["about"][1];
-        if (isset($settings["phone"][1])) $settings["phone"] = $settings["phone"][1];
-        if (isset($settings["visibility"][1])) $settings["visibility"] = $settings["visibility"][1];
+        if (is_array($settings["first_name"])) $settings["first_name"] = $settings["first_name"][1];
+        if (is_array($settings["second_name"]) ) $settings["second_name"] = $settings["second_name"][1];
+        if (is_array($settings["job"]) ) $settings["job"] = $settings["job"][1];
+        if (is_array($settings["country"]) ) $settings["country"] = $settings["country"][1];
+        if (is_array($settings["city"]) ) $settings["city"] = $settings["city"][1];
+        if (is_array($settings["about"]) ) $settings["about"] = $settings["about"][1];
+        if (is_array($settings["phone"]) ) $settings["phone"] = $settings["phone"][1];
+        if (is_array($settings["visibility"]) ) $settings["visibility"] = $settings["visibility"][1];
         $user_session = new Container('user');
         $userId = $user_session->user->id;
 
@@ -61,19 +60,20 @@ class SettingsTable
             $file = $path . '/' . $fileName;
             move_uploaded_file($settings['file']['tmp_name'], getcwd() . "/public/" . $file . $settings['file']['name']);
             if ($this->is_image(getcwd() . "/public/" . $file . $settings['file']['name'])) {
-                $data['avatar'] = $file . $settings['file']['name'];
+                $settings['avatar'] = $file . $settings['file']['name'];
             } else {
                 @unlink(getcwd() . "/public/" . $file . $settings['file']['name']);
             }
 
         }
+        unset($settings["file"]);
         $sql = "SELECT  * FROM user_settings where user_id=" . $userId;
         $results = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
-        if ($results->toArray()) {
+        if (count($results->toArray())) {
             $this->tableGateway->update($settings, array('user_id' => $userId));
         } else {
-            $data['user_id'] = $userId;
-            $this->tableGateway->insert($data);
+            $settings['user_id'] = $userId;
+            $this->tableGateway->insert($settings);
         }
         return true;
     }
