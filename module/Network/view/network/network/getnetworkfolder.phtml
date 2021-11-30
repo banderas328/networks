@@ -7,7 +7,9 @@ foreach($dirs as  $dir_key => $dir_value) {
 }
 if($filesInDir) {
     foreach($filesInDir as  $file) {
-        echo "<span style='display:inline;' class='file_delete_string' file=".$file['id'].">".$file['file_title']."     ".$file['type']."<a href='/network/downloadFile/".$user_id."/".$file['id']."' class='download_file' fileId=".$file['id'].">download file</a></span></br>";
+        echo "<span style='display:inline;' class='file_delete_string' file=".$file['id'].">".$file['file_title']."    ".$file['type']
+             ."<a href='/network/downloadFile/".$user_id."/".$file['id']."' class='download_file' fileId=".$file['id'].">download file</a>
+              <button class='copy_file_from_network' file_id='".$file['id']."'>copy file</button></span></br>";
     }
 }
 ?>
@@ -16,8 +18,19 @@ if($filesInDir) {
 $(function(){
     $(".network_directory").bind("click",get_network_directory);
     $(".parent_directory_network").bind("click",get_network_parent_directory);
+    $(".copy_file_from_network").bind("click",copy_file_from_network);
 
 });
+    function copy_file_from_network(){
+        $("#window_drive").css("display","block");
+        show_directory(0);
+        var file_id = $(this).attr("file_id");
+        $("#paste").addClass("pastpaste_file_to_directory");
+        window.need_to_paste_file = true;
+        window.need_to_paste_file_id = file_id;
+    }
+
+
     function get_network_directory() {
         $.ajax({
                 type: "POST",

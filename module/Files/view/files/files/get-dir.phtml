@@ -10,8 +10,10 @@ if(!$is_root) {
         <form id="file_directory_form"  method="post">
             <input type="file"  name="file" id="file_to_directory"> <p>upload file</p>
         </form>
+        <button id="paste">paste</button>
         <input type="text" id="directory_name">
         <button value="create dir" class='btn btn-primary' id="create_dir"><?php echo $this->translate("Create_Directory",false,$lang);?></button>
+
         <input type="hidden" value="<?php echo $current_directory?>" id="current_directory">
     </div>
         
@@ -50,7 +52,7 @@ if($filesInDir) {
             echo "<p class='file_block'  file=".$file['id']."> ".$file['file_title']."</p>";
                   echo "<div class='file_actions' file=".$file['id'].">";
                   echo          "<p class='file_div_action' file=".$file['id']."><span class='delete_file btn btn-primary' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span></p>";
-                  echo          "<p class='file_div_action' file=".$file['id']."><span class='move_file ' file=".$file['id'].">".$this->translate('Move File',false,$lang)."</span></p>";
+                  echo          "<p class='file_div_action' file=".$file['id']."><span class='move_file' file=".$file['id'].">".$this->translate('Move File',false,$lang)."</span></p>";
                   echo          "<p><a href='/files/downloadFile/id/".$file['id']."' class='download_file ' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></p>";
                   echo "</div>";
             echo "</div>";
@@ -78,7 +80,7 @@ document.oncontextmenu = function() {return false;}; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï
         	$("#paste").addClass("pastpaste_file_to_directory");
         	$("#paste").bind("click",function(){
                     var file_id = window.need_to_paste_file_id;
-                  
+
                     var current_directory = $("#current_directory").val();
                     $.ajax({
                         type: "POST",
@@ -197,6 +199,7 @@ document.oncontextmenu = function() {return false;}; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï
         });
 
     });
+
 //     function sell_file(file_id) {
 //        var cost = $('.file_cost[file='+file_id+']').val();
 //        var description = $('textarea[file='+file_id+']').val();

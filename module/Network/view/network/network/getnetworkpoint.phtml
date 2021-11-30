@@ -10,7 +10,7 @@ foreach($dirs as  $dir_key => $dir_value) {
 
     $(function(){
         $(".network_directory").bind("click",get_network_access);
-        $(".parent_directory_network").bind("click",get_network_parent_directory);
+        //$(".parent_directory_network").bind("click",get_network_parent_directory);
     });
 
     function get_network_access(){
@@ -25,18 +25,18 @@ foreach($dirs as  $dir_key => $dir_value) {
             });
 
     }
-    function get_network_parent_directory () {
-
-        $.ajax({
-                type: "POST",
-                url: "network/getnetworkparentfolder",
-                data: {dir_key: "network_list"}
-            }
-        )
-            .done(function (data) {
-                $("#network").html(data);
-
-            });
-
-    }
+    // function get_network_parent_directory () {
+    //
+    //     $.ajax({
+    //             type: "POST",
+    //             url: "network/getnetworkparentfolder",
+    //             data: {dir_key: "network_list"}
+    //         }
+    //     )
+    //         .done(function (data) {
+    //             $("#network").html(data);
+    //
+    //         });
+    //
+    // }
 </script>

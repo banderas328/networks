@@ -141,7 +141,7 @@ class FilesTable
         }
         return false;
     }
-
+//TODO add copy file from network
     public function moveFileToSyste($fileId,$requiredDirId,$userId,$adapter){
         $sql  = "UPDATE files set directory=".$requiredDirId." WHERE id=".$fileId." and user_id=".$userId;
         $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
