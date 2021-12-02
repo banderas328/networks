@@ -141,11 +141,47 @@ class FilesTable
         }
         return false;
     }
-//TODO add copy file from network
     public function moveFileToSyste($fileId,$requiredDirId,$userId,$adapter){
-        $sql  = "UPDATE files set directory=".$requiredDirId." WHERE id=".$fileId." and user_id=".$userId;
-        $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-        return $result;
+        $user_session = new Container('user');
+        $loggedUser = $user_session->user->id;
+        $sql  = "select * from files  WHERE id=".$fileId." and user_id=".$loggedUser;
+        $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE)->toArray();
+        if(count($result)) {
+            $sql  = "UPDATE files set directory=".$requiredDirId." WHERE id=".$fileId." and user_id=".$userId;
+            $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+            return $result;
+
+        }
+        else {
+
+            $sql  = "select * from files  WHERE id=".$fileId;
+            $sourceFile = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE)->toArray()[0];
+            if(!isset($user_session->user->authedDirs)) return false;
+            $authedDirs  =   $user_session->user->authedDirs;
+            $dirs = explode(",", $authedDirs);
+            if(in_array($sourceFile['directory'],$dirs)){
+                $filename = explode("/",$sourceFile['file_name'])[2];
+                $filenameExt = explode('.',$filename)[1];
+                $newFileName = uniqid();
+                $newFileName .= ".".$filenameExt;
+                $newPath = $_SERVER['DOCUMENT_ROOT']."/userfiles/".$loggedUser."/".$newFileName;
+                $oldPath = $_SERVER['DOCUMENT_ROOT']."/userfiles/".$sourceFile['user_id']."/".$filename;
+                $filename = "/userfiles/".$sourceFile['user_id']."/".$filename;
+                copy($oldPath,$newPath);
+                $fileDb['user_id'] = $loggedUser;
+                $fileDb['directory'] = $requiredDirId;
+                $fileDb['file_title'] = $sourceFile['file_title'];
+                $fileDb['file_name'] = $filename;
+                $fileDb['type'] = $sourceFile['type'];
+                $this->tableGateway->insert($fileDb);
+
+
+
+            }
+
+        }
+
+
         
         
     }

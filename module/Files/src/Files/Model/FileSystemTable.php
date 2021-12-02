@@ -85,16 +85,12 @@ class FileSystemTable {
     public function getChildDirsList($dirId,$userId,$allDirs) {
         $dirId = (int) $dirId;
         $userId = (int) $userId;
-//         var_dump($dirId);
-//         var_dump($userId);
         $sql  = "SELECT id from users_filesystem where parent_path = ".$dirId." and user_id = ".$userId;
-      //  echo "SELECT id from users_filesystem where parent_path = ".$dirId." and user_id = ".$userId;
         $fileSystem = new FileSystem();
         $fileSystem->getAdapter();
         $adapter = $fileSystem->getAdapter();
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         $dirs = $resultSet->buffer()->toArray();
-    //    var_dump($dirs);
         if(!empty($dirs)) {
             $allDirs[] = $dirs;
             foreach($dirs as $dir) {
