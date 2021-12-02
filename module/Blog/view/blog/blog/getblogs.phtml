@@ -71,7 +71,7 @@
         });
 
         function load_comments(blog_id){
-            var comment_count = $('.blog_comments span').length;
+            var comment_count = $('.blog_comments .c-comment').length;
             var data = {"blog_id":blog_id,"comment_count":comment_count};
             $.ajax({
                 type: "POST",

@@ -7,7 +7,7 @@ return array(
         'params'  => array(
             'host'     => 'localhost',
             'username' => 'root',
-            'password' => '',
+            'password' => 'root',
             'dbname'   => 'networks'
         )
     )

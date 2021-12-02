@@ -1685,6 +1685,7 @@ textarea.c-field.is-post {
 }
 
 .c-post__image-wrap .image {
+    max-width: 450px;
 
 }
 
