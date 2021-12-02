@@ -1,30 +1,67 @@
-<?php
-if (!empty($blogs)) {
-    foreach ($blogs as $blog) {
-        echo "<div class='block_div'>";
-        echo $blog['first_name'] . " " . $blog['second_name'];
-        echo "<br>";
-        echo "<img style='width:500px' src=" . $blog["file_name"] . ">";
-        echo "<br>";
-        echo "<div>" . $blog["blog_content"] . "</div>";
-        echo "<br>";
-        echo '<textarea rows="10" cols="45" name="blog_comment" class="comment_blog_body" blog_id="'.$blog["blog_id"].'"></textarea>';
-        echo "<br>";
-        echo "<button class='comment_blog' blog_id='".$blog["blog_id"]."'>comment</button>";
-        echo "<br>";
-        echo "<button class='show_comments' blog_id='".$blog["blog_id"]."'>show comments</button>";
-        echo "<br>";
-        echo "<div class='blog_comments' blog_id='".$blog["blog_id"]."'></div>";
-        echo "<br>";
-        echo "</div>";
+<div class="c-window__scrollable-space">
+    <div class="c-blog">
+        <?php if (!empty($blogs)): ?>
+            <div class="c-blog__posts">
+                <?php foreach ($blogs as $blog): ?>
+                    <div class="c-post">
+                        <div class="c-post__header">
+                            <?php echo $blog['first_name']; ?>
+                            <?php echo $blog['second_name']; ?>
+                        </div>
 
-    }
-    $offset += 5;
-    echo "<button value='get more' class='blogs_more' offset=" . $offset . ">get More</button>";
-} else {
-    echo "NO MORE BLOGS";
-}
-?>
+                        <div class="c-post__main">
+                            <div class="c-post__image-wrap">
+                                <img class="image" src="<?php echo $blog["file_name"]; ?>">
+                            </div>
+        
+                            <div class="c-post__content">
+                                <?php echo $blog["blog_content"]; ?>
+                            </div>
+                        </div>
+    
+                        <div class="c-post__footer">
+                            <div class="c-post__comment-header">
+                                Comments
+                            </div>
+
+                            <div class="c-leave-comment">
+                                <div class="c-leave-comment__field">
+                                    <textarea name="blog_comment" class="comment_blog_body c-field is-post" blog_id="<?php echo $blog["blog_id"]; ?>" placeholder="Comment..."></textarea>
+                                </div>
+
+                                <div class="c-leave-comment__footer">
+                                    <button class="comment_blog c-button c-leave-comment__add-button"type="button" blog_id="<?php echo $blog["blog_id"]; ?>">
+                                        Add comment
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="c-post__post-comments">
+                                <div class="blog_comments c-post__user-comments" blog_id="<?php echo $blog["blog_id"]; ?>"></div>
+
+                                <div class="c-post__show-comments">
+                                    <button class="show_comments c-button" blog_id="<?php echo $blog["blog_id"]; ?>">
+                                        Show post comments
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <div class="c-blog__footer">
+                <?php $offset += 5; ?>
+                <button class="c-button" type="button" value="get more" offset="<?php echo $offset; ?>">
+                    Show more posts
+                </button>
+            </div>
+        <?php else: ?>
+            <?php echo "NO MORE BLOGS"; ?>
+        <?php endif; ?>
+    </div>
+</div>
+
 <script type="text/javascript">
     $(function () {
         $(".show_comments").on("click",function(){
@@ -50,15 +87,42 @@ if (!empty($blogs)) {
                         var second_name  = data[index].second_name;
                         var comment  = data[index].comment;
                         var blog_id  = data[index].blog_id;
-                        var comment_string = "<span style='display: block;'><img style='width: 50px;' src='"+avatar+"'>"+""+first_name+" "+second_name+":"+comment+"</span>";
-                        $(".blog_comments[blog_id="+blog_id+"]").append(comment_string);
+                        var comment_string = `
+                            <div class="c-comment">
+                                <div class="c-comment__aside">
+                                    <div class="c-comment__avatar">
+                                        <img class="c-comment__avatar-image" src="${avatar}" alt="Avatar of ${first_name} ${second_name}">
+                                    </div>
+                                </div>
 
+                                <div class="c-comment__main">
+                                    <div class="c-comment__header">
+                                        ${first_name} ${second_name}
+                                    </div>
+
+                                    <div class="c-comment__content">
+                                        ${comment}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        $(".blog_comments[blog_id="+blog_id+"]").append(comment_string);
                     });
+
                     if(data[0] != undefined) {
-                        $(".blog_comments[blog_id="+data[0].blog_id+"]").append("<button blog_id='"+data[0].blog_id+"' class='more_comments'>more</button>");
+                        const $showMoreButton = `
+                            <div class="c-post__show-more">
+                                <button blog_id="${data[0].blog_id}" class="more_comments c-button">
+                                    Show more
+                                </button>
+                            </div>
+                        `;
+
+                        $(`.blog_comments[blog_id="${data[0].blog_id}"]`).append($showMoreButton);
                         $(".more_comments").on("click",function (){
                             var blog_id = $(this).attr("blog_id");
-                            $(this).remove();
+                            $(this.closest(".c-post__show-more")).remove();
                             load_comments(blog_id);
                         });
                     }

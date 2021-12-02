@@ -1,4 +1,4 @@
-<?php 
+<?php
 return array(
     'webhost'  => 'http://networks.local/',
     'database' => array(
@@ -7,7 +7,7 @@ return array(
         'params'  => array(
             'host'     => 'localhost',
             'username' => 'root',
-            'password' => 'root',
+            'password' => '',
             'dbname'   => 'networks'
         )
     )
