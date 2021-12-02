@@ -267,6 +267,8 @@ console.info("1");
         // Close the window.
         d.on('click', 'a.window_close', function() {
           $(this).closest('div.window').hide();
+
+          // Hide taskbar button
           $($(this).attr('href')).hide('fast');
         });
 
@@ -275,8 +277,7 @@ console.info("1");
           // If any windows are visible, hide all.
           if ($('div.window:visible').length) {
             $('div.window').hide();
-          }
-          else {
+          } else {
             // Otherwise, reveal hidden windows that are open.
             $('#dock li:visible a').each(function() {
                 console.info("2");

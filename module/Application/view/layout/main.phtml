@@ -1,4 +1,4 @@
-<?php 
+<?php
 $user = $_SESSION['user'];
 $lang = $user['user']->lang;
 ?>
@@ -10,15 +10,14 @@ $lang = $user['user']->lang;
     <meta name="description" content="JavaScript desktop environment built with jQuery."/>
     <title>jQuery Desktop</title>
     <link rel="stylesheet" href="assets/css/reset.css"/>
-
-
+    <link rel="preload" as="image" href="assets/images/misc/wallpaper.jpg">
     <link rel="stylesheet" href="jquery-ui/jquery-ui.css"/>
     <link rel="stylesheet" href="jquery-ui/jquery-ui.structure.css"/>
     <link rel="stylesheet" href="jquery-ui/jquery-ui.theme.css"/>
     <link rel="stylesheet" href="css/bootstrap/css/bootstrap.css"/>
     <link rel="stylesheet" href="css/bootstrap/css/bootstrap-responsive.css"/>
     <link rel="stylesheet" href="js/html5sortable/basscss.css"/>
-        <link rel="stylesheet" href="assets/css/desktop.css"/>
+    <link rel="stylesheet" href="assets/css/desktop.css"/>
     <script type="text/javascript" src="jquery-ui1.12/external/jquery/jquery.js"></script>
     <script type="text/javascript" src="jquery-ui1.12/jquery-ui.js"></script>
     <script type="text/javascript" src="assets/js/jquery.desktop.js"></script>
@@ -34,7 +33,7 @@ $lang = $user['user']->lang;
       <a class="abs icon" style="left: 264px;top: 420px;" href="#icon_dock_money">
        <img src="assets/images/icons/3.png"/>
         <?php  echo $this->translate("Task Manager", false, $lang); ?>
-     </a> 
+     </a>
     <!--  <a class="abs icon" style="left:420px;top:360px;" href="#icon_dock_payment">-->
 <!--         <img src="assets/images/icons/payment.png"/> -->
         <?php // echo $this->translate("Market", false, $lang); ?>
@@ -279,7 +278,7 @@ $lang = $user['user']->lang;
             </div>
             <div class="abs window_content">
                 <div class="window_main" id="hard_drive">
-                
+
                 </div>
                 <script type="text/javascript" src="js/pages/main/files.js"></script>
             </div>
@@ -369,9 +368,9 @@ $lang = $user['user']->lang;
                     refresh_boards();
                     });
                     </script>
-                <div id="tasks_transaction"> 
-                     <script type="text/javascript" src="js/pages/main/tasks_window.js"></script> 
-                </div> 
+                <div id="tasks_transaction">
+                     <script type="text/javascript" src="js/pages/main/tasks_window.js"></script>
+                </div>
 
 </div>
             </div>
@@ -533,42 +532,63 @@ $lang = $user['user']->lang;
     </div>
     <span class="abs ui-resizable-handle ui-resizable-se"></span>
 </div>
-<div id="window_blogs" class="abs window">
-    <div class="abs window_inner">
-        <div class="window_top">
-          <span class="float_left">
-            Notes
-          </span>
-          <span class="float_right">
-            <a href="#" class="window_min"></a>
-            <a href="#" class="window_resize"></a>
-              <a href="#icon_dock_blogs" class="window_close"></a>
-          </span>
-        </div>
-        <div class="abs window_content" id="notes_content">
-            <div class="window_aside">
+<div id="window_blogs" class="c-window r-border-box-area abs window">
+    <div class="c-window__inner _abs window_inner">
+        <div class="c-window__title-bar window_top">
+            <div class="c-window__title float_left">
                 Notes
             </div>
-            <div class="abs window_content" id="notes_tabs">
-                <div class="window_main user-tabs">
-                <ul>
-                    <li><a class="users-tab-link" href="#new_blog">Create Blog</a></li>
-                    <li><a class="users-tab-link" href="#list_blogs">Lists Blogs</a></li>
-                </ul>
-                </div>
-                <div id="new_blog">
-                </div>
-                <div id="list_blogs">
-                </div>
-                <script type="text/javascript" src="js/pages/main/blogs.js"></script>
 
+            <div class="c-window__window-controls float_right">
+                <a class="c-window__window-control window_min" href="#">
+                    <svg class="icon-nw icon-nw-window-rollup-16" viewBox="0 0 16 16">
+                        <path d="M14.5 14h-13c-.4 0-.8-.3-.8-.8s.3-.8.8-.8h13c.4 0 .8.3.8.8s-.4.8-.8.8z"/>
+                    </svg>
+                </a>
+
+                <a class="c-window__window-control window_resize" href="#">
+                    <svg class="icon-nw icon-nw-window-maximize-16" viewBox="0 0 16 16">
+                        <path d="M12 1H4C2.3 1 1 2.3 1 4v8c0 1.7 1.3 3 3 3h8c1.7 0 3-1.3 3-3V4c0-1.7-1.3-3-3-3zm1.5 11c0 .8-.7 1.5-1.5 1.5H4c-.8 0-1.5-.7-1.5-1.5V4c0-.8.7-1.5 1.5-1.5h8c.8 0 1.5.7 1.5 1.5v8z"/>
+                    </svg>
+                </a>
+
+                <a class="c-window__window-control window_close" href="#icon_dock_blogs">
+                    <svg class="icon-nw icon-nw-window-close-16" viewBox="0 0 16 16">
+                        <path d="M14.5 13.5c.3.3.3.8 0 1.1-.2.1-.3.2-.5.2s-.4-.1-.5-.2L8 9.1l-5.5 5.5c-.2.1-.3.2-.5.2s-.4-.1-.5-.2c-.3-.3-.3-.8 0-1.1L6.9 8 1.5 2.5c-.3-.3-.3-.8 0-1.1.3-.3.8-.3 1.1 0L8 6.9l5.5-5.5c.3-.3.8-.3 1.1 0 .3.3.3.8 0 1.1L9.1 8l5.4 5.5z"/>
+                    </svg>
+                </a>
             </div>
+        </div>
 
+        <div class="c-window__main _abs _window_content" id="notes_content">
+            <!--
+            <div class="c-window__aside window_aside">
+                Notes
+            </div>
+            -->
+
+            <div class="c-window__tabs-wrap _abs _window_content" id="notes_tabs">
+                <div class="c-window__tabs window_main user-tabs">
+                    <ul class="c-window__tabs-inner">
+                        <li class="c-window__tab"><a class="users-tab-link" href="#new_blog">Create Post</a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#list_blogs">Blogs</a></li>
+                    </ul>
+                </div>
+
+                <div class="c-window__tab-content" id="new_blog"></div>
+                <div class="c-window__tab-content" id="list_blogs"></div>
+
+                <script type="text/javascript" src="js/pages/main/blogs.js"></script>
+            </div>
         </div>
+
+        <div class="c-window__status-bar _abs _window_bottom">
+            <div class="c-window__status-text">
+                Some text
+            </div>
         </div>
-        <div class="abs window_bottom">
-            Notes
-        </div>
+    </div>
+
     <span class="abs ui-resizable-handle ui-resizable-se"></span>
 </div>
 
