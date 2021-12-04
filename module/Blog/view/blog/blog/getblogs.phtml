@@ -13,12 +13,12 @@
                             <div class="c-post__image-wrap">
                                 <img class="image" src="<?php echo $blog["file_name"]; ?>">
                             </div>
-        
+
                             <div class="c-post__content">
                                 <?php echo $blog["blog_content"]; ?>
                             </div>
                         </div>
-    
+
                         <div class="c-post__footer">
                             <div class="c-post__comment-header">
                                 Comments
@@ -57,7 +57,9 @@
                 </button>
             </div>
         <?php else: ?>
-            <?php echo "NO MORE BLOGS"; ?>
+            <div class="c-blog__no-posts">
+                Not posts to show
+            </div>
         <?php endif; ?>
     </div>
 </div>
@@ -72,7 +74,11 @@
 
         function load_comments(blog_id){
             var comment_count = $('.blog_comments .c-comment').length;
-            var data = {"blog_id":blog_id,"comment_count":comment_count};
+            var data = {
+                "blog_id": blog_id,
+                "comment_count": comment_count,
+            };
+
             $.ajax({
                 type: "POST",
                 url: "blog/getComments",
@@ -81,13 +87,14 @@
                 .done(function (data) {
                     data = JSON.parse(data);
                     blog_id = false;
-                    $( data).each(function( index ) {
-                        var avatar =  data[index].avatar;
-                        var first_name  = data[index].first_name;
-                        var second_name  = data[index].second_name;
-                        var comment  = data[index].comment;
-                        var blog_id  = data[index].blog_id;
-                        var comment_string = `
+
+                    $(data).each(function( index ) {
+                        const avatar = data[index].avatar;
+                        const first_name = data[index].first_name;
+                        const second_name = data[index].second_name;
+                        const comment = data[index].comment;
+                        const blog_id = data[index].blog_id;
+                        const comment_string = `
                             <div class="c-comment">
                                 <div class="c-comment__aside">
                                     <div class="c-comment__avatar">
@@ -107,10 +114,11 @@
                             </div>
                         `;
 
-                        $(".blog_comments[blog_id="+blog_id+"]").append(comment_string);
+                        $(`.blog_comments[blog_id="${blog_id}"]`).append(comment_string);
                     });
 
                     if(data[0] != undefined) {
+                        const $blogCommentsContainer = $(`.blog_comments[blog_id="${data[0].blog_id}"]`);
                         const $showMoreButton = `
                             <div class="c-post__show-more">
                                 <button blog_id="${data[0].blog_id}" class="more_comments c-button">
@@ -119,20 +127,37 @@
                             </div>
                         `;
 
-                        $(`.blog_comments[blog_id="${data[0].blog_id}"]`).append($showMoreButton);
+                        // Remove existing 'Show More' button
+                        $blogCommentsContainer.find(".c-post__show-more").remove();
+
+                        $blogCommentsContainer.append($showMoreButton);
+
                         $(".more_comments").on("click",function (){
                             var blog_id = $(this).attr("blog_id");
+
+                            // Remove existing 'Show More' button
                             $(this.closest(".c-post__show-more")).remove();
+
                             load_comments(blog_id);
                         });
                     }
                 });
         }
 
+        function clearTextField($element) {
+            $element.val('');
+        }
+
         $(".comment_blog").on("click",function(){
-            var blog_id = $(this).attr("blog_id");
-            var content_blog = $("textarea[blog_id="+blog_id+"]").val();
-            var data =  {"blog_id":blog_id,"comment":content_blog}
+            const blog_id = $(this).attr("blog_id");
+            const $commentField = $(`textarea[blog_id="${blog_id}"]`)
+            const content_blog = $commentField.val();
+
+            const data =  {
+                "blog_id": blog_id,
+                "comment": content_blog,
+            };
+
             $.ajax({
                 type: "POST",
                 url: "blog/addCommentToBlog",
@@ -140,6 +165,7 @@
             })
                 .done(function (data) {
                     load_comments(blog_id);
+                    clearTextField($commentField);
                 });
         });
 
