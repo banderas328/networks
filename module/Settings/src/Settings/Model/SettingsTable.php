@@ -34,6 +34,7 @@ class SettingsTable
 
     public function saveGeneralSettings($settings)
     {
+        var_dump($settings);
         $files = $settings["file"];
         if ($files) $settings["file"] = $files;
         if (is_array($settings["first_name"])) $settings["first_name"] = $settings["first_name"][1];

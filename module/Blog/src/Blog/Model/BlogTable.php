@@ -26,7 +26,8 @@ class BlogTable
     public function saveBlog($post,$userId,$adapter) {
 
         $text = htmlspecialchars($post['text']);
-        $data = array ("user_id" => $userId,"blog_content" => $text , 'date' => time());
+        $blog_title = htmlspecialchars($post['blog_title']);
+        $data = array ("user_id" => $userId,"blog_content" => $text ,"blog_title" => $blog_title ,'date' => time());
         $this->tableGateway->insert($data);
         $id = $this->tableGateway->lastInsertValue;
         if($post['file']['tmp_name']) {
@@ -37,7 +38,7 @@ class BlogTable
                 $file = $path . '/' . $fileName;
                 move_uploaded_file($post['file']['tmp_name'], getcwd() . "/public/" . $file . $post['file']['name']);
                 if(($post['file']["size"] < 200000)) {
-                   
+
                     $data['file_name'] =$file . $post['file']['name'];
                 }
                 else {
@@ -63,8 +64,8 @@ class BlogTable
     }
         $sqlIn .= ")";
 
-        $sql = "select blogs.id as blog_id,blogs.blog_content,user_settings.first_name,
-       user_settings.second_name,blog_attachment.file_name from blogs
+        $sql = "select blogs.id as blog_id,blog_title,blogs.blog_content,user_settings.first_name,
+       user_settings.second_name,user_settings.avatar,blog_attachment.file_name,user_settings.job,blogs.date from blogs
                left JOIN blog_attachment
                on blogs.id = blog_attachment.blog_id
                 left JOIN user_settings

@@ -7,13 +7,16 @@
                         <div class="c-post__header">
                             <?php echo $blog['first_name']; ?>
                             <?php echo $blog['second_name']; ?>
+                            <?php echo "<img src=".$blog['avatar'].">"; ?>
+                            <?php echo $blog['job']; ?>
+                            <?php echo $blog['date']; ?>
                         </div>
 
                         <div class="c-post__main">
                             <div class="c-post__image-wrap">
                                 <img class="image" src="<?php echo $blog["file_name"]; ?>">
                             </div>
-
+                            <?php echo $blog["blog_title"]; ?>
                             <div class="c-post__content">
                                 <?php echo $blog["blog_content"]; ?>
                             </div>

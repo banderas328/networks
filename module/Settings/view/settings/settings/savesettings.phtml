@@ -6,6 +6,10 @@ $this->headTitle($title);
    <form id="avatar_form" class="form-horizontal" action="settings/savesettings" method="post">
         <input type="file"  name="avatar" id="avatar" >
    </form>
+
+<?php
+echo "<img src='".$this->user_settings["avatar"]."' style='width:200px;'>";
+?>
 <script type="text/javascript">
 $(function () {
 	$('#avatar').bind('change',upload_avatar);

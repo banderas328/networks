@@ -6,6 +6,7 @@
     </div>
 
     <div class="c-blog-post__field">
+        <input type="text" id="blog_title">
         <textarea class="c-field is-post" id="new_blog_text" placeholder="Write your post"></textarea>
     </div>
 
@@ -43,12 +44,14 @@
     $(function(){
        $("#blog_save").bind("click",function () {
             var text = $("#new_blog_text").val();
+            var blog_title = $("#blog_title").val();
             var $file = document.getElementById("blog_attach_file");
             var files= $file.files;
             var file=files[0];
             var data = new FormData();
             data.append('file', file);
             data.append('text', text);
+           data.append('blog_title', blog_title);
             var url  = "blog/saveblog";
             var request = new XMLHttpRequest();
             var xmlupload=request.upload;
