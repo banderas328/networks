@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 11 2021 г., 21:10
+-- Время создания: Дек 14 2021 г., 09:40
 -- Версия сервера: 10.3.22-MariaDB
 -- Версия PHP: 7.4.5
 
@@ -31,7 +31,8 @@ CREATE TABLE `blogs` (
   `id` int(11) NOT NULL,
   `blog_content` text COLLATE utf8_bin NOT NULL,
   `user_id` int(11) NOT NULL,
-  `date` varchar(50) COLLATE utf8_bin NOT NULL
+  `date` varchar(50) COLLATE utf8_bin NOT NULL,
+  `blog_title` varchar(250) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
