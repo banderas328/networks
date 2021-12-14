@@ -1655,6 +1655,17 @@ textarea.c-field.is-post {
     margin-top: 16px;
 }
 
+.c-blog__no-posts {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    min-height: 256px;
+}
+
 
 /* .c-post */
 
@@ -1682,12 +1693,10 @@ textarea.c-field.is-post {
     margin: 0 auto;
     overflow: hidden;
     border-radius: 5px;
+    max-width: 480px;
 }
 
-.c-post__image-wrap .image {
-    max-width: 450px;
-
-}
+.c-post__image-wrap .image {}
 
 .c-post__content {
     margin-top: 16px;
