@@ -28,10 +28,10 @@ class SettingsController extends Controller\preloaderController
         $settings = new Settings();
         $userSettings = $this->getSettingsTable()->getCurrentUserSettings();
         $userSettings = $userSettings->toArray()[0];
+        if($userSettings)
         $form->setData($userSettings);
 
         if ($request->isPost()) {
-         //   $form->setInputFilter($settings->getInputFilter());
             if ($userSettings[0]) {
                   $data = array_merge_recursive(
                     $userSettings[0],
@@ -47,6 +47,7 @@ class SettingsController extends Controller\preloaderController
             $this->getSettingsTable()->saveGeneralSettings($data);
             $userSettings = $this->getSettingsTable()->getCurrentUserSettings();
             $userSettings = $userSettings->toArray()[0];
+            if($userSettings)
             $form->setData($userSettings);
         }
         return array('form' => $form,"user_settings" => $userSettings);

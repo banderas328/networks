@@ -32,6 +32,7 @@ class ChanelsTable
     public function fetchAllPrivate($adapter)
     {
 
+
         $sql = "SELECT  * FROM chanels left join private_chanels_requests on chanels.id = private_chanels_requests.chanel_id 
  WHERE chanels.private = 1 ";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
@@ -46,7 +47,7 @@ class ChanelsTable
         left join private_chanels_requests on chanels.id = private_chanels_requests.chanel_id
         Left join chanels_admins on chanels.id = chanels_admins.chanel_id
         left join user_settings on private_chanels_requests.user_id = user_settings.user_id
-        WHERE chanels.private = 1 and chanels_admins.admins = ".$userId." group by chanels.id";
+        WHERE chanels.private = 1 and chanels_admins.admins = ".$userId." ";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet;
     }
@@ -87,14 +88,14 @@ class ChanelsTable
         $chanel_id = (int) $request->getPost()->to_chanel;
         $user_session = new Container('user');
         $userId = $user_session->user->id;
-        
+
         $sql = "SELECT * FROM private_chanels_requests WHERE chanel_id=".$chanel_id." and user_id=".$userId." and confirmed=1";
         $resultSet =  $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         if(!$resultSet->buffer()->toArray()) {
             $sql = "SELECT * FROM chanels_admins WHERE admins=".$userId;
             $resultSet =  $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
             if(!$resultSet->buffer()->toArray()) {
-                
+
                 return false;
             }
         }
@@ -105,12 +106,15 @@ class ChanelsTable
         $to_chanel = (int) $request->getPost()->to_chanel;
         $user_session = new Container('user');
         $userId = $user_session->user->id;
-        $sql = "INSERT INTO private_chanels_requests (user_id,chanel_id) values ($userId,$to_chanel)";
+        $sql = "delete from  private_chanels_requests where user_id =".$userId." and chanel_id=".$to_chanel." ;";
         $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+        $sql = "INSERT INTO private_chanels_requests (user_id,chanel_id) values ($userId,$to_chanel)";
+        return $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+
     }
-    
+
     public function createChanel($request,$adapter) {
-        
+
         $chanel_name = $request->getPost()->chanel_name;
         $is_private = (int) $request->getPost()->is_private;
         $data = ['chanel_name' => $chanel_name,'private' => $is_private];
@@ -119,6 +123,8 @@ class ChanelsTable
         $user_session = new Container('user');
         $userId = $user_session->user->id;
         $sql = "INSERT INTO chanels_admins (admins,chanel_id) values ($userId,$chanelId)";
+        $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+        $sql = "INSERT INTO private_chanels_requests (user_id,chanel_id,confirmed) values ($userId,$chanelId,1)";
         $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         die("chanel created");
     }

@@ -3,6 +3,7 @@ namespace Chanels\Controller;
 
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Session\Container;
 use Zend\View\Model\ViewModel;
 use Chanels\Model;
 use Chanels\Model\ChanelsMessagesTable;
@@ -18,8 +19,8 @@ class ChanelsController extends Controller\preloaderController
 {
     protected $chanelsTable;
     protected $chanelsMessagesTable;
-    
-    
+
+
     public function createChanelAction(){
         $this->layout('layout/only_form');
         $request = $this->getRequest();
@@ -40,10 +41,12 @@ class ChanelsController extends Controller\preloaderController
 
     public function indexPrivateAction()
     {
+        $user_session = new Container('user');
+        $userId = $user_session->user->id;
         $chanels = new  Chanels();
         $this->layout('layout/only_form');
         return new ViewModel(array(
-            'chanels' => $this->getChanelsTable()->fetchAllPrivate($chanels->getAdapter()),
+            'chanels' => $this->getChanelsTable()->fetchAllPrivate($chanels->getAdapter()),'user_id' => $userId
         ));
     }
 
@@ -53,7 +56,7 @@ class ChanelsController extends Controller\preloaderController
         $request = $this->getRequest();
         $chanels = new  Chanels();
         if ($request->isPost()) {
-            $this->getChanelsTable()->addRequestToChanel($request, $chanels->getAdapter());
+           return  json_encode($this->getChanelsTable()->addRequestToChanel($request, $chanels->getAdapter()));
         }
         return false;
 
