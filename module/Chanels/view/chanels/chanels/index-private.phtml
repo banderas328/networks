@@ -1,6 +1,9 @@
 <?php foreach ($chanels as $chanel) : ?>
     <?php echo $chanel->first_name; ?>&nbsp<?php echo $chanel->second_name; ?>
-    <?php echo $this->escapeHtml($chanel->chanel_name); ?>
+
+    <?php
+   // var_dump($chanel);
+    echo $this->escapeHtml($chanel->chanel_name); ?>
         <a class="join_chanel_request" to_chanel="<?php echo $chanel->chanel_id; ?>"
            href="<?php echo $this->url('chanels',
                array('action' => 'join_chanel_request', 'id' => $chanel->chanel_id)); ?>">Make Request</a>

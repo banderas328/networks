@@ -33,7 +33,9 @@ class ChanelsTable
     {
 
 
-        $sql = "SELECT  * FROM chanels left join private_chanels_requests on chanels.id = private_chanels_requests.chanel_id 
+        $sql = "SELECT  * FROM chanels 
+    left join private_chanels_requests on chanels.id = private_chanels_requests.chanel_id 
+  left join user_settings on private_chanels_requests.user_id = user_settings.user_id
  WHERE chanels.private = 1 ";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet;
