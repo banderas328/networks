@@ -8,7 +8,7 @@
            href="<?php echo $this->url('chanels',
                array('action' => 'join_chanel_request', 'id' => $chanel->chanel_id)); ?>">Make Request</a>
         <?php
-      if($chanel->confirmed and $chanels->user_id == $user_id) {
+      if($chanel->confirmed and $chanel->user_id == $user_id) {
         ?>
         <a class="join_chanel_private" to_chanel="<?php echo $chanel->chanel_id; ?>" href="
                       <?php
