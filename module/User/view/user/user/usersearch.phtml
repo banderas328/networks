@@ -18,50 +18,58 @@ echo $this->form()->closeTag();
 
 
 <div id="usersearchdiv">
-<?php
-if($this->paginator) {
-if (count($this->paginator)): ?>
-    <ul>
-        <?php foreach ($this->paginator as $item): ?>
-            <?php $vars = get_object_vars($item);?>
-            <?php echo "<img src=".$vars['avatar'].">"; ?>
-            <li><?php echo $vars['first_name'];?></li>
-            <li><?php echo $vars['second_name'];?></li>
-           <li><?php var_dump($vars);?></li>
-            <li><a class="friend_request" href="/friends/addfriendrequest/<?php echo $vars['user_id']; ?>">Add To Friends</a></li>
-        <?php endforeach; ?>
-    </ul>
-<?php endif;
-}
-?>
-<script type="text/javascript">
-   $(function() {
-        $('.friend_request').bind('click',function () {
-          //  alert("hello");
-
-            var url = $(this).attr('href');
-            $.ajax({
-                type: "GET",
-                url: url,
-                dataType: "json"
-            })
-                .done(function(data) {
-                    if(data == 'have') {
-                    var have = '<div id="have_request" title="Friend request"><p>You already send request to this user</p></div>';
-                        $('body').append(have);
-                        $('#have_request').dialog();
-                    }
-                });
-
-            return false;
-
+    <?php
+    if ($this->users) {
+        if (count($this->users)): ?>
+            <ul>
+                <?php foreach ($this->users as $item): ?>
+                    <?php $vars = get_object_vars($item); ?>
+                    <?php echo "<img src=" . $vars['avatar'] . ">"; ?>
+                    <li><?php echo $vars['first_name']; ?></li>
+                    <li><?php echo $vars['second_name']; ?></li>
+                    <li><a class="friend_request" href="/friends/addfriendrequest/<?php echo $vars['user_id']; ?>">Add
+                            To Friends</a></li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif;
+    }
+    ?>
+    <script type="text/javascript">
+        $(function () {
+            $('.friend_request').bind('click', function () {
+                var url = $(this).attr('href');
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: "json"
+                })
+                    .done(function (data) {
+                        if (data == 'have') {
+                            var have = '<div id="have_request" title="Friend request"><p>You already send request to this user</p></div>';
+                            $('body').append(have);
+                            $('#have_request').dialog();
+                        }
+                    });
+                return false;
+            });
+            //
+            // $("#user_search").on("click", function (e) {
+            //     e.preventDefault();
+            //     $("#user_search_form").serialize();
+            //     $.ajax({
+            //         type: "GET",
+            //         url: "/user/usersearch",
+            //         dataType: "json"
+            //     })
+            //         .done(function (data) {
+            //             $("#user_search_div").html(data);
+            //         });
+            // });
         });
-    });
-</script>
-
-<?php
-if($this->paginator) {
-echo $this->paginationControl($this->paginator,'Sliding', array('partial/paginator.phtml','Settings'), array('route' => 'usersearch' ,"div" => $this->div));
-}?>
+    </script>
+    <?php
+    if ($this->paginator) {
+        echo $this->paginationControl($this->paginator, 'Sliding', array('partial/paginator.phtml', 'Settings'), array('route' => 'usersearch', "div" => $this->div));
+    } ?>
 </div>
 

@@ -25,7 +25,6 @@ class SettingsController extends Controller\preloaderController
         $form = new SettingsForm();
         $form->get('submit')->setValue('Save Settings');
         $request = $this->getRequest();
-        $settings = new Settings();
         $userSettings = $this->getSettingsTable()->getCurrentUserSettings();
         $userSettings = $userSettings->toArray()[0];
         if($userSettings)

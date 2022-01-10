@@ -112,7 +112,7 @@ class UserController extends Controller\preloaderController
             $mail->Subject = "Octopus activation";
             $mail->Body    = "This is the message to activate user account on networks service please follow this link <a href='" . $url . "'>activate</a>";
             $mail->AltBody = "welcome";
-            
+
             $mail->send();
             return true;
         } catch (Exception $e) {
@@ -181,38 +181,18 @@ class UserController extends Controller\preloaderController
 //user search action
     public function userSearchAction(){
         $this->layout('layout/only_form');
-        $limitForPage = 1;
         $form = new UserSearchForm();
         $request = $this->getRequest();
-        $paginator = false;
-        $user_session = new Container('user_search');
-        $dataSearch = $user_session->user_search;
-        if ($request->isPost() || $dataSearch) {
+        if ($request->isPost()) {
             $data = $request->getPost();
-            $data = get_object_vars($data);
+         //   $data = get_object_vars($data);
             unset($data['submit']);
-            $newData = false;
-            foreach($data as $key => $value) {
-                if($value) {
-                    $newData = true;
-                }
-            }
-            if(!$newData) {
-                $user_session = new Container('user_search');
-                $data = $user_session->user_search;
-            }
+      //      var_dump($data);
             $user = new User();
             $dbAdapter  = $user->getAdapter();
-
-            $user_session = new Container('user_search');
-            $user_session->user_search = $data;
-            $page = (int)$this->params()->fromQuery('page', 1);
-            $paginator = $this->getUserTable()->searchUser($data,$dbAdapter,$limitForPage,$page,true);
-            $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
-            $paginator->setItemCountPerPage($limitForPage);
-         //   var_dump($paginator);
+            $users = $this->getUserTable()->searchUser($data,$dbAdapter);
         }
-        return array('form' => $form , 'paginator' => $paginator , 'div' => "usersearchdiv");
+        return array('form' => $form , 'users' => $users , 'div' => "usersearchdiv");
     }
 	public function userPageAction(){
 		$settings = new Settings();
@@ -220,13 +200,13 @@ class UserController extends Controller\preloaderController
 		$userSettings = $this->getSettingsTable()->getCurrentUserSettings($settings->getAdapter());
 		return array('settings' => $userSettings->toArray() );
 	}
-	
+
 	public function userLogoutAction(){
-	    
+
 
 	    unset($_SESSION['user']);
 	    return $this->redirect()->toRoute('user/login');
-	    
+
 	}
 
     public function getUserTable()
