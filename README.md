@@ -7,6 +7,10 @@ Installation
 
 "composer install" in main directory
 
+### Database
+use database.sql like Maria database dump
+
+
 ### Apache Setup
 
 To setup apache, setup a virtual host to point to the public/ directory of the
