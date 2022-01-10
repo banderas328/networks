@@ -10,13 +10,9 @@ echo $this->formRow($form->get('job'));
 echo $this->formRow($form->get('country'));
 echo $this->formRow($form->get('city'));
 echo $this->formRow($form->get('phone'));
-
-
 echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
 ?>
-
-
 <div id="usersearchdiv">
     <?php
     if ($this->users) {
@@ -67,9 +63,5 @@ echo $this->form()->closeTag();
             // });
         });
     </script>
-    <?php
-    if ($this->paginator) {
-        echo $this->paginationControl($this->paginator, 'Sliding', array('partial/paginator.phtml', 'Settings'), array('route' => 'usersearch', "div" => $this->div));
-    } ?>
 </div>
 
