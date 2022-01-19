@@ -1990,10 +1990,15 @@ textarea.c-field.is-post {
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
+    text-decoration: none;
+    color: #ffffff;
+    cursor: pointer;
 }
 
 .c-chat-card__enter-button:hover {
     filter: hue-rotate(45deg);
+    text-decoration: none;
+    color: #ffffff;
 }
 
 .c-chat-card__wait-pseudo-button .icon-nw,
@@ -2021,6 +2026,9 @@ textarea.c-field.is-post {
     pointer-events: none;
 }
 
+.c-chat-card + .c-chat-card {
+    margin-top: 16px;
+}
 
 
 
@@ -2176,7 +2184,11 @@ textarea.c-field.is-post {
     margin-bottom: 4px;
 }
 
-.c-chat-card__user-controls {
+.c-access-request + .c-access-request {
+    margin-top: 16px;
+}
+
+.c-access-request__user-controls {
     flex: none;
     display: flex;
     min-width: 0;

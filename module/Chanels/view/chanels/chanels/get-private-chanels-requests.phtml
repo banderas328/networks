@@ -1,18 +1,281 @@
-<?php
-foreach($requests->buffer()->toArray() as $request) {
-    echo $request["chanel_name"]." : ";
-    echo $request['first_name']." ".$request['second_name']." "."<a  class='link_ajax privateChanelAccessDenied' href='chanels/privateChanelAccessDeny' user_id=".$request['user_id']."  chanel_id=".$request['chanel_id'].">Deny Access</a>";
-    echo " <a class='link_ajax privateChanelAccessAllow' href='chanels/privateChanelAccessAllow' user_id=".$request['user_id']."  chanel_id=".$request['chanel_id'].">Allow Access</a>";
+<!--
+<div class="c-access-request">
+    <div class="c-access-request__inner">
+        <div class="c-access-request__channel">
+            <div class="c-access-request__image-wrap channel">
+                <img src="https://www.fillmurray.com/360/360" alt="" class="c-access-request__image">
+            </div>
 
-    if(!$request['confirmed'] ) {
-        echo " Waiting";
-    }
-    else {
-        echo " Allowed";
-    }
-    echo "<br/>";
-}
-?>
+            <div class="c-access-request__main">
+                <div class="c-access-request__title">
+                    Channel name
+                </div>
+            </div>
+        </div>
+
+        <div class="c-access-request__users">
+            <div class="c-access-request__user">
+                <div class="c-access-request__image-wrap user">
+                    <img src="https://www.fillmurray.com/360/360" alt="" class="c-access-request__image">
+                </div>
+
+                <div class="c-access-request__main">
+                    <span class="c-access-request__status waiting">
+                        Waiting for access
+                    </span>
+
+                    <div class="c-access-request__title">
+                        User Name
+                    </div>
+
+                    <div class="c-access-request__job">
+                        {{ user_job }}
+                    </div>
+                </div>
+
+                <div class="c-access-request__user-controls">
+                    <div class="c-choice">
+                        <input class="c-choice__input" type="radio" name="choice-access-user-id" id="choice-access-user-id-allow">
+                        <label class="c-choice__item allow" for="choice-access-user-id-allow">
+                            <svg class="icon-nw icon-nw-lock-open-variant-outline-24" viewBox="0 0 24 24">
+                                <path d="M10 13C11.1 13 12 13.89 12 15C12 16.11 11.11 17 10 17S8 16.11 8 15 8.9 13 10 13M18 1C15.24 1 13 3.24 13 6V8H4C2.9 8 2 8.9 2 10V20C2 21.1 2.9 22 4 22H16C17.1 22 18 21.1 18 20V10C18 8.9 17.1 8 16 8H15V6C15 4.34 16.34 3 18 3S21 4.34 21 6V8H23V6C23 3.24 20.76 1 18 1M16 10V20H4V10H16Z" />
+                            </svg>
+
+                            Allow
+                        </label>
+
+                        <input class="c-choice__input" type="radio" name="choice-access-user-id" id="choice-access-user-id-reject">
+                        <label class="c-choice__item reject" for="choice-access-user-id-reject">
+                            <svg class="icon-nw icon-nw-lock-outline-24" viewBox="0 0 24 24">
+                                <path d="M12 17a2 2 0 0 1-2-2c0-1.11.89-2 2-2a2 2 0 0 1 2 2 2 2 0 0 1-2 2m6 3V10H6v10h12m0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2h1m-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3Z"/>
+                            </svg>
+
+                            Reject
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="c-access-request">
+    <div class="c-access-request__inner">
+        <div class="c-access-request__channel">
+            <div class="c-access-request__image-wrap channel">
+                <img src="https://www.fillmurray.com/360/360" alt="" class="c-access-request__image">
+            </div>
+
+            <div class="c-access-request__main">
+                <div class="c-access-request__title">
+                    Channel name
+                </div>
+            </div>
+        </div>
+
+        <div class="c-access-request__users">
+            <div class="c-access-request__user">
+                <div class="c-access-request__image-wrap user">
+                    <img src="https://www.fillmurray.com/360/360" alt="" class="c-access-request__image">
+                </div>
+
+                <div class="c-access-request__main">
+                    <span class="c-access-request__status allow">
+                        Allowed
+                    </span>
+
+                    <div class="c-access-request__title">
+                        User Name
+                    </div>
+
+                    <div class="c-access-request__job">
+                        {{ user_job }}
+                    </div>
+                </div>
+
+                <div class="c-access-request__user-controls">
+                    <div class="c-choice">
+                        <input class="c-choice__input" type="radio" name="choice-access-user-id" id="choice-access-user-id-allow" checked="checked">
+                        <label class="c-choice__item allow" for="choice-access-user-id-allow">
+                            <svg class="icon-nw icon-nw-lock-open-variant-outline-24" viewBox="0 0 24 24">
+                                <path d="M10 13C11.1 13 12 13.89 12 15C12 16.11 11.11 17 10 17S8 16.11 8 15 8.9 13 10 13M18 1C15.24 1 13 3.24 13 6V8H4C2.9 8 2 8.9 2 10V20C2 21.1 2.9 22 4 22H16C17.1 22 18 21.1 18 20V10C18 8.9 17.1 8 16 8H15V6C15 4.34 16.34 3 18 3S21 4.34 21 6V8H23V6C23 3.24 20.76 1 18 1M16 10V20H4V10H16Z" />
+                            </svg>
+
+                            Allow
+                        </label>
+
+                        <input class="c-choice__input" type="radio" name="choice-access-user-id" id="choice-access-user-id-reject">
+                        <label class="c-choice__item reject" for="choice-access-user-id-reject">
+                            <svg class="icon-nw icon-nw-lock-outline-24" viewBox="0 0 24 24">
+                                <path d="M12 17a2 2 0 0 1-2-2c0-1.11.89-2 2-2a2 2 0 0 1 2 2 2 2 0 0 1-2 2m6 3V10H6v10h12m0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2h1m-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3Z"/>
+                            </svg>
+
+                            Reject
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="c-access-request">
+    <div class="c-access-request__inner">
+        <div class="c-access-request__channel">
+            <div class="c-access-request__image-wrap channel">
+                <img src="https://www.fillmurray.com/360/360" alt="" class="c-access-request__image">
+            </div>
+
+            <div class="c-access-request__main">
+                <div class="c-access-request__title">
+                    Channel name
+                </div>
+            </div>
+        </div>
+
+        <div class="c-access-request__users">
+            <div class="c-access-request__user">
+                <div class="c-access-request__image-wrap user">
+                    <img src="https://www.fillmurray.com/360/360" alt="" class="c-access-request__image">
+                </div>
+
+                <div class="c-access-request__main">
+                    <span class="c-access-request__status reject">
+                        Rejected
+                    </span>
+
+                    <div class="c-access-request__title">
+                        User Name
+                    </div>
+
+                    <div class="c-access-request__job">
+                        {{ user_job }}
+                    </div>
+                </div>
+
+                <div class="c-access-request__user-controls">
+                    <div class="c-choice">
+                        <input class="c-choice__input" type="radio" name="choice-access-user-id" id="choice-access-user-id-allow">
+                        <label class="c-choice__item allow" for="choice-access-user-id-allow">
+                            <svg class="icon-nw icon-nw-lock-open-variant-outline-24" viewBox="0 0 24 24">
+                                <path d="M10 13C11.1 13 12 13.89 12 15C12 16.11 11.11 17 10 17S8 16.11 8 15 8.9 13 10 13M18 1C15.24 1 13 3.24 13 6V8H4C2.9 8 2 8.9 2 10V20C2 21.1 2.9 22 4 22H16C17.1 22 18 21.1 18 20V10C18 8.9 17.1 8 16 8H15V6C15 4.34 16.34 3 18 3S21 4.34 21 6V8H23V6C23 3.24 20.76 1 18 1M16 10V20H4V10H16Z" />
+                            </svg>
+
+                            Allow
+                        </label>
+
+                        <input class="c-choice__input" type="radio" name="choice-access-user-id" id="choice-access-user-id-reject" checked="checked">
+                        <label class="c-choice__item reject" for="choice-access-user-id-reject">
+                            <svg class="icon-nw icon-nw-lock-outline-24" viewBox="0 0 24 24">
+                                <path d="M12 17a2 2 0 0 1-2-2c0-1.11.89-2 2-2a2 2 0 0 1 2 2 2 2 0 0 1-2 2m6 3V10H6v10h12m0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2h1m-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3Z"/>
+                            </svg>
+
+                            Reject
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+<?php foreach($requests->buffer()->toArray() as $request) : ?>
+    <?php $suffix = $request['chanel_id'].'-'.$request['user_id']; ?>
+    <?php $isAllowed = $request['confirmed']; ?>
+    <?php $isRejected = !$request['confirmed']; ?>
+    <?php $isWaiting = !$request['confirmed']; ?>
+
+    <!-- <pre><code><?php // echo var_export($request); ?></code></pre> -->
+
+    <div class="c-access-request">
+        <div class="c-access-request__inner">
+            <div class="c-access-request__channel">
+                <div class="c-access-request__image-wrap channel">
+                    <img src="https://www.fillmurray.com/360/360" alt="" class="c-access-request__image">
+                </div>
+
+                <div class="c-access-request__main">
+                    <div class="c-access-request__title">
+                        <?php echo $request["chanel_name"]; ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-access-request__users">
+                <div class="c-access-request__user">
+                    <div class="c-access-request__image-wrap user">
+                        <img src="https://www.fillmurray.com/360/360" alt="" class="c-access-request__image">
+                    </div>
+
+                    <div class="c-access-request__main">
+                        <?php if ($isAllowed): ?>
+                            <span class="c-access-request__status allow">
+                                Allowed
+                            </span>
+                        <?php elseif ($isRejected): ?>
+                            <span class="c-access-request__status reject">
+                                Rejected
+                            </span>
+                        <?php elseif ($isWaiting): ?>
+                            <span class="c-access-request__status waiting">
+                                Waiting for access
+                            </span>
+                        <?php endif; ?>
+
+                        <div class="c-access-request__title">
+                            <?php echo $request['first_name']; ?>
+                            <?php echo $request['second_name']; ?>
+                        </div>
+
+                        <div class="c-access-request__job">
+                            <?php echo $request['job']; ?>
+                        </div>
+                    </div>
+
+                    <div class="c-access-request__user-controls">
+                        <div class="c-choice">
+                            <input class="c-choice__input"
+                                type="radio"
+                                name="choice-access-user-id-<?php echo $suffix; ?>"
+                                id="choice-access-user-id-allow-<?php echo $suffix; ?>"
+                                <?php echo $isAllowed ? 'checked="checked"' : ''; ?>
+                            >
+                            <label class="c-choice__item allow" for="choice-access-user-id-allow-<?php echo $suffix; ?>">
+                                <svg class="icon-nw icon-nw-lock-open-variant-outline-24" viewBox="0 0 24 24">
+                                    <path d="M10 13C11.1 13 12 13.89 12 15C12 16.11 11.11 17 10 17S8 16.11 8 15 8.9 13 10 13M18 1C15.24 1 13 3.24 13 6V8H4C2.9 8 2 8.9 2 10V20C2 21.1 2.9 22 4 22H16C17.1 22 18 21.1 18 20V10C18 8.9 17.1 8 16 8H15V6C15 4.34 16.34 3 18 3S21 4.34 21 6V8H23V6C23 3.24 20.76 1 18 1M16 10V20H4V10H16Z" />
+                                </svg>
+
+                                Allow
+                            </label>
+
+                            <input class="c-choice__input"
+                                type="radio"
+                                name="choice-access-user-id-<?php echo $suffix; ?>"
+                                id="choice-access-user-id-reject-<?php echo $suffix; ?>"
+                                <?php echo $isRejected ? 'checked="checked"' : ''; ?>
+                            >
+                            <label class="c-choice__item reject" for="choice-access-user-id-reject-<?php echo $suffix; ?>">
+                                <svg class="icon-nw icon-nw-lock-outline-24" viewBox="0 0 24 24">
+                                    <path d="M12 17a2 2 0 0 1-2-2c0-1.11.89-2 2-2a2 2 0 0 1 2 2 2 2 0 0 1-2 2m6 3V10H6v10h12m0-12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10c0-1.11.89-2 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2h1m-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3Z"/>
+                                </svg>
+
+                                Reject
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a class="link_ajax privateChanelAccessDenied" href="chanels/privateChanelAccessDeny" user_id="<?php echo $request['user_id']; ?>" chanel_id="<?php echo $request['chanel_id']; ?>">Deny Access</a>
+    <a class="link_ajax privateChanelAccessAllow" href="chanels/privateChanelAccessAllow" user_id="<?php echo $request['user_id']; ?>" chanel_id="<?php echo $request['chanel_id']; ?>">Allow Access</a>
+    <?php echo !$request['confirmed'] ? "Waiting" : "Allowed"; ?>
+<?php endforeach; ?>
+
 <script type="text/javascript">
 
     $(function() {
