@@ -183,7 +183,9 @@
 -->
 
 <?php foreach($requests->buffer()->toArray() as $request) : ?>
-    <?php $suffix = $request['chanel_id'].'-'.$request['user_id']; ?>
+    <?php $channelId = $request['chanel_id']; ?>
+    <?php $userId = $request['user_id']; ?>
+    <?php $suffix = $channelId.'-'.$userId; ?>
     <?php $isAllowed = $request['confirmed']; ?>
     <?php $isRejected = !$request['confirmed']; ?>
     <?php $isWaiting = !$request['confirmed']; ?>
@@ -241,6 +243,9 @@
                                 type="radio"
                                 name="choice-access-user-id-<?php echo $suffix; ?>"
                                 id="choice-access-user-id-allow-<?php echo $suffix; ?>"
+                                data-channel-id="<?php echo $channelId; ?>"
+                                data-user-id="<?php echo $userId; ?>"
+                                value="allow"
                                 <?php echo $isAllowed ? 'checked="checked"' : ''; ?>
                             >
                             <label class="c-choice__item allow" for="choice-access-user-id-allow-<?php echo $suffix; ?>">
@@ -255,6 +260,9 @@
                                 type="radio"
                                 name="choice-access-user-id-<?php echo $suffix; ?>"
                                 id="choice-access-user-id-reject-<?php echo $suffix; ?>"
+                                data-channel-id="<?php echo $channelId; ?>"
+                                data-user-id="<?php echo $userId; ?>"
+                                value="reject"
                                 <?php echo $isRejected ? 'checked="checked"' : ''; ?>
                             >
                             <label class="c-choice__item reject" for="choice-access-user-id-reject-<?php echo $suffix; ?>">
@@ -277,79 +285,48 @@
 <?php endforeach; ?>
 
 <script type="text/javascript">
-
     $(function() {
-        $('.privateChanelAccessDenied').bind("click",function(){
-            deny_access_to_chanel(this);
-            return false;
+        $('.c-choice__input').off().on('change', function handleChoice(e) {
+            const {
+                value: choice,
+                dataset: {
+                    channelId,
+                    userId,
+                },
+            } = e.target;
+
+            if (choice === 'allow') {
+                url = 'chanels/allowAccessToChanel';
+            } else if (choice === 'reject') {
+                url = 'chanels/denyAccessToChanel';
+            } else {
+                throw new Error('Input value does not match any of the possible values.')
+
+                return;
+            }
+
+            $.ajax({
+                url,
+                type: 'POST',
+                data: {
+                    chanel_id: channelId,
+                    user_id: userId,
+                },
+            }).done(updatePrivateChanelsRequests);
+
+            function updatePrivateChanelsRequests() {
+                const $container = document.querySelector('#private_chanels_admin');
+
+                $container.classList.add('is-loading');
+                $.ajax({
+                    type: 'GET',
+                    url: 'chanels/getPrivateChanelsRequests',
+                }).done((data) => {
+                    $container.innerHTML = data;
+                    $("#accordion_admin").accordion(); // TODO: Check if this accordion exists
+                    $container.classList.remove('is-loading');
+                });
+            }
         });
-        $('.privateChanelAccessAllow').bind("click",function(){
-            allow_access_to_chanel(this);
-            return false;
-        });
-
-
-
     });
-    function deny_access_to_chanel (element) {
-        var user_id  = $(element).attr('user_id');
-        var chanel_id  = $(element).attr('chanel_id');
-        $.ajax({
-            type: "POST",
-            url: "chanels/denyAccessToChanel",
-            data: {chanel_id : chanel_id ,user_id : user_id }
-
-        })
-            .done(function( data ) {
-                $.ajax({
-                    type: "GET",
-                    url: "chanels/getPrivateChanelsRequests"
-
-                })
-                    .done(function( data ) {
-                        $("#private_chanels_admin").html(data);
-                        $("#accordion_admin").accordion();
-                        $('.privateChanelAccessDenied').unbind('click');
-                        $('.privateChanelAccessDenied').bind("click",function(){
-                            deny_access_to_chanel(this);
-                            return false;
-
-                        });
-
-                    });
-            });
-        return false;
-    }
-    function allow_access_to_chanel (element) {
-        var user_id  = $(element).attr('user_id');
-        var chanel_id  = $(element).attr('chanel_id');
-        $.ajax({
-            type: "POST",
-            url: "chanels/allowAccessToChanel",
-            data: {chanel_id : chanel_id ,user_id : user_id }
-
-        })
-            .done(function( data ) {
-                $.ajax({
-                    type: "GET",
-                    url: "chanels/getPrivateChanelsRequests"
-
-                })
-                    .done(function( data ) {
-                        $("#private_chanels_admin").html(data);
-                        $("#accordion_admin").accordion();
-                        $('.privateChanelAccessDenied').unbind('click');
-                        $('.privateChanelAccessDenied').bind("click",function(){
-                            deny_access_to_chanel(this);
-                            return false;
-
-                        });
-
-                    });
-            });
-        return false;
-    }
-
-
-
 </script>

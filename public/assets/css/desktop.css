@@ -2211,3 +2211,12 @@ textarea.c-field.is-post {
     min-height: 900px;
 }
 
+#private_chanels_admin {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+#private_chanels_admin.is-loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
