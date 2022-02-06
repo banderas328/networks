@@ -1,0 +1,75 @@
+<div id="window_messages" class="c-window r-border-box-area abs window">
+    <div class="c-window__inner _abs window_inner">
+        <div class="c-window__title-bar window_top">
+            <div class="c-window__title float_left">
+                Messages
+            </div>
+
+            <div class="c-window__window-controls float_right">
+                <a class="c-window__window-control window_min" href="#">
+                    <svg class="icon-nw icon-nw-window-rollup-16" viewBox="0 0 16 16">
+                        <path d="M14.5 14h-13c-.4 0-.8-.3-.8-.8s.3-.8.8-.8h13c.4 0 .8.3.8.8s-.4.8-.8.8z"/>
+                    </svg>
+                </a>
+
+                <a class="c-window__window-control window_resize" href="#">
+                    <svg class="icon-nw icon-nw-window-maximize-16" viewBox="0 0 16 16">
+                        <path d="M12 1H4C2.3 1 1 2.3 1 4v8c0 1.7 1.3 3 3 3h8c1.7 0 3-1.3 3-3V4c0-1.7-1.3-3-3-3zm1.5 11c0 .8-.7 1.5-1.5 1.5H4c-.8 0-1.5-.7-1.5-1.5V4c0-.8.7-1.5 1.5-1.5h8c.8 0 1.5.7 1.5 1.5v8z"/>
+                    </svg>
+                </a>
+
+                <a class="c-window__window-control window_close" href="#icon_dock_messages" id="close_messages">
+                    <svg class="icon-nw icon-nw-window-close-16" viewBox="0 0 16 16">
+                        <path d="M14.5 13.5c.3.3.3.8 0 1.1-.2.1-.3.2-.5.2s-.4-.1-.5-.2L8 9.1l-5.5 5.5c-.2.1-.3.2-.5.2s-.4-.1-.5-.2c-.3-.3-.3-.8 0-1.1L6.9 8 1.5 2.5c-.3-.3-.3-.8 0-1.1.3-.3.8-.3 1.1 0L8 6.9l5.5-5.5c.3-.3.8-.3 1.1 0 .3.3.3.8 0 1.1L9.1 8l5.4 5.5z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="c-window__main _abs _window_content" id="messages_content">
+            <!--
+            <div class="window_aside">
+                Messages
+            </div>
+            -->
+
+            <div class="abs window_content" id="messages_tabs">
+                <div class="window_main user-tabs">
+                <ul>
+                    <li><a class="users-tab-link" href="#chats">Chats</a></li>
+                    <li><a class="users-tab-link" href="#chanels">Chanels</a></li>
+                    <li><a class="users-tab-link" href="#private_chanels">Private Chanels</a></li>
+                    <li><a class="users-tab-link" href="#private_chanels_admin">Private Chanels Settings</a></li>
+                    <li><a class="users-tab-link" href="#create_chanel">Create Chanel</a></li>
+                </ul>
+
+                </div>
+                <div id="chats">
+                    <script type="text/javascript" src="js/pages/main/messages.js"></script>
+                </div>
+                <div id="chanels">
+                    <script type="text/javascript" src="js/pages/main/chanels.js"></script>
+                </div>
+                <div id="private_chanels">
+                    <script type="text/javascript" src="js/pages/main/private_chanels.js"></script>
+                </div>
+                 <div id="create_chanel">
+                    <div>
+                     <input name="chanel_name" type="text" id="chanel_name">
+                     <input name="is_private" type="checkbox" id="is_private"> is private
+                     <button id="create_chanel_submit">create chanel</button>
+                    </div>
+                    <script type="text/javascript" src="js/pages/main/create_chanel.js"></script>
+                </div>
+
+                <div id="private_chanels_admin">
+                    <script type="text/javascript" src="js/pages/main/private_chanels_admin.js"></script>
+                </div>
+            </div>
+        </div>
+        <div class="abs window_bottom">
+            Messages
+        </div>
+    </div>
+    <span class="abs ui-resizable-handle ui-resizable-se"></span>
+</div>

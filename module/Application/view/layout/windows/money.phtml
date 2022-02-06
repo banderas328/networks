@@ -1,0 +1,33 @@
+<div id="window_money" class="abs  window">
+        <div class="abs window_inner">
+            <div class="window_top">
+          <span class="float_left">
+            <img src="assets/images/icons/3.png"/>
+             Tasks
+          </span>
+          <span class="float_right">
+            <a href="#" class="window_min"></a>
+            <a href="#" class="window_resize"></a>
+            <a href="#icon_dock_tasks" class="window_close"></a>
+          </span>
+        </div>
+            <div  class="window_content abs" id="tasks_content">
+                <div id="tasks_tabs" class="window_main">
+                    <span id="go_to_projects">Go To Projects</span>
+                    <script type="text/javascript">
+                    $("#go_to_projects").bind("click", function () {
+                    refresh_boards();
+                    });
+                    </script>
+                <div id="tasks_transaction">
+                     <script type="text/javascript" src="js/pages/main/tasks_window.js"></script>
+                </div>
+
+</div>
+            </div>
+            <div class="abs window_bottom">
+               Task Manager
+            </div>
+        </div>
+        <span class="abs ui-resizable-handle ui-resizable-se"></span>
+    </div>
