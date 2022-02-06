@@ -942,11 +942,10 @@ th.shrink {
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
     border: 1px solid #93c3cd;
-    background: #93c3cd url(images/ui-bg_diagonals-small_50_93c3cd_40x40.png)
-        50% 50% repeat;
+    background: #93c3cd url(images/ui-bg_diagonals-small_50_93c3cd_40x40.png) 50% 50% repeat;
     font-weight: bold;
     color: #333333;
-    width: 250px;
+    min-width: 160px;
 }
 .board-item-gragable {
     border: 1px solid black;
@@ -1069,7 +1068,7 @@ th.shrink {
     border: none;
     margin: 0;
     padding: 9px 16px;
-    max-width: 160px;
+    /* max-width: 160px; */
     text-align: center;
 }
 .user-tabs .ui-tabs-nav .ui-state-default .users-tab-link {
@@ -2208,7 +2207,8 @@ textarea.c-field.is-post {
 }
 
 #window_messages {
-    min-height: 900px;
+    min-width: 850px;
+    min-height: 512px;
 }
 
 #private_chanels_admin {

@@ -33,43 +33,51 @@
             </div>
             -->
 
-            <div class="abs window_content" id="messages_tabs">
-                <div class="window_main user-tabs">
-                <ul>
-                    <li><a class="users-tab-link" href="#chats">Chats</a></li>
-                    <li><a class="users-tab-link" href="#chanels">Chanels</a></li>
-                    <li><a class="users-tab-link" href="#private_chanels">Private Chanels</a></li>
-                    <li><a class="users-tab-link" href="#private_chanels_admin">Private Chanels Settings</a></li>
-                    <li><a class="users-tab-link" href="#create_chanel">Create Chanel</a></li>
-                </ul>
-
+            <div class="c-window__tabs-wrap _abs _window_content" id="messages_tabs">
+                <div class="c-window__tabs window_main user-tabs">
+                    <ul class="c-window__tabs-inner">
+                        <li class="c-window__tab"><a class="users-tab-link" href="#chats">Chats</a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#chanels">Chanels</a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#private_chanels">Private Chanels</a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#private_chanels_admin">Private Chanels Settings</a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#create_chanel">Create Chanel</a></li>
+                    </ul>
                 </div>
-                <div id="chats">
+
+                <div class="c-window__tab-content" id="chats">
                     <script type="text/javascript" src="js/pages/main/messages.js"></script>
                 </div>
-                <div id="chanels">
+
+                <div class="c-window__tab-content" id="chanels">
                     <script type="text/javascript" src="js/pages/main/chanels.js"></script>
                 </div>
-                <div id="private_chanels">
+
+                <div class="c-window__tab-content" id="private_chanels">
                     <script type="text/javascript" src="js/pages/main/private_chanels.js"></script>
                 </div>
-                 <div id="create_chanel">
+
+                 <div class="c-window__tab-content" id="create_chanel">
                     <div>
-                     <input name="chanel_name" type="text" id="chanel_name">
-                     <input name="is_private" type="checkbox" id="is_private"> is private
-                     <button id="create_chanel_submit">create chanel</button>
+                        <input name="chanel_name" type="text" id="chanel_name">
+                        <input name="is_private" type="checkbox" id="is_private"> is private
+                        <button id="create_chanel_submit">create chanel</button>
                     </div>
+
                     <script type="text/javascript" src="js/pages/main/create_chanel.js"></script>
                 </div>
 
-                <div id="private_chanels_admin">
+                <div class="c-window__tab-content" id="private_chanels_admin">
                     <script type="text/javascript" src="js/pages/main/private_chanels_admin.js"></script>
                 </div>
             </div>
         </div>
-        <div class="abs window_bottom">
-            Messages
+
+        <div class="c-window__status-bar _abs _window_bottom">
+            <div class="c-window__status-text">
+                Some text
+            </div>
         </div>
     </div>
+
     <span class="abs ui-resizable-handle ui-resizable-se"></span>
 </div>

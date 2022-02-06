@@ -29,39 +29,41 @@
 </div>
 -->
 
-<?php foreach ($chanels as $chanel) : ?>
-    <div class="c-chat-card">
-        <div class="c-chat-card__inner">
-            <div class="c-chat-card__image-wrap">
-                <img src="https://www.fillmurray.com/360/360" alt="" class="c-chat-card__image">
-            </div>
-
-            <div class="c-chat-card__main">
-                <div class="c-chat-card__title">
-                    <?php echo $this->escapeHtml($chanel->chanel_name); ?>
+<div class="c-window__scrollable-space">
+    <?php foreach ($chanels as $chanel) : ?>
+        <div class="c-chat-card">
+            <div class="c-chat-card__inner">
+                <div class="c-chat-card__image-wrap">
+                    <img src="https://www.fillmurray.com/360/360" alt="" class="c-chat-card__image">
                 </div>
 
-                <div class="c-chat-card__author">
-                    {{channel_author}}
+                <div class="c-chat-card__main">
+                    <div class="c-chat-card__title">
+                        <?php echo $this->escapeHtml($chanel->chanel_name); ?>
+                    </div>
+
+                    <div class="c-chat-card__author">
+                        {{channel_author}}
+                    </div>
                 </div>
-            </div>
 
-            <div class="c-chat-card__controls">
-                <a class="c-chat-card__enter-button js-join-channel"
-                    to_chanel="<?php echo $chanel->id;?>"
-                    href="<?php echo $url; ?>"
-                >
-                    <svg class="icon-nw icon-nw-open-in-new-black-24" viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0V0z" fill="none"/>
-                        <path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
-                    </svg>
+                <div class="c-chat-card__controls">
+                    <a class="c-chat-card__enter-button js-join-channel"
+                        to_chanel="<?php echo $chanel->id;?>"
+                        href="<?php echo $url; ?>"
+                    >
+                        <svg class="icon-nw icon-nw-open-in-new-black-24" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0V0z" fill="none"/>
+                            <path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                        </svg>
 
-                    Open
-                </a>
+                        Open
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-<?php endforeach; ?>
+    <?php endforeach; ?>
+</div>
 
     <script type="text/javascript">
         window.to_chanel = {
