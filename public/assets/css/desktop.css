@@ -1470,7 +1470,7 @@ textarea.c-field.is-post {
     padding: unset;
     height: unset;
     height: 40px;
-    box-shadow: inset 0px -0.5px 0px rgba(0, 0, 0, 0.05);
+    /* box-shadow: inset 0px -0.5px 0px rgba(0, 0, 0, 0.05); */
     z-index: 1;
     padding-left: 16px;
 }
@@ -1479,12 +1479,15 @@ textarea.c-field.is-post {
     content: '';
     display: block;
     position: absolute;
-    top: 100%;
+    /* top: 100%; */
+    bottom: 0;
     right: 0;
     left: 0;
     height: 1px;
-    box-shadow: inset 0px 0.5px 0px rgba(0, 0, 0, 0.15);
+    /* box-shadow: inset 0px 0.5px 0px rgba(0, 0, 0, 0.15); */
     pointer-events: none;
+    /* display: none; */
+    background-color: #E9E9E9;
 }
 
 .c-window__title {
@@ -1555,6 +1558,10 @@ textarea.c-field.is-post {
     border: unset;
 }
 
+.c-window__tabs-wrap.is-vertical-navigation {
+    flex-direction: row;
+}
+
 .c-window__tabs {
     flex: none;
     position: relative;
@@ -1563,6 +1570,19 @@ textarea.c-field.is-post {
     padding: 8px 16px;
     box-shadow: inset 0px -0.5px 0px rgba(0, 0, 0, 0.05);
     z-index: 1;
+}
+
+.c-window__tabs-wrap.is-vertical-navigation .c-window__tabs {
+    position: relative;
+    background: #f3f3f3;
+    width: 240px;
+    padding: 16px;
+    z-index: 0;
+    border-right: 1px solid #E9E9E9;
+}
+
+.c-window__tabs-wrap.is-vertical-navigation .c-window__tabs::after {
+    display: none;
 }
 
 :root .c-window__tabs-inner {
@@ -1574,7 +1594,22 @@ textarea.c-field.is-post {
     max-width: 100%;
 }
 
+.c-window__tabs-wrap.is-vertical-navigation .c-window__tabs-inner {
+    display: block;
+    box-shadow: unset;
+    background-color: unset;
+}
+
 .c-window__tab {}
+
+.c-window__tabs-wrap.is-vertical-navigation .c-window__tab {
+    text-align: left;
+    float: none;
+}
+
+.c-window__tabs-wrap.is-vertical-navigation.ui-tabs .c-window__tab + li.c-window__tab {
+    margin-top: 8px !important;
+}
 
 .c-window__tabs::after {
     content: '';
@@ -1588,9 +1623,18 @@ textarea.c-field.is-post {
     pointer-events: none;
 }
 
+:root .c-window__tab-content {
+    padding: 0;
+}
+
 .c-window__tab-content {
     flex: 1;
     position: relative;
+}
+
+.c-window__tabs-wrap.is-vertical-navigation .c-window__tab-content {
+    flex: 1;
+    min-width: 0;
 }
 
 .c-window__scrollable-space {
@@ -2199,7 +2243,8 @@ textarea.c-field.is-post {
 
 
 #window_blogs {
-    min-height: 528px;
+    min-width: 850px;
+    min-height: 512px;
 }
 
 #list_blogs {
