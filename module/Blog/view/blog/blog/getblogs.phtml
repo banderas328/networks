@@ -3,20 +3,45 @@
         <?php if (!empty($blogs)): ?>
             <div class="c-blog__posts">
                 <?php foreach ($blogs as $blog): ?>
-                    <div class="c-post">
+                    <article class="c-post" data-date="<?php echo $blog['date']; ?>">
                         <div class="c-post__header">
-                            <?php echo $blog['first_name']; ?>
-                            <?php echo $blog['second_name']; ?>
-                            <?php echo "<img src=".$blog['avatar'].">"; ?>
-                            <?php echo $blog['job']; ?>
-                            <?php echo $blog['date']; ?>
+                            <div class="c-post__author">
+                                <div class="c-post__avatar">
+                                    <img src="<?php echo $blog['avatar']; ?>">
+                                </div>
+
+                                <div class="c-post__author-detais">
+                                    <div class="c-post__author-name">
+                                        <?php echo $blog['first_name']; ?> <?php echo $blog['second_name']; ?>
+                                    </div>
+
+                                    <div class="c-post__author-job">
+                                        <?php echo $blog['job']; ?>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="c-post__publication-date">
+                                <div class="description">
+                                    Published
+                                </div>
+
+                                <div class="value js-publication-date-value">
+                                    <?php echo $blog['date']; ?>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="c-post__main">
+                            <h2 class="c-post__title">
+                                <?php echo $blog["blog_title"]; ?>
+                            </h2>
+
                             <div class="c-post__image-wrap">
                                 <img class="image" src="<?php echo $blog["file_name"]; ?>">
                             </div>
-                            <?php echo $blog["blog_title"]; ?>
+
                             <div class="c-post__content">
                                 <?php echo $blog["blog_content"]; ?>
                             </div>
@@ -34,6 +59,11 @@
 
                                 <div class="c-leave-comment__footer">
                                     <button class="comment_blog c-button c-leave-comment__add-button"type="button" blog_id="<?php echo $blog["blog_id"]; ?>">
+                                        <svg class="icon-nw icon-nw-add-comment-24" viewBox="0 0 24 24">
+                                            <path fill="none" d="M0 0h24v24H0V0z"/>
+                                            <path d="M22 4c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4zm-2 13.2L18.8 16H4V4h16v13.2zM13 5h-2v4H7v2h4v4h2v-4h4V9h-4V5z"/>
+                                        </svg>
+
                                         Add comment
                                     </button>
                                 </div>
@@ -44,23 +74,40 @@
 
                                 <div class="c-post__show-comments">
                                     <button class="show_comments c-button" blog_id="<?php echo $blog["blog_id"]; ?>">
-                                        Show post comments
+                                        <svg class="icon-nw icon-nw-question-answer-24" viewBox="0 0 24 24">
+                                            <path fill="none" d="M0 0h24v24H0V0z"/>
+                                            <path d="M15 4v7H5.2l-.6.6-.6.6V4h11m1-2H3c-.5 0-1 .5-1 1v14l4-4h10c.5 0 1-.4 1-1V3c0-.5-.5-1-1-1zm5 4h-2v9H6v2c0 .5.4 1 1 1h11l4 4V7c0-.6-.5-1-1-1z"/>
+                                        </svg>
+
+                                        Show comments
                                     </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </article>
                 <?php endforeach; ?>
             </div>
 
             <div class="c-blog__footer">
                 <?php $offset += 5; ?>
                 <button class="c-button blogs_more" type="button" value="get more" offset="<?php echo $offset; ?>">
+                    <svg class="icon-nw icon-nw-expand-more-24" viewBox="0 0 24 24">
+                        <path fill="none" d="M24 24H0V0h24v24z"/>
+                        <path d="M16.6 8.6 12 13.2 7.4 8.6 6 10l6 6 6-6-1.4-1.4z"/>
+                    </svg>
+
                     Show more posts
                 </button>
             </div>
         <?php else: ?>
             <div class="c-blog__no-posts">
+                <svg class="icon-nw icon-nw-sentiment-dissatisfied-24" viewBox="0 0 24 24">
+                    <path fill="none" d="M0 0h24v24H0V0z"/>
+                    <circle cx="15.5" cy="9.5" r="1.5"/>
+                    <circle cx="8.5" cy="9.5" r="1.5"/>
+                    <path d="M12 14c-2.3 0-4.3 1.4-5.1 3.5h1.7c.7-1.2 2-2 3.4-2s2.8.8 3.4 2h1.7c-.8-2.1-2.8-3.5-5.1-3.5zm0-12C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"/>
+                </svg>
+
                 Not posts to show
             </div>
         <?php endif; ?>
@@ -68,11 +115,41 @@
 </div>
 
 <script type="text/javascript">
+    function replaceDate($element) {
+        const className = 'is-formated';
+
+        if ($element.classList.contains(className)) {
+            return;
+        }
+
+        const date = new Date(Number($element.innerText));
+        const options = {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZone: 'UTC',
+            // timeZoneName: 'short',
+        };
+
+        $element.innerText = date.toLocaleDateString('en-US', options);
+        $element.classList.add(className);
+    }
+
+    function formatPostDates($rootElement = document) {
+        $rootElement.querySelectorAll('.js-publication-date-value')
+            .forEach(replaceDate);
+    }
+
     $(function () {
-        $(".show_comments").on("click",function(){
+        // replace date string
+        formatPostDates()
+
+        $(".show_comments").off().on("click",function(){
             var blog_id = $(this).attr("blog_id");
             load_comments(blog_id);
-
         });
 
         function load_comments(blog_id){
@@ -125,6 +202,11 @@
                         const $showMoreButton = `
                             <div class="c-post__show-more">
                                 <button blog_id="${data[0].blog_id}" class="more_comments c-button">
+                                    <svg class="icon-nw icon-nw-expand-more-24" viewBox="0 0 24 24">
+                                        <path fill="none" d="M24 24H0V0h24v24z"/>
+                                        <path d="M16.6 8.6 12 13.2 7.4 8.6 6 10l6 6 6-6-1.4-1.4z"/>
+                                    </svg>
+
                                     Show more
                                 </button>
                             </div>
@@ -151,7 +233,7 @@
             $element.val('');
         }
 
-        $(".comment_blog").on("click",function(){
+        $(".comment_blog").off().on("click",function(){
             const blog_id = $(this).attr("blog_id");
             const $commentField = $(`textarea[blog_id="${blog_id}"]`)
             const content_blog = $commentField.val();
@@ -172,14 +254,22 @@
                 });
         });
 
-        $(".blogs_more").bind("click", function () {
+        $(".blogs_more").off().on("click", function () {
             $.ajax({
                 type: "POST",
                 url: "blog/getblogs",
-                data: {offset: $(this).attr("offset")}
+                data: {
+                    offset: $(this).attr("offset"),
+                },
             })
-                .done(function (data) {
-                    $("#list_blogs").append(data);
+                .done(function(data) {
+                    const $template = document.createElement('template');
+                    const $listBlogs = document.querySelector('#list_blogs');
+                    const $postsWrapper = document.querySelector('.c-blog__posts');
+                    $template.innerHTML = data;
+                    const $newPosts = $template.content.querySelectorAll('.c-post');
+                    $postsWrapper.append(...$newPosts);
+                    $($listBlogs).html($listBlogs.innerHTML); // TODO: Think of a better solution
                 });
         })
     });

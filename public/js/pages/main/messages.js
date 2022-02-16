@@ -4,12 +4,12 @@ $(function() {
     });
     $('#window_messages').draggable();
     $( "#messages_tabs" ).tabs();
-    $.ajax({
-        type: "GET",
-        url: "messages/getListMessagesCounts"
 
-    })
-        .done(function( data ) {
+    $.ajax({
+            type: "GET",
+            url: "messages/getListMessagesCounts"
+        })
+        .done(function(data) {
             $("#chats").html(data);
         });
 

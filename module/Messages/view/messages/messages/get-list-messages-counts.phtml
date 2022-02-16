@@ -1,23 +1,79 @@
-<?php
-if($data)
-    foreach($data as $friend){
-        echo "<img style='width:80px;height:80px;'src=".$friend['avatar'].">";
-        echo $friend['first_name'];
-        echo $friend['second_name'];
-        echo "<button class='start_chat' with_user='".$friend['user_id']."'>start chat</button>";
-        echo "<br>";
-    }
-?>
+<!-- TODO: Don't delete! Temporarily stopped here.
+<div class="c-chat-card">
+    <div class="c-chat-card__inner">
+        <div class="c-chat-card__image-wrap">
+            <img src="https://www.fillmurray.com/360/360" alt="" class="c-chat-card__image">
+        </div>
+
+        <div class="c-chat-card__main">
+            <div class="c-chat-card__title">
+                Some chat name
+            </div>
+
+            <div class="c-chat-card__job">
+                {{job_name}}
+            </div>
+        </div>
+
+        <div class="c-chat-card__controls">
+            <button class="c-chat-card__enter-button" type="button">
+                <svg class="icon-nw icon-nw-open-in-new-black-24" viewBox="0 0 24 24">
+                    <path d="M0 0h24v24H0V0z" fill="none"/>
+                    <path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                </svg>
+
+                Open
+            </button>
+        </div>
+    </div>
+</div>
+-->
+
+<div class="c-window__scrollable-space">
+    <?php if ($data): ?>
+        <?php foreach ($data as $friend): ?>
+            <?php $fullName = $friend['first_name']." ".$friend['second_name']; ?>
+
+            <div class="c-chat-card">
+                <div class="c-chat-card__inner">
+                    <div class="c-chat-card__image-wrap">
+                        <img src="<?php echo $friend['avatar']; ?>" alt="<?php echo $fullName; ?>" class="c-chat-card__image">
+                    </div>
+
+                    <div class="c-chat-card__main">
+                        <div class="c-chat-card__title">
+                            <?php echo $fullName; ?>
+                        </div>
+
+                        <div class="c-chat-card__job">
+                            <?php echo $friend['job']; ?>
+                        </div>
+                    </div>
+
+                    <div class="c-chat-card__controls">
+                        <button class="c-chat-card__enter-button js-open-chat" type="button" with_user="<?php echo $friend['user_id']; ?>">
+                            <svg class="icon-nw icon-nw-open-in-new-black-24" viewBox="0 0 24 24">
+                                <path d="M0 0h24v24H0V0z" fill="none"/>
+                                <path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                            </svg>
+
+                            Open
+                        </button>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div>
+
 <script type="text/javascript">
 
     $(function() {
-
-
-        $(".start_chat").bind("click",function(){
+        $('.js-open-chat').on('click', function() {
             send_message_from_user_chat(this);
         });
-
     });
+
     function send_message_from_user_chat(element) {
         var to_user = $(element).attr('with_user');
         $('.message_to_user_area_chat').val("");
