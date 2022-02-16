@@ -5,10 +5,16 @@
         Creat Post
     </div>
 
-    <div class="c-blog-post__field">
-        <input type="text" id="blog_title">
-        <textarea class="c-field is-post" id="new_blog_text" placeholder="Write your post"></textarea>
+    <div class="c-blog-post__fields">
+        <div class="c-blog-post__field">
+            <input class="c-field" type="text" id="blog_title" placeholder="Post title">
+        </div>
+
+        <div class="c-blog-post__field">
+            <textarea class="c-field is-post" id="new_blog_text" placeholder="Write your post"></textarea>
+        </div>
     </div>
+
 
     <div class="c-blog-post__footer">
         <div class="c-blog-post__file">
@@ -32,6 +38,12 @@
         </div>
 
         <button class="c-button c-blog-post__save-button" type="button" value="save" id="blog_save" name="blog_image">
+            <svg class="icon-nw icon-nw-add-fpost-24" viewBox="0 0 24 24">
+                <path fill="none" d="M0 0h24v24H0z"/>
+                <path d="M17 19.2H5V7h7V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-7h-2v7.2z"/>
+                <path d="M19 2h-2v3h-3v2h3v3h2V7h3V5h-3V2zM7 9h8v2H7zM7 12v2h8v-2h-3zM7 15h8v2H7z"/>
+            </svg>
+
             Add Post
         </button>
     </div>
@@ -51,11 +63,17 @@
             var data = new FormData();
             data.append('file', file);
             data.append('text', text);
-           data.append('blog_title', blog_title);
+            data.append('blog_title', blog_title);
             var url  = "blog/saveblog";
             var request = new XMLHttpRequest();
             var xmlupload=request.upload;
-            xmlupload.addEventListener('load', alert("blog created"), false);
+            xmlupload.addEventListener('load', () => {
+                alert("Post is created");
+
+                $('#notes_tabs').tabs({
+                    active: 0,
+                });
+            }, false);
             request.open("POST", url, true);
             request.send(data);
         });
