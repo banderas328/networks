@@ -4,7 +4,7 @@ foreach($requests->buffer()->toArray() as $request) {
     echo $request['first_name']." ".$request['second_name']." "."<a  class='link_ajax privateChanelAccessDenied' href='chanels/privateChanelAccessDeny' user_id=".$request['user_id']."  chanel_id=".$request['chanel_id'].">Deny Access</a>";
     echo " <a class='link_ajax privateChanelAccessAllow' href='chanels/privateChanelAccessAllow' user_id=".$request['user_id']."  chanel_id=".$request['chanel_id'].">Allow Access</a>";
 
-    if(!$request['confirmed'] ) {
+    if(!$request['is_confirmed'] ) {
         echo " Waiting";
     }
     else {

@@ -7,8 +7,13 @@
         <a class="join_chanel_request" to_chanel="<?php echo $chanel->chanel_id; ?>"
            href="<?php echo $this->url('chanels',
                array('action' => 'join_chanel_request', 'id' => $chanel->chanel_id)); ?>">Make Request</a>
+  <?php if ($chanel->pending_response)  {  ?>
+        <h3>Waiting</h3>
+  <?php }?>
+
+
         <?php
-      if($chanel->confirmed and $chanel->user_id == $user_id) {
+      if($chanel->is_confirmed and $chanel->user_id == $user_id) {
         ?>
         <a class="join_chanel_private" to_chanel="<?php echo $chanel->chanel_id; ?>" href="
                       <?php
@@ -16,7 +21,7 @@
             array('action' => 'join_chanel', 'id' => $chanel->chanel_id)); ?>">Join Chanel</a>
         <?php
     }
-    if(!$chanel->confirmed and $chanel->user_id == $user_id) {
+    if(!$chanel->is_confirmed and $chanel->user_id == $user_id) {
        echo "please wait";
     }
     ?>
