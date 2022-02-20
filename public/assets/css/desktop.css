@@ -1302,7 +1302,7 @@ textarea.c-field {
     font-size: 14px;
     line-height: 20px;
     font-family: var(--ff-base);
-    padding: 8px;
+    padding: 9px 8px 7px;
     color: #333333;
     box-shadow: unset;
     height: unset;
@@ -1327,7 +1327,7 @@ textarea.c-field::placeholder {
     background: var(--button-gradient);
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
-    padding: 8px 16px 8px 16px;
+    padding: 9px 16px 7px 16px;
     font-family: var(--ff-base);
     font-style: normal;
     font-weight: 400;
@@ -1348,6 +1348,67 @@ textarea.c-field::placeholder {
     font-size: 24px;
     margin-right: 12px;
 }
+
+
+
+/* .c-checkbox */
+
+.c-checkbox {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.c-checkbox__input {
+    display: none;
+}
+
+.c-checkbox__input:hover ~ .c-checkbox__icon {
+    border-color: #57b6ff;
+}
+
+.c-checkbox__input:hover ~ .c-checkbox__icon::before {
+    background-color: #57b6ff;
+}
+
+.c-checkbox__input:checked ~ .c-checkbox__icon {
+    border-color: #15d3c9;
+}
+
+.c-checkbox__input:checked ~ .c-checkbox__icon::before {
+    background-color: #15d3c9;
+    opacity: 1;
+}
+
+.c-checkbox__icon {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border: 2px solid #E9E9E9;
+    border-radius: 4px;
+    cursor: inherit;
+}
+
+.c-checkbox__icon::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    background-color: #E9E9E9;
+    border-radius: 2px;
+    cursor: inherit;
+    opacity: 0;
+}
+
+.c-checkbox__text {
+    margin-left: 8px;
+    cursor: inherit;
+}
+
 
 
 /* .c-blog-post  */
@@ -2324,6 +2385,33 @@ textarea.c-field::placeholder {
 
 
 
+/* .c-create-channel */
+
+.c-create-channel {}
+
+.c-create-channel__header {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 30px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    color: #333333;
+}
+
+.c-create-channel__main {}
+
+.c-create-channel__row {
+    display: flex;
+}
+
+.c-create-channel__footer {
+    display: flex;
+}
+
+.c-create-channel__create-button {
+    margin-left: auto;
+}
 
 
 #window_blogs {
