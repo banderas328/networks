@@ -72,32 +72,6 @@
                     <?php $isWaiting = !$chanel->confirmed and $chanel->user_id == $user_id; ?>
                     <?php $isClosed = true; ?>
 
-    <?php
-   // var_dump($chanel);
-    echo $this->escapeHtml($chanel->chanel_name); ?>
-        <a class="join_chanel_request" to_chanel="<?php echo $chanel->chanel_id; ?>"
-           href="<?php echo $this->url('chanels',
-               array('action' => 'join_chanel_request', 'id' => $chanel->chanel_id)); ?>">Make Request</a>
-  <?php if ($chanel->pending_response)  {  ?>
-        <h3>Waiting</h3>
-  <?php }?>
-
-
-        <?php
-      if($chanel->is_confirmed and $chanel->user_id == $user_id) {
-        ?>
-        <a class="join_chanel_private" to_chanel="<?php echo $chanel->chanel_id; ?>" href="
-                      <?php
-        echo $this->url('chanels',
-            array('action' => 'join_chanel', 'id' => $chanel->chanel_id)); ?>">Join Chanel</a>
-        <?php
-    }
-    if(!$chanel->is_confirmed and $chanel->user_id == $user_id) {
-       echo "please wait";
-    }
-    ?>
-    <br/>
-<?php endforeach; ?>
                     <?php if ($isConfirmed): ?>
                         <a class="c-chat-card__enter-button js-join-private-channel join_chanel_private"
                             to_chanel="<?php echo $chanel->chanel_id; ?>"
@@ -136,6 +110,35 @@
                 </div>
             </div>
         </div>
+
+        <hr><br>New<br>
+        <?php
+   // var_dump($chanel);
+    echo $this->escapeHtml($chanel->chanel_name); ?>
+        <a class="join_chanel_request" to_chanel="<?php echo $chanel->chanel_id; ?>"
+           href="<?php echo $this->url('chanels',
+               array('action' => 'join_chanel_request', 'id' => $chanel->chanel_id)); ?>">Make Request</a>
+  <?php if ($chanel->pending_response)  {  ?>
+        <h3>Waiting</h3>
+  <?php }?>
+
+
+        <?php
+      if($chanel->is_confirmed and $chanel->user_id == $user_id) {
+        ?>
+        <a class="join_chanel_private" to_chanel="<?php echo $chanel->chanel_id; ?>" href="
+                      <?php
+        echo $this->url('chanels',
+            array('action' => 'join_chanel', 'id' => $chanel->chanel_id)); ?>">Join Chanel</a>
+        <?php
+    }
+    if(!$chanel->is_confirmed and $chanel->user_id == $user_id) {
+       echo "please wait";
+    }
+    ?>
+    <br/>
+
+        <hr><br>Old<br>
 
             <a class="join_chanel_request" to_chanel="<?php echo $chanel->chanel_id; ?>" href="<?php echo $this->url('chanels', array('action' => 'join_chanel_request', 'id' => $chanel->chanel_id)); ?>">
                Make Request
