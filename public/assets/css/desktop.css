@@ -1763,14 +1763,22 @@ textarea.c-field::placeholder {
 
 .c-blog__no-posts {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
     max-width: 100%;
     font-size: 18px;
     font-weight: 600;
     line-height: 22px;
-    min-height: 256px;
+    min-height: 400px;
+    text-align: center;
 }
+
+.c-blog__no-posts-icon {
+    font-size: 96px;
+}
+
+.c-blog__no-posts-title {}
+
 
 
 /* .c-post */
