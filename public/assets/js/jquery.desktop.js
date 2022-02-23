@@ -182,7 +182,14 @@ console.info("1");
           if ($(x).is(':hidden')) {
 
             $(x).remove().appendTo('#dock');
-            $(x).show('fast');
+            // $(x).siblings().removeClass('is-active');
+            $(x).show({
+              duration: 'fast',
+              start() {
+                $(this).addClass('is-active');
+                $(this).css('display', 'flex');
+              },
+            });
           }
 
           // Bring window to front.
@@ -203,15 +210,18 @@ console.info("1");
         d.on('click', '#dock a', function() {
           // Get the link's target.
           var x = $($(this).attr('href'));
+          const $parent = $(this).parent();
 
           // Hide, if visible.
           if (x.is(':visible')) {
             x.hide();
-          }
-          else {
+            $parent.removeClass('is-active');
+          } else {
             // Bring window to front.
             JQD.util.window_flat();
             x.show().addClass('window_stack');
+            // $parent.siblings().removeClass('is-active');
+            $parent.addClass('is-active');
           }
         });
 
@@ -257,6 +267,9 @@ console.info("1");
         // Minimize the window.
         d.on('click', 'a.window_min', function() {
           $(this).closest('div.window').hide();
+
+          const $button = $($(this).siblings('a.window_close').attr('href'));
+          $button.removeClass('is-active');
         });
 
         // Maximize or restore the window.
@@ -269,7 +282,9 @@ console.info("1");
           $(this).closest('div.window').hide();
 
           // Hide taskbar button
-          $($(this).attr('href')).hide('fast');
+          const $button = $($(this).attr('href'));
+          $button.hide('fast');
+          $button.removeClass('is-active');
         });
 
         // Show desktop button, ala Windows OS.
@@ -277,12 +292,16 @@ console.info("1");
           // If any windows are visible, hide all.
           if ($('div.window:visible').length) {
             $('div.window').hide();
+            $('#dock li.is-active:visible').removeClass('is-active');
           } else {
+            console.log('div.window:not-visible');
             // Otherwise, reveal hidden windows that are open.
             $('#dock li:visible a').each(function() {
-                console.info("2");
-                console.info($(this).attr('href'));
-                console.info("2");
+              const $button = $(this).parent();
+              $button.addClass('is-active');
+              console.info("2");
+              console.info($(this).attr('href'));
+              console.info("2");
               $($(this).attr('href')).show();
             });
           }
