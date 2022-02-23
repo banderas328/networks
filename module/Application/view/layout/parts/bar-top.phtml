@@ -1,0 +1,131 @@
+<div class="abs r-border-box-area" id="bar_top">
+    <!--
+        <div style="margin-right:10px" class="float_right">
+            <span class="lang" lang="en">
+                <img style="border:1px solid black;" src="assets/images/icons/british-flag.jpg"/>
+            </span>
+
+            <span class="lang" lang="ru">
+                <img style="border:1px solid black;" src="assets/images/icons/russia-flag.gif"/>
+            </span>
+
+            <script type="text/javascript" src="js/pages/main/lang.js"></script>
+        </div>
+    -->
+
+    <ul>
+        <li id="notifications_block">
+            <a class="menu_trigger" href="#" >Notifications</a>
+
+            <!--
+            <ul class="menu">
+                <li>
+                    <a href="http://jqueryenlightenment.com/">jQuery Enlightenment</a>
+                </li>
+            </ul>
+            -->
+        </li>
+
+        <script type="text/javascript">
+            function sync_notifications() {
+                $.ajax({
+                    type: "POST",
+                    url: "notifications/index",
+                    dataType: "json",
+                    data: {},
+                })
+                    .done(function(data) {
+                        $( data ).each(function( index,value ) {
+                            var notification_id =  value.id + "notification";
+                            var notification_text = $("#"+notification_id).text();
+                            if(notification_text.length == 0) {
+                                var markup = "<li><a id='"+notification_id+"'>"+value.text+"</a></li>";
+                                $("#notifications_block .menu").append(markup);
+
+                            }
+                        });
+
+                        setTimeout(sync_notifications, 5000);
+                    });
+            }
+
+            $(function (){
+                sync_notifications();
+            });
+        </script>
+
+        <li>
+            <a class="menu_trigger" href="#">Manual</a>
+
+            <!--
+            <ul class="menu">
+                <li>
+                    <a href="http://diveintohtml5.info/">Dive Into HTML5</a>
+                </li>
+                <li>
+                    <a href="http://www.alistapart.com/articles/get-ready-for-html-5/">Get Ready for HTML5</a>
+                </li>
+                <li>
+                    <a href="http://html5boilerplate.com/">HTML5 Boilerplate</a>
+                </li>
+                <li>
+                    <a href="http://html5doctor.com/">HTML5 Doctor</a>
+                </li>
+                <li>
+                    <a href="http://html5.org/">HTML5 Intro</a>
+                </li>
+                <li>
+                    <a href="http://www.zeldman.com/superfriends/">HTML5 Super Friends</a>
+                </li>
+            </ul>
+            -->
+        </li>
+
+        <!--
+        <li>
+            <a class="menu_trigger" href="#">Code</a>
+
+            <ul class="menu">
+                <li>
+                    <a href="assets/css/desktop.css">Desktop - CSS</a>
+                </li>
+                <li>
+                    <a href="assets/js/jquery.desktop.js">Desktop - JavaScript</a>
+                </li>
+                <li>
+                    <a href="http://github.com/nathansmith/jQuery-Desktop">GitHub Repository</a>
+                </li>
+            </ul>
+        </li>
+        -->
+
+        <li>
+            <a class="menu_trigger" href="#">Resets</a>
+
+            <ul class="menu">
+                <li>
+                    <a id="reset_interface">Reset interface</a>
+                </li>
+
+                <!--
+                <li>
+                    <a href="http://adrian-rodriguez.net/">Wallpaper by Adrian Rodriguez</a>
+                </li>
+                <li>
+                    <a href="http://tango.freedesktop.org/Tango_Desktop_Project">Icons - Tango Desktop Project</a>
+                </li>
+                -->
+            </ul>
+        </li>
+    </ul>
+
+    <span class="" id="clock"></span>
+</div>
+
+<script>
+    $(function(){
+        $("#reset_interface").on("click",function (){
+            window.location.reload();
+        });
+    });
+</script>

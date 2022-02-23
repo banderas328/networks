@@ -4,6 +4,21 @@
     --ff-roboto: 'Roboto', sans-serif;
     --ff-base: var(--ff-roboto);
     --button-gradient: linear-gradient(0deg, #1fcbe1 2.59%, #05e1a3 137.3%, #ffffff 144.49%);
+    --bar-shadow-base: 0 8px 16px rgba(0, 0, 0, 0.1),
+                     0 6px 8px rgba(0, 0, 0, 0.1),
+                     0 4px 4px rgba(0, 0, 0, 0.1),
+                     0 2px 2px rgba(0, 0, 0, 0.1),
+                     0 1px 1px rgba(0, 0, 0, 0.1);
+    --bar-shadow-top: 0 6px 16px rgba(0, 0, 0, 0.1),
+        0 -4px 8px rgba(0, 0, 0, 0.1),
+        0 -2px 4px rgba(0, 0, 0, 0.1),
+        0 -0px 2px rgba(0, 0, 0, 0.1),
+        0 1px 1px rgba(0, 0, 0, 0.1);
+    --bar-shadow-bottom: 0 6px 16px rgba(0, 0, 0, 0.1),
+        0 4px 8px rgba(0, 0, 0, 0.1),
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        0 0px 2px rgba(0, 0, 0, 0.1),
+        0 -1px 1px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -481,26 +496,6 @@ th.shrink {
 /* `Bar >> Top + Bottom
 ----------------------------------------------------------------------------------------------------*/
 
-#bar_top {
-    font-weight: bold;
-    padding: 0 10px;
-    left: 0;
-    right: 0;
-    position: relative;
-    bottom: -10px;
-}
-
-#bar_top {
-    background: #fff url(../images/gui/bar_top.png) repeat-x left bottom;
-    border-bottom: 1px solid #333;
-    color: #999;
-    line-height: 25px;
-    padding-right: 20px;
-    text-shadow: #fff 0 1px 1px;
-    height: 25px;
-    top: 0;
-}
-
 #bar_bottom {
     background: #333 url(../images/gui/bar_bottom.png) repeat-x;
     border-top: 1px solid #fff;
@@ -526,7 +521,6 @@ th.shrink {
     font-size: 14px;
     line-height: 20px;
     font-weight: 600;
-    overflow: hidden;
     text-shadow: unset;
     height: 40px;
     padding: 4px;
@@ -534,41 +528,66 @@ th.shrink {
     border: unset;
     background-image: unset;
     background-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1),
-                0 6px 8px rgba(0, 0, 0, 0.1),
-                0 4px 4px rgba(0, 0, 0, 0.1),
-                0 2px 2px rgba(0, 0, 0, 0.1),
-                0 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--bar-shadow-bottom, unset);
 }
 
 /* `Bar >> Links
 ----------------------------------------------------------------------------------------------------*/
+#clock {
+    align-self: center;
+    margin-left: auto;
+    padding: 0 8px;
+}
+
+#bar_top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: stretch;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 600;
+    text-shadow: unset;
+    height: 32px;
+    padding: 0 4px;
+    opacity: 1;
+    border: unset;
+    background-image: unset;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: var(--bar-shadow-top, unset);
+}
+
+#bar_top ul {
+    flex: none;
+    display: inherit;
+    align-items: inherit;
+    margin: 0;
+}
 
 #bar_top li {
-    float: left;
+    display: inherit;
+    align-items: inherit;
 }
 
 #bar_top li a {
-    display: block;
-    padding: 0 10px;
-}
-
-#bar_top li a {
-    background-image: url(../images/gui/bar_top_link.png);
-    background-repeat: no-repeat;
-    background-position: -99999px -99999px;
-    color: #000;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    color: #000000;
     overflow: hidden;
-    height: 25px;
     min-height: 1px;
+    cursor: pointer;
+}
+
+#bar_top a:hover {
+
 }
 
 #bar_top a.active {
     background-color: #06c;
-    background-position: 0 0;
-    background-repeat: repeat-x;
-    color: #fff;
-    text-shadow: none;
+    color: #ffffff;
 }
 
 #bar_top ul.menu {
@@ -584,6 +603,7 @@ th.shrink {
     padding: 1px 1px 0;
     position: absolute;
     min-width: 200px;
+    top: 100%;
     z-index: 30;
 }
 
@@ -756,10 +776,10 @@ th.shrink {
 
 #desktop {
     overflow: hidden;
-    top: 26px;
+    top: 32px;
     left: 0;
     right: 0;
-    bottom: 41px;
+    bottom: 40px;
 }
 
 #wrapper {
