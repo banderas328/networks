@@ -37,8 +37,9 @@ class  filesController extends Controller\preloaderController {
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $isRoot = false;
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();
+        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         if(!$request->isPost()){
           $dirs = array( 0 => array('id' => 0, 'path' => "/" ));
             $isRoot  = true;
@@ -48,7 +49,7 @@ class  filesController extends Controller\preloaderController {
         else {
             //bug may be becouse here post ( not get)
             $dirKey = (int) $request->getPost()->dir_key;
-            $dirs = $this->getUserDirs($dirKey,$userId)->toArray();
+            $dirs = $this->getUserDirs($dirKey,$userId);
             $isRoot  = false;
             $currentDirectory = (int) $request->getPost()->dir_key;
             $files = new Files();
@@ -68,12 +69,12 @@ class  filesController extends Controller\preloaderController {
         $request = $this->getRequest();
         $dirKey = (int) $request->getPost()->dir_key;
         $filesystem = new FileSystem();
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $parentDir = $this->getFileSystemTable()->getUserParentDir($filesystem->getAdapter(),$dirKey,$userId);
         $files = new Files();
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         if($parentDir !== false && $dirKey != 0 ) {
              $dirs = $this->getUserDirs($parentDir,$userId)->toArray();
             $isRoot  = false;
@@ -81,7 +82,7 @@ class  filesController extends Controller\preloaderController {
             $filesInDir = $this->getFilesTable()->getDirFiles($files->getAdapter(),$currentDirectory,$userId);
         }
         elseif($parentDir === false && $dirKey) {
-            $dirs = $this->getUserDirs(0,$userId)->toArray();
+            $dirs = $this->getUserDirs(0,$userId);
             $isRoot  = false;
             $currentDirectory = 0;
             $filesInDir = $this->getFilesTable()->getDirFiles($files->getAdapter(),$currentDirectory,$userId);
@@ -132,8 +133,8 @@ class  filesController extends Controller\preloaderController {
 
 
     public function downloadFileAction() {
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $fileId = $this->getEvent()->getRouteMatch()->getParam('value');
         $files = new Files();
         $file = $this->getFilesTable()->getFile($files->getAdapter(),$fileId,$userId)[0];
@@ -161,9 +162,9 @@ class  filesController extends Controller\preloaderController {
         $fileId = $requestData->file_id;
         $cost = $requestData->cost;
         $description = $requestData->description;
-        $tags = $requestData->tags;
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        //$tags = $requestData->tags;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $file = new Files();
         $fileData = $this->getFilesTable()->getFile($file->getAdapter(),$fileId,$userId);
         $fileId = $fileData[0]["id"];
@@ -180,8 +181,8 @@ class  filesController extends Controller\preloaderController {
         $request = $this->getRequest();
         $file_id = (int) $request->getPost()->file_id;
         $files = new Files();
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
        if($this->getFilesTable()->deleteFile($files->getAdapter(),$file_id,$userId)){
 
          //  $this->getPayedFilesTable()->deleteFileForPay($file_id);
@@ -195,12 +196,12 @@ class  filesController extends Controller\preloaderController {
         $request = $this->getRequest();
         $dirId = (int)$request->getPost()->dir;
         $fileSystem = new FileSystem();
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $dirs = $this->getFileSystemTable()->getChildDirs($fileSystem->getAdapter(), $dirId, $userId);
         $files = new Files();
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         foreach ($dirs as $dir) {
             $filesInDir = $this->getFilesTable()->getDirFiles($files->getAdapter(), $dir , $userId);
             if(count($filesInDir) > 0)
@@ -211,15 +212,15 @@ class  filesController extends Controller\preloaderController {
         $this->getFileSystemTable()->deleteDirWithChilds($fileSystem->getAdapter(),$dirs);
         die();
     }
-    
+
     public function moveDirectoryAction()
     {
         $request = $this->getRequest();
         $dirId = (int)$request->getPost()->dir_id;
         $dirIdCurrent = (int)$request->getPost()->current_directory;
         $fileSystem = new FileSystem();
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
 //         $dirs = $this->getFileSystemTable()->getChildDirs($fileSystem->getAdapter(), $dirId, $userId);
         $files = new Files();
 //         $user_session = new Container('user');
@@ -233,9 +234,8 @@ class  filesController extends Controller\preloaderController {
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $dirId = (int)$request->getPost()->dir;
-        $user_session = new Container('user');
-
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $files = new FileSystem();
         $dir  = $this->getFileSystemTable()->getDir($dirId,$userId,$files->getAdapter());
         $result = "error in share folder";
@@ -251,9 +251,10 @@ class  filesController extends Controller\preloaderController {
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $dirId = (int)$request->getPost()->dir;
-        $user_session = new Container('user');
+
         $password = $request->getPost()->password;
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $files = new FileSystem();
         $dir  = $this->getFileSystemTable()->getDir($dirId,$userId,$files->getAdapter());
         $result = "error in share folder";
@@ -264,17 +265,17 @@ class  filesController extends Controller\preloaderController {
         echo  json_encode($result);
         die();
     }
-    
+
     public function moveFileAction(){
-        
+
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $fileId = (int)$request->getPost()->file_id;
         $requiredDirId = (int)$request->getPost()->current_directory;
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $files = new Files();
-        $dir  = $this->getFilesTable()->moveFileToSyste($fileId,$requiredDirId,$userId,$files->getAdapter());
+        $dir  = $this->getFilesTable()->moveFileToSystem($fileId,$requiredDirId,$userId,$files->getAdapter());
         die();
     }
 
@@ -282,8 +283,9 @@ class  filesController extends Controller\preloaderController {
     public function setLocale () {
         $loc = $this->getServiceLocator();
         $translator = new Translator();
-        $user_session = new Container('user');
-        if($user_session->user) {
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
+        if($user_session->id) {
             $lang = $user_session->user->lang;
             $translator->addTranslationFile("phparray",$_SERVER["DOCUMENT_ROOT"]."/../config/language/"."lang.array.".$lang.'.php',false,$lang);
             $translator->setLocale($lang);
@@ -350,8 +352,8 @@ class  filesController extends Controller\preloaderController {
         }
         return $this->filesToTagsTable;
     }
-    
-    
+
+
 
 
 

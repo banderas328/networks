@@ -27,8 +27,8 @@ class BlogController extends Controller\preloaderController
     public function saveBlogAction()
     {
         $request = $this->getRequest();
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $post = array_merge_recursive(
             $request->getPost()->toArray(),
             $request->getFiles()->toArray()
@@ -42,8 +42,8 @@ class BlogController extends Controller\preloaderController
     public function getBlogsAction()
     {
         $this->layout('layout/only_form');
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         if (isset($this->getRequest()->getPost()->offset)) $offset = (int)$this->getRequest()->getPost()->offset;
         else $offset = 0;
         $friends = new Friends();
@@ -76,8 +76,8 @@ class BlogController extends Controller\preloaderController
     public function addCommentToBlogAction()
     {
         $this->layout('layout/only_form');
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $data = $this->getRequest()->getPost()->toArray();
         $data["user_id"] = $userId;
         $blogComment = new BlogCommentTable();

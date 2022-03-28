@@ -25,8 +25,8 @@ class MainController extends Controller\preloaderController
     public function setLocale () {
      //   $loc = $this->getServiceLocator();
      //   $translator = new Translator();
-        $user_session = new Container('user');
-        if($user_session->user) {
+        session_start();        $user_session = $_SESSION['user'];
+        if($user_session->id) {
             $lang = $user_session->user->lang;
             $translator->addTranslationFile("phparray",$_SERVER["DOCUMENT_ROOT"]."/../config/language/"."lang.array.".$lang.'.php',false,$lang);
             $translator->setLocale($lang);
