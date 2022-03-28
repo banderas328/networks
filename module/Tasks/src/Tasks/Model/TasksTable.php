@@ -31,7 +31,7 @@ class TasksTable
         session_start();        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $memberList = $data["members_list"];
-        $memberList .= ",".$user_id;
+        $memberList .= ",".$userId;
         $data["to_directory"] = 0;
         $fileTable = new \Files\Model\FilesTable;
         if (isset($data['file']['tmp_name'])) $fileID = $fileTable->saveUserFile($data);
@@ -98,13 +98,14 @@ class TasksTable
     public function getTasksForProject($project_id)
     {
         $project_id = (int) $project_id;
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id FROM tasks 
                 left join boards on boards.id = tasks.board_id 
                 left join projects on boards.project_id = projects.id
                 left join projects_members on projects_members.project_id = projects.id
-                WHERE tasks.is_archive = '0' and projects_members.project_id='" . $project_id . "' and projects_members.user_id = " . $user_id;
+                WHERE tasks.is_archive = '0' and projects_members.project_id='" . $project_id . "' and projects_members.user_id = " . $userId;
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $tasks = $resultSet->toArray();
         $columns = [];
@@ -126,7 +127,7 @@ class TasksTable
                 left join boards on boards.id = tasks.board_id 
                 left join projects on boards.project_id = projects.id
                 left join projects_members on projects_members.project_id = projects.id
-                WHERE tasks.is_archive = '1' and projects_members.project_id='" . $project_id . "' and projects_members.user_id = " . $user_id;
+                WHERE tasks.is_archive = '1' and projects_members.project_id='" . $project_id . "' and projects_members.user_id = " . $userId;
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $tasks = $resultSet->toArray();
         $columns = [];
@@ -188,7 +189,7 @@ class TasksTable
             $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
             $task["files"][]  = $resultSet->toArray()[0];
             $filesTable = new FilesTable();
-            $filesTable->deleteFile(false,$file["file_id"],$user_id);
+            $filesTable->deleteFile(false,$file["file_id"],$userId);
         }
         $delete_sql = "DELETE FROM tasks_files where task_id=".$task_id;
         $this->adapter->query($delete_sql, $this->adapter::QUERY_MODE_EXECUTE);
