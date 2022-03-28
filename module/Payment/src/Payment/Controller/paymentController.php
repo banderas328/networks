@@ -27,8 +27,8 @@ class  paymentController extends Controller\preloaderController
     public function getFinishedPaymentsAction(){
 
         $this->layout('layout/only_form');
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $payments = $this->getPaypalTable()->getUserPayments(array('user_id'=>$userId,'payment_status' => "approved"));
 
         return array('payments' => $payments);
@@ -39,8 +39,8 @@ class  paymentController extends Controller\preloaderController
     public function finishPaymentAction(){
         $this->layout('layout/only_form');
         $id = $this->getRequest()->getPost()->payment_id;
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $paypal =  new Paypal();
         $payment = $this->getPaypalTable()->getPayment(array('id' => $id,'user_id' => $userId ,'payment_status' => 'approved'),$paypal->getAdapter());
         if(!empty($payment)) {
@@ -67,8 +67,8 @@ class  paymentController extends Controller\preloaderController
     }
 
     public function getWalletAction(){
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $data = array("user_id" => $userId);
         $wallet =   $this->getWalletTable()->getWallet($data);
         echo $wallet;

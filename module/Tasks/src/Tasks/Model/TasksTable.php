@@ -28,8 +28,8 @@ class TasksTable
 
     public function createTask(array $data)
     {
-        $user_session = new Container('user');
-        $user_id = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $memberList = $data["members_list"];
         $memberList .= ",".$user_id;
         $data["to_directory"] = 0;
@@ -98,8 +98,8 @@ class TasksTable
     public function getTasksForProject($project_id)
     {
         $project_id = (int) $project_id;
-        $user_session = new Container('user');
-        $user_id = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id FROM tasks 
                 left join boards on boards.id = tasks.board_id 
                 left join projects on boards.project_id = projects.id
@@ -120,8 +120,8 @@ class TasksTable
     public function getArhiveForProject($project_id)
     {
         $project_id = (int) $project_id;
-        $user_session = new Container('user');
-        $user_id = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id,tasks.description FROM tasks 
                 left join boards on boards.id = tasks.board_id 
                 left join projects on boards.project_id = projects.id
@@ -181,8 +181,8 @@ class TasksTable
         $files_task_sql = "SELECT  * FROM tasks_files where task_id=".$task_id;
         $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
         $files = $resultSet->toArray();
-        $user_session = new Container('user');
-        $user_id = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         foreach ($files as $file){
             $files_task_sql = "SELECT  * FROM files where id=".$file["file_id"];
             $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);

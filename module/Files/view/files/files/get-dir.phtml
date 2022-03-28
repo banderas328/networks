@@ -12,11 +12,11 @@ if(!$is_root) {
         </form>
         <button id="paste">paste</button>
         <input type="text" id="directory_name">
-        <button value="create dir" class='btn btn-primary' id="create_dir"><?php echo $this->translate("Create_Directory",false,$lang);?></button>
+        <button value="create dir" class='btn btn-primary' id="create_dir"><?php echo $this->translate("Create directory",false,$lang);?></button>
 
         <input type="hidden" value="<?php echo $current_directory?>" id="current_directory">
     </div>
-        
+
 <?php
 }
 ?>
@@ -30,7 +30,7 @@ foreach($dirs as  $dir_key => $dir_value) {
 
 " ;
 if(!$is_root) {
-    
+
            echo "<div class='directory_actions hard-dropdown' dir=".$dir_value["id"].">
                     <p class='delete_directory hard-dropdown-items' dir=".$dir_value['id'].">".$this->translate('Delete_Directory',false,$lang)."</p>
                     <p class='share_dir hard-dropdown-items' dir=" . $dir_value['id'] . ">share dir</p>
@@ -57,7 +57,7 @@ if($filesInDir) {
                   echo "</div>";
             echo "</div>";
 
-       
+
         }
         else {
             echo "<div class='file_wraper' file=".$file['id'].">";
@@ -69,7 +69,7 @@ if($filesInDir) {
             echo "</div>";
             echo "</div>";
         }
-       
+
     }
 }
 ?>
@@ -104,7 +104,7 @@ document.oncontextmenu = function() {return false;}; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï
         	$("#paste").addClass("pastpaste_file_to_directory");
         	$("#paste").bind("click",function(){
                     var dir_id = window.need_to_paste_dir_id;
-                  
+
                     var current_directory = $("#current_directory").val();
                     $.ajax({
                         type: "POST",
@@ -126,9 +126,9 @@ document.oncontextmenu = function() {return false;}; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï
 
 
 
-    
+
         $(".parent_directory").attr("dir_key",<?php echo $current_directory?>)
-        $('.folder_action').mousedown(function(e){ 
+        $('.folder_action').mousedown(function(e){
       	  if( e.button == 2 ) { //2  - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, 3 - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     		  var dir =   $(this).attr("dir");
     		  if(!$(".directory_actions[dir="+dir+"]").hasClass("visible-block")) {
@@ -139,11 +139,11 @@ document.oncontextmenu = function() {return false;}; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï
     		  else {
     			  $(".directory_actions[dir="+dir+"]").removeClass("visible-block");
         		  }
-  		    return false; 
-  		  } 
-  		  return true; 
-  		}); 
-        $('.file_block').mousedown(function(e){ 
+  		    return false;
+  		  }
+  		  return true;
+  		});
+        $('.file_block').mousedown(function(e){
       	  if( e.button == 2 ) { //2  - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, 3 - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     		  var file =   $(this).attr("file");
     		  if(!$(".file_actions[file="+file+"]").hasClass("visible-block")) {
@@ -154,11 +154,11 @@ document.oncontextmenu = function() {return false;}; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï
     		  else {
     			  $(".file_actions[file="+file+"]").removeClass("visible-block");
         		  }
-    		
-  		    return false; 
-  		  } 
-  		  return true; 
-  		}); 
+
+  		    return false;
+  		  }
+  		  return true;
+  		});
         $(".delete_directory").bind("click",delete_directory);
         $(".move_dir").bind("click",move_directory);
         $('.delete_file').bind("click",delete_file);

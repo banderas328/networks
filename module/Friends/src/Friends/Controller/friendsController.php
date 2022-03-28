@@ -26,8 +26,8 @@ class  friendsController extends Controller\preloaderController
     public function addFriendRequestAction()
     {
         $friendId = $this->getEvent()->getRouteMatch()->getParam('user_id');
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $friends = new Friends();
         $this->getFriendsTable()->addFriendRequest($userId, $friendId, $friends->getAdapter());
         return false;
@@ -36,8 +36,8 @@ class  friendsController extends Controller\preloaderController
     public function requestsAction()
     {
         $this->layout('layout/only_form');
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $friends = new Friends();
         $requests = $this->getFriendsTable()->getRequests($userId, $friends->getAdapter());
         if($requests) $requests = $requests->toArray();
@@ -49,8 +49,8 @@ class  friendsController extends Controller\preloaderController
     public function addFriendAction()
     {
         $friendId = $this->getEvent()->getRouteMatch()->getParam('user_id');
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $friends = new Friends();
         $this->getFriendsTable()->addFriend($userId, $friendId, $friends->getAdapter());
         return false;
@@ -59,8 +59,8 @@ class  friendsController extends Controller\preloaderController
     public function cancelFriendAction()
     {
         $friendId = $this->getEvent()->getRouteMatch()->getParam('user_id');
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $friends = new Friends();
         $this->getFriendsTable()->cancelFriend($userId, $friendId, $friends->getAdapter());
         return false;
@@ -68,8 +68,8 @@ class  friendsController extends Controller\preloaderController
 
     public function getFriendListAction(){
         $this->layout('layout/only_form');
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $friends = new Friends();
         $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
         if($friends) $friends = $friends->toArray();
@@ -78,8 +78,8 @@ class  friendsController extends Controller\preloaderController
     }
     public function getfriendForMemberlistAction(){
         $this->layout('layout/only_form');
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $friends = new Friends();
         $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
         if($friends) $friends = $friends->toArray();
@@ -90,8 +90,8 @@ class  friendsController extends Controller\preloaderController
     public function getfriendForProjectMemberlistAction(){
 
         $this->layout('layout/only_form');
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $friends = new Friends();
         $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
         if($friends) $friends = $friends->toArray();

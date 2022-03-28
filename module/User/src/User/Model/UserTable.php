@@ -86,7 +86,7 @@ class UserTable
             ->setCredential($password);
         $authAdapter->authenticate();
         $columnsToReturn = array(
-            'id', 'login', 'email', 'lang'
+            'id', 'login', 'email'
         );
         return $authAdapter->getResultRowObject($columnsToReturn);
 
@@ -119,8 +119,8 @@ class UserTable
 
     public function changeUserLang($adapter, $request)
     {
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $lang = $request->getPost()->lang;
 
         switch ($lang) {

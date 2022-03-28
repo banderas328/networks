@@ -31,8 +31,8 @@ class ChanelsMessagesTable
         $text = htmlspecialchars($request->getPost()->text);
         $text  = substr ($text,0,250);
         $to_chanel = (int) $request->getPost()->to_chanel;
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $date = date_create();
         $date = date_timestamp_get($date);
         $data = array('to_chanel' => $to_chanel,'from_user' => $userId,'message'=>$text,'date' => $date);

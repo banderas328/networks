@@ -41,8 +41,8 @@ class ChanelsController extends Controller\preloaderController
 
     public function indexPrivateAction()
     {
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $chanels = new  Chanels();
         $this->layout('layout/only_form');
         return new ViewModel(array(

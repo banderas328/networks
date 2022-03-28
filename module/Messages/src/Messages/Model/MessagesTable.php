@@ -37,8 +37,8 @@ class MessagesTable
         $text = htmlspecialchars($request->getPost()->text);
         $text = substr($text, 0, 250);
         $to_user = $request->getPost()->to_user;
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $sql = "SELECT  first_name,second_name FROM user_settings WHERE user_id = '" . $userId . "'";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         $user_info = $resultSet->toArray()[0];
@@ -65,8 +65,8 @@ class MessagesTable
 
     public function checkNewMessages($adapter)
     {
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $sql = "SELECT *,messages.id as message_id FROM messages 
         LEFT JOIN deliver_messages on messages.id = deliver_messages.message_id 
         LEFT JOIN user_settings on messages.from_user = user_settings.user_id 
@@ -78,8 +78,8 @@ class MessagesTable
 
     public function checkOldMessages($adapter, $request)
     {
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $with_user = $request->getPost()->with_user;
         $sql = "SELECT *,messages.id as message_id, '" . $userId . "' as 'current_user' FROM messages 
         LEFT JOIN deliver_messages on messages.id = deliver_messages.message_id 

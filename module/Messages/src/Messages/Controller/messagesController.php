@@ -25,8 +25,8 @@ class  messagesController extends Controller\preloaderController {
 
     public function getListMessagesCountsAction(){
         $this->layout('layout/only_form');
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $messages = new Messages();
         $messagesTable = $this->getMessagesTable();
         $messagesCounts = $messagesTable->getMessagesCounts($userId,$messages->getAdapter());

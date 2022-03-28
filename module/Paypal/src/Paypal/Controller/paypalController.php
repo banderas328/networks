@@ -28,8 +28,8 @@ class  paypalController extends Controller\preloaderController
             unset($_SESSION['last_payment']);
             die();
         }
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $data = array (
             'payment_id' => $_SESSION['last_payment']['id'],
             'user_id' => $userId,
@@ -53,8 +53,8 @@ class  paypalController extends Controller\preloaderController
 
     public function showPaymentsAction(){
         $this->layout('layout/only_form');
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $payments = $this->getPaypalTable()->getUserPayments(array('user_id'=>$userId));
         return array('payments' => $payments);
     }
@@ -62,8 +62,8 @@ class  paypalController extends Controller\preloaderController
     public function getPaymentAction(){
         $this->layout('layout/only_form');
         $id = $this->getRequest()->getPost()->payment_id;
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $paypal =  new Paypal();
         $payment = $this->getPaypalTable()->getPayment(array('id' => $id,'user_id' => $userId),$paypal->getAdapter());
          if(!empty($payment)) {

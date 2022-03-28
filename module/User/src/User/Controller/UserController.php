@@ -168,8 +168,11 @@ class UserController extends Controller\preloaderController
             $dbAdapter  = $user->getAdapter();
             $authResult  =  $this->getUserTable()->authUser($data['email'],$securePass,$dbAdapter);
             $user_session = new Container('user');
+
             if($authResult) {
-                $user_session->user = $authResult;
+               // $user_session->user = $authResult;
+                session_start();
+                $_SESSION['user'] = (array)$authResult;
                 return $this->redirect()->toRoute('main',
                     array('controller'=>"main",
                         'action' => 'index'

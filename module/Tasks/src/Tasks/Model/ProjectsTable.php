@@ -1,8 +1,8 @@
 <?php
 namespace Tasks\Model;
-use Zend\InputFilter\Factory as InputFactory;     
-use Zend\InputFilter\InputFilter;                 
-use Zend\InputFilter\InputFilterAwareInterface;   
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 use Zend\Session\Container;
 use Zend\Config\Config;
@@ -10,10 +10,10 @@ use Zend\Config\Factory;
 
 class ProjectsTable
 {
-    
+
     protected $tableGateway;
     protected $adapter;
-    
+
     public function __construct()
     {
         $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
@@ -27,12 +27,12 @@ class ProjectsTable
         $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("projects",$adapter);
         $this->adapter = $adapter;
     }
-    
+
     public function createProject($request) {
         $project_name =  $request->getPost()->project_name;
         $project_description =  $request->getPost()->project_description;
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $data = ["project_name" => $project_name,"project_description" => $project_description];
         $this->tableGateway->insert($data);
         $projectID = $this->tableGateway->lastInsertValue;
@@ -50,10 +50,10 @@ class ProjectsTable
         }
         return true;
     }
-    
+
     public function getProjects(){
-        $user_session = new Container('user');
-        $user_id = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id 
                 WHERE projects_members.user_id='".$user_id."' and is_archive = '0' order by projects.sort_order";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
@@ -62,8 +62,8 @@ class ProjectsTable
     }
 
     public function getArchiveProjects(){
-        $user_session = new Container('user');
-        $user_id = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
         $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id 
                 WHERE projects_members.user_id='".$user_id."' and is_archive = '1' order by projects.sort_order";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
@@ -101,5 +101,5 @@ class ProjectsTable
         $this->tableGateway->update($data, ['id' => $data["id"]]);
     }
 }
-    
-    
+
+

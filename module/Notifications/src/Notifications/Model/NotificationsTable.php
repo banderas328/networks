@@ -6,10 +6,10 @@ use Zend\Config\Factory;
 
 class NotificationsTable
 {
-    
+
     protected $tableGateway;
     protected $adapter;
-    
+
     public function __construct()
     {
         $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
@@ -23,7 +23,7 @@ class NotificationsTable
         $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("notifications",$adapter);
         $this->adapter = $adapter;
     }
-    
+
     public function createNotification($data) {
         $text =  $data["text"];
         $html_id  =  $data["html_id"];
@@ -33,9 +33,9 @@ class NotificationsTable
     }
 
     public function getNotifications(){
-        $user_session = new Container('user');
-        $user_id = $user_session->user->id;
-        $sql = "select * from notifications where user_id = ".$user_id." order by id desc limit 20 ";
+        session_start();        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
+        $sql = "select * from notifications where user_id = ".$userId." order by id desc limit 20 ";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         return  $resultSet->toArray();
     }
@@ -45,5 +45,5 @@ class NotificationsTable
 
 
 }
-    
-    
+
+
