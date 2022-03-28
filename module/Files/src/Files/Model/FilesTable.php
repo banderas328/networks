@@ -46,10 +46,8 @@ class FilesTable
     public function saveUserFile($data)
     {
         session_start();
-        session_start();        $user_session = $_SESSION['user'];
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
-        var_dump($data);
-        var_dump($userId);
         $path = "userfiles/".$userId;
         $fileName = uniqid();
         $file = $path . '/' . $userId . $fileName . $data['file']['name'];
@@ -66,28 +64,28 @@ class FilesTable
         }
     }
 
-    public function copyFileToMarketDir($adapter,$data){
-        session_start();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
-        $path = "/userfiles";
-        $fileName = microtime();
-        $file = $path . '/' . $userId . $fileName . $data['file_title'];
-        $sql = "select id from users_filesystem where path='market' and user_id = ".$userId;
-        $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-        $dirId = $result->toArray()[0]['id'];
-        if(copy(getcwd() . "/public/" .$data["file_name"], getcwd() . "/public/" . $file)) {
-            $fileDb['user_id'] = $userId;
-            $fileDb['directory'] = $dirId;
-            $fileDb['file_title'] = $data['file_title'];
-            $fileDb['file_name'] = $file;
-            $fileDb['type'] = $data['type'];
-            $this->tableGateway->insert($fileDb);
-        }
-        else {
-            die("error");
-        }
-    }
+//    public function copyFileToMarketDir($adapter,$data){
+//        session_start();
+//        $user_session = $_SESSION['user'];
+//        $userId = $user_session["id"];
+//        $path = "/userfiles";
+//        $fileName = microtime();
+//        $file = $path . '/' . $userId . $fileName . $data['file_title'];
+//        $sql = "select id from users_filesystem where path='market' and user_id = ".$userId;
+//        $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+//        $dirId = $result->toArray()[0]['id'];
+//        if(copy(getcwd() . "/public/" .$data["file_name"], getcwd() . "/public/" . $file)) {
+//            $fileDb['user_id'] = $userId;
+//            $fileDb['directory'] = $dirId;
+//            $fileDb['file_title'] = $data['file_title'];
+//            $fileDb['file_name'] = $file;
+//            $fileDb['type'] = $data['type'];
+//            $this->tableGateway->insert($fileDb);
+//        }
+//        else {
+//            die("error");
+//        }
+//    }
 
 //    public function getFile($fileId, $adapter)
 //    {
@@ -147,20 +145,14 @@ class FilesTable
         $sql  = "select * from files  WHERE id=".$fileId;
         $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE)->toArray();
         if(count($result)) {
-            var_dump($result);
-
             if($result[0]["user_id"] == $userId) {
                 $sql  = "UPDATE files set directory=".$requiredDirId." WHERE id=".$fileId." and user_id=".$userId;
                 $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
                 return $result;
-
             }
             else {
-
                 $filename = explode("/",$result[0]['file_name'])[3];
-                var_dump($filename);
                 $filenameExt = explode('.',$filename)[1];
-                var_dump($filenameExt);
                 $newFileName = uniqid();
                 $newFileName .= ".".$filenameExt;
                 $newPath = $_SERVER['DOCUMENT_ROOT']."/userfiles/".$userId."/".$newFileName;

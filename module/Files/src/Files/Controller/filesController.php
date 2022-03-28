@@ -82,7 +82,7 @@ class  filesController extends Controller\preloaderController {
             $filesInDir = $this->getFilesTable()->getDirFiles($files->getAdapter(),$currentDirectory,$userId);
         }
         elseif($parentDir === false && $dirKey) {
-            $dirs = $this->getUserDirs(0,$userId)->toArray();
+            $dirs = $this->getUserDirs(0,$userId);
             $isRoot  = false;
             $currentDirectory = 0;
             $filesInDir = $this->getFilesTable()->getDirFiles($files->getAdapter(),$currentDirectory,$userId);
