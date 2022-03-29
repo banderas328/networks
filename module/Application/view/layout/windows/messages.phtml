@@ -37,10 +37,10 @@
                 <div class="c-window__tabs window_main user-tabs">
                     <ul class="c-window__tabs-inner">
                         <li class="c-window__tab"><a class="users-tab-link" href="#chats">Chats</a></li>
-                        <li class="c-window__tab"><a class="users-tab-link" href="#chanels">Chanels</a></li>
-                        <li class="c-window__tab"><a class="users-tab-link" href="#private_chanels">Private Chanels</a></li>
-                        <li class="c-window__tab"><a class="users-tab-link" href="#private_chanels_admin">Private Chanels Settings</a></li>
-                        <li class="c-window__tab"><a class="users-tab-link" href="#create_chanel">Create Chanel</a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#chanels">Channels</a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#private_chanels">Private Channels</a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#private_chanels_admin">Private Channels Settings</a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#create_chanel">Create Channel</a></li>
                     </ul>
                 </div>
 
@@ -57,10 +57,43 @@
                 </div>
 
                  <div class="c-window__tab-content" id="create_chanel">
-                    <div>
-                        <input name="chanel_name" type="text" id="chanel_name">
-                        <input name="is_private" type="checkbox" id="is_private"> is private
-                        <button id="create_chanel_submit">create chanel</button>
+                    <div class="c-window__scrollable-space">
+                        <div class="c-create-channel">
+                            <div class="c-create-channel__header">
+                                Create channel
+                            </div>
+
+                            <div class="c-create-channel__main">
+                                <div class="c-create-channel__row">
+                                    <input class="c-field" name="chanel_name" type="text" id="chanel_name" placeholder="Channel name">
+                                </div>
+
+                                <div class="c-create-channel__row">
+                                    <div>
+                                        <label class="c-checkbox" for="is_private">
+                                            <input class="c-checkbox__input" name="is_private" type="checkbox" id="is_private">
+
+                                            <div class="c-checkbox__icon"></div>
+
+                                            <div class="c-checkbox__text">
+                                                Is private channel
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="c-create-channel__footer">
+                                <button class="c-button c-create-channel__create-button" id="create_chanel_submit">
+                                    <svg class="icon-nw icon-nw-forum-black-24" viewBox="0 0 24 24">
+                                        <path d="M0 0h24v24H0V0z" fill="none" />
+                                        <path d="M15 4v7H5.17L4 12.17V4h11m1-2H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm5 4h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1z" />
+                                    </svg>
+
+                                    Create
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     <script type="text/javascript" src="js/pages/main/create_chanel.js"></script>
