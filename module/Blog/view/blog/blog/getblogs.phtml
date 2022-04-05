@@ -1,6 +1,6 @@
-<div class="c-window__scrollable-space">
-    <div class="c-blog">
         <?php if (!empty($blogs)): ?>
+        <div class="c-window__scrollable-space">
+            <div class="c-blog">
             <div class="c-blog__posts">
                 <?php foreach ($blogs as $blog): ?>
                     <article class="c-post" data-date="<?php echo $blog['date']; ?>">
@@ -99,6 +99,8 @@
                     Show more posts
                 </button>
             </div>
+            </div>
+        </div>
         <?php else: ?>
             <div class="c-blog__no-posts">
                 <div class="c-blog__no-posts-icon">
@@ -111,12 +113,11 @@
                 </div>
 
                 <div class="c-blog__no-posts-title">
-                    Not posts to show
+                    No more blogs
                 </div>
             </div>
         <?php endif; ?>
-    </div>
-</div>
+
 
 <script type="text/javascript">
     function replaceDate($element) {
@@ -258,7 +259,7 @@
                 });
         });
 
-        $(".blogs_more").off().on("click", function () {
+        $(".blogs_more").on("click", function () {
             $.ajax({
                 type: "POST",
                 url: "blog/getblogs",
@@ -267,13 +268,15 @@
                 },
             })
                 .done(function(data) {
-                    const $template = document.createElement('template');
-                    const $listBlogs = document.querySelector('#list_blogs');
-                    const $postsWrapper = document.querySelector('.c-blog__posts');
-                    $template.innerHTML = data;
-                    const $newPosts = $template.content.querySelectorAll('.c-post');
-                    $postsWrapper.append(...$newPosts);
-                    $($listBlogs).html($listBlogs.innerHTML); // TODO: Think of a better solution
+                    console.info(data);
+                    $(".c-blog__posts").append(data);
+                    // const $template = document.createElement('template');
+                    // const $listBlogs = document.querySelector('#list_blogs');
+                    // const $postsWrapper = document.querySelector('.c-blog__posts');
+                    // $template.innerHTML = data;
+                    // const $newPosts = $template.content.querySelectorAll('.c-post');
+                    // $postsWrapper.append(...$newPosts);
+                    // $($listBlogs).html($listBlogs.innerHTML); // TODO: Think of a better solution
                 });
         })
     });
