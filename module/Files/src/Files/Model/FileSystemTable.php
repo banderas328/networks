@@ -61,11 +61,11 @@ class FileSystemTable
 
     public function createUserDir($adapter, $request)
     {
-        $user_session = new Container('user');
-        $userId = $user_session->user->id;
+        session_start();        $user_session = $_SESSION['user'];
+        $user_id = $user_session["id"];
         $current_directory = (int)$request->getPost()->current_directory;
         $directory_name = $request->getPost()->directory_name;
-        $data = array('parent_path' => $current_directory, 'path' => $directory_name, 'user_id' => $userId);
+        $data = array('parent_path' => $current_directory, 'path' => $directory_name, 'user_id' => $user_id);
         $this->tableGateway->insert($data);
     }
 

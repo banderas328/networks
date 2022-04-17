@@ -56,7 +56,7 @@ class ProjectsTable
         session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
-        $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id 
+        $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id
                 WHERE projects_members.user_id='".$userId."' and is_archive = '0' order by projects.sort_order";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $projects =   $resultSet->toArray();
@@ -65,8 +65,8 @@ class ProjectsTable
 
     public function getArchiveProjects(){
         session_start();        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
-        $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id 
+        $user_id = $user_session["id"];
+        $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id
                 WHERE projects_members.user_id='".$user_id."' and is_archive = '1' order by projects.sort_order";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $projects =   $resultSet->toArray();

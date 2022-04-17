@@ -127,7 +127,7 @@ document.oncontextmenu = function() {return false;}; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï
 
 
 
-        $(".parent_directory").attr("dir_key",<?php echo $current_directory?>)
+        $(".parent_directory").attr("dir_key",<?php echo $current_directory?>);
         $('.folder_action').mousedown(function(e){
       	  if( e.button == 2 ) { //2  - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, 3 - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     		  var dir =   $(this).attr("dir");
@@ -143,7 +143,7 @@ document.oncontextmenu = function() {return false;}; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï
   		  }
   		  return true;
   		});
-        $('.file_block').mousedown(function(e){
+            $('.file_block').mousedown(function(e){
       	  if( e.button == 2 ) { //2  - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, 3 - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     		  var file =   $(this).attr("file");
     		  if(!$(".file_actions[file="+file+"]").hasClass("visible-block")) {
