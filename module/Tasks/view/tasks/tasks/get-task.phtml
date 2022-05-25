@@ -1,11 +1,11 @@
 <div id="task_block">
     <input type="hidden" value="<?php echo $task["id"]; ?>" name="task_id" id="task_id_popup">
     <h3 id="task_name_block">Task name: <span class="task_name_value"><?php echo $task["name"]; ?></span><span
-                class="edit_task_name"> : edit</span></h3>
+            class="edit_task_name"> : edit</span></h3>
 
     <h4 id="task_description_block">Description: <span
-                class="task_description_value"><?php echo $task["description"]; ?></span><span
-                class="edit_task_description"> : edit</span></h4>
+            class="task_description_value"><?php echo $task["description"]; ?></span><span
+            class="edit_task_description"> : edit</span></h4>
 
     <h4 id="task_description">Status: <?php echo $task["status"]; ?>
         <select id="task_status">
@@ -39,19 +39,29 @@
         if (isset($task["sub_tasks"]))
             foreach ($task["sub_tasks"] as $sub_task) {
 
-                echo "<p style='border: 1px solid darkred'>" . $sub_task["description"] . " status : " . $sub_task["status"] . "</p>";
+                echo "<p style='border-bottom: 1px solid #f5f5f5'>" . $sub_task["description"] . " status : " . $sub_task["status"] . "</p>";
             }
         ?>
     </div>
-    <textarea id="sub_task"></textarea>
-    <input type="file" name="task_file" placeholder="task file" id="task_file_update"/>
-    <input type="button" name="update task" value="update task" id="update_task" task_id="<?php echo $task["id"]; ?>"/>
-    <input type="button" name="archive task" value="archive task" id="archive_task" task_id="<?php echo $task["id"]; ?>"/>
+    <div>
+        <textarea id="sub_task"></textarea>
+        <p>
+            <input type="file" name="task_file" placeholder="task file" id="task_file_update"/>
+        </p>
+        <p>
+            <input type="button" name="update task" value="update task" id="update_task"
+                   task_id="<?php echo $task["id"]; ?>"/>
+        </p>
+        <p>
+            <input type="button" name="archive task" value="archive task" id="archive_task"
+                   task_id="<?php echo $task["id"]; ?>"/>
+        </p>
+    </div>
 </div>
 <script type="text/javascript">
 
     $(function () {
-        $("#archive_task").on("click", function(){
+        $("#archive_task").on("click", function () {
 
             var data = {"is_archive": "1", "id": $("#task_id_popup").val()};
             $.ajax({
@@ -96,8 +106,8 @@
                             $("#open_task_popup").html(data);
                             $("#open_task_popup").dialog({
                                 resizable: true,
-                                height: "auto",
-                                width: 600,
+                                 height: 800,
+                                 width: 600,
                                 modal: false,
                                 buttons: {
                                     Cancel: function () {
@@ -117,7 +127,7 @@
 
         $(".edit_task_description").on("click", function () {
             var test_description = $(".task_description_value").text();
-            var html_string = '<textarea id="task_description_input" name="task_description">'+test_description+'</textarea><span class="edit_save_task_description">save</span>';
+            var html_string = '<textarea id="task_description_input" name="task_description">' + test_description + '</textarea><span class="edit_save_task_description">save</span>';
             $("#task_description_block").html(html_string);
             $(".edit_save_task_description").on("click", function () {
                 var data = {"description": $("#task_description_input").val(), "id": $("#task_id_popup").val()};
@@ -137,7 +147,7 @@
                             $("#open_task_popup").html(data);
                             $("#open_task_popup").dialog({
                                 resizable: true,
-                                height: "auto",
+                                height: 800,
                                 width: 600,
                                 modal: false,
                                 buttons: {
