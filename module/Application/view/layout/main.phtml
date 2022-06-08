@@ -26,11 +26,9 @@ $user = $_SESSION['user'];
     <div class="abs" id="wrapper">
         <!-- Desktop -->
         <?php include dirname(__FILE__)."/parts/desktop.phtml"; ?>
-
         <!-- Bars -->
         <?php include dirname(__FILE__)."/parts/bar-top.phtml"; ?>
         <?php include dirname(__FILE__)."/parts/bar-bottom.phtml"; ?>
-
         <!-- Window -->
         <?php include dirname(__FILE__)."/windows/drive.phtml"; ?>
         <?php include dirname(__FILE__)."/windows/network.phtml"; ?>
@@ -41,6 +39,7 @@ $user = $_SESSION['user'];
         <?php include dirname(__FILE__)."/windows/messages.phtml"; ?>
         <?php include dirname(__FILE__)."/windows/admins.phtml"; ?>
         <?php include dirname(__FILE__)."/windows/blogs.phtml"; ?>
+        <?php include dirname(__FILE__)."/windows/frame.phtml"; ?>
         <?php // include dirname(__FILE__)."/windows/payment.phtml"; ?>
     </div>
 </body>

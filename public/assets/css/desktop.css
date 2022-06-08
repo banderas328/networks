@@ -2625,3 +2625,42 @@ textarea.c-field::placeholder {
     height: 400px;
 }
 
+
+.iframe-container {
+    text-align:center;
+    width:100%;
+}
+#save_frame{
+    background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 10px 0;
+    display: inline-block;
+    border: none;
+}
+.frame_container  .frame_string {
+    width:80%;margin-left:5%;margin-top: 30px;
+}
+.frame_container  .frame_string .frame_input {
+
+
+    float: right;
+    margin-right: 30%;
+}
+.frame_list_block img {
+    width: 50px;
+    border-radius: 25px;
+    margin-left: 140px;
+
+}
+.frame_list_block{
+    padding-top: 12px;
+    cursor:pointer;
+    display: block;
+}
+.frame_block {
+    position: relative;
+}
+

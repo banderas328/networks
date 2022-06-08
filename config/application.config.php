@@ -41,6 +41,7 @@ return array(
        // 'Market',
         'Form',
       'Notifications',
+        'Frames',
         'Tasks',
     ),
 

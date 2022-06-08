@@ -1,0 +1,22 @@
+<?php
+if(isset($frames) and count($frames)){
+    foreach ($frames as $frame) {
+        echo "<div class='frame_list_block'>";
+        echo "<img src='/".$frame['image']."'/>";
+        echo "<p class='frame_block' frame_url='".$frame['url']."'>".$frame['name']."</p>";
+        echo "</div>";
+    }
+}
+?>
+<script type="text/javascript">
+    $(function (){
+        $(".frame_block").on("click",function (){
+            const url = $(this).attr("frame_url");
+            const markup = '<iframe src="'+url+'"  width="2000" height="1500" align="left" id="main_frame"></iframe>';
+            $(".frame_container_output").html(markup);
+            $("#window_frame_container").css("display","block");
+
+
+        })
+    });
+</script>

@@ -1,11 +1,10 @@
 <div id="task_block">
     <input type="hidden" value="<?php echo $task["id"]; ?>" name="task_id" id="task_id_popup">
-    <h3 id="task_name_block">Task name: <span class="task_name_value"><?php echo $task["name"]; ?></span><span
-            class="edit_task_name"> : edit</span></h3>
+    <h3 id="task_name_block"><span
+            class="edit_task_name">edit:</span> Task name: <span class="task_name_value"><?php echo $task["name"]; ?></span></h3>
 
-    <h4 id="task_description_block">Description: <span
-            class="task_description_value"><?php echo $task["description"]; ?></span><span
-            class="edit_task_description"> : edit</span></h4>
+    <h4 id="task_description_block"><span class="edit_task_description">edit:</span> Description: <span
+            class="task_description_value"><?php echo $task["description"]; ?></span></h4>
 
     <h4 id="task_description">Status: <?php echo $task["status"]; ?>
         <select id="task_status">
@@ -26,7 +25,7 @@
         } ?>
     </div>
     <div>
-        <h3>Attached Files</h3>
+        <h5>Attached Files</h5>
         <?php
         if (isset($task["files"]))
             foreach ($task["files"] as $file) {
@@ -34,7 +33,7 @@
                 echo "<a href='" . $file["file_name"] . "'>" . $file["file_title"] . "</a><br/>";
             }
         ?>
-        <H1>Comments</H1>
+        <h5>Comments</h5>
         <?php
         if (isset($task["sub_tasks"]))
             foreach ($task["sub_tasks"] as $sub_task) {

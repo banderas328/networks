@@ -13,14 +13,14 @@ use Zend\Config\Factory;
 
 class ProjectsController extends Controller\preloaderController
 {
-    
+
     protected $projectsTable;
     protected $boardsTable;
 
     public function indexAction(){
         $this->layout('layout/only_form');
         return @array('projects' => $this->getProjectsTable()->getProjects());
-        
+
     }
 
     public function loadProjectsArchiveAction(){
@@ -28,7 +28,7 @@ class ProjectsController extends Controller\preloaderController
         echo json_encode($this->getProjectsTable()->getArchiveProjects());
         return false;
     }
-    
+
     public function createProjectAction(){
         $this->layout('layout/only_form');
         $request = $this->getRequest();
@@ -65,7 +65,7 @@ class ProjectsController extends Controller\preloaderController
     }
 
 
-    
+
     public function getProjectsTable()
     {
         if (!$this->projectsTable) {
@@ -81,6 +81,6 @@ class ProjectsController extends Controller\preloaderController
         }
         return $this->boardsTable;
     }
-    
+
 }
 
