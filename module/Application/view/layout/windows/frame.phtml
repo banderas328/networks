@@ -55,8 +55,6 @@
     function load_frames(){
         $.get( "frames/loadFrames")
             .done(function( data ) {
-                console.info(data);
-
                 $(".frame_container").html(data);
             });
     }
@@ -74,7 +72,7 @@
             var url  = "frames/saveFrame";
             var request = new XMLHttpRequest();
             var xmlupload=request.upload;
-            xmlupload.addEventListener('load',        load_frames(),false);
+            xmlupload.addEventListener('load',        load_frames,false);
             request.open("POST", url, true);
             request.send(data);
         });

@@ -2652,15 +2652,25 @@ textarea.c-field::placeholder {
 .frame_list_block img {
     width: 50px;
     border-radius: 25px;
-    margin-left: 140px;
+    margin-left: 40px;
+    display: inline-block;
 
 }
 .frame_list_block{
     padding-top: 12px;
-    cursor:pointer;
     display: block;
+    margin: 20px;
+}
+.open_frame {
+    cursor: pointer;
 }
 .frame_block {
-    position: relative;
+display: inline-block;
+}
+.frame_string {
+    margin-left: 40px;
+}
+.container {
+    margin: 0;
 }
 
