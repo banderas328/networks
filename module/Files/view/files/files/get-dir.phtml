@@ -47,8 +47,9 @@ if(!$is_root) {
 if($filesInDir) {
     foreach($filesInDir as  $file) {
         //var_dump($file);
-        if(($file['type'] != "image/jpeg") and ($file['type'] != "image/png")) {
+//        if(($file['type'] != "image/jpeg") and ($file['type'] != "image/png")) {
             echo "<div class='file_wraper' file=".$file['id'].">";
+            echo "<img src='assets/images/icons/files.png' width='50px' height='50px' >";
             echo "<p class='file_block'  file=".$file['id']."> ".$file['file_title']."</p>";
                   echo "<div class='file_actions' file=".$file['id'].">";
                   echo          "<p class='file_div_action' file=".$file['id']."><span class='delete_file btn btn-primary' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span></p>";
@@ -58,17 +59,17 @@ if($filesInDir) {
             echo "</div>";
 
 
-        }
-        else {
-            echo "<div class='file_wraper' file=".$file['id'].">";
-            echo "<p class='file_block'  file=".$file['id']."> ".$file['file_title']."<img src='".$file['file_name']."' class='file_image' /></p>";
-            echo "<div class='file_actions' file=".$file['id'].">";
-            echo          "<p class='file_div_action' file=".$file['id']."><span class='delete_file ' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span></p>";
-            echo          "<p class='file_div_action' file=".$file['id']."><span class='move_file ' file=".$file['id'].">".$this->translate('Move File',false,$lang)."</span></p>";
-            echo          "<p><a href='/files/downloadFile/id/".$file['id']."' class='download_file ' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></p>";
-            echo "</div>";
-            echo "</div>";
-        }
+      //  }
+//        else {
+//            echo "<div class='file_wraper' file=".$file['id'].">";
+//            echo "<p class='file_block'  file=".$file['id']."> ".$file['file_title']."<img src='".$file['file_name']."' class='file_image' /></p>";
+//            echo "<div class='file_actions' file=".$file['id'].">";
+//            echo          "<p class='file_div_action' file=".$file['id']."><span class='delete_file ' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span></p>";
+//            echo          "<p class='file_div_action' file=".$file['id']."><span class='move_file ' file=".$file['id'].">".$this->translate('Move File',false,$lang)."</span></p>";
+//            echo          "<p><a href='/files/downloadFile/id/".$file['id']."' class='download_file ' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></p>";
+//            echo "</div>";
+//            echo "</div>";
+//        }
 
     }
 }

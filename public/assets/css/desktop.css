@@ -2673,4 +2673,20 @@ display: inline-block;
 .container {
     margin: 0;
 }
+.file_wraper {
+    width: 120px;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 10px;
+    position: relative;
+    vertical-align: top;
+}
+.file_wraper img {
+    vertical-align: top;
+}
+.file_block{
+    width : 100px;
+    word-wrap: break-word;
+}
+
 
