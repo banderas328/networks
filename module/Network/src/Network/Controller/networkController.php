@@ -52,7 +52,8 @@ class  networkController extends Controller\preloaderController
 
     public function networkIndexAction(){
         $this->layout('layout/only_form');
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $friends = new Friends();
         $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());

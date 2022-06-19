@@ -2688,5 +2688,23 @@ display: inline-block;
     width : 100px;
     word-wrap: break-word;
 }
+.network_point {
+    width: auto;
+    display: inline-block;
+    margin: 10px;
+    height: 100px;
+    vertical-align: top;
+    margin-left: 30px;
+}
+.network_avatar {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    overflow: hidden;
+    margin-top: 20px;
+    position: relative;
+    left: 25%;
+}
 
 

@@ -1,9 +1,14 @@
 <div id="window_network" class="c-window r-border-box-area abs window">
     <div class="c-window__inner _abs window_inner">
         <div class="c-window__title-bar window_top">
-            <div class="c-window__title float_left">
+            <img id="go_to_network" dir_key='0' src="assets/images/gui/left.png"/>
+<!--            <img src="assets/images/icons/network_icon_inner.png"/>-->
                 Network
-            </div>
+            <script type="text/javascript">
+                $("#go_to_network").bind("click", function () {
+                    refresh_network();
+                });
+            </script>
             <div class="c-window__window-controls float_right">
                 <a class="c-window__window-control window_min" href="#">
                     <svg class="icon-nw icon-nw-window-rollup-16" viewBox="0 0 16 16">
@@ -24,49 +29,16 @@
                 </a>
             </div>
         </div>
-
-
-
-
         <div class="c-window__main _abs _window_content" id="network_frame">
-
-
-            <div class="c-window__tabs-wrap is-vertical-navigation _abs _window_content" id="network_tabs">
-
-
-                <div class="c-window__tabs window_main network-tabs">
-
-                    <ul class="c-window__tabs-inner">
-                        <li class="c-window__tab" id="go_to_network"><a class="network-tab-link" href="#network">Go To
-                                Network</a></li>
-                    </ul>
-
-
-
-
-                    <script type="text/javascript">
-                        $("#go_to_network").bind("click", function () {
-                            refresh_network();
-                        });
-                    </script>
-                </div>
-
-            </div>
             <div class="c-window__tab-content" id="network">
-
                             <script type="text/javascript" src="js/pages/main/network.js"></script>
-
             </div>
-
         </div>
     <div class="c-window__status-bar _abs _window_bottom">
         <div class="c-window__status-text">
             Some text
         </div>
-
     </div>
-
-
 </div>
 
 <span class="abs ui-resizable-handle ui-resizable-se"></span>
