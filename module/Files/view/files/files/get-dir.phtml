@@ -1,38 +1,49 @@
 <?php
-$user  = $_SESSION['user'];
+$user = $_SESSION['user'];
 $lang = $user['user']->lang;
 $user_id = $user['user']->id;
 
-if(!$is_root) {
+if (!$is_root) {
     ?>
-<!--    <span id="paste">paste</span>-->
+    <!--    <span id="paste">paste</span>-->
     <div class="hard-drive-form-wrapper">
-        <form id="file_directory_form"  method="post">
-            <input type="file"  name="file" id="file_to_directory"> <p>upload file</p>
-        </form>
-        <button id="paste">paste</button>
-        <input type="text" id="directory_name">
-        <button value="create dir" class='btn btn-primary' id="create_dir"><?php echo $this->translate("Create directory",false,$lang);?></button>
+        <div>
+            <form id="file_directory_form" method="post">
 
-        <input type="hidden" value="<?php echo $current_directory?>" id="current_directory">
+                <input type="file" name="file" id="file_to_directory">
+                <p>Upload File</p>
+            </form>
+        </div>
+        <div>
+
+
+        <input type="text" id="directory_name">
+        <button value="create dir" class='btn btn-primary'
+                id="create_dir"><?php echo $this->translate("Create directory", false, $lang); ?></button>
+    </div>
+    <div>
+        <button id="paste"  class='btn btn-primary'>paste</button>
+        <input type="hidden" value="<?php echo $current_directory ?>" id="current_directory">
+    </div>
     </div>
 
-<?php
+    <?php
 }
 ?>
-<?php
-foreach($dirs as  $dir_key => $dir_value) {
-    echo "<div class='dir_wraper hard-drive-dir-wrapper'>
+<div class="dirs_block">
+    <?php
+    foreach ($dirs as $dir_key => $dir_value) {
+        echo "<div class='dir_wraper hard-drive-dir-wrapper'>
                <div class='directory_wrapper hard-drive-directory-inner'>
-                   <img src='assets/images/icons/folder.png' width='50px' height='50px' dir=".$dir_value['id']." class='folder_action'/>
-                       <div  dir_key=".$dir_value['id']." class='directory' >".$dir_value['path']." </div>
+                   <img src='assets/images/icons/folder.png' width='50px' height='50px' dir=" . $dir_value['id'] . " class='folder_action'/>
+                       <div  dir_key=" . $dir_value['id'] . " class='directory' >" . $dir_value['path'] . " </div>
                 </div>
 
-" ;
-if(!$is_root) {
+";
+        if (!$is_root) {
 
-           echo "<div class='directory_actions hard-dropdown' dir=".$dir_value["id"].">
-                    <p class='delete_directory hard-dropdown-items' dir=".$dir_value['id'].">".$this->translate('Delete_Directory',false,$lang)."</p>
+            echo "<div class='directory_actions hard-dropdown' dir=" . $dir_value["id"] . ">
+                    <p class='delete_directory hard-dropdown-items' dir=" . $dir_value['id'] . ">" . $this->translate('Delete_Directory', false, $lang) . "</p>
                     <p class='share_dir hard-dropdown-items' dir=" . $dir_value['id'] . ">share dir</p>
                     <p class='move_dir hard-dropdown-items' dir=" . $dir_value['id'] . ">move dir</p>
                     <p class='share_dir_with_password hard-dropdown-items' dir=" . $dir_value['id'] . ">share dir with password</p>
@@ -41,25 +52,29 @@ if(!$is_root) {
                      <input type='button' value='save password and share' dir=" . $dir_value['id'] . " class='dir_save_pass btn btn-primary'>
                      </div>
                  </div>";
-}
-    echo "</div>";
-}
-if($filesInDir) {
-    foreach($filesInDir as  $file) {
-        //var_dump($file);
+        }
+        echo "</div>";
+    }
+    ?>
+</div>
+<div class="files_block">
+    <?php
+    if ($filesInDir) {
+        foreach ($filesInDir as $file) {
+            //var_dump($file);
 //        if(($file['type'] != "image/jpeg") and ($file['type'] != "image/png")) {
-            echo "<div class='file_wraper' file=".$file['id'].">";
+            echo "<div class='file_wraper' file=" . $file['id'] . ">";
             echo "<img src='assets/images/icons/files.png' width='50px' height='50px' >";
-            echo "<p class='file_block'  file=".$file['id']."> ".$file['file_title']."</p>";
-                  echo "<div class='file_actions' file=".$file['id'].">";
-                  echo          "<p class='file_div_action' file=".$file['id']."><span class='delete_file btn btn-primary' file=".$file['id'].">".$this->translate('Delete_File',false,$lang)."</span></p>";
-                  echo          "<p class='file_div_action' file=".$file['id']."><span class='move_file' file=".$file['id'].">".$this->translate('Move File',false,$lang)."</span></p>";
-                  echo          "<p><a href='/files/downloadFile/id/".$file['id']."' class='download_file ' fileId=".$file['id'].">".$this->translate('Download_File',false,$lang)."</a></p>";
-                  echo "</div>";
+            echo "<p class='file_block'  file=" . $file['id'] . "> " . $file['file_title'] . "</p>";
+            echo "<div class='file_actions' file=" . $file['id'] . ">";
+            echo "<p class='file_div_action' file=" . $file['id'] . "><span class='delete_file btn btn-primary' file=" . $file['id'] . ">" . $this->translate('Delete_File', false, $lang) . "</span></p>";
+            echo "<p class='file_div_action' file=" . $file['id'] . "><span class='move_file' file=" . $file['id'] . ">" . $this->translate('Move File', false, $lang) . "</span></p>";
+            echo "<p><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" . $this->translate('Download_File', false, $lang) . "</a></p>";
+            echo "</div>";
             echo "</div>";
 
 
-      //  }
+            //  }
 //        else {
 //            echo "<div class='file_wraper' file=".$file['id'].">";
 //            echo "<p class='file_block'  file=".$file['id']."> ".$file['file_title']."<img src='".$file['file_name']."' class='file_image' /></p>";
@@ -71,128 +86,127 @@ if($filesInDir) {
 //            echo "</div>";
 //        }
 
+        }
     }
-}
-?>
+    ?>
+</div>
 <script type="text/javascript">
-document.oncontextmenu = function() {return false;}; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-    $(function() {
-        if(window.need_to_paste_file == true) {
-        	$("#paste").addClass("pastpaste_file_to_directory");
-        	$("#paste").bind("click",function(){
-                    var file_id = window.need_to_paste_file_id;
+    document.oncontextmenu = function () {
+        return false;
+    }; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    $(function () {
+        if (window.need_to_paste_file == true) {
+            $("#paste").addClass("pastpaste_file_to_directory");
+            $("#paste").bind("click", function () {
+                var file_id = window.need_to_paste_file_id;
 
-                    var current_directory = $("#current_directory").val();
-                    $.ajax({
-                        type: "POST",
-                        url: "files/moveFile",
-                        data: {file_id : file_id , current_directory : current_directory }
-                    })
-                        .done(function( data ) {
-                        	window.need_to_paste_file = false;
-                        	window.need_to_paste_file_id = false;
-                        	$("#paste").removeClass("pastpaste_file_to_directory");
-                            var current_directory = $("#current_directory").val();
-                            show_directory(current_directory);
-                        });
+                var current_directory = $("#current_directory").val();
+                $.ajax({
+                    type: "POST",
+                    url: "files/moveFile",
+                    data: {file_id: file_id, current_directory: current_directory}
+                })
+                    .done(function (data) {
+                        window.need_to_paste_file = false;
+                        window.need_to_paste_file_id = false;
+                        $("#paste").removeClass("pastpaste_file_to_directory");
+                        var current_directory = $("#current_directory").val();
+                        show_directory(current_directory);
+                    });
 
-            	});
-
-
-            }
-
-        if(window.need_to_paste_dir == true) {
-        	$("#paste").addClass("pastpaste_file_to_directory");
-        	$("#paste").bind("click",function(){
-                    var dir_id = window.need_to_paste_dir_id;
-
-                    var current_directory = $("#current_directory").val();
-                    $.ajax({
-                        type: "POST",
-                        url: "files/moveDirectory",
-                        data: {dir_id : dir_id , current_directory : current_directory }
-                    })
-                        .done(function( data ) {
-                        	window.need_to_paste_file = false;
-                        	window.need_to_paste_file_id = false;
-                        	$("#paste").removeClass("pastpaste_file_to_directorys");
-                            var current_directory = $("#current_directory").val();
-                             show_directory(current_directory);
-                        });
-
-            	});
+            });
 
 
-            }
+        }
+
+        if (window.need_to_paste_dir == true) {
+            $("#paste").addClass("pastpaste_file_to_directory");
+            $("#paste").bind("click", function () {
+                var dir_id = window.need_to_paste_dir_id;
+
+                var current_directory = $("#current_directory").val();
+                $.ajax({
+                    type: "POST",
+                    url: "files/moveDirectory",
+                    data: {dir_id: dir_id, current_directory: current_directory}
+                })
+                    .done(function (data) {
+                        window.need_to_paste_file = false;
+                        window.need_to_paste_file_id = false;
+                        $("#paste").removeClass("pastpaste_file_to_directorys");
+                        var current_directory = $("#current_directory").val();
+                        show_directory(current_directory);
+                    });
+
+            });
 
 
+        }
 
 
         $(".parent_directory").attr("dir_key",<?php echo $current_directory?>);
-        $('.folder_action').mousedown(function(e){
-      	  if( e.button == 2 ) { //2  - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, 3 - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-    		  var dir =   $(this).attr("dir");
-    		  if(!$(".directory_actions[dir="+dir+"]").hasClass("visible-block")) {
-    			  $(".directory_actions").removeClass("visible-block");
-    			  $(".file_actions").removeClass("visible-block");
-    			  $(".directory_actions[dir="+dir+"]").addClass("visible-block");
-    		  }
-    		  else {
-    			  $(".directory_actions[dir="+dir+"]").removeClass("visible-block");
-        		  }
-  		    return false;
-  		  }
-  		  return true;
-  		});
-            $('.file_block').mousedown(function(e){
-      	  if( e.button == 2 ) { //2  - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, 3 - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-    		  var file =   $(this).attr("file");
-    		  if(!$(".file_actions[file="+file+"]").hasClass("visible-block")) {
-    			  $(".file_actions").removeClass("visible-block");
-    			  $(".directory_actions").removeClass("visible-block");
-    			  $(".file_actions[file="+file+"]").addClass("visible-block");
-    			  }
-    		  else {
-    			  $(".file_actions[file="+file+"]").removeClass("visible-block");
-        		  }
+        $('.folder_action').mousedown(function (e) {
+            if (e.button == 2) { //2  - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, 3 - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                var dir = $(this).attr("dir");
+                if (!$(".directory_actions[dir=" + dir + "]").hasClass("visible-block")) {
+                    $(".directory_actions").removeClass("visible-block");
+                    $(".file_actions").removeClass("visible-block");
+                    $(".directory_actions[dir=" + dir + "]").addClass("visible-block");
+                } else {
+                    $(".directory_actions[dir=" + dir + "]").removeClass("visible-block");
+                }
+                return false;
+            }
+            return true;
+        });
+        $('.file_block').mousedown(function (e) {
+            if (e.button == 2) { //2  - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, 3 - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                var file = $(this).attr("file");
+                if (!$(".file_actions[file=" + file + "]").hasClass("visible-block")) {
+                    $(".file_actions").removeClass("visible-block");
+                    $(".directory_actions").removeClass("visible-block");
+                    $(".file_actions[file=" + file + "]").addClass("visible-block");
+                } else {
+                    $(".file_actions[file=" + file + "]").removeClass("visible-block");
+                }
 
-  		    return false;
-  		  }
-  		  return true;
-  		});
-        $(".delete_directory").bind("click",delete_directory);
-        $(".move_dir").bind("click",move_directory);
-        $('.delete_file').bind("click",delete_file);
-        $('.move_file').bind("click",move_file);
-        $('#file_to_directory').bind('change',upload_file_to_directory);
-        $(".share_dir").bind("click",share_directory);
-        $(".dir_save_pass").bind("click",share_directory_with_password)
-        $(".parent_directory").bind("click",function(){
+                return false;
+            }
+            return true;
+        });
+        $(".delete_directory").bind("click", delete_directory);
+        $(".move_dir").bind("click", move_directory);
+        $('.delete_file').bind("click", delete_file);
+        $('.move_file').bind("click", move_file);
+        $('#file_to_directory').bind('change', upload_file_to_directory);
+        $(".share_dir").bind("click", share_directory);
+        $(".dir_save_pass").bind("click", share_directory_with_password)
+        $(".parent_directory").bind("click", function () {
             var dir_key = $(this).attr('dir_key');
             $.ajax({
                 type: "POST",
                 url: "files/getParentDir",
-                data: {dir_key : dir_key}
+                data: {dir_key: dir_key}
             })
-                .done(function( data ) {
+                .done(function (data) {
                     $("#hard_drive").html(data);
                 });
         });
-        $('.directory').bind("click",function(){
+        $('.directory').bind("click", function () {
             var dir_key = $(this).attr('dir_key');
             show_directory(dir_key);
         });
-        $("#create_dir").bind("click",function(){
+        $("#create_dir").bind("click", function () {
             var directory_name = $("#directory_name").val();
             var current_directory = $("#current_directory").val();
 
             $.ajax({
                 type: "POST",
                 url: "files/createDir",
-                data: {current_directory : current_directory,directory_name : directory_name}
+                data: {current_directory: current_directory, directory_name: directory_name}
 
             })
-                .done(function( data ) {
+                .done(function (data) {
                     var current_directory = $("#current_directory").val();
                     show_directory(current_directory);
 
@@ -201,108 +215,119 @@ document.oncontextmenu = function() {return false;}; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï
 
     });
 
-//     function sell_file(file_id) {
-//        var cost = $('.file_cost[file='+file_id+']').val();
-//        var description = $('textarea[file='+file_id+']').val();
-//        var tags = $(".tags[file="+file_id+"]").val();
-//         $.ajax({
-//             type: "POST",
-//             url: "files/sellFile",
-//             data: {file_id : file_id,cost: cost,description: description,tags:tags}
-//         })
-//             .done(function( data ) {
-//                 alert(data);
-//             });
-//     }
-    function share_directory () {
+    //     function sell_file(file_id) {
+    //        var cost = $('.file_cost[file='+file_id+']').val();
+    //        var description = $('textarea[file='+file_id+']').val();
+    //        var tags = $(".tags[file="+file_id+"]").val();
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "files/sellFile",
+    //             data: {file_id : file_id,cost: cost,description: description,tags:tags}
+    //         })
+    //             .done(function( data ) {
+    //                 alert(data);
+    //             });
+    //     }
+    function share_directory() {
         $.ajax({
             type: "POST",
             url: "files/shareDir",
-            data: {dir : $(this).attr("dir")}
+            data: {dir: $(this).attr("dir")}
         })
-            .done(function( data ) {
-               // alert(data);
+            .done(function (data) {
+                // alert(data);
             });
 
     }
-    function share_directory_with_password (){
+
+    function share_directory_with_password() {
         var dir = $(this).attr("dir");
-        var password  = $(".input_password[dir="+dir+"]").val();
+        var password = $(".input_password[dir=" + dir + "]").val();
 
         $.ajax({
             type: "POST",
             url: "files/shareDirWithPassword",
-            data: {dir : $(this).attr("dir"), password : password}
+            data: {dir: $(this).attr("dir"), password: password}
         })
-            .done(function( data ) {
-              //  alert(data);
+            .done(function (data) {
+                //  alert(data);
             });
 
 
     }
+
     function upload_file_to_directory(e) {
-        var files= e.target.files;
-        var file=files[0];
+        var files = e.target.files;
+        var file = files[0];
         var data = new FormData();
-        data.append('file',file);
+        data.append('file', file);
         var current_directory = $("#current_directory").val();
-        data.append('to_directory',current_directory);
-        var url  = "files/saveFile";
+        data.append('to_directory', current_directory);
+        var url = "files/saveFile";
         var request = new XMLHttpRequest();
-        var xmlupload=request.upload;
-        xmlupload.addEventListener('load',refresh_drive_with_delay(file),false);
+        var xmlupload = request.upload;
+        xmlupload.addEventListener('load', refresh_drive_with_delay(file), false);
         request.open("POST", url, true);
         request.send(data);
     }
+
     function show_directory(dir) {
         $.ajax({
             type: "POST",
             url: "files/getDir",
-            data: {dir_key : dir}
+            data: {dir_key: dir}
         })
-            .done(function( data ) {
+            .done(function (data) {
                 $("#hard_drive").html(data);
             });
 
     }
-    function refresh_drive_with_delay(){
+
+    function refresh_drive_with_delay() {
         var current_directory = $("#current_directory").val();
-        setTimeout(function() { show_directory(current_directory)}, 500);
+        setTimeout(function () {
+            show_directory(current_directory)
+        }, 500);
     }
-    function delete_file () {
+
+    function delete_file() {
         var current_directory = $("#current_directory").val();
         var file_id = $(this).attr("file");
 
         $.ajax({
             type: "POST",
             url: "files/deleteFile",
-            data: {file_id : file_id , current_directory : current_directory }
+            data: {file_id: file_id, current_directory: current_directory}
         })
-            .done(function( data ) {
+            .done(function (data) {
                 var current_directory = $("#current_directory").val();
-                setTimeout(function() { show_directory(current_directory)}, 500);
+                setTimeout(function () {
+                    show_directory(current_directory)
+                }, 500);
             });
     }
 
-    function move_file(){
-           var file_id = $(this).attr("file");
-           $("#paste").addClass("pastpaste_file_to_directory");
-           window.need_to_paste_file = true;
-           window.need_to_paste_file_id = file_id;
-       }
-    function delete_directory(){
+    function move_file() {
+        var file_id = $(this).attr("file");
+        $("#paste").addClass("pastpaste_file_to_directory");
+        window.need_to_paste_file = true;
+        window.need_to_paste_file_id = file_id;
+    }
+
+    function delete_directory() {
 
         var dir = $(this).attr('dir');
         $.ajax({
             type: "POST",
             url: "files/deleteDirectory",
-            data: {dir : dir  }
+            data: {dir: dir}
         })
-            .done(function( data ) {
-               refresh_drive_with_delay();
+            .done(function (data) {
+                refresh_drive_with_delay();
             });
     }
-    function move_directory(){
+
+    function move_directory() {
         var dir_id = $(this).attr("dir");
         $("#paste").addClass("pastpaste_file_to_directory");
         window.need_to_paste_dir = true;
