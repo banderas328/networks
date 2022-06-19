@@ -1,18 +1,17 @@
-<h3 class='parent_directory_network' style='cursor:pointer;' dir_key=<?php echo $current_directory?>><img  style='cursor:pointer;'src='assets/images/icons/go-back-icon.png' width='50px' height='50px'/></h3>
-
+<input type="hidden" class='parent_directory_network' style='cursor:pointer;' dir_key=<?php echo $current_directory?> />
 <?php
-if($dirs) {
+if(isset($dirs) and count($dirs)) {
     foreach ($dirs as $dir_key => $dir_value) {
         echo "<div style='margin-left: 20px;'><img src='assets/images/icons/folder.png' width='50px' height='50px'/><span style='cursor:pointer;margin-top: -8px;margin-left: 5px;' dir_key=" . $dir_value['id'] . " class='network_directory'>" . $dir_value['path'] . "</span></div>";
 
     }
 }
-if($filesInDir) {
-
-    foreach($filesInDir as  $file) {
-        echo "<span style='display:inline;' class='file_delete_string' file=".$file['id'].">".$file['file_title']."    ".$file['type']
-             ."<a href='/network/downloadFile/".$user_id."/".$file['id']."' class='download_file' fileId=".$file['id'].">download file</a>
-              <button class='copy_file_from_network' file_id='".$file['id']."'>copy file</button></span></br>";
+if(isset($filesInDir) and count($filesInDir)) {
+    foreach ($filesInDir as $file) {
+        if(isset($user_id) and (isset($file)))
+        echo "<span style='display:inline;' class='file_delete_string' file=" . $file['id'] . ">" . $file['file_title'] . "    " . $file['type']
+            . "<a href='/network/downloadFile/" . $user_id . "/" . $file['id'] . "' class='download_file' fileId=" . $file['id'] . ">download file</a>
+              <button class='copy_file_from_network' file_id='" . $file['id'] . "'>copy file</button></span></br>";
     }
 }
 ?>
@@ -20,8 +19,10 @@ if($filesInDir) {
 
 $(function(){
     $(".network_directory").bind("click",get_network_directory);
-    $(".parent_directory_network").bind("click",get_network_parent_directory);
+    $("#get_parent_directory").bind("click",get_network_parent_directory);
     $(".copy_file_from_network").bind("click",copy_file_from_network);
+    let dir = $(".parent_directory_network").attr("dir_key");
+    $("#get_parent_directory").attr("dir_key",dir);
 
 });
     function copy_file_from_network(){
@@ -58,8 +59,8 @@ $(function(){
         )
             .done(function (data) {
                 $("#network").html(data);
-
-
+                let dir = $(".parent_directory_network").attr("dir_key");
+                $("#get_parent_directory").attr("dir_key",dir);
             });
 
     }

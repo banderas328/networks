@@ -118,10 +118,6 @@ class  networkController extends Controller\preloaderController
                     $authedDirs .= ",".$dir;
                 }
                 $dirs = explode(",", $authedDirs);
-                var_dump($childDirs);
-                var_dump($dirs);
-
-
                 if(!in_array($childDirs[0],$dirs)) {
 
                     $dirs[] =  $childDirs[0];
