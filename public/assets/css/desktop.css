@@ -1096,9 +1096,10 @@ th.shrink {
 .hard-drive-form-wrapper div {
     display: inline-block;
     padding: 15px 0 0 0;
-    border-bottom: 1px solid #dddddd;
+
     padding-bottom:10px;
 }
+
 .hard-drive-dir-wrapper {
     float: left;
 }
@@ -2720,6 +2721,8 @@ display: inline-block;
     display: block;
     vertical-align: top;
     margin-left: 30px;
+    position: relative;
+    bottom: 5px;
 }
 #create_dir {
     display: block;
