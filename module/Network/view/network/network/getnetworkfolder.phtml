@@ -9,22 +9,24 @@ if(isset($dirs) and count($dirs)) {
 if(isset($filesInDir) and count($filesInDir)) {
     foreach ($filesInDir as $file) {
         if(isset($user_id) and (isset($file)))
-        echo "<span style='display:inline;' class='file_delete_string' file=" . $file['id'] . ">" . $file['file_title'] . "    " . $file['type']
-            . "<a href='/network/downloadFile/" . $user_id . "/" . $file['id'] . "' class='download_file' fileId=" . $file['id'] . ">download file</a>
-              <button class='copy_file_from_network' file_id='" . $file['id'] . "'>copy file</button></span></br>";
+        echo "<div class='file_wraper ' file=" . $file['id'] . ">";
+        echo "<div class='file_block_wrapper hard-drive-directory-inner'>";
+            echo "<img src='assets/images/icons/file.png' width='50px' height='50px' file=" . $file['id'] . " >";
+            echo "<p class='file_block'> ".$file['file_title'] ."</p>";
+            echo "<div class='network_actions'>";
+            echo "<a href='/network/downloadFile/" . $user_id . "/" . $file['id'] . "' class='download_file' fileId=" . $file['id'] . ">
+                      <img class='directory_action' src='assets/images/icons/download.png'>
+                  </a>";
+            echo "<a href='#' class='copy_file_from_network' file_id='" . $file['id'] . "'>
+                      <img class='directory_action' src='assets/images/icons/move.png'>
+                </a>";
+        echo "</div>";
+        echo "</div>";
+        echo "</div>";
     }
 }
 ?>
 <script type="text/javascript">
-
-$(function(){
-    $(".network_directory").bind("click",get_network_directory);
-    $("#get_parent_directory").bind("click",get_network_parent_directory);
-    $(".copy_file_from_network").bind("click",copy_file_from_network);
-    let dir = $(".parent_directory_network").attr("dir_key");
-    $("#get_parent_directory").attr("dir_key",dir);
-
-});
     function copy_file_from_network(){
         $("#window_drive").css("display","block");
         show_directory(0);
@@ -43,7 +45,7 @@ $(function(){
             }
         )
             .done(function (data) {
-                $("#network").html(data);
+                $("#network_frame").html(data);
 
 
             });
@@ -58,10 +60,20 @@ $(function(){
             }
         )
             .done(function (data) {
-                $("#network").html(data);
+                $("#network_frame").html(data);
                 let dir = $(".parent_directory_network").attr("dir_key");
                 $("#get_parent_directory").attr("dir_key",dir);
             });
 
     }
+
+$(function(){
+    $(".network_directory").bind("click",get_network_directory);
+    $("#get_parent_directory").bind("click",get_network_parent_directory);
+    $(".copy_file_from_network").bind("click",copy_file_from_network);
+    let dir = $(".parent_directory_network").attr("dir_key");
+    $("#get_parent_directory").attr("dir_key",dir);
+
+});
+
 </script>

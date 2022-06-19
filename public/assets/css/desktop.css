@@ -943,7 +943,7 @@ th.shrink {
 #setting_table tr td#about_me_setting {
     height: 100px;
 }
-.dir_wraper {
+.dir_wraper   {
     width: 100px;
     display: inline-block;
     margin-top: 10px;
@@ -1031,6 +1031,7 @@ th.shrink {
     font-size: 15px;
     display: block;
     line-height: 10px;
+    margin-top: 10px;
 }
 .directory_wrapper {
     display: inline-block;
@@ -2677,20 +2678,21 @@ display: inline-block;
 .container {
     margin: 0;
 }
-.file_wraper {
-    width: 100px;
+.file_block_wrapper  , .directory_wrapper {
     display: inline-block;
-    margin-top: 10px;
-    margin-left: 10px;
+    margin-top: 25px;
+    margin-left: 35px;
     position: relative;
     vertical-align: top;
 }
 .file_wraper img {
     vertical-align: top;
+    width: 45px;
 }
 .file_block{
     width : 100px;
     word-wrap: break-word;
+    margin-top: 5px;
 }
 .network_point {
     width: auto;
@@ -2721,6 +2723,17 @@ display: inline-block;
 }
 #create_dir {
     display: block;
+}
+.network_actions {
+    display: block;
+}
+.network_actions a {
+    display: inline-block;
+    width: 30%;
+
+}
+img.directory_action {
+    width: 20px;
 }
 
 

@@ -5,7 +5,7 @@ function refresh_network() {
 
     })
         .done(function( data ) {
-            $("#network").html(data);
+            $("#network_frame").html(data);
         });
 
 }

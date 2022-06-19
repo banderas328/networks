@@ -1,34 +1,38 @@
-<input type="hidden" class='parent_directory_network' style='cursor:pointer;' dir_key=<?php if(isset($current_directory))echo $current_directory?> />
+<input type="hidden" class='parent_directory_network' style='cursor:pointer;'
+       dir_key=<?php if (isset($current_directory)) echo $current_directory ?>/>
 <?php
 if (isset($dirs) and count($dirs)) {
-foreach($dirs as  $dir_key => $dir_value) {
-    echo "<div style='margin-left: 20px;'>
-             <img src='assets/images/icons/folder.png' width='50px' height='50px'/>
-             <span style='cursor:pointer;margin-top: -8px;margin-left: 5px;' user_id=".$dir_value['user_id']."
-                   dir_key=".$dir_value['path_id']." class='network_directory'>".$dir_value['path']."
-             </span>
-         </div>" ;
-}
+    foreach ($dirs as $dir_key => $dir_value) {
+        echo "<div class='dir_wraper hard-drive-dir-wrapper'>";
+        echo "<div class='directory_wrapper hard-drive-directory-inner'>";
+        echo "<img src='assets/images/icons/folder.png' width='50px' height='50px'/>";
+        echo "<span style='cursor:pointer;margin-top: -8px;margin-left: 5px;'
+                       user_id=" . $dir_value['user_id'] . " dir_key=" . $dir_value['path_id']
+            . " class='network_directory'>" . $dir_value['path']
+            . "</span>
+          </div>";
+        echo "</div>";
+    }
 }
 ?>
 
 <script type="text/javascript">
 
-    $(function(){
-        $(".network_directory").bind("click",get_network_access);
+    $(function () {
+        $(".network_directory").bind("click", get_network_access);
         let dir = $(".parent_directory_network").attr("dir_key");
-        $("#get_parent_directory").attr("dir_key",dir);
+        $("#get_parent_directory").attr("dir_key", dir);
     });
 
-    function get_network_access(){
+    function get_network_access() {
         $.ajax({
             type: "POST",
             url: "network/getnetworkdirectory",
-            data: {user_id:$(this).attr("user_id"), dir_key : $(this).attr("dir_key")}
+            data: {user_id: $(this).attr("user_id"), dir_key: $(this).attr("dir_key")}
         })
-            .done(function(data) {
-                $("#network").html(data);
-               // console.info(data);
+            .done(function (data) {
+                $("#network_frame").html(data);
+                // console.info(data);
             });
 
     }
