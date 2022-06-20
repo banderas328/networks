@@ -17,11 +17,11 @@ if (!$is_root) {
 
 
             <input type="text" id="directory_name">
-            <button value="create dir" class='btn btn-primary'
+            <button value="create dir" class='action_btn'
                     id="create_dir"><?php echo $this->translate("Create directory", false, $lang); ?></button>
         </div>
         <div>
-            <button id="paste" class='btn btn-primary'>paste</button>
+            <button id="paste" >paste</button>
             <input type="hidden" value="<?php if (isset($current_directory)) echo $current_directory ?>"
                    id="current_directory">
         </div>
@@ -50,7 +50,7 @@ if (!$is_root) {
                     <p class='share_dir_with_password hard-dropdown-items ' dir=" . $dir_value['id'] . ">share dir with password</p>
                     <div class='hard-dropdown-form'>
                     <input type='text' class='input_password' dir=" . $dir_value['id'] . ">
-                     <input type='button' value='save password and share' dir=" . $dir_value['id'] . " class='dir_save_pass btn btn-primary btn btn-primary'>
+                     <input type='button' value='save password and share' dir=" . $dir_value['id'] . " class='dir_save_pass btn btn-primary action_btn'>
                      </div>
                  </div>";
             }
@@ -84,7 +84,7 @@ if (!$is_root) {
     }; //��������� ���������� ����
     $(function () {
         if (window.need_to_paste_file == true) {
-            $("#paste").addClass("pastpaste_file_to_directory");
+            $("#paste").addClass("required_btn");
             $("#paste").bind("click", function () {
                 var file_id = window.need_to_paste_file_id;
 
@@ -105,6 +105,9 @@ if (!$is_root) {
             });
 
 
+        }
+        else {
+            $("#paste").addClass("action_btn");
         }
 
         if (window.need_to_paste_dir == true) {
@@ -130,6 +133,7 @@ if (!$is_root) {
 
 
         }
+
 
 
         $(".parent_directory").attr("dir_key",<?php echo $current_directory?>);

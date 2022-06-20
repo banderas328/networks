@@ -793,10 +793,7 @@ th.shrink {
 .ui-accordion-content {
     height: 100%;
 }
-#friend_list,
-#friends_requets {
-    width: 640px;
-}
+
 .message_to_user_from_chat_list {
     display: none;
     width: 470px;
@@ -1030,7 +1027,7 @@ th.shrink {
     font-weight: normal;
     font-size: 15px;
     display: block;
-    line-height: 10px;
+    line-height: 1.5em;
     margin-top: 10px;
 }
 .directory_wrapper {
@@ -2649,10 +2646,10 @@ textarea.c-field::placeholder {
 .frame_container  .frame_string {
     width:80%;margin-left:5%;margin-top: 30px;
 }
-.frame_container  .frame_string .frame_input {
+ .frame_string .frame_input {
 
 
-    float: right;
+    display: block;
     margin-right: 30%;
 }
 .frame_list_block img {
@@ -2671,7 +2668,10 @@ textarea.c-field::placeholder {
     cursor: pointer;
 }
 .frame_block {
-display: inline-block;
+    display: inline-block;
+    padding-left: 25px;
+    text-align: right;
+    min-width: 450px;
 }
 .frame_string {
     margin-left: 40px;
@@ -2713,30 +2713,98 @@ display: inline-block;
     position: relative;
     left: 25%;
 }
+.avatar {
+    display: inline;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    overflow: hidden;
+    margin-top: 20px;
+
+}
 .dirs_block, .files_block {
-    display: block;
+display: block;
 }
 #paste {
-    height: 40px;
-    display: block;
-    vertical-align: top;
-    margin-left: 30px;
-    position: relative;
-    bottom: 5px;
+height: 40px;
+display: block;
+vertical-align: top;
+margin-left: 30px;
+position: relative;
+bottom: 5px;
 }
 #create_dir {
-    display: block;
+display: block;
 }
 .network_actions {
-    display: block;
+display: block;
 }
 .network_actions a {
-    display: inline-block;
-    width: 30%;
+display: inline-block;
+width: 30%;
 
 }
 img.directory_action {
-    width: 20px;
+width: 20px;
+}
+#general-settings img {
+    width: 120px;
+    border-radius: 60px;
+    padding-left: 14px;
+}
+#user_search_form label input{
+display: block;
+}
+#user_search_form input[type=submit] {
+background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
+color: #fff;
+padding: 10px;
+border-radius: 5px;
+font-size: 18px;
+margin: 10px 0;
+display: inline-block;
+border: none;
+}
+.action_btn {
+background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
+color: #fff;
+padding: 10px;
+border-radius: 5px;
+font-size: 18px;
+margin: 10px 0;
+display: inline-block;
+border: none;
+
+}
+.required_btn {
+background: #eb5757;
+padding: 5px;
+font-size: 16px;
+border-radius: 5px;
+color: #fff;
+border: none;
+}
+
+.frame_block button {
+margin: 5px;
+}
+.friend_block {
+width: 100%;
+}
+.avatar img {
+    width: 70px;
+    border-radius: 35px;
+}
+.friend_block p {
+    display: inline;
+    padding: 15px;
+    text-align: right;
+}
+.friend_block p button {
+    margin: 10px;
+}
+.ui-dialog-title {
+    color: black;
 }
 
 

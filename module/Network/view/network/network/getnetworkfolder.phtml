@@ -31,7 +31,8 @@ if(isset($filesInDir) and count($filesInDir)) {
         $("#window_drive").css("display","block");
         show_directory(0);
         var file_id = $(this).attr("file_id");
-        $("#paste").addClass("pastpaste_file_to_directory");
+        $("#paste").removeClass("action_btn");
+        $("#paste").addClass("required_btn");
         window.need_to_paste_file = true;
         window.need_to_paste_file_id = file_id;
     }

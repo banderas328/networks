@@ -3,7 +3,7 @@ if (isset($frames) and count($frames)) {
     foreach ($frames as $frame) {
         echo "<div class='frame_list_block'>";
         echo "<img src='/" . $frame['image'] . "'/>";
-        echo "<p class='frame_block'>" . $frame['name'] . "<button frame_url='" . $frame['url'] . "' class='open_frame'>open</button><button frame_id='" . $frame['id'] . "' class='delete_frame'>delete</button></p>";
+        echo "<p class='frame_block'>" . $frame['name'] . "<button frame_url='" . $frame['url'] . "' class='open_frame action_btn'>open</button><button frame_id='" . $frame['id'] . "' class='delete_frame action_btn'>delete</button></p>";
         echo "</div>";
     }
 }

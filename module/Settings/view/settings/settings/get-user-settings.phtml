@@ -1,15 +1,17 @@
 <?php if(isset($settings["avatar"])) {?>
+<div class='avatar'>
 <img src="<?php echo $settings["avatar"]; ?>">
+</div>
 <?php }?>
+<div class="user_profile">
 <?php
-if(isset($settings["first_name"])) echo $settings["first_name"];
-if(isset($settings["second_name"])) echo $settings["second_name"];
-if(isset($settings["phone"])) echo $settings["phone"];
-if(isset($settings["about"])) echo $settings["about"];
-if(isset($settings["job"])) echo $settings["job"];
-if(isset($settings["country"])) echo $settings["country"];
-if(isset($settings["city"])) echo $settings["city"];
+echo "<div>".$settings["first_name"]." ".$settings["second_name"]."</div>";
+echo "<div>".$settings["phone"]." ".$settings["job"]."</div>";
+echo "<div>".$settings["country"]." ".$settings["city"]."</div>";
+echo "<div>".$settings["about"]."</div>";
+
+
 
 ?>
-
+</div>
 

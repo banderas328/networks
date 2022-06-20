@@ -5,7 +5,7 @@ if($friends)
 foreach($friends as $friend){
     echo "<span class='user_container_block' userId='".$friend["user_id"]."'>";
     echo "<p class='member_name' userId='".$friend['user_id']."'><div userId='".$friend['user_id']."' class='user_container'>".$friend['first_name']." ".$friend['second_name']."</div></p>";
-    echo '<input type="button" value="Add User To This Task" userId='.$friend["user_id"].' class="add_user_to_task">';
+    echo '<input type="button" value="Add User To This Task" userId='.$friend["user_id"].' class="add_user_to_task action_btn">';
     echo "</span>";
 
 }

@@ -1,18 +1,18 @@
 <div id="user_profile"></div>
 
-<button value="refresh" class="friends_refresh">refresh</button>
+<button value="refresh" class="friends_refresh action_btn">refresh</button>
 <div>
 <?php
 if($friends)
 foreach($friends as $friend){
     echo "<div class='friend_block'>";
-    echo "<span><img style='width:80px;height:80px;'src=".$friend['avatar'].">";
-    echo $friend['first_name'];
-    echo $friend['second_name'];
-    echo $friend['job'];
-    echo "<button class='send_message' to_user='".$friend['user_id']."' value='send_message'>send message</button>";
-    echo "<button class='show_profile' user_id='".$friend['user_id']."' >show profile</button>";
-    echo "</span>";
+    echo "<div class='avatar'>";
+    echo "<img src=".$friend['avatar'].">";
+    echo "</div>";
+    echo "<p>".$friend['first_name']." ".$friend['second_name']." ".$friend['job'];
+    echo "<button class='send_message action_btn' to_user='".$friend['user_id']."' value='send_message'>send message</button>";
+    echo "<button class='show_profile action_btn' user_id='".$friend['user_id']."' >show profile</button>";
+    echo "</p>";
     echo "</div>";
 
 }
@@ -20,7 +20,7 @@ foreach($friends as $friend){
 </div>
 <div id="message_to_user_from_user_list" title="Enter message">
 <textarea class="message_to_user_area" style="width: 400px;height: 120px" maxlength="500"></textarea>
-<button class="submit" id="message_to_user_from_user_list_button">send</button>
+<button class="submit action_btn" id="message_to_user_from_user_list_button" >send</button>
 </div>
 <script type="text/javascript">
     $(function() {
@@ -42,15 +42,14 @@ foreach($friends as $friend){
         }).done(function(data){
             $("#user_profile").html(data);
 
-            $("#user_profile").dialog();
+            $("#user_profile").dialog({width: 300,height:400});
         });
 
     }
     function send_message_from_user_list(element) {
         var to_user = $(element).attr('to_user');
         $('.message_to_user_area').val("");
-        $("#message_to_user_from_user_list").dialog( { width: 500,height:200
-            });
+        $("#message_to_user_from_user_list").dialog({width: 600,height:230});
         $("#message_to_user_from_user_list_button").attr("to_user",to_user);
         $( "#message_to_user_from_user_list_button").unbind( "click" );
         $("#message_to_user_from_user_list_button").bind("click",function(){
