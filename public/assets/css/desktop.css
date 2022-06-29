@@ -2806,5 +2806,19 @@ width: 100%;
 .ui-dialog-title {
     color: black;
 }
+.user_container_block {
+    display: inline-block;
+    width: auto;
+}
+.user_container_block .avatar img{
+width: 40px;
+    border-radius: 20px;
+}
+.user_container div * {
+     margin-left: 15px;
+     margin-right: 15px;
+ }
+.user_container  input {
+    margin-left: 15px;
 
-
+}

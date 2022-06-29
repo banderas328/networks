@@ -19,11 +19,19 @@ foreach ($boards as $board) {
 <div id="task_popup">
     <span id="members_list"></span>
     <span id="task_members_list"></span>
-    <input type="text" name="task_name" placeholder="task name" id="task_name">
+    <div>
+    <input type="text" name="task_name" placeholder="Task name" id="task_name">
+    </div>
+    <div>
     <input	type="hidden" name="task_members" placeholder="task members"id="task_members">
     <textarea name="task_description" placeholder="task description" id="task_description"></textarea>
-    <input	type="file" name="task_file" placeholder="task file" id="task_file">
-    <input type="button" value="save task" id="save_task" project_id='<?php if(isset($board["project_id"])) echo $board["project_id"]?>'/>
+    </div>
+    <div>
+    <input	type="file" name="task_file" class="action_btn" placeholder="task file" id="task_file">
+    </div>
+    <div>
+    <input type="button" value="save task" id="save_task"  class="action_btn" project_id='<?php if(isset($board["project_id"])) echo $board["project_id"]?>'/>
+    </div>
 </div>
 <div id="task_manager_arhive"><span id="load_archive">load archive</span>
     <div id="task_manager_arhive_block"></div>
