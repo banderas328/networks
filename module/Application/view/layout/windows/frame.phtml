@@ -14,15 +14,19 @@
         </div>
         <div class="abs window_content">
             <div class="container">
-            <p class="frame_string">Window url    <input class="frame_input" type="text" name="frame_url"  id="frame_url"/></p>
-            <p  class="frame_string">Window name   <input class="frame_input" type="text" name="frame_name" id="frame_name"/></p>
-            <p  class="frame_string">Window Image  <input class="frame_input" type="file" name="frame_image" id="frame_image"/></p>
-             <p class="frame_string" ><input type="button" value="save" id="save_frame" class="frame_input" style="float: left;"></p>
+                <p class="frame_string">Window url <input class="frame_input" type="text" name="frame_url"
+                                                          id="frame_url"/></p>
+                <p class="frame_string">Window name <input class="frame_input" type="text" name="frame_name"
+                                                           id="frame_name"/></p>
+                <p class="frame_string">Window Image <input class="frame_input" type="file" name="frame_image"
+                                                            id="frame_image"/></p>
+                <p class="frame_string"><input type="button" value="save" id="save_frame" class="frame_input"
+                                               style="float: left;"></p>
             </div>
             <div class="frame_container">
 
             </div>
-           </div>
+        </div>
         <div class="abs window_bottom">
             Фреймы
         </div>
@@ -52,33 +56,32 @@
     <span class="abs ui-resizable-handle ui-resizable-se"></span>
 </div>
 <script type="text/javascript">
-    function load_frames(){
-        $.get( "frames/loadFrames")
-            .done(function( data ) {
+    function load_frames() {
+        $.get("frames/loadFrames")
+            .done(function (data) {
                 $(".frame_container").html(data);
             });
     }
-    $(function (){
+
+    $(function () {
         load_frames();
-        $("#save_frame").on("click",function(){
+        $("#save_frame").on("click", function () {
             const frame_url = $("#frame_url").val();
             const frame_name = $("#frame_name").val();
             const image = $("#frame_image").prop("files");
-            var file=image[0];
+            var file = image[0];
             var data = new FormData();
-            data.append('file',file);
-            data.append('frame_url',frame_url);
-            data.append('frame_name',frame_name);
-            var url  = "frames/saveFrame";
+            data.append('file', file);
+            data.append('frame_url', frame_url);
+            data.append('frame_name', frame_name);
+            var url = "frames/saveFrame";
             var request = new XMLHttpRequest();
-            var xmlupload=request.upload;
-            xmlupload.addEventListener('load',        load_frames,false);
+            var xmlupload = request.upload;
+            xmlupload.addEventListener('load', load_frames, false);
             request.open("POST", url, true);
             request.send(data);
         });
     });
-
-
 
 
 </script>

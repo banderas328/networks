@@ -822,7 +822,7 @@ th.shrink {
     left: 360px;
     top: 447px;
     background-color: black;
-    color: #66bb00;
+    color: black;
     border: 3px solid #66bb00;
     border-radius: 10px;
 }
@@ -834,13 +834,14 @@ th.shrink {
     left: 30px;
     font-size: large;
 }
-.message_box {
-    max-height: 400px;
-    overflow: auto;
-    border: 3px solid #66bb00;
-    border-radius: 10px;
-    padding: 10px 10px 10px 10px;
-}
+/*.message_box {*/
+/*    height: 350px;*/
+/*    width: 400px;*/
+/*    overflow: auto;*/
+/*    border: 3px solid #66bb00;*/
+/*    border-radius: 10px;*/
+/*    padding: 10px 10px 10px 10px;*/
+/*}*/
 
 .message_to_user_area_chat {
     position: absolute;
@@ -876,12 +877,16 @@ th.shrink {
 }
 .message_to_user_from_user_chanel_button {
     position: absolute;
-    left: 360px;
-    top: 447px;
-    background-color: black;
-    color: #66bb00;
-    border: 3px solid #66bb00;
-    border-radius: 10px;
+    left: 400px;
+    top: 325px;
+    background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 10px 0;
+    display: inline-block;
+    border: none;
 }
 .close_chanel {
     font-weight: bold;
@@ -892,18 +897,24 @@ th.shrink {
     font-size: large;
 }
 .message_box {
-    max-height: 400px;
+    height: 270px;
     overflow: auto;
-    border: 3px solid #66bb00;
+    border: 3px solid #f3f3f3;
     border-radius: 10px;
     padding: 10px 10px 10px 10px;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 400px;
+
 }
 .message_to_user_area_chanel {
     position: absolute;
-    top: 447px;
-    background-color: black;
-    color: #66bb00;
-    border: 3px solid #66bb00;
+    top: 335px;
+    left: 5%;
+    background-color: #f3f3f3;
+    color: black;
+    border: 3px solid #f3f3f3;
     border-radius: 10px;
 }
 
@@ -2822,3 +2833,12 @@ width: 40px;
     margin-left: 15px;
 
 }
+#chat_public {
+    width: 500px;
+    height: 80%;
+}
+#chat_private {
+
+    width: 500px;
+    height: 80%;
+ }

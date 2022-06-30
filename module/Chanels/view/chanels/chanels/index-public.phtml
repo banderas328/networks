@@ -96,11 +96,18 @@
             window.to_chanel.to_chanel  = $(element).attr("to_chanel");
             $('.message_to_user_area_chanel').val("");
             $(".message_to_user_from_chanel_list").remove();
-            var chat_html = '<div class="message_to_user_from_chanel_list" style="display:hide;" title="Enter message" to_chanel='+  to_chanel.to_chanel +'><p class="close_chanel" to_chanel='+to_chanel.to_chanel+'>X</p><div class="message_box" to_chanel='+to_chanel.to_chanel+'></div><div class="chanel" to_chanel='+to_chanel.to_chanel+'><textarea class="message_to_user_area_chanel"  maxlength="500" to_chanel='+to_chanel.to_chanel+'></textarea><button class="submit" class="chanel_button" to_chanel='+to_chanel.to_chanel+'>send</button></div></div>';
+            var chat_html =
+                '<div class="abs window" id="chat_public"><div class="abs window_inner"><div class="window_top"><span class="float_left">Chat</span><span class="float_right"><a href="#" class="window_min"></a><a href="#" class="window_resize"></a><a href="#icon_dock_drive" class="window_close"></a></span></div><div class="abs window_content">' +
+                '<div class="message_to_user_from_chanel_list" style="display:hide;" title="Enter message" to_chanel=' +  to_chanel.to_chanel +'>' +
+                '<p class="close_chanel" to_chanel='+to_chanel.to_chanel+'>X</p>' +
+                '<div class="message_box" to_chanel='+to_chanel.to_chanel+'></div>' +
+                '<div class="chanel" to_chanel='+to_chanel.to_chanel+'>' +
+                '<textarea class="message_to_user_area_chanel"  maxlength="500" to_chanel='+to_chanel.to_chanel+'></textarea>' +
+                '<button class="submit" class="chanel_button" to_chanel='+to_chanel.to_chanel+'>Send</button>' +
+                '</div></div>' + '</div> <div class="abs window_bottom">Chat</div> </div> <span class="abs ui-resizable-handle ui-resizable-se"></span> </div>';
             $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel.to_chanel+"]").remove();
             $('body').append(chat_html);
-            $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel.to_chanel+"]").addClass('new_chanel');
-            $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel.to_chanel+"]").draggable();
+           // $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel.to_chanel+"]").addClass('new_chanel');
             $(".message_to_user_from_chanel_list").bind("click",function() {
                // $(this).addClass("window");
             });
@@ -114,6 +121,7 @@
                 window.to_chanel = { to_chanel : false  , date : false};
             })
             $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel.to_chanel+"]").show();
+            $("#chat_public").show();
             sync_chanel();
         }
 
