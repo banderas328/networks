@@ -52,6 +52,7 @@
                     <a class="c-chat-card__enter-button js-join-channel"
                         to_chanel="<?php echo $chanel->id;?>"
                         href="<?php echo $url; ?>"
+                        chanel_name="<?php echo $chanel->chanel_name ?>"
                     >
                         <svg class="icon-nw icon-nw-open-in-new-black-24" viewBox="0 0 24 24">
                             <path d="M0 0h24v24H0V0z" fill="none"/>
@@ -94,10 +95,11 @@
 
         function send_message_from_user_chanel(element) {
             window.to_chanel.to_chanel  = $(element).attr("to_chanel");
+            var chanel_name =  $(element).attr("chanel_name");
             $('.message_to_user_area_chanel').val("");
-            $(".message_to_user_from_chanel_list").remove();
+            //$(".message_to_user_from_chanel_list").remove();
             var chat_html =
-                '<div class="abs window" id="chat_public"><div class="abs window_inner"><div class="window_top"><span class="float_left">Chat</span><span class="float_right"><a href="#" class="window_min"></a><a href="#" class="window_resize"></a><a href="#icon_dock_drive" class="window_close"></a></span></div><div class="abs window_content">' +
+                '<div class="abs window" id="chat_public"><div class="abs window_inner"><div class="window_top"><span class="float_left">Chat :'+chanel_name+'</span><span class="float_right"><a href="#" class="window_min"></a><a href="#" class="window_resize"></a><a href="#icon_dock_drive" class="window_close"></a></span></div><div class="abs window_content">' +
                 '<div class="message_to_user_from_chanel_list" style="display:hide;" title="Enter message" to_chanel=' +  to_chanel.to_chanel +'>' +
                 '<p class="close_chanel" to_chanel='+to_chanel.to_chanel+'>X</p>' +
                 '<div class="message_box" to_chanel='+to_chanel.to_chanel+'></div>' +
@@ -105,7 +107,7 @@
                 '<textarea class="message_to_user_area_chanel"  maxlength="500" to_chanel='+to_chanel.to_chanel+'></textarea>' +
                 '<button class="submit" class="chanel_button" to_chanel='+to_chanel.to_chanel+'>Send</button>' +
                 '</div></div>' + '</div> <div class="abs window_bottom">Chat</div> </div> <span class="abs ui-resizable-handle ui-resizable-se"></span> </div>';
-            $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel.to_chanel+"]").remove();
+            $("#chat_public").remove();
             $('body').append(chat_html);
            // $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel.to_chanel+"]").addClass('new_chanel');
             $(".message_to_user_from_chanel_list").bind("click",function() {
@@ -115,11 +117,11 @@
             $(".message_to_user_from_user_chanel_button").bind("click",function(){
                 send_to_chanel();
             });
-            $(".close_chanel").bind("click",function(){
-                var to_chanel = $(this).attr('to_chanel');
-                $(".message_to_user_from_chanel_list[to_chanel="+to_chanel+"]").remove();
-                window.to_chanel = { to_chanel : false  , date : false};
-            })
+            // $(".close_chanel").bind("click",function(){
+            //     var to_chanel = $(this).attr('to_chanel');
+            //     $(".message_to_user_from_chanel_list[to_chanel="+to_chanel+"]").remove();
+            //     window.to_chanel = { to_chanel : false  , date : false};
+            // })
             $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel.to_chanel+"]").show();
             $("#chat_public").show();
             sync_chanel();

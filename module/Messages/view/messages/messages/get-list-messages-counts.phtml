@@ -32,12 +32,13 @@
 <div class="c-window__scrollable-space">
     <?php if ($data): ?>
         <?php foreach ($data as $friend): ?>
-            <?php $fullName = $friend['first_name']." ".$friend['second_name']; ?>
+            <?php $fullName = $friend['first_name'] . " " . $friend['second_name']; ?>
 
             <div class="c-chat-card">
                 <div class="c-chat-card__inner">
                     <div class="c-chat-card__image-wrap">
-                        <img src="<?php echo $friend['avatar']; ?>" alt="<?php echo $fullName; ?>" class="c-chat-card__image">
+                        <img src="<?php echo $friend['avatar']; ?>" alt="<?php echo $fullName; ?>"
+                             class="c-chat-card__image">
                     </div>
 
                     <div class="c-chat-card__main">
@@ -51,10 +52,12 @@
                     </div>
 
                     <div class="c-chat-card__controls">
-                        <button class="c-chat-card__enter-button js-open-chat" type="button" with_user="<?php echo $friend['user_id']; ?>">
+                        <button class="c-chat-card__enter-button js-open-chat" type="button"
+                                with_user="<?php echo $friend['user_id']; ?>" user_name="<?php echo $fullName ;?>">
                             <svg class="icon-nw icon-nw-open-in-new-black-24" viewBox="0 0 24 24">
                                 <path d="M0 0h24v24H0V0z" fill="none"/>
-                                <path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                                <path
+                                    d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
                             </svg>
 
                             Open
@@ -68,34 +71,44 @@
 
 <script type="text/javascript">
 
-    $(function() {
-        $('.js-open-chat').on('click', function() {
+    $(function () {
+        $('.js-open-chat').on('click', function () {
             send_message_from_user_chat(this);
         });
     });
 
     function send_message_from_user_chat(element) {
         var to_user = $(element).attr('with_user');
+        var user_name = $(element).attr('user_name');
         $('.message_to_user_area_chat').val("");
-        $(".message_to_user_from_chat_list").remove();
-        var chat_html = '<div class="message_to_user_from_chat_list" style="display:hide;" title="Enter message" with_user='+to_user+'><p class="close_chat" with_user='+to_user+'>X</p><div class="message_box" with_user='+to_user+'></div><div class="user_chat" with_user='+to_user+'><textarea class="message_to_user_area_chat"  maxlength="500" with_user='+to_user+'></textarea><button class="submit" class="chats_button" with_user='+to_user+'>send</button></div></div>';
+        $("#chat_user").remove();
+        var chat_html = '' +
+            '<div class="abs window" id="chat_user"><div class="abs window_inner"><div class="window_top"><span class="float_left">Chat with :'+user_name+'</span><span class="float_right"><a href="#" class="window_min"></a><a href="#" class="window_resize"></a><a href="#icon_dock_drive" class="window_close"></a></span></div><div class="abs window_content">' +
+            '<div class="message_to_user_from_chat_list" style="display:hide;" title="Enter message" with_user=' + to_user + '>' +
+            '<p class="close_chat" with_user=' + to_user + '>X</p>' +
+            '<div class="message_box" with_user=' + to_user + '>' + '</div>' +
+            '<div class="user_chat" with_user=' + to_user + '>' +
+            '<textarea class="message_to_user_area_chat"  maxlength="500" with_user=' + to_user + '></textarea>' +
+            '<button class="submit" class="chanel_button" with_user=' + to_user + '>send</button>' +
+            '</div>' +
+            '</div>'+ '</div> <div class="abs window_bottom">Chat</div> </div> <span class="abs ui-resizable-handle ui-resizable-se"></span> </div>';
 
         $('body').append(chat_html);
-        $(".message_to_user_from_chat_list[with_user="+to_user+"]").draggable();
-        $(".message_to_user_from_chat_list[with_user="+to_user+"]").addClass('new_chat');
-        $(".message_to_user_from_chat_list").bind("click",function() {
-          //  $(this).addClass("window");
-        });
+       // $(".message_to_user_from_chat_list[with_user=" + to_user + "]").draggable();
+       // $(".message_to_user_from_chat_list[with_user=" + to_user + "]").addClass('new_chat');
+       //  $(".message_to_user_from_chat_list").bind("click", function () {
+       //      //  $(this).addClass("window");
+       //  });
         $(".message_to_user_from_chat_list").find('button').addClass("message_to_user_from_user_chats_button");
-        $(".message_to_user_from_user_chats_button").bind("click",function(){
+        $(".message_to_user_from_user_chats_button").bind("click", function () {
             send_chat(this);
         });
-        $(".close_chat").bind("click",function(){
-            var to_user = $(this).attr('with_user');
-            $(".message_to_user_from_chat_list[with_user="+to_user+"]").remove();
-
-        })
-        $(".message_to_user_from_chat_list[with_user="+to_user+"]").show();
+        // $(".close_chat").bind("click", function () {
+        //     var to_user = $(this).attr('with_user');
+        //     $(".message_to_user_from_chat_list[with_user=" + to_user + "]").remove();
+        //
+        // })
+        $("#chat_user").show();
         get_old_messages(to_user);
         sync_chat();
     }
@@ -106,27 +119,26 @@
             type: "POST",
             url: "sync/getoldmessages",
             dataType: "json",
-            data: {"with_user":to_user}
+            data: {"with_user": to_user}
         })
-            .done(function(data) {
+            .done(function (data) {
                 console.info(data);
-                $.each(data, function (index,message) {
-                    if(message.current_user == message.from_user) {
-                        $(".message_box[with_user="+message.to_user+"]").append("<p message_id='"+message.message_id+"'>" +message.first_name+" "+message.second_name+":"+message.text+"</p>");
-                    }
-                    else {
-                        $(".message_box[with_user="+message.from_user+"]").append("<p message_id='"+message.message_id+"'>" +message.first_name+" "+message.second_name+":"+message.text+"</p>");
+                $.each(data, function (index, message) {
+                    if (message.current_user == message.from_user) {
+                        $(".message_box[with_user=" + message.to_user + "]").append("<p message_id='" + message.message_id + "'>" + message.first_name + " " + message.second_name + ":" + message.text + "</p>");
+                    } else {
+                        $(".message_box[with_user=" + message.from_user + "]").append("<p message_id='" + message.message_id + "'>" + message.first_name + " " + message.second_name + ":" + message.text + "</p>");
                     }
 
-                    $(".message_box[with_user="+message.to_user+"]").animate({ scrollTop: 10000}, 50);
+                    $(".message_box[with_user=" + message.to_user + "]").animate({scrollTop: 10000}, 50);
 
                 });
 
 
+            });
+    }
 
-
-    });}
-    function sync_chat(to_user){
+    function sync_chat(to_user) {
 
         $.ajax({
             type: "POST",
@@ -134,38 +146,38 @@
             dataType: "json",
             data: {}
         })
-            .done(function(data) {
-                $.each(data.simple_messages, function (index,message) {
-                    console.info($("p[message_id="+message.message_id+"]").text());
-                    if($("p[message_id="+message.message_id+"]").text().length == 0) {
-                    if(message.current_user == message.from_user) {
+            .done(function (data) {
+                $.each(data.simple_messages, function (index, message) {
+                    console.info($("p[message_id=" + message.message_id + "]").text());
+                    if ($("p[message_id=" + message.message_id + "]").text().length == 0) {
+                        if (message.current_user == message.from_user) {
 
-                        $(".message_box[with_user="+message.to_user+"]").append("<p message_id='"+message.message_id+"'>" +message.first_name+" "+message.second_name+":"+message.text+"</p>");
+                            $(".message_box[with_user=" + message.to_user + "]").append("<p message_id='" + message.message_id + "'>" + message.first_name + " " + message.second_name + ":" + message.text + "</p>");
+                        } else {
+                            $(".message_box[with_user=" + message.from_user + "]").append("<p message_id='" + message.message_id + "'>" + message.first_name + " " + message.second_name + ":" + message.text + "</p>");
+                        }
                     }
-                    else {
-                        $(".message_box[with_user="+message.from_user+"]").append("<p message_id='"+message.message_id+"'>" +message.first_name+" "+message.second_name+":"+message.text+"</p>");
-                    }
-                    }
-                    $(".message_box[with_user="+message.to_user+"]").animate({ scrollTop: 10000}, 50);
+                    $(".message_box[with_user=" + message.to_user + "]").animate({scrollTop: 10000}, 50);
 
 
-             });
+                });
 
                 setTimeout(sync_chat, 3000);
             });
 
     }
+
     function send_chat(element) {
         var to_user = $(element).attr('with_user');
-        var text = $('.message_to_user_area_chat[with_user='+to_user+']').val();
-        $('.message_to_user_area_chat[with_user='+to_user+']').val("");
-        $(".message_box[with_user="+to_user+"]").append("you:"+text+"<br/>");
-        $('.message_to_user_from_user_chats_button[with_user='+to_user+']').val("");
-        $(".message_box[with_user="+to_user+"]").animate({ scrollTop: 10000}, 50);
+        var text = $('.message_to_user_area_chat[with_user=' + to_user + ']').val();
+        $('.message_to_user_area_chat[with_user=' + to_user + ']').val("");
+        $(".message_box[with_user=" + to_user + "]").append("you:" + text + "<br/>");
+        $('.message_to_user_from_user_chats_button[with_user=' + to_user + ']').val("");
+        $(".message_box[with_user=" + to_user + "]").animate({scrollTop: 10000}, 50);
         $.ajax({
             type: "POST",
             url: "messages/addmessage",
-            data : {text :text , to_user : to_user }
+            data: {text: text, to_user: to_user}
         });
     }
 </script>

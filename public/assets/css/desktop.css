@@ -795,8 +795,7 @@ th.shrink {
 }
 
 .message_to_user_from_chat_list {
-    display: none;
-    width: 470px;
+    width: 450px;
 }
 .new_chat {
     position: absolute;
@@ -819,12 +818,16 @@ th.shrink {
 }
 .message_to_user_from_user_chats_button {
     position: absolute;
-    left: 360px;
-    top: 447px;
-    background-color: black;
-    color: black;
-    border: 3px solid #66bb00;
-    border-radius: 10px;
+    left: 400px;
+    top: 325px;
+    background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 10px 0;
+    display: inline-block;
+    border: none;
 }
 .close_chat {
     font-weight: bold;
@@ -845,10 +848,11 @@ th.shrink {
 
 .message_to_user_area_chat {
     position: absolute;
-    top: 447px;
-    background-color: black;
-    color: #66bb00;
-    border: 3px solid #66bb00;
+    top: 335px;
+    left: 5%;
+    background-color: #f3f3f3;
+    color: black;
+    border: 3px solid #f3f3f3;
     border-radius: 10px;
 }
 /*chanels*/
@@ -2842,3 +2846,8 @@ width: 40px;
     width: 500px;
     height: 80%;
  }
+#chat_user {
+
+    width: 500px;
+    height: 80%;
+}
