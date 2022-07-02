@@ -13,9 +13,9 @@ return array(
             'home' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/',
+                    'route'    => '/website',
                     'defaults' => array(
-                        'controller' => 'Settings\Controller\Settings',
+                        'controller' => 'Application\Controller\Index',
                         'action'     => 'index',
                     ),
                 ),
