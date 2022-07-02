@@ -76,7 +76,7 @@ class  filesController extends Controller\preloaderController {
         session_start();        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         if($parentDir !== false && $dirKey != 0 ) {
-             $dirs = $this->getUserDirs($parentDir,$userId)->toArray();
+             $dirs = $this->getUserDirs($parentDir,$userId);
             $isRoot  = false;
             $currentDirectory = $parentDir;
             $filesInDir = $this->getFilesTable()->getDirFiles($files->getAdapter(),$currentDirectory,$userId);
