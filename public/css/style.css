@@ -1,41 +1,49 @@
-body {
-    padding-top: 60px;
-    padding-bottom: 40px;
+.website_body label {
+    display: block;
+    margin-bottom: 0.5rem;
 }
 
-.zf-green {
-    color: #68b604;
-}
 
-.btn-success {
-  background-color: #57a900;
-  background-image: -moz-linear-gradient(top, #70d900, #57a900);
-  background-image: -ms-linear-gradient(top, #70d900, #57a900);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#70d900), to(#57a900));
-  background-image: -webkit-linear-gradient(top, #70d900, #57a900);
-  background-image: -o-linear-gradient(top, #70d900, #57a900);
-  background-image: linear-gradient(top, #70d900, #57a900);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#70d900', endColorstr='#57a900', GradientType=0);
-}
+.website_body .btn-success ,.website_body input[type=submit]{
+    color: #fff;
+    background-color: #218838;
+    border-color: #1e7e34;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 
-.btn-success:hover,
-.btn-success:active,
-.btn-success.active,
-.btn-success.disabled,
-.btn-success[disabled] {
-  background-color: #57a900;
 }
-
-.btn-success:active, .btn-success.active {
-  background-color: #57a900;
+.website_body button,.website_body input {
+    overflow: visible;
+    float: right;
+    position: relative;
+    right: 50%;
 }
-
-div.container a.brand {
-    background: url("../img/zf2-logo.png") no-repeat scroll 0 10px transparent;
-    margin-left: 0;
-    padding: 8px 20px 12px 40px;
+.website_body {
+    height: 70%;
 }
-#task_popup {
-	
-	display:none;
+html, body {
+    overflow: auto;
+    font-family: "Roboto";
+    font-weight: 500;
+    background: white;
 }
+.logo {
+    width: 200px;
+}
+a {
+    color: black;
+}
+.rounded {
+    width: 550px;
+ }

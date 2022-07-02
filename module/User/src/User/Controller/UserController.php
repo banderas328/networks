@@ -35,7 +35,7 @@ class UserController extends Controller\preloaderController
 //method for register user
     public function registerAction()
     {
-        $this->layout('layout/only_form');
+        $this->layout('layout/layout');
         $form = new UserRegisterForm();
         $form->get('submit')->setValue('Register');
         $request = $this->getRequest();
@@ -156,7 +156,7 @@ class UserController extends Controller\preloaderController
     }
 //method for login action
     public function loginAction(){
-        $this->layout('layout/only_form');
+        $this->layout('layout/layout');
         $form = new UserAuthForm();
         $form->get('submit')->setValue('Login');
         $request = $this->getRequest();

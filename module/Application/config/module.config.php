@@ -13,9 +13,9 @@ return array(
             'home' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/',
+                    'route'    => '/mainpage',
                     'defaults' => array(
-                        'controller' => 'Settings\Controller\Settings',
+                        'controller' => 'Application\Controller\Index',
                         'action'     => 'index',
                     ),
                 ),
@@ -27,11 +27,11 @@ return array(
             'application' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/application',
+                    'route'    => '/octopus',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Index',
-                        'action'        => 'index',
+                        'action'        => 'octopus',
                     ),
                 ),
                 'may_terminate' => true,
@@ -84,7 +84,7 @@ return array(
         'exception_template'       => 'error/index',
         'template_map' => array(
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
-            'application/index/index' => __DIR__ . '/../view/application/index/uploadfile.phtml',
+            'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
         ),
         'template_path_stack' => array(

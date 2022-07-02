@@ -19,4 +19,10 @@ class IndexController extends AbstractActionController
 
         return new ViewModel();
     }
+    public function octopusAction()
+    {
+        $this->layout('layout/layout');
+
+        return new ViewModel();
+    }
 }

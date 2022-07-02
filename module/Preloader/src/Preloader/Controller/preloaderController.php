@@ -17,7 +17,7 @@ class  preloaderController extends AbstractActionController{
     public function isAuthed(){
 
       //  $uri = $_SERVER['REQUEST_URI'];
-      
+
         $uri = explode("/", $_SERVER['REQUEST_URI']);
 
 
@@ -25,7 +25,7 @@ class  preloaderController extends AbstractActionController{
             $uri = "/".$uri[1]."/".$uri[2];
 
         if(($uri != "/user/register" ) && ($uri != "/user/login" ) && ($uri != "/user/confirm" )) {
-            
+
             if(!isset($_SESSION['user'])) {
                 $actual_link = 'http://'.$_SERVER['HTTP_HOST'].'/user/login';
                 header("location: $actual_link");
@@ -37,6 +37,22 @@ class  preloaderController extends AbstractActionController{
 
             if(!isset($_SESSION['user'])) {
                 $actual_link = 'http://'.$_SERVER['HTTP_HOST'].'/user/login';
+                header("location: $actual_link");
+                die();
+            }
+        }
+        elseif($uri[1] == 'mainpage'){
+
+            if(!isset($_SESSION['user'])) {
+                $actual_link = 'http://'.$_SERVER['HTTP_HOST'].'/mainpage';
+                header("location: $actual_link");
+                die();
+            }
+        }
+        elseif($uri[1] == 'octopus'){
+
+            if(!isset($_SESSION['user'])) {
+                $actual_link = 'http://'.$_SERVER['HTTP_HOST'].'/octopus';
                 header("location: $actual_link");
                 die();
             }
