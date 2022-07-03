@@ -22,7 +22,7 @@ echo $this->form()->closeTag();
                     <?php $vars = get_object_vars($item); ?>
 
                     <li>
-                        <?php echo "<img src='" . $vars['avatar'] . "'>".$vars['first_name']." ".$vars['second_name'] ." <a class='friend_request action_btn' href='/friends/addfriendrequest/".$vars['user_id']."'>Add to friends</a>";?>
+                        <?php echo "<img src='" . $vars['avatar'] . "'>".$vars['first_name']." ".$vars['second_name'] ." <a class='friend_request action_btn' href='/friends/addfriendrequest/".$vars['user_id']."'>Add to Friends</a>";?>
                     </li>
                 <?php endforeach; ?>
             </ul>
@@ -40,7 +40,13 @@ echo $this->form()->closeTag();
                 })
                     .done(function (data) {
                         if (data == 'have') {
-                            var have = '<div id="have_request" title="Friend request"><p>You already send request to this user</p></div>';
+                            var have = '<div id="have_request" title="Friend request"><p>request already sent</p></div>';
+                            $('body').append(have);
+                            $('#have_request').dialog();
+                        }
+                        else {
+
+                            var have = '<div id="have_request" title="Friend request"><p>request sent</p></div>';
                             $('body').append(have);
                             $('#have_request').dialog();
                         }
