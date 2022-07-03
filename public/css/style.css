@@ -47,3 +47,21 @@ a {
 .rounded {
     width: 550px;
  }
+.figure-caption {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+@media screen and (min-width: 1000px) {
+    .figure-caption {
+        font-size: 1.25rem;
+        color: black;
+        word-break: normal;
+    }
+    .figure {
+        display: inline-block;
+        width: 45%;
+        vertical-align: top;
+        margin: 25px;
+
+    }
+}

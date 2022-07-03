@@ -1,7 +1,4 @@
         <?php if (!empty($blogs)): ?>
-        <div class="c-window__scrollable-space">
-            <div class="c-blog">
-            <div class="c-blog__posts">
                 <?php foreach ($blogs as $blog): ?>
                     <article class="c-post" data-date="<?php echo $blog['date']; ?>">
                         <div class="c-post__header">
@@ -98,9 +95,6 @@
 
                     Show more posts
                 </button>
-            </div>
-            </div>
-        </div>
         <?php else: ?>
             <div class="c-blog__no-posts">
                 <div class="c-blog__no-posts-icon">
@@ -271,15 +265,7 @@
                 },
             })
                 .done(function(data) {
-                    console.info(data);
-                    $(".c-blog__posts").append(data);
-                    // const $template = document.createElement('template');
-                    // const $listBlogs = document.querySelector('#list_blogs');
-                    // const $postsWrapper = document.querySelector('.c-blog__posts');
-                    // $template.innerHTML = data;
-                    // const $newPosts = $template.content.querySelectorAll('.c-post');
-                    // $postsWrapper.append(...$newPosts);
-                    // $($listBlogs).html($listBlogs.innerHTML); // TODO: Think of a better solution
+                     $(".c-blog__posts").append(data);
                 });
         })
     });

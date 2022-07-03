@@ -51,8 +51,12 @@ class BlogController extends Controller\preloaderController
         if ($friends) {
             $blog = new Blog();
             $blogs = $this->getBlogTable()->getBlogs($userId, $friends->toArray(), $offset, $blog->getAdapter());
-            return array("blogs" => $blogs->toArray(), 'user_id' => $userId, 'offset' => $offset);
-        } else {
+            if(!empty($blogs)) {
+                return array("blogs" => $blogs, 'user_id' => $userId, 'offset' => $offset);
+            }
+            else {
+                return array("blogs" => [], 'user_id' => $userId, 'offset' => $offset);
+            }
             return array("blogs" => [], 'user_id' => $userId, 'offset' => $offset);
         }
     }

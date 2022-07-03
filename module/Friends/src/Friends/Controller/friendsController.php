@@ -26,11 +26,13 @@ class  friendsController extends Controller\preloaderController
     public function addFriendRequestAction()
     {
         $friendId = $this->getEvent()->getRouteMatch()->getParam('user_id');
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $friends = new Friends();
         $this->getFriendsTable()->addFriendRequest($userId, $friendId, $friends->getAdapter());
-        return false;
+        echo "have";
+        die();
     }
 
     public function requestsAction()

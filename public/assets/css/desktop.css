@@ -2851,4 +2851,35 @@ width: 40px;
     width: 500px;
     height: 80%;
 }
+#usersearchdiv ul {
+    display: block;
+}
+#usersearchdiv ul li {
+    display: block;
+    width: 400px;
+    text-align: right;
+
+
+}
+#usersearchdiv ul li a {
+    color: white;
+    text-decoration: none;
+
+}
+
+#usersearchdiv img {
+    float: left;
+    display: inline-block;
+    width: 50px;
+    border-radius: 25px;
+}
+.c-window__title-bar{
+
+display: inline-block;
+
+}
+.c-window__title-bar , .c-window__title{
+    position: relative;
+    top:5px;
+}
 

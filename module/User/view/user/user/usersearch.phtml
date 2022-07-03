@@ -20,11 +20,10 @@ echo $this->form()->closeTag();
             <ul>
                 <?php foreach ($this->users as $item): ?>
                     <?php $vars = get_object_vars($item); ?>
-                    <?php echo "<img src=" . $vars['avatar'] . ">"; ?>
-                    <li><?php echo $vars['first_name']; ?></li>
-                    <li><?php echo $vars['second_name']; ?></li>
-                    <li><a class="friend_request" href="/friends/addfriendrequest/<?php echo $vars['user_id']; ?>">Add
-                            To Friends</a></li>
+
+                    <li>
+                        <?php echo "<img src='" . $vars['avatar'] . "'>".$vars['first_name']." ".$vars['second_name'] ." <a class='friend_request action_btn' href='/friends/addfriendrequest/".$vars['user_id']."'>Add to friends</a>";?>
+                    </li>
                 <?php endforeach; ?>
             </ul>
         <?php endif;
@@ -45,6 +44,7 @@ echo $this->form()->closeTag();
                             $('body').append(have);
                             $('#have_request').dialog();
                         }
+                        return false;
                     });
                 return false;
             });

@@ -204,12 +204,19 @@ class UserController extends Controller\preloaderController
 		return array('settings' => $userSettings->toArray() );
 	}
 
-	public function userLogoutAction(){
-
-
+	public function logoutAction(){
 	    unset($_SESSION['user']);
-	    return $this->redirect()->toRoute('user/login');
-
+        if (isset($_SERVER['HTTPS']) &&
+            ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
+            isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
+            $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+            $protocol = 'https://';
+        }
+        else {
+            $protocol = 'http://';
+        }
+        header("Location: ".$protocol.$_SERVER["HTTP_HOST"].'/user/logout');
+        die();
 	}
 
     public function getUserTable()

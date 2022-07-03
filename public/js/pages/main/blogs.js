@@ -15,7 +15,7 @@ $(function() {
 
     })
         .done(function( data ) {
-            $("#list_blogs").html(data);
+            $(".c-blog__posts").html(data);
         });
 
    });

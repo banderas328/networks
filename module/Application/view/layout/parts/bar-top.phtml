@@ -55,31 +55,28 @@
         </script>
 
         <li>
-            <a class="menu_trigger" href="#">Manual</a>
+            <a class="menu_trigger" href="#">Go to website</a>
 
-            <!--
+
             <ul class="menu">
                 <li>
-                    <a href="http://diveintohtml5.info/">Dive Into HTML5</a>
-                </li>
-                <li>
-                    <a href="http://www.alistapart.com/articles/get-ready-for-html-5/">Get Ready for HTML5</a>
-                </li>
-                <li>
-                    <a href="http://html5boilerplate.com/">HTML5 Boilerplate</a>
-                </li>
-                <li>
-                    <a href="http://html5doctor.com/">HTML5 Doctor</a>
-                </li>
-                <li>
-                    <a href="http://html5.org/">HTML5 Intro</a>
-                </li>
-                <li>
-                    <a href="http://www.zeldman.com/superfriends/">HTML5 Super Friends</a>
+                    <?php         if (isset($_SERVER['HTTPS']) &&
+                        ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
+                        isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
+                        $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+                        $protocol = 'https://';
+                    }
+                    else {
+                        $protocol = 'http://';
+                    }
+                    $url = $protocol.$_SERVER["HTTP_HOST"].'/octopus';
+                    ?>
+                    <a href="<?php echo $url;?>"><?php echo $url;?></a>
                 </li>
             </ul>
-            -->
+
         </li>
+
 
         <!--
         <li>
