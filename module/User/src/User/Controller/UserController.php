@@ -11,6 +11,8 @@ use PHPMailer\PHPMailer\Exception;
 
 use User\Form\UserRegisterForm;
 use User\Form\UserAuthForm;
+use User\Form\UserResetForm;
+use User\Form\UserRestoreForm;
 use User\Form\UserSearchForm;
 //use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -58,7 +60,7 @@ class UserController extends Controller\preloaderController
                 $data["email_key"] = $key;
                 $user->exchangeArray($data);
                 $this->getUserTable()->registerUser($user);
-               // $this->sendRegistrationMail($request->getPost("email"), $key);
+                $this->sendRegistrationMail($request->getPost("email"), $key);
                 $view = new ViewModel();
                 $view->setTemplate('user/user/registred.phtml');
                 return $view;
@@ -67,6 +69,58 @@ class UserController extends Controller\preloaderController
         }
         return array('form' => $form);
     }
+    public function restoreAction(){
+        $this->layout('layout/layout');
+        $form = new UserRestoreForm();
+        $form->get('submit')->setValue('Restore');
+        $request = $this->getRequest();
+        $message = false;
+        if ($request->isPost()) {
+                $data["email"] = $request->getPost('email');
+                $data['activated'] = 0;
+                $key = $this->randKey(40);
+                $data["email_key"] = $key;
+                if($this->getUserTable()->restoreUser($data)) {
+                    $message = "Please check email";
+                }
+        }
+        return array('form' => $form,'message' => $message);
+     }
+
+     public function resetAction(){
+         $this->layout('layout/layout');
+         $form = new UserResetForm();
+         $form->get('submit')->setValue('Reset');
+         $request = $this->getRequest();
+         $message = false;
+         $data = [];
+         if ($request->isPost()) {
+             if ($request->getPost('password') !== $request->getPost('confirm_password')) {
+                 return array('form' => $form, 'message' => 'passwords must be equal');
+             }
+             $data["password"] = $request->getPost('password');
+             $data["password"] = md5("octopus" . $data["password"]);
+             $email_key = $this->params('value2');
+
+             if ($this->getUserTable()->resetUser($data)) {
+                 $message = "Please check email";
+                 //   sendRestoreMail
+//                         $email = $this->params('value1');
+
+
+//        $view = new ViewModel();
+//        if ($result) {
+//            $view->setTemplate('user/user/activated.phtml');
+//        } else {
+//            $view->setTemplate('user/user/dont_activated.phtml');
+//        }
+
+             }
+         }
+         return array('form' => $form,'message' => $message);
+
+     }
+
 //method for generate random string to email activation of user accout
     public function randKey($length, $charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')
     {
@@ -84,17 +138,6 @@ class UserController extends Controller\preloaderController
         $uri = $this->getRequest()->getUri();
         $base = sprintf('%s://%s', $uri->getScheme(), $uri->getHost());
         $url = $base . "/user/confirm/email/" . $email . "/key/" . $key;
-//         $message = new Message();
-//         $message->addTo($email)
-//             ->addFrom('banderas328@gmail.com')
-//             ->setSubject('Networks Activation');
-//         $html = new MimePart("This is the message to activate user account on networks service please follow this link <a href='" . $url . "'>activate</a>");
-//         $html->type = "text/html";
-//         $body = new MimeMessage();
-//         $body->addPart($html);
-//         $message->setBody($body);
-//         $transport = new Mail\Transport\Sendmail();
-//         $transport->send($message);
         try {
             $mail = new PHPMailer(true);
             //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
@@ -119,23 +162,35 @@ class UserController extends Controller\preloaderController
             echo "send error: {$mail->ErrorInfo}";
         }
     }
-    public function jokeMailAction($email, $key)
+    public function sendRestoreMail($email, $key)
     {
+
         $uri = $this->getRequest()->getUri();
         $base = sprintf('%s://%s', $uri->getScheme(), $uri->getHost());
-        $url = $base . "/user/confirm/email/" . $email . "/key/" . $key;
-        $message = new Message();
-        $message->addTo("banderas328@gmail.com")
-            ->addFrom('zdeni@yandex.ru')//kseniya.jung@gmail.com
-            ->setSubject('Привет');
-        $html = new MimePart("а вот денис тебе пишет");
-        $html->type = "text/html";
-        $body = new MimeMessage();
-        $body->addPart($html);
-        $message->setBody($body);
-        $transport = new Mail\Transport\Sendmail();
-        $transport->send($message);
-        die();
+        $url = $base . "/user/restore/email/" . $email . "/key/" . $key;
+        try {
+            $mail = new PHPMailer(true);
+            //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'anton.zhavrid.minsk@gmail.com';
+            $mail->Password   = '5lxdiOlVcLBf';
+            $mail->Port = 587;
+            $mail->setFrom("anton.zhavrid.minsk@gmail.com","Anton Zhavrid");
+            $mail->addAddress($email,"");//���� ����������
+            //$mail->addReplyTo("kudaotvetit@yandex.ru","��� ���� ������ ��� ������");
+            $mail->SMTPSecure = 'tls';
+            $mail->isHTML(true);//HTML ������
+            $mail->Subject = "Octopus activation";
+            $mail->Body    = "This is the message to restore user account in octopus project <a href='" . $url . "'>restore</a>";
+            $mail->AltBody = "welcome";
+
+            $mail->send();
+            return true;
+        } catch (Exception $e) {
+            echo "send error: {$mail->ErrorInfo}";
+        }
     }
 //method for confirm activation user account from email
     public function confirmAction()
@@ -188,9 +243,7 @@ class UserController extends Controller\preloaderController
         $request = $this->getRequest();
         if ($request->isPost()) {
             $data = $request->getPost();
-         //   $data = get_object_vars($data);
             unset($data['submit']);
-      //      var_dump($data);
             $user = new User();
             $dbAdapter  = $user->getAdapter();
             $users = $this->getUserTable()->searchUser($data,$dbAdapter);
@@ -222,7 +275,6 @@ class UserController extends Controller\preloaderController
     public function getUserTable()
     {
         if (!$this->userTable) {
-           // $sm = $this->getServiceLocator();
             $this->userTable = new \User\Model\UserTable;
         }
         return $this->userTable;
@@ -230,7 +282,6 @@ class UserController extends Controller\preloaderController
 	public function getSettingsTable()
 	{
 		if (!$this->settingsTable) {
-			//$sm = $this->getServiceLocator();
 			$this->settingsTable = new \Settings\Model\SettingsTable;
 		}
 		return $this->settingsTable;

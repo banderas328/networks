@@ -64,10 +64,29 @@ class UserTable
         }
     }
 
+    public function restoreUser($data)
+    {
+        if ($this->tableGateway->update($data, array('email' => $data["email"]))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function resetUser($data)
+    {
+        $user = $this->select($data);
+        var_dump($user);
+        if ($this->tableGateway->update($data, array('email' => $data["email"]))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function activateUser($email, $key)
     {
         $data = array('activated' => 1);
-        if ($this->tableGateway->update($data, array('email' => $email, 'email_key' => $key, 'activated' => 0))) {
+        if ($this->tableGateway->update($data, array('email' => $email, 'email_key' => $key, 'activated' => 1))) {
             return true;
         } else {
             return false;
@@ -95,31 +114,28 @@ class UserTable
 
     public function searchUser($data, $adapter)
     {
-            $select = new Select();
-            $select->from('user_settings');
-            $select->columns(array("user_id", "first_name", "second_name", 'avatar', 'job', 'country', 'city', 'phone', 'about'));
-            $whereArray = [];
-         //   var_dump($data);
-         //   var_dump(get_object_vars($data));
-        //    die();
-            if ($data) {
-                foreach ($data as $key => $value) {
-                    if (($value != "") && ($key != 'submit') && ($key != 'visibility')) {
-                        $whereArray[$key] = $value;
-                    }
+        $select = new Select();
+        $select->from('user_settings');
+        $select->columns(array("user_id", "first_name", "second_name", 'avatar', 'job', 'country', 'city', 'phone', 'about'));
+        $whereArray = [];
+        if ($data) {
+            foreach ($data as $key => $value) {
+                if (($value != "") && ($key != 'submit') && ($key != 'visibility')) {
+                    $whereArray[$key] = $value;
                 }
             }
-            $select->where($whereArray);
-            $resultSetPrototype = new ResultSet();
-            $resultSetPrototype->setArrayObjectPrototype(new Settings());
-            $users = new DbSelect($select, $this->tableGateway->getAdapter(), $resultSetPrototype);
-        //    var_dump($users->getItems(0,1000));die();
-            return $users->getItems(0,1000);
+        }
+        $select->where($whereArray);
+        $resultSetPrototype = new ResultSet();
+        $resultSetPrototype->setArrayObjectPrototype(new Settings());
+        $users = new DbSelect($select, $this->tableGateway->getAdapter(), $resultSetPrototype);
+        return $users->getItems(0, 1000);
     }
 
     public function changeUserLang($adapter, $request)
     {
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $lang = $request->getPost()->lang;
 

@@ -53,6 +53,36 @@ return array(
                 ),
 
             ),
+            'restore' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/user/restore',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'User\Controller\User',
+                        'action'     => 'restore',
+                    ),
+                ),
+
+            ),
+            'reset' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/user/reset[/:key1][/:value1]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'User\Controller\User',
+                        'action'     => 'reset',
+                    ),
+                ),
+
+            ),
         ),
     ),
 
