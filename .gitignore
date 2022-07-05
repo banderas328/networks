@@ -1,8 +1,4 @@
-vendor/*
 ./idea/*
 ./settings/*
-./project
-./config/autoload/global.php
 
 
-public/img/avatars
