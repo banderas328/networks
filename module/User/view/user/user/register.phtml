@@ -3,6 +3,13 @@ $title = 'Please Register';
 $this->headTitle($title);
 ?>
     <h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php if($this->message) {
+    ?>
+    <div class="alert alert-success" role="alert">
+        <?php echo $this->message;?>
+    </div>
+    <?php
+}?>
 <?php
 $form = $this->form;
 $form->setAttribute('action', $this->url('user', array('action' => 'register')));

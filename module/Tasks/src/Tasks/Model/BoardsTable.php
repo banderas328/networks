@@ -60,7 +60,8 @@ class BoardsTable
         return $boards;
     }
     public function deleteBoard($request) {
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $board_id =  (int)$request->getPost()->board_id;
         $project_id=  (int)$request->getPost()->project_id;

@@ -40,7 +40,7 @@ return array(
         'Tags',
        // 'Market',
         'Form',
-      'Notifications',
+        'Notifications',
         'Frames',
         'Tasks',
     ),

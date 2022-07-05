@@ -33,6 +33,7 @@ class UserTable
             'password' => $config->database["params"]->password,
         ));
         $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("user", $adapter);
+        $this->adapter = $adapter;
     }
 
 
@@ -66,7 +67,7 @@ class UserTable
 
     public function restoreUser($data)
     {
-        if ($this->tableGateway->update($data, array('email' => $data["email"]))) {
+        if ($this->tableGateway->update(array('activated' => 0,'email_key' => $data['email_key']), array('email' => $data["email"]))) {
             return true;
         } else {
             return false;
@@ -74,9 +75,8 @@ class UserTable
     }
     public function resetUser($data)
     {
-        $user = $this->select($data);
-        var_dump($user);
-        if ($this->tableGateway->update($data, array('email' => $data["email"]))) {
+       // $user = $this->select($data);
+        if ($this->tableGateway->update($data, array('email' => $data["email"],'email_key' => $data["email_key"]))) {
             return true;
         } else {
             return false;
@@ -85,8 +85,7 @@ class UserTable
 
     public function activateUser($email, $key)
     {
-        $data = array('activated' => 1);
-        if ($this->tableGateway->update($data, array('email' => $email, 'email_key' => $key, 'activated' => 1))) {
+        if ($this->tableGateway->update(array('activated' => 1),array ('email_key' => $key,'email' => $email, 'activated' => 0))) {
             return true;
         } else {
             return false;
@@ -111,8 +110,15 @@ class UserTable
 
 
     }
+    public function searchSystemUser($data)
+    {
+        $user = $this->tableGateway->select($data);
+        foreach ($user as $userRow) {
+            return $userRow;
+        }
+    }
 
-    public function searchUser($data, $adapter)
+    public function searchUser($data)
     {
         $select = new Select();
         $select->from('user_settings');

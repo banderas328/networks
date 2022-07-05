@@ -1,5 +1,5 @@
 <?php
-if (isset($friends) and count($friends))
+if (isset($friends) and $friends)
     foreach ($friends as $friend) {
         echo "<div class='network_point' style='cursor:pointer;' user_id=" . $friend['user_id'] . ">";
         echo "<div class='network_avatar'>";
