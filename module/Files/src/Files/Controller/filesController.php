@@ -133,13 +133,15 @@ class  filesController extends Controller\preloaderController {
 
 
     public function downloadFileAction() {
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $fileId = $this->getEvent()->getRouteMatch()->getParam('value');
         $files = new Files();
         $file = $this->getFilesTable()->getFile($files->getAdapter(),$fileId,$userId)[0];
-        $path  = $_SERVER['DOCUMENT_ROOT'].$file['file_name'];
+        $path  = $_SERVER['DOCUMENT_ROOT']."/".$file['file_name'];
         $fileName = $path;
+        ob_clean();
         if (file_exists($fileName)) {
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');

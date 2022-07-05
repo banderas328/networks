@@ -14,12 +14,12 @@ return array(
     'smtp' => array(
         'yandex' => array(
             'address' => 'smtp.yandex.ru',
-            'username' => 'xxxxxxxxxx@yandex.ru',   //yandex login
-            'password' => 'XXXXXXXXXXX',            //yandex application password
+            'username' => 'banderas328@yandex.ru',
+            'password' => 'xlzyyyyvyvejcjxc',
             'secure' => 'TLS',
             'port' => '587',
-            'from_mail' => 'xxxxxxxxx@yandex.ru',   // from email
-            'from_name' => 'admin'                  // from name
+            'from_mail' => 'banderas328@yandex.ru',
+            'from_name' => 'octopus admin'
         )
     )
 );
