@@ -292,7 +292,7 @@ class UserController extends Controller\preloaderController
             unset($data['submit']);
             $user = new User();
             $dbAdapter = $user->getAdapter();
-            $users = $this->getUserTable()->searchUser($data, $dbAdapter);
+            $users = $this->getSettingsTable()->searchUsersOnSettings($data);
         }
         return array('form' => $form, 'users' => $users, 'div' => "usersearchdiv");
     }

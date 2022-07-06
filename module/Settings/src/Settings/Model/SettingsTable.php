@@ -34,18 +34,18 @@ class SettingsTable
 
     public function saveGeneralSettings($settings)
     {
-        var_dump($settings);
         $files = $settings["file"];
         if ($files) $settings["file"] = $files;
         if (is_array($settings["first_name"])) $settings["first_name"] = $settings["first_name"][1];
-        if (is_array($settings["second_name"]) ) $settings["second_name"] = $settings["second_name"][1];
-        if (is_array($settings["job"]) ) $settings["job"] = $settings["job"][1];
-        if (is_array($settings["country"]) ) $settings["country"] = $settings["country"][1];
-        if (is_array($settings["city"]) ) $settings["city"] = $settings["city"][1];
-        if (is_array($settings["about"]) ) $settings["about"] = $settings["about"][1];
-        if (is_array($settings["phone"]) ) $settings["phone"] = $settings["phone"][1];
-        if (is_array($settings["visibility"]) ) $settings["visibility"] = $settings["visibility"][1];
-        session_start();        $user_session = $_SESSION['user'];
+        if (is_array($settings["second_name"])) $settings["second_name"] = $settings["second_name"][1];
+        if (is_array($settings["job"])) $settings["job"] = $settings["job"][1];
+        if (is_array($settings["country"])) $settings["country"] = $settings["country"][1];
+        if (is_array($settings["city"])) $settings["city"] = $settings["city"][1];
+        if (is_array($settings["about"])) $settings["about"] = $settings["about"][1];
+        if (is_array($settings["phone"])) $settings["phone"] = $settings["phone"][1];
+        if (is_array($settings["visibility"])) $settings["visibility"] = $settings["visibility"][1];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
 
         if ($settings['file']['tmp_name']) {
@@ -81,7 +81,8 @@ class SettingsTable
 
     public function getCurrentUserSettings()
     {
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "SELECT  * FROM user_settings where user_id=" . $userId;
         $results = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
@@ -92,6 +93,19 @@ class SettingsTable
     {
         $sql = "SELECT  * FROM user_settings where user_id=" . $userID;
         return $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE)->toArray()[0];
+    }
+
+    public function searchUsersOnSettings($data)
+    {
+        $search_array = [];
+        foreach ($data as $search_key => $search_value) {
+            if($search_value) $search_array[$search_key] = $search_value;
+
+        }
+        if (count($search_array)) $users = $this->tableGateway->select($data);
+        else $users = $this->tableGateway->select();
+
+        return $users->toArray();
     }
 
     public function is_image($path)

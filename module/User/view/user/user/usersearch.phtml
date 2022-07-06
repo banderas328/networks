@@ -14,21 +14,19 @@ echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
 ?>
 <div id="usersearchdiv">
+    users with handled "Setting"
     <?php
-    if ($this->users) {
-        if (count($this->users)): ?>
+    if ($this->users) { ?>
+
             <ul>
-                <?php foreach ($this->users as $item): ?>
-                    <?php $vars = get_object_vars($item); ?>
+                <?php foreach ($this->users as $vars): ?>
 
                     <li>
                         <?php echo "<img src='" . $vars['avatar'] . "'>".$vars['first_name']." ".$vars['second_name'] ." <a class='friend_request action_btn' href='/friends/addfriendrequest/".$vars['user_id']."'>Add to Friends</a>";?>
                     </li>
                 <?php endforeach; ?>
             </ul>
-        <?php endif;
-    }
-    ?>
+  <?php  }   ?>
     <script type="text/javascript">
         $(function () {
             $('.friend_request').bind('click', function () {

@@ -2,6 +2,7 @@
 
 namespace User\Model;
 
+use Couchbase\UserSettings;
 use Settings\Model\Settings;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Authentication\Adapter\DbTable as AuthAdapter;
@@ -119,25 +120,7 @@ class UserTable
         }
     }
 
-    public function searchUser($data)
-    {
-        $select = new Select();
-        $select->from('user_settings');
-        $select->columns(array("user_id", "first_name", "second_name", 'avatar', 'job', 'country', 'city', 'phone', 'about'));
-        $whereArray = [];
-        if ($data) {
-            foreach ($data as $key => $value) {
-                if (($value != "") && ($key != 'submit') && ($key != 'visibility')) {
-                    $whereArray[$key] = $value;
-                }
-            }
-        }
-        $select->where($whereArray);
-        $resultSetPrototype = new ResultSet();
-        $resultSetPrototype->setArrayObjectPrototype(new Settings());
-        $users = new DbSelect($select, $this->tableGateway->getAdapter(), $resultSetPrototype);
-        return $users->getItems(0, 1000);
-    }
+
 
     public function changeUserLang($adapter, $request)
     {
