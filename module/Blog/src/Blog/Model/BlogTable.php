@@ -58,21 +58,21 @@ class BlogTable
     public function getBlogs($userId, $friends, $offset, $adapter)
     {
 
-        $sqlIn = " IN (";
-        $needComma = false;
-        foreach ($friends as $friend) {
-            if (!$needComma) $sqlIn .= $friend['user_id'];
-            else $sqlIn .= "," . $friend['user_id'];
-            $needComma = true;
-        }
-        $sqlIn .= ")";
+//        $sqlIn = " IN (";
+//        $needComma = false;
+//        foreach ($friends as $friend) {
+//            if (!$needComma) $sqlIn .= $friend['user_id'];
+//            else $sqlIn .= "," . $friend['user_id'];
+//            $needComma = true;
+//        }
+//        $sqlIn .= ")";
         $sql = "select blogs.id as blog_id,blog_title,blogs.blog_content,user_settings.first_name,
                 user_settings.second_name,user_settings.avatar,blog_attachment.file_name,user_settings.job,blogs.date from blogs
                 left JOIN blog_attachment
                 on blogs.id = blog_attachment.blog_id
                 left JOIN user_settings
                 on blogs.user_id = user_settings.user_id
-                WHERE blogs.user_id = " . $userId . " or blogs.user_id " . $sqlIn . " order by blogs.date desc limit 5 offset " . $offset;
+                order by blogs.date desc limit 5 offset " . $offset;
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet->toArray();
     }
