@@ -27,7 +27,8 @@ class BlogController extends Controller\preloaderController
     public function saveBlogAction()
     {
         $request = $this->getRequest();
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $post = array_merge_recursive(
             $request->getPost()->toArray(),
@@ -42,15 +43,16 @@ class BlogController extends Controller\preloaderController
     public function getBlogsAction()
     {
         $this->layout('layout/only_form');
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         if (isset($this->getRequest()->getPost()->offset)) $offset = (int)$this->getRequest()->getPost()->offset;
         else $offset = 0;
-        $friends = new Friends();
-        $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
-        if ($friends) {
+        //$friends = new Friends();
+    //    $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
+  //      if ($friends) {
             $blog = new Blog();
-            $blogs = $this->getBlogTable()->getBlogs($userId, $friends->toArray(), $offset, $blog->getAdapter());
+            $blogs = $this->getBlogTable()->getBlogs($userId, 'false', $offset, $blog->getAdapter());
             if(!empty($blogs)) {
                 return array("blogs" => $blogs, 'user_id' => $userId, 'offset' => $offset);
             }
@@ -58,7 +60,7 @@ class BlogController extends Controller\preloaderController
                 return array("blogs" => [], 'user_id' => $userId, 'offset' => $offset);
             }
             return array("blogs" => [], 'user_id' => $userId, 'offset' => $offset);
-        }
+    //    }
     }
 
     public function getBlogTable()
