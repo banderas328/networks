@@ -1,6 +1,7 @@
         <?php if (!empty($blogs)): ?>
                 <?php foreach ($blogs as $blog): ?>
-                    <article class="c-post" data-date="<?php echo $blog['date']; ?>">
+                <?php $date = date('m/d/Y H:i:s', $blog['date'])?>
+                    <article class="c-post" data-date="<?php echo $date;  ?>">
                         <div class="c-post__header">
                             <div class="c-post__author">
                                 <div class="c-post__avatar">
@@ -17,19 +18,16 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="c-post__publication-date">
                                 <div class="description">
                                     Published
                                 </div>
 
                                 <div class="value js-publication-date-value">
-                                    <?php echo $blog['date']; ?>
+                                    <?php echo $date ?>
                                 </div>
                             </div>
                         </div>
-
                         <div class="c-post__main">
                             <h2 class="c-post__title">
                                 <?php echo $blog["blog_title"]; ?>
@@ -141,13 +139,13 @@
     }
 
     function formatPostDates($rootElement = document) {
-        $rootElement.querySelectorAll('.js-publication-date-value')
-            .forEach(replaceDate);
+        // $rootElement.querySelectorAll('.js-publication-date-value')
+        //     .forEach(replaceDate);
     }
 
     $(function () {
         // replace date string
-        formatPostDates()
+    //    formatPostDates()
 
         $(".show_comments").off().on("click",function(){
             var blog_id = $(this).attr("blog_id");

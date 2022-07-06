@@ -120,7 +120,10 @@ class UserTable
         }
     }
 
+    public function searchUser($data)
+    {
 
+    }
 
     public function changeUserLang($adapter, $request)
     {

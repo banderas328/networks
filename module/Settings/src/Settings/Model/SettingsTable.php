@@ -2,7 +2,9 @@
 
 namespace Settings\Model;
 
+use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Paginator\Adapter\DbSelect;
 use Zend\Session\Container;
 use Zend\Db\Sql\Sql;
 
@@ -10,6 +12,7 @@ use Zend\Db\Sql\Sql;
 //use Zend\Db\ResultSet\ResultSet;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Zend\Db\Sql\Select;
 
 
 class SettingsTable
@@ -97,15 +100,27 @@ class SettingsTable
 
     public function searchUsersOnSettings($data)
     {
-        $search_array = [];
-        foreach ($data as $search_key => $search_value) {
-            if($search_value) $search_array[$search_key] = $search_value;
-
+        session_start();
+        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
+        $select = new Select();
+        $select->from('user_settings');
+        $select->columns(array("user_id", "first_name", "second_name", 'avatar', 'job', 'country', 'city', 'phone', 'about'));
+        $whereArray = [];
+        if ($data) {
+            foreach ($data as $key => $value) {
+                if (($value != "") && ($key != 'submit')) {
+                    $whereArray[$key] = $value;
+                }
+            }
         }
-        if (count($search_array)) $users = $this->tableGateway->select($data);
-        else $users = $this->tableGateway->select();
-
-        return $users->toArray();
+        $excludeUserWhere = "(id != ".$userId.")";
+        $select->where($excludeUserWhere);
+        if(count($data))  $select->where($whereArray);
+        $resultSetPrototype = new ResultSet();
+        $resultSetPrototype->setArrayObjectPrototype(new Settings());
+        $users = new DbSelect($select, $this->tableGateway->getAdapter(), $resultSetPrototype);
+        return array($users->getItems(0, 1000));
     }
 
     public function is_image($path)
