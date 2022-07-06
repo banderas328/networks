@@ -15,14 +15,14 @@ echo $this->form()->closeTag();
 ?>
 <div id="usersearchdiv">
     users with handled "Setting"
-    <?php
-    if ($this->users) { ?>
-
+<?php
+    if ($this->users[0]) { ?>
             <ul>
-                <?php foreach ($this->users as $vars): ?>
+                <?php foreach ($this->users[0] as $vars): ?>
+                <?php $vars = array($vars);?>
 
                     <li>
-                        <?php echo "<img src='" . $vars['avatar'] . "'>".$vars['first_name']." ".$vars['second_name'] ." <a class='friend_request action_btn' href='/friends/addfriendrequest/".$vars['user_id']."'>Add to Friends</a>";?>
+                        <?php echo "<img src='" . $vars[0]->avatar. "'>".$vars[0]->first_name." ".$vars[0]->second_name ." <a class='friend_request action_btn' href='/friends/addfriendrequest/".$vars[0]->user_id."'>Add to Friends</a>";?>
                     </li>
                 <?php endforeach; ?>
             </ul>
