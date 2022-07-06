@@ -114,8 +114,8 @@ class SettingsTable
                 }
             }
         }
-        $excludeUserWhere = "(id <> ".$userId.")";
-        $select->where($excludeUserWhere);
+       // $excludeUserWhere = "(id <> ".$userId.")";
+     //   $select->where($excludeUserWhere);
         if(count($data))  $select->where($whereArray);
         $resultSetPrototype = new ResultSet();
         $resultSetPrototype->setArrayObjectPrototype(new Settings());
