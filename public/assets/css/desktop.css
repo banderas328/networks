@@ -817,9 +817,6 @@ th.shrink {
     height: 150px;
 }
 .message_to_user_from_user_chats_button {
-    position: absolute;
-    left: 400px;
-    top: 325px;
     background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
     color: #fff;
     padding: 10px;
@@ -828,6 +825,8 @@ th.shrink {
     margin: 10px 0;
     display: inline-block;
     border: none;
+    vertical-align: top;
+    margin-left: 10px;
 }
 .close_chat {
     font-weight: bold;
@@ -847,9 +846,6 @@ th.shrink {
 /*}*/
 
 .message_to_user_area_chat {
-    position: absolute;
-    top: 335px;
-    left: 5%;
     background-color: #f3f3f3;
     color: black;
     border: 3px solid #f3f3f3;
@@ -906,9 +902,6 @@ th.shrink {
     border: 3px solid #f3f3f3;
     border-radius: 10px;
     padding: 10px 10px 10px 10px;
-    position: absolute;
-    top: 5%;
-    left: 5%;
     width: 400px;
 
 }

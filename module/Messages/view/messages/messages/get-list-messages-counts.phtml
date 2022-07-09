@@ -57,11 +57,13 @@
             '<p class="close_chat" with_user=' + to_user + '>X</p>' +
             '<div class="message_box" with_user=' + to_user + '>' + '</div>' +
             '<div class="user_chat" with_user=' + to_user + '>' +
-            '<textarea class="message_to_user_area_chat"  maxlength="500" with_user=' + to_user + '></textarea>' +
+            '<textarea class="message_to_user_area_chat"  maxlength="2000" with_user=' + to_user + '></textarea>' +
             '<button class="submit" class="chanel_button" with_user=' + to_user + '>send</button>' +
             '</div>' +
             '</div>'+ '</div> <div class="abs window_bottom">Chat</div> </div> <span class="abs ui-resizable-handle ui-resizable-se"></span> </div>';
 
+
+        $("#chat_user").remove();
         $('body').append(chat_html);
         $(".message_to_user_from_chat_list").find('button').addClass("message_to_user_from_user_chats_button");
         $(".message_to_user_from_user_chats_button").bind("click", function () {
