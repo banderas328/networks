@@ -1,5 +1,7 @@
 <?php
+
 namespace Tasks\Model;
+
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
@@ -16,7 +18,7 @@ class ProjectsTable
 
     public function __construct()
     {
-        $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
+        $config = new Config(Factory::fromFile('config/autoload/global.php'), true);
         $adapter = new \Zend\Db\Adapter\Adapter (array(
             'driver' => $config->database->driver,
             'dsn' => $config->database->dsn,
@@ -24,17 +26,26 @@ class ProjectsTable
             'username' => $config->database["params"]->username,
             'password' => $config->database["params"]->password,
         ));
-        $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("projects",$adapter);
+        $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("projects", $adapter);
         $this->adapter = $adapter;
     }
 
-    public function createProject($request) {
-        $project_name =  $request->getPost()->project_name;
-        $project_description =  $request->getPost()->project_description;
+    public function addUserToProject($project_id,$user_id) {
+        $sql = "delete from projects_members where user_id=".$user_id." and project_id=".$project_id;
+        $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+        $sql = "insert into projects_members (user_id,project_id) values (".$user_id.",".$project_id.")";
+        $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+        die();
+    }
+
+    public function createProject($request)
+    {
+        $project_name = $request->getPost()->project_name;
+        $project_description = $request->getPost()->project_description;
         session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
-        $data = ["project_name" => $project_name,"project_description" => $project_description];
+        $data = ["project_name" => $project_name, "project_description" => $project_description];
         $this->tableGateway->insert($data);
         $projectID = $this->tableGateway->lastInsertValue;
 
@@ -43,63 +54,86 @@ class ProjectsTable
         $projectMembersTable = new \Tasks\Model\ProjectMemberTable();
         if (count($memberList)) {
             foreach ($memberList as $member) {
-                $projectMembersTable->saveMemberToProject(['user_id' =>$member,"project_id" => $projectID]);
-                /*todo change to transaction methods*/
-                $sql = "insert into notifications (text,html_id,user_id) values ('you have new project:  " . $project_name . "','test',".$member.")";
+                $projectMembersTable->saveMemberToProject(['user_id' => $member, "project_id" => $projectID]);
+                $sql = "insert into notifications (text,html_id,user_id) values ('you have new project:  " . $project_name . "','test'," . $member . ")";
                 $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
             }
         }
         return true;
     }
 
-    public function getProjects(){
+    public function getProjectMembers($project_id)
+    {
+        $sql = "SELECT * FROM `projects_members`
+                left join projects on projects_members.project_id = projects.id
+                left join user_settings on projects_members.user_id = user_settings.user_id
+                WHERE projects_members.project_id='" . $project_id . "'
+                and is_archive = '0' order by projects.sort_order";
+        $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+        $members = $resultSet->toArray();
+        return $members;
+    }
+
+    function deleteUserFromProjectMembers(int $project_id, int $user_id)
+    {
+        $sql = "delete from `projects_members` where project_id=".$project_id." and user_id=".$user_id;
+        return $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+    }
+
+    public function getProjects()
+    {
         session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id
-                WHERE projects_members.user_id='".$userId."' and is_archive = '0' order by projects.sort_order";
+                WHERE projects_members.user_id='" . $userId . "' and is_archive = '0' order by projects.sort_order";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
-        $projects =   $resultSet->toArray();
+        $projects = $resultSet->toArray();
         return $projects;
     }
 
-    public function getArchiveProjects(){
-        session_start();        $user_session = $_SESSION['user'];
+    public function getArchiveProjects()
+    {
+        session_start();
+        $user_session = $_SESSION['user'];
         $user_id = $user_session["id"];
         $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id
-                WHERE projects_members.user_id='".$user_id."' and is_archive = '1' order by projects.sort_order";
+                WHERE projects_members.user_id='" . $user_id . "' and is_archive = '1' order by projects.sort_order";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
-        $projects =   $resultSet->toArray();
+        $projects = $resultSet->toArray();
         return $projects;
 
     }
 
-    public function daleteProject($request){
-        $project_id =  $request->getPost()->id;
+    public function daleteProject($request)
+    {
+        $project_id = $request->getPost()->id;
         $tasksTable = new TasksTable();
         $tasks = $tasksTable->getTasksForProject($project_id);
-        foreach ($tasks as $task_key => $task_value){
+        foreach ($tasks as $task_key => $task_value) {
             foreach ($task_value as $task_body) {
                 $tasksTable->deleteTask($task_body["id"]);
             }
 
         }
-        $delete_sql = "DELETE FROM projects where id=".$project_id;
+        $delete_sql = "DELETE FROM projects where id=" . $project_id;
         $this->adapter->query($delete_sql, $this->adapter::QUERY_MODE_EXECUTE);
-        $delete_sql = "DELETE FROM projects_members where project_id=".$project_id;
+        $delete_sql = "DELETE FROM projects_members where project_id=" . $project_id;
         $this->adapter->query($delete_sql, $this->adapter::QUERY_MODE_EXECUTE);
 
 
     }
 
-    public function updateProjectsInBoard($request){
+    public function updateProjectsInBoard($request)
+    {
         $projects_list = $request->getPost()->projects_list;
         foreach ($projects_list as $project) {
             $this->tableGateway->update($project, ['id' => $project["id"]]);
         }
     }
 
-    public function updateProject(array $data){
+    public function updateProject(array $data)
+    {
         $this->tableGateway->update($data, ['id' => $data["id"]]);
     }
 }

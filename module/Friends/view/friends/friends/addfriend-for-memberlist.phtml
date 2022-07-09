@@ -1,0 +1,37 @@
+<div>
+<?php
+if($friends)
+foreach($friends as $friend){
+    echo "<div class='user_container_block' userId='".$friend["user_id"]."'>";
+    echo "<div class='member_name' userId='".$friend['user_id']."'>";
+
+    echo "<div userId='".$friend['user_id']."' class='user_container'>";
+    echo "<div class='avatar'>";
+    echo "<img src=".$friend['avatar'].">";
+    echo "</div>";
+    echo $friend['first_name']." ".$friend['second_name'];
+    echo '<input type="button" value="+" userId='.$friend["user_id"].' class="add_user_to_project action_btn">';
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+
+
+}
+?>
+</div>
+<script type="text/javascript">
+    $(".add_user_to_project").on("click", function(){
+        var user_id = $(this).attr("userId");
+        var project_id = $("#create_board_button").attr("project_id");
+        $.ajax({
+            type: "post",
+            url: "projects/addUserToProject",
+            async: true,
+            data: {"project_id": project_id , 'user_id' : user_id}
+        })
+            .done(function (data) {
+                edit_project_members();
+               // $(".project_active_members_add").html(data);
+            });
+        });
+</script>

@@ -68,9 +68,9 @@ if (!$is_root) {
             echo "<img src='assets/images/icons/file.png' width='50px' height='50px' class='file_block'  file=" . $file['id'] . " >";
             echo "<p class='file_block'  file=" . $file['id'] . "> " . $file['file_title'] . "</p>";
             echo "<div class='directory_actions hard-dropdown file_actions' file=" . $file['id'] . ">";
-            echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='delete_file  ' file=" . $file['id'] . ">" . $this->translate('Delete_File', false, $lang) . "</span></p>";
-            echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='move_file ' file=" . $file['id'] . ">" . $this->translate('Move File', false, $lang) . "</span></p>";
-            echo "<p class='hard-dropdown-items'><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" . $this->translate('download file', false, $lang) . "</a></p>";
+            echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='delete_file  ' file=" . $file['id'] . ">" . $this->translate('delete ile', false, $lang) . "</span></p>";
+            echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='move_file ' file=" . $file['id'] . ">" . $this->translate('move File', false, $lang) . "</span></p>";
+            echo "<p class='hard-dropdown-items'><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" . $this->translate('download', false, $lang) . "</a></p>";
             echo "</div>";
             echo "</div>";
             echo "</div>";
@@ -81,7 +81,7 @@ if (!$is_root) {
 <script type="text/javascript">
     document.oncontextmenu = function () {
         return false;
-    }; //��������� ���������� ����
+    };
     $(function () {
         if (window.need_to_paste_file == true) {
             $("#paste").addClass("required_btn");
@@ -111,7 +111,7 @@ if (!$is_root) {
         }
 
         if (window.need_to_paste_dir == true) {
-            $("#paste").addClass("pastpaste_file_to_directory");
+            $("#paste").addClass("required_btn");
             $("#paste").bind("click", function () {
                 var dir_id = window.need_to_paste_dir_id;
 
@@ -133,12 +133,32 @@ if (!$is_root) {
 
 
         }
+        $(".dirs_block").mousedown(function (e) {
+            if (e.button == 2) {
+                var dir = $(this).attr("dir");
+                if ($(".directory_actions").hasClass("visible-block")) {
+                    $(".directory_actions").removeClass("visible-block");
+                }
+                return false;
+            }
+            return false;
+        });
+        $(".files_block").mousedown(function (e) {
+            if (e.button == 2) {
+                var dir = $(this).attr("dir");
+                if ($(".directory_actions").hasClass("visible-block")) {
+                    $(".directory_actions").removeClass("visible-block");
+                }
+                return false;
+            }
+            return false;
+        });
 
 
 
         $(".parent_directory").attr("dir_key",<?php echo $current_directory?>);
         $('.folder_action').mousedown(function (e) {
-            if (e.button == 2) { //2  - ������ ����, 3 - ������� ����
+            if (e.button == 2) {
                 var dir = $(this).attr("dir");
                 if (!$(".directory_actions[dir=" + dir + "]").hasClass("visible-block")) {
                     $(".directory_actions").removeClass("visible-block");
@@ -206,20 +226,6 @@ if (!$is_root) {
         });
 
     });
-
-    //     function sell_file(file_id) {
-    //        var cost = $('.file_cost[file='+file_id+']').val();
-    //        var description = $('textarea[file='+file_id+']').val();
-    //        var tags = $(".tags[file="+file_id+"]").val();
-    //         $.ajax({
-    //             type: "POST",
-    //             url: "files/sellFile",
-    //             data: {file_id : file_id,cost: cost,description: description,tags:tags}
-    //         })
-    //             .done(function( data ) {
-    //                 alert(data);
-    //             });
-    //     }
     function share_directory() {
         $.ajax({
             type: "POST",

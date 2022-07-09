@@ -1,4 +1,5 @@
 <?php
+
 namespace Tasks\Controller;
 
 use Tasks\Model\Projects;
@@ -10,26 +11,52 @@ use Zend\Config\Config;
 use Zend\Config\Factory;
 
 
-
 class ProjectsController extends Controller\preloaderController
 {
 
     protected $projectsTable;
     protected $boardsTable;
 
-    public function indexAction(){
+    public function indexAction()
+    {
         $this->layout('layout/only_form');
         return @array('projects' => $this->getProjectsTable()->getProjects());
 
     }
 
-    public function loadProjectsArchiveAction(){
+    public function loadProjectsArchiveAction()
+    {
         $this->layout('layout/only_form');
         echo json_encode($this->getProjectsTable()->getArchiveProjects());
         return false;
     }
 
-    public function createProjectAction(){
+    public function addUserToProjectAction(){
+        $project_id = (int)$this->getRequest()->getPost()->project_id;
+        $user_id = (int)$this->getRequest()->getPost()->user_id;
+        $this->getProjectsTable()->addUserToProject($project_id,$user_id);
+
+    }
+
+    public function getProjectMemberlistAction()
+    {
+        $this->layout('layout/only_form');
+        $project_id = (int)$this->getRequest()->getPost()->project_id;
+        $members = $this->getProjectsTable()->getProjectMembers($project_id);
+        return @array('members' => $members);
+    }
+
+    public function deleteUserFromProjectAction(){
+        $this->layout('layout/only_form');
+        $project_id = (int)$this->getRequest()->getPost()->project_id;
+        $user_id = (int)$this->getRequest()->getPost()->user_id;
+        $this->getProjectsTable()->deleteUserFromProjectMembers($project_id,$user_id);
+        return false;
+
+    }
+
+    public function createProjectAction()
+    {
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -39,7 +66,8 @@ class ProjectsController extends Controller\preloaderController
         die();
     }
 
-    public function updateProjectsInBoardAction(){
+    public function updateProjectsInBoardAction()
+    {
 
         $this->layout('layout/only_form');
         $request = $this->getRequest();
@@ -47,7 +75,8 @@ class ProjectsController extends Controller\preloaderController
         return false;
     }
 
-    public function deleteProjectAction(){
+    public function deleteProjectAction()
+    {
 
         $this->layout('layout/only_form');
         $request = $this->getRequest();
@@ -56,14 +85,14 @@ class ProjectsController extends Controller\preloaderController
 
     }
 
-    public function updateProjectAction(){
+    public function updateProjectAction()
+    {
         $this->layout('layout/only_form');
         $request = $this->getRequest()->getPost()->toArray();
         $this->getProjectsTable()->updateProject($request);
         return false;
 
     }
-
 
 
     public function getProjectsTable()

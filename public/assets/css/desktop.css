@@ -970,9 +970,12 @@ th.shrink {
     margin-left: 20px;
 }
 .file_wraper span {
-    padding-left: 10px;
+    padding-left: 5px;
 }
+
 .file_wraper a {
+    text-decoration: none;
+    cursor: pointer;
 }
 .file_actions {
     display: none;
@@ -1115,7 +1118,10 @@ th.shrink {
     background: rgba(246, 246, 246, 1);
     border-radius: 10px;
     border: 1px solid #efefef;
+    width: auto;
+    text-align: left;
 }
+
 .hard-dropdown-items {
     padding: 8px 12px;
 }
@@ -2888,6 +2894,10 @@ display: inline-block;
 #project_name {
     width: 60%;
 }
+#project_member {
+    width: 60%;
+    display: block;
+}
 .project_member_span {
     display: inline-block;
 }
@@ -2911,4 +2921,16 @@ display: inline-block;
 }
 #project_members_list {
     width: 400px;
+}
+.download_file  {
+    margin: 5px;
+    color: black;
+    text-decoration: none;
+}
+#task_description {
+    width: 400px;
+    height: 300px;
+}
+.project_active_members input {
+    margin:5%;
 }

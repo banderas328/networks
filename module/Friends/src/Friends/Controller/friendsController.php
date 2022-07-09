@@ -80,7 +80,20 @@ class  friendsController extends Controller\preloaderController
     }
     public function getfriendForMemberlistAction(){
         $this->layout('layout/only_form');
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
+        $friends = new Friends();
+        $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
+        if($friends) $friends = $friends->toArray();
+        else $friends = false;
+        return @array('friends' => $friends);
+    }
+
+    public function addfriendForMemberlistAction(){
+        $this->layout('layout/only_form');
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $friends = new Friends();
         $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
