@@ -2902,6 +2902,11 @@ display: inline-block;
     border-radius: 40px;
     overflow: hidden;
     margin-top: 20px;
-    /* position: relative; */
+    position: relative;
     /* left: 25%; */
+    top: 20px;
+}
+#project_members div {
+    display: inline-block;
+    width: auto;
 }
