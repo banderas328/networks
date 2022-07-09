@@ -901,7 +901,7 @@ th.shrink {
     overflow: auto;
     border: 3px solid #f3f3f3;
     border-radius: 10px;
-    padding: 10px 10px 10px 10px;
+    margin: 5%;
     width: 400px;
 
 }
@@ -2874,5 +2874,8 @@ display: inline-block;
 .c-window__title-bar , .c-window__title{
     position: relative;
     top:5px;
+}
+.message_to_user_from_chat_list div {
+    margin: 5%;
 }
 
