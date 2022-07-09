@@ -2910,3 +2910,6 @@ display: inline-block;
     display: inline-block;
     width: auto;
 }
+#project_members {
+    width: 400px;
+}
