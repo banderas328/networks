@@ -2903,13 +2903,12 @@ display: inline-block;
     overflow: hidden;
     margin-top: 20px;
     position: relative;
-    /* left: 25%; */
     top: 20px;
 }
 #project_members div {
-    display: inline-block;
-    width: auto;
+    display: block;
+    width: 300px;
 }
-#project_members {
+#project_members_list {
     width: 400px;
 }
