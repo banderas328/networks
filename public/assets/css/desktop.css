@@ -527,7 +527,7 @@ th.shrink {
     opacity: 1;
     border: unset;
     background-image: unset;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: white;
     box-shadow: var(--bar-shadow-bottom, unset);
 }
 
@@ -555,7 +555,7 @@ th.shrink {
     opacity: 1;
     border: unset;
     background-image: unset;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: white;
     box-shadow: var(--bar-shadow-top, unset);
 }
 
@@ -2878,4 +2878,30 @@ display: inline-block;
 .message_to_user_from_chat_list div {
     margin: 5%;
 }
-
+#project_popup input ,#project_popup textarea{
+    display: inline-block;
+}
+#project_description {
+    width: 80%;
+    height: 300px;
+}
+#project_name {
+    width: 60%;
+}
+.project_member_span {
+    display: inline-block;
+}
+.project_member_span div, .project_member_span input {
+    display: inline-block;
+    margin: 5px;
+}
+.task_member_avatar {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    overflow: hidden;
+    margin-top: 20px;
+    /* position: relative; */
+    /* left: 25%; */
+}

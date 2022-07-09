@@ -2,9 +2,12 @@
 <?php
 if($friends)
 foreach($friends as $friend){
-    echo "<span userId='".$friend["user_id"]."'>";
-    echo "<p class='member_name' userId='".$friend['user_id']."'><div userId='".$friend['user_id']."' class='user_container_project'>".$friend['first_name']." ".$friend['second_name']."</div></p>";
-    echo '<input type="button" value="+" userId='.$friend["user_id"].' class="add_user_to_project">';
+    echo "<span userId='".$friend["user_id"]."' class='project_member_span'>";
+    echo "<div class='task_member_avatar'>";
+    echo "<img src='" . $friend['avatar'] . "'>";
+    echo "</div>";
+    echo "<div class='member_name' userId='".$friend['user_id']."'><div userId='".$friend['user_id']."' class='user_container_project'>".$friend['first_name']." ".$friend['second_name']."</div></div>";
+    echo '<input type="button" value="+" userId='.$friend["user_id"].' class="add_user_to_project action_btn">';
     echo "</span>";
 }
 ?>
