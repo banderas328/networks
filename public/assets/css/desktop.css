@@ -813,7 +813,7 @@ th.shrink {
 .message_to_user_area_chat {
     position: relative;
     top: 10px;
-    width: 340px;
+    width: 300px;
     height: 150px;
 }
 .message_to_user_from_user_chats_button {
@@ -826,7 +826,7 @@ th.shrink {
     display: inline-block;
     border: none;
     vertical-align: top;
-    margin-left: 10px;
+    display: inline-block;
 }
 .close_chat {
     font-weight: bold;
