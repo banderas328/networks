@@ -114,14 +114,11 @@ class ProjectsTable
             foreach ($task_value as $task_body) {
                 $tasksTable->deleteTask($task_body["id"]);
             }
-
         }
         $delete_sql = "DELETE FROM projects where id=" . $project_id;
         $this->adapter->query($delete_sql, $this->adapter::QUERY_MODE_EXECUTE);
         $delete_sql = "DELETE FROM projects_members where project_id=" . $project_id;
         $this->adapter->query($delete_sql, $this->adapter::QUERY_MODE_EXECUTE);
-
-
     }
 
     public function updateProjectsInBoard($request)

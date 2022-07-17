@@ -1341,7 +1341,7 @@ th.shrink {
 .delete_board {
     position: absolute;
     right: 15px;
-    top: 0;
+    top: -20px;
     font-size: 12px !important;
     text-transform: lowercase !important;
     color: red;
