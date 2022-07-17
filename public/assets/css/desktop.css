@@ -1027,6 +1027,8 @@ th.shrink {
 #file_directory_form p {
     position: relative;
     left: 10px;
+    top: -3px;
+    height: 22px;
 }
 .directory {
     font-weight: normal;
@@ -2964,11 +2966,14 @@ display: inline-block;
     height: 80%;
 }
 .open_project ,.archive_project , .delete_board , #create_board_button , #edit_project_member , #add_project_member , .create_project_button ,#load_projects_archive
-, .restore_task ,.delete_task , .delete_project , .restore_project ,#load_archive ,.create_task_button ,#create_project_button ,#go_to_projects , .directory ,.file_block
+, .restore_task ,.delete_task , .delete_project , .restore_project ,#load_archive ,.create_task_button ,#create_project_button ,.action_btn ,#go_to_projects , .directory ,.file_block
 {
 
     cursor: pointer;
 }
 .delete_task , .delete_project{color: red;}
+#file_to_directory{
+    display: none;
+}
 
 

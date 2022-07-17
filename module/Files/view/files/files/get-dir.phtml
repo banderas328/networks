@@ -10,7 +10,7 @@ if (!$is_root) {
             <form id="file_directory_form" method="post">
 
                 <input type="file" name="file" id="file_to_directory">
-                <p>Upload File</p>
+                <p class='action_btn' id="file_to_directory_button">Upload File</p>
             </form>
         </div>
         <div>
@@ -84,6 +84,10 @@ if (!$is_root) {
         return false;
     };
     $(function () {
+        $("#file_to_directory_button").on("click", function(){
+
+            $("#file_to_directory").click();
+        })
         if (window.need_to_paste_file == true) {
             $("#paste").addClass("required_btn");
             $("#paste").bind("click", function () {
