@@ -2964,7 +2964,7 @@ display: inline-block;
     height: 80%;
 }
 .open_project ,.archive_project , .delete_board , #create_board_button , #edit_project_member , #add_project_member , .create_project_button ,#load_projects_archive
-, .restore_task ,.delete_task , .delete_project , .restore_project ,#load_archive ,.create_task_button ,#create_project_button ,#go_to_projects
+, .restore_task ,.delete_task , .delete_project , .restore_project ,#load_archive ,.create_task_button ,#create_project_button ,#go_to_projects , .directory ,.file_block
 {
 
     cursor: pointer;

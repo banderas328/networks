@@ -38,7 +38,7 @@ if (!$is_root) {
                <div class='directory_wrapper hard-drive-directory-inner'>
                    <img src='assets/images/icons/folder.png' width='50px' height='50px' dir=" . $dir_value['id'] . " class='folder_action'/>
                        <div  dir_key=" . $dir_value['id'] . " class='directory' >" . $dir_value['path'] . " </div>
-                </div>
+
 
 ";
             if (!$is_root) {
@@ -52,8 +52,9 @@ if (!$is_root) {
                     <input type='text' class='input_password' dir=" . $dir_value['id'] . ">
                      <input type='button' value='save password and share' dir=" . $dir_value['id'] . " class='dir_save_pass btn btn-primary action_btn'>
                      </div>
-                 </div>";
+                                      </div>";
             }
+            echo "</div>";
             echo "</div>";
         }
     }
@@ -63,11 +64,11 @@ if (!$is_root) {
     <?php
     if ($filesInDir) {
         foreach ($filesInDir as $file) {
-            echo "<div class='file_wraper ' file=" . $file['id'] . ">";
+            echo "<div class='file_wraper  hard-drive-dir-wrapper' file=" . $file['id'] . ">";
            echo  "<div class='file_block_wrapper hard-drive-directory-inner'>";
             echo "<img src='assets/images/icons/file.png' width='50px' height='50px' class='file_block'  file=" . $file['id'] . " >";
             echo "<p class='file_block'  file=" . $file['id'] . "> " . $file['file_title'] . "</p>";
-            echo "<div class='directory_actions hard-dropdown file_actions' file=" . $file['id'] . ">";
+            echo "<div class='hard-dropdown file_actions' file=" . $file['id'] . ">";
             echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='delete_file  ' file=" . $file['id'] . ">" . $this->translate('delete ile', false, $lang) . "</span></p>";
             echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='move_file ' file=" . $file['id'] . ">" . $this->translate('move File', false, $lang) . "</span></p>";
             echo "<p class='hard-dropdown-items'><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" . $this->translate('download', false, $lang) . "</a></p>";
