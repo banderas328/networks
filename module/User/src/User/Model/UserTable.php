@@ -52,7 +52,7 @@ class UserTable
             $userId = $this->tableGateway->lastInsertValue;
 
             $adapter = $user->getAdapter();
-            $sql = "insert into users_filesystem (path,parent_path,user_id) values ('market','0'," . $userId . ")";
+            $sql = "insert into users_filesystem (path,parent_path,user_id) values ('docs','0'," . $userId . ")";
             $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
             $path = $_SERVER["DOCUMENT_ROOT"] . "/userfiles/" . $userId;
             mkdir($path);
