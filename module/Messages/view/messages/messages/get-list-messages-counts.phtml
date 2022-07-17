@@ -40,6 +40,7 @@
 
 <script type="text/javascript">
 
+
     $(function () {
         $('.js-open-chat').on('click', function () {
             send_message_from_user_chat(this);
@@ -54,16 +55,17 @@
         var chat_html = '' +
             '<div class="abs window" id="chat_user"><div class="abs window_inner"><div class="window_top"><span class="float_left">Chat with :'+user_name+'</span><span class="float_right"><a href="#" class="window_min"></a><a href="#" class="window_resize"></a><a href="#icon_dock_drive" class="window_close"></a></span></div><div class="abs window_content">' +
             '<div class="message_to_user_from_chat_list" style="display:hide;" title="Enter message" with_user=' + to_user + '>' +
-            '<p class="close_chat" with_user=' + to_user + '>X</p>' +
+            // '<p class="close_chat" with_user=' + to_user + '>X</p>' +
             '<div class="message_box" with_user=' + to_user + '>' + '</div>' +
             '<div class="user_chat" with_user=' + to_user + '>' +
-            '<textarea class="message_to_user_area_chat"  maxlength="2000" with_user=' + to_user + '></textarea>' +
+            '<textarea class="message_to_user_area_chat" class="selectable-all" maxlength="2000" with_user=' + to_user + '></textarea>' +
             '<button class="submit" class="chanel_button" with_user=' + to_user + '>send</button>' +
             '</div>' +
             '</div>'+ '</div> <div class="abs window_bottom">Chat</div> </div> <span class="abs ui-resizable-handle ui-resizable-se"></span> </div>';
 
 
         $("#chat_user").remove();
+
         $('body').append(chat_html);
         $(".message_to_user_from_chat_list").find('button').addClass("message_to_user_from_user_chats_button");
         $(".message_to_user_from_user_chats_button").bind("click", function () {
@@ -86,9 +88,9 @@
                 console.info(data);
                 $.each(data, function (index, message) {
                     if (message.current_user == message.from_user) {
-                        $(".message_box[with_user=" + message.to_user + "]").append("<p message_id='" + message.message_id + "'>" + message.first_name + " " + message.second_name + ":" + message.text + "</p>");
+                        $(".message_box[with_user=" + message.to_user + "]").append("<p class='allowSelectOneClick' message_id='" + message.message_id + "'>" + message.first_name + " " + message.second_name + ":" + message.text + "</p>");
                     } else {
-                        $(".message_box[with_user=" + message.from_user + "]").append("<p message_id='" + message.message_id + "'>" + message.first_name + " " + message.second_name + ":" + message.text + "</p>");
+                        $(".message_box[with_user=" + message.from_user + "]").append("<p class='allowSelectOneClick' message_id='" + message.message_id + "'>" + message.first_name + " " + message.second_name + ":" + message.text + "</p>");
                     }
 
                     $(".message_box[with_user=" + message.to_user + "]").animate({scrollTop: 10000}, 50);
@@ -113,17 +115,28 @@
                     if ($("p[message_id=" + message.message_id + "]").text().length == 0) {
                         if (message.current_user == message.from_user) {
 
-                            $(".message_box[with_user=" + message.to_user + "]").append("<p message_id='" + message.message_id + "'>" + message.first_name + " " + message.second_name + ":" + message.text + "</p>");
+                            $(".message_box[with_user=" + message.to_user + "]").append("<p class='allowSelectOneClick' message_id='" + message.message_id + "'>" + message.first_name + " " + message.second_name + ":" + message.text + "</p>");
                         } else {
-                            $(".message_box[with_user=" + message.from_user + "]").append("<p message_id='" + message.message_id + "'>" + message.first_name + " " + message.second_name + ":" + message.text + "</p>");
+                            $(".message_box[with_user=" + message.from_user + "]").append("<p class='allowSelectOneClick' message_id='" + message.message_id + "'>" + message.first_name + " " + message.second_name + ":" + message.text + "</p>");
                         }
                     }
                     $(".message_box[with_user=" + message.to_user + "]").animate({scrollTop: 10000}, 50);
 
 
                 });
+                $( "p.allowSelectOneClick" ).click(function( event ) {
+                    event.stopPropagation();
 
-                setTimeout(sync_chat, 3000);
+                });
+                $( "p.allowSelectOneClick" ).mousedown(function( event ) {
+                    event.stopPropagation();
+
+                });
+                $( "p.allowSelectOneClick" ).mouseup(function( event ) {
+                    event.stopPropagation();
+
+                });
+                setTimeout(sync_chat, 2000);
             });
 
     }

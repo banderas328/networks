@@ -21,9 +21,7 @@
         0 -1px 1px rgba(0, 0, 0, 0.1);
 }
 
-* {
-    cursor: default;
-}
+
 @font-face {
     font-family: "Roboto";
     src: url("../Roboto/Roboto-Regular.ttf") format("truetype");
@@ -37,6 +35,7 @@ body {
     font-family: "Roboto";
     font-weight: 500;
     background: #222;
+
 }
 
 #wrapper {
@@ -77,6 +76,7 @@ li {
 .float_right {
     float: right;
 }
+
 
 .ui-resizable-se {
     background: url(../images/gui/window_corner.gif) no-repeat right bottom;
@@ -2934,3 +2934,32 @@ display: inline-block;
 .project_active_members input {
     margin:5%;
 }
+.noSelect
+{
+    -webkit-touch-callout:none; /* iOS Safari */
+    -webkit-user-select:none;   /* Chrome/Safari/Opera */
+    -khtml-user-select:none;    /* Konqueror */
+    -moz-user-select:none;      /* Firefox */
+    -ms-user-select:none;       /* Internet Explorer/Edge */
+    user-select:none;           /* Non-prefixed version */
+}
+
+.allowSelect
+{
+    -webkit-user-select:text;   /* Chrome/Safari/Opera */
+    -khtml-user-select:text;    /* Konqueror */
+    -moz-user-select:text;      /* Firefox */
+    -ms-user-select:text;       /* Internet Explorer/Edge */
+    user-select:text;           /* Non-prefixed version */
+}
+
+.allowSelectOneClick
+{
+    -webkit-user-select:all;   /* Chrome/Safari/Opera */
+    -khtml-user-select:all;    /* Konqueror */
+    -moz-user-select:all;      /* Firefox */
+    -ms-user-select:all;       /* Internet Explorer/Edge */
+    user-select:all;           /* Non-prefixed version */
+}
+
+

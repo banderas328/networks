@@ -158,9 +158,7 @@ var JQD = (function($, window, document, undefined) {
 
         // Cancel single-click.
         d.on('mousedown', 'a.icon', function() {
-            console.info('icon active');
             console.info(this);
-            console.info('hello');
           // Highlight the icon.
           JQD.util.clear_active();
           $(this).addClass('active');
@@ -172,12 +170,6 @@ var JQD = (function($, window, document, undefined) {
           // Get the link's target.
           var x = $(this).attr('href');
           var y = $(x).find('a').attr('href');
-console.info("1");
-
-            console.info(x);
-            console.info(y);
-            console.info($(x));
-            console.info("1");
           // Show the taskbar button.
           if ($(x).is(':hidden')) {
 
@@ -196,12 +188,14 @@ console.info("1");
           JQD.util.window_flat();
 
           $(y).addClass('window_stack').show();
+            $(y).addClass('allowSelect').show();
+
         });
 
         // Make icons draggable.
         d.on('mouseenter', 'a.icon', function() {
           $(this).off('mouseenter').draggable({
-            revert: true,
+            revert: false,
             containment: 'parent'
           });
         });
@@ -217,20 +211,23 @@ console.info("1");
             x.hide();
             $parent.removeClass('is-active');
           } else {
+
             // Bring window to front.
             JQD.util.window_flat();
             x.show().addClass('window_stack');
             // $parent.siblings().removeClass('is-active');
             $parent.addClass('is-active');
+              $parent.addClass('allowSelect');
           }
         });
 
         // Focus active window.
-        d.on('mousedown', 'div.window', function() {
-          // Bring window to front.
-          JQD.util.window_flat();
-          $(this).addClass('window_stack');
-        });
+        // d.on('mousedown', 'div.window', function() {
+        //   // Bring window to front.
+        //   JQD.util.window_flat();
+        //   $(this).addClass('window_stack');
+        //
+        // });
 
         // Make windows draggable.
         d.on('mouseenter', 'div.window', function() {
@@ -340,6 +337,7 @@ console.info("1");
       //
       window_flat: function() {
         $('div.window').removeClass('window_stack');
+
       },
       //
       // Resize modal window.
@@ -383,6 +381,7 @@ console.info("1");
         // Bring window to front.
         JQD.util.window_flat();
         win.addClass('window_stack');
+
       }
     }
   };

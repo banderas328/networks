@@ -42,5 +42,15 @@ $user = $_SESSION['user'];
         <?php include dirname(__FILE__)."/windows/frame.phtml"; ?>
         <?php // include dirname(__FILE__)."/windows/payment.phtml"; ?>
     </div>
+<script type="text/javascript">
+    (function($){
+        $.fn.disableSelection = function() {
+            return this
+                .attr('unselectable', 'off')
+                .css('user-select', 'all')
+                .on('selectstart', true);
+        };
+    })(jQuery);
+</script>
 </body>
 </html>
