@@ -64,7 +64,6 @@
             var chat_html =
                 '<div class="abs window" id="chat_public"><div class="abs window_inner"><div class="window_top"><span class="float_left">Chat :'+chanel_name+'</span><span class="float_right"><a href="#" class="window_min"></a><a href="#" class="window_resize"></a><a href="#icon_dock_drive" class="window_close"></a></span></div><div class="abs window_content">' +
                 '<div class="message_to_user_from_chanel_list" style="display:hide;" title="Enter message" to_chanel=' +  to_chanel.to_chanel +'>' +
-                '<p class="close_chanel" to_chanel='+to_chanel.to_chanel+'>X</p>' +
                 '<div class="message_box" to_chanel='+to_chanel.to_chanel+'></div>' +
                 '<div class="chanel" to_chanel='+to_chanel.to_chanel+'>' +
                 '<textarea class="message_to_user_area_chanel"  maxlength="2000" to_chanel='+to_chanel.to_chanel+'></textarea>' +
@@ -90,12 +89,12 @@
             })
                 .done(function(data) {
                     $.each(data.chanels_messages, function (index,message) {
-                        $(".message_box[to_chanel="+message.to_chanel+"]").append("<p class='old_message'>"+message.first_name+" "+message.second_name+":"+message.message+"</p>");
+                        $(".message_box[to_chanel="+message.to_chanel+"]").append("<p class='old_message allowSelectOneClick'>"+message.first_name+" "+message.second_name+":"+message.message+"</p>");
                         window.to_chanel.date  = message.date;
                         $(".message_box[to_chanel="+message.to_chanel+"]").animate({ scrollTop: 10000}, 200);
 
                     });
-                    setTimeout(sync_chanel, 3000);
+                    setTimeout(sync_chanel, 2000);
                 });
         }
         function send_to_chanel(element) {
