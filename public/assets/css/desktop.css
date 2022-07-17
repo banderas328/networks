@@ -2961,5 +2961,20 @@ display: inline-block;
     -ms-user-select:all;       /* Internet Explorer/Edge */
     user-select:all;           /* Non-prefixed version */
 }
+.open_task {
+   width: 225px;
+    word-break: break-word;
+}
+#window_money {
+    width: 80%;
+    height: 80%;
+}
+.open_project ,.archive_project , .delete_board , #create_board_button , #edit_project_member , #add_project_member , .create_project_button ,#load_projects_archive
+, .restore_task ,.delete_task , .delete_project , .restore_project ,#load_archive ,.create_task_button
+{
+
+    cursor: pointer;
+}
+.delete_task , .delete_project{color: red;}
 
 

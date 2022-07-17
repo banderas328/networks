@@ -23,7 +23,7 @@
     ?>
 </div>
 <div id="create_board" class="col col-12">
-    <input type="text" id="board_name_input" placeholder="board name">
+    <input type="text" id="board_name_input" placeholder="column name">
     <span id="create_board_button"
           project_id='<?php if (isset($project_id)) echo $project_id; ?>'>+ create column</span>
 </div>
@@ -179,11 +179,7 @@
                             height: 800,
                             width: 600,
                             modal: false,
-                            buttons: {
-                                Cancel: function () {
-                                    $(this).dialog("close");
-                                }
-                            }
+                             }
                         });
 
                     });
