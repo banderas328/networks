@@ -2975,5 +2975,8 @@ display: inline-block;
 #file_to_directory{
     display: none;
 }
+.directory_wrapper {
+    display: block;
+}
 
 
