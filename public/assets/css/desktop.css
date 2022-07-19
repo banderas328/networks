@@ -2975,7 +2975,7 @@ display: inline-block;
 #file_to_directory{
     display: none;
 }
-.directory_wrapper {
+.network_directory {
     display: block;
 }
 
