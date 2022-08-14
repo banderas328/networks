@@ -2799,7 +2799,8 @@ border: none;
 margin: 5px;
 }
 .friend_block {
-width: 100%;
+    width: 540px;
+    height: 100px;
 }
 .avatar img {
     width: 70px;
@@ -2809,6 +2810,7 @@ width: 100%;
     display: inline;
     padding: 15px;
     text-align: right;
+    float: right;
 }
 .friend_block p button {
     margin: 10px;
@@ -2925,7 +2927,7 @@ display: inline-block;
 }
 #task_description {
     width: 400px;
-    height: 300px;
+    height: auto;
 }
 .project_active_members input {
     margin:5%;
@@ -2977,6 +2979,18 @@ display: inline-block;
 }
 .network_directory {
     display: block;
+}
+#task_button_area textarea{
+    width: 95%;
+    height: 200px;
+}
+#task_button_area .c-file__icon-wrap{
+display: block;
+}
+.edit_save_task_name ,.edit_save_task_description {
+    display: block;
+    cursor: pointer;
+    font-size: 20px;
 }
 
 
