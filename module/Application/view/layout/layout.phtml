@@ -16,6 +16,7 @@ $user = $_SESSION['user'];
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-03HREGPV42"></script>
     <script>
+        typeof window.jQuery !== 'undefined' ? console.log(window.jQuery.fn.jquery) : 'jQuery not found!';
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
