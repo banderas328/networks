@@ -20,10 +20,11 @@ class Tasks
     public $description;
     public $parent_task;
     public $attachments;
+    public $estimate;
     public $is_archive;
-    
+
     protected $inputFilter;
-    
+
     public function exchangeArray($data)
     {
         $this->id = (isset($data['id'])) ? $data['id'] : null;
@@ -34,6 +35,7 @@ class Tasks
         $this->description = (isset($data['description'])) ? $data['description'] : null;
         $this->parent_task = (isset($data['parent_task'])) ? $data['parent_task'] : null;
         $this->is_archive = (isset($data['is_archive'])) ? $data['is_archive'] : null;
+        $this->estimate = (isset($data['estimate'])) ? $data['estimate'] : null;
     }
     public function getArrayCopy()
     {
@@ -45,7 +47,7 @@ class Tasks
     }
     public function getInputFilter()
     {
-        
+
     }
     public function getAdapter()
     {
@@ -58,8 +60,8 @@ class Tasks
             'password' => $config->database["params"]->password,
         ));
         return $adapter;
-        
+
     }
-    
-    
+
+
 }

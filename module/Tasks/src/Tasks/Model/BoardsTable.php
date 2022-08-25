@@ -70,7 +70,7 @@ class BoardsTable
                 WHERE projects_members.user_id='".$userId."' and boards.project_id = '".$project_id."'";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $board_id_new =   $resultSet->toArray()[0]["board_id"];
-        $sql = "update tasks set board_id =".$board_id_new." where board_id=".$board_id;
+        $sql = "update tasks set is_archive = 1 where board_id=".$board_id;
         $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $data = ["id" => $board_id];
         $this->tableGateway->delete($data);

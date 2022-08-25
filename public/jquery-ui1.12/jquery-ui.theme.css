@@ -72,7 +72,7 @@ a.ui-button,
 a:link.ui-button,
 a:visited.ui-button,
 .ui-button {
-	color: #454545;
+	color: #05e1a3;
 	text-decoration: none;
 }
 .ui-state-hover,
@@ -83,10 +83,12 @@ a:visited.ui-button,
 .ui-widget-header .ui-state-focus,
 .ui-button:hover,
 .ui-button:focus {
-	border: 1px solid #cccccc;
-	background: #ededed;
+	border: 1px solid #05e1a3;
+
 	font-weight: normal;
-	color: #2b2b2b;
+	color: white;
+    background: none;
+    background-color: #05e1a3;
 }
 .ui-state-hover a,
 .ui-state-hover a:hover,
@@ -133,13 +135,13 @@ a.ui-button:active,
 .ui-state-highlight,
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
-	border: 1px solid #dad55e;
-	background: #fffa90;
-	color: #777620;
+	border: 1px solid #05e1a3;
+	background: #05e1a3;
+	color: white;
 }
 .ui-state-checked {
-	border: 1px solid #dad55e;
-	background: #fffa90;
+	border: 1px solid #05e1a3;
+	background: #05e1a3;
 }
 .ui-state-highlight a,
 .ui-widget-content .ui-state-highlight a,

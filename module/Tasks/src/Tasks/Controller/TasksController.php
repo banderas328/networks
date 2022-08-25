@@ -12,9 +12,9 @@ use Zend\Config\Factory;
 
 class TasksController extends Controller\preloaderController
 {
-    
+
     protected $tasksTable;
-    
+
     public function indexAction(){
         $project_id = $this->getRequest()->getPost()->project_id;
         $this->layout('layout/only_form');
@@ -23,7 +23,7 @@ class TasksController extends Controller\preloaderController
         //return @array('tasks' => $tasks);
 
     }
-    
+
     public function createTaskAction(){
         $this->layout('layout/only_form');
         $request = $this->getRequest();
@@ -48,6 +48,13 @@ class TasksController extends Controller\preloaderController
         $task_id = (int) $this->getRequest()->getPost()->task_id;
         $task = $this->getTasksTable()->getTask($task_id);
         return @array('task' => $task);
+    }
+
+    public function addTimeToTaskAction(){
+        $request = $this->getRequest();
+        if ($this->getTasksTable()->addTimeToTask($request->getPost()->toArray()["data"])) die("time added");
+        die("something wrong");
+
     }
 
     public function updateTaskAction(){
@@ -81,6 +88,6 @@ class TasksController extends Controller\preloaderController
         }
         return $this->getTasksTable;
     }
-    
+
 }
 

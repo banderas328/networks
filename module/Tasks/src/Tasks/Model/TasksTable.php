@@ -28,9 +28,12 @@ class TasksTable
 
     public function createTask(array $data)
     {
-        session_start();        $user_session = $_SESSION['user'];
+        var_dump($data);
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $memberList = $data["members_list"];
+        $estimate = (int) $data["estimate"];
         $memberList .= ",".$userId;
         $data["to_directory"] = 0;
         $fileTable = new \Files\Model\FilesTable;
@@ -49,6 +52,7 @@ class TasksTable
         $data = [
             "description" => $description,
             "name" => $task_name,
+            "estimate" => $estimate,
             "status" => "new",
             "board_id" => $board_id,
         ];
@@ -101,8 +105,8 @@ class TasksTable
         session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
-        $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id FROM tasks 
-                left join boards on boards.id = tasks.board_id 
+        $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id FROM tasks
+                left join boards on boards.id = tasks.board_id
                 left join projects on boards.project_id = projects.id
                 left join projects_members on projects_members.project_id = projects.id
                 WHERE tasks.is_archive = '0' and projects_members.project_id='" . $project_id . "' and projects_members.user_id = " . $userId;
@@ -123,8 +127,8 @@ class TasksTable
         $project_id = (int) $project_id;
         session_start();        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
-        $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id,tasks.description FROM tasks 
-                left join boards on boards.id = tasks.board_id 
+        $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id,tasks.description FROM tasks
+                left join boards on boards.id = tasks.board_id
                 left join projects on boards.project_id = projects.id
                 left join projects_members on projects_members.project_id = projects.id
                 WHERE tasks.is_archive = '1' and projects_members.project_id='" . $project_id . "' and projects_members.user_id = " . $userId;
@@ -158,6 +162,18 @@ class TasksTable
         }
     }
 
+    //TODO if in future it will be required to make some more logic with time , it should be moved to special TaskTimeTable model class
+    public function addTimeToTask($data){
+        session_start();
+        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
+        $hours = (int)$data["hours"];
+        $task_id = (int)$data["task_id"];
+        $date = strtotime($data["date"]);
+        $sql = "INSERT into  task_time (hours,task_id,user_id,date) values ($hours,$task_id,$userId,$date)";
+        return $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+    }
+
     public function updateTask($data){
         if(isset($data["data"])) $data = $data["data"];
         $fileTable = new \Files\Model\FilesTable;
@@ -182,7 +198,8 @@ class TasksTable
         $files_task_sql = "SELECT  * FROM tasks_files where task_id=".$task_id;
         $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
         $files = $resultSet->toArray();
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         foreach ($files as $file){
             $files_task_sql = "SELECT  * FROM files where id=".$file["file_id"];
@@ -211,6 +228,8 @@ class TasksTable
 //        $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
 //
 //    } TODO ADD SECURITY CHECK WITH ACL
+
+
 }
 
 

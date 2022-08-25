@@ -17,6 +17,14 @@
             <option value="hold">Hold</option>
         </select>
     </h4>
+    <div id="log_work_block">
+        <div>
+        <button id="add_hours_button">Add</button> : <input type="text" name="log_hours" id="log_hours_input" placeholder="1" task_id="<?php echo $task["id"]; ?>"> hours to task
+
+        <div>
+         on Date : <input type="text" id="datepicker">
+        </div>
+    </div>
     <div class="task_members">
         <?php foreach ($task["users"] as $user) {
 
@@ -65,9 +73,23 @@
 <script type="text/javascript">
 
     $(function () {
+        $("#datepicker").datepicker();
         $("#task_file_update").css("display","none");
         $(".c-file__icon-wrap").on("click",function(){
             $("#task_file_update").click();
+        });
+        $("#add_hours_button").on("click", function(){
+            var hours = $("#log_hours_input").val();
+            var task_id = $("#log_hours_input").attr("task_id");
+            var date = $("#datepicker").val();
+            var data = {"hours": hours, "task_id": task_id ,"date" : date};
+            $.ajax({
+                type: "POST",
+                url: "tasks/addTimeToTask",
+                data: {data}
+            }).done(function (data) {
+                       alert(data);
+           });
         });
         $("#archive_task").on("click", function () {
 

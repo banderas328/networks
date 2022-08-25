@@ -1,6 +1,8 @@
 <span id="edit_project_member">Remove members</span>
+<hr>
 <div class="project_active_members"></div>
 <span id="add_project_member">Add members</span>
+<hr>
 <div class="project_active_members_add"></div>
 <script type="text/javascript">
     $("#edit_project_member").bind("click", function () {
@@ -27,22 +29,31 @@
     <span id="create_board_button"
           project_id='<?php if (isset($project_id)) echo $project_id; ?>'>+ create column</span>
 </div>
+<hr>
 
 <div id="create_task" class="col col-12">
     <span class="create_task_button">+ create task</span>
 </div>
+<hr>
 <div id="task_popup">
     <span id="members_list"></span>
     <span id="task_members_list"></span>
+    <hr>
     <div>
         <input type="text" name="task_name" placeholder="Task name" id="task_name">
+    </div>
+    <div>
+        <input type="text" name="task_estimation" placeholder="Estimate in hours" id="task_estimate">
     </div>
     <div>
         <input type="hidden" name="task_members" placeholder="task members" id="task_members">
         <textarea name="task_description" placeholder="task description" id="task_description"></textarea>
     </div>
     <div>
-        <input type="file" name="task_file" class="action_btn" placeholder="task file" id="task_file">
+        <svg class="icon-nw icon-nw-attach-file-16" viewBox="0 0 16 16" id="task_file_ocon">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="m14.8 7.6-5.5 6.3c-2.1 2.4-5.6 2.8-7.7.7-2.1-2.1-2-5.8.1-8.2L7 .4c.3-.4.9-.4 1.3-.1.4.4.3 1 0 1.4L3 7.7c-1.5 1.7-1.5 4.1-.1 5.5 1.4 1.4 3.7 1.2 5.2-.5l5.5-6.3c.9-1 .9-2.6.1-3.4-.8-.8-2.3-.7-3.2.3L5.4 9c-.4.4-.4 1-.1 1.3.3.3.8.3 1.2-.1l4.8-5.5c.3-.4.9-.5 1.3-.1s.3 1 0 1.4l-4.8 5.5c-1 1.2-2.7 1.3-3.7.3s-1-2.8.1-4l5-5.7c1.6-1.8 4.1-2.1 5.7-.5 1.5 1.4 1.5 4.2-.1 6z"></path>
+        </svg>
+        <input type="file" name="task_file" class="action_btn" placeholder="task file" id="task_file_input">
     </div>
     <div>
         <input type="button" value="save task" id="save_task" class="action_btn"
@@ -114,7 +125,7 @@
     });
     $(".create_task_button").on("click", function () {
         $("#task_popup").show();
-        refresh_members_list();
+        refresh_project_members_list();
     });
     $("#task_popup #save_task").on("click", function () {
         var task_name = $("#task_name").val();
@@ -123,12 +134,14 @@
             members_list.push($(e).attr("userId"));
         });
         var task_description = $("#task_description").val();
+        var estimate = $("#task_estimate").val();
         var project_id = $("#create_board_button").attr("project_id");
-        var files = $("#task_file").prop('files');
+        var files = $("#task_file_input").prop('files');
         var file = files[0];
         var data = new FormData();
         data.append('file', file);
         data.append('members_list', members_list);
+        data.append('estimate', estimate);
         data.append('project_id', project_id);
         data.append('task_name', task_name);
         data.append('task_description', task_description);
@@ -207,6 +220,11 @@
     }
 
     $(function () {
+        $("#task_file_input").css("display","none");
+        $("#task_file_ocon").on("click" , function(){
+            $("#task_file_input").click();
+        });
+
 
 
         $("#create_board_button").bind("click", function () {
