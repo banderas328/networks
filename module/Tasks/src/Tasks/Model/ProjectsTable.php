@@ -143,7 +143,7 @@ class ProjectsTable
         $start_date = strtotime($data["start_date"]);
         $end_date = strtotime($data["end_date"]);
         $sql = "select * from projects
-                         left join projects_members on projects.id  = projects_members.project_id
+
                          left join boards on projects.id = boards.project_id
                          left join tasks on boards.id = tasks.board_id
                          left join task_time on tasks.id = task_time.task_id
@@ -158,14 +158,10 @@ class ProjectsTable
             $estimate = $data_value["estimate"];
             $name = $data_value["first_name"] . " " . $data_value["second_name"];
             $user_id = $data_value["user_id"];
-       //     if (!isset($report_array[$project_name][$user_id][$task_name]["hours"])) {
-                $report_array[$project_name][$user_id][$task_name]["hours"] = (int)$data_value["hours"];
-//            } else {
-//                $report_array[$project_name][$user_id][$task_name]["hours"] += (int)$data_value["hours"];
-//            }
-            $report_array[$project_name][$user_id][$task_name]["estimate"] = $estimate;
-            $report_array[$project_name][$user_id][$task_name]["user_name"] = $name;
-            $report_array[$project_name][$user_id][$task_name]["project_name"] = $project_name;
+            $report_array[$project_name][$task_name]["hours"] += (int)$data_value["hours"];
+            $report_array[$project_name][$task_name]["estimate"] = $estimate;
+            $report_array[$project_name][$task_name]["user_name"] = $name;
+            $report_array[$project_name][$task_name]["project_name"] = $project_name;
         }
         $final_report = [];
 //        foreach ($report_array as $report_task_key => $report_task_value) {
@@ -179,6 +175,7 @@ class ProjectsTable
 //                }
 //            }
 //        }
+
         return $report_array;
     }
 }
