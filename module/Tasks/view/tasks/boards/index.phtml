@@ -1,17 +1,67 @@
-<span id="edit_project_member">Remove members</span>
-<hr>
+<span id="edit_project_member" class="action_btn">Remove members</span>
+
+<span id="add_project_member" class="action_btn">Add members</span>
+<div id="create_board" class="">
+    <input type="text" id="board_name_input" placeholder="column name">
+    <span id="create_board_button" class='action_btn'
+          project_id='<?php if (isset($project_id)) echo $project_id; ?>'>Create Column</span>
+</div>
 <div class="project_active_members"></div>
-<span id="add_project_member">Add members</span>
-<hr>
 <div class="project_active_members_add"></div>
-<script type="text/javascript">
-    $("#edit_project_member").bind("click", function () {
-        edit_project_members();
-    });
-    $("#add_project_member").bind("click", function () {
-        add_project_members();
-    });
-</script>
+<div>
+<span id="project_report" class="action_btn">Report</span>
+<span id="create_task " class="create_task_button action_btn">Create Task</span>
+<span id="load_archive">Load Archive</span>
+</div>
+<div id="report_date_block">
+    Start Date : <input type="text" name="start_date" id="start_report_date">
+    End Date :   <input type="text" name="end_date" id="end_report_date">
+             <input type="button" id="show_report" value="Show Report" class="action_btn">
+
+</div>
+
+<div id="stackedHorizontalBC">
+</div>
+<div id="report_user_select_clock">
+
+</div>
+<div id="task_manager_arhive">
+    <div id="task_manager_arhive_block">
+
+    </div>
+</div>
+<div id="task_popup">
+    <hr>
+    <h4>Create Task</h4>
+    <h5>Members List</h5>
+    <span id="members_list"></span>
+    <span id="task_members_list"></span>
+
+    <div>
+        <h5>Task Name</h5>
+        <input type="text" name="task_name" placeholder="Task name" id="task_name">
+    </div>
+    <div>
+        <h5>Estimation in hours</h5>
+        <input type="text" name="task_estimation" placeholder="Estimation in hours" id="task_estimate">
+    </div>
+    <div>
+        <input type="hidden" name="task_members" placeholder="task members" id="task_members">
+        <h5>Task Description</h5>
+        <textarea name="task_description" placeholder="task description" id="task_description"></textarea>
+    </div>
+    <div>
+        <h5>Attach File</h5>
+        <svg class="icon-nw icon-nw-attach-file-16" viewBox="0 0 16 16" id="task_file_ocon">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="m14.8 7.6-5.5 6.3c-2.1 2.4-5.6 2.8-7.7.7-2.1-2.1-2-5.8.1-8.2L7 .4c.3-.4.9-.4 1.3-.1.4.4.3 1 0 1.4L3 7.7c-1.5 1.7-1.5 4.1-.1 5.5 1.4 1.4 3.7 1.2 5.2-.5l5.5-6.3c.9-1 .9-2.6.1-3.4-.8-.8-2.3-.7-3.2.3L5.4 9c-.4.4-.4 1-.1 1.3.3.3.8.3 1.2-.1l4.8-5.5c.3-.4.9-.5 1.3-.1s.3 1 0 1.4l-4.8 5.5c-1 1.2-2.7 1.3-3.7.3s-1-2.8.1-4l5-5.7c1.6-1.8 4.1-2.1 5.7-.5 1.5 1.4 1.5 4.2-.1 6z"></path>
+        </svg>
+        <input type="file" name="task_file" class="action_btn" placeholder="task file" id="task_file_input">
+    </div>
+    <div>
+        <input type="button" value="save task" id="save_task" class="action_btn"
+               project_id='<?php if (isset($board["project_id"])) echo $board["project_id"] ?>'/>
+    </div>
+</div>
 <div id="boards_div" class="board-wrapper">
     <?php
     if (isset($boards)) {
@@ -24,50 +74,93 @@
     }
     ?>
 </div>
-<div id="create_board" class="col col-12">
-    <input type="text" id="board_name_input" placeholder="column name">
-    <span id="create_board_button"
-          project_id='<?php if (isset($project_id)) echo $project_id; ?>'>+ create column</span>
-</div>
-<hr>
-
-<div id="create_task" class="col col-12">
-    <span class="create_task_button">+ create task</span>
-</div>
-<hr>
-<div id="task_popup">
-    <span id="members_list"></span>
-    <span id="task_members_list"></span>
-    <hr>
-    <div>
-        <input type="text" name="task_name" placeholder="Task name" id="task_name">
-    </div>
-    <div>
-        <input type="text" name="task_estimation" placeholder="Estimate in hours" id="task_estimate">
-    </div>
-    <div>
-        <input type="hidden" name="task_members" placeholder="task members" id="task_members">
-        <textarea name="task_description" placeholder="task description" id="task_description"></textarea>
-    </div>
-    <div>
-        <svg class="icon-nw icon-nw-attach-file-16" viewBox="0 0 16 16" id="task_file_ocon">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="m14.8 7.6-5.5 6.3c-2.1 2.4-5.6 2.8-7.7.7-2.1-2.1-2-5.8.1-8.2L7 .4c.3-.4.9-.4 1.3-.1.4.4.3 1 0 1.4L3 7.7c-1.5 1.7-1.5 4.1-.1 5.5 1.4 1.4 3.7 1.2 5.2-.5l5.5-6.3c.9-1 .9-2.6.1-3.4-.8-.8-2.3-.7-3.2.3L5.4 9c-.4.4-.4 1-.1 1.3.3.3.8.3 1.2-.1l4.8-5.5c.3-.4.9-.5 1.3-.1s.3 1 0 1.4l-4.8 5.5c-1 1.2-2.7 1.3-3.7.3s-1-2.8.1-4l5-5.7c1.6-1.8 4.1-2.1 5.7-.5 1.5 1.4 1.5 4.2-.1 6z"></path>
-        </svg>
-        <input type="file" name="task_file" class="action_btn" placeholder="task file" id="task_file_input">
-    </div>
-    <div>
-        <input type="button" value="save task" id="save_task" class="action_btn"
-               project_id='<?php if (isset($board["project_id"])) echo $board["project_id"] ?>'/>
-    </div>
-</div>
-<div id="task_manager_arhive"><span id="load_archive">load archive</span>
-    <div id="task_manager_arhive_block"></div>
-</div>
 <div id="open_task_popup"></div>
+<script src="/js/barGraph.js"></script>
 <script type="text/javascript">
+    function show_report(data){
+        // Set effect from select menu value
+        const data2 = [ {'value': [5,10],'color' :['#05e1a3','#059669'],'labelColor' :['black','black'], 'barLabel': 'Task 1' },
+            {'value': [11,5], 'color' :['#05e1a3','#059669'], 'labelColor' :['black','black' ], 'barLabel': 'Task 2'},
+            {'value' : [10,5,], 'color' :['#05e1a3','#059669'], 'labelColor' :['black','black' ], 'barLabel' : 'Task 3'},
+        ];
+        const options2 = {
+            width: 600,
+            height: 300,
+            barColor: "blue",
+            barSpacing: 4,
+            graphFont: 16,
+            barLabelColor: "red",
+            barLabelPosition: 'center',
+            yLableColor: 'green',
+            backgroundBarColor: 'rgb(220,220,220)',
+            titleFont: {size: 24, color: "black"},
+            title: "Проект Octopus",
+            xAxisTitle: 'Отчет за период',
+            xAxisTitleFont: {size: 24, color: "black"},
+            xMax: 60,
+            xsteps: 10
+        };
+
+        let element2 = $("#stackedHorizontalBC");
+        $("#stackedHorizontalBC").eq(0).html(" ");
+        //  $("#stackedHorizontalBC").append("<hr>");
+        drawBarChart(data2, options2, element2);
+   }
+    $(function () {
+        $("#show_report").on('click', function(){
+            var project_id = $("#create_board_button").attr("project_id");
+            var start_date = $("#start_report_date").val();
+            var end_date = $("#end_report_date").val();
+            $.ajax({
+                type: "POST",
+                url: "projects/getProjectReport",
+                data: {"project_id": project_id, "start_date": start_date,"end_date" :end_date}
+            })
+                .done(function (data) {
+                     show_report(data)
+                });
+        });
+        $("#edit_project_member").bind("click", function () {
+            edit_project_members();
+        });
+        $("#add_project_member").bind("click", function () {
+            add_project_members();
+        });
+        $( "#project_report" ).on( "click", function() {
+            $( "#report_date_block" ).slideToggle( "slow", function() {
+                // Animation complete.
+            });
+        });
+        $("#start_report_date").datepicker();
+        $("#end_report_date").datepicker();
+        $("#task_file_input").css("display","none");
+        $("#task_file_ocon").on("click" , function(){
+            $("#task_file_input").click();
+        });
+        $("#create_board_button").bind("click", function () {
+            var board_name = $("#board_name_input").val();
+            var project_id = $(this).attr("project_id");
+            $.ajax({
+                type: "POST",
+                url: "boards/createBoard",
+                data: {"board_name": board_name, "project_id": project_id}
+            })
+                .done(function (data) {
+                    $("#tasks_transaction").html(data);
+                    // get_project_tasks();
+                });
+        });
+        $.ajax({
+            type: "POST",
+            url: "friends/getfriendForMemberlist",
+        })
+            .done(function (data) {
+                $("#task_members_list").html(data);
+            });
+        get_project_tasks();
+    });
 
     function add_project_members() {
-
         var project_id = $("#create_board_button").attr("project_id");
         $.ajax({
             type: "post",
@@ -80,7 +173,6 @@
             });
     }
     function edit_project_members() {
-
         var project_id = $("#create_board_button").attr("project_id");
         $.ajax({
             type: "post",
@@ -92,7 +184,10 @@
                 $(".project_active_members").html(data);
             });
     }
+    $("#project_report").on("click",function(){
+        show_report();
 
+    });
     $("#load_archive").on("click", function () {
         var project_id = $("#create_board_button").attr("project_id");
         $.ajax({
@@ -120,11 +215,12 @@
                     .done(function (data) {
                         $("#tasks_transaction").html(data);
                     });
-
             });
     });
     $(".create_task_button").on("click", function () {
-        $("#task_popup").show();
+        $( "#task_popup" ).slideToggle( "slow", function() {
+            // Animation complete.
+        });
         refresh_project_members_list();
     });
     $("#task_popup #save_task").on("click", function () {
@@ -192,11 +288,8 @@
                             height: 800,
                             width: 600,
                             modal: false,
-
                         });
-
                     });
-
                 });
                 $('.connected').sortable({
                     connectWith: '.connected',
@@ -218,36 +311,4 @@
                 });
             });
     }
-
-    $(function () {
-        $("#task_file_input").css("display","none");
-        $("#task_file_ocon").on("click" , function(){
-            $("#task_file_input").click();
-        });
-
-
-
-        $("#create_board_button").bind("click", function () {
-            var board_name = $("#board_name_input").val();
-            var project_id = $(this).attr("project_id");
-            $.ajax({
-                type: "POST",
-                url: "boards/createBoard",
-                data: {"board_name": board_name, "project_id": project_id}
-            })
-                .done(function (data) {
-                    $("#tasks_transaction").html(data);
-                    // get_project_tasks();
-                });
-        });
-        $.ajax({
-            type: "POST",
-            url: "friends/getfriendForMemberlist",
-                   })
-            .done(function (data) {
-                $("#task_members_list").html(data);
-            });
-        get_project_tasks();
-    });
-
 </script>

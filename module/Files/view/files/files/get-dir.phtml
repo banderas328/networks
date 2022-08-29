@@ -16,12 +16,12 @@ if (!$is_root) {
         <div>
 
 
-            <input type="text" id="directory_name">
+            <input type="text" id="directory_name" placeholder="Directory name">
             <button value="create dir" class='action_btn'
                     id="create_dir"><?php echo $this->translate("Create directory", false, $lang); ?></button>
         </div>
         <div>
-            <button id="paste" >paste</button>
+            <button id="paste" class="action_btn" >paste</button>
             <input type="hidden" value="<?php if (isset($current_directory)) echo $current_directory ?>"
                    id="current_directory">
         </div>
@@ -89,7 +89,8 @@ if (!$is_root) {
             $("#file_to_directory").click();
         })
         if (window.need_to_paste_file == true) {
-            $("#paste").addClass("required_btn");
+         //   alert("hello");
+            $("#paste").css("display", "inline");
             $("#paste").bind("click", function () {
                 var file_id = window.need_to_paste_file_id;
 
@@ -112,14 +113,13 @@ if (!$is_root) {
 
         }
         else {
-            $("#paste").addClass("action_btn");
+            $("#paste").css("display","none");
         }
 
         if (window.need_to_paste_dir == true) {
-            $("#paste").addClass("required_btn");
+            $("#paste").css("display","inline");
             $("#paste").bind("click", function () {
                 var dir_id = window.need_to_paste_dir_id;
-
                 var current_directory = $("#current_directory").val();
                 $.ajax({
                     type: "POST",
@@ -129,7 +129,7 @@ if (!$is_root) {
                     .done(function (data) {
                         window.need_to_paste_file = false;
                         window.need_to_paste_file_id = false;
-                        $("#paste").removeClass("pastpaste_file_to_directorys");
+                        $("#paste").css("display","none");
                         var current_directory = $("#current_directory").val();
                         show_directory(current_directory);
                     });
@@ -312,6 +312,7 @@ if (!$is_root) {
 
     function move_file() {
         var file_id = $(this).attr("file");
+        $("#paste").css("display","inline-block");
         $("#paste").addClass("pastpaste_file_to_directory");
         window.need_to_paste_file = true;
         window.need_to_paste_file_id = file_id;
@@ -332,7 +333,7 @@ if (!$is_root) {
 
     function move_directory() {
         var dir_id = $(this).attr("dir");
-        $("#paste").addClass("pastpaste_file_to_directory");
+        $("#paste").css("display","inline-block");
         window.need_to_paste_dir = true;
         window.need_to_paste_dir_id = dir_id;
     }

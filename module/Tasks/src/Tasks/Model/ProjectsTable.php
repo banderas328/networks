@@ -133,6 +133,53 @@ class ProjectsTable
     {
         $this->tableGateway->update($data, ['id' => $data["id"]]);
     }
+    public function getProjectReport($data) {
+        $project_id = (int)$data["project_id"];
+        $start_date = strtotime($data["start_date"]);
+        $end_date = strtotime($data["end_date"]);
+                $sql =  "select * from projects
+                         left join projects_members on projects.id  = projects_members.project_id
+                         left join boards on projects.id = boards.project_id
+                         left join tasks on boards.id = tasks.board_id
+                         left join task_time on tasks.id = task_time.task_id
+                         left join user_settings on task_time.user_id = user_settings.user_id
+                         where task_time.date >= $start_date and task_time.date <= $end_date and projects.id = $project_id
+                         ";
+        $data = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE)->toArray();
+      // var_dump($data);
+        $project_name = false;
+        $estimate = false;
+        $hours_track = [];
+       // var_dump($data);
+        $report_array = [];
+        foreach ($data as $data_key => $data_value) {
+            $project_name = $data_value["project_name"];
+            $task_name = $data_value["name"];
+            $estimate = $data_value["estimate"];
+            $name = $data_value["first_name"]." ".$data_value["second_name"];
+            $user_id = $data_value["user_id"];
+            // $hours = $hours_track[$data_value["name"]]["hours"];
+            if(!$report_array[$project_name][$user_id][$task_name]["hours"]) {
+                $report_array[$project_name][$user_id][$task_name]["hours"] = (int)$data_value["hours"];
+            }
+            else {
+                $report_array[$project_name][$user_id][$task_name]["hours"] += (int)$data_value["hours"];
+            }
+            $report_array[$project_name][$user_id][$task_name]["estimate"] = $estimate;
+            $report_array[$project_name][$user_id][$task_name]["user_name"] = $name;
+            $report_array[$project_name][$user_id][$task_name]["project_name"] = $project_name;
+
+        }
+        foreach ($report_array as $report_task_key => $report_task_value) {
+            var_dump($report_task_key);
+            var_dump($report_task_value);
+
+
+        }
+
+      //  var_dump($report_array);
+        die();
+    }
 }
 
 

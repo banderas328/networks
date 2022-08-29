@@ -28,7 +28,6 @@ class TasksTable
 
     public function createTask(array $data)
     {
-        var_dump($data);
         session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];

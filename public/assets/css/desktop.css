@@ -1057,8 +1057,9 @@ th.shrink {
     background-color: white;
 }
 .pastpaste_file_to_directory {
-    border: 5px solid #93c3cd;
     border-radius: 5px;
+    display: inline-block;
+    background: linear-gradient(90deg, red 0%, red 98.48%)
 }
 .board {
     display: inline;
@@ -1299,10 +1300,11 @@ th.shrink {
 }
 #load_archive {
     background: #eb5757;
-    padding: 5px;
+    padding: 12px;
     font-size: 16px;
     border-radius: 5px;
     color: #fff;
+    display: inline-block;
 }
 #projects_archive_block {
     padding-top: 10px;
@@ -1320,6 +1322,8 @@ th.shrink {
 .board-wrapper {
     display: flex;
     padding: 15px 0 20px 0;
+    margin: 5px;
+    margin-top: 40px;
 }
 .board-wrapper > div {
     margin-right: 20px;
@@ -2736,12 +2740,11 @@ textarea.c-field::placeholder {
 display: block;
 }
 #paste {
-height: 40px;
-display: block;
-vertical-align: top;
-margin-left: 30px;
-position: relative;
-bottom: 5px;
+    height: 40px;
+    display: block;
+    position: relative;
+    bottom: 6px;
+    background-color: red;
 }
 #create_dir {
 display: block;
@@ -2929,8 +2932,13 @@ display: inline-block;
     width: 400px;
     height: auto;
 }
-.project_active_members input {
-    margin:5%;
+.project_active_members input ,.user_container input{
+    margin: 15px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 25px;
 }
 .noSelect
 {
@@ -2968,7 +2976,7 @@ display: inline-block;
     height: 80%;
 }
 .open_project ,.archive_project , .delete_board , #create_board_button , #edit_project_member , #add_project_member , .create_project_button ,#load_projects_archive
-, .restore_task ,.delete_task , .delete_project , .restore_project ,.network_directory ,#load_archive ,.create_task_button ,#create_project_button ,.action_btn ,#go_to_projects , .directory ,.file_block
+, .restore_task ,.delete_task , .delete_project , .restore_project ,.network_directory ,#load_archive ,#project_report ,.create_task_button ,#create_project_button ,.action_btn ,#go_to_projects , .directory ,.file_block
 {
 
     cursor: pointer;
@@ -3069,4 +3077,49 @@ display: block;
 .ui-datepicker .ui-datepicker-next {
     right: 20px;
 }
+#chart-container{
+    height: 500px;
+}
+#create_board {
+    display: inline;
+}
+.project_active_members span  {
+    width: auto;
+}
+#create_task , #task_manager_arhive {
+    display: inline;
+}
+#task_manager_arhive_block {
+    padding: 20px 0px;
+}
+#board_name_input {
+    height: 40px;
+}
+.restore_task , .delete_task , .arcihe_task_block   {
+    display: inline;
+}
+#report_user_select_clock, #stackedHorizontalBC {
+    display: inline-block;
+    vertical-align: top;
+}
+.alert_button {
 
+    background: #eb5757;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #fff;
+}
+#task_manager_arhive_block p,#task_manager_arhive_block span {margin: 10px}
+#stackedHorizontalBC {
+    padding-bottom: 35px;
+}
+#report_date_block {
+    display: none;
+}
+#display input {
+    display: block;
+}
+#start_report_date , #end_report_date {
+    width: 75px;
+}

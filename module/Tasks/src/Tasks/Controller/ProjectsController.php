@@ -66,9 +66,19 @@ class ProjectsController extends Controller\preloaderController
         die();
     }
 
+    public function getProjectReportAction(){
+
+        $this->layout('layout/only_form');
+        $request = $this->getRequest();
+        $data = [];
+        if ($request->isPost()) {
+            $data = $this->getProjectsTable()->getProjectReport($this->getRequest()->getPost()->toArray());
+        }
+        return $data;
+    }
+
     public function updateProjectsInBoardAction()
     {
-
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $this->getProjectsTable()->updateProjectsInBoard($request);
@@ -77,12 +87,10 @@ class ProjectsController extends Controller\preloaderController
 
     public function deleteProjectAction()
     {
-
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $this->getProjectsTable()->daleteProject($request);
         return false;
-
     }
 
     public function updateProjectAction()
@@ -91,7 +99,6 @@ class ProjectsController extends Controller\preloaderController
         $request = $this->getRequest()->getPost()->toArray();
         $this->getProjectsTable()->updateProject($request);
         return false;
-
     }
 
 
