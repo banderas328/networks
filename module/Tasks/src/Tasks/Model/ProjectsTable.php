@@ -158,11 +158,11 @@ class ProjectsTable
             $estimate = $data_value["estimate"];
             $name = $data_value["first_name"] . " " . $data_value["second_name"];
             $user_id = $data_value["user_id"];
-            if (!$report_array[$project_name][$user_id][$task_name]["hours"]) {
+       //     if (!isset($report_array[$project_name][$user_id][$task_name]["hours"])) {
                 $report_array[$project_name][$user_id][$task_name]["hours"] = (int)$data_value["hours"];
-            } else {
-                $report_array[$project_name][$user_id][$task_name]["hours"] += (int)$data_value["hours"];
-            }
+//            } else {
+//                $report_array[$project_name][$user_id][$task_name]["hours"] += (int)$data_value["hours"];
+//            }
             $report_array[$project_name][$user_id][$task_name]["estimate"] = $estimate;
             $report_array[$project_name][$user_id][$task_name]["user_name"] = $name;
             $report_array[$project_name][$user_id][$task_name]["project_name"] = $project_name;
