@@ -71,10 +71,10 @@ class ProjectsController extends Controller\preloaderController
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $data = [];
-        if ($request->isPost()) {
-            $data = $this->getProjectsTable()->getProjectReport($this->getRequest()->getPost()->toArray());
-        }
-        return $data;
+   //     if ($request->isPost()) {
+            $data = $this->getProjectsTable()->getProjectReport($this->getRequest()->getQuery()->toArray());
+    //    }
+        return @array('data' => $data);
     }
 
     public function updateProjectsInBoardAction()

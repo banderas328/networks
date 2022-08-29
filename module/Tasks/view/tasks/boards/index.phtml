@@ -1,3 +1,4 @@
+<script src="/js/barGraph.js"></script>
 <span id="edit_project_member" class="action_btn">Remove members</span>
 
 <span id="add_project_member" class="action_btn">Add members</span>
@@ -75,51 +76,16 @@
     ?>
 </div>
 <div id="open_task_popup"></div>
-<script src="/js/barGraph.js"></script>
 <script type="text/javascript">
-    function show_report(data){
-        // Set effect from select menu value
-        const data2 = [ {'value': [5,10],'color' :['#05e1a3','#059669'],'labelColor' :['black','black'], 'barLabel': 'Task 1' },
-            {'value': [11,5], 'color' :['#05e1a3','#059669'], 'labelColor' :['black','black' ], 'barLabel': 'Task 2'},
-            {'value' : [10,5,], 'color' :['#05e1a3','#059669'], 'labelColor' :['black','black' ], 'barLabel' : 'Task 3'},
-        ];
-        const options2 = {
-            width: 600,
-            height: 300,
-            barColor: "blue",
-            barSpacing: 4,
-            graphFont: 16,
-            barLabelColor: "red",
-            barLabelPosition: 'center',
-            yLableColor: 'green',
-            backgroundBarColor: 'rgb(220,220,220)',
-            titleFont: {size: 24, color: "black"},
-            title: "Проект Octopus",
-            xAxisTitle: 'Отчет за период',
-            xAxisTitleFont: {size: 24, color: "black"},
-            xMax: 60,
-            xsteps: 10
-        };
-
-        let element2 = $("#stackedHorizontalBC");
-        $("#stackedHorizontalBC").eq(0).html(" ");
-        //  $("#stackedHorizontalBC").append("<hr>");
-        drawBarChart(data2, options2, element2);
-   }
+    $("#show_report").on('click', function(){
+        var project_id = $("#create_board_button").attr("project_id");
+        var start_date = $("#start_report_date").val();
+        var end_date = $("#end_report_date").val();
+        var url = "/projects/getProjectReport?project_id="+project_id+"&start_date="+start_date+"&end_date="+end_date
+        window.open(url,'_blank');
+    });
     $(function () {
-        $("#show_report").on('click', function(){
-            var project_id = $("#create_board_button").attr("project_id");
-            var start_date = $("#start_report_date").val();
-            var end_date = $("#end_report_date").val();
-            $.ajax({
-                type: "POST",
-                url: "projects/getProjectReport",
-                data: {"project_id": project_id, "start_date": start_date,"end_date" :end_date}
-            })
-                .done(function (data) {
-                     show_report(data)
-                });
-        });
+
         $("#edit_project_member").bind("click", function () {
             edit_project_members();
         });
@@ -184,10 +150,10 @@
                 $(".project_active_members").html(data);
             });
     }
-    $("#project_report").on("click",function(){
-        show_report();
-
-    });
+    // $("#project_report").on("click",function(){
+    //     show_report();
+    //
+    // });
     $("#load_archive").on("click", function () {
         var project_id = $("#create_board_button").attr("project_id");
         $.ajax({

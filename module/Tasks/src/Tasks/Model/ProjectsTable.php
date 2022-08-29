@@ -30,10 +30,11 @@ class ProjectsTable
         $this->adapter = $adapter;
     }
 
-    public function addUserToProject($project_id,$user_id) {
-        $sql = "delete from projects_members where user_id=".$user_id." and project_id=".$project_id;
+    public function addUserToProject($project_id, $user_id)
+    {
+        $sql = "delete from projects_members where user_id=" . $user_id . " and project_id=" . $project_id;
         $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
-        $sql = "insert into projects_members (user_id,project_id) values (".$user_id.",".$project_id.")";
+        $sql = "insert into projects_members (user_id,project_id) values (" . $user_id . "," . $project_id . ")";
         $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         die();
     }
@@ -76,7 +77,7 @@ class ProjectsTable
 
     function deleteUserFromProjectMembers(int $project_id, int $user_id)
     {
-        $sql = "delete from `projects_members` where project_id=".$project_id." and user_id=".$user_id;
+        $sql = "delete from `projects_members` where project_id=" . $project_id . " and user_id=" . $user_id;
         return $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
     }
 
@@ -133,11 +134,15 @@ class ProjectsTable
     {
         $this->tableGateway->update($data, ['id' => $data["id"]]);
     }
-    public function getProjectReport($data) {
+
+    public function getProjectReport($data)
+    {
+        session_start();
+        if(!$_SESSION['user']) die("only for logged in users"); //TODO possibly personal info ?
         $project_id = (int)$data["project_id"];
         $start_date = strtotime($data["start_date"]);
         $end_date = strtotime($data["end_date"]);
-                $sql =  "select * from projects
+        $sql = "select * from projects
                          left join projects_members on projects.id  = projects_members.project_id
                          left join boards on projects.id = boards.project_id
                          left join tasks on boards.id = tasks.board_id
@@ -145,40 +150,36 @@ class ProjectsTable
                          left join user_settings on task_time.user_id = user_settings.user_id
                          where task_time.date >= $start_date and task_time.date <= $end_date and projects.id = $project_id
                          ";
-        $data = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE)->toArray();
-      // var_dump($data);
-        $project_name = false;
-        $estimate = false;
-        $hours_track = [];
-       // var_dump($data);
-        $report_array = [];
+       $data = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE)->toArray();
+       $report_array = [];
         foreach ($data as $data_key => $data_value) {
             $project_name = $data_value["project_name"];
             $task_name = $data_value["name"];
             $estimate = $data_value["estimate"];
-            $name = $data_value["first_name"]." ".$data_value["second_name"];
+            $name = $data_value["first_name"] . " " . $data_value["second_name"];
             $user_id = $data_value["user_id"];
-            // $hours = $hours_track[$data_value["name"]]["hours"];
-            if(!$report_array[$project_name][$user_id][$task_name]["hours"]) {
+            if (!$report_array[$project_name][$user_id][$task_name]["hours"]) {
                 $report_array[$project_name][$user_id][$task_name]["hours"] = (int)$data_value["hours"];
-            }
-            else {
+            } else {
                 $report_array[$project_name][$user_id][$task_name]["hours"] += (int)$data_value["hours"];
             }
             $report_array[$project_name][$user_id][$task_name]["estimate"] = $estimate;
             $report_array[$project_name][$user_id][$task_name]["user_name"] = $name;
             $report_array[$project_name][$user_id][$task_name]["project_name"] = $project_name;
-
         }
-        foreach ($report_array as $report_task_key => $report_task_value) {
-            var_dump($report_task_key);
-            var_dump($report_task_value);
-
-
-        }
-
-      //  var_dump($report_array);
-        die();
+        $final_report = [];
+//        foreach ($report_array as $report_task_key => $report_task_value) {
+//            foreach ($report_task_value as $task_key => $task_value) {
+//                foreach ($task_value as $task_name =>$task_detail) {
+//                    $final_report[] = ["value" => [$task_detail["estimate"], $task_detail['hours']],
+//                        'color' => ['#05e1a3', '#059669'],
+//                        'labelColor' => ['black', 'black'],
+//                        'barLabel' => $task_name,
+//                    ];
+//                }
+//            }
+//        }
+        return $report_array;
     }
 }
 
