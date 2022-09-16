@@ -52,6 +52,7 @@ a {
     font-weight: 300;
 }
 @media screen and (max-width: 1200px) {
+    .font-fifty {font-size: 50px;}
     .figure-caption {
         font-size: 50px;
         width: 80%;
