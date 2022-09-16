@@ -51,7 +51,18 @@ a {
     font-size: 1.25rem;
     font-weight: 300;
 }
+.col-12 {
+    font-size: 25px;
+}
+
 @media screen and (max-width: 1200px) {
+    .col-12 {
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+        font-size: 50px;
+    }
+
     .font-fifty {font-size: 50px;}
     .figure-caption {
         font-size: 50px;
