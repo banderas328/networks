@@ -25,4 +25,9 @@ class IndexController extends AbstractActionController
 
         return new ViewModel();
     }
+    public function donateAction()
+    {
+        $this->layout('layout/layout');
+        return new ViewModel();
+    }
 }
