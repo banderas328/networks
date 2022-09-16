@@ -59,7 +59,7 @@ a {
     }
     .figure {
         display: inline-block;
-        width: 45%;
+        width: 100%;
         vertical-align: top;
         margin: 25px;
 
@@ -68,3 +68,4 @@ a {
 #project_report {
     display: none;
 }
+
