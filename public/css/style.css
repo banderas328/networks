@@ -52,6 +52,13 @@ a {
     font-weight: 300;
 }
 @media screen and (max-width: 1200px) {
+    .figure-caption {
+        font-size: 50px;
+        width: 80%;
+        font-weight: 300;
+        font-size: 50px;
+        word-break: break-word;
+    }
     .rounded {
         width: 100%;
     }
@@ -72,6 +79,7 @@ a {
         width: 100%;
         vertical-align: top;
         margin: 25px;
+        font-size: 50px;
 
     }
     .navbar-nav {
