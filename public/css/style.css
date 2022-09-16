@@ -51,9 +51,19 @@ a {
     font-size: 1.25rem;
     font-weight: 300;
 }
-@media screen and (min-width: 1000px) {
-    .figure-caption {
-        font-size: 1.25rem;
+@media screen and (max-width: 1200px) {
+    .rounded {
+        width: 100%;
+    }
+    .panel-title {
+        font-size: 50px;
+        font-weight: bold;
+    }
+    .website_body .btn-success ,.website_body input[type=submit]{
+        font-size: 50px;
+    }
+    .col-12 {
+        font-size: 50px;
         color: black;
         word-break: normal;
     }
@@ -63,6 +73,19 @@ a {
         vertical-align: top;
         margin: 25px;
 
+    }
+    .navbar-nav {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+        font-size: 50px;
+    }
+    .logo {
+        width: 50%;
     }
 }
 #project_report {
