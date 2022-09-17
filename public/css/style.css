@@ -1,10 +1,17 @@
-.website_body label {
+.website_body label
+{
     display: block;
     margin-bottom: 0.5rem;
+    width: 50%;
+}
+.website_body form label input {
+float: right;
 }
 
 
+
 .website_body .btn-success ,.website_body input[type=submit]{
+    float: left;
     color: #fff;
     background-color: #218838;
     border-color: #1e7e34;
@@ -56,6 +63,10 @@ a {
 }
 #project_report {
     display: none;
+}
+.website_body a {
+    display: block;
+    margin-top: 10px;
 }
 @media screen and (max-width: 1200px) {
     .col-12 {
@@ -124,7 +135,7 @@ a {
         margin-top: 25px;
         font-size: 50px;
     }
-    .container a {
+    .website_body a {
         font-size: 50px;
         display: block;
         margin-top: 10px;

@@ -10,6 +10,8 @@ $this->headTitle($title);
     </div>
     <?php
 }?>
+    <div class="row">
+        <div class="col-12">
 <?php
 $form = $this->form;
 $form->setAttribute('action', $this->url('user', array('action' => 'register')));
@@ -22,3 +24,6 @@ echo $this->formRow($form->get('password'));
 echo $this->formRow($form->get('confirm_password'));
 echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
+?>
+        </div>
+    </div>
