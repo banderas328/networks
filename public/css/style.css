@@ -23,12 +23,12 @@
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 
 }
-.website_body button,.website_body input {
-    overflow: visible;
-    float: right;
-    position: relative;
-    right: 50%;
-}
+/*.website_body button,.website_body input {*/
+/*    overflow: visible;*/
+/*    float: right;*/
+/*    position: relative;*/
+/*    right: 50%;*/
+/*}*/
 .website_body {
     height: 70%;
 }
@@ -54,7 +54,9 @@ a {
 .col-12 {
     font-size: 25px;
 }
-
+#project_report {
+    display: none;
+}
 @media screen and (max-width: 1200px) {
     .col-12 {
         -ms-flex: 0 0 100%;
@@ -80,6 +82,7 @@ a {
     }
     .website_body .btn-success ,.website_body input[type=submit]{
         font-size: 50px;
+        margin-top: 50px;
     }
     .col-12 {
         font-size: 50px;
@@ -107,8 +110,28 @@ a {
     .logo {
         width: 50%;
     }
+    .container form label span {
+        font-size: 50px;
+        width: 49%;
+    }
+    .container form label input {
+        font-size: 50px;
+        width: 100%;
+        height: 107px;
+        border: 1px solid;
+    }
+    .container form label {
+        margin-top: 25px;
+        font-size: 50px;
+    }
+    .container a {
+        font-size: 50px;
+        display: block;
+        margin-top: 10px;
+    }
+    .website_body h1 {
+        font-size: 60px;
+    }
 }
-#project_report {
-    display: none;
-}
+
 
