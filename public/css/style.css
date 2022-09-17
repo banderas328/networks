@@ -93,7 +93,8 @@ a {
     }
     .website_body .btn-success ,.website_body input[type=submit]{
         font-size: 50px;
-        margin-top: 50px;
+        margin: 15px;
+
     }
     .col-12 {
         font-size: 50px;
