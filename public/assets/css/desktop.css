@@ -3052,12 +3052,12 @@ display: block;
 .ui-widget-header .ui-state-focus,
 .ui-button:hover,
 .ui-button:focus {
-    border: 1px solid #05e1a3;
+    /*border: 1px solid #05e1a3;*/
 
     font-weight: normal;
-    color: white;
-    background: none;
-    background-color: #05e1a3;
+    color: black;
+    /*background: none;*/
+    /*background-color: #05e1a3;*/
     cursor: pointer;
 }
 #datepicker {

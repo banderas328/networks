@@ -52,9 +52,15 @@
     <!-- <p>only jpg and png</p> -->
     <!-- <input type="file" value="attach_file" id="blog_attach_file"> -->
 </div>
+<link href="assets/js/editor/styles.css" rel="stylesheet" type="text/css">
+<link href="assets/js/editor/richtext.min.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="assets/js/editor/jquery.richtext.min.js" ></script>
 <script type="text/javascript">
     $(function(){
-       $("#blog_save").bind("click",function () {
+        $('#new_blog_text').richText();
+
+
+        $("#blog_save").bind("click",function () {
             var text = $("#new_blog_text").val();
             var blog_title = $("#blog_title").val();
             var $file = document.getElementById("blog_attach_file");
