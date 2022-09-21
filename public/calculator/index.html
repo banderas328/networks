@@ -74,6 +74,7 @@
     </form>
 </div>
 <script>
+
     $(function () {
         function scrollToAnchor(aid) {
             const destination = $("a[name='" + aid + "']");
@@ -88,25 +89,24 @@
         });
         $("#slider").slider({
             // range:true,
-            min: 0,
+            min: 3,
             max: 50,
-            values: [5],
+            values: [3],
             slide: function (event, ui) {
                 $("#price").text("$" + ui.values[0] * 10);
                 $("#users").text("For: " + ui.values[0] + ": Users ");
+                var megabites = $("#slider_drive").slider("values")[0];
                 var users = $("#slider").slider("values")[0];
                 var final_price = (users * 10) + ((ui.values[0] / 100) * users);
                 parseInt(final_price);
-                $("#total").text("Total : " + final_price + " for " + users + " user with " + ui.values[0] + " megabytes disks");
+                $("#total").text("Total : " + final_price + " for " + users + " user with " + megabites + " megabytes disks");
             }
         });
-    });
-    $(function () {
         $("#slider_drive").slider({
             // range:true,
             min: 50,
             max: 5000,
-            values: [50],
+            values: [1000],
             step: 10,
             slide: function (event, ui) {
                 $("#drive").text("$" + ui.values[0] / 100 + "per user");
