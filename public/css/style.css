@@ -36,9 +36,7 @@ float: right;
 /*    position: relative;*/
 /*    right: 50%;*/
 /*}*/
-.website_body {
-    height: 70%;
-}
+
 html, body {
     overflow: auto;
     font-family: "Roboto";
@@ -46,9 +44,10 @@ html, body {
     background: white;
 }
 .logo {
-    width: 200px;
+
     padding-left: 30px;
     padding-top: 10px;
+    width: 100%;
 }
 a {
     color: black;
@@ -71,6 +70,14 @@ a {
     margin-top: 10px;
 }
 @media screen and (max-width: 1200px) {
+    .navbar-nav > li > a {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        font-size: 45px;
+    }
+    header {
+        height: 345px;
+    }
     .col-12 {
         -ms-flex: 0 0 100%;
         flex: 0 0 100%;
@@ -112,8 +119,6 @@ a {
 
     }
     .navbar-nav {
-        display: -ms-flexbox;
-        display: flex;
         -ms-flex-direction: column;
         flex-direction: column;
         padding-left: 0;
@@ -121,9 +126,7 @@ a {
         list-style: none;
         font-size: 50px;
     }
-    .logo {
-        width: 50%;
-    }
+
     .container form label span {
         font-size: 50px;
         width: 49%;
@@ -148,13 +151,14 @@ a {
     }
 }
 header {
-    height: 110px;
+
 }
 @media (min-width: 768px) {
-    .navbar-nav > li > a {
+    .navbar-nav > li > a  {
         padding-top: 15px;
         padding-bottom: 15px;
-        font-size: 20px;
+        font-size: 60px;
+        line-height: 65px;
     }
 }
 .panel-title {
