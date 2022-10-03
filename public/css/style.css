@@ -47,6 +47,8 @@ html, body {
 }
 .logo {
     width: 200px;
+    padding-left: 30px;
+    padding-top: 10px;
 }
 a {
     color: black;
@@ -144,6 +146,22 @@ a {
     .website_body h1 {
         font-size: 60px;
     }
+}
+header {
+    height: 110px;
+}
+@media (min-width: 768px) {
+    .navbar-nav > li > a {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        font-size: 20px;
+    }
+}
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 35px;
+    color: inherit;
 }
 
 

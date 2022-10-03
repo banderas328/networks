@@ -25,10 +25,10 @@ $user = $_SESSION['user'];
     </script>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<header>
+<nav class="navbar navbar-fixed-top" role="navigation">
     <div class="container">
         <img class="logo" src="<?php echo $this->basePath('img/octopus_logo.png') ?>" alt="Octopus"/>
-        <div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Main Page</a></li>
                 <li class="active"><a href="/octopus">Octopus</a></li>
@@ -41,9 +41,9 @@ $user = $_SESSION['user'];
                 <?php } ?>
                 <li class="active"><a href="/donate">Donate</a></li>
             </ul>
-        </div>
     </div>
 </nav>
+</header>
 <div class="container website_body">
     <?php echo $this->content; ?>
 </div>
