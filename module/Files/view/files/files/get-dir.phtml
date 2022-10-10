@@ -4,7 +4,6 @@ $lang = $user['user']->lang;
 $user_id = $user['user']->id;
 if (!$is_root) {
     ?>
-    <!--    <span id="paste">paste</span>-->
     <div class="hard-drive-form-wrapper">
         <div>
             <form id="file_directory_form" method="post">
@@ -30,6 +29,10 @@ if (!$is_root) {
             <input type='text'  name='password_dir' required  minlength='4' maxlength='12' size=12' class='dir_password' placeholder="password">
             <Button value='save password and share' dir=" . $dir_value['id'] . " class='  dir_save_pass btn btn-primary action_btn'>Save and share</Button>
         </div>
+        <div >
+            <button class='action_btn create_text_file'>Create Editable Html File</button>
+        </div>
+
     </div>
 
     <?php
@@ -139,6 +142,13 @@ foreach ($dirs as $dir_key => $dir_value) {
 
 
         }
+        $("#hard_drive:not(.dirs_block),#hard_drive:not(.dirs_block)").mousedown(function (e) {
+
+            $(".directory_actions").removeClass("visible-block");
+            $(".file_actions").removeClass("visible-block");
+            return false;
+
+        });
         $(".dirs_block").mousedown(function (e) {
             if (e.button == 2) {
                 var dir = $(this).attr("dir");

@@ -435,6 +435,8 @@ div.ui-resizable-handle {
 
 .window_main {
     background: #fff;
+    height: 100%;
+    width: 100%;
 }
 
 .window_full .window_top,
@@ -3147,5 +3149,11 @@ display: block;
     position: relative;
     bottom: 5px;
 }
+.create_text_file {
+    position: relative;
+    bottom: 6px;
+    height: 40px;
+}
+
 
 
