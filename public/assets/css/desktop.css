@@ -152,7 +152,7 @@ div.ui-resizable-handle {
     height: 300px;
     top: 30px;
     left: 120px;
-    z-index: 11;
+    z-index: 10;
 }
 .window_settings {
     background: #fff;
@@ -435,7 +435,7 @@ div.ui-resizable-handle {
 
 .window_main {
     background: #fff;
-    height: 100%;
+    height: auto;
     width: 100%;
 }
 
@@ -1098,6 +1098,10 @@ th.shrink {
 #project_popup,
 #open_task_popup {
     display: none;
+}
+.hard-drive-form-wrapper {
+    width: 100%;
+    height: 300px;
 }
 
 .hard-drive-form-wrapper div {
@@ -2964,14 +2968,7 @@ display: inline-block;
     user-select:none;           /* Non-prefixed version */
 }
 
-.allowSelect
-{
-    -webkit-user-select:text;   /* Chrome/Safari/Opera */
-    -khtml-user-select:text;    /* Konqueror */
-    -moz-user-select:text;      /* Firefox */
-    -ms-user-select:text;       /* Internet Explorer/Edge */
-    user-select:text;           /* Non-prefixed version */
-}
+
 
 .allowSelectOneClick
 {
@@ -3154,6 +3151,11 @@ display: block;
     bottom: 6px;
     height: 40px;
 }
-
+#directory_name:focus {
+    outline: 4px dashed orange;
+}
+#directory_name:focus-visible {
+    outline: 4px dashed orange;
+}
 
 

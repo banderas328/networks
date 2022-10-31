@@ -13,11 +13,10 @@ if (!$is_root) {
             </form>
         </div>
         <div>
-
-
-            <input type="text" id="directory_name" placeholder="Directory name">
-            <button value="create dir" class='action_btn'
-                    id="create_dir"><?php echo $this->translate("Create directory", false, $lang); ?></button>
+            <form>
+            <button value="create dir" class='action_btn' id="create_dir"><?php echo $this->translate("Create directory", false, $lang); ?></button>
+            <input  id="directory_name" placeholder="Directory name" type="text"  >
+            </form>
         </div>
         <div>
             <button id="paste" class="action_btn">Paste</button>
@@ -32,9 +31,7 @@ if (!$is_root) {
         <div >
             <button class='action_btn create_text_file'>Create Editable Html File</button>
         </div>
-
     </div>
-
     <?php
 }
 ?>
@@ -61,7 +58,7 @@ foreach ($dirs as $dir_key => $dir_value) {
 
         }
     }
-    ?>
+?>
 </div>
 <div class="files_block">
     <?php
@@ -143,11 +140,11 @@ foreach ($dirs as $dir_key => $dir_value) {
 
         }
         $("#hard_drive:not(.dirs_block),#hard_drive:not(.dirs_block)").mousedown(function (e) {
-
+            if (e.button == 2) {
             $(".directory_actions").removeClass("visible-block");
             $(".file_actions").removeClass("visible-block");
             return false;
-
+            }
         });
         $(".dirs_block").mousedown(function (e) {
             if (e.button == 2) {
@@ -187,7 +184,7 @@ foreach ($dirs as $dir_key => $dir_value) {
             return true;
         });
         $('.file_block').mousedown(function (e) {
-            if (e.button == 2) { //2  - ������ ����, 3 - ������� ����
+            if (e.button == 2) {
                 var file = $(this).attr("file");
                 if (!$(".file_actions[file=" + file + "]").hasClass("visible-block")) {
                     $(".file_actions").removeClass("visible-block");
@@ -212,6 +209,7 @@ foreach ($dirs as $dir_key => $dir_value) {
         });
 
         $(".delete_directory").bind("click", delete_directory);
+        $(".create_text_file").bind("click" , create_html_file)
         $(".move_dir").bind("click", move_directory);
         $('.delete_file').bind("click", delete_file);
         $('.move_file').bind("click", move_file);
@@ -357,6 +355,11 @@ foreach ($dirs as $dir_key => $dir_value) {
         $("#paste").css("display", "inline-block");
         window.need_to_paste_dir = true;
         window.need_to_paste_dir_id = dir_id;
+    }
+    function create_html_file(){
+
+
+
     }
 
 </script>
