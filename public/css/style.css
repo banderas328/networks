@@ -12,9 +12,11 @@ float: right;
 
 .website_body .btn-success ,.website_body input[type=submit]{
     float: left;
-    color: #fff;
-    background-color: #218838;
-    border-color: #1e7e34;
+  padding: 10px;
+  border-radius: 20px;
+    background-color: #218837;
+    opacity: 0.7;
+    border-color: none;
     display: inline-block;
     font-weight: 400;
     text-align: center;
@@ -23,12 +25,15 @@ float: right;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    padding: 0.375rem 0.75rem;
-    font-size: 2rem;
+   
+    font-size: 25px;
     line-height: 1.5;
-    border-radius: 0.25rem;
+    
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 
+}
+.btn-success:hover{
+    opacity: 1;
 }
 /*.website_body button,.website_body input {*/
 /*    overflow: visible;*/
@@ -41,17 +46,29 @@ html, body {
     overflow: auto;
     font-family: "Roboto";
     font-weight: 500;
-    background: white;
+    background: linear-gradient(90deg, #1fcae110 0%, #05e1a38a 98.48%);;
+}
+
+.header-nav{
+    background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  
 }
 .logo {
 
     padding-left: 30px;
     padding-top: 10px;
     width: 100%;
+    margin-bottom: 70px;
 }
 a {
     color: black;
+    padding: 0;
+
 }
+
 .rounded {
     width: 550px;
  }
@@ -61,7 +78,11 @@ a {
 }
 .col-12 {
     font-size: 25px;
+   
+    margin-top: 15px;
+    padding:15px;
 }
+
 #project_report {
     display: none;
 }
@@ -69,12 +90,52 @@ a {
     display: block;
     margin-top: 10px;
 }
+
+.navbar-nav > li > a  {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 45px;
+    line-height: 65px;
+    color: wheat;
+    transition: transform 500ms ease
+}
+.nav{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.navbar-nav > li :hover {
+ color: rgba(0, 89, 255, 0.562);
+ transform: translateY(-10px);
+
+text-decoration: none;
+}
+.navbar-nav > li :active {
+    color: rgba(30, 255, 0, 0.562);
+  
+   
+   text-decoration: none;
+   }
+
+   .panel-title {
+    font-size: 50px;
+    
+    margin-top: 20px;
+    background-color: rgba(0, 81, 255, 0.185);
+    display: block;
+    padding: 7px;
+    border-radius: 10px;
+
+}
+
+.img-fluid {
+width: 100%;
+margin-bottom: 30px;
+}
+  
+
 @media screen and (max-width: 1200px) {
-    .navbar-nav > li > a {
-        padding-top: 15px;
-        padding-bottom: 15px;
-        font-size: 45px;
-    }
+ 
     header {
         height: 345px;
     }
@@ -96,10 +157,7 @@ a {
     .rounded {
         width: 100%;
     }
-    .panel-title {
-        font-size: 50px;
-        font-weight: bold;
-    }
+    
     .website_body .btn-success ,.website_body input[type=submit]{
         font-size: 50px;
         margin: 15px;
@@ -154,12 +212,7 @@ header {
 
 }
 @media (min-width: 768px) {
-    .navbar-nav > li > a  {
-        padding-top: 15px;
-        padding-bottom: 15px;
-        font-size: 60px;
-        line-height: 65px;
-    }
+
 }
 .panel-title {
     margin-top: 0;
