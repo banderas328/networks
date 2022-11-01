@@ -139,12 +139,7 @@ margin-bottom: 30px;
     header {
         height: 345px;
     }
-    .col-12 {
-        -ms-flex: 0 0 100%;
-        flex: 0 0 100%;
-        max-width: 100%;
-        font-size: 50px;
-    }
+  
 
     .font-fifty {font-size: 50px;}
     .figure-caption {
@@ -158,11 +153,7 @@ margin-bottom: 30px;
         width: 100%;
     }
     
-    .website_body .btn-success ,.website_body input[type=submit]{
-        font-size: 50px;
-        margin: 15px;
-
-    }
+   
     .col-12 {
         font-size: 50px;
         color: black;
