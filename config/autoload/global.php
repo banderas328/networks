@@ -3,11 +3,11 @@ return array(
     'webhost' => 'http://networks.local/',
     'database' => array(
         'driver' => 'Pdo',
-        'dsn' => 'mysql:dbname=networks_08_2022;host=localhost;charset=utf8',
+        'dsn' => 'mysql:dbname=octopus;host=localhost;charset=utf8',
         'params' => array(
             'host' => 'localhost',
             'username' => 'root',
-            'password' => 'root',
+            'password' => '',
             'dbname' => 'networks_08_2022'
         )
     ),
