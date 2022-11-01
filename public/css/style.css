@@ -1,13 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 #r{
     border-bottom: 2px solid rgba(137, 43, 226, 0.397);
 }
 
 .row #user {
     height: 200px;
+  
 }
 .row #user label {
     height: 100px;
-    width: 530px;
+    width: 600px;
+    font-size: 30px;
+    opacity: 0.7;
 }
 .row #user label input {
     background: linear-gradient(90deg, #e11fb007 0%, #05e1a350 98.48%);
@@ -16,18 +21,21 @@
     outline: none;
 }
 .row #user #submitbutton {
-    width: 300px;
-    background: green;
+    height: 50px;
+    font-size: 30px;
+    width: 250px;
+    background:  linear-gradient(90deg, #e11f60f8 0%, #05e1a3 98.48%);
     margin-bottom: 30px;
-    padding-left: 20px;
-    padding-right: 20px;
+   padding: 0;
     color: aliceblue;
-    opacity: 0, 7;
+    opacity: 0.7;
     margin-left: 100px;
     border: none;
     transition: color 500ms ease;
+    border-radius: 5px;
 }
 .row #user #submitbutton:hover {
+    background:  linear-gradient(90deg, #1f43e1f8 0%, #05e1a3 98.48%);
     opacity: 1;
 }
 
@@ -77,7 +85,7 @@
 html,
 body {
     overflow: auto;
-    font-family: "Roboto";
+    font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     background: linear-gradient(90deg, #e11fb007 0%, #05e1a350 98.48%);
 }
@@ -127,8 +135,8 @@ a {
 
 .navbar-nav > li > a {
     padding-top: 15px;
-    padding-bottom: 15px;
-    font-size: 45px;
+    padding: 0;
+    font-size: 30px;
     line-height: 65px;
     color: wheat;
     transition: transform 500ms ease;
@@ -139,14 +147,14 @@ a {
     width: 100%;
 }
 .navbar-nav > li :hover {
-    color: rgba(0, 89, 255, 0.692);
+    color: #1f43e1f8;
     transform: translateY(-10px);
 
     text-decoration: none;
 }
 
 .panel-title {
-    font-size: 50px;
+    font-size: 40px;
 
     margin-top: 20px;
     background-color: rgba(0, 81, 255, 0.185);
