@@ -1015,7 +1015,7 @@ th.shrink {
     position: relative;
     bottom: 5px;
     left: 10px;
-    height: 40px;
+  padding:6px;
 }
 #directory_name {
     position: relative;
@@ -1028,9 +1028,11 @@ th.shrink {
 }
 #file_directory_form p {
     position: relative;
-    left: 10px;
-    top: -3px;
-    height: 22px;
+    height: 20px;
+    left: -106px;
+    top: -5px;
+    width: 70px;
+    padding-top: 7px;
 }
 .directory {
     font-weight: normal;
@@ -1100,20 +1102,21 @@ th.shrink {
     display: none;
 }
 .hard-drive-form-wrapper {
-    width: 100%;
-    height: 300px;
+    
+        width: 100%;
+        height: 101px;
+    
 }
 
 .hard-drive-form-wrapper div {
-    display: inline-block;
-    padding: 15px 0 0 0;
-
+   
+    padding:5px;
     padding-bottom:10px;
-    margin-left: 20px;
+    
 }
 
 .hard-drive-dir-wrapper {
-    float: left;
+   float:left
 }
 .hard-drive-directory-inner {
     width: inherit;
@@ -2797,14 +2800,16 @@ display: inline-block;
 border: none;
 }
 .action_btn {
-background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
+background: #43bee4;
 color: #fff;
-padding: 10px;
-border-radius: 5px;
-font-size: 18px;
-margin: 10px 0;
+padding: 5px;
+border-radius:2px;
+
+
+margin-top: 2px;
 display: inline-block;
 border: none;
+font-size: 14px;
 
 }
 .required_btn {
@@ -3148,14 +3153,19 @@ display: block;
 }
 .create_text_file {
     position: relative;
-    bottom: 6px;
-    height: 40px;
-}
-#directory_name:focus {
-    outline: 4px dashed orange;
-}
-#directory_name:focus-visible {
-    outline: 4px dashed orange;
+    padding: 6px;
+    padding-top: 6px;
+    padding-right: 6px;
+    padding-bottom: 6px;
+    padding-left: 6px;
+    left: -114px;
+    top: -5px;
+    width: 168px;
 }
 
+
+.hrd-flex{
+    display: flex;
+    margin-left: -5px;
+}
 

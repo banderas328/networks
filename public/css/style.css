@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-
+.body-container{
+    height: auto;
+    min-height:600px ;
+}
 .col-12-link{
     color:black ;
     background: none;
@@ -233,6 +236,8 @@ a {
 
 .mini-img {
     width: 20%;
+    height: 30%;
+    margin-top: 12px;
 }
 .figure {
     background-color:#43bee4 ;
@@ -251,14 +256,15 @@ a {
     font-weight: 300;
 }
 
-/* @media screen and (max-width: 1200px) {
-
-    /* header {
-        height: 345px;
+@media (max-width: 500px) {
+    .mini-img {
+        width: 5%;
+        height: 30%;
+        margin-top: 50px;
     }
-
-
-    .font-fifty {font-size: 50px;}
+ }
+   
+    /* .font-fifty {font-size: 50px;}
 
     .rounded {
         width: 100%;
