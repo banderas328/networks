@@ -5,7 +5,7 @@
     background: none;
     font-size: 30px;
     margin-left: 350px;
-   
+
 }
 .website_body .col-12-link a {
     display: inline-block;
@@ -59,7 +59,7 @@ color: white;
 
     padding: 0;
     color: white;
-   
+
 
     border: none;
     transition: color 500ms ease;
@@ -84,7 +84,7 @@ color: white;
     padding: 10px;
     border-radius: 10px;
     background:  #43bee4;;
-    
+
     border: none;
     display: inline-block;
     font-weight: 600;
@@ -215,7 +215,7 @@ a {
     font-weight: 600;
     opacity: 0.9;
     margin-top: 20px;
-    background: #43bee4;
+    background: white;
     display: block;
     padding: 3px;
     border-radius: 6px;
@@ -223,7 +223,7 @@ a {
     text-align: center;
     padding-left: 20px;
     padding-right: 20px;
-    color: white;
+    color: #43bee4
 }
 
 .img-fluid {
@@ -252,19 +252,19 @@ a {
 }
 
 /* @media screen and (max-width: 1200px) {
- 
+
     /* header {
         height: 345px;
     }
-  
+
 
     .font-fifty {font-size: 50px;}
-   
+
     .rounded {
         width: 100%;
     }
-    
-   
+
+
     .col-12 {
         font-size: 50px;
         color: black;
