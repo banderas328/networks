@@ -1,14 +1,41 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-.body-container{
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital@1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Griffy&display=swap');
+
+.body-container {
     height: auto;
-    min-height:600px ;
+    min-height: 600px;
 }
-.col-12-link{
-    color:black ;
+
+.mail-img {
+    width: 38px;
+    position: relative;
+    top: 6px;
+    margin-right: 16px;
+    margin-left: 9px;
+}
+.telegram-img {
+    width: 59px;
+    margin-right: 8px;
+    position: relative;
+    left: -1px;
+    bottom: 2px;
+}
+.link-flex {
+    display: flex;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+.col-12-link {
+    color: black;
     background: none;
     font-size: 30px;
     margin-left: 350px;
-
 }
 .website_body .col-12-link a {
     display: inline-block;
@@ -25,8 +52,8 @@
 .website_body h1 {
     font-size: 26px;
     font-weight: 600;
-color: white;
-    background:  #43bee4;;
+    color: white;
+    background: #43bee4;
 
     border-radius: 3px;
     padding: 4px 0 4px 15px;
@@ -44,9 +71,9 @@ color: white;
     flex-direction: column;
 }
 .row #user label input {
-    background:  #43bee4 ;
+    background: #43bee4;
     border: none;
-    border-bottom: 2px solid linear-gradient(90deg, #43bee4 0%,  #fff 98.48%);
+    border-bottom: 2px solid linear-gradient(90deg, #43bee4 0%, #fff 98.48%);
     outline: none;
     border-radius: 5px;
     padding: 3px;
@@ -58,11 +85,10 @@ color: white;
     height: 40px;
     font-size: 25px;
     width: 200px;
-    background:  #43bee4;;
+    background: #43bee4;
 
     padding: 0;
     color: white;
-
 
     border: none;
     transition: color 500ms ease;
@@ -84,9 +110,9 @@ color: white;
 
 .website_body .btn-success,
 .website_body input[type="submit"] {
-    padding: 10px;
-    border-radius: 10px;
-    background:  #43bee4;;
+    padding: 7px;
+    border-radius: 16px;
+    background: #43bee4;
 
     border: none;
     display: inline-block;
@@ -99,7 +125,7 @@ color: white;
     user-select: none;
 
     font-size: 22px;
-
+    font-family: system-ui;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -116,10 +142,16 @@ color: white;
 
 html,
 body {
-    overflow: auto;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
+    /* font-family: "Montserrat", sans-serif; */
+    font-family: 'Roboto Mono', monospace;
+    /* font-family: "Ubuntu", sans-serif; */
+    /* font-family: 'Lora', serif; */
+    /* font-family: 'Source Code Pro', monospace; */
+    font-weight: 600;
     background: white;
+    overflow: auto;
+    font-weight: 600;
+    font-size: 16px;
 }
 .container {
     width: 85%;
@@ -146,6 +178,14 @@ body {
     background: #43bee4;
 
     padding-top: 20px;
+    /* font-family: 'Griffy'; */
+  
+       font-family: "Montserrat", sans-serif;
+    /* font-family: 'Roboto Mono', monospace; */
+    /* font-family: "Ubuntu", sans-serif; */
+    /* font-family: 'Lora', serif; */
+    /* font-family: 'Source Code Pro', monospace; */
+    color: black;
 }
 .logo {
     padding-left: 30px;
@@ -166,22 +206,13 @@ a {
     font-weight: 300;
 }
 .col-12 {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 500;
 
-    padding: 5px;
+    padding: 2px;
 }
 
 .col-12 a {
-    font-size: 22px;
-    font-weight: 500;
-
-    background-color:#43bee4 ;
-    color: white;
-    border-radius: 10px;
-    display: block;
-    padding-left: 10px;
-    width: auto;
 }
 
 #project_report {
@@ -199,6 +230,7 @@ a {
     line-height: 65px;
     color: white;
     transition: transform 500ms ease;
+    font-weight: 400;
 }
 .nav {
     display: flex;
@@ -226,7 +258,7 @@ a {
     text-align: center;
     padding-left: 20px;
     padding-right: 20px;
-    color: #43bee4
+    color: #43bee4;
 }
 
 .img-fluid {
@@ -240,7 +272,7 @@ a {
     margin-top: 12px;
 }
 .figure {
-    background-color:#43bee4 ;
+    background-color: #43bee4;
     color: white;
     padding: 40px;
     border-radius: 30px;
@@ -262,9 +294,9 @@ a {
         height: 30%;
         margin-top: 50px;
     }
- }
-   
-    /* .font-fifty {font-size: 50px;}
+}
+
+/* .font-fifty {font-size: 50px;}
 
     .rounded {
         width: 100%;

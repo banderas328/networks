@@ -6,42 +6,52 @@ if (!$is_root) {
     ?>
 <div class="hard-drive-form-wrapper">
     <div class=hrd-flex>
-        <div >
+        <div>
             <form>
-                <button value="create dir" class='action_btn'
-                    id="create_dir"><?php echo $this->translate("Create directory", false, $lang); ?></button>
+                <div>
+                    <button value="create dir" class='action_btn'
+                        id="create_dir"><?php echo $this->translate("Create directory", false, $lang); ?></button>
+                    <div>
+                        <form id="file_directory_form" method="post">
+
+                            <input type="file" name="file" id="file_to_directory">
+                            <p class='action_btn' id="file_to_directory_button">Upload File</p>
+                        </form>
+                    </div>
+                    <div>
+                        <div>
+                            <button class='action_btn create_text_file'>Create Editable Html File</button>
+                        </div>
+
+                        <div>
+                            <button id="paste" class="action_btn">Paste</button>
+
+                            <input type="hidden" value="<?php if (isset($current_directory)) echo $current_directory ?>"
+                                id="current_directory">
+                        </div>
+
+                    </div>
+                </div>
+
                 <input id="directory_name" placeholder="Directory name" type="text">
             </form>
-        </div>
-        <div>
-            <form id="file_directory_form" method="post">
+            <div class="directory_password_block hidden_display" style="display: none;">
+                <input type='text' name='password_dir' required minlength='4' maxlength='12' size='12'
+                    class='dir_password' placeholder="password">
+                <Button value='save password and share' dir=" . $dir_value['id'] . "
+                    class='  dir_save_pass btn btn-primary action_btn'>Save and share</Button>
+            </div>
 
-                <input type="file" name="file" id="file_to_directory">
-                <p class='action_btn' id="file_to_directory_button">Upload File</p>
-            </form>
-        </div>
-        <div>
-            <button class='action_btn create_text_file'>Create Editable Html File</button>
         </div>
 
+
+
     </div>
-   
 
 
 
 
-    <div>
-        <button id="paste" class="action_btn">Paste</button>
 
-        <input type="hidden" value="<?php if (isset($current_directory)) echo $current_directory ?>"
-            id="current_directory">
-    </div>
-    <div class="directory_password_block hidden_display" style="display: none;">
-        <input type='text' name='password_dir' required minlength='4' maxlength='12' size='12' class='dir_password'
-            placeholder="password">
-        <Button value='save password and share' dir=" . $dir_value['id'] . "
-            class='  dir_save_pass btn btn-primary action_btn'>Save and share</Button>
-    </div>
 
 </div>
 <?php
