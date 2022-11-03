@@ -1011,15 +1011,10 @@ th.shrink {
     left: 240px;
     top: 70px;
 }
-#create_dir {
-    position: relative;
-    bottom: 5px;
-    left: 10px;
-  padding:6px;
-}
+
 #directory_name {
     position: relative;
-    left: 10px;
+   
 }
 #file_to_directory {
     position: relative;
@@ -1029,8 +1024,8 @@ th.shrink {
 #file_directory_form p {
     position: relative;
     height: 20px;
-    left: -106px;
-    top: -5px;
+   
+   
     width: 70px;
     padding-top: 7px;
 }
@@ -1110,8 +1105,9 @@ th.shrink {
 
 .hard-drive-form-wrapper div {
    
-    padding:5px;
-    padding-bottom:10px;
+    padding:1px;
+   
+    display: inline-block;
     
 }
 
@@ -2761,15 +2757,21 @@ textarea.c-field::placeholder {
 display: block;
 }
 #paste {
-    height: 40px;
+    height: 31px;
     display: block;
     position: relative;
     bottom: 6px;
     background-color: red;
 }
 #create_dir {
-display: block;
+    display: inline-block;
+    position: relative;
+    bottom: 6px;
+    left: 0px;
+    padding: 6px;
+    height: 31px;
 }
+
 .network_actions {
 display: block;
 }
@@ -2800,16 +2802,17 @@ display: inline-block;
 border: none;
 }
 .action_btn {
-background: #43bee4;
-color: #fff;
-padding: 5px;
-border-radius:2px;
-
-
-margin-top: 2px;
-display: inline-block;
-border: none;
-font-size: 14px;
+    position: relative;
+    background: #43bee4;
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    right: 2px;
+    bottom: 4px;
+    margin-top: 2px;
+    display: inline-block;
+    border: none;
+    font-size: 14px;
 
 }
 .required_btn {
@@ -3142,6 +3145,8 @@ display: block;
 .hidden_display {display: none;}
 .directory_password_block {display: none;
     vertical-align: top;
+    position: relative;
+    left: 5px;
 
 }
 .directory_password_block input {
@@ -3152,20 +3157,20 @@ display: block;
     bottom: 5px;
 }
 .create_text_file {
+    height: 31px;
     position: relative;
+    bottom: 6px;
     padding: 6px;
     padding-top: 6px;
     padding-right: 6px;
     padding-bottom: 6px;
     padding-left: 6px;
-    left: -114px;
-    top: -5px;
     width: 168px;
+    right: 7px;
 }
 
 
-.hrd-flex{
-    display: flex;
-    margin-left: -5px;
+.hrd-flex>div{
+    white-space: nowrap
 }
 

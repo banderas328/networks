@@ -4,7 +4,8 @@
         <h3 class="panel-title"><?php echo $this->translate('Follow Development') ?></h3>
     </div>
     <div class="col-12">
-        <?php echo sprintf($this->translate('Octopus is under active development. If you are interested in following the development of Octopus, This is a great resource for staying up to date with the latest developments!')); ?></p>
+        <?php echo sprintf($this->translate('Octopus is under active development. If you are interested in following the development of Octopus, This is a great resource for staying up to date with the latest developments!')); ?>
+        </p>
 
     </div>
 </div>
@@ -20,7 +21,7 @@
         gallery for Octopus modules. The project is available GitHub. The site is currently live and
         currently contains a list of some of the modules already available for Octopus.
         <a id="gut_hub_link" class="btn btn-success pull-right" href="https://github.com/banderas328/networks"
-           target="_blank">Explore Octopus Modules</a>
+            target="_blank">Explore Octopus Modules</a>
     </div>
 
 </div>
@@ -33,24 +34,29 @@
     <div class="col-12">
         If you need any help or support while developing with Octopus, you may reach us via mail
         :
-        <a href="mailto:anton.zhavrid.minsk@gmail.com?subject=From Octopus Website">anton.zhavrid.minsk@gmail.com</a>
-        <a href='https://t.me/underwaterlight'>or telegramm @underwaterlight</a>
+
+        <div class="link-flex"> <img class="mail-img" src="img/a.png" alt="mail"> <a
+                href="mailto:anton.zhavrid.minsk@gmail.com?subject=From Octopus Website">anton.zhavrid.minsk@gmail.com</a>
+        </div>
+        <div class="link-flex"><img class="telegram-img" src="/img/telegram.png" alt="telegram"> <a
+                href='https://t.me/underwaterlight'>or telegramm @underwaterlight</a></div>
+
     </div>
 </div>
 <div class="container">
-        <div class="col-12">
-            <h3 class="panel-title"><?php echo $this->translate('Requirements') ?></h3>
-        </div>
-        <div class="col-12">
-            Octopus can be installed on any cloud or internal server.
-            Current Requirements:
-            <ul>
-                <li>Linux</li>
-                <li>Apache 2.4</li>
-                <li>PHP 7.4</li>
-                <li>Maria DB 10.3</li>
-                <li>Fresh Stable Desktop Google Chrome</li>
-            </ul>
-        </div>
-        <img src="/img/demo/desctop.png" class="figure-img img-fluid rounded" alt="...">
+    <div class="col-12">
+        <h3 class="panel-title"><?php echo $this->translate('Requirements') ?></h3>
     </div>
+    <div class="col-12">
+        Octopus can be installed on any cloud or internal server.
+        Current Requirements:
+        <ul>
+            <li>Linux</li>
+            <li>Apache 2.4</li>
+            <li>PHP 7.4</li>
+            <li>Maria DB 10.3</li>
+            <li>Fresh Stable Desktop Google Chrome</li>
+        </ul>
+    </div>
+    <img src="/img/demo/desctop.png" class="figure-img img-fluid rounded" alt="...">
+</div>
