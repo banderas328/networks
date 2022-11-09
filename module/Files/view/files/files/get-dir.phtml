@@ -1,40 +1,53 @@
+<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.css" rel="stylesheet">
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.js"></script> -->
+
+<!-- include summernote css/js -->
+
+
 <?php
+
 $user = $_SESSION['user'];
 $lang = $user['user']->lang;
 $user_id = $user['user']->id;
 if (!$is_root) {
     ?>
- <div class="hard-drive-form-wrapper">
-        <div>
-            <form id="file_directory_form" method="post">
 
-                <input type="file" name="file" id="file_to_directory">
-                <p class='action_btn' id="file_to_directory_button">Upload File</p>
-            </form>
-        </div>
-        <div>
-            <form>
-            <button value="create dir" class='action_btn' id="create_dir"><?php echo $this->translate("Create directory", false, $lang); ?></button>
-            <input  id="directory_name" placeholder="Directory name" type="text"  >
-            </form>
-        </div>
-        <div>
-            <button id="paste" class="action_btn">Paste</button>
+<div class="hard-drive-form-wrapper">
+    <div>
+        <form id="file_directory_form" method="post">
 
-            <input type="hidden" value="<?php if (isset($current_directory)) echo $current_directory ?>"
-                   id="current_directory">
-        </div>
-        <div class="directory_password_block hidden_display" style="display: none;">
-            <input type='text'  name='password_dir' required  minlength='4' maxlength='12' size=12' class='dir_password' placeholder="password">
-            <Button value='save password and share' dir=" . $dir_value['id'] . " class='  dir_save_pass btn btn-primary action_btn'>Save and share</Button>
-        </div>
-        <div >
-            <button class='action_btn create_text_file'>Create Editable Html File</button>
-        </div>
+            <input type="file" name="file" id="file_to_directory">
+            <p class='action_btn' id="file_to_directory_button">Upload File</p>
+        </form>
     </div>
+    <div>
+        <form>
+            <button value="create dir" class='action_btn'
+                id="create_dir"><?php echo $this->translate("Create directory", false, $lang); ?></button>
+            <input id="directory_name" placeholder="Directory name" type="text">
+        </form>
+    </div>
+    <div>
+        <button id="paste" class="action_btn">Paste</button>
+
+        <input type="hidden" value="<?php if (isset($current_directory)) echo $current_directory ?>"
+            id="current_directory">
+    </div>
+    <div class="directory_password_block hidden_display" style="display: none;">
+        <input type='text' name='password_dir' required minlength='4' maxlength='12' size=12' class='dir_password'
+            placeholder="password">
+        <Button value='save password and share' dir=" . $dir_value['id'] . "
+            class='  dir_save_pass btn btn-primary action_btn'>Save and share</Button>
+    </div>
+    <div>
+        <button class='action_btn create_text_file'>Create Editable Html File</button>
+    </div>
+</div>
 <?php
 }
 ?>
+
 <div class="dirs_block">
     <?php
 if (isset($dirs) and count($dirs)) {
@@ -79,7 +92,8 @@ foreach ($dirs as $dir_key => $dir_value) {
     }
     ?>
 </div>
-<script type="text/javascript">
+
+<script async type="text/javascript">
 document.oncontextmenu = function() {
     return false;
 };
@@ -381,7 +395,19 @@ function move_directory() {
 
 function create_html_file() {
 
+    var wysiwyg_html =
+'<div class="abs window" id="wysiwyg"><div class="window_top"><span class="float_right"><a href="#" class="window_min"></a><a href="#" class="window_resize"></a><a href="#icon_dock_drive" class="window_close"></a></span></div><div><textarea id="editor"></textarea></div></div> <span class="abs ui-resizable-handle ui-resizable-se"></span> </div>'
+
+    $('body').append(wysiwyg_html);
+    $("#wysiwyg").show();
+    
+    $("#editor").wysibb();
+
+    
+   
+     
 
 
 }
+console.log("test1")
 </script>
