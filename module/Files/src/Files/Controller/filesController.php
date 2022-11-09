@@ -109,7 +109,7 @@ class  filesController extends Controller\preloaderController {
         $request = $this->getRequest();
         $filesystem = new FileSystem();
         $this->getFileSystemTable()->createUserDir($filesystem->getAdapter(),$request);
-        die();
+        die(json_encode("created"));
 
     }
 
@@ -125,7 +125,7 @@ class  filesController extends Controller\preloaderController {
             $request->getPost()->toArray(),
             $request->getFiles()->toArray()
         );
-        $files = new Files();
+       // $files = new Files();
         $this->getFilesTable()->saveUserFile($post);
 
         die();
@@ -198,11 +198,12 @@ class  filesController extends Controller\preloaderController {
         $request = $this->getRequest();
         $dirId = (int)$request->getPost()->dir;
         $fileSystem = new FileSystem();
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
-        $dirs = $this->getFileSystemTable()->getChildDirs($fileSystem->getAdapter(), $dirId, $userId);
+        $dirs = $this->getFileSystemTable()->getChildDirs($dirId, $userId);
         $files = new Files();
-        session_start();        $user_session = $_SESSION['user'];
+
         $userId = $user_session["id"];
         foreach ($dirs as $dir) {
             $filesInDir = $this->getFilesTable()->getDirFiles($files->getAdapter(), $dir , $userId);
@@ -212,7 +213,7 @@ class  filesController extends Controller\preloaderController {
                 }
         }
         $this->getFileSystemTable()->deleteDirWithChilds($fileSystem->getAdapter(),$dirs);
-        die();
+        die("deleted");
     }
 
     public function moveDirectoryAction()

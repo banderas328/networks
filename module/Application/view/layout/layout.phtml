@@ -30,17 +30,9 @@ $user = $_SESSION['user'];
 
 
     $(function() {
-
         var link = window.location.href;
-
-        console.log(link);
-
         var splitUrl = link.split('/');
-        console.log(splitUrl);
-        console.log(splitUrl.length);
-
         var url = "";
-
         if (splitUrl.length == 5) {
             url = splitUrl[3] + "/" + splitUrl[4];
             console.log(url);
@@ -48,7 +40,6 @@ $user = $_SESSION['user'];
             url = splitUrl[3];
             console.log(url);
         }
-        console.log(url);
         $(".menu_link[href='/" + url + "']").css('border-bottom', '3px solid white');
 
     })

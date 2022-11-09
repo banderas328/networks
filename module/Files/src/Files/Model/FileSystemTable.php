@@ -59,9 +59,10 @@ class FileSystemTable
         else return false;
     }
 
-    public function createUserDir($adapter, $request)
+    public function createUserDir($request)
     {
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $user_id = $user_session["id"];
         $current_directory = (int)$request->getPost()->current_directory;
         $directory_name = $request->getPost()->directory_name;
