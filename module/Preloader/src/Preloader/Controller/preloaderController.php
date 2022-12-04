@@ -23,8 +23,6 @@ class  preloaderController extends AbstractActionController
         //  $uri = $_SERVER['REQUEST_URI'];
 
         $uri = explode("/", $_SERVER['REQUEST_URI']);
-
-
         if (isset($uri[2])) {
             $uri = "/" . $uri[1] . "/" . $uri[2];
 
@@ -41,7 +39,7 @@ class  preloaderController extends AbstractActionController
                 die();
 
             }
-        } elseif ($uri[1] == 'main') {
+        } elseif ($uri[1] == 'main' or $uri[1] == 'main?') {
 
             if (!isset($_SESSION['user'])) {
                 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . '/user/login';

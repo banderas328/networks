@@ -4,34 +4,29 @@ $lang = $user['user']->lang;
 $user_id = $user['user']->id;
 if (!$is_root) {
     ?>
+    <!--    <span id="paste">paste</span>-->
     <div class="hard-drive-form-wrapper">
         <div>
             <form id="file_directory_form" method="post">
 
                 <input type="file" name="file" id="file_to_directory">
-                <p class='action_btn' id="file_to_directory_button">Upload File</p>
+                <p>Upload File</p>
             </form>
         </div>
         <div>
-            <form>
-                <button value="create dir" class='action_btn' id="create_dir"><?php echo $this->translate("Create directory", false, $lang); ?></button>
-                <input  id="directory_name" placeholder="Directory name" type="text"  >
-            </form>
-        </div>
-        <div>
-            <button id="paste" class="action_btn">Paste</button>
 
+
+            <input type="text" id="directory_name">
+            <button value="create dir" class='action_btn'
+                    id="create_dir"><?php echo $this->translate("Create directory", false, $lang); ?></button>
+        </div>
+        <div>
+            <button id="paste">paste</button>
             <input type="hidden" value="<?php if (isset($current_directory)) echo $current_directory ?>"
                    id="current_directory">
         </div>
-        <div class="directory_password_block hidden_display" style="display: none;">
-            <input type='text'  name='password_dir' required  minlength='4' maxlength='12' size=12' class='dir_password' placeholder="password">
-            <Button value='save password and share' dir=" . $dir_value['id'] . " class='  dir_save_pass btn btn-primary action_btn'>Save and share</Button>
-        </div>
-        <div >
-            <button class='action_btn create_text_file'>Create Editable Html File</button>
-        </div>
     </div>
+
     <?php
 }
 ?>
@@ -40,22 +35,23 @@ if (!$is_root) {
     if (isset($dirs) and count($dirs)) {
         foreach ($dirs as $dir_key => $dir_value) {
             echo "<div class='dir_wraper hard-drive-dir-wrapper'>
-      <div class='directory_wrapper hard-drive-directory-inner'>
-               <img src='assets/images/icons/folder.png' width='50px' height='50px' dir=" . $dir_value['id'] . " class='folder_action'/>
-                   <div  dir_key=" . $dir_value['id'] . " class='directory dir_action' >" . $dir_value['path'] . " </div>";
+                        <div class='directory_wrapper hard-drive-directory-inner'>
+                        <img src='assets/images/icons/folder.png' width='50px' height='50px' dir=" . $dir_value['id'] . " class='folder_action'/>
+                         <p  dir_key=" . $dir_value['id'] . " dir=" . $dir_value['id'] . " class='directory folder_action' >" . $dir_value['path'] . " </p>
+                  </div>";
             if (!$is_root) {
                 echo "<div class='directory_actions hard-dropdown ' dir=" . $dir_value["id"] . ">
-                                        <p class='delete_directory hard-dropdown-items ' dir=" . $dir_value['id'] . ">" . $this->translate('Delete directory', false, $lang) . "</p>
-                                        <p class='share_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Share directory</p>
-                                        <p class='move_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Move directory</p>
-                                        <p class='share_dir_with_password hard-dropdown-items ' dir=" . $dir_value['id'] . ">Share with password</p>
-
-                                </div>";
+                           <p class='delete_directory hard-dropdown-items ' dir=" . $dir_value['id'] . ">" . $this->translate('Delete Directory', false, $lang) . "</p>
+                           <p class='share_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Share Dir</p>
+                           <p class='move_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Move dir</p>
+                           <p class='share_dir_with_password hard-dropdown-items ' dir=" . $dir_value['id'] . ">Share With Password</p>
+                            <div class='hard-dropdown-form'>
+                                <input type='text' class='input_password' dir=" . $dir_value['id'] . ">
+                                <input type='button' value='Save Password' dir=" . $dir_value['id'] . " class='dir_save_pass btn btn-primary action_btn'>
+                            </div>
+                      </div>";
             }
             echo "</div>";
-            echo "</div>";
-            echo "</div>";
-
         }
     }
     ?>
@@ -64,16 +60,16 @@ if (!$is_root) {
     <?php
     if ($filesInDir) {
         foreach ($filesInDir as $file) {
-            echo "<div class='file_wraper  hard-drive-dir-wrapper' file=" . $file['id'] . ">";
-            echo "<div class='file_block_wrapper hard-drive-directory-inner'>";
-            echo "<img src='assets/images/icons/file.png' width='50px' height='50px' class='file_block'  file=" . $file['id'] . " >";
-            echo "<p class='file_block'  file=" . $file['id'] . "> " . $file['file_title'] . "</p>";
-            echo "<div class='hard-dropdown file_actions' file=" . $file['id'] . ">";
-            echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='delete_file  ' file=" . $file['id'] . ">" . $this->translate('Delete file', false, $lang) . "</span></p>";
-            echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='move_file ' file=" . $file['id'] . ">" . $this->translate('Move File', false, $lang) . "</span></p>";
-            echo "<p class='hard-dropdown-items'><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" . $this->translate('Download', false, $lang) . "</a></p>";
-            echo "</div>";
-            echo "</div>";
+            echo "<div class='file_wraper hard-drive-dir-wrapper' file=" . $file['id'] . ">";
+                echo "<div class='file_block_wrapper hard-drive-directory-inner'>";
+                        echo "<img src='assets/images/icons/file.png' width='50px' height='50px' class='file_block'  file=" . $file['id'] . " >";
+                        echo "<p class='file_block'  file=" . $file['id'] . "> " . $file['file_title'] . "</p>";
+                        echo "<div class='hard-dropdown file_actions' file=" . $file['id'] . ">";
+                                echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='delete_file  ' file=" . $file['id'] . ">" . $this->translate('Delete File', false, $lang) . "</span></p>";
+                                echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='move_file ' file=" . $file['id'] . ">" . $this->translate('Move File', false, $lang) . "</span></p>";
+                                echo "<p class='hard-dropdown-items'><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" . $this->translate('Download File', false, $lang) . "</a></p>";
+                        echo "</div>";
+                echo "</div>";
             echo "</div>";
         }
     }
@@ -82,15 +78,10 @@ if (!$is_root) {
 <script type="text/javascript">
     document.oncontextmenu = function () {
         return false;
-    };
+    }; //��������� ���������� ����
     $(function () {
-        $("#file_to_directory_button").on("click", function () {
-
-            $("#file_to_directory").click();
-        })
         if (window.need_to_paste_file == true) {
-            //   alert("hello");
-            $("#paste").css("display", "inline");
+            $("#paste").addClass("required_btn");
             $("#paste").bind("click", function () {
                 var file_id = window.need_to_paste_file_id;
 
@@ -106,20 +97,20 @@ if (!$is_root) {
                         $("#paste").removeClass("pastpaste_file_to_directory");
                         var current_directory = $("#current_directory").val();
                         show_directory(current_directory);
-                        $("#paste").css("display", "none");
                     });
 
             });
 
 
         } else {
-            $("#paste").css("display", "none");
+            $("#paste").addClass("action_btn");
         }
 
         if (window.need_to_paste_dir == true) {
-            $("#paste").css("display", "inline");
+            $("#paste").addClass("action_btn");
             $("#paste").bind("click", function () {
                 var dir_id = window.need_to_paste_dir_id;
+
                 var current_directory = $("#current_directory").val();
                 $.ajax({
                     type: "POST",
@@ -129,16 +120,21 @@ if (!$is_root) {
                     .done(function (data) {
                         window.need_to_paste_file = false;
                         window.need_to_paste_file_id = false;
-                        $("#paste").css("display", "none");
+                        $("#paste").removeClass("pastpaste_file_to_directorys");
                         var current_directory = $("#current_directory").val();
                         show_directory(current_directory);
-                        $("#paste").css("display", "none");
                     });
 
             });
 
 
         }
+        else {
+            $("#paste").addClass("action_btn");
+        }
+
+
+        $(".parent_directory").attr("dir_key",<?php echo $current_directory?>);
         $("#hard_drive:not(.dirs_block),#hard_drive:not(.dirs_block)").mousedown(function (e) {
             if (e.button == 2) {
                 $(".directory_actions").removeClass("visible-block");
@@ -146,32 +142,9 @@ if (!$is_root) {
                 return false;
             }
         });
-        $(".dirs_block").mousedown(function (e) {
-            if (e.button == 2) {
+        $('.folder_action').mousedown(function (e) {
+            if (e.button == 2) { //2  - ������ ����, 3 - ������� ����
                 var dir = $(this).attr("dir");
-                if ($(".directory_actions").hasClass("visible-block")) {
-                    $(".directory_actions").removeClass("visible-block");
-                }
-                return false;
-            }
-            return false;
-        });
-        $(".files_block").mousedown(function (e) {
-            if (e.button == 2) {
-                var dir = $(this).attr("dir");
-                if ($(".directory_actions").hasClass("visible-block")) {
-                    $(".directory_actions").removeClass("visible-block");
-                }
-                return false;
-            }
-            return false;
-        });
-
-
-        $(".parent_directory").attr("dir_key",<?php echo $current_directory?>);
-        $('.dir_action').mousedown(function (e) {
-            if (e.button == 2) {
-                var dir = $(this).attr("dir_key");
                 if (!$(".directory_actions[dir=" + dir + "]").hasClass("visible-block")) {
                     $(".directory_actions").removeClass("visible-block");
                     $(".file_actions").removeClass("visible-block");
@@ -184,7 +157,7 @@ if (!$is_root) {
             return true;
         });
         $('.file_block').mousedown(function (e) {
-            if (e.button == 2) {
+            if (e.button == 2) { //2  - ������ ����, 3 - ������� ����
                 var file = $(this).attr("file");
                 if (!$(".file_actions[file=" + file + "]").hasClass("visible-block")) {
                     $(".file_actions").removeClass("visible-block");
@@ -198,18 +171,7 @@ if (!$is_root) {
             }
             return true;
         });
-        $(".share_dir_with_password").on("click" , function() {
-            var display = $(".directory_password_block").css("display");
-            if(display == "none") {
-                $(".directory_password_block").css("display","inline-block");
-            }
-            else {
-                $(".directory_password_block").css("display","none");
-            }
-        });
-
         $(".delete_directory").bind("click", delete_directory);
-        $(".create_text_file").bind("click" , create_html_file)
         $(".move_dir").bind("click", move_directory);
         $('.delete_file').bind("click", delete_file);
         $('.move_file').bind("click", move_file);
@@ -243,15 +205,26 @@ if (!$is_root) {
             })
                 .done(function (data) {
                     var current_directory = $("#current_directory").val();
-                    setTimeout(function () {
-                        show_directory(current_directory)
-                    }, 500);
+                    show_directory(current_directory);
 
                 });
         });
 
     });
 
+    //     function sell_file(file_id) {
+    //        var cost = $('.file_cost[file='+file_id+']').val();
+    //        var description = $('textarea[file='+file_id+']').val();
+    //        var tags = $(".tags[file="+file_id+"]").val();
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "files/sellFile",
+    //             data: {file_id : file_id,cost: cost,description: description,tags:tags}
+    //         })
+    //             .done(function( data ) {
+    //                 alert(data);
+    //             });
+    //     }
     function share_directory() {
         $.ajax({
             type: "POST",
@@ -259,7 +232,7 @@ if (!$is_root) {
             data: {dir: $(this).attr("dir")}
         })
             .done(function (data) {
-                alert("Shared");
+                // alert(data);
             });
 
     }
@@ -309,7 +282,6 @@ if (!$is_root) {
 
     function refresh_drive_with_delay() {
         var current_directory = $("#current_directory").val();
-       // show_directory(current_directory)
         setTimeout(function () {
             show_directory(current_directory)
         }, 500);
@@ -334,7 +306,6 @@ if (!$is_root) {
 
     function move_file() {
         var file_id = $(this).attr("file");
-        $("#paste").css("display", "inline-block");
         $("#paste").addClass("pastpaste_file_to_directory");
         window.need_to_paste_file = true;
         window.need_to_paste_file_id = file_id;
@@ -355,15 +326,9 @@ if (!$is_root) {
 
     function move_directory() {
         var dir_id = $(this).attr("dir");
-        $("#paste").css("display", "inline-block");
+        $("#paste").addClass("pastpaste_file_to_directory");
         window.need_to_paste_dir = true;
         window.need_to_paste_dir_id = dir_id;
     }
-    function create_html_file(){
-
-
-
-    }
 
 </script>
-

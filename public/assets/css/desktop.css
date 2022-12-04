@@ -1,27 +1,29 @@
-/* `Basic HTMLfile_to_directory_button
+/* `Basic HTML
 ----------------------------------------------------------------------------------------------------*/
 :root {
     --ff-roboto: 'Roboto', sans-serif;
     --ff-base: var(--ff-roboto);
     --button-gradient: linear-gradient(0deg, #1fcbe1 2.59%, #05e1a3 137.3%, #ffffff 144.49%);
     --bar-shadow-base: 0 8px 16px rgba(0, 0, 0, 0.1),
-                     0 6px 8px rgba(0, 0, 0, 0.1),
-                     0 4px 4px rgba(0, 0, 0, 0.1),
-                     0 2px 2px rgba(0, 0, 0, 0.1),
-                     0 1px 1px rgba(0, 0, 0, 0.1);
+    0 6px 8px rgba(0, 0, 0, 0.1),
+    0 4px 4px rgba(0, 0, 0, 0.1),
+    0 2px 2px rgba(0, 0, 0, 0.1),
+    0 1px 1px rgba(0, 0, 0, 0.1);
     --bar-shadow-top: 0 6px 16px rgba(0, 0, 0, 0.1),
-        0 -4px 8px rgba(0, 0, 0, 0.1),
-        0 -2px 4px rgba(0, 0, 0, 0.1),
-        0 -0px 2px rgba(0, 0, 0, 0.1),
-        0 1px 1px rgba(0, 0, 0, 0.1);
+    0 -4px 8px rgba(0, 0, 0, 0.1),
+    0 -2px 4px rgba(0, 0, 0, 0.1),
+    0 -0px 2px rgba(0, 0, 0, 0.1),
+    0 1px 1px rgba(0, 0, 0, 0.1);
     --bar-shadow-bottom: 0 6px 16px rgba(0, 0, 0, 0.1),
-        0 4px 8px rgba(0, 0, 0, 0.1),
-        0 2px 4px rgba(0, 0, 0, 0.1),
-        0 0px 2px rgba(0, 0, 0, 0.1),
-        0 -1px 1px rgba(0, 0, 0, 0.1);
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 0px 2px rgba(0, 0, 0, 0.1),
+    0 -1px 1px rgba(0, 0, 0, 0.1);
 }
 
-
+* {
+    cursor: default;
+}
 @font-face {
     font-family: "Roboto";
     src: url("../Roboto/Roboto-Regular.ttf") format("truetype");
@@ -35,7 +37,6 @@ body {
     font-family: "Roboto";
     font-weight: 500;
     background: #222;
-
 }
 
 #wrapper {
@@ -76,7 +77,6 @@ li {
 .float_right {
     float: right;
 }
-
 
 .ui-resizable-se {
     background: url(../images/gui/window_corner.gif) no-repeat right bottom;
@@ -152,7 +152,7 @@ div.ui-resizable-handle {
     height: 300px;
     top: 30px;
     left: 120px;
-    z-index: 10;
+    z-index: 11;
 }
 .window_settings {
     background: #fff;
@@ -435,8 +435,6 @@ div.ui-resizable-handle {
 
 .window_main {
     background: #fff;
-    height: auto;
-    width: 100%;
 }
 
 .window_full .window_top,
@@ -529,7 +527,7 @@ th.shrink {
     opacity: 1;
     border: unset;
     background-image: unset;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
     box-shadow: var(--bar-shadow-bottom, unset);
 }
 
@@ -557,7 +555,7 @@ th.shrink {
     opacity: 1;
     border: unset;
     background-image: unset;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
     box-shadow: var(--bar-shadow-top, unset);
 }
 
@@ -664,7 +662,7 @@ th.shrink {
 }
 
 #bar_bottom .bottom-bar-button:hover {
-	background-image: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+    background-image: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
     color: #000000;
 }
 
@@ -815,10 +813,13 @@ th.shrink {
 .message_to_user_area_chat {
     position: relative;
     top: 10px;
-    width: 90%;
-    height: 90px;
+    width: 340px;
+    height: 150px;
 }
 .message_to_user_from_user_chats_button {
+    position: absolute;
+    left: 400px;
+    top: 325px;
     background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
     color: #fff;
     padding: 10px;
@@ -827,9 +828,6 @@ th.shrink {
     margin: 10px 0;
     display: inline-block;
     border: none;
-    vertical-align: top;
-    display: inline-block;
-    float: right;
 }
 .close_chat {
     font-weight: bold;
@@ -849,6 +847,9 @@ th.shrink {
 /*}*/
 
 .message_to_user_area_chat {
+    position: absolute;
+    top: 335px;
+    left: 5%;
     background-color: #f3f3f3;
     color: black;
     border: 3px solid #f3f3f3;
@@ -857,7 +858,7 @@ th.shrink {
 /*chanels*/
 .message_to_user_from_chanel_list {
     display: none;
-    width: 80%;
+    width: 470px;
 }
 .new_chanel {
     position: absolute;
@@ -872,9 +873,16 @@ th.shrink {
     padding-top: 10px;
     padding-left: 10px;
 }
-
+.message_to_user_area_chanel {
+    position: relative;
+    top: 435px;
+    width: 340px;
+    height: 150px;
+}
 .message_to_user_from_user_chanel_button {
-    float: right;
+    position: absolute;
+    left: 400px;
+    top: 325px;
     background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
     color: #fff;
     padding: 10px;
@@ -893,22 +901,25 @@ th.shrink {
     font-size: large;
 }
 .message_box {
-    height: 430px;
+    height: 270px;
     overflow: auto;
     border: 3px solid #f3f3f3;
     border-radius: 10px;
-    margin: 5%;
-    width: 100%;
+    padding: 10px 10px 10px 10px;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 400px;
 
 }
 .message_to_user_area_chanel {
+    position: absolute;
+    top: 335px;
+    left: 5%;
     background-color: #f3f3f3;
     color: black;
     border: 3px solid #f3f3f3;
     border-radius: 10px;
-    width: 90%;
-    height: 90px;
-    margin-left: 23px;
 }
 
 .link_ajax:hover {
@@ -966,26 +977,29 @@ th.shrink {
     margin-left: 20px;
 }
 .file_wraper span {
-    padding-left: 5px;
+    padding-left: 10px;
 }
 
 .file_wraper a {
-    text-decoration: none;
-    cursor: pointer;
+    padding: 10px;
+    color: black;
 }
+
 .file_actions {
     display: none;
 }
-.file_wraper {
-    width: 350px;
-}
+
 .file_actions_icon {
 }
 .file_actions h3 {
     cursor: pointer;
 }
-.file_actions {
-    margin-top: 20px;
+/*.file_actions {*/
+/*    margin-top: 20px;*/
+/*}*/
+.input_password {
+    width: 90%;
+
 }
 .file_actions textarea {
     max-width: 350px;
@@ -996,9 +1010,12 @@ th.shrink {
     float: right;
 }
 .file_wraper {
-    width: auto;
+
     display: inline-block;
     position: relative;
+
+    width: 400px;
+
 }
 .file_wraper h3 {
     clear: both;
@@ -1011,10 +1028,15 @@ th.shrink {
     left: 240px;
     top: 70px;
 }
-
+#create_dir {
+    position: relative;
+    bottom: 5px;
+    left: 10px;
+    height: 40px;
+}
 #directory_name {
     position: relative;
-   
+    left: 10px;
 }
 #file_to_directory {
     position: relative;
@@ -1023,11 +1045,7 @@ th.shrink {
 }
 #file_directory_form p {
     position: relative;
-    height: 20px;
-   
-   
-    width: 70px;
-    padding-top: 7px;
+    left: 10px;
 }
 .directory {
     font-weight: normal;
@@ -1056,9 +1074,9 @@ th.shrink {
     background-color: white;
 }
 .pastpaste_file_to_directory {
+    border: 5px solid #93c3cd;
     border-radius: 5px;
-    display: inline-block;
-    background: linear-gradient(90deg, red 0%, red 98.48%)
+    background-color: red;
 }
 .board {
     display: inline;
@@ -1096,49 +1114,41 @@ th.shrink {
 #open_task_popup {
     display: none;
 }
-.hard-drive-form-wrapper {
-    
-        width: 100%;
-        height: 101px;
-    
-}
 
 .hard-drive-form-wrapper div {
-   
-    padding:1px;
-   
     display: inline-block;
-    
+    padding: 15px 0 0 0;
+
+    padding-bottom:10px;
 }
 
 .hard-drive-dir-wrapper {
-   float:left
+    float: left;
+    width: 150px;
+    vertical-align: top;
+    position: relative;
+    top: 30px;
 }
 .hard-drive-directory-inner {
     width: inherit;
 }
+
 .hard-dropdown {
     background: rgba(246, 246, 246, 1);
     border-radius: 10px;
     border: 1px solid #efefef;
-    width: auto;
+    width: 235px;
     text-align: left;
+    position: relative;
+    /* bottom: 150px; */
+    top: -50px;
+    left: 80px;
 }
 
-
-.directory_wrapper .hard-dropdown-items {
-    padding: 8px 12px;
-    width: auto;
-    min-width: 140px;
-
-}
 .hard-dropdown-items {
-    padding: 8px 12px;
-    width: auto;
-    min-width: auto;
-
+    padding: 10px;
+    color: black;
 }
-
 .hard-dropdown-items:hover {
     background: #ffffff;
     cursor: pointer;
@@ -1317,11 +1327,10 @@ th.shrink {
 }
 #load_archive {
     background: #eb5757;
-    padding: 12px;
+    padding: 5px;
     font-size: 16px;
     border-radius: 5px;
     color: #fff;
-    display: inline-block;
 }
 #projects_archive_block {
     padding-top: 10px;
@@ -1339,8 +1348,6 @@ th.shrink {
 .board-wrapper {
     display: flex;
     padding: 15px 0 20px 0;
-    margin: 5px;
-    margin-top: 40px;
 }
 .board-wrapper > div {
     margin-right: 20px;
@@ -1358,7 +1365,7 @@ th.shrink {
 .delete_board {
     position: absolute;
     right: 15px;
-    top: -20px;
+    top: 0;
     font-size: 12px !important;
     text-transform: lowercase !important;
     color: red;
@@ -2603,7 +2610,7 @@ textarea.c-field::placeholder {
 #open_task_popup {
     overflow: auto;
 }
-#open_task_popup #update_task ,#add_hours_button{
+#open_task_popup #update_task {
     background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
     color: #fff;
     padding: 10px;
@@ -2677,7 +2684,7 @@ textarea.c-field::placeholder {
 .frame_container  .frame_string {
     width:80%;margin-left:5%;margin-top: 30px;
 }
- .frame_string .frame_input {
+.frame_string .frame_input {
 
 
     display: block;
@@ -2710,19 +2717,19 @@ textarea.c-field::placeholder {
 .container {
     margin: 0;
 }
-.file_block_wrapper  , .directory_wrapper {
-    display: inline-block;
-    margin-top: 25px;
-    margin-left: 35px;
-    position: relative;
-    vertical-align: top;
-}
+/*.file_block_wrapper  , .directory_wrapper {*/
+/*    display: inline-block;*/
+/*    margin-top: 25px;*/
+/*    margin-left: 35px;*/
+/*    position: relative;*/
+/*    vertical-align: top;*/
+/*}*/
 .file_wraper img {
     vertical-align: top;
     width: 45px;
 }
 .file_block{
-    width : 100px;
+    width: 150px;
     word-wrap: break-word;
     margin-top: 5px;
 }
@@ -2733,6 +2740,9 @@ textarea.c-field::placeholder {
     height: 100px;
     vertical-align: top;
     margin-left: 30px;
+}
+#paste {
+    display: none;
 }
 .network_avatar {
     flex: none;
@@ -2754,34 +2764,29 @@ textarea.c-field::placeholder {
 
 }
 .dirs_block, .files_block {
-display: block;
+    display: block;
 }
 #paste {
-    height: 31px;
+    height: 40px;
     display: block;
+    vertical-align: top;
+    margin-left: 30px;
     position: relative;
-    bottom: 6px;
-    background-color: red;
+    bottom: 5px;
 }
 #create_dir {
-    display: inline-block;
-    position: relative;
-    bottom: 6px;
-    left: 0px;
-    padding: 6px;
-    height: 31px;
+    display: block;
 }
-
 .network_actions {
-display: block;
+    display: block;
 }
 .network_actions a {
-display: inline-block;
-width: 30%;
+    display: inline-block;
+    width: 30%;
 
 }
 img.directory_action {
-width: 20px;
+    width: 20px;
 }
 #general-settings img {
     width: 120px;
@@ -2789,47 +2794,43 @@ width: 20px;
     padding-left: 14px;
 }
 #user_search_form label input{
-display: block;
+    display: block;
 }
 #user_search_form input[type=submit] {
-background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
-color: #fff;
-padding: 10px;
-border-radius: 5px;
-font-size: 18px;
-margin: 10px 0;
-display: inline-block;
-border: none;
-}
-.action_btn {
-    position: relative;
-    background: #43bee4;
+    background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
     color: #fff;
-    padding: 5px;
-    border-radius: 4px;
-    right: 2px;
-    bottom: 4px;
-    margin-top: 2px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 10px 0;
     display: inline-block;
     border: none;
-    font-size: 14px;
+}
+.action_btn {
+    background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin: 10px 0;
+    display: inline-block;
+    border: none;
 
 }
 .required_btn {
-background: #eb5757;
-padding: 5px;
-font-size: 16px;
-border-radius: 5px;
-color: #fff;
-border: none;
+    background: #eb5757;
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #fff;
+    border: none;
 }
 
 .frame_block button {
-margin: 5px;
+    margin: 5px;
 }
 .friend_block {
-    width: 540px;
-    height: 100px;
+    width: 100%;
 }
 .avatar img {
     width: 70px;
@@ -2839,7 +2840,6 @@ margin: 5px;
     display: inline;
     padding: 15px;
     text-align: right;
-    float: right;
 }
 .friend_block p button {
     margin: 10px;
@@ -2852,13 +2852,13 @@ margin: 5px;
     width: auto;
 }
 .user_container_block .avatar img{
-width: 40px;
+    width: 40px;
     border-radius: 20px;
 }
 .user_container div * {
-     margin-left: 15px;
-     margin-right: 15px;
- }
+    margin-left: 15px;
+    margin-right: 15px;
+}
 .user_container  input {
     margin-left: 15px;
 
@@ -2871,7 +2871,7 @@ width: 40px;
 
     width: 500px;
     height: 80%;
- }
+}
 #chat_user {
 
     width: 500px;
@@ -2901,276 +2901,11 @@ width: 40px;
 }
 .c-window__title-bar{
 
-display: inline-block;
+    display: inline-block;
 
 }
 .c-window__title-bar , .c-window__title{
     position: relative;
     top:5px;
-}
-.message_to_user_from_chat_list div {
-    margin: 5%;
-}
-#project_popup input ,#project_popup textarea{
-    display: inline-block;
-}
-#project_description {
-    width: 80%;
-    height: 300px;
-}
-#project_name {
-    width: 60%;
-}
-#project_member {
-    width: 60%;
-    display: block;
-}
-.project_member_span {
-    display: inline-block;
-}
-.project_member_span div, .project_member_span input {
-    display: inline-block;
-    margin: 5px;
-}
-.task_member_avatar {
-    flex: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
-    overflow: hidden;
-    margin-top: 20px;
-    position: relative;
-    top: 20px;
-}
-#project_members div {
-    display: block;
-    width: 300px;
-}
-#project_members_list {
-    width: 400px;
-}
-.download_file  {
-    margin: 5px;
-    color: black;
-    text-decoration: none;
-}
-#task_description {
-    width: 400px;
-    height: auto;
-}
-.project_active_members input ,.user_container input{
-    margin: 15px;
-    height: 40px;
-    width: 40px;
-    text-align: center;
-    vertical-align: middle;
-    border-radius: 25px;
-}
-.noSelect
-{
-    -webkit-touch-callout:none; /* iOS Safari */
-    -webkit-user-select:none;   /* Chrome/Safari/Opera */
-    -khtml-user-select:none;    /* Konqueror */
-    -moz-user-select:none;      /* Firefox */
-    -ms-user-select:none;       /* Internet Explorer/Edge */
-    user-select:none;           /* Non-prefixed version */
-}
-
-
-
-.allowSelectOneClick
-{
-    -webkit-user-select:all;   /* Chrome/Safari/Opera */
-    -khtml-user-select:all;    /* Konqueror */
-    -moz-user-select:all;      /* Firefox */
-    -ms-user-select:all;       /* Internet Explorer/Edge */
-    user-select:all;           /* Non-prefixed version */
-}
-.open_task {
-   width: 225px;
-    word-break: break-word;
-}
-#window_money {
-    width: 80%;
-    height: 80%;
-}
-.open_project ,.archive_project , .delete_board , #create_board_button , #edit_project_member , #add_project_member , .create_project_button ,#load_projects_archive
-, .restore_task ,.delete_task , .delete_project , .restore_project ,.network_directory ,#load_archive ,#project_report ,.create_task_button ,#create_project_button ,.action_btn ,#go_to_projects , .directory ,.file_block
-{
-
-    cursor: pointer;
-}
-.delete_task , .delete_project{color: red;}
-#file_to_directory{
-    display: none;
-}
-.network_directory {
-    display: block;
-}
-#task_button_area textarea{
-    width: 95%;
-    height: auto;
-}
-#task_button_area .c-file__icon-wrap{
-display: block;
-}
-.edit_save_task_name ,.edit_save_task_description {
-    display: block;
-    cursor: pointer;
-    font-size: 20px;
-}
-#task_description {
-    width: 400px;
-    height: auto;
-}
-.open_task {
-    border-top : 1px solid black;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    cursor: pointer;
-}
-#log_hours_input {
-    height: 35px;
-    width: 35px;
-    text-align: center;
-    margin: 10px;
-}
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-    border: 1px solid #93c3cd;
-    background-color: #05e1a3;
-
-    font-weight: bold;
-    color: white;
-    min-width: auto;
-}
-#ui-datepicker-div .ui-widget-header {
-    background-image: none;
-    border: 1px solid #2c4359;
-    background-color: #05e1a3;
-    color: white;
-    font-weight: bold;
-}
-.ui-datepicker-prev .ui-icon-circle-triangle-w{
-    color: white;
-}
-.ui-icon {
-    width: 50px;
-    height: 16px;
-    display: block;
-    text-indent: 2px;
-
-}
-.ui-datepicker-next {
-    width: 50px;
-}
-.ui-state-hover,
-.ui-widget-content .ui-state-hover,
-.ui-widget-header .ui-state-hover,
-.ui-state-focus,
-.ui-widget-content .ui-state-focus,
-.ui-widget-header .ui-state-focus,
-.ui-button:hover,
-.ui-button:focus {
-    /*border: 1px solid #05e1a3;*/
-
-    font-weight: normal;
-    color: black;
-    /*background: none;*/
-    /*background-color: #05e1a3;*/
-    cursor: pointer;
-}
-#datepicker {
-    width: 75px;
-    cursor: pointer;
-    margin: 5px;
-}
-.ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span {
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 50%;
-    margin: 5px;
-    margin-top: -8px;
-    color: white;
-}
-.ui-datepicker .ui-datepicker-next {
-    right: 20px;
-}
-#chart-container{
-    height: 500px;
-}
-#create_board {
-    display: inline;
-}
-.project_active_members span  {
-    width: auto;
-}
-#create_task , #task_manager_arhive {
-    display: inline;
-}
-#task_manager_arhive_block {
-    padding: 20px 0px;
-}
-#board_name_input {
-    height: 40px;
-}
-.restore_task , .delete_task , .arcihe_task_block   {
-    display: inline;
-}
-#report_user_select_clock, #stackedHorizontalBC {
-    display: inline-block;
-    vertical-align: top;
-}
-.alert_button {
-
-    background: #eb5757;
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 5px;
-    color: #fff;
-}
-#task_manager_arhive_block p,#task_manager_arhive_block span {margin: 10px}
-#stackedHorizontalBC {
-    padding-bottom: 35px;
-}
-#report_date_block {
-    display: none;
-}
-#display input {
-    display: block;
-}
-#start_report_date , #end_report_date {
-    width: 75px;
-}
-.hidden_display {display: none;}
-.directory_password_block {display: none;
-    vertical-align: top;
-    position: relative;
-    left: 5px;
-
-}
-.directory_password_block input {
-    display: block;
-}
-.dir_save_pass {
-    position: relative;
-    bottom: 5px;
-}
-.create_text_file {
-    height: 31px;
-    position: relative;
-    bottom: 6px;
-    padding: 6px;
-    padding-top: 6px;
-    padding-right: 6px;
-    padding-bottom: 6px;
-    padding-left: 6px;
-    width: 168px;
-    right: 7px;
-}
-
-
-.hrd-flex>div{
-    white-space: nowrap
 }
 
