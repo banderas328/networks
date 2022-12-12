@@ -8,23 +8,23 @@ if (!$is_root) {
     <div class="hard-drive-form-wrapper">
         <div>
             <form id="file_directory_form" method="post">
-
                 <input type="file" name="file" id="file_to_directory">
-                <p>Upload File</p>
+                <p class='action_btn' id="upload_file">upload file</p>
             </form>
         </div>
         <div>
-
-
             <input type="text" id="directory_name">
             <button value="create dir" class='action_btn'
-                    id="create_dir"><?php echo $this->translate("Create directory", false, $lang); ?></button>
+                    id="create_dir"><?php echo $this->translate("create directory", false, $lang); ?></button>
         </div>
         <div>
-            <button id="paste">paste</button>
-            <input type="hidden" value="<?php if (isset($current_directory)) echo $current_directory ?>"
-                   id="current_directory">
+            <button id="paste" class='action_btn'>paste</button>
         </div>
+        <div>
+            <button id="create_txt_file" class='action_btn'>create text file</button>
+        </div>
+        <input type="hidden" value="<?php if (isset($current_directory)) echo $current_directory ?>"
+               id="current_directory">
     </div>
 
     <?php
@@ -75,6 +75,8 @@ if (!$is_root) {
     }
     ?>
 </div>
+
+
 <script type="text/javascript">
     document.oncontextmenu = function () {
         return false;
@@ -172,9 +174,13 @@ if (!$is_root) {
             return true;
         });
         $(".delete_directory").bind("click", delete_directory);
+        $("#upload_file").bind("click", function(){
+            $("#file_to_directory").click();
+        });
         $(".move_dir").bind("click", move_directory);
         $('.delete_file').bind("click", delete_file);
         $('.move_file').bind("click", move_file);
+        $('#create_txt_file').bind("click", create_txt_file);
         $('#file_to_directory').bind('change', upload_file_to_directory);
         $(".share_dir").bind("click", share_directory);
         $(".dir_save_pass").bind("click", share_directory_with_password)
@@ -225,6 +231,26 @@ if (!$is_root) {
     //                 alert(data);
     //             });
     //     }
+
+    function create_txt_file(){
+
+
+        var file_html = '' +
+            '<div id="window_text_file" class="abs window text_window"><div class="abs window_inner"><div class="window_top">'
+            +'<span class="float_left">Text File</span><span class="float_right">'+
+            '<a href="#" class="window_min"></a><a href="#" class="window_resize"></a><a href="#window_text_file" class="window_close"></a>'+
+          '</span></div>' +
+            '<div class="abs window_content" id="admins_content">'+
+        '<div id="editor"></div></div><div class="abs window_bottom">Text File</div></div>'+
+        '<span class="abs ui-resizable-handle ui-resizable-se"></span></div>';
+        $('body').append(file_html);
+        $.getScript( "./node_modules/ckeditor/ckeditor.js", function () {
+            CKEDITOR.replace( 'editor' );
+            $("#window_text_file").show();
+        } );
+
+
+    }
     function share_directory() {
         $.ajax({
             type: "POST",

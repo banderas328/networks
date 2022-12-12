@@ -1028,12 +1028,14 @@ th.shrink {
     left: 240px;
     top: 70px;
 }
+
 #create_dir {
     position: relative;
-    bottom: 5px;
-    left: 10px;
-    height: 40px;
+    /* bottom: 5px; */
+    left: 50px;
+    height: 46px;
 }
+
 #directory_name {
     position: relative;
     left: 10px;
@@ -2767,12 +2769,12 @@ textarea.c-field::placeholder {
     display: block;
 }
 #paste {
-    height: 40px;
+    height: 44px;
     display: block;
     vertical-align: top;
     margin-left: 30px;
     position: relative;
-    bottom: 5px;
+    bottom: 0px;
 }
 #create_dir {
     display: block;
@@ -2907,5 +2909,39 @@ img.directory_action {
 .c-window__title-bar , .c-window__title{
     position: relative;
     top:5px;
+}
+#file_to_directory {
+    display: none;
+}
+#create_txt_file {
+    height: 44px;
+    display: block;
+    vertical-align: top;
+    margin-left: 30px;
+    position: relative;
+    bottom: 0px;
+    left:10px;
+}
+.text_window {
+    background: #fff;
+    /* border: 1px solid #9E9E9E; */
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -webkit-background-clip: padding-box;
+    color: #000;
+    display: none;
+    width: 80%;
+    min-height: 60%;
+    top: 30px;
+    left: 120px;
+    z-index: 11;
+}
+.cke_inner {
+    height: 750px;
+}
+.cke_editor {
+
+    height: 750px;
 }
 

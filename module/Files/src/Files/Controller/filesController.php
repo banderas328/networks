@@ -41,7 +41,7 @@ class  filesController extends Controller\preloaderController {
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         if(!$request->isPost()){
-          $dirs = array( 0 => array('id' => 0, 'path' => "/" ));
+          $dirs = array( 0 => array('id' => 0, 'path' => "Home" ));
             $isRoot  = true;
             $currentDirectory = 0;
             $filesInDir = false;
