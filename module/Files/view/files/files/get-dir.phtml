@@ -61,15 +61,23 @@ if (!$is_root) {
     if ($filesInDir) {
         foreach ($filesInDir as $file) {
             echo "<div class='file_wraper hard-drive-dir-wrapper' file=" . $file['id'] . ">";
-                echo "<div class='file_block_wrapper hard-drive-directory-inner'>";
-                        echo "<img src='assets/images/icons/file.png' width='50px' height='50px' class='file_block'  file=" . $file['id'] . " >";
-                        echo "<p class='file_block'  file=" . $file['id'] . "> " . $file['file_title'] . "</p>";
-                        echo "<div class='hard-dropdown file_actions' file=" . $file['id'] . ">";
-                                echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='delete_file  ' file=" . $file['id'] . ">" . $this->translate('Delete File', false, $lang) . "</span></p>";
-                                echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='move_file ' file=" . $file['id'] . ">" . $this->translate('Move File', false, $lang) . "</span></p>";
-                                echo "<p class='hard-dropdown-items'><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" . $this->translate('Download File', false, $lang) . "</a></p>";
-                        echo "</div>";
-                echo "</div>";
+            echo "<div class='file_block_wrapper hard-drive-directory-inner'>";
+            $type = explode("/", $file['type']);
+            if ($type[0] == 'text_file')
+                echo "<img src='assets/images/icons/text_file.png' width='60px' height='60px' class='file_block'  file=" . $file['id'] . " >";
+            elseif ($type[0] == 'image')
+                echo "<img src='/" . $file['file_name'] . "' width='80px' height='60px' class='file_block'  file=" . $file['id'] . " >";
+            else
+                echo "<img src='assets/images/icons/file.png' width='50px' height='50px' class='file_block'  file=" . $file['id'] . " >";
+            echo "<p class='file_block'  file=" . $file['id'] . "> " . $file['file_title'] . "</p>";
+            echo "<div class='hard-dropdown file_actions' file=" . $file['id'] . ">";
+            if ($type[0] == 'text_file')
+                echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='edit_file ' file=" . $file['id'] . ">" . $this->translate('Edit File', false, $lang) . "</span></p>";
+            echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='delete_file  ' file=" . $file['id'] . ">" . $this->translate('Delete File', false, $lang) . "</span></p>";
+            echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='move_file ' file=" . $file['id'] . ">" . $this->translate('Move File', false, $lang) . "</span></p>";
+            echo "<p class='hard-dropdown-items'><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" . $this->translate('Download File', false, $lang) . "</a></p>";
+            echo "</div>";
+            echo "</div>";
             echo "</div>";
         }
     }
@@ -130,8 +138,7 @@ if (!$is_root) {
             });
 
 
-        }
-        else {
+        } else {
             $("#paste").addClass("action_btn");
         }
 
@@ -174,10 +181,11 @@ if (!$is_root) {
             return true;
         });
         $(".delete_directory").bind("click", delete_directory);
-        $("#upload_file").bind("click", function(){
+        $("#upload_file").bind("click", function () {
             $("#file_to_directory").click();
         });
         $(".move_dir").bind("click", move_directory);
+        $(".edit_file").on("click", edit_text_file)
         $('.delete_file').bind("click", delete_file);
         $('.move_file').bind("click", move_file);
         $('#create_txt_file').bind("click", create_txt_file);
@@ -232,25 +240,91 @@ if (!$is_root) {
     //             });
     //     }
 
-    function create_txt_file(){
+    function edit_text_file() {
+        var file_id = $(this).attr("file");
+        $.ajax({
+            type: "POST",
+            url: "files/getContentTextFile",
+            data: {file_id: file_id}
+        })
+            .done(function (data) {
+                var data = JSON.parse(data);
+                create_txt_file(data.id, data.content, data.file_title);
+            });
+
+    }
+
+    function create_txt_file(file_id = false, content = false, file_title = false) {
 
 
         var file_html = '' +
-            '<div id="window_text_file" class="abs window text_window"><div class="abs window_inner"><div class="window_top">'
-            +'<span class="float_left">Text File</span><span class="float_right">'+
-            '<a href="#" class="window_min"></a><a href="#" class="window_resize"></a><a href="#window_text_file" class="window_close"></a>'+
-          '</span></div>' +
-            '<div class="abs window_content" id="admins_content">'+
-        '<div id="editor"></div></div><div class="abs window_bottom">Text File</div></div>'+
-        '<span class="abs ui-resizable-handle ui-resizable-se"></span></div>';
+            '<div id="window_text_file" class="abs window text_window"><div class="abs window_inner">' +
+            '<div class="window_top">';
+        if (file_title) {
+            file_html = file_html + '<span class="float_left"><span id="text_file_name" file_id="' + file_id + '">' + file_title + '</span></span>';
+        } else {
+            file_html = file_html + '<span class="float_left"><span id="text_file_name" file_id="' + file_id + '">text file</span></span>';
+        }
+
+        file_html = file_html + '<span class="float_right">' +
+            '<a href="#" class="window_min"></a>' +
+            '<a href="#" class="window_resize"></a>' +
+            '<a href="#window_text_file" class="window_close"></a>' +
+            '</span></div>' +
+            '<div class="abs window_content" id="file_content">' +
+            '<span id="edit_file_name">&nbsp;&nbsp;edit filename</span>' +
+            '<span id="save_text_file">&nbsp;&nbsp;save</span>';
+        if (content) {
+            file_html = file_html + '<div id="editor">' + content + '</div></div><div class="abs window_bottom">text file</div></div>';
+        } else {
+            file_html = file_html + '<div id="editor"></div></div><div class="abs window_bottom">text file</div></div>';
+        }
+
+        file_html = file_html + '<span class="abs ui-resizable-handle ui-resizable-se"></span></div>';
+        $("#window_text_file").remove();
         $('body').append(file_html);
-        $.getScript( "./node_modules/ckeditor/ckeditor.js", function () {
-            CKEDITOR.replace( 'editor' );
+        $.getScript("./node_modules/ckeditor/ckeditor.js", function () {
+            CKEDITOR.replace('editor');
             $("#window_text_file").show();
-        } );
+            $("#edit_file_name").on("click", edit_file_name);
+            $("#save_text_file").on("click", save_text_file);
+
+        });
+    }
+
+    function save_text_file() {
+
+        var data = CKEDITOR.instances.editor.getData();
+        var file_name = $("#text_file_name_input").val();
+        var file_id = $("#text_file_name").attr('file_id');
+        $("#text_file_name").text(file_name);
+        var current_directory = $("#current_directory").val();
+        save_file_to_disk(file_name, data, current_directory,file_id);
+
+    }
+
+    function save_file_to_disk(file_name, data, current_directory,file_id) {
+
+
+        $.ajax({
+            type: "POST",
+            url: "files/saveTextFile",
+            data: {file_name: file_name, data: data, current_directory: current_directory,file_id:file_id}
+        })
+            .done(function (data) {
+                refresh_drive_with_delay();
+                $("#window_text_file").remove();
+            });
 
 
     }
+
+    function edit_file_name() {
+        var text_file_name = $("#text_file_name").text();
+        $("#text_file_name_input").remove();
+        $("#file_content").prepend("<input type='text'  value='" + text_file_name + "' id='text_file_name_input'>");
+    }
+
     function share_directory() {
         $.ajax({
             type: "POST",

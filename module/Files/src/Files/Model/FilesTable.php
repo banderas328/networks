@@ -64,6 +64,39 @@ class FilesTable
         }
     }
 
+    public function saveTextFile($file_name,$data,$current_directory,$userId,$file_id =  false) {
+        $path = "userfiles/".$userId;
+        $fileName = uniqid();
+        $file = $path . '/' . $userId . $fileName . $file_name;
+        if( file_put_contents(getcwd() . "/public/" . $file,$data)) {
+            $fileDb['user_id'] = $userId;
+            if(isset($current_directory))
+                $fileDb['directory'] = $current_directory;
+            else $fileDb['directory']  = 0;
+            $fileDb['file_title'] = $file_name;
+            $fileDb['file_name'] = $file;
+            $fileDb['type'] = "text_file";
+            var_dump($file_id);
+            var_dump($userId);
+            $this->tableGateway->delete(['user_id' => $userId, 'id'=>$file_id]);
+            $this->tableGateway->insert($fileDb);
+            return $this->tableGateway->lastInsertValue;
+        }
+
+
+    }
+
+    public function getTextFile($fileId,$userId) {
+
+        $sql = "SELECT * FROM files where id=".$fileId." and user_id=".$userId;
+        $adapter = $this->adapter;
+        $fileData = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE)->toArray()[0];
+        $fileContent = file_get_contents(getcwd() . "/public/".$fileData['file_name']);
+        return ['id'=> $fileData['id'],'content' => $fileContent , 'file_title' => $fileData['file_title']];
+
+
+    }
+
 //    public function copyFileToMarketDir($adapter,$data){
 //        session_start();
 //        $user_session = $_SESSION['user'];

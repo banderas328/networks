@@ -62,14 +62,44 @@ class  filesController extends Controller\preloaderController {
             'filesInDir' => $filesInDir
         ));
     }
+    public function saveTextFileAction(){
+        $this->layout('layout/only_form');
+        $request = $this->getRequest();
+        $file_name =  $request->getPost()->file_name;
+        $file_id =  $request->getPost()->file_id;
+        $current_directory =  $request->getPost()->current_directory;
+        $data =  $request->getPost()->data;
+        $data =  preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data);
+        session_start();
+        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
+        $files = new Files();
+        $this->getFilesTable()->saveTextFile($file_name,$data,$current_directory,$userId,$file_id);
+        die();
 
+    }
+    public function getContentTextFileAction(){
+        $this->layout('layout/only_form');
+        $request = $this->getRequest();
+        $fileId = (int) $request->getPost()->file_id;
+        $files = new Files();
+        session_start();
+        $userSession = $_SESSION['user'];
+        $userId = $userSession["id"];
+        echo json_encode($this->getFilesTable()->getTextFile($fileId,$userId));
+        die();
+
+
+
+    }
     public function getParentDirAction(){
         //$this->setLocale();
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $dirKey = (int) $request->getPost()->dir_key;
         $filesystem = new FileSystem();
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $parentDir = $this->getFileSystemTable()->getUserParentDir($filesystem->getAdapter(),$dirKey,$userId);
         $files = new Files();
