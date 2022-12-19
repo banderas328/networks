@@ -64,13 +64,15 @@
             var chat_html =
                 '<div class="abs window" id="chat_public"><div class="abs window_inner"><div class="window_top"><span class="float_left">Chat :'+chanel_name+'</span><span class="float_right"><a href="#" class="window_min"></a><a href="#" class="window_resize"></a><a href="#icon_dock_drive" class="window_close"></a></span></div><div class="abs window_content">' +
                 '<div class="message_to_user_from_chanel_list" style="display:hide;" title="Enter message" to_chanel=' +  to_chanel.to_chanel +'>' +
-                '<div class="message_box" to_chanel='+to_chanel.to_chanel+'></div>' +
-                '<div class="chanel" to_chanel='+to_chanel.to_chanel+'>' +
-                '<textarea class="message_to_user_area_chanel"  maxlength="2000" to_chanel='+to_chanel.to_chanel+'></textarea>' +
+                '<div class="message_box"  to_chanel='+to_chanel.to_chanel+'></div>' +
+                '<div class="chanel"  id="public_messages_message_box" to_chanel='+to_chanel.to_chanel+'>' +
                 '<button class="submit" class="chanel_button" to_chanel='+to_chanel.to_chanel+'>Send</button>' +
+                '<div class="message_to_user_area_chanel"  id="public_chat_message" to_chanel='+to_chanel.to_chanel+'></div>' +
+
                 '</div></div>' + '</div> <div class="abs window_bottom">Chat</div> </div> <span class="abs ui-resizable-handle ui-resizable-se"></span> </div>';
             $("#chat_public").remove();
             $('body').append(chat_html);
+            CKEDITOR.replace('public_chat_message');
             $(".message_to_user_from_chanel_list").find('button').addClass("message_to_user_from_user_chanel_button");
             $(".message_to_user_from_user_chanel_button").bind("click",function(){
                 send_to_chanel();
@@ -91,14 +93,15 @@
                     $.each(data.chanels_messages, function (index,message) {
                         $(".message_box[to_chanel="+message.to_chanel+"]").append("<p class='old_message allowSelectOneClick'>"+message.first_name+" "+message.second_name+":"+message.message+"</p>");
                         window.to_chanel.date  = message.date;
-                        $(".message_box[to_chanel="+message.to_chanel+"]").animate({ scrollTop: 10000}, 200);
+                       // $(".message_box[to_chanel="+message.to_chanel+"]").animate({ scrollTop: 10000}, 200);
 
                     });
                     setTimeout(sync_chanel, 2000);
                 });
         }
         function send_to_chanel(element) {
-            var text = $('.message_to_user_area_chanel[to_chanel='+ window.to_chanel.to_chanel+']').val();
+            //var text = $('.message_to_user_area_chanel[to_chanel='+ window.to_chanel.to_chanel+']').val();
+            var text = CKEDITOR.instances.public_chat_message.getData();
             $('.message_to_user_area_chanel[to_chanel='+ window.to_chanel.to_chanel+']').val("");
             $('.message_to_user_from_user_chanel_button[to_chanel='+ window.to_chanel.to_chanel+']').val("");
             $(".message_box[to_chanel="+ window.to_chanel.to_chanel+"]").animate({ scrollTop: 10000}, 50);

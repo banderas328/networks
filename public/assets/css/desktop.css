@@ -818,7 +818,7 @@ th.shrink {
 }
 .message_to_user_from_user_chats_button {
     position: absolute;
-    left: 400px;
+    /* left: 400px; */
     top: 325px;
     background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
     color: #fff;
@@ -880,9 +880,8 @@ th.shrink {
     height: 150px;
 }
 .message_to_user_from_user_chanel_button {
-    position: absolute;
-    left: 400px;
     top: 325px;
+    margin-left: 10px;
     background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
     color: #fff;
     padding: 10px;
@@ -891,6 +890,7 @@ th.shrink {
     margin: 10px 0;
     display: inline-block;
     border: none;
+    margin-left: 10px;
 }
 .close_chanel {
     font-weight: bold;
@@ -906,10 +906,8 @@ th.shrink {
     border: 3px solid #f3f3f3;
     border-radius: 10px;
     padding: 10px 10px 10px 10px;
-    position: absolute;
-    top: 5%;
-    left: 5%;
-    width: 400px;
+    margin: 10px 10px 10px 10px;
+    width: 415px;
 
 }
 .message_to_user_area_chanel {
@@ -1609,6 +1607,8 @@ textarea.c-field::placeholder {
 
 .c-blog-post__save-button {
     margin-left: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .c-blog-post__save-button .icon-nw {
@@ -2943,5 +2943,9 @@ img.directory_action {
 .cke_editor {
 
     height: 750px;
+}
+#cke_public_chat_message {
+    margin-left: 10px;
+    margin-top: 10px;
 }
 

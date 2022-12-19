@@ -56,16 +56,18 @@
             '<div class="message_to_user_from_chat_list" style="display:hide;" title="Enter message" with_user=' + to_user + '>' +
             // '<p class="close_chat" with_user=' + to_user + '>X</p>' +
             '<div class="message_box" with_user=' + to_user + '>' + '</div>' +
-            '<div class="user_chat" with_user=' + to_user + '>' +
-            '<textarea class="message_to_user_area_chat" class="selectable-all" maxlength="2000" with_user=' + to_user + '></textarea>' +
+            '<div class="user_chat" style="height: 350px;margin-top: 90px;margin-left: 10px;" with_user=' + to_user + '>' +
+            //            '<div class="message_to_user_area_chat selectable-all" id="user_chat" with_user=' + to_user + '></div>' +
+            '<div  id="user_chat" with_user=' + to_user + '></div>' +
             '<button class="submit" class="chanel_button" with_user=' + to_user + '>Send</button>' +
             '</div>' +
             '</div>'+ '</div> <div class="abs window_bottom">Chat</div> </div> <span class="abs ui-resizable-handle ui-resizable-se"></span> </div>';
 
 
-    //    $("#chat_user").remove();
+        $("#chat_user").remove();
 
         $('body').append(chat_html);
+        CKEDITOR.replace('user_chat');
         $(".message_to_user_from_chat_list").find('button').addClass("message_to_user_from_user_chats_button");
         $(".message_to_user_from_user_chats_button").bind("click", function () {
             send_chat(this);
@@ -142,7 +144,8 @@
 
     function send_chat(element) {
         var to_user = $(element).attr('with_user');
-        var text = $('.message_to_user_area_chat[with_user=' + to_user + ']').val();
+       // var text = $('.message_to_user_area_chat[with_user=' + to_user + ']').val();
+        var text = CKEDITOR.instances.user_chat.getData();
         $('.message_to_user_area_chat[with_user=' + to_user + ']').val("");
         $(".message_box[with_user=" + to_user + "]").append("you:" + text + "<br/>");
         $('.message_to_user_from_user_chats_button[with_user=' + to_user + ']').val("");

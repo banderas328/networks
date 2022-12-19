@@ -28,10 +28,14 @@ class ChanelsMessagesTable
     }
 
     public function addMessageToChanel($request,$adapter){
-        $text = htmlspecialchars($request->getPost()->text);
-        $text  = substr ($text,0,250);
+        $text =  preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $request->getPost()->text);
+        //$text = htmlspecialchars($request->getPost()->text);
+       // $text = substr($text, 0, 250);
+       // $text = htmlspecialchars($request->getPost()->text);
+      //  $text  = substr ($text,0,250);
         $to_chanel = (int) $request->getPost()->to_chanel;
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $date = date_create();
         $date = date_timestamp_get($date);

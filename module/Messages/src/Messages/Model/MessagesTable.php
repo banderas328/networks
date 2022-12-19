@@ -33,11 +33,12 @@ class MessagesTable
 
     public function addMessage($request, $adapter)
     {
-
-        $text = htmlspecialchars($request->getPost()->text);
+        $text =  preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $request->getPost()->text);
+        //$text = htmlspecialchars($request->getPost()->text);
         $text = substr($text, 0, 250);
         $to_user = $request->getPost()->to_user;
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "SELECT  first_name,second_name FROM user_settings WHERE user_id = '" . $userId . "'";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
@@ -65,11 +66,12 @@ class MessagesTable
 
     public function checkNewMessages($adapter)
     {
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
-        $sql = "SELECT *,messages.id as message_id FROM messages 
-        LEFT JOIN deliver_messages on messages.id = deliver_messages.message_id 
-        LEFT JOIN user_settings on messages.from_user = user_settings.user_id 
+        $sql = "SELECT *,messages.id as message_id FROM messages
+        LEFT JOIN deliver_messages on messages.id = deliver_messages.message_id
+        LEFT JOIN user_settings on messages.from_user = user_settings.user_id
         WHERE to_user = '".$userId."' AND dilivered <=> NULL";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet;
@@ -78,13 +80,14 @@ class MessagesTable
 
     public function checkOldMessages($adapter, $request)
     {
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $with_user = $request->getPost()->with_user;
-        $sql = "SELECT *,messages.id as message_id, '" . $userId . "' as 'current_user' FROM messages 
-        LEFT JOIN deliver_messages on messages.id = deliver_messages.message_id 
-        LEFT JOIN user_settings on messages.from_user = user_settings.user_id 
-        WHERE  ((to_user = $userId and from_user = $with_user)  OR  (from_user = $userId and to_user = $with_user))  
+        $sql = "SELECT *,messages.id as message_id, '" . $userId . "' as 'current_user' FROM messages
+        LEFT JOIN deliver_messages on messages.id = deliver_messages.message_id
+        LEFT JOIN user_settings on messages.from_user = user_settings.user_id
+        WHERE  ((to_user = $userId and from_user = $with_user)  OR  (from_user = $userId and to_user = $with_user))
         AND dilivered = 1 ORDER BY messages.id ASC LIMIT 20";
         return $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet;
