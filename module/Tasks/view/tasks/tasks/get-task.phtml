@@ -51,7 +51,7 @@
         ?>
     </div>
     <div id="task_button_area">
-        <textarea id="sub_task"></textarea>
+        <div id="sub_task"></div>
         <p>
             <span class="c-file__icon-wrap">
                     <svg class="icon-nw icon-nw-attach-file-16" viewBox="0 0 16 16">
@@ -73,6 +73,7 @@
 <script type="text/javascript">
 
     $(function () {
+        CKEDITOR.replace('sub_task');
         $("#datepicker").datepicker();
         $("#task_file_update").css("display","none");
         $(".c-file__icon-wrap").on("click",function(){
@@ -156,11 +157,12 @@
         });
 
         $(".edit_task_description").on("click", function () {
-            var test_description = $(".task_description_value").text();
-            var html_string = '<textarea id="task_description_input" name="task_description">' + test_description + '</textarea><span class="edit_save_task_description">save</span>';
+
+            var html_string = '<div id="task_description_input" name="task_description">' + test_description + '</div><span class="edit_save_task_description">save</span>';
             $("#task_description_block").html(html_string);
+            CKEDITOR.replace('task_description_input');
             $(".edit_save_task_description").on("click", function () {
-                var data = {"description": $("#task_description_input").val(), "id": $("#task_id_popup").val()};
+                var data = {"description": CKEDITOR.instances.task_description_input.getData(), "id": $("#task_id_popup").val()};
                 $.ajax({
                     type: "POST",
                     url: "tasks/updateTask",
@@ -199,7 +201,8 @@
         $("#update_task").on("click", function () {
 
             var task_id = $(this).attr("task_id");
-            var text = $("#sub_task").val();
+            //var text = $("#sub_task").val();
+            var text = CKEDITOR.instances.task_description_input.getData();
             var status = $("#task_status").val();
             var files = $("#task_file_update").prop('files');
             var file = files[0];

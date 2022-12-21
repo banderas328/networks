@@ -48,7 +48,8 @@
     <div>
         <input type="hidden" name="task_members" placeholder="task members" id="task_members">
         <h5>Task Description</h5>
-        <textarea name="task_description" placeholder="task description" id="task_description"></textarea>
+
+        <div name="task_description" placeholder="task description" id="task_description"></div>
     </div>
     <div>
         <h5>Attach File</h5>
@@ -84,6 +85,7 @@
         window.open(url,'_blank');
     });
     $(function () {
+        CKEDITOR.replace('task_description');
 
         $("#edit_project_member").bind("click", function () {
             edit_project_members();
@@ -194,7 +196,8 @@
         var task_members_lsit = $("#task_members_list div").each(function (index, e) {
             members_list.push($(e).attr("userId"));
         });
-        var task_description = $("#task_description").val();
+        //var task_description = $("#task_description").val();
+        var text = CKEDITOR.instances.task_description.getData();
         var estimate = $("#task_estimate").val();
         var project_id = $("#create_board_button").attr("project_id");
         var files = $("#task_file_input").prop('files');
