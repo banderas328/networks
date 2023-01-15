@@ -76,6 +76,10 @@ if (!$is_root) {
             echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='delete_file  ' file=" . $file['id'] . ">" . $this->translate('Delete File', false, $lang) . "</span></p>";
             echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='move_file ' file=" . $file['id'] . ">" . $this->translate('Move File', false, $lang) . "</span></p>";
             echo "<p class='hard-dropdown-items'><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" . $this->translate('Download File', false, $lang) . "</a></p>";
+
+            if ($type[0] == 'image') {
+                echo "<p class='image_url hard-dropdown-items' url='/".$file["file_name"]."'><a href='#'>Copy image url</a></p>";
+            }
             echo "</div>";
             echo "</div>";
             echo "</div>";
@@ -185,6 +189,7 @@ if (!$is_root) {
             $("#file_to_directory").click();
         });
         $(".move_dir").bind("click", move_directory);
+        $(".image_url").bind("click", copy_image_url);
         $(".edit_file").on("click", edit_text_file)
         $('.delete_file').bind("click", delete_file);
         $('.move_file').bind("click", move_file);
@@ -253,6 +258,21 @@ if (!$is_root) {
             });
 
     }
+//TODO move to upper level
+    function copyImageToClipboard(text) {
+        text = location.protocol + "//" +window.location.hostname + text;
+        var sampleTextarea = document.createElement("textarea");
+        document.body.appendChild(sampleTextarea);
+        sampleTextarea.value = text; //save main text in it
+        sampleTextarea.select(); //select textarea contenrs
+        document.execCommand("copy");
+        document.body.removeChild(sampleTextarea);
+        alert("Url copied: "+text);
+    }
+    function copy_image_url(){
+        copyImageToClipboard($(this).attr("url"));
+
+    }
 
     function create_txt_file(file_id = false, content = false, file_title = false) {
 
@@ -295,7 +315,7 @@ if (!$is_root) {
     function save_text_file() {
 
         var data = CKEDITOR.instances.editor.getData();
-        var file_name = $("#text_file_name_input").val();
+        var file_name = $("#text_file_name").text();
         var file_id = $("#text_file_name").attr('file_id');
         $("#text_file_name").text(file_name);
         var current_directory = $("#current_directory").val();

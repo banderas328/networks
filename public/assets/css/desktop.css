@@ -2940,7 +2940,7 @@ img.directory_action {
 .cke_inner {
     height: 750px;
 }
-.cke_editor {
+#cke_editor {
 
     height: 750px;
 }
