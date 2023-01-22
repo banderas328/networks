@@ -1030,23 +1030,26 @@ th.shrink {
 #create_dir {
     position: relative;
     /* bottom: 5px; */
-    left: 50px;
+
     height: 46px;
 }
 
-#directory_name {
-    position: relative;
-    left: 10px;
-}
+/*#directory_name {*/
+/*    position: relative;*/
+/*    left: 10px;*/
+/*}*/
 #file_to_directory {
     position: relative;
     top: -15px;
     left: 10px;
 }
+
 #file_directory_form p {
     position: relative;
     left: 10px;
+    height: 25px;
 }
+
 .directory {
     font-weight: normal;
     font-size: 15px;
@@ -2948,7 +2951,7 @@ img.directory_action {
     margin-left: 10px;
     margin-top: 10px;
 }
-.share_dir_block {
+.share_dir_block,#create_dir_block {
     display: none;
 }
 .ui-widget-overlay {
@@ -2958,5 +2961,10 @@ img.directory_action {
 }
 .dir_close_share {
     margin-left: 10px;
+}
+#show_directory_creation {
+    margin-left: 40px;
+    height: 45px;
+    margin-bottom: 15px;
 }
 

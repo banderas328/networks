@@ -8,14 +8,20 @@ if (!$is_root) {
     <div class="hard-drive-form-wrapper">
         <div>
             <form id="file_directory_form" method="post">
-                <input type="file" name="file" id="file_to_directory">
+                <input type="file" name="file"  id="file_to_directory">
                 <p class='action_btn' id="upload_file">upload file</p>
             </form>
         </div>
         <div>
-            <input type="text" id="directory_name">
-            <button value="create dir" class='action_btn'
-                    id="create_dir"><?php echo $this->translate("create directory", false, $lang); ?></button>
+            <div id="create_dir_block" title="Create Directory" dir="<?php echo $dir_value['id']; ?>">
+                <input type="text" id="directory_name" placeholder="Directory Name">
+                <button value="create dir" class='action_btn' id="create_dir">
+                    <?php echo $this->translate("create directory", false, $lang); ?>
+                </button>
+            </div>
+
+            <button id="show_directory_creation" value="create dir"
+                    class='action_btn'><?php echo $this->translate("create directory", false, $lang); ?></button>
         </div>
         <div>
             <button id="paste" class='action_btn'>paste</button>
@@ -33,7 +39,9 @@ if (!$is_root) {
 <div class="dirs_block">
     <?php
     if (isset($dirs) and count($dirs)) {
-    foreach ($dirs as $dir_key => $dir_value) {
+    foreach ($dirs
+
+             as $dir_key => $dir_value) {
         echo "<div class='dir_wraper hard-drive-dir-wrapper'>
                         <div class='directory_wrapper hard-drive-directory-inner'>
                         <img src='assets/images/icons/folder.png' width='50px' height='50px' dir=" . $dir_value['id'] . " class='folder_action'/>
@@ -51,55 +59,55 @@ if (!$is_root) {
         echo "</div>";
 
         ?>
-        <div class="share_dir_block" title="Share Directory with password"  dir="<?php echo $dir_value['id']; ?>">
+        <div class="share_dir_block" title="Share Directory with password" dir="<?php echo $dir_value['id']; ?>">
             <p>
                 <?php
                 $password = $dir_value["password"];
-                echo "<input type='text' class='input_password' dir=" . $dir_value['id'] .
+                echo "<input type='text' class='input_password' placeholder='Password' dir=" . $dir_value['id'] .
                     "><input type='button' value='Save Password' dir='"
-                    .$dir_value['id']."' class='dir_save_pass btn btn-primary action_btn'>";
-                if($password) echo "<input type='button' value='Close Share' dir='".$dir_value['id']
-                    ."' class='dir_close_share btn btn-primary action_btn'>";
+                    . $dir_value['id'] . "' class='dir_save_pass btn btn-primary action_btn'>";
+                if ($password) echo "<input type='button' value='Close Share' dir='" . $dir_value['id']
+                    . "' class='dir_close_share btn btn-primary action_btn'>";
                 unset($password);
                 ?>
             </p>
         </div>
 
-        <?php
+    <?php
     }
     ?>
 
-    <script>
+        <script>
 
-        $(function () {
-            $(".share_dir_with_password").on("click", function () {
-                var dir = $(this).attr("dir");
-                $(".share_dir_block[dir='"+dir+"']").dialog({
-                    resizable: false,
-                    height: "auto",
-                    width: 400,
-                    modal: true,
-                });
-                // $("#share_dir_block").css("display","block");
-            });
-            $('.dir_close_share').on("click", function(){
-                var dir = $(this).attr("dir");
-                $.ajax({
-                    type: "POST",
-                    url: "files/closeDirectory",
-                    data: {dir: dir}
-                })
-                    .done(function (data) {
-                        var current_directory = $("#current_directory").val();
-                        $('.share_dir_block').remove();
-                        refresh_drive_with_delay();
-                        $(".ui-dialog-content").dialog("close");
+            $(function () {
+                $(".share_dir_with_password").on("click", function () {
+                    var dir = $(this).attr("dir");
+                    $(".share_dir_block[dir='" + dir + "']").dialog({
+                        resizable: false,
+                        height: "auto",
+                        width: 400,
+                        modal: true,
                     });
+                    // $("#share_dir_block").css("display","block");
+                });
+                $('.dir_close_share').on("click", function () {
+                    var dir = $(this).attr("dir");
+                    $.ajax({
+                        type: "POST",
+                        url: "files/closeDirectory",
+                        data: {dir: dir}
+                    })
+                        .done(function (data) {
+                            var current_directory = $("#current_directory").val();
+                            $('.share_dir_block').remove();
+                            refresh_drive_with_delay();
+                            $(".ui-dialog-content").dialog("close");
+                        });
 
+                });
             });
-        });
-    </script>
-    <?php
+        </script>
+        <?php
     }
 
     ?>
@@ -245,7 +253,17 @@ if (!$is_root) {
         $('#create_txt_file').bind("click", create_txt_file);
         $('#file_to_directory').bind('change', upload_file_to_directory);
         $(".share_dir").bind("click", share_directory);
-        $(".dir_save_pass").bind("click", share_directory_with_password)
+        $(".dir_save_pass").bind("click", share_directory_with_password);
+        $("#show_directory_creation").on("click", function () {
+
+            $("#create_dir_block").dialog({
+                resizable: false,
+                height: "auto",
+                width: 400,
+                modal: true,
+            });
+
+        });
         $(".parent_directory").bind("click", function () {
             var dir_key = $(this).attr('dir_key');
             $.ajax({
@@ -274,6 +292,7 @@ if (!$is_root) {
                 .done(function (data) {
                     var current_directory = $("#current_directory").val();
                     show_directory(current_directory);
+                    $(".ui-dialog-content").dialog("close");
 
                 });
         });
