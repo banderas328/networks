@@ -213,7 +213,8 @@ class  filesController extends Controller\preloaderController {
         $request = $this->getRequest();
         $file_id = (int) $request->getPost()->file_id;
         $files = new Files();
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
        if($this->getFilesTable()->deleteFile($files->getAdapter(),$file_id,$userId)){
 
@@ -221,6 +222,29 @@ class  filesController extends Controller\preloaderController {
            $this->getFilesToTagsTable()->deleteFileTags($file_id);
        }
           die(json_encode($file_id));
+    }
+
+    public function renameDirAction() {
+        session_start();
+        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
+        $request = $this->getRequest();
+        $dir = (int) $request->getPost()->dir;
+        $dirName =  $request->getPost()->directory_name;
+        $this->getFileSystemTable()->renameDir($dir,$dirName);
+        die();
+
+    }
+    public function renameFileAction() {
+        session_start();
+        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
+        $request = $this->getRequest();
+        $file = (int) $request->getPost()->file;
+        $fileName =  $request->getPost()->file_name;
+        $this->getFilesTable()->renameFile($file,$fileName,$userId);
+        die();
+
     }
 
     public function deleteDirectoryAction()
@@ -263,6 +287,7 @@ class  filesController extends Controller\preloaderController {
         $this->getFileSystemTable()->moveDir($fileSystem->getAdapter(),$dirId,$dirIdCurrent,$userId);
         die();
     }
+
 
     public function closeDirectoryAction(){
         $request = $this->getRequest();

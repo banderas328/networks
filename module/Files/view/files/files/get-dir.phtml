@@ -8,18 +8,29 @@ if (!$is_root) {
     <div class="hard-drive-form-wrapper">
         <div>
             <form id="file_directory_form" method="post">
-                <input type="file" name="file"  id="file_to_directory">
+                <input type="file" name="file" id="file_to_directory">
                 <p class='action_btn' id="upload_file">upload file</p>
             </form>
         </div>
         <div>
             <div id="create_dir_block" title="Create Directory" dir="<?php echo $dir_value['id']; ?>">
                 <input type="text" id="directory_name" placeholder="Directory Name">
-                <button value="create dir" class='action_btn' id="create_dir">
-                    <?php echo $this->translate("create directory", false, $lang); ?>
+                <button value="Create" class='action_btn' id="create_dir">
+                    <?php echo $this->translate("Create Directory", false, $lang); ?>
                 </button>
             </div>
-
+            <div id="rename_file_block" title="Rename File" dir="<?php echo $dir_value['id']; ?>">
+                <input type="text" id="rename_file_name" placeholder="New File Name">
+                <button value="Rename" class='action_btn' id="rename_file">
+                    <?php echo $this->translate("Rename File", false, $lang); ?>
+                </button>
+            </div>
+            <div id="rename_dir_block" title="Rename Directory" dir="<?php echo $dir_value['id']; ?>">
+                <input type="text" id="rename_directory_name" placeholder="New Directory Name">
+                <button value="Rename" class='action_btn' id="rename_dir">
+                    <?php echo $this->translate("Rename Directory", false, $lang); ?>
+                </button>
+            </div>
             <button id="show_directory_creation" value="create dir"
                     class='action_btn'><?php echo $this->translate("create directory", false, $lang); ?></button>
         </div>
@@ -29,8 +40,7 @@ if (!$is_root) {
         <div>
             <button id="create_txt_file" class='action_btn'>create text file</button>
         </div>
-        <input type="hidden" value="<?php if (isset($current_directory)) echo $current_directory ?>"
-               id="current_directory">
+        <input type="hidden" value="<?php if (isset($current_directory)) echo $current_directory ?>" id="current_directory">
     </div>
 
     <?php
@@ -50,9 +60,9 @@ if (!$is_root) {
         if (!$is_root) {
             echo "<div class='directory_actions hard-dropdown ' dir=" . $dir_value["id"] . ">
                            <p class='delete_directory hard-dropdown-items ' dir=" . $dir_value['id'] . ">" . $this->translate('Delete Directory', false, $lang) . "</p>
-                           <p class='share_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Share Directory</p>
                            <p class='move_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Move Directory</p>
-                           <p class='move_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Rename Directory</p>
+                           <p class='rename_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Rename Directory</p>
+                           <p class='share_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Share Directory</p>
                            <p class='share_dir_with_password hard-dropdown-items ' dir=" . $dir_value['id'] . ">Share With Password</p>
                       </div>";
         }
@@ -131,7 +141,7 @@ if (!$is_root) {
                 echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='edit_file ' file=" . $file['id'] . ">" . $this->translate('Edit File', false, $lang) . "</span></p>";
             echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='delete_file  ' file=" . $file['id'] . ">" . $this->translate('Delete File', false, $lang) . "</span></p>";
             echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='move_file ' file=" . $file['id'] . ">" . $this->translate('Move File', false, $lang) . "</span></p>";
-            echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='move_file ' file=" . $file['id'] . ">" . $this->translate('Rename File', false, $lang) . "</span></p>";
+            echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='rename_file ' file=" . $file['id'] . ">" . $this->translate('Rename File', false, $lang) . "</span></p>";
             echo "<p class='hard-dropdown-items'><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" . $this->translate('Download File', false, $lang) . "</a></p>";
 
             if ($type[0] == 'image') {
@@ -213,7 +223,7 @@ if (!$is_root) {
             }
         });
         $('.folder_action').mousedown(function (e) {
-            if (e.button == 2) { //2  - ������ ����, 3 - ������� ����
+            if (e.button == 2) { //2  right botton
                 var dir = $(this).attr("dir");
                 if (!$(".directory_actions[dir=" + dir + "]").hasClass("visible-block")) {
                     $(".directory_actions").removeClass("visible-block");
@@ -227,7 +237,7 @@ if (!$is_root) {
             return true;
         });
         $('.file_block').mousedown(function (e) {
-            if (e.button == 2) { //2  - ������ ����, 3 - ������� ����
+            if (e.button == 2) { //2  - right botton
                 var file = $(this).attr("file");
                 if (!$(".file_actions[file=" + file + "]").hasClass("visible-block")) {
                     $(".file_actions").removeClass("visible-block");
@@ -254,6 +264,64 @@ if (!$is_root) {
         $('#file_to_directory').bind('change', upload_file_to_directory);
         $(".share_dir").bind("click", share_directory);
         $(".dir_save_pass").bind("click", share_directory_with_password);
+        $("#rename_dir").on("click", function(){
+            var dir = $(this).attr("dir");
+
+            var directory_name = $("#rename_directory_name").val();
+
+
+            $.ajax({
+                type: "POST",
+                url: "files/renameDir",
+                data: {dir: dir, directory_name: directory_name}
+
+            })
+                .done(function (data) {
+                    $("#rename_dir_block").remove();
+                    refresh_drive_with_delay();
+                    $(".ui-dialog-content").dialog("close");
+
+                });
+
+        });
+        $("#rename_file").on("click", function(){
+            var file = $(this).attr("file");
+
+            var file_name = $("#rename_file_name").val();
+
+
+            $.ajax({
+                type: "POST",
+                url: "files/renameFile",
+                data: {file: file, file_name: file_name}
+
+            })
+                .done(function (data) {
+                    $("#rename_file_block").remove();
+                    refresh_drive_with_delay();
+                    $(".ui-dialog-content").dialog("close");
+
+                });
+
+        });
+        $(".rename_dir").on("click" , function(){
+            $("#rename_dir_block").dialog({
+                resizable: false,
+                height: "auto",
+                width: 400,
+                modal: true,
+            });
+            $("#rename_dir").attr('dir',$(this).attr("dir"))
+        });
+        $(".rename_file").on("click" , function(){
+            $("#rename_file_block").dialog({
+                resizable: false,
+                height: "auto",
+                width: 400,
+                modal: true,
+            });
+            $("#rename_file").attr('file',$(this).attr("file"))
+        });
         $("#show_directory_creation").on("click", function () {
 
             $("#create_dir_block").dialog({
@@ -387,6 +455,10 @@ if (!$is_root) {
         var data = CKEDITOR.instances.editor.getData();
         var file_name = $("#text_file_name").text();
         var file_id = $("#text_file_name").attr('file_id');
+        var name = $("#text_file_name_input").val().length;
+        if(name) {
+            var file_name = $("#text_file_name_input").val();
+        }
         $("#text_file_name").text(file_name);
         var current_directory = $("#current_directory").val();
         save_file_to_disk(file_name, data, current_directory, file_id);

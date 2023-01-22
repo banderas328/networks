@@ -2951,7 +2951,7 @@ img.directory_action {
     margin-left: 10px;
     margin-top: 10px;
 }
-.share_dir_block,#create_dir_block {
+.share_dir_block,#create_dir_block, #rename_file_block,#rename_dir_block {
     display: none;
 }
 .ui-widget-overlay {
@@ -2966,5 +2966,8 @@ img.directory_action {
     margin-left: 40px;
     height: 45px;
     margin-bottom: 15px;
+}
+#rename_file{
+    display: block;
 }
 

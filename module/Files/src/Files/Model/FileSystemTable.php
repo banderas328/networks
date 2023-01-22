@@ -74,6 +74,16 @@ class FileSystemTable
         $data = array('parent_path' => $current_directory, 'path' => $directory_name, 'user_id' => $user_id);
         $this->tableGateway->insert($data);
     }
+    public function renameDir($dir,$dirName)
+    {
+        session_start();
+        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
+        $dir= (int)$dir;
+        $directoryName = $dirName;
+        $data = array('path' => $directoryName);
+        $this->tableGateway->update($data,['user_id' => $userId,'id' => $dir] );
+    }
 
 
     public function getChildDirs($dirId, $userId)
