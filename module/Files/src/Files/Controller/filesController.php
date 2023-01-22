@@ -252,7 +252,8 @@ class  filesController extends Controller\preloaderController {
         $dirId = (int)$request->getPost()->dir_id;
         $dirIdCurrent = (int)$request->getPost()->current_directory;
         $fileSystem = new FileSystem();
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
 //         $dirs = $this->getFileSystemTable()->getChildDirs($fileSystem->getAdapter(), $dirId, $userId);
         $files = new Files();
@@ -263,11 +264,23 @@ class  filesController extends Controller\preloaderController {
         die();
     }
 
+    public function closeDirectoryAction(){
+        $request = $this->getRequest();
+        $dir = (int)$request->getPost()->dir;
+        session_start();
+        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
+        $this->getNetworkTable()->closeDir($dir,$userId);
+        die();
+
+    }
+
     public function shareDirAction(){
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $dirId = (int)$request->getPost()->dir;
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $files = new FileSystem();
         $dir  = $this->getFileSystemTable()->getDir($dirId,$userId,$files->getAdapter());

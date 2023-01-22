@@ -17,6 +17,7 @@ use Zend\Config\Factory;
 class FileSystemTable
 {
     protected $tableGateway;
+    public $adapter;
 
     public function __construct()
     {
@@ -28,6 +29,7 @@ class FileSystemTable
             'username' => $config->database["params"]->username,
             'password' => $config->database["params"]->password,
         ));
+        $this->adapter = $adapter;
         $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("users_filesystem", $adapter);
     }
 
@@ -44,7 +46,10 @@ class FileSystemTable
 
     public function getDir($dir, $userId, $adapter)
     {
-        $sql = "SELECT  * FROM users_filesystem WHERE user_id='" . $userId . "' and id = '" . $dir . "'";
+        $dir = (int)$dir;
+        $sql = "SELECT  * FROM users_filesystem left join network
+                    on users_filesystem.id = network.path_id
+                    WHERE user_id='" . $userId . "' and users_filesystem.id = '" . $dir . "'";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet->toArray();
     }
@@ -61,7 +66,8 @@ class FileSystemTable
 
     public function createUserDir($adapter, $request)
     {
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $user_id = $user_session["id"];
         $current_directory = (int)$request->getPost()->current_directory;
         $directory_name = $request->getPost()->directory_name;

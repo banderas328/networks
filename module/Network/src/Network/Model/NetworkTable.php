@@ -6,6 +6,7 @@ use Zend\Session\Container;
 use Zend\Db\Sql\Sql;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Files\Model\FileSystemTable;
 //use Zend\Db\Adapter\Driver\ResultInterface;
 //use Zend\Db\ResultSet\ResultSet;
 
@@ -15,7 +16,7 @@ class NetworkTable
     protected $tableGateway;
 
     public function __construct()
-    
+
     {
         $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
         $adapter = new \Zend\Db\Adapter\Adapter (array(
@@ -38,6 +39,21 @@ class NetworkTable
         );
         $this->tableGateway->delete(array ('path_id' => $dir));
         $this->tableGateway->insert($data);
+    }
+    //CLOSE directory with deleting share row in network table
+    public function closeDir($dir,$userId){
+        $fileSystem = new FileSystemTable();
+        $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
+        $adapter = new \Zend\Db\Adapter\Adapter (array(
+            'driver' => $config->database->driver,
+            'dsn' => $config->database->dsn,
+            'database' => $config->database["params"]->database,
+            'username' => $config->database["params"]->username,
+            'password' => $config->database["params"]->password,
+        ));
+        $dir = ($fileSystem->getDir($dir,$userId,$adapter))[0]['id'];
+        var_dump($dir);
+        $this->tableGateway->delete(array ('id' => $dir));
     }
 
     public function getUserSharedDirs($request,$adapter) {
