@@ -72,13 +72,13 @@ if (!$is_root) {
         <div class="share_dir_block" title="Share Directory with password" dir="<?php echo $dir_value['id']; ?>">
             <p>
                 <?php
-                $password = $dir_value["password"];
+                $pathSharedExist = $dir_value["path_id"];
                 echo "<input type='text' class='input_password' placeholder='Password' dir=" . $dir_value['id'] .
                     "><input type='button' value='Save Password' dir='"
                     . $dir_value['id'] . "' class='dir_save_pass btn btn-primary action_btn'>";
-                if ($password) echo "<input type='button' value='Close Share' dir='" . $dir_value['id']
+                if ($pathSharedExist) echo "<input type='button' value='Close Share' dir='" . $dir_value['id']
                     . "' class='dir_close_share btn btn-primary action_btn'>";
-                unset($password);
+                unset($pathSharedExist);
                 ?>
             </p>
         </div>
