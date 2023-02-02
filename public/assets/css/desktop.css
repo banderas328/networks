@@ -2970,4 +2970,10 @@ img.directory_action {
 #rename_file{
     display: block;
 }
-
+/*div#cke_new_blog_text {*/
+/*    visibility: inherit;*/
+/*    height: 368px;*/
+/*}*/
+#blog_save {
+    margin-left: 52.5%;
+}
