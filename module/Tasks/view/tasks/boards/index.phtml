@@ -1,24 +1,24 @@
-<span id="edit_project_member" class="action_btn">Remove members</span>
+<div id="edit_project_member" class="action_btn">Remove members</div>
 
-<span id="add_project_member" class="action_btn">Add members</span>
-<div id="create_board" class="">
+<div id="add_project_member" class="action_btn">Add members</div>
+<!--<div id="create_board" class="">-->
     <input type="text" id="board_name_input" placeholder="column name">
-    <span id="create_board_button" class='action_btn'
-          project_id='<?php if (isset($project_id)) echo $project_id; ?>'>Create Column</span>
-</div>
-<div class="project_active_members"></div>
-<div class="project_active_members_add"></div>
-<div>
-<span id="project_report" class="action_btn">Report</span>
-<span id="create_task " class="create_task_button action_btn">Create Task</span>
-<span id="load_archive">Load Archive</span>
-</div>
+    <div id="create_board_button" class='action_btn' project_id='<?php if (isset($project_id)) echo $project_id; ?>'>Create Column</div>
+<!--</div>-->
+
+<!--<div>-->
+<div id="project_report" class="action_btn">Report</div>
+<div id="create_task" class="create_task_button action_btn">Create Task</div>
+<div id="load_archive">Load Archive</div>
+<!--</div>-->
 <div id="report_date_block">
     Start Date : <input type="text" name="start_date" id="start_report_date">
     End Date :   <input type="text" name="end_date" id="end_report_date">
              <input type="button" id="show_report" value="Show Report" class="action_btn">
 
 </div>
+<div class="project_active_members"></div>
+<div class="project_active_members_add"></div>
 
 <div id="stackedHorizontalBC">
 </div>
@@ -137,6 +137,9 @@
         })
             .done(function (data) {
                 $(".project_active_members_add").html(data);
+                $(".project_active_members_add").slideToggle( "slow", function() {
+                    // Animation complete.
+                });
             });
     }
     function edit_project_members() {
@@ -149,6 +152,9 @@
         })
             .done(function (data) {
                 $(".project_active_members").html(data);
+                $(".project_active_members").slideToggle( "slow", function() {
+                    // Animation complete.
+                });
             });
     }
     // $("#project_report").on("click",function(){
@@ -163,6 +169,9 @@
             data: {"project_id": project_id}
         }).done(function (data) {
             $("#task_manager_arhive_block").html(data);
+            $("#task_manager_arhive_block").slideToggle( "slow", function() {
+                // Animation complete.
+            });
         });
     });
     $(".delete_board").on("click", function () {

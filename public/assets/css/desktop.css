@@ -1099,7 +1099,7 @@ th.shrink {
     background: #93c3cd url(images/ui-bg_diagonals-small_50_93c3cd_40x40.png) 50% 50% repeat;
     font-weight: bold;
     color: #333333;
-    min-width: 160px;
+    /*min-width: 160px;*/
 }
 .board-item-gragable {
     border: 1px solid black;
@@ -1315,8 +1315,8 @@ th.shrink {
     display: block;
 }
 #create_task {
-    display: block;
     margin-bottom: 20px;
+    display: inline-block;
 }
 #create_task .create_task_button {
     background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
@@ -1330,10 +1330,13 @@ th.shrink {
 }
 #load_archive {
     background: #eb5757;
-    padding: 5px;
+    padding: 12px;
     font-size: 16px;
     border-radius: 5px;
     color: #fff;
+    width: 100px;
+    display: inline-block;
+    height: 24px;
 }
 #projects_archive_block {
     padding-top: 10px;
@@ -2976,4 +2979,46 @@ img.directory_action {
 /*}*/
 #blog_save {
     margin-left: 52.5%;
+}
+#board_name_input {
+    height: 35px;
+    margin-bottom: 5px;
+}
+#start_report_date,#end_report_date {
+    height: 35px;
+    margin-bottom: 5px;
+}
+.project_active_members ,  .project_active_members_add , #task_manager_arhive_block ,#report_date_block{
+    display: none;
+}
+.create_task_button {
+    width: 100px;
+}
+input.remove_user_from_project {
+    border-radius: 25px;
+    width: 40px;
+    margin: 10px;
+}
+input.remove_user_from_project {
+    border-radius: 25px;
+    width: 40px;
+    margin: 10px;
+}
+input.add_user_to_project {
+    border-radius: 25px;
+    width: 40px;
+    margin: 10px;
+}
+input.add_user_to_task {
+    border-radius: 25px;
+    width: 40px;
+    margin: 10px;
+}
+#show_report {
+    height: 44px;
+    vertical-align: baseline;
+    margin-left: 10px;
+}
+.restore_task {
+    margin-left: 10px;
 }
