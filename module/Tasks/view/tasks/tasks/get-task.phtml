@@ -50,8 +50,9 @@
             }
         ?>
     </div>
+        <textarea id="sub_task"></textarea>
     <div id="task_button_area">
-        <div id="sub_task"></div>
+
         <p>
             <span class="c-file__icon-wrap">
                     <svg class="icon-nw icon-nw-attach-file-16" viewBox="0 0 16 16">
@@ -73,7 +74,13 @@
 <script type="text/javascript">
 
     $(function () {
-        CKEDITOR.replace('sub_task');
+        $.getScript("./node_modules/ckeditor/ckeditor.js", function () {
+            CKEDITOR.replace('sub_task',{
+                // width:750,
+                // height:205,
+                // resize_enabled:true
+            });
+        });
         $("#datepicker").datepicker();
         $("#task_file_update").css("display","none");
         $(".c-file__icon-wrap").on("click",function(){
@@ -158,8 +165,15 @@
 
         $(".edit_task_description").on("click", function () {
 
-            var html_string = '<div id="task_description_input" name="task_description">' + test_description + '</div><span class="edit_save_task_description">save</span>';
+            var html_string = '<textarea id="task_description_input" name="task_description"></textarea><span class="edit_save_task_description">save</span>';
             $("#task_description_block").html(html_string);
+       //     $.getScript("./node_modules/ckeditor/ckeditor.js", function () {
+                CKEDITOR.replace('task_description_input',{
+                    // width:750,
+                    // height:205,
+                    // resize_enabled:true
+                });
+     //       });
             CKEDITOR.replace('task_description_input');
             $(".edit_save_task_description").on("click", function () {
                 var data = {"description": CKEDITOR.instances.task_description_input.getData(), "id": $("#task_id_popup").val()};

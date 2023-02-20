@@ -3022,3 +3022,6 @@ input.add_user_to_task {
 .restore_task {
     margin-left: 10px;
 }
+#cke_task_description {
+    height: 400px;
+}

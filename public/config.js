@@ -32,10 +32,12 @@ CKEDITOR.config = function( config ) {
 
 	// Set the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;pre';
-	// config.height = '40%';
+	config.height = '40%';
     // config.extraPlugins = 'autogrow';
     // config.autoGrow_minHeight = 250;
     // config.autoGrow_maxHeight = 600;
 	// Simplify the dialog windows.
-	config.removeDialogTabs = 'image:advanced;link:advanced';
+	//config.removeDialogTabs = 'image:advanced;link:advanced';
+    config.blockedKeystrokes = [];
+
 };

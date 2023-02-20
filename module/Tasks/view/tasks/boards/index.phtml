@@ -49,7 +49,7 @@
         <input type="hidden" name="task_members" placeholder="task members" id="task_members">
         <h5>Task Description</h5>
 
-        <div name="task_description" placeholder="task description" id="task_description"></div>
+        <textarea placeholder="task description" id="task_description_field" class="c-field is-post"></textarea>
     </div>
     <div>
         <h5>Attach File</h5>
@@ -77,15 +77,15 @@
 </div>
 <div id="open_task_popup"></div>
 <script type="text/javascript">
-    $("#show_report").on('click', function(){
-        var project_id = $("#create_board_button").attr("project_id");
-        var start_date = $("#start_report_date").val();
-        var end_date = $("#end_report_date").val();
-        var url = "/projects/getProjectReport?project_id="+project_id+"&start_date="+start_date+"&end_date="+end_date
-        window.open(url,'_blank');
-    });
-    $(function () {
-        CKEDITOR.replace('task_description');
+
+    $(function(){
+     //   $.getScript("./node_modules/ckeditor/ckeditor.js", function () {
+            CKEDITOR.replace('task_description_field', {
+                blockedKeystrokes: [],
+            });
+    //    });
+
+
 
         $("#edit_project_member").bind("click", function () {
             edit_project_members();
@@ -125,6 +125,13 @@
                 $("#task_members_list").html(data);
             });
         get_project_tasks();
+    });
+    $("#show_report").on('click', function(){
+        var project_id = $("#create_board_button").attr("project_id");
+        var start_date = $("#start_report_date").val();
+        var end_date = $("#end_report_date").val();
+        var url = "/projects/getProjectReport?project_id="+project_id+"&start_date="+start_date+"&end_date="+end_date
+        window.open(url,'_blank');
     });
 
     function add_project_members() {
@@ -195,7 +202,7 @@
     });
     $(".create_task_button").on("click", function () {
         $( "#task_popup" ).slideToggle( "slow", function() {
-            // Animation complete.
+
         });
         refresh_project_members_list();
     });
@@ -206,7 +213,7 @@
             members_list.push($(e).attr("userId"));
         });
         //var task_description = $("#task_description").val();
-        var text = CKEDITOR.instances.task_description.getData();
+        var text = CKEDITOR.instances.task_description_field.getData();
         var estimate = $("#task_estimate").val();
         var project_id = $("#create_board_button").attr("project_id");
         var files = $("#task_file_input").prop('files');
