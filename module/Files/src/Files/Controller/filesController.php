@@ -4,8 +4,6 @@ namespace Files\Controller;
 use Files\Form\FilesForm;
 use Files\Model\Files;
 use Files\Model\FileSystem;
-use Files\Model\PayedFiles;
-use Files\Model\FilesToTagsTable;
 use Network\Model\NetworkTable;
 use Tags\Model\TagsTable;
 use Network\Model\Network;
@@ -36,7 +34,6 @@ class  filesController extends Controller\preloaderController {
         //$this->setLocale();
         $this->layout('layout/only_form');
         $request = $this->getRequest();
-        $isRoot = false;
         session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
@@ -47,7 +44,6 @@ class  filesController extends Controller\preloaderController {
             $filesInDir = false;
         }
         else {
-            //bug may be becouse here post ( not get)
             $dirKey = (int) $request->getPost()->dir_key;
             $dirs = $this->getUserDirs($dirKey,$userId);
             $isRoot  = false;
@@ -73,7 +69,6 @@ class  filesController extends Controller\preloaderController {
         session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
-        $files = new Files();
         $this->getFilesTable()->saveTextFile($file_name,$data,$current_directory,$userId,$file_id);
         die();
 
@@ -82,7 +77,6 @@ class  filesController extends Controller\preloaderController {
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $fileId = (int) $request->getPost()->file_id;
-        $files = new Files();
         session_start();
         $userSession = $_SESSION['user'];
         $userId = $userSession["id"];
@@ -103,8 +97,6 @@ class  filesController extends Controller\preloaderController {
         $userId = $user_session["id"];
         $parentDir = $this->getFileSystemTable()->getUserParentDir($filesystem->getAdapter(),$dirKey,$userId);
         $files = new Files();
-        session_start();        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
         if($parentDir !== false && $dirKey != 0 ) {
              $dirs = $this->getUserDirs($parentDir,$userId);
             $isRoot  = false;
@@ -118,7 +110,7 @@ class  filesController extends Controller\preloaderController {
             $filesInDir = $this->getFilesTable()->getDirFiles($files->getAdapter(),$currentDirectory,$userId);
         }
         else {
-            $dirs = array( 0 => array('id' => 0, 'path' => "/" ));
+            $dirs = array( 0 => array('id' => 0, 'path' => "Home" ));
             $isRoot  = true;
             $currentDirectory = 0;
             $filesInDir = false;
@@ -155,7 +147,7 @@ class  filesController extends Controller\preloaderController {
             $request->getPost()->toArray(),
             $request->getFiles()->toArray()
         );
-        $files = new Files();
+  //      $files = new Files();
         $this->getFilesTable()->saveUserFile($post);
 
         die();
@@ -186,28 +178,28 @@ class  filesController extends Controller\preloaderController {
         die();
     }
 
-    public function sellFileAction() {
-
-
-        $this->layout('layout/only_form');
-        $requestData = $this->getRequest()->getPost();
-        $fileId = $requestData->file_id;
-        $cost = $requestData->cost;
-        $description = $requestData->description;
-        //$tags = $requestData->tags;
-        session_start();        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
-        $file = new Files();
-        $fileData = $this->getFilesTable()->getFile($file->getAdapter(),$fileId,$userId);
-        $fileId = $fileData[0]["id"];
-        $this->getPayedFilesTable()->saveFileForPay($fileId,$description,$cost);
-        $tags = explode(",",$tags);
-        echo "test";
-        $tagsIds = $this->getTagsTable()->updateTags($tags);
-        $this->getFilesToTagsTable()->updateFileTags($fileId,$tagsIds);
-        die();
-
-    }
+//    public function sellFileAction() {
+//
+//
+//        $this->layout('layout/only_form');
+//        $requestData = $this->getRequest()->getPost();
+//        $fileId = $requestData->file_id;
+//        $cost = $requestData->cost;
+//        $description = $requestData->description;
+//        //$tags = $requestData->tags;
+//        session_start();        $user_session = $_SESSION['user'];
+//        $userId = $user_session["id"];
+//        $file = new Files();
+//        $fileData = $this->getFilesTable()->getFile($file->getAdapter(),$fileId,$userId);
+//        $fileId = $fileData[0]["id"];
+//        $this->getPayedFilesTable()->saveFileForPay($fileId,$description,$cost);
+////        $tags = explode(",",$tags);
+// //       echo "test";
+//        $tagsIds = $this->getTagsTable()->updateTags($tags);
+//        $this->getFilesToTagsTable()->updateFileTags($fileId,$tagsIds);
+//        die();
+//
+//    }
 
     public function deleteFileAction() {
         $request = $this->getRequest();
@@ -225,9 +217,6 @@ class  filesController extends Controller\preloaderController {
     }
 
     public function renameDirAction() {
-        session_start();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
         $request = $this->getRequest();
         $dir = (int) $request->getPost()->dir;
         $dirName =  $request->getPost()->directory_name;
@@ -257,8 +246,6 @@ class  filesController extends Controller\preloaderController {
         $userId = $user_session["id"];
         $dirs = $this->getFileSystemTable()->getChildDirs( $dirId, $userId);
         $files = new Files();
-        session_start();        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
         foreach ($dirs as $dir) {
             $filesInDir = $this->getFilesTable()->getDirFiles($files->getAdapter(), $dir , $userId);
             if(count($filesInDir) > 0)
@@ -279,11 +266,6 @@ class  filesController extends Controller\preloaderController {
         session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
-//         $dirs = $this->getFileSystemTable()->getChildDirs($fileSystem->getAdapter(), $dirId, $userId);
-        $files = new Files();
-//         $user_session = new Container('user');
-//         $userId = $user_session->user->id;
-
         $this->getFileSystemTable()->moveDir($fileSystem->getAdapter(),$dirId,$dirIdCurrent,$userId);
         die();
     }
@@ -324,7 +306,8 @@ class  filesController extends Controller\preloaderController {
         $dirId = (int)$request->getPost()->dir;
 
         $password = $request->getPost()->password;
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $files = new FileSystem();
         $dir  = $this->getFileSystemTable()->getDir($dirId,$userId,$files->getAdapter());
@@ -343,7 +326,8 @@ class  filesController extends Controller\preloaderController {
         $request = $this->getRequest();
         $fileId = (int)$request->getPost()->file_id;
         $requiredDirId = (int)$request->getPost()->current_directory;
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $files = new Files();
         $dir  = $this->getFilesTable()->moveFileToSystem($fileId,$requiredDirId,$userId,$files->getAdapter());
@@ -423,10 +407,4 @@ class  filesController extends Controller\preloaderController {
         }
         return $this->filesToTagsTable;
     }
-
-
-
-
-
-
 }

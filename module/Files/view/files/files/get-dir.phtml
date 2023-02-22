@@ -441,13 +441,16 @@ if (!$is_root) {
         file_html = file_html + '<span class="abs ui-resizable-handle ui-resizable-se"></span></div>';
         $("#window_text_file").remove();
         $('body').append(file_html);
-        $.getScript("./node_modules/ckeditor/ckeditor.js", function () {
-            CKEDITOR.replace('editor');
+        CKEDITOR.replace('editor', {
+            blockedKeystrokes: [],
+            height : "800px",
+        });
+
             $("#window_text_file").show();
             $("#edit_file_name").on("click", edit_file_name);
             $("#save_text_file").on("click", save_text_file);
 
-        });
+
     }
 
     function save_text_file() {

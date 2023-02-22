@@ -1636,15 +1636,18 @@ textarea.c-field::placeholder {
     visibility: hidden;
 }
 
+
 .c-file__icon-wrap {
     flex: none;
-    display: flex;
+    display: block;
     align-items: center;
     justify-content: center;
     font-size: 16px;
-    color: #9E9E9E;
+    color: black;
     cursor: inherit;
+    margin-top: 13px;
 }
+
 
 .c-file__desc {
     flex: 1;
@@ -3025,3 +3028,40 @@ input.add_user_to_task {
 #cke_task_description {
     height: 400px;
 }
+.edit_task_name > img,.edit_task_description > img {
+
+    width: 15px;
+    display: inline-block;
+}
+#log_hours_input , #datepicker  {
+    vertical-align: baseline;
+    height: 30px;
+    width: 30px;
+}
+#datepicker , #task_status {
+    width: 100px;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: 1px solid white;
+    background-color: #05e1a3 ;
+    font-weight: bold;
+    color: white;
+    /* min-width: 160px; */
+}
+.ui-widget-header {
+    border: 1px solid white;
+    background-color: #05e1a3 ;
+    color: white;
+    font-weight: bold;
+}
+.
+.ui-datepicker .ui-datepicker-header {
+    background: none;
+    background-color: #05e1a3 ;
+}
+.ui-datepicker .ui-datepicker-next {
+    background: center / contain no-repeat url("../images/icons/next.png")
+}
+.ui-datepicker .ui-datepicker-prev {
+    background: center / contain no-repeat url("../images/icons/previous.png")
+  }
