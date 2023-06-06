@@ -5,7 +5,7 @@ foreach($friends as $friend){
     echo "<div class='user_container_block' userId='".$friend["user_id"]."'>";
     echo "<div class='member_name' userId='".$friend['user_id']."'>";
 
-    echo "<div userId='".$friend['user_id']."' class='user_container'>";
+    echo "<div userId='".$friend['user_id']."' class='user_container_task'>";
 //    echo "<div class='avatar'>";
 //    echo "<img src=".$friend['avatar'].">";
 //    echo "</div>";
@@ -22,7 +22,7 @@ foreach($friends as $friend){
 <script type="text/javascript">
     $(".add_user_to_task").on("click", function(){
         var user_id = $(this).attr("userId");
-        var member_name = $(".user_container[userId="+user_id+"]").text();
+        var member_name = $(".user_container_task[userId="+user_id+"]").text();
         var member_markup =  "<div userId="+user_id+">"+member_name+"</div";
         $("#task_members_list").append(member_markup);
         });

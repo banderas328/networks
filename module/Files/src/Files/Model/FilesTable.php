@@ -50,19 +50,22 @@ class FilesTable
         $userId = $user_session["id"];
         $path = "userfiles/".$userId;
         $fileName = uniqid();
-        $file = $path . '/' . $userId . $fileName . $data['file']['name'];
-        if(move_uploaded_file($data['file']['tmp_name'], getcwd() . "/public/" . $file)) {
-            $fileDb['user_id'] = $userId;
-            if(isset($data["to_directory"]))
-            $fileDb['directory'] = $data["to_directory"];
-            else $fileDb['directory']  = 0;
-            $fileDb['file_title'] = $data["file"]['name'];
-            $fileDb['file_name'] = $file;
-            $fileDb['type'] = $data["file"]['type'];
-            $this->tableGateway->insert($fileDb);
-            return $this->tableGateway->lastInsertValue;
+        //var_dump($data);
+        if(isset($data['name'])) {
+            $file = $path . '/' . $userId . $fileName . $data['name'];
+            if(move_uploaded_file($data['tmp_name'], getcwd() . "/public/" . $file)) {
+                $fileDb['user_id'] = $userId;
+                if(isset($data["to_directory"]))
+                    $fileDb['directory'] = $data["to_directory"];
+                    else $fileDb['directory']  = 0;
+                    $fileDb['file_title'] = $data['name'];
+                    $fileDb['file_name'] = $file;
+                    $fileDb['type'] = $data['type'];
+                    $this->tableGateway->insert($fileDb);
+                    return $this->tableGateway->lastInsertValue;
+            }
         }
-    }
+   }
 
     public function saveTextFile($file_name,$data,$current_directory,$userId,$file_id =  false) {
         $path = "userfiles/".$userId;
@@ -76,6 +79,7 @@ class FilesTable
             $fileDb['file_title'] = $file_name;
             $fileDb['file_name'] = $file;
             $fileDb['type'] = "text_file";
+            if(is_numeric($file_id))
             $this->tableGateway->delete(['user_id' => $userId, 'id'=>$file_id]);
             $this->tableGateway->insert($fileDb);
             return $this->tableGateway->lastInsertValue;
@@ -158,7 +162,7 @@ class FilesTable
        if($dir)
            $sql = "SELECT  * ,files.id as id FROM files left join users_filesystem on users_filesystem.id = files.directory left join payed_files on files.id = payed_files.file_id  WHERE users_filesystem.user_id='".$userId."' and files.directory = '".$dir."'";
        else
-           $sql = "SELECT  *,files.id as id FROM files  left join payed_files on files.id = payed_files.file_id  WHERE files.user_id='".$userId."' and files.directory = '".$dir."' group by files.id";
+           $sql = "SELECT  *,files.id as id FROM files   WHERE files.user_id='".$userId."' and files.directory = '".$dir."' group by files.id";
        $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
        if(!empty($resultSet->buffer())) return $resultSet->buffer();
        else return false;

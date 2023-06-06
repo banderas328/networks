@@ -2,90 +2,95 @@
 $user = $_SESSION['user'];
 $lang = $user['user']->lang;
 $user_id = $user['user']->id;
-if (!$is_root) {
+if (! $is_root) {
     ?>
-    <!--    <span id="paste">paste</span>-->
-    <div class="hard-drive-form-wrapper">
-        <div>
-            <form id="file_directory_form" method="post">
-                <input type="file" name="file" id="file_to_directory">
-                <p class='action_btn' id="upload_file">upload file</p>
-            </form>
-        </div>
-        <div>
-            <div id="create_dir_block" title="Create Directory" dir="<?php echo $dir_value['id']; ?>">
-                <input type="text" id="directory_name" placeholder="Directory Name">
-                <button value="Create" class='action_btn' id="create_dir">
+<!--    <span id="paste">paste</span>-->
+<div class="hard-drive-form-wrapper">
+	<div>
+		<form id="file_directory_form" method="post">
+			<input type="file" name="file" id="file_to_directory">
+			<p class='action_btn' id="upload_file">upload file</p>
+		</form>
+	</div>
+	<div>
+		<div id="create_dir_block" title="Create Directory"
+			dir="<?php echo $dir_value['id']; ?>">
+			<input type="text" id="directory_name" placeholder="Directory Name">
+			<button value="Create" class='action_btn' id="create_dir">
                     <?php echo $this->translate("Create Directory", false, $lang); ?>
                 </button>
-            </div>
-            <div id="rename_file_block" title="Rename File" dir="<?php echo $dir_value['id']; ?>">
-                <input type="text" id="rename_file_name" placeholder="New File Name">
-                <button value="Rename" class='action_btn' id="rename_file">
+		</div>
+		<div id="rename_file_block" title="Rename File"
+			dir="<?php echo $dir_value['id']; ?>">
+			<input type="text" id="rename_file_name" placeholder="New File Name">
+			<button value="Rename" class='action_btn' id="rename_file">
                     <?php echo $this->translate("Rename File", false, $lang); ?>
                 </button>
-            </div>
-            <div id="rename_dir_block" title="Rename Directory" dir="<?php echo $dir_value['id']; ?>">
-                <input type="text" id="rename_directory_name" placeholder="New Directory Name">
-                <button value="Rename" class='action_btn' id="rename_dir">
+		</div>
+		<div id="rename_dir_block" title="Rename Directory"
+			dir="<?php echo $dir_value['id']; ?>">
+			<input type="text" id="rename_directory_name"
+				placeholder="New Directory Name">
+			<button value="Rename" class='action_btn' id="rename_dir">
                     <?php echo $this->translate("Rename Directory", false, $lang); ?>
                 </button>
-            </div>
-            <button id="show_directory_creation" value="create dir"
-                    class='action_btn'><?php echo $this->translate("create directory", false, $lang); ?></button>
-        </div>
-        <div>
-            <button id="paste" class='action_btn'>paste</button>
-        </div>
-        <div>
-            <button id="create_txt_file" class='action_btn'>create text file</button>
-        </div>
-        <input type="hidden" value="<?php if (isset($current_directory)) echo $current_directory ?>" id="current_directory">
-    </div>
+		</div>
+		<button id="show_directory_creation" value="create dir"
+			class='action_btn'><?php echo $this->translate("create directory", false, $lang); ?></button>
+	</div>
+	<div>
+		<button id="paste" class='action_btn'>paste</button>
+	</div>
+	<div>
+		<button id="create_txt_file" class='action_btn'>create text file</button>
+	</div>
+	<input type="hidden"
+		value="<?php if (isset($current_directory)) echo $current_directory ?>"
+		id="current_directory">
+</div>
 
-    <?php
+<?php
 }
 ?>
 <div class="dirs_block">
     <?php
     if (isset($dirs) and count($dirs)) {
-    foreach ($dirs
-
-             as $dir_key => $dir_value) {
-        echo "<div class='dir_wraper hard-drive-dir-wrapper'>
+        foreach ($dirs as 
+        $dir_key => $dir_value) {
+            echo "<div class='dir_wraper hard-drive-dir-wrapper'>
                         <div class='directory_wrapper hard-drive-directory-inner'>
                         <img src='assets/images/icons/folder.png' width='50px' height='50px' dir=" . $dir_value['id'] . " class='folder_action'/>
                          <p  dir_key=" . $dir_value['id'] . " dir=" . $dir_value['id'] . " class='directory folder_action' >" . $dir_value['path'] . " </p>
                   </div>";
-        if (!$is_root) {
-            echo "<div class='directory_actions hard-dropdown ' dir=" . $dir_value["id"] . ">
+            if (! $is_root) {
+                echo "<div class='directory_actions hard-dropdown ' dir=" . $dir_value["id"] . ">
                            <p class='delete_directory hard-dropdown-items ' dir=" . $dir_value['id'] . ">" . $this->translate('Delete Directory', false, $lang) . "</p>
                            <p class='move_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Move Directory</p>
                            <p class='rename_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Rename Directory</p>
                            <p class='share_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Share Directory</p>
                            <p class='share_dir_with_password hard-dropdown-items ' dir=" . $dir_value['id'] . ">Share With Password</p>
                       </div>";
-        }
-        echo "</div>";
-
-        ?>
-        <div class="share_dir_block" title="Share Directory with password" dir="<?php echo $dir_value['id']; ?>">
-            <p>
+            }
+            echo "</div>";
+            
+            ?>
+        <div class="share_dir_block"
+		title="Share Directory with password"
+		dir="<?php echo $dir_value['id']; ?>">
+		<p>
                 <?php
-                $pathSharedExist = $dir_value["path_id"];
-                echo "<input type='text' class='input_password' placeholder='Password' dir=" . $dir_value['id'] .
-                    "><input type='button' value='Save Password' dir='"
-                    . $dir_value['id'] . "' class='dir_save_pass btn btn-primary action_btn'>";
-                if ($pathSharedExist) echo "<input type='button' value='Close Share' dir='" . $dir_value['id']
-                    . "' class='dir_close_share btn btn-primary action_btn'>";
-                unset($pathSharedExist);
-                ?>
+            $pathSharedExist = $dir_value["path_id"];
+            echo "<input type='text' class='input_password' placeholder='Password' dir=" . $dir_value['id'] . "><input type='button' value='Save Password' dir='" . $dir_value['id'] . "' class='dir_save_pass btn btn-primary action_btn'>";
+            if ($pathSharedExist)
+                echo "<input type='button' value='Close Share' dir='" . $dir_value['id'] . "' class='dir_close_share btn btn-primary action_btn'>";
+            unset($pathSharedExist);
+            ?>
             </p>
-        </div>
+	</div>
 
     <?php
-    }
-    ?>
+        }
+        ?>
 
         <script>
 
@@ -119,7 +124,7 @@ if (!$is_root) {
         </script>
         <?php
     }
-
+    
     ?>
 </div>
 <div class="files_block">
@@ -143,7 +148,7 @@ if (!$is_root) {
             echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='move_file ' file=" . $file['id'] . ">" . $this->translate('Move File', false, $lang) . "</span></p>";
             echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='rename_file ' file=" . $file['id'] . ">" . $this->translate('Rename File', false, $lang) . "</span></p>";
             echo "<p class='hard-dropdown-items'><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" . $this->translate('Download File', false, $lang) . "</a></p>";
-
+            
             if ($type[0] == 'image') {
                 echo "<p class='image_url hard-dropdown-items' url='/" . $file["file_name"] . "'><a href='#'>Copy image url</a></p>";
             }
@@ -159,7 +164,12 @@ if (!$is_root) {
 <script type="text/javascript">
     document.oncontextmenu = function () {
         return false;
-    }; //��������� ���������� ����
+    }; 
+    function invalid_callback() {
+        setTimeout(function() {
+          $( "#effect" ).removeAttr( "style" ).hide().fadeIn();
+        }, 1000 );
+      };
     $(function () {
         if (window.need_to_paste_file == true) {
             $("#paste").addClass("required_btn");
@@ -349,6 +359,7 @@ if (!$is_root) {
         });
         $("#create_dir").bind("click", function () {
             var directory_name = $("#directory_name").val();
+
             var current_directory = $("#current_directory").val();
 
             $.ajax({
@@ -458,9 +469,9 @@ if (!$is_root) {
         var data = CKEDITOR.instances.editor.getData();
         var file_name = $("#text_file_name").text();
         var file_id = $("#text_file_name").attr('file_id');
-        var name = $("#text_file_name_input").val().length;
-        if(name) {
-            var file_name = $("#text_file_name_input").val();
+        var file_name = $("#text_file_name_input").val();
+        if(!file_name) {
+        	var file_name = $("#text_file_name").text();
         }
         $("#text_file_name").text(file_name);
         var current_directory = $("#current_directory").val();

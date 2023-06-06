@@ -70,7 +70,7 @@ class  filesController extends Controller\preloaderController {
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $this->getFilesTable()->saveTextFile($file_name,$data,$current_directory,$userId,$file_id);
-        die();
+        die("file created");
 
     }
     public function getContentTextFileAction(){

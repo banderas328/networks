@@ -3065,3 +3065,7 @@ input.add_user_to_task {
 .ui-datepicker .ui-datepicker-prev {
     background: center / contain no-repeat url("../images/icons/previous.png")
   }
+#open_task_popup  {
+    width: 1000px;
+    height: 500px;
+}
