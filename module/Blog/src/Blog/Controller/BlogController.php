@@ -99,6 +99,30 @@ class BlogController extends Controller\preloaderController
         die();
 
     }
+    
+    public function deleteBlogsAction(){
+        $this->layout('layout/only_form');
+        $request = $this->getRequest();
+        session_start();
+        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
+        $blog = new Blog();
+        return array("blogs" => $this->getBlogTable()->getBlogsForDelete($userId),$blog->getAdapter());
+        
+    }
+    
+    public function deleteBlogAction(){
+        $request = $this->getRequest();
+        session_start();
+        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
+        $data = $this->getRequest()->getPost();
+        if($this->getBlogTable()->deleteBlog($userId,$data["blog_id"]))
+            die("deleted");
+        die("error on blod delete");
+        //return array("blogs" => $this->getBlogTable()->getBlogsForDelete($userId),$blog->getAdapter());
+        
+    }
 
 
 }

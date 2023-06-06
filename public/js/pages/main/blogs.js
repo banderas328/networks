@@ -17,5 +17,13 @@ $(function() {
         .done(function( data ) {
             $(".c-blog__posts").html(data);
         });
+    $.ajax({
+        type: "POST",
+        url: "blog/deleteblogs"
+
+    })
+        .done(function( data ) {
+            $("#delete_blog").html(data);
+        });
 
    });

@@ -23,15 +23,6 @@ $user = $_SESSION['user'];
     <script type="text/javascript" src="jquery-ui-1.13.2/jquery-ui.js"></script>
     <script type="text/javascript" src="assets/js/jquery.desktop.js"></script>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-03HREGPV42"></script>
-    <script>
-        typeof window.jQuery !== 'undefined' ? console.log(window.jQuery.fn.jquery) : 'jQuery not found!';
-
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-03HREGPV42');
     </script>
     <script type="text/javascript" src="node_modules/ckeditor/ckeditor.js"></script>
 </head>
@@ -55,15 +46,5 @@ $user = $_SESSION['user'];
         <?php include dirname(__FILE__)."/windows/frame.phtml"; ?>
         <?php // include dirname(__FILE__)."/windows/payment.phtml"; ?>
     </div>
-<script type="text/javascript">
-    (function($){
-        $.fn.disableSelection = function() {
-            return this
-                .attr('unselectable', 'off')
-                .css('user-select', 'all')
-                .on('selectstart', true);
-        };
-    })(jQuery);
-</script>
 </body>
 </html>

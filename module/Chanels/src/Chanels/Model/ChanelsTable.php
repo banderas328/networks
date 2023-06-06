@@ -11,6 +11,7 @@ use Zend\Db\Sql\Sql;
 class ChanelsTable
 {
     protected $tableGateway;
+    protected $adapter;
 
     public function __construct()
     {
@@ -22,12 +23,18 @@ class ChanelsTable
             'username' => $config->database["params"]->username,
             'password' => $config->database["params"]->password,
         ));
+        $this->adapter = $adapter;
         $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("chanels", $adapter);
     }
 
     public function fetchAllPublic()
     {
-        $resultSet = $this->tableGateway->select(array('private' => 0));
+        $sql = "SELECT  * FROM chanels
+        left join chanels_admins on chanels_admins.chanel_id = chanels.id
+        left join user_settings on chanels_admins.admins = user_settings.user_id
+        left join private_chanels_requests on private_chanels_requests.user_id = user_settings.user_id
+        WHERE chanels.private = 0 group by chanels.chanel_name";
+        $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         return $resultSet;
     }
 
