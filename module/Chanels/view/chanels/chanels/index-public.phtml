@@ -66,13 +66,17 @@
                 '<div class="message_to_user_from_chanel_list" style="display:hide;" title="Enter message" to_chanel=' +  to_chanel.to_chanel +'>' +
                 '<div class="message_box"  to_chanel='+to_chanel.to_chanel+'></div>' +
                 '<div class="chanel"  id="public_messages_message_box" to_chanel='+to_chanel.to_chanel+'>' +
-                '<button class="submit" class="chanel_button" to_chanel='+to_chanel.to_chanel+'>Send</button>' +
+                
                 '<div class="message_to_user_area_chanel"  id="public_chat_message" to_chanel='+to_chanel.to_chanel+'></div>' +
-
+                '<button class="submit" class="chanel_button" to_chanel='+to_chanel.to_chanel+'>Send</button>' +
                 '</div></div>' + '</div> <div class="abs window_bottom">Chat</div> </div> <span class="abs ui-resizable-handle ui-resizable-se"></span> </div>';
             $("#chat_public").remove();
             $('body').append(chat_html);
-            CKEDITOR.replace('public_chat_message');
+            CKEDITOR.replace('public_chat_message',{
+                width:750,
+                height:205,
+                resize_enabled:true
+                });
             $(".message_to_user_from_chanel_list").find('button').addClass("message_to_user_from_user_chanel_button");
             $(".message_to_user_from_user_chanel_button").bind("click",function(){
                 send_to_chanel();

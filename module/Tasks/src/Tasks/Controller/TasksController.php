@@ -30,8 +30,7 @@ class TasksController extends Controller\preloaderController
 
         $request = array_merge_recursive(
             $request->getPost()->toArray(),
-//             $request->getFiles()->toArray()
-$_FILES
+            $_FILES
         );
         $this->getTasksTable()->createTask($request);
         return false;
@@ -64,7 +63,7 @@ $_FILES
         $request = $this->getRequest();
         $request = array_merge_recursive(
             $request->getPost()->toArray(),
-            $request->getFiles()->toArray()
+            $_FILES
         );
         echo json_encode($this->getTasksTable()->updateTask($request));
         return false;

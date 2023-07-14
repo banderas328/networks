@@ -102,6 +102,31 @@ class ChanelsController extends Controller\preloaderController
         $this->getChanelsTable()->allowAccessUserToChanel($chanels->getAdapter(),$request);
         die();
     }
+    
+    public function indexDeleteAction()
+    {
+        session_start();        
+        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
+        $chanels = new  Chanels();
+        $this->layout('layout/only_form');
+        return new ViewModel(array(
+            'chanels' => $this->getChanelsTable()->fetchAllChanelsInAdminRole(),
+        ));
+    }
+    
+    public function deleteChanelAction(){
+        session_start();
+        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
+        if ($this->getChanelsTable()->deleteChanel($this->getRequest(),$userId))
+            die("deleted");
+        die("error delete chanel");
+        
+        
+        
+        
+    }
 
     public function getChanelsTable()
     {

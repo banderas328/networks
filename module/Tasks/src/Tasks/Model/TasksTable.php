@@ -3,6 +3,7 @@ namespace Tasks\Model;
 
 use Files\Model\FilesTable;
 use Zend\Session\Container;
+use Notifications\Model\NotificationsTable;
 use Zend\Config\Config;
 use Zend\Config\Factory;
 
@@ -98,8 +99,15 @@ class TasksTable
                 $sql = "select project_name from projects where id=" . $project_id;
                 $project_name = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE)->toArray()[0]["project_name"];
                 /* todo change to transaction methods */
-              //  $sql = "insert into notifications (text,html_id,user_id) values ('you have new task: " . $task_name . " in project :" . $project_name . "','test'," . $member . ")";
-              //  $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+                $notification = new NotificationsTable;
+                
+                $data = ["text" => "you have new task: " . $task_name . " in project :" . $project_name,
+                         "html_id" => "test",
+                         'user_id' => $member
+                ];
+                $notification->createNotification($data);
+                //$sql = "insert into notifications (text,html_id,user_id) values ('you have new task: " . $task_name . " in project :" . $project_name . "','test'," . $member . ")";
+                //$this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
             }
         }
     }
@@ -217,6 +225,22 @@ class TasksTable
         if (isset($data["data"]))
             $data = $data["data"];
         $fileTable = new \Files\Model\FilesTable();
+        
+        ////////////////////
+        $fileIDs = [];
+        foreach ($data['files'] as $file_key => $files_value) {
+            // var_dump($file_key);
+            // var_dump($files_value);
+            $fileIDs[] = $fileTable->saveUserFile([
+                "name" => $data['files']["name"][$i],
+                "tmp_name" => $data['files']["tmp_name"][$i],
+                "type" => $data['files']["type"][$i]
+            ]);
+            $i ++;
+        }
+        
+        
+        //////////
         if (isset($data['file']['tmp_name']))
             $fileID = $fileTable->saveUserFile($data);
         unset($data['file']);
@@ -227,12 +251,27 @@ class TasksTable
                 "id = " . (int) $data["id"]
             ]);
         }
+        $taskID = $this->tableGateway->lastInsertValue;
+        if ($fileIDs) {
+            $fileTable = new \Tasks\Model\TasksFilesTable();
+            foreach ($fileIDs as $fileId) {
+                if (is_numeric($fileId)) {
+                    $dataFile = [];
+                    $dataFile["file_id"] = $fileId;
+                    $dataFile["task_id"] = $taskID;
+                    
+                    // var_dump($dataFile);
+                    $fileTable->saveFileToTask($dataFile);
+                }
+            }
+        }
+        /*
         if (isset($fileID)) {
             $dataFile["file_id"] = $fileID;
             $dataFile["task_id"] = $data["parent_task"];
             $fileTable = new \Tasks\Model\TasksFilesTable();
             $fileTable->saveFileToTask($dataFile);
-        }
+        }*/
         return $data;
     }
 

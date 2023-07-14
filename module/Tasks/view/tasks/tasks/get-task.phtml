@@ -1,46 +1,54 @@
 <div id="task_block">
-    <input type="hidden" value="<?php echo $task["id"]; ?>" name="task_id" id="task_id_popup">
-    <div id="task_name_block"><span
-            class="edit_task_name"><img src="\assets\images\icons\edit.png"></span> Task name: <span
-            class="task_name_value"><?php echo $task["name"]; ?></span></div>
+	<input type="hidden" value="<?php echo $task["id"]; ?>" name="task_id"
+		id="task_id_popup">
+	<div id="task_name_block">
+		<span class="edit_task_name"><img src="\assets\images\icons\edit.png"></span>
+		Task name: <span class="task_name_value"><?php echo $task["name"]; ?></span>
+	</div>
+	<div id="task_description_block">
+<!-- 		-->
+	</div>
+	<span class="edit_task_description"><button value='save'>Save</button> </span> Description: <span 
+			class="task_description_value"></span>
 
-    <div id="task_description_block"><span class="edit_task_description"><img src="\assets\images\icons\edit.png"> </span> Description: <span
-            class="task_description_value"><?php echo $task["description"]; ?></span></div>
-
-    <div id="task_description">Status: <?php echo $task["status"]; ?>
+	<div id="task_description">Status: <?php echo $task["status"]; ?>
         <select id="task_status">
-            <option value="edit">Edit</option>
-            <option value="new">New</option>
-            <option value="urgent">Urgent</option>
-            <option value="major">Major</option>
-            <option value="normal">Normal</option>
-            <option value="low">Low</option>
-            <option value="hold">Hold</option>
-        </select>
-    </div>
-    <div id="log_work_block">
-        <div>
-            <button id="add_hours_button" class="action_btn">Add</button>
-            : <input type="text" name="log_hours" id="log_hours_input" placeholder="1"
-                     task_id="<?php echo $task["id"]; ?>">&nbsp hours to task
+			<option value="edit">Edit</option>
+			<option value="new">New</option>
+			<option value="urgent">Urgent</option>
+			<option value="major">Major</option>
+			<option value="normal">Normal</option>
+			<option value="low">Low</option>
+			<option value="hold">Hold</option>
+		</select>
+	</div>
+	<div id="log_work_block">
+		<div>
+			<button id="add_hours_button" class="action_btn">Add</button>
+			: <input type="text" name="log_hours" id="log_hours_input"
+				placeholder="1" task_id="<?php echo $task["id"]; ?>">&nbsp hours to
+			task
 
-            <div>
-                on Date : <input type="text" id="datepicker">
-            </div>
-        </div>
-        <div class="task_members">
-            <?php foreach ($task["users"] as $user) {
-
+			<div>
+				on Date : <input type="text" id="datepicker">
+			</div>
+		</div>
+		<div class="task_members">
+            <?php
+            
+foreach ($task["users"] as $user) {
+                
                 echo "<span>" . $user["first_name"] . " " . $user["second_name"] . "</span>";
                 echo "<img src='" . $user["avatar"] . "'/>";
-            } ?>
+            }
+            ?>
         </div>
-        <div>
-            <h5>Attached Files</h5>
+		<div>
+			<h5>Attached Files</h5>
             <?php
             if (isset($task["files"]))
                 foreach ($task["files"] as $file) {
-
+                    
                     echo "<a href='" . $file["file_name"] . "'>" . $file["file_title"] . "</a><br/>";
                 }
             ?>
@@ -48,35 +56,35 @@
             <?php
             if (isset($task["sub_tasks"]))
                 foreach ($task["sub_tasks"] as $sub_task) {
-
+                    
                     echo "<p style='border-bottom: 1px solid #f5f5f5'>" . $sub_task["description"] . " status : " . $sub_task["status"] . "</p>";
                 }
             ?>
-            <textarea id="sub_task"></textarea>
-        </div>
+<div id="sub_task"></div> 
+		</div>
 
-        <div id="task_button_area">
+		<div id="task_button_area">
 
-            <p>
-            <span class="c-file__icon-wrap">
-                    <svg class="icon-nw icon-nw-attach-file-16" viewBox="0 0 16 16">
+			<p>
+				<span class="c-file__icon-wrap"> <svg
+						class="icon-nw icon-nw-attach-file-16" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" clip-rule="evenodd"
-                              d="m14.8 7.6-5.5 6.3c-2.1 2.4-5.6 2.8-7.7.7-2.1-2.1-2-5.8.1-8.2L7 .4c.3-.4.9-.4 1.3-.1.4.4.3 1 0 1.4L3 7.7c-1.5 1.7-1.5 4.1-.1 5.5 1.4 1.4 3.7 1.2 5.2-.5l5.5-6.3c.9-1 .9-2.6.1-3.4-.8-.8-2.3-.7-3.2.3L5.4 9c-.4.4-.4 1-.1 1.3.3.3.8.3 1.2-.1l4.8-5.5c.3-.4.9-.5 1.3-.1s.3 1 0 1.4l-4.8 5.5c-1 1.2-2.7 1.3-3.7.3s-1-2.8.1-4l5-5.7c1.6-1.8 4.1-2.1 5.7-.5 1.5 1.4 1.5 4.2-.1 6z"></path>
+							d="m14.8 7.6-5.5 6.3c-2.1 2.4-5.6 2.8-7.7.7-2.1-2.1-2-5.8.1-8.2L7 .4c.3-.4.9-.4 1.3-.1.4.4.3 1 0 1.4L3 7.7c-1.5 1.7-1.5 4.1-.1 5.5 1.4 1.4 3.7 1.2 5.2-.5l5.5-6.3c.9-1 .9-2.6.1-3.4-.8-.8-2.3-.7-3.2.3L5.4 9c-.4.4-.4 1-.1 1.3.3.3.8.3 1.2-.1l4.8-5.5c.3-.4.9-.5 1.3-.1s.3 1 0 1.4l-4.8 5.5c-1 1.2-2.7 1.3-3.7.3s-1-2.8.1-4l5-5.7c1.6-1.8 4.1-2.1 5.7-.5 1.5 1.4 1.5 4.2-.1 6z"></path>
                     </svg>
-                </span>
-                <input type="file" name="task_file" placeholder="task file" id="task_file_update"/>
-            </p>
-            <p>
-                <input type="button" name="update task" value="update task" id="update_task"
-                       task_id="<?php echo $task["id"]; ?>"/>
-            </p>
-            <p>
-                <input type="button" name="archive task" value="archive task" id="archive_task"
-                       task_id="<?php echo $task["id"]; ?>"/>
-            </p>
-        </div>
-    </div>
-    <script type="text/javascript">
+				</span> <input type="file" name="task_file" placeholder="task file"
+					multiple id="task_file_update" />
+			</p>
+			<p>
+				<input type="button" name="update task" value="update task"
+					id="update_task" task_id="<?php echo $task["id"]; ?>" />
+			</p>
+			<p>
+				<input type="button" name="archive task" value="archive task"
+					id="archive_task" task_id="<?php echo $task["id"]; ?>" />
+			</p>
+		</div>
+	</div>
+	<script type="text/javascript">
         function edit_task_name() {
 
             var tast_name = $(".task_name_value").text();
@@ -115,14 +123,13 @@
 
         }
         function edit_task_description() {
-            $("#task_description_block").html(" ");
-            $("#task_description_input").remove();
-            var html_string = '<textarea id="task_description_input" name="task_description"></textarea><span class="edit_save_task_description">save</span>';
-            $("#task_description_block").html(html_string);
-            CKEDITOR.replace('task_description_input');
-            $(".edit_save_task_description").on("click", function () {
+//             $("#task_description_block").html(" ");
+//             $("#task_description_input").remove();
+//             var html_string = '<textarea id="task_description_input" name="task_description"></textarea><span class="edit_save_task_description">save</span>';
+//             $("#task_description_block").html(html_string);
+ //           CKEDITOR.replace('task_description_block');
                 var data = {
-                    "description": CKEDITOR.instances.task_description_input.getData(),
+                    "description": CKEDITOR.instances.task_description_block.getData(),
                     "id": $("#task_id_popup").val()
                 };
                 $.ajax({
@@ -153,7 +160,7 @@
 
                         });
                     });
-            });
+
 
         }
         function update_task() {
@@ -161,10 +168,15 @@
             //var text = $("#sub_task").val();
             var text = CKEDITOR.instances.sub_task.getData();
             var status = $("#task_status").val();
-            var files = $("#task_file_update").prop('files');
-            var file = files[0];
+            //var files = $("#task_file_update").prop('files');
+            //var file = files[0];
+            //var data = new FormData();
             var data = new FormData();
-            data.append('file', file);
+    	    var totalfiles = document.getElementById('task_file_update').files.length;
+  		    for (var index = 0; index < totalfiles; index++) {
+    			data.append("files[]", document.getElementById('task_file_update').files[index]);
+  		    }
+//             data.append('file', file);
             data.append('parent_task', task_id);
             data.append('description', text);
             data.append('status', status);
@@ -195,7 +207,13 @@
 
         }
         $(function () {
+        	//document.getElementById("task_description_block").value  = "";
             CKEDITOR.replace('sub_task', {});
+            CKEDITOR.replace('task_description_block', {});
+           CKEDITOR.instances.task_description_block.setData( "<?php echo trim($task["description"]);?>", function()
+            		{
+            		    this.checkDirty();  // true
+            		});
             $("#datepicker").datepicker();
             $("#task_file_update").css("display", "none");
             $(".c-file__icon-wrap").on("click", function () {

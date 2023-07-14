@@ -6,12 +6,10 @@ $('#create_chanel_submit').click(function () {
     } else {
         is_private = "0";
     }
-    alert("chanel");
     $.ajax({
         url: "chanels/createChanel",
         type: "POST",
         data: {"chanel_name": name, "is_private": is_private},
-       // dataType: "json"
     }).done(function (data) {
         $.ajax({
             type: "GET",
@@ -28,6 +26,14 @@ $('#create_chanel_submit').click(function () {
         })
             .done(function (data) {
                 $("#private_chanels").html(data);
+            });
+        $.ajax({
+            type: "GET",
+            url: "chanels/indexDelete"
+
+        })
+            .done(function( data ) {
+                $("#delete_chanel").html(data);
             });
     });
 });

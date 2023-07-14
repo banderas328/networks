@@ -890,7 +890,9 @@ th.shrink {
     margin: 10px 0;
     display: inline-block;
     border: none;
-    margin-left: 10px;
+}
+.chanel_button {
+	position:relative;
 }
 .close_chanel {
     font-weight: bold;
@@ -901,13 +903,13 @@ th.shrink {
     font-size: large;
 }
 .message_box {
-    height: 270px;
+    height: 400px;
     overflow: auto;
-    border: 3px solid #f3f3f3;
+    border: 1px solid #d1d1d1;
     border-radius: 10px;
     padding: 10px 10px 10px 10px;
     margin: 10px 10px 10px 10px;
-    width: 415px;
+    width: 730px;
 
 }
 .message_to_user_area_chanel {
@@ -1117,6 +1119,12 @@ th.shrink {
 #open_task_popup {
     display: none;
 }
+#task_popup {
+	width:900px;
+	height : 700px;
+	margin :10px;
+	padding : 10px;
+}
 
 .hard-drive-form-wrapper div {
     display: inline-block;
@@ -1241,7 +1249,7 @@ th.shrink {
     text-align: center;
 }
 .user-tabs .ui-tabs-nav .ui-state-default .users-tab-link {
-    color: #bfbfbf;
+    color: black;
     font-size: 13px;
 }
 .user-tabs .ui-tabs-nav .ui-tabs-active {
@@ -1557,7 +1565,7 @@ textarea.c-field::placeholder {
     position: relative;
     width: 24px;
     height: 24px;
-    border: 2px solid #d1d1d1;
+    border: 1px solid #d1d1d1;
     border-radius: 4px;
     cursor: inherit;
 }
@@ -2875,13 +2883,13 @@ img.directory_action {
 
 }
 #chat_public {
-    width: 500px;
-    height: 80%;
+    width: 50%;
+    height: 90%;
 }
 #chat_private {
 
-    width: 500px;
-    height: 80%;
+    width: 50%;
+    height: 90%;
 }
 #chat_user {
 
@@ -2953,10 +2961,7 @@ img.directory_action {
 
     height: 750px;
 }
-#cke_public_chat_message {
-    margin-left: 10px;
-    margin-top: 10px;
-}
+
 .share_dir_block,#create_dir_block, #rename_file_block,#rename_dir_block {
     display: none;
 }
@@ -2976,13 +2981,7 @@ img.directory_action {
 #rename_file{
     display: block;
 }
-/*div#cke_new_blog_text {*/
-/*    visibility: inherit;*/
-/*    height: 368px;*/
-/*}*/
-#blog_save {
-    margin-left: 52.5%;
-}
+
 #board_name_input {
     height: 35px;
     margin-bottom: 5px;
@@ -3068,4 +3067,31 @@ input.add_user_to_task {
 #open_task_popup  {
     width: 1000px;
     height: 500px;
+}
+.alert {
+background-color: red;
+    color: white;
+    font-weight: 800;
+    paddind: 10px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 10px;
+}
+#public_messages_message_box {
+	margin-left:10px;
+}
+#google_search_input {
+height: 30px;
+    margin: 5px;
+}
+	
+	
+}
+#search_tabs{
+	heigth:700px;
+}
+#task_create {
+	
+	margin :20px;
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Chanels\Model;
 
 use Zend\Db\TableGateway\TableGateway;
@@ -10,18 +9,20 @@ use Zend\Db\Sql\Sql;
 
 class ChanelsTable
 {
+
     protected $tableGateway;
+
     protected $adapter;
 
     public function __construct()
     {
         $config = new Config(Factory::fromFile('config/autoload/global.php'), true);
-        $adapter = new \Zend\Db\Adapter\Adapter (array(
+        $adapter = new \Zend\Db\Adapter\Adapter(array(
             'driver' => $config->database->driver,
             'dsn' => $config->database->dsn,
             'database' => $config->database["params"]->database,
             'username' => $config->database["params"]->username,
-            'password' => $config->database["params"]->password,
+            'password' => $config->database["params"]->password
         ));
         $this->adapter = $adapter;
         $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("chanels", $adapter);
@@ -40,9 +41,9 @@ class ChanelsTable
 
     public function fetchAllPrivate($adapter)
     {
-//        session_start();
-//        $user_session = $_SESSION['user'];
-//        $userId = $user_session["id"];
+        // session_start();
+        // $user_session = $_SESSION['user'];
+        // $userId = $user_session["id"];
         $sql = "SELECT  * FROM chanels
         left join chanels_admins on chanels_admins.chanel_id = chanels.id
         left join user_settings on chanels_admins.admins = user_settings.user_id
@@ -52,9 +53,20 @@ class ChanelsTable
         return $resultSet;
     }
 
+    public function fetchAllChanelsInAdminRole()
+    {
+        session_start();
+        $user_session = $_SESSION['user'];
+        $userId = $user_session["id"];
+        $sql = "SELECT * FROM chanels_admins 
+                left join chanels on chanels.id = chanels_admins.chanel_id
+                where chanels_admins.admins=" . $userId;
+        $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+        return $resultSet->toArray();
+    }
+
     public function fetchAllPrivateRequests($adapter)
     {
-
         session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
@@ -72,55 +84,54 @@ class ChanelsTable
         session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
-        $chanel_id = (int)$request->getPost()->chanel_id;
+        $chanel_id = (int) $request->getPost()->chanel_id;
         $sql = "SELECT * FROM chanels_admins WHERE chanel_id=" . $chanel_id . " AND admins=" . $userId;
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-        if (!empty($resultSet->buffer()->toArray())) return true;
+        if (! empty($resultSet->buffer()->toArray()))
+            return true;
         return false;
-
-
     }
 
     public function denyAccessUserToChanel($adapter, $request)
     {
-        $chanel_id = (int)$request->getPost()->chanel_id;
-        $userId = (int)$request->getPost()->user_id;
+        $chanel_id = (int) $request->getPost()->chanel_id;
+        $userId = (int) $request->getPost()->user_id;
         $sql = "UPDATE private_chanels_requests set is_confirmed = 0,pending_response = 0 where chanel_id=" . $chanel_id . " and user_id=" . $userId;
         $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
     }
 
     public function allowAccessUserToChanel($adapter, $request)
     {
-        $chanel_id = (int)$request->getPost()->chanel_id;
-        $userId = (int)$request->getPost()->user_id;
+        $chanel_id = (int) $request->getPost()->chanel_id;
+        $userId = (int) $request->getPost()->user_id;
         $sql = "UPDATE private_chanels_requests set is_confirmed = 1,pending_response = 0 where chanel_id=" . $chanel_id . " and user_id=" . $userId;
         $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
     }
 
     public function checkIsChanelPrivate($adapter, $request)
     {
-        $chanel_id = (int)$request->getPost()->chanel_id;
+        $chanel_id = (int) $request->getPost()->chanel_id;
         $sql = "SELECT * FROM chanels WHERE id=" . $chanel_id . " and private = 1";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-        if (!$resultSet->toArray()) return false;
+        if (! $resultSet->toArray())
+            return false;
         return true;
     }
 
     public function checkUserHaveAccessToChanel($adapter, $request)
     {
-
-        $chanel_id = (int)$request->getPost()->to_chanel;
+        $chanel_id = (int) $request->getPost()->to_chanel;
         session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
-
+        
         $sql = "SELECT * FROM private_chanels_requests WHERE chanel_id=" . $chanel_id . " and user_id=" . $userId . " and is_confirmed=1";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-        if (!$resultSet->buffer()->toArray()) {
+        if (! $resultSet->buffer()->toArray()) {
             $sql = "SELECT * FROM chanels_admins WHERE admins=" . $userId;
             $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-            if (!$resultSet->buffer()->toArray()) {
-
+            if (! $resultSet->buffer()->toArray()) {
+                
                 return false;
             }
         }
@@ -129,7 +140,7 @@ class ChanelsTable
 
     public function addRequestToChanel($request, $adapter)
     {
-        $to_chanel = (int)$request->getPost()->to_chanel;
+        $to_chanel = (int) $request->getPost()->to_chanel;
         session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
@@ -137,15 +148,16 @@ class ChanelsTable
         $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         $sql = "INSERT INTO private_chanels_requests (user_id,chanel_id,is_confirmed,pending_response) values ($userId,$to_chanel,null,1)";
         return $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-
     }
 
     public function createChanel($request, $adapter)
     {
-
         $chanel_name = $request->getPost()->chanel_name;
-        $is_private = (int)$request->getPost()->is_private;
-        $data = ['chanel_name' => $chanel_name, 'private' => $is_private];
+        $is_private = (int) $request->getPost()->is_private;
+        $data = [
+            'chanel_name' => $chanel_name,
+            'private' => $is_private
+        ];
         $this->tableGateway->insert($data);
         $chanelId = $this->tableGateway->lastInsertValue;
         session_start();
@@ -156,6 +168,34 @@ class ChanelsTable
         $sql = "INSERT INTO private_chanels_requests (user_id,chanel_id,is_confirmed) values ($userId,$chanelId,1)";
         $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         die("chanel created");
+    }
+    
+    public function deleteChanel($request,$userId){
+        $chanelId = (int)$request->getPost()["chanel_id"];
+        $sql = "SELECT * FROM chanels_admins
+                left join chanels on chanels.id = chanels_admins.chanel_id
+                where chanels_admins.admins = " . $userId ." AND chanels_admins.chanel_id = ".$chanelId;
+        $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+      
+        foreach ($resultSet->toArray() as $chanel) {
+            $sql = "SELECT * FROM chanels_messages
+                left join chanels_deliver_messages on chanels_messages.id = chanels_deliver_messages.message_id
+                where chanels_messages.id = ".$chanelId;
+            $messages= $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+            foreach ($messages as $message) {
+                $sql = "delete FROM chanels_messages where chanels_messages.id = ".$message["message_id"];
+                $messages= $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+                $sql = "DELETE FROM chanels_deliver_messages where chanels_deliver_messages.message_id = ".$message["message_id"];
+                $messages= $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+            }
+            $sql = "delete FROM chanels where chanels.id = ".$chanelId;
+            $messages= $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+            $sql = "delete FROM chanels_admins where chanels_admins.chanel_id = ".$chanelId;
+            $messages= $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
+
+        }
+        
+        return "chanel deleted";
     }
 
 }
