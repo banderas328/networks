@@ -131,6 +131,17 @@ class TasksTable
             $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
             $task["files"][] = $resultSet->toArray()[0];
         }
+        
+        foreach ($task["sub_tasks"] as $sub_task) {
+            $files_task_sql = "SELECT  * FROM tasks_files where task_id=" . $sub_task['id'];
+            $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
+            $files = $resultSet->toArray();
+            foreach ($files as $file) {
+                $files_task_sql = "SELECT  * FROM files where id=" . $file["file_id"];
+                $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
+                $task["files"][] = $resultSet->toArray()[0];
+            }
+        }
         return $task;
     }
 
@@ -223,7 +234,7 @@ class TasksTable
     public function updateTask($data)
     {
         if (isset($data["data"]))
-            $data = $data["data"];
+        $data = $data["data"];
         $fileTable = new \Files\Model\FilesTable();
         
         ////////////////////
@@ -238,19 +249,10 @@ class TasksTable
             ]);
             $i ++;
         }
-        
-        
-        //////////
-        if (isset($data['file']['tmp_name']))
-            $fileID = $fileTable->saveUserFile($data);
-        unset($data['file']);
-        if (! isset($data["id"])) {
-            $this->tableGateway->insert($data);
-        } else {
-            $this->tableGateway->update($data, [
-                "id = " . (int) $data["id"]
-            ]);
-        }
+        unset($data['files']);
+        if(!isset($data["id"]))
+        $this->tableGateway->insert($data);
+        else $this->tableGateway->update($data, ["id = " . (int) $data["id"]]);
         $taskID = $this->tableGateway->lastInsertValue;
         if ($fileIDs) {
             $fileTable = new \Tasks\Model\TasksFilesTable();

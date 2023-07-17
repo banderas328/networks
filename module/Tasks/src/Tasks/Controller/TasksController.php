@@ -84,10 +84,10 @@ class TasksController extends Controller\preloaderController
 
     public function getTasksTable()
     {
-        if (!$this->getTasksTable) {
-            $this->getTasksTable = new \Tasks\Model\TasksTable;
+        if (!$this->tasksTable) {
+            $this->tasksTable = new \Tasks\Model\TasksTable;
         }
-        return $this->getTasksTable;
+        return $this->tasksTable;
     }
 
 }
