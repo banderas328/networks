@@ -974,7 +974,7 @@ th.shrink {
     display: none;
 }
 .file_wraper {
-    margin-left: 20px;
+    margin-left: 13px;
 }
 .file_wraper span {
     padding-left: 10px;
@@ -1134,7 +1134,6 @@ th.shrink {
 }
 
 .hard-drive-dir-wrapper {
-    float: left;
     width: 150px;
     vertical-align: top;
     position: relative;
@@ -1145,14 +1144,14 @@ th.shrink {
 }
 
 .hard-dropdown {
-    background: rgba(246, 246, 246, 1);
+background: rgba(246, 246, 246, 1);
     border-radius: 10px;
     border: 1px solid #efefef;
     width: 235px;
     text-align: left;
-    position: relative;
+    position: absolute;
     /* bottom: 150px; */
-    top: -50px;
+    top: -65px;
     left: 80px;
 }
 
