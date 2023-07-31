@@ -8,6 +8,8 @@ return array(
     'Search' => "Поиск",
     'Admin' => "Администрирование",
     'Hard_Drive' => "Жесткий Диск",
+    'Blogs' => "Новости",
+    'Task_Manager' => "Менеджер Задач",
     'Computer' => "Компьютер",
     'Audio' => 'Аудио',
     'Create_Directory' => 'Создать папку',

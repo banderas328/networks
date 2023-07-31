@@ -106,7 +106,7 @@ class UserTable
             ->setCredential($password);
         $authAdapter->authenticate();
         $columnsToReturn = array(
-            'id', 'login', 'email'
+            'id', 'login', 'email','lang'
         );
         return $authAdapter->getResultRowObject($columnsToReturn);
 
@@ -131,18 +131,24 @@ class UserTable
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $lang = $request->getPost()->lang;
-
-        switch ($lang) {
-            case "en" :
-                $this->setUserLang($lang, $userId);
-                break;
-            case "ru" :
-                $this->setUserLang($lang, $userId);
-                break;
-            default :
-                $this->setUserLang("en", $userId);
-                break;
+        
+        if($lang) {
+            switch ($lang) {
+                case "en" :
+                    $this->setUserLang($lang, $userId);
+                    break;
+                case "ru" :
+                    $this->setUserLang($lang, $userId);
+                    break;
+                default :
+                    $this->setUserLang("en", $userId);
+                    break;
+            }
+            $user_session["lang"] = $lang;
+            
         }
+
+
     }
 
     public function setUserLang($lang, $userId)

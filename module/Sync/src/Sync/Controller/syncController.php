@@ -95,8 +95,12 @@ class  syncController extends AbstractActionController {
         $request = $this->getRequest();
         $users = new User();
         $this->getUsersTable()->changeUserLang($users->getAdapter(),$request);
-        $user_session = new Container('user');
-        $user_session->user->lang = $request->getPost()->lang;
+        session_start();
+        $user_session = $_SESSION['user'];
+      
+      //  var_dump($user_session);
+        $_SESSION['user']['lang'] = $request->getPost()->lang;
+       
         die(json_encode("language_changed"));
 
     }

@@ -8,6 +8,8 @@ return array(
     'Search' => "Search",
     'Admin' => "Admin",
     'Hard_Drive' => "Hard Drive",
+    'Task_Manager' => "Task_Manager",
+    'Blogs' => "News",
     'Computer' => "Computer",
     'Audio' => "Audio",
     'Create_Directory' => 'Create Directory',
