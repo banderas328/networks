@@ -1,10 +1,17 @@
 <?php
 namespace Main;
+use Application;
 
 
 
 class Module
 {
+    public function __construct(){
+        
+        $application = new Application\Module();
+        $application->loadFactories();
+    }
+    
     public function getAutoloaderConfig()
     {
         return array(

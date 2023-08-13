@@ -16,4 +16,5 @@ return array(
     'Delete_Directory' => "Удалить папку",
     'Delete_File' => 'Удалить файл',
     'Download_File' => 'Скачать файл',
+    'Frames' => '������'
 );

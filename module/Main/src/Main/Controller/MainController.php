@@ -20,17 +20,17 @@ class MainController extends Controller\preloaderController
 
     }
 
-    public function setLocale () {
-        session_start();     
-        $user_session = $_SESSION['user'];
-        if($user_session->id) {
-            $lang = $user_session->user->lang;
-            $translator->addTranslationFile("phparray",$_SERVER["DOCUMENT_ROOT"]."/../config/language/"."lang.array.".$lang.'.php',false,$lang);
-            $translator->setLocale($lang);
-            $loc->get('ViewHelperManager')->get('translate')
-                ->setTranslator($translator);
-        }
-    }
+//     public function setLocale () {
+//         session_start();     
+//         $user_session = $_SESSION['user'];
+//         if($user_session->id) {
+//             $lang = $user_session->user->lang;
+//             $translator->addTranslationFile("phparray",$_SERVER["DOCUMENT_ROOT"]."/../config/language/"."lang.array.".$lang.'.php',false,$lang);
+//             $translator->setLocale($lang);
+//             $loc->get('ViewHelperManager')->get('translate')
+//                 ->setTranslator($translator);
+//         }
+//     }
 
 
 

@@ -8,7 +8,7 @@ return array(
     'Search' => "Search",
     'Admin' => "Admin",
     'Hard_Drive' => "Hard Drive",
-    'Task_Manager' => "Task_Manager",
+    'Task_Manager' => "Task Manager",
     'Blogs' => "News",
     'Computer' => "Computer",
     'Audio' => "Audio",
@@ -16,4 +16,5 @@ return array(
     'Delete_Directory' => "Delete Directory",
     'Delete_File' => 'Delete File',
     'Download_File' => 'Download File',
+    'Frames' => 'Frames'
 );

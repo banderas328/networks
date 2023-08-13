@@ -209,9 +209,8 @@ foreach ($task["users"] as $user) {
 
         }
         $(function () {
-        	//document.getElementById("task_description_block").value  = "";
-            CKEDITOR.replace('sub_task', {});
-            CKEDITOR.replace('task_description_block', {});
+           CKEDITOR.replace('sub_task', {});
+           CKEDITOR.replace('task_description_block', {});
            CKEDITOR.instances.task_description_block.setData( "<?php echo htmlspecialchars($task["description"]);?>", function()
             		{
             		    this.checkDirty();  // true
