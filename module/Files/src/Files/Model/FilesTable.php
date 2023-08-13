@@ -51,16 +51,19 @@ class FilesTable
         $path = "userfiles/".$userId;
         $fileName = uniqid();
         //var_dump($data);
-        if(isset($data['name'])) {
+        var_dump($data);
+        var_dump($userId);
+      //  die();
+        if(isset($data['file']['name'])) {
             $file = $path . '/' . $userId . $fileName . $data['name'];
-            if(move_uploaded_file($data['tmp_name'], getcwd() . "/public/" . $file)) {
+            if(move_uploaded_file($data['file']['tmp_name'], getcwd() . "/public/" . $file)) {
                 $fileDb['user_id'] = $userId;
-                if(isset($data["to_directory"]))
+                if(isset($data['file']["to_directory"]))
                     $fileDb['directory'] = $data["to_directory"];
                     else $fileDb['directory']  = 0;
-                    $fileDb['file_title'] = $data['name'];
+                    $fileDb['file_title'] = $data['file']['name'];
                     $fileDb['file_name'] = $file;
-                    $fileDb['type'] = $data['type'];
+                    $fileDb['type'] = $data['file']['type'];
                     $this->tableGateway->insert($fileDb);
                     return $this->tableGateway->lastInsertValue;
             }

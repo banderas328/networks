@@ -31,7 +31,6 @@ class  filesController extends Controller\preloaderController {
 
 
     public function getDirAction(){
-        //$this->setLocale();
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         session_start();

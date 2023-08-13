@@ -28,6 +28,9 @@ class Module
 
     public function getAutoloaderConfig()
     {
+        
+        $translate = $_SERVER["DOCUMENT_ROOT"].'/../config/language/translator.php';
+        $GLOBALS['translator'] = include_once $translate;
         return array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(

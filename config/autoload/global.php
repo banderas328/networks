@@ -8,7 +8,7 @@ return array(
         'params' => array(
             'host' => 'localhost',
             'username' => 'root',
-            'password' => 'root',
+            'password' => '',
             'dbname' => 'octopus'
         )
     ),

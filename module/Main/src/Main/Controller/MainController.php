@@ -15,28 +15,21 @@ class MainController extends Controller\preloaderController
 
     public function indexAction()
     {
-
         parent::__construct();
-      //  $this->setLocale();
         $this->layout('layout/main');
 
     }
 
     public function setLocale () {
-     //   $loc = $this->getServiceLocator();
-     //   $translator = new Translator();
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();     
+        $user_session = $_SESSION['user'];
         if($user_session->id) {
             $lang = $user_session->user->lang;
             $translator->addTranslationFile("phparray",$_SERVER["DOCUMENT_ROOT"]."/../config/language/"."lang.array.".$lang.'.php',false,$lang);
             $translator->setLocale($lang);
             $loc->get('ViewHelperManager')->get('translate')
                 ->setTranslator($translator);
-
         }
-
-
-
     }
 
 

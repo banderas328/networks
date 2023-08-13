@@ -1,16 +1,16 @@
-<?php 
-$translate = $_SERVER["DOCUMENT_ROOT"].'/../config/language/translator.php';
-$translator = include_once $translate;
-?>
+// <?php 
+// $translate = $_SERVER["DOCUMENT_ROOT"].'/../config/language/translator.php';
+// $translator = include_once $translate;
+// ?>
 
 <div class="abs" id="desktop">
     <a class="abs icon" style="left:180px;top:420px;" href="#icon_dock_drive">
         <img src="assets/images/icons/icon_32_drive.png"/>
-        <?php echo $translator["Hard_Drive"]; ?>
+        <?php echo $GLOBALS['translator']["Hard_Drive"]; ?>
     </a>
     <a class="abs icon" style="left: 264px;top: 420px;" href="#icon_dock_money">
         <img src="assets/images/icons/3.png"/>
-        <?php   echo $translator["Task_Manager"] ?>
+        <?php   echo $GLOBALS['translator']["Task_Manager"] ?>
      </a>
     <!--
     <a class="abs icon" style="left:420px;top:360px;" href="#icon_dock_payment">
@@ -20,30 +20,30 @@ $translator = include_once $translate;
     -->
     <a class="abs icon" style="left:340px;top:420px;" href="#icon_dock_network">
         <img src="assets/images/icons/icon_32_network.png"/>
-           <?php   echo $translator["Network"] ?>
+           <?php   echo $GLOBALS['translator']["Network"] ?>
     </a>
     <a class="abs icon" style="left:420px;top:420px;" href="#icon_dock_settings">
         <img src="assets/images/icons/setting.png"/>
-              <?php   echo $translator["Settings"] ?>
+              <?php   echo $GLOBALS['translator']["Settings"] ?>
 
     </a>
     <a class="abs icon" style="left:740px;top:420px;" href="#icon_dock_search">
         <img src="assets/images/icons/search.png"/>
-                   <?php   echo $translator["Search"] ;?>
+                   <?php   echo $GLOBALS['translator']["Search"] ;?>
 
     </a>
     <a class="abs icon" style="left:500px;top:420px;" href="#icon_dock_users">
         <img src="assets/images/icons/users.png"/>
-        <?php echo $this->translate("Users", false, $lang); ?>
+        <?php echo $GLOBALS['translator']["Users"]; ?>
     </a>
     <a class="abs icon" style="left:580px;top:420px;" href="#icon_dock_messages">
         <img src="assets/images/icons/messages.png"/>
-                    <?php   echo $translator["Messages"] ?>
+                    <?php   echo $GLOBALS['translator']["Messages"] ?>
 
     </a>
     <a class="abs icon" style="left:660px;top:420px;" href="#icon_dock_blogs">
         <img src="assets/images/icons/blogs.png"/>
-            <?php   echo $translator["Blogs"] ?>
+            <?php   echo $GLOBALS['translator']["Blogs"] ?>
     </a>
 <!--    <a class="abs icon" style="left:820px;top:420px;" href="#icon_dock_admins">-->
 <!--        <img src="assets/images/icons/admin-icon.png"/>-->
