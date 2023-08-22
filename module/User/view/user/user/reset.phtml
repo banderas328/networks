@@ -11,13 +11,21 @@ $this->headTitle($title);
 }?>
     <h1><?php echo $this->escapeHtml($title); ?></h1>
 <?php
-$form = $this->form;
-$form->setAttribute('action', $this->url('user', array('action' => 'reset')));
-$form->prepare();
-echo $this->form()->openTag($form);
-echo $this->formRow($form->get('password'));
-echo $this->formRow($form->get('confirm_password'));
-echo $this->formSubmit($form->get('submit'));
-echo $this->form()->closeTag();
+// $form = $this->form;
+// $form->setAttribute('action', $this->url('user', array('action' => 'reset')));
+// $form->prepare();
+// echo $this->form()->openTag($form);
+// echo $this->formRow($form->get('password'));
+// echo $this->formRow($form->get('confirm_password'));
+// echo $this->formSubmit($form->get('submit'));
+// echo $this->form()->closeTag();
 ?>
+<form action="/user/reset" method="post" id="reset_form">
+<input type="password" name="password" placeholder="Password"/>
+<br/>
+<input type="password" name="confirm_password" placeholder="Confirm password"/>
+<br/>
+<input type="submit" value="Reset"/>
+
+</form>
 <a href="/user/login">Login</a>

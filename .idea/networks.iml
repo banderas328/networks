@@ -89,7 +89,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zend-serializer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zend-mime" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zend-mail" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zend-i18n" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zend-mvc-plugin-identity" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/container-interop/container-interop" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zend-servicemanager" />

@@ -1,22 +1,32 @@
 <?php
-$form = $this->form;
-$form->setAttribute('action', $this->url('user', array('action' => 'usersearch')));
-$form->prepare();
+// $form = $this->form;
+// $form->setAttribute('action', $this->url('user', array('action' => 'usersearch')));
+// $form->prepare();
 
-echo $this->form()->openTag($form);
-echo $this->formRow($form->get('first_name'));
-echo $this->formRow($form->get('second_name'));
-echo $this->formRow($form->get('job'));
-echo $this->formRow($form->get('country'));
-echo $this->formRow($form->get('city'));
-echo $this->formRow($form->get('phone'));
-echo $this->formSubmit($form->get('submit'));
-echo $this->form()->closeTag();
+// echo $this->form()->openTag($form);
+// echo $this->formRow($form->get('first_name'));
+// echo $this->formRow($form->get('second_name'));
+// echo $this->formRow($form->get('job'));
+// echo $this->formRow($form->get('country'));
+// echo $this->formRow($form->get('city'));
+// echo $this->formRow($form->get('phone'));
+// echo $this->formSubmit($form->get('submit'));
+// echo $this->form()->closeTag();
 ?>
+<form action="/user/usersearch" method="post" id="user_search_form">
+	<input type="text" name="first_name" placeholder="First name" /> <br />
+	<input type="text" name="second_name" placeholder="Second name" /> <br />
+	<input type="text" name="job" placeholder="Job" /> <br /> <input
+		type="text" name="country" placeholder="Country" /> <br /> <input
+		type="text" name="city" placeholder="City" /> <br /> <input
+		type="text" name="phone" placeholder="Phone" /> <br /> <input
+		type="submit" value="Search" id="user_search" />
+</form>
 <div id="usersearchdiv">
     users with handled "Setting"
 <?php
-    if ($this->users[0]) { ?>
+if ($this->users[0]) {
+    ?>
             <ul>
                 <?php foreach ($this->users[0] as $vars): ?>
                 <?php $vars = array($vars);?>
@@ -29,6 +39,27 @@ echo $this->form()->closeTag();
   <?php  }   ?>
     <script type="text/javascript">
         $(function () {
+
+//         	$("#user_search_submit").on("click", function (){
+//                 var data = {};
+//                 data.first_name = $('#user_search_form input[name="first_name"]').val();
+//                 data.second_name = $('#user_search_form input[name="second_name"]').val();
+//                 data.job = $('#user_search_form input[name="job"]').val();
+//                 data.country = $('#user_search_form input[name="country"]').val();
+//                 data.city = $('#user_search_form input[name="city"]').val();
+//                 data.phone = $('#user_search_form input[name="phone"]').val();
+//                 $.ajax({
+//                     type: "POST",
+//                     url: "/user/usersearch",
+//                     dataType: "json",
+//                     data : data
+//                 }).done(function (data){
+//                     $("#user_search_div").html(data);
+//                     });
+// 				return false;
+
+//             	});
+            
             $('.friend_request').bind('click', function () {
                 var url = $(this).attr('href');
                 $.ajax({

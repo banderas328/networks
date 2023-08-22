@@ -285,7 +285,7 @@ class UserController extends Controller\preloaderController
     public function userSearchAction()
     {
         $this->layout('layout/only_form');
-        $form = new UserSearchForm();
+      //  $form = new UserSearchForm();
         $request = $this->getRequest();
         if ($request->isPost()) {
             $data = $request->getPost();
@@ -294,7 +294,7 @@ class UserController extends Controller\preloaderController
             $dbAdapter = $user->getAdapter();
             $users = $this->getSettingsTable()->searchUsersOnSettings($data);
         }
-        return array('form' => $form, 'users' => $users, 'div' => "usersearchdiv");
+        return array('users' => $users, 'div' => "usersearchdiv");
     }
 
     public function userPageAction()

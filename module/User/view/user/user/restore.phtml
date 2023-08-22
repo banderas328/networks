@@ -14,11 +14,18 @@ $this->headTitle($title);
         <div class="col-12">
 <?php
 $form = $this->form;
-$form->setAttribute('action', $this->url('user', array('action' => 'restore')));
-$form->prepare();
-echo $this->form()->openTag($form);
-echo $this->formRow($form->get('email'));
-echo $this->formSubmit($form->get('submit'));
-echo $this->form()->closeTag();
+// $form->setAttribute('action', $this->url('user', array('action' => 'restore')));
+// $form->prepare();
+// echo $this->form()->openTag($form);
+// echo $this->formRow($form->get('email'));
+// echo $this->formSubmit($form->get('submit'));
+// echo $this->form()->closeTag();
 ?>
+<form action="/user/restore" method="POST" id="restore_form">
+<input type="text" name="email" placeholder="Email"/>
+<br/>
+<input type="submit" value="Restore"/>
+</form>
+
+
         </div></div>

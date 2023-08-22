@@ -17,14 +17,14 @@ if (! $is_root) {
 			dir="<?php echo $dir_value['id']; ?>">
 			<input type="text" id="directory_name" placeholder="Directory Name">
 			<button value="Create" class='action_btn' id="create_dir">
-                    <?php echo $this->translate("Create Directory", false, $lang); ?>
+                    <?php echo  $this->translator["Create Directory"]; ?>
                 </button>
 		</div>
 		<div id="rename_file_block" title="Rename File"
 			dir="<?php echo $dir_value['id']; ?>">
 			<input type="text" id="rename_file_name" placeholder="New File Name">
 			<button value="Rename" class='action_btn' id="rename_file">
-                    <?php echo $this->translate("Rename File", false, $lang); ?>
+                    <?php echo $this->translator["Rename"]; ?>
                 </button>
 		</div>
 		<div id="rename_dir_block" title="Rename Directory"
@@ -32,11 +32,11 @@ if (! $is_root) {
 			<input type="text" id="rename_directory_name"
 				placeholder="New Directory Name">
 			<button value="Rename" class='action_btn' id="rename_dir">
-                    <?php echo $this->translate("Rename Directory", false, $lang); ?>
+                    <?php echo $this->translator["Rename Directory"]; ?>
                 </button>
 		</div>
 		<button id="show_directory_creation" value="create dir"
-			class='action_btn'><?php echo $this->translate("create directory", false, $lang); ?></button>
+			class='action_btn'><?php echo $this->translator["Create_Directory"];?></button>
 	</div>
 	<div>
 		<button id="paste" class='action_btn'>paste</button>
@@ -64,7 +64,7 @@ if (! $is_root) {
                   </div>";
             if (! $is_root) {
                 echo "<div class='directory_actions hard-dropdown ' dir=" . $dir_value["id"] . ">
-                           <p class='delete_directory hard-dropdown-items ' dir=" . $dir_value['id'] . ">" . $this->translate('Delete Directory', false, $lang) . "</p>
+                           <p class='delete_directory hard-dropdown-items ' dir=" . $dir_value['id'] . ">" . $this->translator['Delete_Directory'] . "</p>
                            <p class='move_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Move Directory</p>
                            <p class='rename_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Rename Directory</p>
                            <p class='share_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Share Directory</p>
@@ -143,11 +143,11 @@ if (! $is_root) {
             echo "<p class='file_block'  file=" . $file['id'] . "> " . $file['file_title'] . "</p>";
             echo "<div class='hard-dropdown file_actions' file=" . $file['id'] . ">";
             if ($type[0] == 'text_file')
-                echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='edit_file ' file=" . $file['id'] . ">" . $this->translate('Edit File', false, $lang) . "</span></p>";
-            echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='delete_file  ' file=" . $file['id'] . ">" . $this->translate('Delete File', false, $lang) . "</span></p>";
-            echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='move_file ' file=" . $file['id'] . ">" . $this->translate('Move File', false, $lang) . "</span></p>";
-            echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='rename_file ' file=" . $file['id'] . ">" . $this->translate('Rename File', false, $lang) . "</span></p>";
-            echo "<p class='hard-dropdown-items'><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" . $this->translate('Download File', false, $lang) . "</a></p>";
+                echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='edit_file ' file=" . $file['id'] . ">" .$this->translator['Edit_File']. "</span></p>";
+                echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='delete_file  ' file=" . $file['id'] . ">" . $this->translator['Delete_File']. "</span></p>";
+                echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='move_file ' file=" . $file['id'] . ">" . $this->translator['Move_File'] . "</span></p>";
+                echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='rename_file ' file=" . $file['id'] . ">" . $this->translator['Rename_File'] . "</span></p>";
+                echo "<p class='hard-dropdown-items'><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" .  $this->translator['Download_File'] . "</a></p>";
             
             if ($type[0] == 'image') {
                 echo "<p class='image_url hard-dropdown-items' url='/" . $file["file_name"] . "'><a href='#'>Copy image url</a></p>";

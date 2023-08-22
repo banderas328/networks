@@ -6,8 +6,6 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 //use Zend\Stdlib\RequestInterface as Request;
 use Zend\Session\Container;
-use Zend\I18n\Translator\Translator;
-
 
 class  preloaderController extends AbstractActionController
 {

@@ -16,5 +16,11 @@ return array(
     'Delete_Directory' => "Delete Directory",
     'Delete_File' => 'Delete File',
     'Download_File' => 'Download File',
-    'Frames' => 'Frames'
+    'Frames' => 'Frames',
+    "Edit_File" => "Edit File",
+    "Delete_File" => "Delete File",
+    "Move_File" => "Move File",
+    "Rename_File" => "Rename File",
+    "Download_File" => "Rename File",
+    
 );

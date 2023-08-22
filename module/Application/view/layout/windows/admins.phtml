@@ -1,23 +1,65 @@
-<div id="window_admins" class="abs window">
-    <div class="abs window_inner">
-        <div class="window_top">
-          <span class="float_left">
-           Administration
-          </span>
-          <span class="float_right">
-            <a href="#" class="window_min"></a>
-            <a href="#" class="window_resize"></a>
-            <a href="#icon_dock_drive" class="window_close"></a>
-          </span>
+<div id="window_admins" class="c-window r-border-box-area abs window">
+    <div class="c-window__inner _abs window_inner">
+
+        <div class="c-window__title-bar window_top">
+            <div class="c-window__title float_left">
+                <?php echo $this->translator["Admin"];?>
+            </div>
+
+            <div class="c-window__window-controls float_right">
+            <span class="float_right">
+                <a href="#" class="window_min"></a>
+                <a href="#" class="window_resize"></a>
+                <a href="#icon_dock_messages" class="window_close"></a>
+            </span>
+            </div>
         </div>
-        <div class="abs window_content" id="admins_content">
 
 
 
+
+        <div class="c-window__main _abs _window_content" id="admins_content">
+
+
+            <div class="c-window__tabs-wrap is-vertical-navigation _abs _window_content" id="admins_tabs">
+
+
+                <div class="c-window__tabs window_main user-tabs">
+                    <ul class="c-window__tabs-inner">
+                        <li class="c-window__tab"><a class="users-tab-link" href="#sliders">Sliders</a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#blogs">Blogs</a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#contact_form">Contact Form</a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#main_page">Main Page</a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#admins_list">Administators List</a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#settings">Other Settings</a></li>
+                    </ul>
+                </div>
+                <div class="c-window__tab-content" id="sliders">
+                </div>
+                <div class="c-window__tab-content" id="blogs">
+                </div>
+                <div class="c-window__tab-content" id="contact_form">
+                </div>
+                <div class="c-window__tab-content" id="main_page">
+                </div>
+                <div class="c-window__tab-content" id="admins_list">
+                </div>
+                <div class="c-window__tab-content" id="settings">
+                </div>
+            </div>
         </div>
-        <div class="abs window_bottom">
-            Administration
+
+
+
+        <div class="c-window__status-bar _abs _window_bottom">
+            <div class="c-window__status-text">
+          <?php echo $this->translator["Admin"];?>
+            </div>
+
         </div>
+
+
     </div>
+
     <span class="abs ui-resizable-handle ui-resizable-se"></span>
 </div>

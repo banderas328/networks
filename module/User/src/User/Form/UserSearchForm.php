@@ -22,29 +22,9 @@ class UserSearchForm extends Form
 //
 //        ));
 //        $this->add($selectSex);
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Select',
-            'name' => 'sex',
-            'options' => array(
-                'label' => 'Select sex',
-                'empty_option' => 'Select sex',
-                'value_options' => array(
-                    '0' => 'Male',
-                    '1' => 'Female',
-                ),
-            )
-        ));
 
 
-        $this->add(array(
-            'name' => 'birthdate',
-            'attributes' => array(
-                'type' => 'text',
-            ),
-            'options' => array(
-                'label' => 'Birthdate',
-            ),
-        ));
+
         $this->add(array(
             'name' => 'first_name',
             'attributes' => array(
@@ -88,15 +68,6 @@ class UserSearchForm extends Form
             ),
             'options' => array(
                 'label' => 'City',
-            ),
-        ));
-        $this->add(array(
-            'name' => 'skype',
-            'attributes' => array(
-                'type' => 'text',
-            ),
-            'options' => array(
-                'label' => 'Skype',
             ),
         ));
         $this->add(array(

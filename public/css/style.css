@@ -348,3 +348,40 @@ a {
         font-size: 60px;
     }
 } */
+#auth_form {
+margin:15px;
+}
+#auth_form input {
+margin-top:25px;
+}
+#auth_form input[type=submit] {
+color:white;
+}
+#register_form {
+margin:15px;
+
+}
+#register_form input {
+margin-top:25px;
+}
+#register_form input[type=submit] {
+color:white;
+}
+#restore_form {
+margin:15px;
+}
+#restore_form input {
+margin-top:25px;
+}
+#restore_form input[type=submit] {
+color:white;
+}
+#reset_form {
+margin:15px;
+}
+#reset_form input {
+margin-top:25px;
+}
+#reset_form input[type=submit] {
+color:white;
+}

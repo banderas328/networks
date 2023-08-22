@@ -12,7 +12,7 @@ return array(
         'Zend\Mvc\Plugin\Identity',
         'Zend\Mvc\Plugin\Prg',
         'Zend\Session',
-        'Zend\Mvc\I18n',
+//         'Zend\Mvc\I18n',
         'Zend\Mvc\Console',
         'Zend\Form',
         'Zend\Hydrator',

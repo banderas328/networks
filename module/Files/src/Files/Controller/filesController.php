@@ -1,19 +1,14 @@
 <?php
 namespace Files\Controller;
 
-use Files\Form\FilesForm;
 use Files\Model\Files;
 use Files\Model\FileSystem;
 use Network\Model\NetworkTable;
 use Tags\Model\TagsTable;
 use Network\Model\Network;
-use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Stdlib\RequestInterface as Request;
-use Zend\Session\Container;
-use Preloader;
 use Preloader\Controller;
 use Zend\View\Model\ViewModel;
-use Zend\I18n\Translator\Translator;
 
 
 class  filesController extends Controller\preloaderController {
@@ -86,7 +81,6 @@ class  filesController extends Controller\preloaderController {
 
     }
     public function getParentDirAction(){
-        //$this->setLocale();
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $dirKey = (int) $request->getPost()->dir_key;
@@ -146,7 +140,6 @@ class  filesController extends Controller\preloaderController {
             $request->getPost()->toArray(),
             $request->getFiles()->toArray()
         );
-  //      $files = new Files();
         $this->getFilesTable()->saveUserFile($post);
 
         die();
@@ -176,29 +169,6 @@ class  filesController extends Controller\preloaderController {
         }
         die();
     }
-
-//    public function sellFileAction() {
-//
-//
-//        $this->layout('layout/only_form');
-//        $requestData = $this->getRequest()->getPost();
-//        $fileId = $requestData->file_id;
-//        $cost = $requestData->cost;
-//        $description = $requestData->description;
-//        //$tags = $requestData->tags;
-//        session_start();        $user_session = $_SESSION['user'];
-//        $userId = $user_session["id"];
-//        $file = new Files();
-//        $fileData = $this->getFilesTable()->getFile($file->getAdapter(),$fileId,$userId);
-//        $fileId = $fileData[0]["id"];
-//        $this->getPayedFilesTable()->saveFileForPay($fileId,$description,$cost);
-////        $tags = explode(",",$tags);
-// //       echo "test";
-//        $tagsIds = $this->getTagsTable()->updateTags($tags);
-//        $this->getFilesToTagsTable()->updateFileTags($fileId,$tagsIds);
-//        die();
-//
-//    }
 
     public function deleteFileAction() {
         $request = $this->getRequest();
@@ -334,29 +304,9 @@ class  filesController extends Controller\preloaderController {
     }
 
 
-    public function setLocale () {
-        $loc = $this->getServiceLocator();
-        $translator = new Translator();
-        session_start();        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
-        if($user_session->id) {
-            $lang = $user_session->user->lang;
-            $translator->addTranslationFile("phparray",$_SERVER["DOCUMENT_ROOT"]."/../config/language/"."lang.array.".$lang.'.php',false,$lang);
-            $translator->setLocale($lang);
-            $loc->get('ViewHelperManager')->get('translate')
-                ->setTranslator($translator);
-
-        }
-
-
-
-    }
-
 	public function getFilesTable()
 	{
 		if (!$this->filesTable) {
-// 			$sm = $this->getServiceLocator();
-// 			$this->filesTable = $sm->get('Files\Model\FilesTable');
 		    $this->filesTable  = new \Files\Model\FilesTable;
 		}
 		return $this->filesTable;
@@ -374,8 +324,6 @@ class  filesController extends Controller\preloaderController {
     public function getFileSystemTable()
     {
         if (!$this->filesystemTable) {
-//             $sm = $this->getServiceLocator();
-//             $this->filesystemTable = $sm->get('Files\Model\FileSystemTable');
             $this->filesystemTable = new \Files\Model\FileSystemTable;
         }
         return $this->filesystemTable;
@@ -384,7 +332,6 @@ class  filesController extends Controller\preloaderController {
     public function getNetworkTable()
     {
         if (!$this->networkTable) {
-          //  $sm = $this->getServiceLocator();
             $this->networkTable = new \Network\Model\NetworkTable;
         }
         return $this->networkTable;
@@ -400,8 +347,6 @@ class  filesController extends Controller\preloaderController {
     public function getFilesToTagsTable()
     {
         if (!$this->filesToTagsTable) {
-          //  $sm = $this->getServiceLocator();
-           // $this->filesToTagsTable = $sm->get('Files\Model\FilesToTagsTable');
             $this->filesToTagsTable = new \Files\Model\FilesToTagsTable;
         }
         return $this->filesToTagsTable;
