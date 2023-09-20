@@ -129,18 +129,18 @@ class FriendsTable {
         if(count($needIds) >= 1)
         {
             $lastElement = end($needIds);
-            $where = " WHERE ";
+            $where = " WHERE user_id in ( ";
             foreach ($needIds as $user) {
-                    $where .= " user_id = '"  . $user . "' ";
-                    if($user != $lastElement and (count($needIds) >= 2)) {
-                        $where .= " OR ";
+                    $where .=  $user ;
+                    if($user != $lastElement) {
+                        $where .= " , ";
                     }
 
 
             }
+            $where .= " ) ";
 
             $sql = "SELECT * FROM user_settings ".$where;
-            var_dump($sql);
             $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
             return $resultSet;
         }
