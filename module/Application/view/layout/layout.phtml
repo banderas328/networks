@@ -1,6 +1,6 @@
 <?php
 session_start();
-$user = $_SESSION['user'];
+if(isset($_SESSION['user']))$user = $_SESSION['user'];
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -47,24 +47,17 @@ $user = $_SESSION['user'];
 
 </head>
 
-<body>
+<body id="body_os">
 
     <header>
         <nav class="header-nav" role="navigation">
 
             <div class="container">
-                <img class="logo" src="<?php echo $this->basePath('img/octopus_logo_horizontal_white.png') ?>" alt="Octopus" />
                 <ul class="nav navbar-nav">
-                    <li><a class="menu_link" href="/">Main Page</a></li>
-                    <li><a class="menu_link" href="/octopus">Octopus</a></li>
-                    <li><a class="menu_link" href="/main">Demo</a></li>
-                    <?php if (is_null($user)) { ?>
                     <li><a class="menu_link" href="/user/login">Login</a></li>
                     <li><a class="menu_link" href="/user/register">Register</a></li>
-                    <?php } elseif (!is_null($user)) { ?>
                     <li><a class="menu_link" href="/user/logout">Logout</a></li>
-                    <?php } ?>
-                    <li><a class="menu_link" href="/donate">Donate</a></li>
+                    <li><a class="menu_link" href="http://wordpress.local/">Back to Website</a></li>
                 </ul>
             </div>
         </nav>

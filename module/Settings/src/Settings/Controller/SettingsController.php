@@ -31,7 +31,7 @@ class SettingsController extends Controller\preloaderController
         $form->setData($userSettings);
 
         if ($request->isPost()) {
-            if ($userSettings[0]) {
+            if ($userSettings and isset($userSettings[0])) {
                   $data = array_merge_recursive(
                     $userSettings[0],
                     $request->getPost()->toArray(),

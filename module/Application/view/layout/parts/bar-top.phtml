@@ -1,13 +1,13 @@
 <div class="abs r-border-box-area" id="bar_top">
    
         <div style="margin-right:10px" class="float_right">
-            <span class="lang" lang="en">
-                <img style="border:1px solid black;" src="assets/images/icons/british-flag.jpg"/>
-            </span>
+<!--             <span class="lang" lang="en"> -->
+             <!--    <img style="border:1px solid black;" src="assets/images/icons/british-flag.jpg"/> -->
+<!--             </span> -->
 
-            <span class="lang" lang="ru">
-                <img style="border:1px solid black;" src="assets/images/icons/russia-flag.gif"/>
-            </span>
+<!--             <span class="lang" lang="ru"> -->
+          <!--      <img style="border:1px solid black;" src="assets/images/icons/russia-flag.gif"/> -->
+<!--             </span> -->
 
             <script type="text/javascript" src="js/pages/main/lang.js"></script>
         </div>
@@ -69,32 +69,13 @@
                     else {
                         $protocol = 'http://';
                     }
-                    $url = $protocol.$_SERVER["HTTP_HOST"].'/octopus';
+                    $url = $protocol."wordpress.local/";
                     ?>
                     <a href="<?php echo $url;?>"><?php echo $url;?></a>
                 </li>
             </ul>
 
         </li>
-
-
-        <!--
-        <li>
-            <a class="menu_trigger" href="#">Code</a>
-
-            <ul class="menu">
-                <li>
-                    <a href="assets/css/desktop.css">Desktop - CSS</a>
-                </li>
-                <li>
-                    <a href="assets/js/jquery.desktop.js">Desktop - JavaScript</a>
-                </li>
-                <li>
-                    <a href="http://github.com/nathansmith/jQuery-Desktop">GitHub Repository</a>
-                </li>
-            </ul>
-        </li>
-        -->
 
         <li>
             <a class="menu_trigger" href="#">Resets</a>
@@ -104,14 +85,6 @@
                     <a id="reset_interface">Reset interface</a>
                 </li>
 
-                <!--
-                <li>
-                    <a href="http://adrian-rodriguez.net/">Wallpaper by Adrian Rodriguez</a>
-                </li>
-                <li>
-                    <a href="http://tango.freedesktop.org/Tango_Desktop_Project">Icons - Tango Desktop Project</a>
-                </li>
-                -->
             </ul>
         </li>
     </ul>

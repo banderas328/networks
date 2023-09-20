@@ -7,14 +7,28 @@ class Translator
     protected function __construct()
     {
         session_start();
-        $user_session = $_SESSION['user'];
-        $lang = $user_session["lang"];
-       
-        if ($lang) {
-            $transtator = include $_SERVER["DOCUMENT_ROOT"] . '/../config/language/lang.array.' . $lang . ".php";
-            $GLOBALS["HELPERS"]["TRANSLATOR"] = $transtator;
-            return $transtator;
+        if(isset($_SESSION['user'])){
+            $user_session = $_SESSION['user'];
+            $lang = $user_session["lang"];
+            
+            if ($lang) {
+                $transtator = include $_SERVER["DOCUMENT_ROOT"] . '/../config/language/lang.array.' . $lang . ".php";
+                $GLOBALS["HELPERS"]["TRANSLATOR"] = $transtator;
+                return $transtator;
+            }
         }
+        else {
+            
+            $lang = "en"; // default lang
+            
+            if ($lang) {
+                $transtator = include $_SERVER["DOCUMENT_ROOT"] . '/../config/language/lang.array.' . $lang . ".php";
+                $GLOBALS["HELPERS"]["TRANSLATOR"] = $transtator;
+                return $transtator;
+            }
+            
+        }
+
         return;
     }
 

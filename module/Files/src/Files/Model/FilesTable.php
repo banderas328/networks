@@ -50,12 +50,24 @@ class FilesTable
         $userId = $user_session["id"];
         $path = "userfiles/".$userId;
         $fileName = uniqid();
-        //var_dump($data);
-        var_dump($data);
-        var_dump($userId);
+       // echo "<pre>";
+       // var_dump($data);
+//         $i = 0;
+        if(isset($data[0])) $data = $data[0];
+      //  die();
+//         if(isset($data["files"]))
+//             foreach ($data["files"] as $file){
+//             $fileA = [];
+//             $fileA["file"]['name'] = $file['name'][$i];
+//             $fileA["file"]['tmp_name'] = $file['tmp_name'][$i];
+//             $fileA["file"]['to_directory'] = empty($file[$i]['to_directory']) ? 0 : $file[$i]['to_directory'];
+//             $fileA["file"]['type'] = $file['type'][$i];
+                       
+//         }
+       // var_dump($userId);
       //  die();
         if(isset($data['file']['name'])) {
-            $file = $path . '/' . $userId . $fileName . $data['name'];
+            $file = $path . '/' . $userId . $fileName . $data['file']['name'];
             if(move_uploaded_file($data['file']['tmp_name'], getcwd() . "/public/" . $file)) {
                 $fileDb['user_id'] = $userId;
                 if(isset($data['file']["to_directory"]))
@@ -73,7 +85,7 @@ class FilesTable
     public function saveTextFile($file_name,$data,$current_directory,$userId,$file_id =  false) {
         $path = "userfiles/".$userId;
         $fileName = uniqid();
-        $file = $path . '/' . $userId . $fileName . $file_name;
+        $file = $path . '/' . $userId . $fileName . $file_name.".html";
         if( file_put_contents(getcwd() . "/public/" . $file,$data)) {
             $fileDb['user_id'] = $userId;
             if(isset($current_directory))
@@ -171,7 +183,7 @@ class FilesTable
        else return false;
    }
 
-    public function deleteFile($adapter = false,$fileId,$userId) {
+    public function deleteFile($fileId,$userId) {
         $fileId =  (int) $fileId;
         $sql = "SELECT * FROM files where id=".$fileId." and user_id=".$userId;
         if(!$adapter) $adapter = $this->adapter;
@@ -182,7 +194,7 @@ class FilesTable
             $fileName  = $_SERVER['DOCUMENT_ROOT'].$file["file_name"];
             @ unlink($fileName);
             $sql = "DELETE FROM files  where id=".$fileId." and user_id=".$userId;
-            $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
+            $this->adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
             return true;
         }
         return false;

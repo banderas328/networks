@@ -817,16 +817,14 @@ th.shrink {
     height: 150px;
 }
 .message_to_user_from_user_chats_button {
-    position: absolute;
-    /* left: 400px; */
-    top: 325px;
+    position: relative;
+    top: 0;
     background: linear-gradient(90deg, #1fcbe1 0%, #05e1a3 98.48%);
     color: #fff;
     padding: 10px;
     border-radius: 5px;
     font-size: 18px;
     margin: 10px 0;
-    display: inline-block;
     border: none;
 }
 .close_chat {
@@ -1184,10 +1182,10 @@ background: rgba(246, 246, 246, 1);
 .form-horizontal input,
 .form-horizontal select,
 .form-horizontal textarea {
-    background: #f6f6f6;
     border: 1px solid #f6f6f6;
     border-radius: 5px;
     min-width: 320px;
+	margin:15px;
 }
 .form-horizontal select {
     min-width: 335px;
@@ -2646,6 +2644,16 @@ textarea.c-field::placeholder {
     border-radius: 5px;
     color: #fff;
     border: none;
+	margin-top:10px;
+}
+#open_task_popup #delete_task{
+    background: #eb5757;
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #fff;
+    border: none;
+	margin-top:10px;
 }
 .ui-draggable .ui-dialog-titlebar {
     border-top: none;
@@ -2892,8 +2900,8 @@ img.directory_action {
 }
 #chat_user {
 
-    width: 500px;
-    height: 80%;
+    width: 850px;
+    height: 95%;
 }
 #usersearchdiv ul {
     display: block;
@@ -2901,15 +2909,16 @@ img.directory_action {
 #usersearchdiv ul li {
     display: block;
     width: 400px;
+	clear: both;
 }
 #usersearchdiv ul li a {
     color: white;
     text-decoration: none;
+	float: right;
 
 }
 
 #usersearchdiv img {
-    float: left;
     display: inline-block;
     width: 50px;
     border-radius: 25px;
@@ -3087,8 +3096,18 @@ height: 30px;
 #search_tabs{
 	heigth:700px;
 }
-#task_create {
-	
+#task_create {	
 	margin :20px;
 }
-
+.user_search_half_block {
+	display:inline-block;
+	width: 15%;
+}
+.friend_request {
+	position: relative;
+	right: 0px;
+}
+.user_name_block{
+	width: 500px;
+	padding:15px;
+}

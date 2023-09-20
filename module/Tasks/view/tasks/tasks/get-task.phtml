@@ -2,14 +2,15 @@
 	<input type="hidden" value="<?php echo $task["id"]; ?>" name="task_id"
 		id="task_id_popup">
 	<div id="task_name_block">
-		<span class="edit_task_name"><img src="\assets\images\icons\edit.png"></span>
+		<span class="edit_task_name"><img  src="\assets\images\icons\edit.png"></span>
 		Task name: <span class="task_name_value"><?php echo $task["name"]; ?></span>
 	</div>
 	<div id="task_description_block">
-<!-- 		-->
+	<?php echo $task["description"];?>
 	</div>
-	<span class="edit_task_description"><button value='save'>Save</button> </span> Description: <span 
-			class="task_description_value"></span>
+	<span class="edit_task_description"><button value='save'
+			class="action_btn">Save</button> </span> Description: <span
+		class="task_description_value"></span>
 
 	<div id="task_description">Status: <?php echo $task["status"]; ?>
         <select id="task_status">
@@ -36,7 +37,7 @@
 		<div class="task_members">
             <?php
             
-foreach ($task["users"] as $user) {
+            foreach ($task["users"] as $user) {
                 
                 echo "<span>" . $user["first_name"] . " " . $user["second_name"] . "</span>";
                 echo "<img src='" . $user["avatar"] . "'/>";
@@ -47,9 +48,10 @@ foreach ($task["users"] as $user) {
 			<h5>Attached Files</h5>
             <?php
             if (isset($task["files"]))
-                foreach ($task["files"] as $file) {
+                foreach ($task["files"] as $file_key => $file_value) {
+                   // var_dump($file_value);
                     
-                    echo "<a href='" . $file["file_name"] . "'>" . $file["file_title"] . "</a><br/>";
+                    echo "<a href='" . $file_value[0]["file_name"] . "'>" . $file_value[0]["file_title"] . "</a><br/>";
                 }
             ?>
             <h5>Comments</h5>
@@ -57,11 +59,12 @@ foreach ($task["users"] as $user) {
             if (isset($task["sub_tasks"]))
                 foreach ($task["sub_tasks"] as $sub_task) {
                     
-                    echo "<p style='border-bottom: 1px solid #f5f5f5'>" . $sub_task["description"] ."</p>" ;
-                    if($sub_task["status"] != "edit") echo "<p>status : " . $sub_task["status"] . "</p>";
+                    echo "<p style='border-bottom: 1px solid #f5f5f5'>" . $sub_task["description"] . "</p>";
+                    if ($sub_task["status"] != "edit")
+                        echo "<p>status : " . $sub_task["status"] . "</p>";
                 }
             ?>
-<div id="sub_task"></div> 
+<div id="sub_task"></div>
 		</div>
 
 		<div id="task_button_area">
@@ -76,12 +79,16 @@ foreach ($task["users"] as $user) {
 					multiple id="task_file_update" />
 			</p>
 			<p>
-				<input type="button" name="update task" value="update task"
+				<input type="button" name="update task" value="Update task"
 					id="update_task" task_id="<?php echo $task["id"]; ?>" />
 			</p>
 			<p>
-				<input type="button" name="archive task" value="archive task"
+				<input type="button" name="archive_task" value="Archive task"
 					id="archive_task" task_id="<?php echo $task["id"]; ?>" />
+			</p>
+			<p>
+				<!-- 				<input type="button" name="delete_task" value="Delete task" -->
+				<!-- 	id="delete_task" task_id="<?php // echo $task["id"]; ?>" /> -->
 			</p>
 		</div>
 	</div>
@@ -89,7 +96,7 @@ foreach ($task["users"] as $user) {
         function edit_task_name() {
 
             var tast_name = $(".task_name_value").text();
-            var html_string = '<input type="text" id="task_name_input" name="task_name" value="' + tast_name + '"/><span class="edit_save_task_name">save</span>';
+            var html_string = '<input type="text" id="task_name_input" name="task_name" value="' + tast_name + '"/>&nbsp;&nbsp;<span class="edit_save_task_name action_btn">save</span>';
             $("#task_name_block").html(html_string);
             $(".edit_save_task_name").on("click", function () {
                 var data = {"name": $("#task_name_input").val(), "id": $("#task_id_popup").val()};
@@ -124,11 +131,6 @@ foreach ($task["users"] as $user) {
 
         }
         function edit_task_description() {
-//             $("#task_description_block").html(" ");
-//             $("#task_description_input").remove();
-//             var html_string = '<textarea id="task_description_input" name="task_description"></textarea><span class="edit_save_task_description">save</span>';
-//             $("#task_description_block").html(html_string);
- //           CKEDITOR.replace('task_description_block');
                 var data = {
                     "description": CKEDITOR.instances.task_description_block.getData(),
                     "id": $("#task_id_popup").val()
@@ -165,20 +167,14 @@ foreach ($task["users"] as $user) {
 
         }
         function update_task() {
-            //var task_id = $(this).attr("task_id");
             var task_id = $("#task_id_popup").val();
-            //var text = $("#sub_task").val();
             var text = CKEDITOR.instances.sub_task.getData();
             var status = $("#task_status").val();
-            //var files = $("#task_file_update").prop('files');
-            //var file = files[0];
-            //var data = new FormData();
             var data = new FormData();
     	    var totalfiles = document.getElementById('task_file_update').files.length;
   		    for (var index = 0; index < totalfiles; index++) {
     			data.append("files[]", document.getElementById('task_file_update').files[index]);
   		    }
-//             data.append('file', file);
             data.append('parent_task', task_id);
             data.append('description', text);
             data.append('status', status);
@@ -208,15 +204,43 @@ foreach ($task["users"] as $user) {
             request.send(data);
 
         }
+
+        function delete_task(){
+        	var task_id = $("#task_id_popup").val();
+
+            $.ajax({
+                type: "POST",
+                url: "tasks/deleteTask",
+                async: false,
+                data: {"task_id": task_id}
+            })
+                .done(function (data) {
+                    var project_id = $("#create_board_button").attr("project_id");
+                    $.ajax({
+                        type: "POST",
+                        url: "boards/index",
+                        async: false,
+                        data: {"project_id": project_id}
+                    })
+                        .done(function (data) {
+                            $("#open_task_popup").dialog("close");
+                            $("#open_task_popup").html(" ");
+                            $("#tasks_transaction").html(data);
+
+                        });
+                });
+            }
         $(function () {
            CKEDITOR.replace('sub_task', {});
-           CKEDITOR.replace('task_description_block', {});
-           CKEDITOR.instances.task_description_block.setData( "<?php echo htmlspecialchars($task["description"]);?>", function()
-            		{
-            		    this.checkDirty();  // true
-            		});
-            $("#datepicker").datepicker();
-            $("#task_file_update").css("display", "none");
+          // $("#task_description_block").html('<?php //echo $task["description"];?>');
+           CKEDITOR.replace('task_description_block', {
+               blockedKeystrokes: [],
+               height : "200px",
+           });
+        //   CKEDITOR.replace('task_description_block', {});
+         //  $("#task_description_block").html(content_description_block);
+           $("#datepicker").datepicker();
+           $("#task_file_update").css("display", "none");
             $(".c-file__icon-wrap").on("click", function () {
                 $("#task_file_update").click();
             });
@@ -272,5 +296,6 @@ foreach ($task["users"] as $user) {
 
 
             $("#update_task").on("click", update_task);
+            $("#delete_task").on("click", delete_task);
         })
     </script>

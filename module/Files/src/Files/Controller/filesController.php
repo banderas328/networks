@@ -177,9 +177,7 @@ class  filesController extends Controller\preloaderController {
         session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
-       if($this->getFilesTable()->deleteFile($files->getAdapter(),$file_id,$userId)){
-
-         //  $this->getPayedFilesTable()->deleteFileForPay($file_id);
+       if($this->getFilesTable()->deleteFile($file_id,$userId)){
            $this->getFilesToTagsTable()->deleteFileTags($file_id);
        }
           die(json_encode($file_id));

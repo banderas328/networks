@@ -50,17 +50,23 @@
     height: 200px;
 }
 .website_body h1 {
-    font-size: 26px;
+font-size: 26px;
     font-weight: 600;
     color: white;
-    background: #43bee4;
-
+    background: black;
     border-radius: 3px;
     padding: 4px 0 4px 15px;
+    /* margin-top: 5px; */
+    /* margin-bottom: 20px; */
+    /* opacity: 0.8; */
+width: 265px;
+    position: relative;
+    top: 25px;
+}
+.alert-success {
 
-    margin-top: 5px;
-    margin-bottom: 20px;
-    opacity: 0.8;
+ width: 290px;
+
 }
 .row #user label {
     height: 100px;
@@ -112,7 +118,7 @@
 .website_body input[type="submit"] {
     padding: 7px;
     border-radius: 16px;
-    background: #43bee4;
+    background: black;
 
     border: none;
     display: inline-block;
@@ -175,8 +181,6 @@ body {
 }
 
 .header-nav {
-    background: #43bee4;
-
     padding-top: 20px;
     /* font-family: 'Griffy'; */
   
@@ -220,7 +224,8 @@ a {
 }
 .website_body a {
     display: block;
-    margin-top: 10px;
+    margin: 20px;
+    font-size:25px;
 }
 
 .navbar-nav > li > a {
@@ -228,21 +233,18 @@ a {
     padding: 0;
     font-size: 30px;
     line-height: 65px;
-    color: white;
-    transition: transform 500ms ease;
+    /* color: white; */
+    transition: transform 500ms black;
     font-weight: 400;
 }
 .nav {
-    display: flex;
-    justify-content: space-around;
     width: 100%;
 }
 .navbar-nav > li :hover {
     scale: 1.1;
-    font-weight: 700;
-    transform: translateY(-10px);
-
+    font-weight: 800;
     text-decoration: none;
+    color:black;
 }
 
 .panel-title {
@@ -352,7 +354,7 @@ a {
 margin:15px;
 }
 #auth_form input {
-margin-top:25px;
+margin-top: 25px;
 }
 #auth_form input[type=submit] {
 color:white;
@@ -384,4 +386,12 @@ margin-top:25px;
 }
 #reset_form input[type=submit] {
 color:white;
+}
+#body_os {
+    background-image: url(/img/login.webp);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.navbar-nav>li {
+ float: none; 
 }

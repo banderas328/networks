@@ -37,8 +37,10 @@ class SettingsTable
 
     public function saveGeneralSettings($settings)
     {
-        $files = $settings["file"];
-        if ($files) $settings["file"] = $files;
+        if(isset($settings["file"])){
+            $files = $settings["file"];
+        }
+        if (isset($files)) $settings["file"] = $files;
         if (is_array($settings["first_name"])) $settings["first_name"] = $settings["first_name"][1];
         if (is_array($settings["second_name"])) $settings["second_name"] = $settings["second_name"][1];
         if (is_array($settings["job"])) $settings["job"] = $settings["job"][1];
@@ -46,12 +48,12 @@ class SettingsTable
         if (is_array($settings["city"])) $settings["city"] = $settings["city"][1];
         if (is_array($settings["about"])) $settings["about"] = $settings["about"][1];
         if (is_array($settings["phone"])) $settings["phone"] = $settings["phone"][1];
-        if (is_array($settings["visibility"])) $settings["visibility"] = $settings["visibility"][1];
+//         if (is_array($settings["visibility"])) $settings["visibility"] = $settings["visibility"][1];
         session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
 
-        if ($settings['file']['tmp_name']) {
+        if (isset($settings['file']['tmp_name'])) {
             $sql = "SELECT  * FROM user_settings where user_id=" . $userId;
             $results = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
             $results = $results->toArray();

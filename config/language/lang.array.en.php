@@ -12,8 +12,6 @@ return array(
     'Blogs' => "News",
     'Computer' => "Computer",
     'Audio' => "Audio",
-    'Create_Directory' => 'Create Directory',
-    'Delete_Directory' => "Delete Directory",
     'Delete_File' => 'Delete File',
     'Download_File' => 'Download File',
     'Frames' => 'Frames',
@@ -22,5 +20,10 @@ return array(
     "Move_File" => "Move File",
     "Rename_File" => "Rename File",
     "Download_File" => "Rename File",
-    
+    "Create_Directory" => "Create Directory",
+    "Delete_Directory" => "Delete Directory",
+    "Move_Directory" => "Move Directory",
+    "Rename_Directory" => "Rename Directory",
+    "Share_Directory" => "Share Directory",
+    "Share_With_Password" => "Share with password",
 );

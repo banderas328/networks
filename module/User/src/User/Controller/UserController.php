@@ -289,12 +289,17 @@ class UserController extends Controller\preloaderController
         $request = $this->getRequest();
         if ($request->isPost()) {
             $data = $request->getPost();
-            unset($data['submit']);
+            if(isset($data['submit'])) unset($data['submit']);
             $user = new User();
             $dbAdapter = $user->getAdapter();
             $users = $this->getSettingsTable()->searchUsersOnSettings($data);
         }
-        return array('users' => $users, 'div' => "usersearchdiv");
+        if(isset($users)) {
+            
+            $response["users"] = $users;
+        }
+        $response["div"] = "usersearchdiv";
+        return $response;
     }
 
     public function userPageAction()

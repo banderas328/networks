@@ -1,7 +1,6 @@
 <?php
 $user = $_SESSION['user'];
-$lang = $user['user']->lang;
-$user_id = $user['user']->id;
+$this->translator = $GLOBALS["HELPERS"]["TRANSLATOR"];
 if (! $is_root) {
     ?>
 <!--    <span id="paste">paste</span>-->
@@ -63,8 +62,8 @@ if (! $is_root) {
                          <p  dir_key=" . $dir_value['id'] . " dir=" . $dir_value['id'] . " class='directory folder_action' >" . $dir_value['path'] . " </p>
                   </div>";
             if (! $is_root) {
-                echo "<div class='directory_actions hard-dropdown ' dir=" . $dir_value["id"] . ">
-                           <p class='delete_directory hard-dropdown-items ' dir=" . $dir_value['id'] . ">" . $this->translator['Delete_Directory'] . "</p>
+                echo "<div class='directory_actions hard-dropdown ' dir=" . $dir_value['id'] . ">
+                           <p class='delete_directory hard-dropdown-items' dir=" . $dir_value['id'] . ">" . $this->translator['Delete_Directory'] . "</p>
                            <p class='move_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Move Directory</p>
                            <p class='rename_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Rename Directory</p>
                            <p class='share_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Share Directory</p>
@@ -149,9 +148,9 @@ if (! $is_root) {
                 echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='rename_file ' file=" . $file['id'] . ">" . $this->translator['Rename_File'] . "</span></p>";
                 echo "<p class='hard-dropdown-items'><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" .  $this->translator['Download_File'] . "</a></p>";
             
-            if ($type[0] == 'image') {
-                echo "<p class='image_url hard-dropdown-items' url='/" . $file["file_name"] . "'><a href='#'>Copy image url</a></p>";
-            }
+//             if ($type[0] == 'image') {
+                echo "<p class='image_url hard-dropdown-items' url='/" . $file["file_name"] . "'><a href='#'>Copy url</a></p>";
+//            }
             echo "</div>";
             echo "</div>";
             echo "</div>";

@@ -13,6 +13,7 @@
                 </div>
 
                 <div class="c-chat-card__controls">
+                <?php //var_dump($chanel); ?>
                     <a class="c-chat-card__enter-button js-join-channel"
                         to_chanel="<?php echo $chanel->id;?>"
                         href="<?php echo $url; ?>"
@@ -58,6 +59,7 @@
         });
 
         function send_message_from_user_chanel(element) {
+            console.info(element);
             window.to_chanel.to_chanel  = $(element).attr("to_chanel");
             var chanel_name =  $(element).attr("chanel_name");
             $('.message_to_user_area_chanel').val("");
@@ -79,7 +81,7 @@
                 });
             $(".message_to_user_from_chanel_list").find('button').addClass("message_to_user_from_user_chanel_button");
             $(".message_to_user_from_user_chanel_button").bind("click",function(){
-                send_to_chanel();
+                send_to_chanel(this);
             });
             $(".message_to_user_from_chanel_list[to_chanel="+window.to_chanel.to_chanel+"]").show();
             $("#chat_public").show();
@@ -104,6 +106,8 @@
                 });
         }
         function send_to_chanel(element) {
+            console.info(element);
+            console.info($(element).attr('to_chanel'));
             //var text = $('.message_to_user_area_chanel[to_chanel='+ window.to_chanel.to_chanel+']').val();
             var text = CKEDITOR.instances.public_chat_message.getData();
             $('.message_to_user_area_chanel[to_chanel='+ window.to_chanel.to_chanel+']').val("");

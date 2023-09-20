@@ -13,26 +13,34 @@
 // echo $this->formSubmit($form->get('submit'));
 // echo $this->form()->closeTag();
 ?>
-<form action="/user/usersearch" method="post" id="user_search_form">
-	<input type="text" name="first_name" placeholder="First name" /> <br />
-	<input type="text" name="second_name" placeholder="Second name" /> <br />
-	<input type="text" name="job" placeholder="Job" /> <br /> <input
-		type="text" name="country" placeholder="Country" /> <br /> <input
-		type="text" name="city" placeholder="City" /> <br /> <input
-		type="text" name="phone" placeholder="Phone" /> <br /> <input
-		type="submit" value="Search" id="user_search" />
-</form>
-<div id="usersearchdiv">
+	<div class="col user_search_half_block" >
+		<form action="/user/usersearch" method="post" id="user_search_form">
+			<input type="text" name="first_name" placeholder="First name" /> <br />
+			<input type="text" name="second_name" placeholder="Second name" /> <br />
+			<input type="text" name="job" placeholder="Job" /> <br /> <input
+				type="text" name="country" placeholder="Country" /> <br /> <input
+				type="text" name="city" placeholder="City" /> <br /> <input
+				type="text" name="phone" placeholder="Phone" /> <br /> <input
+				type="submit" value="Search" id="user_search" />
+		</form>
+	</div>
+	<div class="col user_search_half_block">
+		<div id="usersearchdiv" >
     users with handled "Setting"
 <?php
-if ($this->users[0]) {
+
+if (isset($this->users[0])) {
     ?>
             <ul>
                 <?php foreach ($this->users[0] as $vars): ?>
                 <?php $vars = array($vars);?>
 
                     <li>
-                        <?php echo "<img src='" . $vars[0]->avatar. "'>".$vars[0]->first_name." ".$vars[0]->second_name ." <a class='friend_request action_btn' href='/friends/addfriendrequest/".$vars[0]->user_id."'>Add to Friends</a>";?>
+                        <?php echo "<img src='" . $vars[0]->avatar. "'>"
+                                    ."<span class='user_name_block'>".$vars[0]->first_name." ".$vars[0]->second_name ."</span>".
+                                    " 
+                                                   <a class='friend_request action_btn' href='/friends/addfriendrequest/".$vars[0]->user_id."'>Add to Friends</a>"
+                                      ."";?>
                     </li>
                 <?php endforeach; ?>
             </ul>
@@ -85,5 +93,6 @@ if ($this->users[0]) {
             });
         });
     </script>
-</div>
+		</div>
+	</div>
 

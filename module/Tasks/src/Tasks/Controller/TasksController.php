@@ -68,6 +68,7 @@ class TasksController extends Controller\preloaderController
         echo json_encode($this->getTasksTable()->updateTask($request));
         return false;
     }
+    
 
     public function loadProjectArchiveAction(){
         $this->layout('layout/only_form');
