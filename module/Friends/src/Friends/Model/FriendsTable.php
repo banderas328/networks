@@ -131,7 +131,7 @@ class FriendsTable {
             $lastElement = end($needIds);
             $where = " WHERE ";
             foreach ($needIds as $user) {
-                    $where .= " user_id = "  . $user ;
+                    $where .= " user_id = '"  . $user . "' ";
                     if($user != $lastElement and (count($needIds) >= 2)) {
                         $where .= " OR ";
                     }
@@ -140,6 +140,7 @@ class FriendsTable {
             }
 
             $sql = "SELECT * FROM user_settings ".$where;
+            var_dump($sql);
             $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
             return $resultSet;
         }
