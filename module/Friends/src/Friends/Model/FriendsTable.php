@@ -103,28 +103,29 @@ class FriendsTable {
             if(!in_array($row['user_id'],$userIds)) array_push($userIds,$row['user_id']);
             if(!in_array($row['friend_id'],$userIds)) array_push($userIds,$row['friend_id']);
         }
-        $userIds[] = $userId;
-        if($onlyIds) {
-            foreach($onlyIds as $onlyIdKey => $onlyIdValue){
-                foreach($userIds as $userId){
-                    if($onlyIdValue['user'] == $userId) {
-                        $needIds[] = $onlyIdValue['user'];
-                        break;
-                    }
-                }
-            }
-        }
-        else {
-            $needIds = $userIds;
-        }
 
+//         if($onlyIds) {
+//             foreach($onlyIds as $onlyIdKey => $onlyIdValue){
+//                 foreach($userIds as $userIdValue){
+//                     if($onlyIdValue['user'] == $userIdValue) {
+//                         $needIds[] = $onlyIdValue['user'];
+//                         break;
+//                     }
+//                 }
+//             }
+//         }
+//         else {
+//            
+//         }
+        $needIds = $userIds;
+        $needIds[] = $userId;
         
-        foreach($needIds as $needIdKey => $needIdValue) {
-            if($needIdValue == $requestUser) {
-                unset($needIds[$needIdKey]);
-            }
+//         foreach($needIds as $needIdKey => $needIdValue) {
+//             if($needIdValue == $requestUser) {
+//                 unset($needIds[$needIdKey]);
+//             }
 
-        }
+//         }
         if(count($needIds) >= 1)
         {
             $lastElement = end($needIds);
