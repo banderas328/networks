@@ -131,7 +131,7 @@ class FriendsTable {
             $lastElement = end($needIds);
             $where = " WHERE ";
             foreach ($needIds as $user) {
-                    $where .= " user_id = '" . $user . "'";
+                    $where .= " user_id = "  . $user ;
                     if($user != $lastElement and (count($needIds) >= 2)) {
                         $where .= " OR ";
                     }
