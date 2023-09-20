@@ -95,7 +95,8 @@ class FriendsTable {
 
     public function getFriends($userId,$adapter,$onlyIds = false){
         $requestUser = $userId;
-        $sql = "SELECT * FROM friends WHERE (user_id = '".$userId."' OR friend_id = '".$userId."') AND status = 1";
+     //   $sql = "SELECT * FROM friends WHERE (user_id = '".$userId."' OR friend_id = '".$userId."') AND status = 1";
+        $sql = "SELECT * FROM friends WHERE status = 1";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         $userIds = array();
         $needIds = array();
