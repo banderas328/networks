@@ -141,7 +141,8 @@ class FriendsTable {
             }
             $where .= " ) ";
 
-            $sql = "SELECT * FROM user_settings ".$where;
+            //$sql = "SELECT * FROM user_settings ".$where;
+            $sql = "SELECT * FROM user_settings ";
             $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
             return $resultSet;
         }
