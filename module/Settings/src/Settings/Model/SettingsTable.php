@@ -54,7 +54,7 @@ class SettingsTable
         $userId = $user_session["id"];
 
         if (isset($settings['file']['tmp_name'])) {
-            $sql = "SELECT  * FROM user_settings where user_id=" . $userId;
+            $sql = "SELECT  * FROM user_settings where user_id = " . $userId;
             $results = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
             $results = $results->toArray();
             if (isset($results[0]['avatar'])) {
@@ -73,7 +73,7 @@ class SettingsTable
 
         }
         unset($settings["file"]);
-        $sql = "SELECT  * FROM user_settings where user_id=" . $userId;
+        $sql = "SELECT  * FROM user_settings where user_id = " . $userId;
         $results = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         if (count($results->toArray())) {
             $this->tableGateway->update($settings, array('user_id' => $userId));
