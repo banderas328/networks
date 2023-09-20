@@ -116,6 +116,7 @@ class FriendsTable {
         else {
             $needIds = $userIds;
         }
+        $needIds[] = $userId;
         
         foreach($needIds as $needIdKey => $needIdValue) {
             if($needIdValue == $requestUser) {
