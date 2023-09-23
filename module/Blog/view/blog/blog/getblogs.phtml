@@ -159,9 +159,6 @@
                 "blog_id": blog_id,
                 "comment_count": comment_count,
             };
-            if(!refresh && comment_count != 0) {
-            	data.comment_count = comment_count - 1;
-                }
             $.ajax({
                 type: "POST",
                 url: "blog/getComments",
@@ -170,6 +167,7 @@
                 .done(function (data) {
                     data = JSON.parse(data);
                     blog_id = false;
+                    console.info(data);
 
                     $(data).each(function( index ) {
                         const avatar = data[index].avatar;
@@ -179,27 +177,13 @@
                         console.info(data[index]);
                         console.info(comment);
                         const blog_id = data[index].blog_id;
-                        const comment_string = `
-                            <div class="c-comment">
-                                <div class="c-comment__aside">
-                                    <div class="c-comment__avatar">
-                                        <img class="c-comment__avatar-image" src="${avatar}" alt="Avatar of ${first_name} ${second_name}">
-                                    </div>
-                                </div>
+                        const comment_string = 
+                            '<div class="c-comment"><div class="c-comment__aside"><div class="c-comment__avatar">'
+                            +'<img class="c-comment__avatar-image" src="'+avatar + '">'
+                                     + '</div></div><div class="c-comment__main"><div class="c-comment__header">'
+                                     + first_name + ' ' + second_name + '</div><div class="c-comment__content">'+comment+'</div></div></div>';
 
-                                <div class="c-comment__main">
-                                    <div class="c-comment__header">
-                                        ${first_name} ${second_name}
-                                    </div>
-
-                                    <div class="c-comment__content">
-                                        ${comment}
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-
-                        $(`.blog_comments[blog_id="${blog_id}"]`).append(comment_string);
+                        $(".blog_comments[blog_id="+blog_id+"]").append(comment_string);
                     });
 
                     if(data[0] != undefined) {
