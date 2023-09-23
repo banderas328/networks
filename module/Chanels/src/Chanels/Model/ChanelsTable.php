@@ -30,7 +30,7 @@ class ChanelsTable
 
     public function fetchAllPublic()
     {
-        $sql = "SELECT chanels.id as chanel_id,chanels.chanel_name,user_settings.first_name,user_settings.second_name,user_settings.avatar,
+        $sql = "SELECT chanels.id as chanel_id,chanels.chanel_name,user_settings.first_name,user_settings.second_name,user_settings.avatar
 
          FROM chanels
         left join chanels_admins on chanels_admins.chanel_id = chanels.id
