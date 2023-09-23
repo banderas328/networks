@@ -136,7 +136,8 @@
         })
             .done(function (data) {
                 $.each(data, function (index, message) {
-                    $(".message_box[to_chanel=" + message.to_chanel + "]").append("<p class='old_message allowSelectOneClick'>" + message.first_name + " " + message.second_name + ":" + message.message + "</p>");
+                    let to_chanel  = parseInt(message.to_chanel);
+                    $(".message_box[to_chanel=" + to_chanel + "]").append("<p class='old_message allowSelectOneClick'>" + message.first_name + " " + message.second_name + ":" + message.message + "</p>");
                     if (typeof message.date !== "undefined") {
                         window.to_chanel_private.date = message.date;
                     }

@@ -15,8 +15,8 @@
                 <div class="c-chat-card__controls">
                 <?php //var_dump($chanel); ?>
                     <a class="c-chat-card__enter-button js-join-channel"
-                        to_chanel="<?php echo $chanel->id;?>"
-                        href="<?php echo $url; ?>"
+                        to_chanel="<?php echo $chanel->chanel_id;?>"
+                        href="#"
                         chanel_name="<?php echo $chanel->chanel_name ?>"
                     >
                         <svg class="icon-nw icon-nw-open-in-new-black-24" viewBox="0 0 24 24">
@@ -97,7 +97,9 @@
             })
                 .done(function(data) {
                     $.each(data.chanels_messages, function (index,message) {
-                        $(".message_box[to_chanel="+message.to_chanel+"]").append("<p class='old_message allowSelectOneClick'>"+message.first_name+" "+message.second_name+":"+message.message+"</p>");
+                        console.info(message);
+                        let to_chanel  = parseInt(message.to_chanel);
+                        $(".message_box[to_chanel='"+to_chanel+"']").append("<p class='old_message allowSelectOneClick'>"+message.first_name+" "+message.second_name+":"+message.message+"</p>");
                         window.to_chanel.date  = message.date;
                        // $(".message_box[to_chanel="+message.to_chanel+"]").animate({ scrollTop: 10000}, 200);
 
