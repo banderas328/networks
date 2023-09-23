@@ -153,11 +153,15 @@ class TasksTable
         session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
+//         $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id FROM tasks
+//                 left join boards on boards.id = tasks.board_id
+//                 left join projects on boards.project_id = projects.id
+//                 left join projects_members on projects_members.project_id = projects.id
+//                 WHERE tasks.is_archive = '0' and projects_members.project_id='" . $project_id . "' and projects_members.user_id = " . $userId;
         $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id FROM tasks
                 left join boards on boards.id = tasks.board_id
                 left join projects on boards.project_id = projects.id
-                left join projects_members on projects_members.project_id = projects.id
-                WHERE tasks.is_archive = '0' and projects_members.project_id='" . $project_id . "' and projects_members.user_id = " . $userId;
+                WHERE tasks.is_archive = '0'";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $tasks = $resultSet->toArray();
         $columns = [];

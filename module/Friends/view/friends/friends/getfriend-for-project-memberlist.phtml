@@ -2,13 +2,17 @@
 <?php
 if($friends)
 foreach($friends as $friend){
-    echo "<span userId='".$friend["user_id"]."' class='project_member_span'>";
-    echo "<div class='task_member_avatar'>";
-    echo "<img src='" . $friend['avatar'] . "'>";
+    echo "<div userId='".$friend["user_id"]."' class='project_member_span'>";
+    if(isset($friend['first_name'])) {
+        
+        echo "<div class='member_name' userId='".$friend['user_id']."'><span userId='".$friend['user_id']."' class='user_container_project'>".$friend['first_name']." ".$friend['second_name']."</span></div>";
+    }
+   else {
+       echo "<div class='member_name' userId='".$friend['user_id']."'><span userId='".$friend['user_id']."' class='user_container_project'>anonymous</span></div>";
+       
+   }
+    echo '<div style="margin:0;" userId='.$friend["user_id"].' class="add_user_to_project action_btn">Add</div>';
     echo "</div>";
-    echo "<div class='member_name' userId='".$friend['user_id']."'><div userId='".$friend['user_id']."' class='user_container_project'>".$friend['first_name']." ".$friend['second_name']."</div></div>";
-    echo '<input type="button" value="+" userId='.$friend["user_id"].' class="add_user_to_project action_btn">';
-    echo "</span>";
 }
 ?>
 </div>

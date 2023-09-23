@@ -2,31 +2,40 @@
 	<div class="col col-3">
 		<ul class="projects_list">
 <?php
-if(isset($projects)){
-foreach ($projects as $project) {
-    echo '<li class="open_project" projectId="'.$project["id"].'">' . $project["project_name"] .
-        '<span class="open_project" projectId="'.$project["id"].'">open</span><span class="archive_project" projectId="'.$project["id"].'">archive</span></li>';
-}}
+if (isset($projects)) {
+    foreach ($projects as $project) {
+        echo '<li class="open_project" projectId="' . $project["id"] . '">' . $project["project_name"] . '<div class="open_project" projectId="' . $project["id"] . '">open</span><span class="archive_project" projectId="' . $project["id"] . '">archive</div></li>';
+    }
+}
 ?>
 </ul>
 	</div>
 </div>
-<div id="projects_div" class="col col-12">
-<span id="create_project_button">+ create project</span>
-</div>
-<div id="project_popup">
-    <span id="project_members_list"></span>
-    <span id="project_members"></span>
-    <input type="text" name="project_name" placeholder="project name" id="project_name">
-    <textarea name="project_description" placeholder="project description" id="project_description"></textarea>
-    <input	type="button" name="project_save" class="action_btn" value="save project" id="create_project">
-</div>
-
 <div class="projects_archive">
-<span id="load_projects_archive">load projects archive</span>
-    <div id="projects_archive_block"></div>
+	<span id="load_projects_archive">load projects archive</span>
+	<div id="projects_archive_block"></div>
 
 </div>
+<div class="col col-12">
+	<div id="create_project_button">+ create project</div>
+
+
+<div id="project_popup" style="display: block;">
+	<div style="width: 100%;">
+		<input type="text" name="project_name" placeholder="project name"
+			id="project_name"> </br>
+		<textarea name="project_description" placeholder="project description"
+			id="project_description"></textarea>
+		</br> <input type="button" name="project_save" class="action_btn"
+			value="save project" id="create_project">
+	</div>
+	<div style="display: block;" id="project_members"></div>
+</div>
+	<div id="project_members_list"></div>
+
+</div>
+
+
 <script type="text/javascript">
     $(function(){
         $("#load_projects_archive").on("click" , function (){

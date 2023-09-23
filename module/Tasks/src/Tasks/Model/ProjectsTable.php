@@ -83,11 +83,12 @@ class ProjectsTable
 
     public function getProjects()
     {
-        session_start();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
-        $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id
-                WHERE projects_members.user_id='" . $userId . "' and is_archive = '0' order by projects.sort_order";
+//         session_start();
+//         $user_session = $_SESSION['user'];
+//         $userId = $user_session["id"];
+//         $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id
+//                 WHERE projects_members.user_id='" . $userId . "' and is_archive = '0' order by projects.sort_order";
+         $sql = "SELECT * FROM  projects WHERE  is_archive = '0' order by projects.sort_order";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $projects = $resultSet->toArray();
         return $projects;

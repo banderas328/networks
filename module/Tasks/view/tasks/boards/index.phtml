@@ -231,6 +231,7 @@
         })
             .done(function (data) {
                 data = JSON.parse(data);
+//                 console.info(data);
                 for (const [key, value] of Object.entries(data)) {
                     for (const [key_task, value_task] of Object.entries(value)) {
                         var board_id = value_task.board_id;
