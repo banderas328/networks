@@ -54,8 +54,7 @@ if (! $is_root) {
 <div class="dirs_block">
     <?php
     if (isset($dirs) and count($dirs)) {
-        foreach ($dirs as 
-        $dir_key => $dir_value) {
+        foreach ($dirs as $dir_key => $dir_value) {
             echo "<div class='dir_wraper hard-drive-dir-wrapper'>
                         <div class='directory_wrapper hard-drive-directory-inner'>
                         <img src='assets/images/icons/folder.png' width='50px' height='50px' dir=" . $dir_value['id'] . " class='folder_action'/>
@@ -142,15 +141,15 @@ if (! $is_root) {
             echo "<p class='file_block'  file=" . $file['id'] . "> " . $file['file_title'] . "</p>";
             echo "<div class='hard-dropdown file_actions' file=" . $file['id'] . ">";
             if ($type[0] == 'text_file')
-                echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='edit_file ' file=" . $file['id'] . ">" .$this->translator['Edit_File']. "</span></p>";
-                echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='delete_file  ' file=" . $file['id'] . ">" . $this->translator['Delete_File']. "</span></p>";
-                echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='move_file ' file=" . $file['id'] . ">" . $this->translator['Move_File'] . "</span></p>";
-                echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='rename_file ' file=" . $file['id'] . ">" . $this->translator['Rename_File'] . "</span></p>";
-                echo "<p class='hard-dropdown-items'><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" .  $this->translator['Download_File'] . "</a></p>";
+                echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='edit_file ' file=" . $file['id'] . ">" . $this->translator['Edit_File'] . "</span></p>";
+            echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='delete_file  ' file=" . $file['id'] . ">" . $this->translator['Delete_File'] . "</span></p>";
+            echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='move_file ' file=" . $file['id'] . ">" . $this->translator['Move_File'] . "</span></p>";
+            echo "<p class='hard-dropdown-items' file=" . $file['id'] . "><span class='rename_file ' file=" . $file['id'] . ">" . $this->translator['Rename_File'] . "</span></p>";
+            echo "<p class='hard-dropdown-items'><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" . $this->translator['Download_File'] . "</a></p>";
             
-//             if ($type[0] == 'image') {
-                echo "<p class='image_url hard-dropdown-items' url='/" . $file["file_name"] . "'><a href='#'>Copy url</a></p>";
-//            }
+            // if ($type[0] == 'image') {
+            echo "<p class='image_url hard-dropdown-items' url='/" . $file["file_name"] . "'><a href='#'>Copy url</a></p>";
+            // }
             echo "</div>";
             echo "</div>";
             echo "</div>";
@@ -535,6 +534,11 @@ if (! $is_root) {
     function upload_file_to_directory(e) {
         var files = e.target.files;
         var file = files[0];
+  		let filesize = parseInt(files[0].size);
+	    if(filesize >= 1024 * 1024 * 35) {
+			alert("files should be less than 35 MB");
+			return false;
+	    }
         var data = new FormData();
         data.append('file', file);
         var current_directory = $("#current_directory").val();

@@ -2,7 +2,7 @@
 	<input type="hidden" value="<?php echo $task["id"]; ?>" name="task_id"
 		id="task_id_popup">
 	<div id="task_name_block">
-		<span class="edit_task_name"><img  src="\assets\images\icons\edit.png"></span>
+		<span class="edit_task_name"><img src="\assets\images\icons\edit.png"></span>
 		Task name: <span class="task_name_value"><?php echo $task["name"]; ?></span>
 	</div>
 	<div id="task_description_block">
@@ -49,7 +49,7 @@
             <?php
             if (isset($task["files"]))
                 foreach ($task["files"] as $file_key => $file_value) {
-                   // var_dump($file_value);
+                    // var_dump($file_value);
                     
                     echo "<a href='" . $file_value[0]["file_name"] . "'>" . $file_value[0]["file_title"] . "</a><br/>";
                 }
@@ -173,7 +173,15 @@
             var data = new FormData();
     	    var totalfiles = document.getElementById('task_file_update').files.length;
   		    for (var index = 0; index < totalfiles; index++) {
-    			data.append("files[]", document.getElementById('task_file_update').files[index]);
+  	  	  		let filesize = parseInt(document.getElementById('task_file_update').files[index].size);
+  	  		    if(filesize <= 1024 * 1024 * 35) {
+  	  	  		    data.append("files[]", document.getElementById('task_file_update').files[index]);
+  	  	  		    }
+  	  		    else {
+						alert("files should be less than 35 MB");
+						return false;
+  	  	  		    }
+    			
   		    }
             data.append('parent_task', task_id);
             data.append('description', text);
