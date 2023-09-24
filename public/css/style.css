@@ -387,11 +387,6 @@ margin-top:25px;
 #reset_form input[type=submit] {
 color:white;
 }
-#body_os {
-    background-image: url(/img/login.webp);
-    background-repeat: no-repeat;
-    background-position: center;
-}
 .navbar-nav>li {
  float: none; 
 }
