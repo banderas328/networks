@@ -30,13 +30,21 @@ class ChanelsTable
 
     public function fetchAllPublic()
     {
-        $sql = "SELECT chanels.id as chanel_id,chanels.chanel_name,user_settings.first_name,user_settings.second_name,user_settings.avatar
+//         $sql = "SELECT chanels.id as chanel_id,chanels.chanel_name,user_settings.first_name,user_settings.second_name,user_settings.avatar
 
-         FROM chanels
-        left join chanels_admins on chanels_admins.chanel_id = chanels.id
-        left join user_settings on chanels_admins.admins = user_settings.user_id
-        left join private_chanels_requests on private_chanels_requests.user_id = user_settings.user_id
-        WHERE chanels.private = 0 group by chanels.chanel_name";
+//          FROM chanels
+//         left join chanels_admins on chanels_admins.chanel_id = chanels.id
+//         left join user_settings on chanels_admins.admins = user_settings.user_id
+//         left join private_chanels_requests on private_chanels_requests.user_id = user_settings.user_id
+//         WHERE chanels.private = 0 group by chanels.chanel_name";
+//         $sql = "SELECT chanels.id as chanel_id,chanels.chanel_name,user_settings.first_name,user_settings.second_name,user_settings.avatar
+        
+         $sql = "SELECT chanels.id as chanel_id,chanels.chanel_name,user_settings.first_name,user_settings.second_name,user_settings.avatar
+from chanels
+left join chanels_admins on chanels_admins.chanel_id = chanels.id
+                
+         left join user_settings on chanels_admins.admins = user_settings.user_id
+         WHERE chanels.private = 0 group by chanels.chanel_name";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         return $resultSet;
     }
@@ -46,8 +54,15 @@ class ChanelsTable
         // session_start();
         // $user_session = $_SESSION['user'];
         // $userId = $user_session["id"];
+//         $sql = "SELECT chanels.id as chanel_id,chanels.chanel_name,user_settings.first_name,user_settings.second_name,user_settings.avatar,
+//         chanels_admins.admins , private_chanels_requests.is_confirmed,private_chanels_requests.pending_response
+//         FROM  chanels
+//         left join chanels_admins on chanels_admins.chanel_id = chanels.id
+//         left join user_settings on chanels_admins.admins = user_settings.user_id
+//         left join private_chanels_requests on private_chanels_requests.user_id = user_settings.user_id
+//         WHERE chanels.private = 1 group by chanels.chanel_name";
         $sql = "SELECT chanels.id as chanel_id,chanels.chanel_name,user_settings.first_name,user_settings.second_name,user_settings.avatar,
-chanels_admins.admins , private_chanels_requests.is_confirmed,private_chanels_requests.pending_response
+        chanels_admins.admins , private_chanels_requests.is_confirmed,private_chanels_requests.pending_response
         FROM  chanels
         left join chanels_admins on chanels_admins.chanel_id = chanels.id
         left join user_settings on chanels_admins.admins = user_settings.user_id
