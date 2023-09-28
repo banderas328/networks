@@ -52,9 +52,12 @@ class BoardsTable
         $project_id =  (int)$request->getPost()->project_id;
         session_start();        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
-        $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id
-                left join boards on projects.id = boards.project_id
-                WHERE projects_members.user_id='".$userId."' and boards.project_id = '".$project_id."'";
+//         $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id
+//                 left join boards on projects.id = boards.project_id
+//                 WHERE projects_members.user_id='".$userId."' and boards.project_id = '".$project_id."'";
+         $sql = "SELECT * FROM  projects 
+                 left join boards on projects.id = boards.project_id
+                 WHERE  boards.project_id = '".$project_id."'";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $boards =   $resultSet->toArray();
         return $boards;

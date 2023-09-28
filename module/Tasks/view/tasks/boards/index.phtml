@@ -89,6 +89,7 @@
                 data: {"board_name": board_name, "project_id": project_id}
             })
                 .done(function (data) {
+                    console.info(data);
                     $("#tasks_transaction").html(data);
                     // get_project_tasks();
                 });
@@ -174,10 +175,11 @@
         $( "#task_popup" ).show();
         refresh_project_members_list();
     });
+    $('#task_popup #save_task').unbind('click');
     $("#task_popup #save_task").on("click", function () {
+        alert("tut");
         var task_name = $("#task_name").val();
         if(task_name.length == 0) {
-            
        	 alert("Add task name");
         	return false;
             }
@@ -196,9 +198,9 @@
         var project_id = $("#create_board_button").attr("project_id");
         var data = new FormData();
         var totalfiles = document.getElementById('task_file_input').files.length;
-   for (var index = 0; index < totalfiles; index++) {
-      data.append("files[]", document.getElementById('task_file_input').files[index]);
-   }
+  			 for (var index = 0; index < totalfiles; index++) {
+     			 data.append("files[]", document.getElementById('task_file_input').files[index]);
+ 			  }
         data.append('members_list', members_list);
         data.append('estimate', estimate);
         data.append('project_id', project_id);
@@ -216,6 +218,7 @@
             })
                 .done(function (data) {
                     $("#tasks_transaction").html(data);
+                    $( "#task_popup" ).hide();
                 });
         }, false);
         request.open("POST", url, true);
