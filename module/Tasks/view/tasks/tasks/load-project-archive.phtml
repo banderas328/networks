@@ -1,11 +1,10 @@
 <div>
 <?php
-
 if(isset($tasks)){
     foreach ($tasks as $task_key => $task_value){
-        echo "<p class='arcihe_task_block' task_id='".$task_value[0]["id"]."'>".$task_value[0]["name"]." ".$task_value[0]["description"].
-            "<span class='restore_task action_btn' task_id='".$task_value[0]["id"]."'>  restore</span></p>".
-            "<span class='delete_task alert_button' task_id='".$task_value[0]["id"]."'>  delete</span></p>";
+        echo "<p class='arcihe_task_block' task_id='".$task_value[0]["id"]."'>".$task_value[0]["name"].
+            "<span class='restore_task action_btn' task_id='".$task_value[0]["id"]."'> restore</span>&nbsp".
+            "<span class='delete_task action_btn' task_id='".$task_value[0]["id"]."'> delete</span></p>";
     }
 }
 ?>

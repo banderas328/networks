@@ -57,7 +57,7 @@ class BoardsTable
 //                 WHERE projects_members.user_id='".$userId."' and boards.project_id = '".$project_id."'";
          $sql = "SELECT * FROM  projects 
                  left join boards on projects.id = boards.project_id
-                 WHERE  boards.project_id = '".$project_id."'";
+                 WHERE  boards.project_id = '".$project_id."' and boards.is_deleted IS NULL";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $boards =   $resultSet->toArray();
         return $boards;
@@ -68,15 +68,16 @@ class BoardsTable
         $userId = $user_session["id"];
         $board_id =  (int)$request->getPost()->board_id;
         $project_id=  (int)$request->getPost()->project_id;
-        $sql = "SELECT min(boards.id) as board_id FROM `projects_members` left join projects on projects_members.project_id = projects.id
-                left join boards on projects.id = boards.project_id
-                WHERE projects_members.user_id='".$userId."' and boards.project_id = '".$project_id."'";
+        $sql = "SELECT min(boards.id) as board_id FROM `boards` 
+                left join projects on boards.project_id = projects.id
+                WHERE  boards.project_id = '".$project_id."'";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $board_id_new =   $resultSet->toArray()[0]["board_id"];
         $sql = "update tasks set is_archive = 1 where board_id=".$board_id;
         $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $data = ["id" => $board_id];
-        $this->tableGateway->delete($data);
+        //$this->tableGateway->delete($data);
+        $this->tableGateway->update(["is_deleted" => 1],$data);
     }
 }
 

@@ -161,7 +161,7 @@ class TasksTable
         $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id FROM tasks
                 left join boards on boards.id = tasks.board_id
                 left join projects on boards.project_id = projects.id
-                WHERE tasks.is_archive = '0'";
+                WHERE tasks.is_archive = '0' and boards.is_deleted is null";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $tasks = $resultSet->toArray();
         $columns = [];
@@ -186,8 +186,7 @@ class TasksTable
         $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id,tasks.description FROM tasks
                 left join boards on boards.id = tasks.board_id
                 left join projects on boards.project_id = projects.id
-                left join projects_members on projects_members.project_id = projects.id
-                WHERE tasks.is_archive = '1' and projects_members.project_id='" . $project_id . "' and projects_members.user_id = " . $userId;
+                WHERE tasks.is_archive = '1' and projects.id=" . $project_id;
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $tasks = $resultSet->toArray();
         $columns = [];
@@ -268,9 +267,20 @@ class TasksTable
 //         }
            
 //         else {
-            
+
+        if(isset($data["parent_task"])) {
             $this->tableGateway->update($data, ["id = " . (int) $data["parent_task"]]);
-            $taskID = (int) $data["parent_task"];
+            
+        }
+        elseif(isset($data["id"])) {
+            $this->tableGateway->update($data, ["id = " . (int) $data["id"]]);
+            $taskID = (int) $data["id"];
+        }
+        else {
+            die("incorrectd data for task");
+        }
+            
+
    //     }
            
        
