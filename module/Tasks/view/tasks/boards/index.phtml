@@ -188,10 +188,10 @@
             console.info(k);
             console.info(v);
         });
-        if(members_list.length == 0) {
-     		  alert("Add members to task")
-        	return false;
-            }
+//         if(members_list.length == 0) {
+//      		  alert("Add members to task")
+//         	return false;
+//             }
         var task_description = CKEDITOR.instances.task_description_field.getData();
         var estimate = $("#task_estimate").val();
         var project_id = $("#create_board_button").attr("project_id");
