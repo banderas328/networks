@@ -1,7 +1,7 @@
 <input type="hidden" class='parent_directory_network' style='cursor:pointer;'
        dir_key=<?php if (isset($current_directory)) echo $current_directory ?>/>
 <?php
-if (isset($dirs) and count($dirs)) {
+if (isset($dirs)) {
     foreach ($dirs as $dir_key => $dir_value) {
         echo "<div class='dir_wraper hard-drive-dir-wrapper'>";
         echo "<div class='directory_wrapper hard-drive-directory-inner'>";

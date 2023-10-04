@@ -70,9 +70,9 @@ class  networkController extends Controller\preloaderController
         $friends = new Friends();
 
         $userId = $user_session["id"];
-        $isUsersFriends = $this->getFriendsTable()->isUsersFriends($userId,$request->getPost()->user_id,$friends->getAdapter());
+      //  $isUsersFriends = $this->getFriendsTable()->isUsersFriends($userId,$request->getPost()->user_id,$friends->getAdapter());
        // var_dump($isUsersFriends->toArray());
-        if(!empty($isUsersFriends->toArray())){
+      //  if(!empty($isUsersFriends->toArray())){
             $network = new Network();
             $dirs = $this->getNetworkTable()->getUserSharedDirs($request,$network->getAdapter());
 
@@ -82,11 +82,14 @@ class  networkController extends Controller\preloaderController
             //$userId = $user_session["id"];
             $user_session['authedDirs'] = $authedDirs;
             $dirs = $dirs['result'];
+            if($dirs)
             return array("dirs" => $dirs,'current_directory' => 0);
-        }
-        else {
-            return array("dirs" => false,"error" => true,'current_directory' => 0);
-        }
+            else 
+                return array("dirs" => false,"error" => true,'current_directory' => 0);
+      //  }
+     //   else {
+         //   return array("dirs" => false,"error" => true,'current_directory' => 0);
+      //  }
     }
 
     public function getNetworkDirectoryAction(){
@@ -97,9 +100,9 @@ class  networkController extends Controller\preloaderController
      //   var_dump($user_session);
         $userId = $user_session["id"];
         $friends = new Friends();
-        $isUsersFriends = $this->getFriendsTable()->isUsersFriends($userId,$request->getPost()->user_id,$friends->getAdapter());
-        if(!empty($isUsersFriends->toArray()))
-        {
+     //   $isUsersFriends = $this->getFriendsTable()->isUsersFriends($userId,$request->getPost()->user_id,$friends->getAdapter());
+ //       if(!empty($isUsersFriends->toArray()))
+   //     {
             $fileSystem = new FileSystem();
             $dirOptions = $this->getFileSystemTable()->getDirOptions((int) $request->getPost()->dir_key,$fileSystem->getAdapter());
             if ($dirOptions->buffer()->toArray()[0]["is_public"]) {
@@ -139,7 +142,7 @@ class  networkController extends Controller\preloaderController
                 return $view;
             }
 
-        }
+      //  }
 
     }
 
