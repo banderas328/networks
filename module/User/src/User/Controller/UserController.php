@@ -161,19 +161,20 @@ class UserController extends Controller\preloaderController
         $config = new Config(Factory::fromFile('config/autoload/global.php'), true);
         $mail = new PHPMailer;
         $mail->isSMTP();
-        $mail->SMTPOptions = array(
-            'ssl' => array(
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-                'allow_self_signed' => true
-            )
-        );
+//         $mail->SMTPOptions = array(
+//             'ssl' => array(
+//                 'verify_peer' => false,
+//                 'verify_peer_name' => false,
+//                 'allow_self_signed' => true
+//             )
+//         );
         $mail->Host = $config->smtp["yandex"]->address;
         $mail->SMTPAuth = true;
+        $mail->SMTPSecure = "tls";
         // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
         $mail->Username = $config->smtp["yandex"]->username; // Если почта для домена, то логин это полный адрес почты
         $mail->Password = $config->smtp["yandex"]->password;
-        $mail->SMTPSecure = $config->smtp["yandex"]->secure;
+       // $mail->SMTPSecure = $config->smtp["yandex"]->secure;
         $mail->Port = $config->smtp["yandex"]->port;
         $mail->CharSet = 'UTF-8';
         $mail->From = $config->smtp["yandex"]->from_mail;
