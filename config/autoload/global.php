@@ -14,12 +14,12 @@ return array(
     ),
     'smtp' => array(
         'yandex' => array(
-            'address' => 'smtp.gmail.com',
-            'username' => 'anton.zhavrid.minsk@gmail.com',   //yandex login
-            'password' => 'WmmKOnDmZhHA',            //yandex application password
+            'address' => '',
+            'username' => '',   //yandex login
+            'password' => '',            //yandex application password
             'secure' => 'TLS',
             'port' => '587',
-            'from_mail' => 'anton.zhavrid.minsk@gmail.com',   // from email
+            'from_mail' => 'osoctopus.email@gmail.com',   // from email
             'from_name' => 'admin'                  // from name
         )
     )

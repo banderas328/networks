@@ -2,39 +2,30 @@
 $title = 'Please Register';
 $this->headTitle($title);
 ?>
-    <h1><?php echo $this->escapeHtml($title); ?></h1>
-<?php if($this->message) {
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+
+if ($this->message) {
     ?>
-    <div class="alert alert-success" role="alert">
+<div class="alert alert-success" role="alert">
         <?php echo $this->message;?>
     </div>
-    <?php
-}?>
-    <div class="row">
-        <div class="col-12">
 <?php
-// $form = $this->form;
-// $form->setAttribute('action', $this->url('user', array('action' => 'register')));
-// $form->prepare();
-
-// echo $this->form()->openTag($form);
-// echo $this->formRow($form->get('login'));
-// echo $this->formRow($form->get('email'));
-// echo $this->formRow($form->get('password'));
-// echo $this->formRow($form->get('confirm_password'));
-// echo $this->formSubmit($form->get('submit'));
-// echo $this->form()->closeTag();
+}
 ?>
+<div class="row">
+	<div class="col-6">
 <form action="/user/register" method="post" id="register_form">
-<input type="text" placeholder="Login" name="login"/>
-<br/>
-<input type="text" placeholder="Email" name="email"/>
-<br/>
-<input type="password" placeholder="Password" name="password"/>
-<br/>
-<input type="password" placeholder="Repeat Password" name="confirm_password"/>
-<br/>
-<input type="submit" value="Register" />
-</form>
-        </div>
-    </div>
+			<input type="text" placeholder="Login" name="login" /> <br /> <input
+				type="text" placeholder="Email" name="email" /> <br /> <input
+				type="password" placeholder="Password" name="password" /> <br /> <input
+				type="password" placeholder="Repeat Password"
+				name="confirm_password" /> <br /> <input type="submit"
+				value="Register" />
+		</form>
+	</div>
+	<div class="col-6">
+  For security reason we dont send any emails, demo version also unable to restore account,
+  please save your password in safe place.
+	</div>
+</div>

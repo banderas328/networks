@@ -44,7 +44,8 @@ class UserTable
             'login' => $user->login,
             'email' => $user->email,
             'password' => $user->password,
-            'email_key' => $user->email_key
+            'email_key' => $user->email_key,
+            'activated' => '1',
         );
         $id = (int)$user->id;
         if ($id == 0) {
