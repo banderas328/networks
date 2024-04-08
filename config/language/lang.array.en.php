@@ -19,6 +19,7 @@ return array(
     "Delete_File" => "Delete File",
     "Move_File" => "Move File",
     "Rename_File" => "Rename File",
+    "Rename" => "Rename",
     "Download_File" => "Download File",
     "Create_Directory" => "Create Directory",
     "Delete_Directory" => "Delete Directory",

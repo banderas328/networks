@@ -18,11 +18,9 @@ if (isset($frames) and count($frames)) {
         });
         $(".open_frame").on("click", function () {
             const url = $(this).attr("frame_url");
-            const markup = '<iframe src="' + url + '" sandbox="allow-top-navigation allow-scripts allow-forms" data-tf-redirect-target=”_self” width="500" height="500" align="left" id="main_frame"></iframe>';
+            const markup = '<iframe src="' + url + '" sandbox="allow-top-navigation allow-scripts allow-forms allow-same-origin"  width="1200px" height="600px" id="main_frame"></iframe>';
             $(".frame_container_output").html(markup);
-            $(".frame_container_output").css("display", "block");
-            $(".frame_container_output").css("width", "50%");
-            $(".frame_container_output").css("height", "50%");
+            $("#window_frame_container").css("display","block");
         })
     });
 </script>
