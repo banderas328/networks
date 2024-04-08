@@ -42,15 +42,19 @@ class TasksTable
         $fileIDs = [];
         $i = 0;
         foreach ($data['files']['name'] as $files_value) {
-            $fileId =  $fileTable->saveUserFile([["file" => [
-                "name" => $data['files']["name"][$i],
-                "tmp_name" => $data['files']["tmp_name"][$i],
-                "type" => $data['files']["type"][$i]
-            ]]]);
-            $fileIDs['file'][] =  [
+            $fileId = $fileTable->saveUserFile([
+                [
+                    "file" => [
+                        "name" => $data['files']["name"][$i],
+                        "tmp_name" => $data['files']["tmp_name"][$i],
+                        "type" => $data['files']["type"][$i]
+                    ]
+                ]
+            ]);
+            $fileIDs['file'][] = [
                 "file_id" => $fileId
             ];
-            $i++;
+            $i ++;
         }
         
         $task_name = $data["task_name"];
@@ -80,15 +84,14 @@ class TasksTable
             $fileTable = new \Tasks\Model\TasksFilesTable();
             foreach ($fileIDs["file"] as $fileId) {
                 var_dump($fileId);
-                //   var_dump($fileIDs);
-                //  die();
+                // var_dump($fileIDs);
+                // die();
                 $dataFile = [];
                 $dataFile["file_id"] = $fileId["file_id"];
                 $dataFile["task_id"] = $taskID;
                 
                 // var_dump($dataFile);
                 $fileTable->saveFileToTask($dataFile);
-                
             }
         }
         $memberList = explode(",", $memberList);
@@ -102,11 +105,12 @@ class TasksTable
                 $sql = "select project_name from projects where id=" . $project_id;
                 $project_name = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE)->toArray()[0]["project_name"];
                 /* todo change to transaction methods */
-                $notification = new NotificationsTable;
+                $notification = new NotificationsTable();
                 
-                $data = ["text" => "you have new task: " . $task_name . " in project :" . $project_name,
-                         "html_id" => "test",
-                         'user_id' => $member
+                $data = [
+                    "text" => "you have new task: " . $task_name . " in project :" . $project_name,
+                    "html_id" => "test",
+                    'user_id' => $member
                 ];
                 $notification->createNotification($data);
             }
@@ -133,17 +137,17 @@ class TasksTable
             $task["files"][] = $resultSet->toArray();
         }
         
-//         foreach ($task["sub_tasks"] as $sub_task) {
-//             $files_task_sql = "SELECT  * FROM tasks_files where task_id=" . $sub_task['id'];
-//             $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
-//             $files = $resultSet->toArray();
-//             var_dump($files);
-//             foreach ($files as $file) {
-//                 $files_task_sql = "SELECT  * FROM files  where id=" . $file["file_id"];
-//                 $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
-//                 $task["files"][] = $resultSet->toArray();
-//             }
-//         }
+        // foreach ($task["sub_tasks"] as $sub_task) {
+        // $files_task_sql = "SELECT * FROM tasks_files where task_id=" . $sub_task['id'];
+        // $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
+        // $files = $resultSet->toArray();
+        // var_dump($files);
+        // foreach ($files as $file) {
+        // $files_task_sql = "SELECT * FROM files where id=" . $file["file_id"];
+        // $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
+        // $task["files"][] = $resultSet->toArray();
+        // }
+        // }
         return $task;
     }
 
@@ -153,11 +157,11 @@ class TasksTable
         session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
-//         $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id FROM tasks
-//                 left join boards on boards.id = tasks.board_id
-//                 left join projects on boards.project_id = projects.id
-//                 left join projects_members on projects_members.project_id = projects.id
-//                 WHERE tasks.is_archive = '0' and projects_members.project_id='" . $project_id . "' and projects_members.user_id = " . $userId;
+        // $sql = "SELECT tasks.name,tasks.sort_order,tasks.board_id,tasks.id FROM tasks
+        // left join boards on boards.id = tasks.board_id
+        // left join projects on boards.project_id = projects.id
+        // left join projects_members on projects_members.project_id = projects.id
+        // WHERE tasks.is_archive = '0' and projects_members.project_id='" . $project_id . "' and projects_members.user_id = " . $userId;
         $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id FROM tasks
                 left join boards on boards.id = tasks.board_id
                 left join projects on boards.project_id = projects.id
@@ -239,74 +243,52 @@ class TasksTable
     public function updateTask($data)
     {
         if (isset($data["data"]))
-        $data = $data["data"];
+            $data = $data["data"];
         $fileTable = new \Files\Model\FilesTable();
-        
-        ////////////////////
         $fileIDs = [];
-        if(isset($data['files'])){
-        $fileIDs = [];
-        $i = 0;
-        foreach ($data['files']['name'] as $files_value) {
-            $fileId =  $fileTable->saveUserFile([["file" => [
-                "name" => $data['files']["name"][$i],
-                "tmp_name" => $data['files']["tmp_name"][$i],
-                "type" => $data['files']["type"][$i]
-            ]]]);
-             $fileIDs['file'][] =  [
-                 "file_id" => $fileId
-             ];
-            $i++;
-        }
+        if (isset($data['files'])) {
+            $fileIDs = [];
+            $i = 0;
+            foreach ($data['files']['name'] as $files_value) {
+                $fileId = $fileTable->saveUserFile([
+                    [
+                        "file" => [
+                            "name" => $data['files']["name"][$i],
+                            "tmp_name" => $data['files']["tmp_name"][$i],
+                            "type" => $data['files']["type"][$i]
+                        ]
+                    ]
+                ]);
+                $fileIDs['file'][] = [
+                    "file_id" => $fileId
+                ];
+                $i ++;
+            }
         }
         unset($data['files']);
-//         if(!isset($data["id"])) {
-//             $this->tableGateway->insert($data);
-//             $taskID = $this->tableGateway->lastInsertValue;
-            
-//         }
-           
-//         else {
-
-        if(isset($data["parent_task"])) {
-            $this->tableGateway->update($data, ["id = " . (int) $data["parent_task"]]);
-            
-        }
-        elseif(isset($data["id"])) {
-            $this->tableGateway->update($data, ["id = " . (int) $data["id"]]);
-            $taskID = (int) $data["id"];
-        }
-        else {
-            die("incorrectd data for task");
-        }
-            
-
-   //     }
-           
-       
-    
         if ($fileIDs) {
             $fileTable = new \Tasks\Model\TasksFilesTable();
             foreach ($fileIDs["file"] as $fileId) {
-                var_dump($fileId);
-             //   var_dump($fileIDs);
-              //  die();
-                    $dataFile = [];
-                    $dataFile["file_id"] = $fileId["file_id"];
-                    $dataFile["task_id"] = $taskID;
-                    
-                    // var_dump($dataFile);
-                    $fileTable->saveFileToTask($dataFile);
                 
+                if (isset($data["parent_task"])) {
+                    $this->tableGateway->update($data, [
+                        "id = " . (int) $data["parent_task"]
+                    ]);
+                    $taskID = $data["parent_task"];
+                } elseif (isset($data["id"])) {
+                    $this->tableGateway->update($data, [
+                        "id = " . (int) $data["id"]
+                    ]);
+                    $taskID = (int) $data["id"];
+                } else {
+                    die("incorrectd data for task");
+                }
+                $dataFile = [];
+                $dataFile["file_id"] = $fileId["file_id"];
+                $dataFile["task_id"] = $taskID;
+                $fileTable->saveFileToTask($dataFile);
             }
         }
-        /*
-        if (isset($fileID)) {
-            $dataFile["file_id"] = $fileID;
-            $dataFile["task_id"] = $data["parent_task"];
-            $fileTable = new \Tasks\Model\TasksFilesTable();
-            $fileTable->saveFileToTask($dataFile);
-        }*/
         return $data;
     }
 
@@ -325,7 +307,7 @@ class TasksTable
             $filesTable = new FilesTable();
             $filesTable->deleteFile(false, $file["file_id"], $userId);
         }
-        /////////////////////////
+        // ///////////////////////
         
         $files_subtask_sql = "SELECT  * FROM tasks where parent_task=" . $task_id;
         $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
@@ -345,8 +327,7 @@ class TasksTable
             $this->adapter->query($delete_sql, $this->adapter::QUERY_MODE_EXECUTE);
         }
         
-        
-        ///////////////////////
+        // /////////////////////
         $delete_sql = "DELETE FROM tasks_files where task_id=" . $task_id;
         $this->adapter->query($delete_sql, $this->adapter::QUERY_MODE_EXECUTE);
         

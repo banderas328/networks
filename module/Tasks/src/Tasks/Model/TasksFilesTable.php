@@ -31,8 +31,6 @@ class TasksFilesTable
     }
     
     public function saveFileToTask($data) {
-        echo "@@@@";
-        var_dump($data);
         $this->tableGateway->insert($data);
         return  $this->tableGateway->lastInsertValue;
     }
