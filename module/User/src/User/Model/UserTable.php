@@ -49,6 +49,8 @@ class UserTable
         );
         $id = (int)$user->id;
         if ($id == 0) {
+            $data = $this->tableGateway->select(['email' => $data['email']]);
+            if(count($data)) return "user with such email exist";
             $this->tableGateway->insert($data);
             $userId = $this->tableGateway->lastInsertValue;
 

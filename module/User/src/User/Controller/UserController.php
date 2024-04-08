@@ -69,23 +69,16 @@ class UserController extends Controller\preloaderController
                 $user->exchangeArray($data);
                 
                 $dbAdapter = $user->getAdapter();
-                $this->getUserTable()->registerUser($user);
+                $message = $this->getUserTable()->registerUser($user);
+                if($message)
+                    return array('form' => $form, 'message' => $message);
                 
                 $authResult = $this->getUserTable()->authUser($data['email'], $securePass, $dbAdapter);
                 $user_session = new Container('user');
-                var_dump($data);
-                var_dump($authResult);
-                
                 return $this->redirect()->toRoute('user',
                     array('controller' => "user",
                         'action' => 'login'
                     ));
-                
-
-//                 if ($this->sendRegistrationMail($request->getPost("email"), $key)) {
-//                     $message = "Please Check Email";
-//                 }
- //           }
 
         }
         return array('form' => $form, 'message' => $message);
