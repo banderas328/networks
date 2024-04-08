@@ -9,8 +9,7 @@
 	<?php echo $task["description"];?>
 	</div>
 	<span class="edit_task_description"><button value='save'
-			class="action_btn">Save</button> </span> Description: <span
-		class="task_description_value"></span>
+			class="action_btn">Save</button> </span> 
 
 	<div id="task_description">Status: <?php echo $task["status"]; ?>
         <select id="task_status">
@@ -26,13 +25,10 @@
 	<div id="log_work_block">
 		<div>
 			<button id="add_hours_button" class="action_btn">Add</button>
-			: <input type="text" name="log_hours" id="log_hours_input"
-				placeholder="1" task_id="<?php echo $task["id"]; ?>">&nbsp hours to
-			task
-
-			<div>
-				on Date : <input type="text" id="datepicker">
-			</div>
+			<input type="text" name="log_hours" id="log_hours_input"	placeholder="1" task_id="
+			     <?php echo $task["id"]; ?>">
+			     &nbsp hours to	task on Date : 
+			<input type="text" id="datepicker">
 		</div>
 		<div class="task_members">
             <?php
