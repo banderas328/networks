@@ -5,9 +5,9 @@ if (isset($dirs)) {
     foreach ($dirs as $dir_key => $dir_value) {
         echo "<div class='dir_wraper hard-drive-dir-wrapper'>";
         echo "<div class='directory_wrapper hard-drive-directory-inner'>";
-        echo "<img src='assets/images/icons/folder.png' width='50px' height='50px'/>";
+        echo "<span><img src='assets/images/icons/folder.png' width='50px' height='50px'/></span>";
         echo "<span  user_id=" . $dir_value['user_id'] . " dir_key=" . $dir_value['path_id']
-            . " class='network_directory'>" . $dir_value['path']
+            . " class='network_directory' style='display:block;'>" . $dir_value['path']
             . "</span>
           </div>";
         echo "</div>";

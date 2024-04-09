@@ -4,9 +4,11 @@
                     <article class="c-post" data-date="<?php echo $date;  ?>">
                         <div class="c-post__header">
                             <div class="c-post__author">
+                            <?php if(isset($blog['avatar'])) { ?>
                                 <div class="c-post__avatar">
                                     <img src="<?php echo $blog['avatar']; ?>">
                                 </div>
+                                <?php } ?>
 
                                 <div class="c-post__author-detais">
                                     <div class="c-post__author-name">

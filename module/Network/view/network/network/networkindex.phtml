@@ -1,20 +1,22 @@
 <?php
 if (isset($friends) and $friends)
     foreach ($friends as $friend) {
+        if(isset($friend['first_name']) or isset($friend['second_name'])) {
         echo "<div class='network_point' style='cursor:pointer;' user_id=" . $friend['user_id'] . ">";
-        echo "<div class='network_avatar'>";
-        echo "<img src='" . $friend['avatar'] . "'>";
-        echo "</div>";
+//         echo "<div class='network_avatar'>";
+//         echo "<img src='" . $friend['avatar'] . "'>";
+//         echo "</div>";
         ?>
         <div class="c-post__author-detais">
             <div class="c-post__author-name">
                 <?php echo $friend['first_name']; ?> <?php echo $friend['second_name']; ?>
             </div>
             <div class="c-post__author-job">
-                <?php echo $friend['job']; ?>
+               <button class='action_btn'>Open</button>
             </div>
         </div>
         <?php echo "</div>";
+        }
     }
 ?>
 <script type="text/javascript">

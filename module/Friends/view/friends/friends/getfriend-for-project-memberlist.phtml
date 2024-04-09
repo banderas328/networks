@@ -6,13 +6,14 @@ foreach($friends as $friend){
     if(isset($friend['first_name'])) {
         
         echo "<div class='member_name' userId='".$friend['user_id']."'><span userId='".$friend['user_id']."' class='user_container_project'>".$friend['first_name']." ".$friend['second_name']."</span></div>";
+        echo '<div style="margin:0;" userId='.$friend["user_id"].' class="add_user_to_project action_btn">Add</div>';
+        echo "</div>";
     }
-   else {
-       echo "<div class='member_name' userId='".$friend['user_id']."'><span userId='".$friend['user_id']."' class='user_container_project'>anonymous</span></div>";
+//    else {
+//        echo "<div class='member_name' userId='".$friend['user_id']."'><span userId='".$friend['user_id']."' class='user_container_project'>anonymous</span></div>";
        
-   }
-    echo '<div style="margin:0;" userId='.$friend["user_id"].' class="add_user_to_project action_btn">Add</div>';
-    echo "</div>";
+//    }
+
 }
 ?>
 </div>

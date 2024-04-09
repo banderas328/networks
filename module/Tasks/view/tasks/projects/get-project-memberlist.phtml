@@ -1,7 +1,8 @@
 <?php foreach ($this->members as $member) {
+    if(isset($member["first_name"] or isset($member["second_name"]))) {
     echo "<span>" . $member["first_name"] . " " . $member["second_name"] . "
     <input type='button' value='-' class='remove_user_from_project action_btn'  user_id=".$member['user_id']." project_id=".$member['project_id']."></span>";
-} ?>
+}} ?>
 <script type="text/javascript">
     $(function () {
         $(".remove_user_from_project").on("click", function () {

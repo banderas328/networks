@@ -2,6 +2,7 @@
 <?php
 if($friends)
 foreach($friends as $friend){
+    if(isset($friend['first_name']) or ($friend['second_name'])) {
     echo "<div class='user_container_block' userId='".$friend["user_id"]."'>";
     echo "<div class='member_name' userId='".$friend['user_id']."'>";
 
@@ -14,6 +15,7 @@ foreach($friends as $friend){
     echo "</div>";
     echo "</div>";
     echo "</div>";
+    }
 
 
 }

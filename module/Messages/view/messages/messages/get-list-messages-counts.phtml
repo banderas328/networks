@@ -2,13 +2,14 @@
     <?php if ($data): ?>
         <?php foreach ($data as $friend): ?>
             <?php $fullName = $friend['first_name'] . " " . $friend['second_name']; ?>
-
             <div class="c-chat-card">
                 <div class="c-chat-card__inner">
+                <?php if(isset($friend['avatar'])) {?>
                     <div class="c-chat-card__image-wrap">
                         <img src="<?php echo $friend['avatar']; ?>" alt="<?php echo $fullName; ?>"
                              class="c-chat-card__image">
                     </div>
+                            <? }?>
 
                     <div class="c-chat-card__main">
                         <div class="c-chat-card__title">
