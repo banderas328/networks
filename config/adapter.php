@@ -1,4 +1,4 @@
 driver  = 'Mysqli'
-database = networks,
-username => root,
-password =>
+database = octopus,
+username => admin_root,
+password => password

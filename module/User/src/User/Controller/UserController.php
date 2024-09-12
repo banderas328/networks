@@ -60,6 +60,7 @@ class UserController extends Controller\preloaderController
             }
 //             if ($form->isValid() && $valid) {
             $data = $request->getPost();
+           //var_dump($data);die();
                 $password = $data['password'];
                 $securePass = md5("octopus" . $password);
                 $data['password'] = $securePass;

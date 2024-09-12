@@ -47,10 +47,13 @@ class UserTable
             'email_key' => $user->email_key,
             'activated' => '1',
         );
+      //  var_dump($data);
         $id = (int)$user->id;
+         var_dump($id);
         if ($id == 0) {
-            $data = $this->tableGateway->select(['email' => $data['email']]);
-            if(count($data)) return "user with such email exist";
+            $dataUser = $this->tableGateway->select(['email' => $data['email']]);
+            if(count($dataUser)) return "user with such email exist";
+          //  var_dump($data);die();
             $this->tableGateway->insert($data);
             $userId = $this->tableGateway->lastInsertValue;
 

@@ -7,8 +7,8 @@ return array(
         'dsn' => 'mysql:dbname=octopus;host=localhost;charset=utf8',
         'params' => array(
             'host' => 'localhost',
-            'username' => 'root',
-            'password' => '',
+            'username' => 'admin_root',
+            'password' => 'password',
             'dbname' => 'octopus'
         )
     ),
