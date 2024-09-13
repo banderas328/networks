@@ -52,7 +52,7 @@ class  networkController extends Controller\preloaderController
 
     public function networkIndexAction(){
         $this->layout('layout/only_form');
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $friends = new Friends();
@@ -63,7 +63,7 @@ class  networkController extends Controller\preloaderController
     }
 
     public function getNetworkPointAction(){
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $this->layout('layout/only_form');
         $request = $this->getRequest();
@@ -95,7 +95,7 @@ class  networkController extends Controller\preloaderController
     public function getNetworkDirectoryAction(){
         $this->layout('layout/only_form');
         $request = $this->getRequest();
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
      //   var_dump($user_session);
         $userId = $user_session["id"];
@@ -184,7 +184,9 @@ class  networkController extends Controller\preloaderController
 
         $this->layout('layout/only_form');
         $request = $this->getRequest();
-        session_start();        $user_session = $_SESSION['user'];
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+
+                $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $friends = new Friends();
         $isUsersFriends = $this->getFriendsTable()->isUsersFriends($userId,$request->getPost()->user_id,$friends->getAdapter());
@@ -219,7 +221,7 @@ class  networkController extends Controller\preloaderController
 
 
     public function isUserLogedInDirectory($dir) {
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         if(!isset($user_session['authedDirs'])) return false;
         $authedDirs  =   $user_session['authedDirs'];
@@ -230,7 +232,9 @@ class  networkController extends Controller\preloaderController
     }
 
     public function downloadFileAction() {
-        session_start();        $user_session = $_SESSION['user'];
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start(); 
+
+               $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $fileId = $this->getEvent()->getRouteMatch()->getParam('value');
         $frinendId = $this->getEvent()->getRouteMatch()->getParam('param');
@@ -267,7 +271,7 @@ class  networkController extends Controller\preloaderController
       //  $user_session = new Container('user');
         //$userId = $user_session->user->id;
         $frinendId = $this->getRequest()->getPost()->user_id;
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $friends = new Friends();
@@ -307,7 +311,9 @@ class  networkController extends Controller\preloaderController
         }
           elseif(!$this->isUserLogedInDirectory($dirKey))    {
               $this->layout('layout/only_form');
-              session_start();        $user_session = $_SESSION['user'];
+              if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+
+                     $user_session = $_SESSION['user'];
               $userId = $user_session["id"];
               $friends = new Friends();
               $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
@@ -362,7 +368,9 @@ class  networkController extends Controller\preloaderController
     }
 
     public function nonAuthedFoldersFilter ($dirs) {
-        session_start();        $user_session = $_SESSION['user'];
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+
+               $user_session = $_SESSION['user'];
       //  $userId = $user_session["id"];
         if(!isset($user_session['authedDirs'])) return false;
         $authedDirs  =   $user_session['authedDirs'];

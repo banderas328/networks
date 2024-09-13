@@ -49,7 +49,7 @@ class SettingsTable
         if (is_array($settings["about"])) $settings["about"] = $settings["about"][1];
         if (is_array($settings["phone"])) $settings["phone"] = $settings["phone"][1];
 //         if (is_array($settings["visibility"])) $settings["visibility"] = $settings["visibility"][1];
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
 
@@ -86,7 +86,7 @@ class SettingsTable
 
     public function getCurrentUserSettings()
     {
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "SELECT  * FROM user_settings where user_id=" . $userId;
@@ -102,7 +102,7 @@ class SettingsTable
 
     public function searchUsersOnSettings($data)
     {
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $select = new Select();

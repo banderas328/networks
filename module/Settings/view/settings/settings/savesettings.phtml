@@ -10,7 +10,7 @@ $this->headTitle($title);
         	<input type="file" name="avatar" id="avatar">
         </form>
 		</div>
-		<?php
+		<?php if(is_array($this->user_settings))
 echo "<img src='" . $this->user_settings["avatar"] . "'>";
 ?>
 
@@ -50,19 +50,19 @@ $(function () {
 
 		<div class="col">
 			<form action="settings/savesettings" method="post" id="user_general_settings" >
-				<input name="first_name" type="text" / placeholder="First Name" <?php if(isset($this->user_settings['first_name'])) echo "value=".$this->user_settings['first_name'];?> />
+				<input name="first_name" type="text" / placeholder="First Name" <?php if(is_array($this->user_settings) and isset($this->user_settings['first_name'])) echo "value=".$this->user_settings['first_name'];?> />
 				<br />
-				<input name="second_name" type="text" / placeholder="Second Name" <?php if(isset($this->user_settings['second_name'])) echo "value='".$this->user_settings['second_name']."'";?> />
+				<input name="second_name" type="text" / placeholder="Second Name" <?php if(is_array($this->user_settings) and isset($this->user_settings['second_name'])) echo "value='".$this->user_settings['second_name']."'";?> />
 				<br /> 
-				<input name="about" type="text" / placeholder="About" <?php if(isset($this->user_settings['about'])) echo "value='".$this->user_settings['about']."'"?> />
+				<input name="about" type="text" / placeholder="About" <?php if(is_array($this->user_settings) and isset($this->user_settings['about'])) echo "value='".$this->user_settings['about']."'"?> />
 				<br />
-				<input name="job" type="text" / placeholder="Job" <?php if(isset($this->user_settings['job'])) echo "value='".$this->user_settings['job']."'"?> /> 
+				<input name="job" type="text" / placeholder="Job" <?php if(is_array($this->user_settings) and isset($this->user_settings['job'])) echo "value='".$this->user_settings['job']."'"?> /> 
 				<br /> 
-				<input	name="country" type="text" / placeholder="Country" <?php if(isset($this->user_settings['country'])) echo "value='".$this->user_settings['country']."'";?> />
+				<input	name="country" type="text" / placeholder="Country" <?php if(is_array($this->user_settings) and isset($this->user_settings['country'])) echo "value='".$this->user_settings['country']."'";?> />
 			    <br /> 
-				<input name="city" type="text" / placeholder="City" <?php if(isset($this->user_settings['city'])) echo "value='".$this->user_settings['city']."'";?>/>
+				<input name="city" type="text" / placeholder="City" <?php if(is_array($this->user_settings) and isset($this->user_settings['city'])) echo "value='".$this->user_settings['city']."'";?>/>
 				<br />
-				<input name="phone" type="text" / placeholder="Phone" <?php if(isset($this->user_settings['phone'])) echo "value='".$this->user_settings['phone']."'";?>  />
+				<input name="phone" type="text" / placeholder="Phone" <?php if(is_array($this->user_settings) and isset($this->user_settings['phone'])) echo "value='".$this->user_settings['phone']."'";?>  />
 				<br /> 
 				<input type="submit" value="Save" class='action_btn' id="save_general_settings" />
 			</form>

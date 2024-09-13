@@ -1,4 +1,15 @@
 <div class="c-window__scrollable-space">
+    <?php
+if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+if(isset($_SESSION['user']))
+
+{
+    $user = $_SESSION['user'];
+    $user_id = $user['id'];
+}
+
+
+?>
     <?php foreach ($chanels as $chanel) : ?>
         <div class="c-chat-card">
             <div class="c-chat-card__inner">

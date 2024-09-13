@@ -27,7 +27,7 @@ class BlogController extends Controller\preloaderController
     public function saveBlogAction()
     {
         $request = $this->getRequest();
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $post = array_merge_recursive(
@@ -43,7 +43,7 @@ class BlogController extends Controller\preloaderController
     public function getBlogsAction()
     {
         $this->layout('layout/only_form');
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         if (isset($this->getRequest()->getPost()->offset)) $offset = (int)$this->getRequest()->getPost()->offset;
@@ -82,7 +82,9 @@ class BlogController extends Controller\preloaderController
     public function addCommentToBlogAction()
     {
         $this->layout('layout/only_form');
-        session_start();        $user_session = $_SESSION['user'];
+        session_start();   
+
+             $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $data = $this->getRequest()->getPost()->toArray();
         $data["user_id"] = $userId;

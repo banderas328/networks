@@ -61,7 +61,7 @@ left join chanels_admins on chanels_admins.chanel_id = chanels.id
 //         left join user_settings on chanels_admins.admins = user_settings.user_id
 //         left join private_chanels_requests on private_chanels_requests.user_id = user_settings.user_id
 //         WHERE chanels.private = 1 group by chanels.chanel_name";
-        $sql = "SELECT chanels.id as chanel_id,chanels.chanel_name,user_settings.first_name,user_settings.second_name,user_settings.avatar,
+        $sql = "SELECT user_settings.user_id as user_id,chanels.id as chanel_id,chanels.chanel_name,user_settings.first_name,user_settings.second_name,user_settings.avatar,
         chanels_admins.admins , private_chanels_requests.is_confirmed,private_chanels_requests.pending_response
         FROM  chanels
         left join chanels_admins on chanels_admins.chanel_id = chanels.id
@@ -74,7 +74,7 @@ left join chanels_admins on chanels_admins.chanel_id = chanels.id
 
     public function fetchAllChanelsInAdminRole()
     {
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "SELECT * FROM chanels_admins 
@@ -86,7 +86,7 @@ left join chanels_admins on chanels_admins.chanel_id = chanels.id
 
     public function fetchAllPrivateRequests($adapter)
     {
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "SELECT  * FROM chanels
@@ -100,7 +100,7 @@ left join chanels_admins on chanels_admins.chanel_id = chanels.id
 
     public function checkIsUserIsChanelAdmin($adapter, $request)
     {
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $chanel_id = (int) $request->getPost()->chanel_id;
@@ -140,7 +140,7 @@ left join chanels_admins on chanels_admins.chanel_id = chanels.id
     public function checkUserHaveAccessToChanel($adapter, $request)
     {
         $chanel_id = (int) $request->getPost()->to_chanel;
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         
@@ -160,7 +160,7 @@ left join chanels_admins on chanels_admins.chanel_id = chanels.id
     public function addRequestToChanel($request, $adapter)
     {
         $to_chanel = (int) $request->getPost()->to_chanel;
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "delete from  private_chanels_requests where user_id =" . $userId . " and chanel_id=" . $to_chanel . " ;";
@@ -179,7 +179,7 @@ left join chanels_admins on chanels_admins.chanel_id = chanels.id
         ];
         $this->tableGateway->insert($data);
         $chanelId = $this->tableGateway->lastInsertValue;
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "INSERT INTO chanels_admins (admins,chanel_id) values ($userId,$chanelId)";

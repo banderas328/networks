@@ -43,7 +43,7 @@ class ProjectsTable
     {
         $project_name = $request->getPost()->project_name;
         $project_description = $request->getPost()->project_description;
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $data = ["project_name" => $project_name, "project_description" => $project_description];
@@ -96,7 +96,7 @@ class ProjectsTable
 
     public function getArchiveProjects()
     {
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $user_id = $user_session["id"];
         $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id
@@ -138,7 +138,7 @@ class ProjectsTable
 
     public function getProjectReport($data)
     {
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         if(!$_SESSION['user']) die("only for logged in users"); //TODO possibly personal info ?
         $project_id = (int)$data["project_id"];
         $start_date = strtotime($data["start_date"]);
