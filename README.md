@@ -2,14 +2,31 @@ Introduction
 ------------
 Core of octopus project. Cloud os. 
 
+Existing features :
+        Task Manager
+        Hard Drive
+        Network Connections
+        Messeger
+        Blogs, News of company
+        Settings
+        Adding to friends module
+        Search module
+        IFrame module (allow to connect external web sirvices in ifame window).
+
+Fully independet from web.
+
 Installation
 ------------
 
-"composer install" in main directory
+run command "composer install" in main directory
+
+Requires php8.3 , maria db 10 or mysql 8. nginx or apache
 
 ### Database
-use database.sql like Maria database dump
-set global sql_mode='';
+use database/octopus.sql like Maria DB or Mysql 8 database dump
+
+
+run command  "set global sql_mode='';" inside database
 
 
 ### Apache Setup
@@ -62,3 +79,4 @@ server {
         deny all;
     }
 }
+###
