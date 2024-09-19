@@ -45,7 +45,7 @@ class FilesTable
 
     public function saveUserFile($data)
     {
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $path = "userfiles/".$userId;
@@ -105,7 +105,7 @@ class FilesTable
     public function renameFile($fileId,$fileName, $userId = false)
     {
         if(!$userId) {
-            session_start();
+            if(session_status() !== PHP_SESSION_ACTIVE) session_start();
             $user_session = $_SESSION['user'];
             $userId = $user_session["id"];
         }
@@ -200,7 +200,7 @@ class FilesTable
         return false;
     }
     public function moveFileToSystem($fileId,$requiredDirId,$userId,$adapter){
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql  = "select * from files  WHERE id=".$fileId;

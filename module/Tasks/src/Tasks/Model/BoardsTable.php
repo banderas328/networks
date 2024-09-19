@@ -50,7 +50,9 @@ class BoardsTable
 //    }
     public function getProjectBoards($request){
         $project_id =  (int)$request->getPost()->project_id;
-        session_start();        $user_session = $_SESSION['user'];
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
 //         $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id
 //                 left join boards on projects.id = boards.project_id
@@ -63,7 +65,7 @@ class BoardsTable
         return $boards;
     }
     public function deleteBoard($request) {
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $board_id =  (int)$request->getPost()->board_id;

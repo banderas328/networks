@@ -55,8 +55,6 @@ class FriendsTable {
             'status' => 1
 
         );
-        var_dump($userId);
-        var_dump($friendId);
         if($this->tableGateway->update($data, array('user_id' => $friendId , 'friend_id' => $userId))) {
             return true;
         }

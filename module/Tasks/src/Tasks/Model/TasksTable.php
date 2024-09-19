@@ -30,7 +30,7 @@ class TasksTable
 
     public function createTask(array $data)
     {
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $memberList = $data["members_list"];
@@ -38,7 +38,6 @@ class TasksTable
         $memberList .= "," . $userId;
         $data["to_directory"] = 0;
         $fileTable = new \Files\Model\FilesTable();
-        // var_dump($data['files']);
         $fileIDs = [];
         $i = 0;
         foreach ($data['files']['name'] as $files_value) {
@@ -83,9 +82,6 @@ class TasksTable
         if ($fileIDs) {
             $fileTable = new \Tasks\Model\TasksFilesTable();
             foreach ($fileIDs["file"] as $fileId) {
-                var_dump($fileId);
-                // var_dump($fileIDs);
-                // die();
                 $dataFile = [];
                 $dataFile["file_id"] = $fileId["file_id"];
                 $dataFile["task_id"] = $taskID;
@@ -110,7 +106,7 @@ class TasksTable
                 $data = [
                     "text" => "you have new task: " . $task_name . " in project :" . $project_name,
                     "html_id" => "test",
-                    'user_id' => $member
+                    'user_id' => $userId
                 ];
                 $notification->createNotification($data);
             }
@@ -154,7 +150,7 @@ class TasksTable
     public function getTasksForProject($project_id)
     {
         $project_id = (int) $project_id;
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         // $sql = "SELECT tasks.name,tasks.sort_order,tasks.board_id,tasks.id FROM tasks
@@ -184,7 +180,7 @@ class TasksTable
     public function getArhiveForProject($project_id)
     {
         $project_id = (int) $project_id;
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id,tasks.description FROM tasks
@@ -230,7 +226,7 @@ class TasksTable
     // TODO if in future it will be required to make some more logic with time , it should be moved to special TaskTimeTable model class
     public function addTimeToTask($data)
     {
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $hours = (int) $data["hours"];
@@ -276,9 +272,6 @@ class TasksTable
                     ]);
                     $taskID = $data["parent_task"];
                 } elseif (isset($data["id"])) {
-                    $this->tableGateway->update($data, [
-                        "id = " . (int) $data["id"]
-                    ]);
                     $taskID = (int) $data["id"];
                 } else {
                     die("incorrectd data for task");
@@ -289,6 +282,9 @@ class TasksTable
                 $fileTable->saveFileToTask($dataFile);
             }
         }
+        $this->tableGateway->update($data, [
+                        "id = " . (int) $data["id"]
+                    ]);
         return $data;
     }
 
@@ -297,7 +293,7 @@ class TasksTable
         $files_task_sql = "SELECT  * FROM tasks_files where task_id=" . $task_id;
         $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
         $files = $resultSet->toArray();
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         foreach ($files as $file) {
