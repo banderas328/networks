@@ -47,16 +47,12 @@ class UserTable
             'email_key' => $user->email_key,
             'activated' => '1',
         );
-      //  var_dump($data);
         $id = (int)$user->id;
-         var_dump($id);
         if ($id == 0) {
             $dataUser = $this->tableGateway->select(['email' => $data['email']]);
             if(count($dataUser)) return "user with such email exist";
-          //  var_dump($data);die();
             $this->tableGateway->insert($data);
             $userId = $this->tableGateway->lastInsertValue;
-
             $adapter = $user->getAdapter();
             $sql = "insert into users_filesystem (path,parent_path,user_id) values ('docs','0'," . $userId . ")";
             $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
@@ -65,8 +61,6 @@ class UserTable
         } else {
             if ($this->getUser($id)) {
                 $this->tableGateway->update($data, array('id' => $id));
-
-
             } else {
                 throw new \Exception('Form id does not exist');
             }
@@ -83,7 +77,6 @@ class UserTable
     }
     public function resetUser($data)
     {
-       // $user = $this->select($data);
         if ($this->tableGateway->update($data, array('email' => $data["email"],'email_key' => $data["email_key"]))) {
             return true;
         } else {
@@ -133,7 +126,7 @@ class UserTable
 
     public function changeUserLang($adapter, $request)
     {
-        session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $lang = $request->getPost()->lang;
