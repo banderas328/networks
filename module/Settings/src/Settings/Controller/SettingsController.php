@@ -30,12 +30,13 @@ class SettingsController extends Controller\preloaderController
         $form->setData($userSettings);
 
         if ($request->isPost()) {
-            if (is_array($userSettings) and isset($userSettings[0])) {
+            if (!empty($userSettings)) {
                   $data = array_merge_recursive(
-                    $userSettings[0],
+                    $userSettings,
                     $request->getPost()->toArray(),
                     $request->getFiles()->toArray()
                 );
+                  $inipath = php_ini_loaded_file();
             } else {
                 $data = array_merge_recursive(
                     $request->getPost()->toArray(),

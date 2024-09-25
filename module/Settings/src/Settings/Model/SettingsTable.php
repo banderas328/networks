@@ -52,6 +52,7 @@ class SettingsTable
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
+      //  
 
         if (isset($settings['file']['tmp_name'])) {
             $sql = "SELECT  * FROM user_settings where user_id = " . $userId;
@@ -61,7 +62,7 @@ class SettingsTable
                 @unlink(getcwd() . "/public" . $results[0]['avatar']);
             }
 
-            $path = "/img/avatars";
+            $path = "img/avatars";
             $fileName = uniqid();
             $file = $path . '/' . $fileName;
             move_uploaded_file($settings['file']['tmp_name'], getcwd() . "/public/" . $file . $settings['file']['name']);
