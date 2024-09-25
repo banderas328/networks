@@ -9,7 +9,7 @@ return array(
             'host' => 'localhost',
             'username' => 'admin_root',
             'password' => 'password',
-            'dbname' => 'octopus'
+            'database' => 'octopus'
         )
     ),
     'smtp' => array(

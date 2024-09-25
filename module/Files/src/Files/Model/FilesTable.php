@@ -186,7 +186,7 @@ class FilesTable
     public function deleteFile($fileId,$userId) {
         $fileId =  (int) $fileId;
         $sql = "SELECT * FROM files where id=".$fileId." and user_id=".$userId;
-        if(!$adapter) $adapter = $this->adapter;
+        $adapter = $this->adapter;
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         if(!empty($resultSet->buffer())) {
             //var_dump($resultSet->buffer()->toArray());die();

@@ -145,17 +145,17 @@
                             data: {"task_id": data.id}
                         }).done(function (data) {
                             $("#open_task_popup").html(data);
-                            $("#open_task_popup").dialog({
-                                resizable: true,
-                                height: 800,
-                                width: 600,
-                                modal: false,
-                                buttons: {
-                                    Cancel: function () {
-                                        $(this).dialog("close");
-                                    }
-                                }
-                            });
+                            // $("#open_task_popup").dialog({
+                            //     resizable: true,
+                            //     height: 800,
+                            //     width: 600,
+                            //     modal: false,
+                            //     buttons: {
+                            //         Cancel: function () {
+                            //             $(this).dialog("close");
+                            //         }
+                            //     }
+                            // });
 
                         });
                     });

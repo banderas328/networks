@@ -43,11 +43,11 @@ class ChanelsController extends Controller\preloaderController
     {
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $user_id = $user_session["id"];
         $chanels = new  Chanels();
         $this->layout('layout/only_form');
         return new ViewModel(array(
-            'chanels' => $this->getChanelsTable()->fetchAllPrivate($chanels->getAdapter()),'user_id' => $userId
+            'chanels' => $this->getChanelsTable()->fetchAllPrivate($chanels->getAdapter(),$user_id),'user_id' => $user_id
         ));
     }
 

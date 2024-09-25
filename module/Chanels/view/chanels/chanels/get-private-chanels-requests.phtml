@@ -2,18 +2,22 @@
     <?php foreach($requests->buffer()->toArray() as $request) : ?>
         <?php $channelId = $request['chanel_id']; ?>
         <?php $userId = $request['user_id']; ?>
-        <?php $suffix = $channelId.'-'.$userId; ?>
-        <?php $isAllowed = $request['confirmed']; ?>
-        <?php $isRejected = !$request['confirmed']; ?>
-        <?php $isWaiting = !$request['confirmed']; ?>
+        <?php $suffix = $channelId.'-'.$userId; 
+$isAllowed = false;
+$isRejected = false;
+$isWaiting = false; 
+
+        ?>
+        <?php if(isset($request['confirmed'])) {
+         $isAllowed = $request['confirmed']; 
+         $isRejected = !$request['confirmed']; 
+         $isWaiting = !$request['confirmed']; 
+         }
+         ?>
 
         <div class="c-access-request">
             <div class="c-access-request__inner">
                 <div class="c-access-request__channel">
-                    <div class="c-access-request__image-wrap channel">
-                        <img src="https://www.fillmurray.com/360/360" alt="" class="c-access-request__image">
-                    </div>
-
                     <div class="c-access-request__main">
                         <div class="c-access-request__title">
                             <?php echo $request["chanel_name"]; ?>
@@ -24,7 +28,7 @@
                 <div class="c-access-request__users">
                     <div class="c-access-request__user">
                         <div class="c-access-request__image-wrap user">
-                            <img src="https://www.fillmurray.com/360/360" alt="" class="c-access-request__image">
+                            <img src="<?php echo $request["avatar"];?>" alt="" class="c-access-request__image">
                         </div>
 
                         <div class="c-access-request__main">
