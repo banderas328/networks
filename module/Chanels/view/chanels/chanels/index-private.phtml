@@ -62,9 +62,10 @@ if(isset($_SESSION['user']))
                     else {
                         $isAdmin = false;
                     }
+                    ?>
 
 
-                    <?php if ($isConfirmed or $isAdmin): ?>
+                    <?php if ($isConfirmed or $isAdmin) { ?>
                         <a class="c-chat-card__enter-button js-join-private-channel join_chanel_private"
                             to_chanel="<?php echo $chanel->chanel_id; ?>" chanel_name="<?php echo $chanel->chanel_name ?>"
                             href="<?php echo $this->url('chanels', array('action' => 'join_chanel', 'id' => $chanel->chanel_id)); ?>"
@@ -76,7 +77,9 @@ if(isset($_SESSION['user']))
 
                             Open
                         </a>
-                    <?php elseif ($isWaiting): ?>
+                    <?php
+                    }
+                     elseif ($isWaiting) {?>
                         <div class="c-chat-card__wait-pseudo-button">
                             <svg class="icon-nw icon-nw-lock-clock-black-24" viewBox="0 0 24 24">
                                 <path d="M0 0h24v24H0V0z" fill="none"/>
@@ -86,7 +89,8 @@ if(isset($_SESSION['user']))
 
                             Waiting...
                         </div>
-                    <?php elseif ($isClosed): ?>
+                    <?php }
+                     elseif ($isClosed) { ?>
                         <a class="c-chat-card__request-button js-join-private-channel-request"
                             to_chanel="<?php echo $chanel->chanel_id; ?>"
                             href="<?php echo $this->url('chanels', array('action' => 'join_chanel_request', 'id' => $chanel->chanel_id)); ?>"
@@ -98,7 +102,7 @@ if(isset($_SESSION['user']))
 
                             Request access
                         </a>
-                    <?php endif; ?>
+                    <?php } ?>
                 </div>
             </div>
         </div>

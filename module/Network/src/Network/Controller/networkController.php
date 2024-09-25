@@ -107,18 +107,14 @@ class  networkController extends Controller\preloaderController
             $dirOptions = $this->getFileSystemTable()->getDirOptions((int) $request->getPost()->dir_key,$fileSystem->getAdapter());
             if ($dirOptions->buffer()->toArray()[0]["is_public"]) {
                 $childDirs = $this->getFileSystemTable()->getChildDirs((int) $request->getPost()->dir_key,(int) $request->getPost()->user_id);
-             //   var_dump($childDirs);
-             //   var_dump($request->getPost()->dir_key);
-                $childDirs[] = (int) $request->getPost()->dir_key;
-                $authedDirs  =   $user_session['authedDirs'];
-              //  var_dump($user_session);
+                    $childDirs[] = (int) $request->getPost()->dir_key;
                 if(isset($user_session['authedDirs'])) {
                     $authedDirs  =   $user_session['authedDirs'];
                 }
 
                 foreach($childDirs as $dir) {
-
-                    $authedDirs .= ",".$dir;
+                    if(!isset($authedDirs)) $authedDirs = $dir;
+                    else   $authedDirs .= ",".$dir;
                 }
                 $dirs = explode(",", $authedDirs);
                 if(!in_array($childDirs[0],$dirs)) {
