@@ -7,9 +7,6 @@ foreach($friends as $friend){
     echo "<div class='member_name' userId='".$friend['user_id']."'>";
 
     echo "<div userId='".$friend['user_id']."' class='user_container'>";
-//    echo "<div class='avatar'>";
-//    echo "<img src=".$friend['avatar'].">";
-//    echo "</div>";
     echo $friend['first_name']." ".$friend['second_name'];
     echo '<input type="button" value="+" userId='.$friend["user_id"].' class="add_user_to_project action_btn">';
     echo "</div>";
@@ -33,7 +30,6 @@ foreach($friends as $friend){
         })
             .done(function (data) {
                 edit_project_members();
-               // $(".project_active_members_add").html(data);
             });
         });
 </script>

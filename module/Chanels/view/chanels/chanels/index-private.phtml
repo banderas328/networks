@@ -63,10 +63,6 @@ if(isset($_SESSION['user']))
                         $isAdmin = false;
                     }
 
-                   // $isConfirmed = $chanel->is_confirmed and ($chanel->user_id == $user_id)?>
-<!--                     <?php $isWaiting = $chanel->pending_response and ($chanel->user_id == $user_id )?>
-                    <?php $isAdmin = ($chanel->admins == $user_id) ? true : false; ?>
-                    <?php $isClosed = true; ?> -->
 
                     <?php if ($isConfirmed or $isAdmin): ?>
                         <a class="c-chat-card__enter-button js-join-private-channel join_chanel_private"

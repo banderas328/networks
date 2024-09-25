@@ -48,7 +48,6 @@ class SettingsTable
         if (is_array($settings["city"])) $settings["city"] = $settings["city"][1];
         if (is_array($settings["about"])) $settings["about"] = $settings["about"][1];
         if (is_array($settings["phone"])) $settings["phone"] = $settings["phone"][1];
-//         if (is_array($settings["visibility"])) $settings["visibility"] = $settings["visibility"][1];
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];

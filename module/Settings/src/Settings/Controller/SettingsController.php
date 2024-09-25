@@ -4,13 +4,8 @@ namespace Settings\Controller;
 
 
 use Settings\Form\SettingsForm;
-
-//use Zend\Mvc\Controller\AbstractActionController;
-//use Zend\View\Model\ViewModel;
 use Files\Model\Files;
 use Settings\Model\Settings;
-
-//use Zend\Session\Container;
 use Preloader;
 use Preloader\Controller;
 

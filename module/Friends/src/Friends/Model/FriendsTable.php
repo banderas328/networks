@@ -4,13 +4,8 @@ namespace Friends\Model;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Session\Container;
 use Zend\Db\Sql\Sql;
-//use Zend\Db\Adapter\Driver\ResultInterface;
-//use Zend\Db\ResultSet\ResultSet;
 use Zend\Config\Config;
 use Zend\Config\Factory;
-
-
-
 
 class FriendsTable {
 	protected $tableGateway;
@@ -93,7 +88,6 @@ class FriendsTable {
 
     public function getFriends($userId,$adapter,$onlyIds = false){
         $requestUser = $userId;
-     //   $sql = "SELECT * FROM friends WHERE (user_id = '".$userId."' OR friend_id = '".$userId."') AND status = 1";
         $sql = "SELECT * FROM friends WHERE status = 1";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         $userIds = array();
@@ -102,29 +96,8 @@ class FriendsTable {
             if(!in_array($row['user_id'],$userIds)) array_push($userIds,$row['user_id']);
             if(!in_array($row['friend_id'],$userIds)) array_push($userIds,$row['friend_id']);
         }
-
-//         if($onlyIds) {
-//             foreach($onlyIds as $onlyIdKey => $onlyIdValue){
-//                 foreach($userIds as $userIdValue){
-//                     if($onlyIdValue['user'] == $userIdValue) {
-//                         $needIds[] = $onlyIdValue['user'];
-//                         break;
-//                     }
-//                 }
-//             }
-//         }
-//         else {
-//            
-//         }
         $needIds = $userIds;
         $needIds[] = $userId;
-        
-//         foreach($needIds as $needIdKey => $needIdValue) {
-//             if($needIdValue == $requestUser) {
-//                 unset($needIds[$needIdKey]);
-//             }
-
-//         }
         if(count($needIds) >= 1)
         {
             $lastElement = end($needIds);
@@ -134,12 +107,8 @@ class FriendsTable {
                     if($user != $lastElement) {
                         $where .= " , ";
                     }
-
-
             }
             $where .= " ) ";
-
-            //$sql = "SELECT * FROM user_settings ".$where;
             $sql = "SELECT * FROM user_settings ";
             $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
             return $resultSet;

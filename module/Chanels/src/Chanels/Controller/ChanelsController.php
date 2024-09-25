@@ -132,8 +132,6 @@ class ChanelsController extends Controller\preloaderController
     public function getChanelsTable()
     {
         if (!$this->chanelsTable) {
-            //$sm = $this->getServiceLocator();
-           // $this->chanelsTable = $sm->get('Chanels\Model\ChanelsTable');
             $this->chanelsTable = new \Chanels\Model\ChanelsTable;
         }
         return $this->chanelsTable;
@@ -142,8 +140,6 @@ class ChanelsController extends Controller\preloaderController
     public function getChanelsMessagesTable()
     {
         if (!$this->chanelsMessagesTable) {
-            //$sm = $this->getServiceLocator();
-            //$this->chanelsMessagesTable = $sm->get('Chanels\Model\ChanelsMessagesTable');
             $this->chanelsMessagesTable = new \Chanels\Model\ChanelsMessagesTable;
         }
         return $this->chanelsMessagesTable;
