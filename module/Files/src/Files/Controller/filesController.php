@@ -28,7 +28,6 @@ class  filesController extends Controller\preloaderController {
     public function getDirAction(){
         $this->layout('layout/only_form');
         $request = $this->getRequest();
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         if(!$request->isPost()){
@@ -60,7 +59,6 @@ class  filesController extends Controller\preloaderController {
         $current_directory =  $request->getPost()->current_directory;
         $data =  $request->getPost()->data;
         $data =  preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data);
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $this->getFilesTable()->saveTextFile($file_name,$data,$current_directory,$userId,$file_id);
@@ -71,7 +69,6 @@ class  filesController extends Controller\preloaderController {
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $fileId = (int) $request->getPost()->file_id;
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $userSession = $_SESSION['user'];
         $userId = $userSession["id"];
         echo json_encode($this->getFilesTable()->getTextFile($fileId,$userId));
@@ -85,7 +82,6 @@ class  filesController extends Controller\preloaderController {
         $request = $this->getRequest();
         $dirKey = (int) $request->getPost()->dir_key;
         $filesystem = new FileSystem();
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $parentDir = $this->getFileSystemTable()->getUserParentDir($filesystem->getAdapter(),$dirKey,$userId);
@@ -147,7 +143,6 @@ class  filesController extends Controller\preloaderController {
 
 
     public function downloadFileAction() {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $fileId = $this->getEvent()->getRouteMatch()->getParam('value');
@@ -174,7 +169,6 @@ class  filesController extends Controller\preloaderController {
         $request = $this->getRequest();
         $file_id = (int) $request->getPost()->file_id;
         $files = new Files();
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
        if($this->getFilesTable()->deleteFile($file_id,$userId)){
@@ -192,7 +186,6 @@ class  filesController extends Controller\preloaderController {
 
     }
     public function renameFileAction() {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $request = $this->getRequest();
@@ -208,7 +201,6 @@ class  filesController extends Controller\preloaderController {
         $request = $this->getRequest();
         $dirId = (int)$request->getPost()->dir;
         $fileSystem = new FileSystem();
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $dirs = $this->getFileSystemTable()->getChildDirs( $dirId, $userId);
@@ -230,7 +222,6 @@ class  filesController extends Controller\preloaderController {
         $dirId = (int)$request->getPost()->dir_id;
         $dirIdCurrent = (int)$request->getPost()->current_directory;
         $fileSystem = new FileSystem();
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $this->getFileSystemTable()->moveDir($fileSystem->getAdapter(),$dirId,$dirIdCurrent,$userId);
@@ -241,7 +232,6 @@ class  filesController extends Controller\preloaderController {
     public function closeDirectoryAction(){
         $request = $this->getRequest();
         $dir = (int)$request->getPost()->dir;
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $this->getNetworkTable()->closeDir($dir,$userId);
@@ -253,7 +243,6 @@ class  filesController extends Controller\preloaderController {
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $dirId = (int)$request->getPost()->dir;
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $files = new FileSystem();
@@ -273,7 +262,6 @@ class  filesController extends Controller\preloaderController {
         $dirId = (int)$request->getPost()->dir;
 
         $password = $request->getPost()->password;
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $files = new FileSystem();
@@ -293,7 +281,6 @@ class  filesController extends Controller\preloaderController {
         $request = $this->getRequest();
         $fileId = (int)$request->getPost()->file_id;
         $requiredDirId = (int)$request->getPost()->current_directory;
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $files = new Files();

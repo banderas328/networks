@@ -52,7 +52,6 @@ class  networkController extends Controller\preloaderController
 
     public function networkIndexAction(){
         $this->layout('layout/only_form');
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $friends = new Friends();
@@ -63,50 +62,33 @@ class  networkController extends Controller\preloaderController
     }
 
     public function getNetworkPointAction(){
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $friends = new Friends();
-
         $userId = $user_session["id"];
-      //  $isUsersFriends = $this->getFriendsTable()->isUsersFriends($userId,$request->getPost()->user_id,$friends->getAdapter());
-       // var_dump($isUsersFriends->toArray());
-      //  if(!empty($isUsersFriends->toArray())){
-            $network = new Network();
-            $dirs = $this->getNetworkTable()->getUserSharedDirs($request,$network->getAdapter());
-
-            $alredyShared = $dirs['already_shared'];
-            $authedDirs = implode(",",$alredyShared);
-
-            //$userId = $user_session["id"];
-            $user_session['authedDirs'] = $authedDirs;
-            $dirs = $dirs['result'];
-            if($dirs)
-            return array("dirs" => $dirs,'current_directory' => 0);
-            else 
-                return array("dirs" => false,"error" => true,'current_directory' => 0);
-      //  }
-     //   else {
-         //   return array("dirs" => false,"error" => true,'current_directory' => 0);
-      //  }
+        $network = new Network();
+        $dirs = $this->getNetworkTable()->getUserSharedDirs($request,$network->getAdapter());
+        $alredyShared = $dirs['already_shared'];
+        $authedDirs = implode(",",$alredyShared);
+        $user_session['authedDirs'] = $authedDirs;
+        $dirs = $dirs['result'];
+        if($dirs)
+        return array("dirs" => $dirs,'current_directory' => 0);
+        else 
+        return array("dirs" => false,"error" => true,'current_directory' => 0);
     }
 
     public function getNetworkDirectoryAction(){
         $this->layout('layout/only_form');
         $request = $this->getRequest();
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
-     //   var_dump($user_session);
         $userId = $user_session["id"];
         $friends = new Friends();
-     //   $isUsersFriends = $this->getFriendsTable()->isUsersFriends($userId,$request->getPost()->user_id,$friends->getAdapter());
- //       if(!empty($isUsersFriends->toArray()))
-   //     {
-            $fileSystem = new FileSystem();
-            $dirOptions = $this->getFileSystemTable()->getDirOptions((int) $request->getPost()->dir_key,$fileSystem->getAdapter());
-            if ($dirOptions->buffer()->toArray()[0]["is_public"]) {
-                $childDirs = $this->getFileSystemTable()->getChildDirs((int) $request->getPost()->dir_key,(int) $request->getPost()->user_id);
+        $fileSystem = new FileSystem();
+        $dirOptions = $this->getFileSystemTable()->getDirOptions((int) $request->getPost()->dir_key,$fileSystem->getAdapter());
+        if ($dirOptions->buffer()->toArray()[0]["is_public"]) {
+            $childDirs = $this->getFileSystemTable()->getChildDirs((int) $request->getPost()->dir_key,(int) $request->getPost()->user_id);
                     $childDirs[] = (int) $request->getPost()->dir_key;
                 if(isset($user_session['authedDirs'])) {
                     $authedDirs  =   $user_session['authedDirs'];
@@ -137,9 +119,6 @@ class  networkController extends Controller\preloaderController
                 $view->setTemplate('network/network/password.phtml'); // path to phtml file under view folder
                 return $view;
             }
-
-      //  }
-
     }
 
     public function getNetworkFolderAction()
@@ -150,7 +129,6 @@ class  networkController extends Controller\preloaderController
         $userId = (int)$request->getPost()->user_id;
         $fileSystem = new FileSystem();
         $dirs = $this->getFileSystemTable()->getUserDirs($fileSystem->getAdapter(), $dirId, $userId);
-    //    var_dump($this->isUserLogedInDirectory($dirId));
         if (!$this->isUserLogedInDirectory($dirId)) {
             $filesystem = new FileSystem();
             $check_dir = $this->getFileSystemTable()->getUserDirsDetails($filesystem->getAdapter(), array(0 => $dirId));
@@ -162,8 +140,6 @@ class  networkController extends Controller\preloaderController
              else {
                  $files = new Files();
                  $files = $this->getFilesTable()->getDirFiles($files->getAdapter(), $dirId, $userId);
-            //     var_dump($dirs);
-
                  return new ViewModel(array(
                      'user_id' => $userId,
                      'dirs' => $dirs,
@@ -180,9 +156,7 @@ class  networkController extends Controller\preloaderController
 
         $this->layout('layout/only_form');
         $request = $this->getRequest();
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-
-                $user_session = $_SESSION['user'];
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $friends = new Friends();
         $isUsersFriends = $this->getFriendsTable()->isUsersFriends($userId,$request->getPost()->user_id,$friends->getAdapter());
@@ -217,7 +191,6 @@ class  networkController extends Controller\preloaderController
 
 
     public function isUserLogedInDirectory($dir) {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         if(!isset($user_session['authedDirs'])) return false;
         $authedDirs  =   $user_session['authedDirs'];
@@ -228,9 +201,7 @@ class  networkController extends Controller\preloaderController
     }
 
     public function downloadFileAction() {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start(); 
-
-               $user_session = $_SESSION['user'];
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $fileId = $this->getEvent()->getRouteMatch()->getParam('value');
         $frinendId = $this->getEvent()->getRouteMatch()->getParam('param');
@@ -259,13 +230,10 @@ class  networkController extends Controller\preloaderController
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $dirKey = (int) $request->getPost()->dir_key;
-       // var_dump($dirKey);
         $userId = $request->getPost()->user_id;
         $filesystem = new FileSystem();
         $parentDir = $this->getFileSystemTable()->getUserParentDir($filesystem->getAdapter(),$dirKey,$userId);
         $files = new Files();
-      //  $user_session = new Container('user');
-        //$userId = $user_session->user->id;
         $frinendId = $this->getRequest()->getPost()->user_id;
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
@@ -286,11 +254,9 @@ class  networkController extends Controller\preloaderController
 
                     $alredyShared = $dirs['already_shared'];
                     $authedDirs = implode(",",$alredyShared);
-                    session_start();        $user_session = $_SESSION['user'];
-                 //   $userId = $user_session["id"];
+                    $user_session = $_SESSION['user'];
                     $user_session['authedDirs'] = $authedDirs;
                     $dirs = $dirs['result'];
-                  //  return array("dirs" => $dirs,'current_directory' => 0);
                     $view = new ViewModel();
                     $view->setTemplate('network/getnetworkpoint.phtml');
                     $view->setVariable("dirs",$dirs);
@@ -307,9 +273,7 @@ class  networkController extends Controller\preloaderController
         }
           elseif(!$this->isUserLogedInDirectory($dirKey))    {
               $this->layout('layout/only_form');
-              if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-
-                     $user_session = $_SESSION['user'];
+              $user_session = $_SESSION['user'];
               $userId = $user_session["id"];
               $friends = new Friends();
               $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
@@ -364,10 +328,7 @@ class  networkController extends Controller\preloaderController
     }
 
     public function nonAuthedFoldersFilter ($dirs) {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-
-               $user_session = $_SESSION['user'];
-      //  $userId = $user_session["id"];
+        $user_session = $_SESSION['user'];
         if(!isset($user_session['authedDirs'])) return false;
         $authedDirs  =   $user_session['authedDirs'];
         $authedDirs = explode(",", $authedDirs);

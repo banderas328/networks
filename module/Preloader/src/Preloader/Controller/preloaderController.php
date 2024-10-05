@@ -11,8 +11,9 @@ class  preloaderController extends AbstractActionController
 {
     function __construct()
     {
-        @session_start();
+        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $this->isAuthed();
+
     }
 
     public function isAuthed()

@@ -84,7 +84,7 @@ class MarketController extends preloaderController
 
     public function byeFileAction(){
         $this->layout('layout/only_form');
-        session_start();        $user_session = $_SESSION['user'];
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $file_id = $this->getRequest()->getPost()->file_id;
         $payedFiles = new PayedFiles();

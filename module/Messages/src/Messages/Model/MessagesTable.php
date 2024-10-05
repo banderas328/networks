@@ -34,10 +34,8 @@ class MessagesTable
     public function addMessage($request, $adapter)
     {
         $text =  preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $request->getPost()->text);
-        //$text = htmlspecialchars($request->getPost()->text);
         $text = substr($text, 0, 250);
         $to_user = $request->getPost()->to_user;
-        session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "SELECT  first_name,second_name FROM user_settings WHERE user_id = '" . $userId . "'";
@@ -66,7 +64,6 @@ class MessagesTable
 
     public function checkNewMessages($adapter)
     {
-        session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "SELECT *,messages.id as message_id FROM messages
@@ -80,7 +77,6 @@ class MessagesTable
 
     public function checkOldMessages($adapter, $request)
     {
-        session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $with_user = $request->getPost()->with_user;

@@ -16,8 +16,6 @@ class  friendsController extends Controller\preloaderController
     public function getFriendsTable()
     {
         if (!$this->friendsTable) {
-           // $sm = $this->getServiceLocator();
-           // $this->friendsTable = $sm->get('Friends\Model\FriendsTable');
             $this->friendsTable = new \Friends\Model\FriendsTable;
         }
         return $this->friendsTable;
@@ -26,7 +24,6 @@ class  friendsController extends Controller\preloaderController
     public function addFriendRequestAction()
     {
         $friendId = $this->getEvent()->getRouteMatch()->getParam('user_id');
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $friends = new Friends();
@@ -38,8 +35,7 @@ class  friendsController extends Controller\preloaderController
     public function requestsAction()
     {
         $this->layout('layout/only_form');
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();    
-            $user_session = $_SESSION['user'];
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $friends = new Friends();
         $requests = $this->getFriendsTable()->getRequests($userId, $friends->getAdapter());
@@ -52,8 +48,7 @@ class  friendsController extends Controller\preloaderController
     public function addFriendAction()
     {
         $friendId = $this->getEvent()->getRouteMatch()->getParam('user_id');
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-               $user_session = $_SESSION['user'];
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $friends = new Friends();
         $this->getFriendsTable()->addFriend($userId, $friendId, $friends->getAdapter());
@@ -63,8 +58,7 @@ class  friendsController extends Controller\preloaderController
     public function cancelFriendAction()
     {
         $friendId = $this->getEvent()->getRouteMatch()->getParam('user_id');
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start(); 
-               $user_session = $_SESSION['user'];
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $friends = new Friends();
         $this->getFriendsTable()->cancelFriend($userId, $friendId, $friends->getAdapter());
@@ -73,9 +67,7 @@ class  friendsController extends Controller\preloaderController
 
     public function getFriendListAction(){
         $this->layout('layout/only_form');
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();  
-
-              $user_session = $_SESSION['user'];
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $friends = new Friends();
         $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
@@ -85,7 +77,6 @@ class  friendsController extends Controller\preloaderController
     }
     public function getfriendForMemberlistAction(){
         $this->layout('layout/only_form');
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $friends = new Friends();
@@ -97,7 +88,6 @@ class  friendsController extends Controller\preloaderController
 
     public function addfriendForMemberlistAction(){
         $this->layout('layout/only_form');
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $friends = new Friends();
@@ -110,10 +100,7 @@ class  friendsController extends Controller\preloaderController
     public function getfriendForProjectMemberlistAction(){
 
         $this->layout('layout/only_form');
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();  
-
-
-              $user_session = $_SESSION['user'];
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $friends = new Friends();
         $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());

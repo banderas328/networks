@@ -66,7 +66,6 @@ class FileSystemTable
 
     public function createUserDir($adapter, $request)
     {
-        session_start();
         $user_session = $_SESSION['user'];
         $user_id = $user_session["id"];
         $current_directory = (int)$request->getPost()->current_directory;
@@ -76,7 +75,6 @@ class FileSystemTable
     }
     public function renameDir($dir,$dirName)
     {
-        session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $dir= (int)$dir;
@@ -89,7 +87,6 @@ class FileSystemTable
     public function getChildDirs($dirId, $userId)
     {
         $dirs = $this->getChildDirsList((int)$dirId, $userId, false);
-        //  var_dump($dirs);
         $dirs = $this->sortDirs($dirs);
         $dirs[] = $dirId;
 

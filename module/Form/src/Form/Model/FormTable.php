@@ -13,21 +13,15 @@ class FormTable
     }
 
     public function getUserForm($userId) {
-        $data =  array ("user_id" => $userId);
-       $result =  $this->tableGateway->select($data);
+     $data =  array ("user_id" => $userId);
+     $result =  $this->tableGateway->select($data);
      return ($result->toArray());
-
-
     }
 
     public function createForm ($userId){
-
-        $data = array ('user_id' => $userId);
-        $this->tableGateway->insert($data);
-        return false;
-
-
-
+    $data = array ('user_id' => $userId);
+    $this->tableGateway->insert($data);
+    return false;
     }
 
 

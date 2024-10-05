@@ -31,41 +31,13 @@ class FilesTable
         $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("files",$adapter);
     }
 
-//    public function getUserFiles($adapter)
-//    {
-//        $user_session = new Container('user');
-//        $userId = $user_session->user->id;
-//        $sql = new Sql($adapter, 'files');
-//        $select = $sql->select();
-//        $select->where(array('user_id' => $userId));
-//        $selectString = $sql->getSqlStringForSqlObject($select);
-//        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-//        return $results;
-//    }
-
     public function saveUserFile($data)
     {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $path = "userfiles/".$userId;
         $fileName = uniqid();
-       // echo "<pre>";
-       // var_dump($data);
-//         $i = 0;
         if(isset($data[0])) $data = $data[0];
-      //  die();
-//         if(isset($data["files"]))
-//             foreach ($data["files"] as $file){
-//             $fileA = [];
-//             $fileA["file"]['name'] = $file['name'][$i];
-//             $fileA["file"]['tmp_name'] = $file['tmp_name'][$i];
-//             $fileA["file"]['to_directory'] = empty($file[$i]['to_directory']) ? 0 : $file[$i]['to_directory'];
-//             $fileA["file"]['type'] = $file['type'][$i];
-                       
-//         }
-       // var_dump($userId);
-      //  die();
         if(isset($data['file']['name'])) {
             $file = $path . '/' . $userId . $fileName . $data['file']['name'];
             if(move_uploaded_file($data['file']['tmp_name'], getcwd() . "/public/" . $file)) {
@@ -105,7 +77,6 @@ class FilesTable
     public function renameFile($fileId,$fileName, $userId = false)
     {
         if(!$userId) {
-            if(session_status() !== PHP_SESSION_ACTIVE) session_start();
             $user_session = $_SESSION['user'];
             $userId = $user_session["id"];
         }
@@ -124,42 +95,6 @@ class FilesTable
 
 
     }
-
-//    public function copyFileToMarketDir($adapter,$data){
-//        session_start();
-//        $user_session = $_SESSION['user'];
-//        $userId = $user_session["id"];
-//        $path = "/userfiles";
-//        $fileName = microtime();
-//        $file = $path . '/' . $userId . $fileName . $data['file_title'];
-//        $sql = "select id from users_filesystem where path='market' and user_id = ".$userId;
-//        $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-//        $dirId = $result->toArray()[0]['id'];
-//        if(copy(getcwd() . "/public/" .$data["file_name"], getcwd() . "/public/" . $file)) {
-//            $fileDb['user_id'] = $userId;
-//            $fileDb['directory'] = $dirId;
-//            $fileDb['file_title'] = $data['file_title'];
-//            $fileDb['file_name'] = $file;
-//            $fileDb['type'] = $data['type'];
-//            $this->tableGateway->insert($fileDb);
-//        }
-//        else {
-//            die("error");
-//        }
-//    }
-
-//    public function getFile($fileId, $adapter)
-//    {
-//        $user_session = new Container('user');
-//        $userId = $user_session->user->id;
-//        $sql = new Sql($adapter, 'files');
-//        $select = $sql->select();
-//        $select->where(array('user_id' => $userId));
-//        $select->where(array('id' => $fileId));
-//        $selectString = $sql->getSqlStringForSqlObject($select);
-//        $results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-//        return $results;
-//    }
 
 
 
@@ -200,7 +135,6 @@ class FilesTable
         return false;
     }
     public function moveFileToSystem($fileId,$requiredDirId,$userId,$adapter){
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql  = "select * from files  WHERE id=".$fileId;

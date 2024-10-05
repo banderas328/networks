@@ -31,9 +31,6 @@ class BlogTable
     public function saveBlog($post, $userId, $adapter)
     {
         $text = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $post['text']);
-        // $text = htmlspecialchars($request->getPost()->text);
-        
-        // $text = htmlspecialchars($post['text']);
         $blog_title = htmlspecialchars($post['blog_title']);
         $data = array(
             "user_id" => $userId,
@@ -54,12 +51,7 @@ class BlogTable
             $fileName = uniqid();
             $file = $path . '/' . $fileName;
             move_uploaded_file($post['file']['tmp_name'], getcwd() . "/public/" . $file . $post['file']['name']);
-            // if (($post['file']["size"] < 200000)) {
-            
             $data['file_name'] = $file . $post['file']['name'];
-            // } else {
-            // @unlink(getcwd() . "/public/" . $file . $post['file']['name']);
-            // }
             $data['file_name'] = $file . $post['file']['name'];
             $data['blog_id'] = $id;
             $sql = "insert into blog_attachment (file_name,blog_id) values ('" . $data['file_name'] . "'," . $data['blog_id'] . ")";
@@ -112,8 +104,6 @@ class BlogTable
         $sql = "delete from blogs where blogs.id=" . $blog["blog_id"];
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         return true;
-        
-        
     } 
     
 

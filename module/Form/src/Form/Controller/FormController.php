@@ -23,8 +23,7 @@ class FormController extends preloaderController
 
     public function indexAction(){
         $this->layout('layout/only_form');
-
-        session_start();        $user_session = $_SESSION['user'];
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $isFormExists = $this->getFormTable()->getUserForm($userId);
         $formExists = true;
@@ -43,7 +42,7 @@ class FormController extends preloaderController
     }
 
     public function createFormAction(){
-        session_start();        $user_session = $_SESSION['user'];
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $this->getFormTable()->createForm($userId);
         die();

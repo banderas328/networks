@@ -32,7 +32,6 @@ class FramesTable
 
     public function createFrame($request)
     {
-        session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $url = $request->getPost()->frame_url;
@@ -52,7 +51,6 @@ class FramesTable
 
     public function getFrames()
     {
-        session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "SELECT * FROM `frames`   WHERE frames.user_id='" . $userId . "'";

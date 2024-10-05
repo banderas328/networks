@@ -27,7 +27,6 @@ class BlogController extends Controller\preloaderController
     public function saveBlogAction()
     {
         $request = $this->getRequest();
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $post = array_merge_recursive(
@@ -43,24 +42,19 @@ class BlogController extends Controller\preloaderController
     public function getBlogsAction()
     {
         $this->layout('layout/only_form');
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         if (isset($this->getRequest()->getPost()->offset)) $offset = (int)$this->getRequest()->getPost()->offset;
         else $offset = 0;
-        //$friends = new Friends();
-    //    $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
-  //      if ($friends) {
-            $blog = new Blog();
-            $blogs = $this->getBlogTable()->getBlogs($userId, 'false', $offset, $blog->getAdapter());
-            if(!empty($blogs)) {
-                return array("blogs" => $blogs, 'user_id' => $userId, 'offset' => $offset);
-            }
-            else {
-                return array("blogs" => [], 'user_id' => $userId, 'offset' => $offset);
-            }
+        $blog = new Blog();
+        $blogs = $this->getBlogTable()->getBlogs($userId, 'false', $offset, $blog->getAdapter());
+        if(!empty($blogs)) {
+            return array("blogs" => $blogs, 'user_id' => $userId, 'offset' => $offset);
+        }
+        else {
             return array("blogs" => [], 'user_id' => $userId, 'offset' => $offset);
-    //    }
+        }
+            return array("blogs" => [], 'user_id' => $userId, 'offset' => $offset);
     }
 
     public function getBlogTable()
@@ -82,9 +76,7 @@ class BlogController extends Controller\preloaderController
     public function addCommentToBlogAction()
     {
         $this->layout('layout/only_form');
-        session_start();   
-
-             $user_session = $_SESSION['user'];
+        $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $data = $this->getRequest()->getPost()->toArray();
         $data["user_id"] = $userId;
@@ -105,7 +97,6 @@ class BlogController extends Controller\preloaderController
     public function deleteBlogsAction(){
         $this->layout('layout/only_form');
         $request = $this->getRequest();
-        session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $blog = new Blog();
@@ -115,16 +106,11 @@ class BlogController extends Controller\preloaderController
     
     public function deleteBlogAction(){
         $request = $this->getRequest();
-        session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $data = $this->getRequest()->getPost();
         if($this->getBlogTable()->deleteBlog($userId,$data["blog_id"]))
             die("deleted");
         die("error on blod delete");
-        //return array("blogs" => $this->getBlogTable()->getBlogsForDelete($userId),$blog->getAdapter());
-        
     }
-
-
 }

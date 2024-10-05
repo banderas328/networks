@@ -55,7 +55,6 @@ class ChanelsTable
 
     public function fetchAllChanelsInAdminRole()
     {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "SELECT * FROM chanels_admins 
@@ -67,7 +66,6 @@ class ChanelsTable
 
     public function fetchAllPrivateRequests($adapter)
     {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "SELECT  * FROM chanels
@@ -81,7 +79,6 @@ class ChanelsTable
 
     public function checkIsUserIsChanelAdmin($adapter, $request)
     {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $chanel_id = (int) $request->getPost()->chanel_id;
@@ -121,7 +118,6 @@ class ChanelsTable
     public function checkUserHaveAccessToChanel($adapter, $request)
     {
         $chanel_id = (int) $request->getPost()->to_chanel;
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         
@@ -141,7 +137,6 @@ class ChanelsTable
     public function addRequestToChanel($request, $adapter)
     {
         $to_chanel = (int) $request->getPost()->to_chanel;
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "delete from  private_chanels_requests where user_id =" . $userId . " and chanel_id=" . $to_chanel . " ;";

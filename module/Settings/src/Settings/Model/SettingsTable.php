@@ -51,8 +51,6 @@ class SettingsTable
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
-      //  
-
         if (isset($settings['file']['tmp_name'])) {
             $sql = "SELECT  * FROM user_settings where user_id = " . $userId;
             $results = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
@@ -86,7 +84,6 @@ class SettingsTable
 
     public function getCurrentUserSettings()
     {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $sql = "SELECT  * FROM user_settings where user_id=" . $userId;
@@ -102,7 +99,6 @@ class SettingsTable
 
     public function searchUsersOnSettings($data)
     {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
         $select = new Select();
