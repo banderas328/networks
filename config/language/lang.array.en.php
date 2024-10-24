@@ -27,4 +27,5 @@ return array(
     "Rename_Directory" => "Rename Directory",
     "Share_Directory" => "Share Directory",
     "Share_With_Password" => "Share with password",
+    "Email" => "Email",
 );

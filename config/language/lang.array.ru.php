@@ -26,4 +26,5 @@ return array(
     "Rename_Directory" => "Переименовать папку",
     "Share_Directory" => "Открыть доступ",
     "Share_With_Password" => "Открыть доступ - пароль",
+    "Email" => "Почта",
 );

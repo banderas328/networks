@@ -16,32 +16,6 @@ if(isset($_SESSION['user']))$user = $_SESSION['user'];
     <script type="text/javascript" src="/jquery-ui1.12/external/jquery/jquery.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-03HREGPV42"></script>
-    <script>
-    typeof window.jQuery !== 'undefined' ? console.log(window.jQuery.fn.jquery) : 'jQuery not found!';
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'G-03HREGPV42');
-    $(function() {
-        var link = window.location.href;
-        var splitUrl = link.split('/');
-        var url = "";
-        if (splitUrl.length == 5) {
-            url = splitUrl[3] + "/" + splitUrl[4];
-            console.log(url);
-        } else {
-            url = splitUrl[3];
-            console.log(url);
-        }
-        $(".menu_link[href='/" + url + "']").css('border-bottom', '3px solid white');
-
-    })
-    </script>
-
 </head>
 
 <body id="body_os">
