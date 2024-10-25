@@ -80,3 +80,18 @@ server {
     }
 }
 ###
+For Frames
+client_max_body_size 20M;
+server_name  octopus.local;
+proxy_hide_header X-Frame-Options;
+---
+Nginx subsystems ifmare settings
+client_max_body_size 20M;
+server_name mail.octopus.local;
+proxy_hide_header X-Frame-Options;
+add_header 'Access-Control-Allow-Origin' '*';
+add_header X-Frame-Options "ALLOW-FROM octopus.local";
+
+---
+
+
