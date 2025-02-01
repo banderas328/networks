@@ -28,6 +28,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -46,11 +51,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -176,6 +176,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -194,11 +199,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -364,6 +364,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -382,11 +387,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -489,16 +489,6 @@
         0 => 'contacts',
         1 => true,
       ),
-      'load_gmail_contacts' => 
-      array (
-        0 => 'gmail_contacts',
-        1 => true,
-      ),
-      'load_ldap_contacts' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
       'load_local_contacts' => 
       array (
         0 => 'local_contacts',
@@ -582,6 +572,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -600,11 +595,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -705,6 +695,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -723,11 +718,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -763,11 +753,6 @@
       'process_tag_source_max_setting' => 
       array (
         0 => 'tags',
-        1 => true,
-      ),
-      'load_ldap_settings' => 
-      array (
-        0 => 'ldap_contacts',
         1 => true,
       ),
       'message_list_type' => 
@@ -1025,11 +1010,6 @@
         0 => 'contacts',
         1 => true,
       ),
-      'process_ldap_auth_settings' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
       'process_unread_feeds_setting' => 
       array (
         0 => 'feeds',
@@ -1070,9 +1050,19 @@
         0 => 'themes',
         1 => true,
       ),
-      'process_enable_sieve_filter_setting' => 
+      'process_inline_message_setting' => 
       array (
-        0 => 'sievefilters',
+        0 => 'inline_message',
+        1 => true,
+      ),
+      'process_inline_message_style' => 
+      array (
+        0 => 'inline_message',
+        1 => true,
+      ),
+      'process_enable_shortcut_setting' => 
+      array (
+        0 => 'keyboard_shortcuts',
         1 => true,
       ),
       'save_user_settings' => 
@@ -1133,6 +1123,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -1151,11 +1146,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -1186,6 +1176,16 @@
       'tag_data' => 
       array (
         0 => 'tags',
+        1 => true,
+      ),
+      'get_inline_message_setting' => 
+      array (
+        0 => 'inline_message',
+        1 => true,
+      ),
+      'highlight_list_data' => 
+      array (
+        0 => 'highlights',
         1 => true,
       ),
       'load_feeds_from_config' => 
@@ -1281,6 +1281,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -1299,11 +1304,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -1329,6 +1329,16 @@
       'load_imap_servers_for_message_list' => 
       array (
         0 => 'imap',
+        1 => true,
+      ),
+      'get_inline_message_setting' => 
+      array (
+        0 => 'inline_message',
+        1 => true,
+      ),
+      'save_searches_data' => 
+      array (
+        0 => 'saved_searches',
         1 => true,
       ),
       'load_feeds_from_config' => 
@@ -1404,6 +1414,131 @@
     ),
     'advanced_search' => 
     array (
+      'stay_logged_in' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'login' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'default_page_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'load_user_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'mod_env' => 
+      array (
+        0 => 'tags',
+        1 => true,
+      ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
+      'load_theme' => 
+      array (
+        0 => 'themes',
+        1 => true,
+      ),
+      'idle_time_check' => 
+      array (
+        0 => 'idle_timer',
+        1 => true,
+      ),
+      'smtp_default_server' => 
+      array (
+        0 => 'smtp',
+        1 => true,
+      ),
+      'load_imap_servers_from_config' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'fix_folder_assignments' => 
+      array (
+        0 => 'imap_folders',
+        1 => true,
+      ),
+      'imap_oauth2_token_check' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'add_imap_servers_to_page_data' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'prefetch_imap_folders' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'load_imap_servers_for_message_list' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'default_sort_order_setting' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'message_list_type' => 
+      array (
+        0 => 'advanced_search',
+        1 => true,
+      ),
+      'language' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'process_search_terms' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'title' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'date' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'advanced_search_prepare' => 
+      array (
+        0 => 'advanced_search',
+        1 => true,
+      ),
+      'save_user_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'logout' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'http_headers' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
     ),
     'ajax_reset_search' => 
     array (
@@ -1470,6 +1605,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -1488,11 +1628,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -1623,6 +1758,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -1641,11 +1781,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -1877,14 +2012,19 @@
         0 => 'tags',
         1 => true,
       ),
-      'sieve_filters_enabled' => 
+      'get_shortcut_setting' => 
       array (
-        0 => 'core',
+        0 => 'keyboard_shortcuts',
         1 => true,
       ),
       'imap_folder_check' => 
       array (
         0 => 'imap_folders',
+        1 => true,
+      ),
+      'saved_search_folder_data' => 
+      array (
+        0 => 'saved_searches',
         1 => true,
       ),
       'load_theme' => 
@@ -2061,6 +2201,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -2079,11 +2224,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -2119,46 +2259,6 @@
       'load_contacts' => 
       array (
         0 => 'contacts',
-        1 => true,
-      ),
-      'load_gmail_contacts' => 
-      array (
-        0 => 'gmail_contacts',
-        1 => true,
-      ),
-      'load_ldap_contacts' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'load_edit_ldap_contact' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'process_update_ldap_contact' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'process_add_ldap_contact' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'process_ldap_fields' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'process_update_ldap_server' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'process_add_to_ldap_server' => 
-      array (
-        0 => 'ldap_contacts',
         1 => true,
       ),
       'load_local_contacts' => 
@@ -2327,16 +2427,6 @@
         0 => 'contacts',
         1 => true,
       ),
-      'load_gmail_contacts' => 
-      array (
-        0 => 'gmail_contacts',
-        1 => true,
-      ),
-      'load_ldap_contacts' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
       'load_local_contacts' => 
       array (
         0 => 'local_contacts',
@@ -2397,9 +2487,9 @@
         0 => 'contacts',
         1 => true,
       ),
-      'sieve_filters_enabled_message_content' => 
+      'history_record_imap_message' => 
       array (
-        0 => 'sievefilters',
+        0 => 'history',
         1 => true,
       ),
       'vcalendar_check' => 
@@ -2440,24 +2530,9 @@
         0 => 'core',
         1 => true,
       ),
-      'load_imap_servers_from_config' => 
-      array (
-        0 => 'imap',
-        1 => true,
-      ),
       'load_contacts' => 
       array (
         0 => 'contacts',
-        1 => true,
-      ),
-      'load_gmail_contacts' => 
-      array (
-        0 => 'gmail_contacts',
-        1 => true,
-      ),
-      'load_ldap_contacts' => 
-      array (
-        0 => 'ldap_contacts',
         1 => true,
       ),
       'load_local_contacts' => 
@@ -2473,11 +2548,6 @@
       'process_add_contact_from_message' => 
       array (
         0 => 'local_contacts',
-        1 => true,
-      ),
-      'process_add_ldap_contact_from_message' => 
-      array (
-        0 => 'ldap_contacts',
         1 => true,
       ),
       'save_user_data' => 
@@ -2518,24 +2588,9 @@
         0 => 'core',
         1 => true,
       ),
-      'load_imap_servers_from_config' => 
-      array (
-        0 => 'imap',
-        1 => true,
-      ),
       'load_contacts' => 
       array (
         0 => 'contacts',
-        1 => true,
-      ),
-      'load_gmail_contacts' => 
-      array (
-        0 => 'gmail_contacts',
-        1 => true,
-      ),
-      'load_ldap_contacts' => 
-      array (
-        0 => 'ldap_contacts',
         1 => true,
       ),
       'load_local_contacts' => 
@@ -2584,21 +2639,6 @@
       'load_contacts' => 
       array (
         0 => 'contacts',
-        1 => true,
-      ),
-      'load_gmail_contacts' => 
-      array (
-        0 => 'gmail_contacts',
-        1 => true,
-      ),
-      'load_ldap_contacts' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'process_delete_ldap_contact' => 
-      array (
-        0 => 'ldap_contacts',
         1 => true,
       ),
       'load_local_contacts' => 
@@ -2659,6 +2699,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -2677,11 +2722,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -2848,6 +2888,11 @@
         0 => 'feeds',
         1 => true,
       ),
+      'history_record_feed_message' => 
+      array (
+        0 => 'history',
+        1 => true,
+      ),
       'save_feeds' => 
       array (
         0 => 'feeds',
@@ -2987,6 +3032,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -3005,11 +3055,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -3581,11 +3626,6 @@
         0 => 'core',
         1 => true,
       ),
-      'sieve_status' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
-      ),
       'imap_status' => 
       array (
         0 => 'imap',
@@ -3982,6 +4022,61 @@
     ),
     'ajax_adv_search' => 
     array (
+      'login' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'default_page_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'load_user_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'load_imap_servers_from_config' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'imap_oauth2_token_check' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'process_adv_search_request' => 
+      array (
+        0 => 'advanced_search',
+        1 => true,
+      ),
+      'default_sort_order_setting' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'language' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'date' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'advanced_search_prepare' => 
+      array (
+        0 => 'advanced_search',
+        1 => true,
+      ),
+      'http_headers' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
     ),
     'ajax_imap_combined_inbox' => 
     array (
@@ -4366,6 +4461,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -4384,11 +4484,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -4800,6 +4895,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -4818,11 +4918,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -4923,6 +5018,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -4941,11 +5041,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -5074,6 +5169,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -5092,11 +5192,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -5313,6 +5408,405 @@
         1 => true,
       ),
     ),
+    'history' => 
+    array (
+      'stay_logged_in' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'login' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'default_page_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'load_user_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'mod_env' => 
+      array (
+        0 => 'tags',
+        1 => true,
+      ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
+      'load_theme' => 
+      array (
+        0 => 'themes',
+        1 => true,
+      ),
+      'idle_time_check' => 
+      array (
+        0 => 'idle_timer',
+        1 => true,
+      ),
+      'smtp_default_server' => 
+      array (
+        0 => 'smtp',
+        1 => true,
+      ),
+      'load_imap_servers_from_config' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'fix_folder_assignments' => 
+      array (
+        0 => 'imap_folders',
+        1 => true,
+      ),
+      'imap_oauth2_token_check' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'add_imap_servers_to_page_data' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'prefetch_imap_folders' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'load_imap_servers_for_message_list' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'get_inline_message_setting' => 
+      array (
+        0 => 'inline_message',
+        1 => true,
+      ),
+      'message_list_type' => 
+      array (
+        0 => 'history',
+        1 => true,
+      ),
+      'language' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'process_search_terms' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'title' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'date' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'load_message_history' => 
+      array (
+        0 => 'history',
+        1 => true,
+      ),
+      'save_user_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'logout' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'http_headers' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+    ),
+    'ajax_github_event_detail' => 
+    array (
+    ),
+    'ajax_wp_notice_display' => 
+    array (
+    ),
+    'ajax_save_search' => 
+    array (
+      'login' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'load_user_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'save_search' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'language' => 
+      array (
+        0 => 'saved_searches',
+        1 => true,
+      ),
+      'date' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'http_headers' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+    ),
+    'ajax_update_search' => 
+    array (
+      'login' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'load_user_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'update_search' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'language' => 
+      array (
+        0 => 'saved_searches',
+        1 => true,
+      ),
+      'date' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'http_headers' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+    ),
+    'ajax_delete_search' => 
+    array (
+      'login' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'load_user_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'delete_search' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'language' => 
+      array (
+        0 => 'saved_searches',
+        1 => true,
+      ),
+      'date' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'http_headers' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+    ),
+    'ajax_update_save_search_label' => 
+    array (
+      'login' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'load_user_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'update_save_search_label' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'language' => 
+      array (
+        0 => 'saved_searches',
+        1 => true,
+      ),
+      'date' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'http_headers' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+    ),
+    'highlights' => 
+    array (
+      'stay_logged_in' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'login' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'default_page_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'load_user_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'mod_env' => 
+      array (
+        0 => 'tags',
+        1 => true,
+      ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
+      'load_theme' => 
+      array (
+        0 => 'themes',
+        1 => true,
+      ),
+      'idle_time_check' => 
+      array (
+        0 => 'idle_timer',
+        1 => true,
+      ),
+      'smtp_default_server' => 
+      array (
+        0 => 'smtp',
+        1 => true,
+      ),
+      'load_imap_servers_from_config' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'fix_folder_assignments' => 
+      array (
+        0 => 'imap_folders',
+        1 => true,
+      ),
+      'imap_oauth2_token_check' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'add_imap_servers_to_page_data' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'prefetch_imap_folders' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'load_imap_servers_for_message_list' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'load_feeds_from_config' => 
+      array (
+        0 => 'feeds',
+        1 => true,
+      ),
+      'message_list_type' => 
+      array (
+        0 => 'highlights',
+        1 => true,
+      ),
+      'language' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'highlight_process_form' => 
+      array (
+        0 => 'highlights',
+        1 => true,
+      ),
+      'highlight_page_data' => 
+      array (
+        0 => 'highlights',
+        1 => true,
+      ),
+      'process_search_terms' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'title' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'date' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'save_user_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'logout' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'http_headers' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+    ),
     'ajax_smtp_attach_file' => 
     array (
     ),
@@ -5343,6 +5837,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -5361,11 +5860,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -5774,6 +6268,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -5792,11 +6291,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -5923,7 +6417,7 @@
         1 => true,
       ),
     ),
-    'sieve_filters' => 
+    'shortcuts' => 
     array (
       'stay_logged_in' => 
       array (
@@ -5950,6 +6444,21 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
+      'load_edit_id' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
+      'process_edit_shortcut' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -5968,11 +6477,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -6000,14 +6504,9 @@
         0 => 'imap',
         1 => true,
       ),
-      'settings_load_imap' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
-      ),
       'message_list_type' => 
       array (
-        0 => 'sieve_filters',
+        0 => 'keyboard_shortcuts',
         1 => true,
       ),
       'language' => 
@@ -6043,680 +6542,6 @@
       'http_headers' => 
       array (
         0 => 'core',
-        1 => true,
-      ),
-    ),
-    'block_list' => 
-    array (
-      'stay_logged_in' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'login' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'default_page_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_user_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'mod_env' => 
-      array (
-        0 => 'tags',
-        1 => true,
-      ),
-      'load_theme' => 
-      array (
-        0 => 'themes',
-        1 => true,
-      ),
-      'idle_time_check' => 
-      array (
-        0 => 'idle_timer',
-        1 => true,
-      ),
-      'smtp_default_server' => 
-      array (
-        0 => 'smtp',
-        1 => true,
-      ),
-      'load_imap_servers_from_config' => 
-      array (
-        0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
-      ),
-      'fix_folder_assignments' => 
-      array (
-        0 => 'imap_folders',
-        1 => true,
-      ),
-      'imap_oauth2_token_check' => 
-      array (
-        0 => 'imap',
-        1 => true,
-      ),
-      'add_imap_servers_to_page_data' => 
-      array (
-        0 => 'imap',
-        1 => true,
-      ),
-      'prefetch_imap_folders' => 
-      array (
-        0 => 'imap',
-        1 => true,
-      ),
-      'load_imap_servers_for_message_list' => 
-      array (
-        0 => 'imap',
-        1 => true,
-      ),
-      'settings_load_imap' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
-      ),
-      'load_behaviour' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
-      ),
-      'message_list_type' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-      'language' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'process_search_terms' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'title' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'date' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'save_user_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'logout' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'http_headers' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_save_filter' => 
-    array (
-      'login' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'default_page_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_user_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'language' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'date' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'http_headers' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'settings_load_imap' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-      'sieve_save_filter' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_edit_filter' => 
-    array (
-      'login' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'default_page_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_user_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'language' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'date' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'http_headers' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'settings_load_imap' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-      'sieve_edit_filter' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_delete_filter' => 
-    array (
-      'login' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'default_page_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_user_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'language' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'date' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'http_headers' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'settings_load_imap' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-      'sieve_delete_filter' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_save_script' => 
-    array (
-      'login' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'default_page_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_user_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'language' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'date' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'http_headers' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'settings_load_imap' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-      'sieve_save_script' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_edit_script' => 
-    array (
-      'login' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'default_page_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_user_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'language' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'date' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'http_headers' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'settings_load_imap' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-      'sieve_edit_script' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_delete_script' => 
-    array (
-      'login' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'default_page_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_user_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'language' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'date' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'http_headers' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'settings_load_imap' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-      'sieve_delete_script' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_block_unblock' => 
-    array (
-      'login' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'default_page_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_user_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_smtp_servers_from_config' => 
-      array (
-        0 => 'imap',
-        1 => true,
-      ),
-      'load_imap_servers_from_config' => 
-      array (
-        0 => 'imap',
-        1 => true,
-      ),
-      'language' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'date' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'http_headers' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'sieve_block_unblock_script' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_unblock_sender' => 
-    array (
-      'login' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'default_page_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_user_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_smtp_servers_from_config' => 
-      array (
-        0 => 'imap',
-        1 => true,
-      ),
-      'load_imap_servers_from_config' => 
-      array (
-        0 => 'imap',
-        1 => true,
-      ),
-      'language' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'date' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'http_headers' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'sieve_unblock_sender' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_get_mailboxes' => 
-    array (
-      'login' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'default_page_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_user_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_imap_servers_from_config' => 
-      array (
-        0 => 'imap',
-        1 => true,
-      ),
-      'language' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'date' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'http_headers' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'settings_load_imap' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-      'sieve_get_mailboxes_script' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_block_domain' => 
-    array (
-      'login' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'default_page_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_user_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_imap_servers_from_config' => 
-      array (
-        0 => 'imap',
-        1 => true,
-      ),
-      'language' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'date' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'http_headers' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'settings_load_imap' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-      'sieve_block_domain_script' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_block_change_behaviour' => 
-    array (
-      'login' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'default_page_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_user_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_imap_servers_from_config' => 
-      array (
-        0 => 'imap',
-        1 => true,
-      ),
-      'language' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'date' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'http_headers' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'settings_load_imap' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-      'sieve_block_change_behaviour_script' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_toggle_script_state' => 
-    array (
-      'login' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'default_page_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_user_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'load_imap_servers_from_config' => 
-      array (
-        0 => 'imap',
-        1 => true,
-      ),
-      'language' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'date' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'http_headers' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'settings_load_imap' => 
-      array (
-        0 => 'sieve_filters',
-        1 => true,
-      ),
-      'sieve_toggle_script_state' => 
-      array (
-        0 => 'sieve_filters',
         1 => true,
       ),
     ),
@@ -6747,6 +6572,11 @@
         0 => 'tags',
         1 => true,
       ),
+      'load_keyboard_shortcuts' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
       'load_theme' => 
       array (
         0 => 'themes',
@@ -6765,11 +6595,6 @@
       'load_imap_servers_from_config' => 
       array (
         0 => 'imap',
-        1 => true,
-      ),
-      'sieve_filters_enabled' => 
-      array (
-        0 => 'sievefilters',
         1 => true,
       ),
       'fix_folder_assignments' => 
@@ -6959,15 +6784,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -7107,15 +6932,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -7325,15 +7150,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -7503,15 +7328,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -7631,15 +7456,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -7721,9 +7546,19 @@
         0 => 'core',
         1 => true,
       ),
-      'enable_sieve_filter_setting' => 
+      'enable_shortcut_setting' => 
       array (
-        0 => 'sievefilters',
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
+      'inline_message_setting' => 
+      array (
+        0 => 'inline_message',
+        1 => true,
+      ),
+      'inline_message_style' => 
+      array (
+        0 => 'inline_message',
         1 => true,
       ),
       'enable_compose_delivery_receipt_setting' => 
@@ -8011,11 +7846,6 @@
         0 => 'core',
         1 => true,
       ),
-      'ldap_auth_settings' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
       'start_feed_settings' => 
       array (
         0 => 'feeds',
@@ -8114,15 +7944,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -8132,6 +7962,11 @@
       'js_search_data' => 
       array (
         0 => 'core',
+        1 => true,
+      ),
+      'inline_message_flag' => 
+      array (
+        0 => 'inline_message',
         1 => true,
       ),
       'header_end' => 
@@ -8187,6 +8022,11 @@
       'folder_list_end' => 
       array (
         0 => 'core',
+        1 => true,
+      ),
+      'highlight_css' => 
+      array (
+        0 => 'highlights',
         1 => true,
       ),
       'content_section_start' => 
@@ -8272,15 +8112,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -8290,6 +8130,11 @@
       'js_search_data' => 
       array (
         0 => 'core',
+        1 => true,
+      ),
+      'inline_message_flag' => 
+      array (
+        0 => 'inline_message',
         1 => true,
       ),
       'header_end' => 
@@ -8372,9 +8217,29 @@
         0 => 'core',
         1 => true,
       ),
+      'search_name_fld' => 
+      array (
+        0 => 'saved_searches',
+        1 => true,
+      ),
+      'advanced_search_link' => 
+      array (
+        0 => 'advanced_search',
+        1 => true,
+      ),
       'search_form_end' => 
       array (
         0 => 'core',
+        1 => true,
+      ),
+      'update_search_icon' => 
+      array (
+        0 => 'saved_searches',
+        1 => true,
+      ),
+      'delete_search_icon' => 
+      array (
+        0 => 'saved_searches',
         1 => true,
       ),
       'message_list_start' => 
@@ -8385,6 +8250,16 @@
       'search_results_table_end' => 
       array (
         0 => 'core',
+        1 => true,
+      ),
+      'update_search_label_icon' => 
+      array (
+        0 => 'saved_searches',
+        1 => true,
+      ),
+      'save_search_icon' => 
+      array (
+        0 => 'saved_searches',
         1 => true,
       ),
       'search_content_end' => 
@@ -8420,6 +8295,166 @@
     ),
     'advanced_search' => 
     array (
+      'header_start' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'theme_css' => 
+      array (
+        0 => 'themes',
+        1 => true,
+      ),
+      'header_css' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'header_content' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
+      'js_data' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'js_search_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'header_end' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'content_start' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'prefetch_imap_folder_ids' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'login_start' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'login' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'login_end' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'loading_icon' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'date' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'msgs' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'folder_list_start' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'folder_list_end' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'content_section_start' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'search_move_copy_controls' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'advanced_search_content_start' => 
+      array (
+        0 => 'advanced_search',
+        1 => true,
+      ),
+      'advanced_search_form_start' => 
+      array (
+        0 => 'advanced_search',
+        1 => true,
+      ),
+      'advanced_search_form_content' => 
+      array (
+        0 => 'advanced_search',
+        1 => true,
+      ),
+      'advanced_search_form_end' => 
+      array (
+        0 => 'advanced_search',
+        1 => true,
+      ),
+      'message_list_start' => 
+      array (
+        0 => 'advanced_search',
+        1 => true,
+      ),
+      'advanced_search_results_table_end' => 
+      array (
+        0 => 'advanced_search',
+        1 => true,
+      ),
+      'advanced_search_content_end' => 
+      array (
+        0 => 'advanced_search',
+        1 => true,
+      ),
+      'content_section_end' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'modals' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'save_reminder' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'page_js' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'content_end' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
     ),
     'message' => 
     array (
@@ -8438,15 +8473,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -8576,15 +8611,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -8699,6 +8734,11 @@
         0 => 'imap',
         1 => true,
       ),
+      'search_folders' => 
+      array (
+        0 => 'saved_searches',
+        1 => true,
+      ),
       'tags' => 
       array (
         0 => 'tags',
@@ -8744,6 +8784,11 @@
         0 => 'calendar',
         1 => true,
       ),
+      'history_page_link' => 
+      array (
+        0 => 'history',
+        1 => true,
+      ),
       'logout_menu_item' => 
       array (
         0 => 'core',
@@ -8779,6 +8824,11 @@
         0 => 'core',
         1 => true,
       ),
+      'highlight_link' => 
+      array (
+        0 => 'highlights',
+        1 => true,
+      ),
       'change_password_link' => 
       array (
         0 => 'account',
@@ -8799,9 +8849,9 @@
         0 => 'imap_folders',
         1 => true,
       ),
-      'sievefilters_settings_link' => 
+      'shortcuts_page_link' => 
       array (
-        0 => 'sievefilters',
+        0 => 'keyboard_shortcuts',
         1 => true,
       ),
       'settings_menu_end' => 
@@ -8832,15 +8882,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -8915,126 +8965,6 @@
       'contacts_content_start' => 
       array (
         0 => 'contacts',
-        1 => true,
-      ),
-      'ldap_contact_form_start' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_first_name' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_last_name' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_mail' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_displayname' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_locality' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_state' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_street' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_postalcode' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_title' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_phone' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_fax' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_mobile' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_room' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_car' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_org' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_org_unit' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_org_dpt' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_emp_num' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_emp_type' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_lang' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_uri' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_form_submit' => 
-      array (
-        0 => 'ldap_contacts',
-        1 => true,
-      ),
-      'ldap_contact_form_end' => 
-      array (
-        0 => 'ldap_contacts',
         1 => true,
       ),
       'contacts_form' => 
@@ -9136,15 +9066,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -9286,15 +9216,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -9419,15 +9349,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -9552,15 +9482,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -9680,15 +9610,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -9812,6 +9742,317 @@
         1 => true,
       ),
     ),
+    'history' => 
+    array (
+      'header_start' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'theme_css' => 
+      array (
+        0 => 'themes',
+        1 => true,
+      ),
+      'header_css' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'header_content' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
+      'js_data' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'js_search_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'inline_message_flag' => 
+      array (
+        0 => 'inline_message',
+        1 => true,
+      ),
+      'header_end' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'content_start' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'prefetch_imap_folder_ids' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'login_start' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'login' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'login_end' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'loading_icon' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'date' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'msgs' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'folder_list_start' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'folder_list_end' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'content_section_start' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'history_heading' => 
+      array (
+        0 => 'history',
+        1 => true,
+      ),
+      'history_content' => 
+      array (
+        0 => 'history',
+        1 => true,
+      ),
+      'history_footer' => 
+      array (
+        0 => 'history',
+        1 => true,
+      ),
+      'content_section_end' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'modals' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'save_reminder' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'page_js' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'content_end' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+    ),
+    'ajax_save_search' => 
+    array (
+      'filter_saved_search_result' => 
+      array (
+        0 => 'saved_searches',
+        1 => true,
+      ),
+    ),
+    'ajax_update_search' => 
+    array (
+      'filter_saved_search_result' => 
+      array (
+        0 => 'saved_searches',
+        1 => true,
+      ),
+    ),
+    'ajax_delete_search' => 
+    array (
+      'filter_saved_search_result' => 
+      array (
+        0 => 'saved_searches',
+        1 => true,
+      ),
+    ),
+    'ajax_update_save_search_label' => 
+    array (
+      'filter_saved_search_result' => 
+      array (
+        0 => 'saved_searches',
+        1 => true,
+      ),
+    ),
+    'ajax_adv_search' => 
+    array (
+      'filter_imap_advanced_search' => 
+      array (
+        0 => 'advanced_search',
+        1 => true,
+      ),
+    ),
+    'highlights' => 
+    array (
+      'header_start' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'theme_css' => 
+      array (
+        0 => 'themes',
+        1 => true,
+      ),
+      'header_css' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'header_content' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
+      ),
+      'js_data' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'js_search_data' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'header_end' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'content_start' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'prefetch_imap_folder_ids' => 
+      array (
+        0 => 'imap',
+        1 => true,
+      ),
+      'login_start' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'login' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'login_end' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'loading_icon' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'date' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'msgs' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'folder_list_start' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'folder_list_end' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'content_section_start' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'highlight_config_page' => 
+      array (
+        0 => 'highlights',
+        1 => true,
+      ),
+      'content_section_end' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'modals' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'save_reminder' => 
+      array (
+        0 => 'core',
+        1 => true,
+      ),
+      'page_js' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+      'content_end' => 
+      array (
+        0 => 'core',
+        1 => false,
+      ),
+    ),
     'profiles' => 
     array (
       'header_start' => 
@@ -9829,15 +10070,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -9962,15 +10203,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -10145,15 +10386,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -10266,7 +10507,7 @@
         1 => false,
       ),
     ),
-    'sieve_filters' => 
+    'shortcuts' => 
     array (
       'header_start' => 
       array (
@@ -10283,15 +10524,15 @@
         0 => 'core',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'core',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -10363,147 +10604,19 @@
         0 => 'core',
         1 => true,
       ),
-      'sievefilters_settings_start' => 
+      'start_shortcuts_page' => 
       array (
-        0 => 'sievefilters',
+        0 => 'keyboard_shortcuts',
         1 => true,
       ),
-      'sievefilters_settings_accounts' => 
+      'shortcut_edit_form' => 
       array (
-        0 => 'sievefilters',
+        0 => 'keyboard_shortcuts',
         1 => true,
       ),
-      'content_section_end' => 
+      'shortcuts_content' => 
       array (
-        0 => 'core',
-        1 => true,
-      ),
-      'modals' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'save_reminder' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'page_js' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'content_end' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-    ),
-    'block_list' => 
-    array (
-      'header_start' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'theme_css' => 
-      array (
-        0 => 'themes',
-        1 => true,
-      ),
-      'header_css' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
-      'header_content' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'js_data' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'js_search_data' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'header_end' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'content_start' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'prefetch_imap_folder_ids' => 
-      array (
-        0 => 'imap',
-        1 => true,
-      ),
-      'login_start' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'login' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'login_end' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'loading_icon' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'date' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'msgs' => 
-      array (
-        0 => 'core',
-        1 => false,
-      ),
-      'folder_list_start' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'folder_list_end' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'content_section_start' => 
-      array (
-        0 => 'core',
-        1 => true,
-      ),
-      'blocklist_settings_start' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
-      ),
-      'blocklist_settings_accounts' => 
-      array (
-        0 => 'sievefilters',
+        0 => 'keyboard_shortcuts',
         1 => true,
       ),
       'content_section_end' => 
@@ -10530,94 +10643,6 @@
       array (
         0 => 'core',
         1 => false,
-      ),
-    ),
-    'ajax_sieve_save_filter' => 
-    array (
-      'sieve_save_filter_output' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_edit_filter' => 
-    array (
-      'sieve_edit_filter_output' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_delete_filter' => 
-    array (
-      'sieve_delete_output' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_save_script' => 
-    array (
-      'sieve_save_script_output' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_edit_script' => 
-    array (
-      'sieve_edit_script_output' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_delete_script' => 
-    array (
-      'sieve_delete_output' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_block_unblock' => 
-    array (
-      'sieve_block_unblock_output' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_unblock_sender' => 
-    array (
-      'sieve_block_unblock_output' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_get_mailboxes' => 
-    array (
-      'sieve_get_mailboxes_output' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_block_domain' => 
-    array (
-      'sieve_block_domain_output' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
-      ),
-    ),
-    'ajax_sieve_block_change_behaviour' => 
-    array (
-      'sieve_block_change_behaviour_output' => 
-      array (
-        0 => 'sievefilters',
-        1 => true,
       ),
     ),
     'tags' => 
@@ -10637,15 +10662,15 @@
         0 => 'tags',
         1 => false,
       ),
-      'push_js_include' => 
-      array (
-        0 => 'desktop_notifications',
-        1 => true,
-      ),
       'header_content' => 
       array (
         0 => 'tags',
         1 => false,
+      ),
+      'keyboard_shortcut_data' => 
+      array (
+        0 => 'keyboard_shortcuts',
+        1 => true,
       ),
       'js_data' => 
       array (
@@ -11081,6 +11106,16 @@
         0 => 516,
         1 => false,
       ),
+      'saved_search_result' => 
+      array (
+        0 => 257,
+        1 => false,
+      ),
+      'new_saved_search_label' => 
+      array (
+        0 => 516,
+        1 => false,
+      ),
       'imap_folders_success' => 
       array (
         0 => 257,
@@ -11095,51 +11130,6 @@
       array (
         0 => 516,
         1 => false,
-      ),
-      'script_removed' => 
-      array (
-        0 => 516,
-        1 => false,
-      ),
-      'script' => 
-      array (
-        0 => 516,
-        1 => false,
-      ),
-      'conditions' => 
-      array (
-        0 => 516,
-        1 => false,
-      ),
-      'actions' => 
-      array (
-        0 => 516,
-        1 => false,
-      ),
-      'test_type' => 
-      array (
-        0 => 516,
-        1 => false,
-      ),
-      'mailboxes' => 
-      array (
-        0 => 516,
-        1 => false,
-      ),
-      'sieve_detail_display' => 
-      array (
-        0 => 516,
-        1 => false,
-      ),
-      'imap_extensions_display' => 
-      array (
-        0 => 516,
-        1 => false,
-      ),
-      'script_details' => 
-      array (
-        0 => 516,
-        1 => 16777216,
       ),
     ),
     'allowed_get' => 
@@ -11196,7 +11186,9 @@
       'state' => 516,
       'error' => 516,
       'security_token' => 516,
+      'search_name' => 516,
       'profile_id' => 516,
+      'edit_id' => 257,
       'tag_id' => 516,
     ),
     'allowed_cookie' => 
@@ -11293,40 +11285,6 @@
       'contact_auto_collect' => 258,
       'enable_warn_contacts_cc_not_exist_in_list_contact' => 257,
       'email_address' => 522,
-      'ldap_first_name' => 516,
-      'ldap_last_name' => 516,
-      'ldap_displayname' => 516,
-      'ldap_mail' => 516,
-      'ldap_locality' => 516,
-      'ldap_state' => 516,
-      'ldap_street' => 516,
-      'ldap_postalcode' => 516,
-      'ldap_title' => 516,
-      'ldap_phone' => 516,
-      'ldap_fax' => 516,
-      'ldap_mobile' => 516,
-      'ldap_room' => 516,
-      'ldap_car' => 516,
-      'ldap_org' => 516,
-      'ldap_org_unit' => 516,
-      'ldap_org_dpt' => 516,
-      'ldap_emp_num' => 516,
-      'ldap_emp_type' => 516,
-      'ldap_lang' => 516,
-      'ldap_uri' => 516,
-      'add_ldap_contact' => 516,
-      'update_ldap_contact' => 516,
-      'ldap_source' => 516,
-      'ldap_usernames' => 
-      array (
-        'filter' => 516,
-        'flags' => 67108864,
-      ),
-      'ldap_passwords' => 
-      array (
-        'filter' => 516,
-        'flags' => 67108864,
-      ),
       'feed_id' => 516,
       'delete_feed' => 257,
       'feed_connect' => 257,
@@ -11468,6 +11426,59 @@
       'nux_all_inkl_login' => 516,
       'accounts_source' => 516,
       'accounts_sample' => 516,
+      'search_name' => 516,
+      'search_terms' => 516,
+      'search_fld' => 516,
+      'search_since' => 516,
+      'search_terms_label' => 516,
+      'old_search_terms_label' => 516,
+      'adv_source' => 516,
+      'adv_start' => 516,
+      'adv_source_limit' => 257,
+      'adv_end' => 516,
+      'adv_charset' => 516,
+      'adv_flags' => 
+      array (
+        'filter' => 516,
+        'flags' => 16777216,
+      ),
+      'adv_terms' => 
+      array (
+        'filter' => 516,
+        'flags' => 16777216,
+      ),
+      'adv_targets' => 
+      array (
+        'filter' => 516,
+        'flags' => 16777216,
+      ),
+      'rule_del_id' => 257,
+      'hl_target' => 516,
+      'hl_color' => 516,
+      'hl_source_type' => 516,
+      'hl_important' => 258,
+      'hl_feeds_unseen' => 258,
+      'hl_github_unseen' => 258,
+      'hl_imap_flags' => 
+      array (
+        'filter' => 516,
+        'flags' => 16777216,
+      ),
+      'hl_imap_sources' => 
+      array (
+        'filter' => 516,
+        'flags' => 16777216,
+      ),
+      'hl_github_sources' => 
+      array (
+        'filter' => 516,
+        'flags' => 16777216,
+      ),
+      'hl_feeds_sources' => 
+      array (
+        'filter' => 516,
+        'flags' => 16777216,
+      ),
       'profile_name' => 516,
       'profile_id' => 516,
       'profile_replyto' => 516,
@@ -11478,32 +11489,22 @@
       'profile_sig' => 516,
       'profile_rmk' => 516,
       'profile_delete' => 516,
+      'inline_message' => 257,
+      'inline_message_style' => 516,
       'parent' => 516,
       'new_folder' => 516,
       'special_folder_type' => 516,
       'imap_service_name' => 516,
       'subscription_state' => 258,
       'only_subscribed_folders' => 258,
-      'script_state' => 516,
-      'imap_account' => 516,
-      'sieve_script_name' => 516,
-      'sieve_script_priority' => 257,
-      'sieve_filter_name' => 516,
-      'sieve_filter_priority' => 257,
-      'script' => 516,
-      'current_editing_script' => 516,
-      'current_editing_filter_name' => 516,
-      'conditions_json' => 516,
-      'actions_json' => 516,
-      'filter_test_type' => 516,
-      'sender' => 516,
-      'selected_behaviour' => 516,
-      'enable_sieve_filter' => 257,
-      'scope' => 516,
-      'block_action' => 516,
-      'reject_message' => 516,
-      'change_behavior' => 258,
-      'gen_script' => 258,
+      'enable_keyboard_shortcuts' => 257,
+      'shortcut_meta' => 
+      array (
+        'filter' => 516,
+        'flags' => 67108864,
+      ),
+      'shortcut_key' => 257,
+      'shortcut_id' => 257,
       'tag_name' => 516,
       'parent_tag' => 516,
       'tag_delete' => 516,
@@ -11603,33 +11604,28 @@
       65 => 'ajax_nux_service_select',
       66 => 'ajax_get_nux_service_details',
       67 => 'ajax_nux_add_service',
-      68 => 'profiles',
-      69 => 'folders',
-      70 => 'folders_subscription',
-      71 => 'ajax_imap_folders_delete',
-      72 => 'ajax_imap_folders_create',
-      73 => 'ajax_imap_folders_rename',
-      74 => 'ajax_imap_special_folder',
-      75 => 'ajax_imap_clear_special_folder',
-      76 => 'ajax_imap_accept_special_folders',
-      77 => 'ajax_imap_folder_subscription',
-      78 => 'block_list',
-      79 => 'sieve_filters',
-      80 => 'ajax_sieve_save_script',
-      81 => 'ajax_sieve_edit_script',
-      82 => 'ajax_sieve_delete_script',
-      83 => 'ajax_sieve_save_filter',
-      84 => 'ajax_sieve_edit_filter',
-      85 => 'ajax_sieve_delete_filter',
-      86 => 'ajax_sieve_block_unblock',
-      87 => 'ajax_sieve_unblock_sender',
-      88 => 'ajax_sieve_get_mailboxes',
-      89 => 'ajax_sieve_block_domain',
-      90 => 'ajax_sieve_block_change_behaviour',
-      91 => 'ajax_sieve_toggle_script_state',
-      92 => 'ajax_process_tag_update',
-      93 => 'ajax_imap_tag_data',
-      94 => 'tags',
+      68 => 'history',
+      69 => 'ajax_save_search',
+      70 => 'ajax_update_search',
+      71 => 'ajax_delete_search',
+      72 => 'ajax_update_save_search_label',
+      73 => 'advanced_search',
+      74 => 'ajax_adv_search',
+      75 => 'highlights',
+      76 => 'profiles',
+      77 => 'folders',
+      78 => 'folders_subscription',
+      79 => 'ajax_imap_folders_delete',
+      80 => 'ajax_imap_folders_create',
+      81 => 'ajax_imap_folders_rename',
+      82 => 'ajax_imap_special_folder',
+      83 => 'ajax_imap_clear_special_folder',
+      84 => 'ajax_imap_accept_special_folders',
+      85 => 'ajax_imap_folder_subscription',
+      86 => 'shortcuts',
+      87 => 'ajax_process_tag_update',
+      88 => 'ajax_imap_tag_data',
+      89 => 'tags',
     ),
   ),
 );

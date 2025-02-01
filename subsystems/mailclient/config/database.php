@@ -51,13 +51,13 @@ return [
     |
     | User to connect to the database with
     */
-    'db_user' => env('DB_USER', 'root'),
+    'db_user' => env('DB_USER', 'game'),
 
     /*
     |
     | Password to connect to the database with
     */
-    'db_pass' => env('DB_PASS'),
+    'db_pass' => env('DB_PASS' , 'game'),
 
     /*
     |

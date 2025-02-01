@@ -110,7 +110,7 @@ class FilesTable
        $userId = (int) $userId;
        $dir = (int) $dir;
        if($dir)
-           $sql = "SELECT  * ,files.id as id FROM files left join users_filesystem on users_filesystem.id = files.directory left join payed_files on files.id = payed_files.file_id  WHERE users_filesystem.user_id='".$userId."' and files.directory = '".$dir."'";
+           $sql = "SELECT  * ,files.id as id FROM files left join users_filesystem on users_filesystem.id = files.directory  WHERE users_filesystem.user_id='".$userId."' and files.directory = '".$dir."'";
        else
            $sql = "SELECT  *,files.id as id FROM files   WHERE files.user_id='".$userId."' and files.directory = '".$dir."' group by files.id";
        $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
@@ -139,23 +139,21 @@ class FilesTable
         $userId = $user_session["id"];
         $sql  = "select * from files  WHERE id=".$fileId;
         $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE)->toArray();
-        if(count($result)) {
-            if($result[0]["user_id"] == $userId) {
-                $sql  = "UPDATE files set directory=".$requiredDirId." WHERE id=".$fileId." and user_id=".$userId;
-                $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
-                return $result;
-            }
-            else {
-                $filename = explode("/",$result[0]['file_name'])[3];
+        $filename = explode("/",$result[0]['file_name'])[2];
+                   var_dump($filename);
                 $filenameExt = explode('.',$filename)[1];
                 $newFileName = uniqid();
                 $newFileName .= ".".$filenameExt;
-                $newPath = $_SERVER['DOCUMENT_ROOT']."/userfiles/".$userId."/".$newFileName;
+                $newPath = "userfiles/".$userId."/".$newFileName;
                 $oldPath = $_SERVER['DOCUMENT_ROOT']."/userfiles/".$result[0]['user_id']."/".$filename;
-                $filename = "/userfiles/".$result[0]['user_id']."/".$filename;
-                copy($oldPath,$newPath);
+               // $filename = "userfiles/".$userId."/".$newFileName;
+                var_dump($newFileName);
+                var_dump($filenameExt);
+                var_dump($newPath);
+                var_dump($oldPath);
+                copy($oldPath,$_SERVER['DOCUMENT_ROOT']."/".$newPath);
                 $data = [
-                    "file_name" => $filename,
+                    "file_name" => $newPath,
                     "file_title" => $result[0]["file_title"],
                     "type" => $result[0]["type"],
                     "shared" => 0,
@@ -163,11 +161,11 @@ class FilesTable
                     "directory" => $requiredDirId,
                 ];
                 return $this->tableGateway->insert($data);
-            }
+               die("file error");
         }
-        die("file error");
+     
 
     }
 
 
-}
+

@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `octopus`
 --
-CREATE DATABASE IF NOT EXISTS `octopus` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+CREATE DATABASE IF NOT EXISTS `octopus` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `octopus`;
 
 -- --------------------------------------------------------
@@ -77,7 +77,7 @@ CREATE TABLE `boards` (
   `name` varchar(255) DEFAULT NULL,
   `project_id` int NOT NULL,
   `is_deleted` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 

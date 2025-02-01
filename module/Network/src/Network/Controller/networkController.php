@@ -207,9 +207,10 @@ class  networkController extends Controller\preloaderController
         $frinendId = $this->getEvent()->getRouteMatch()->getParam('param');
         $friends = new Friends();
         $isUsersFriends = $this->getFriendsTable()->isUsersFriends($userId,$frinendId,$friends->getAdapter());
-        if(!empty($isUsersFriends->toArray())) {
+      //  if(!empty($isUsersFriends->toArray())) {
             $files = new Files();
             $file = $this->getFilesTable()->getFile($files->getAdapter(),$fileId,$frinendId)[0];
+            var_dump($file);die();
             $path  = $_SERVER['DOCUMENT_ROOT']."/".$file['file_name'];
             if (file_exists($path)) {
                 header('Content-Description: File Transfer');
@@ -222,7 +223,7 @@ class  networkController extends Controller\preloaderController
                 readfile($path);
                 exit;
             }
-        }
+      //  }
         die();
     }
 

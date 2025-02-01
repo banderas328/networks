@@ -46,43 +46,6 @@ E.wrap=function(a){return this.each(function(b,c){var d=F(a)[0];F(c).wrapAll(b?d
 E.nextAll=function(a){return this.next(a,!0)};E.nextUntil=function(a,b){return this.next(b,!0,a)};E.not=function(a){var b=L(a);return this.filter(function(c,d){return(!C(a)||x(d))&&!b.call(d,c,d)})};E.parent=function(a){return M(F(P(O(this,"parentNode"))),a)};E.index=function(a){var b=a?F(a)[0]:this[0];a=a?this:F(b).parent().children();return ha.call(a,b)};E.closest=function(a){var b=this.filter(a);if(b.length)return b;var c=this.parent();return c.length?c.closest(a):b};
 E.parents=function(a,b){return M(F(P(O(this,"parentElement",!0,b))),a)};E.parentsUntil=function(a,b){return this.parents(b,a)};E.prev=function(a,b,c){return M(F(P(O(this,"previousElementSibling",b,c))),a)};E.prevAll=function(a){return this.prev(a,!0)};E.prevUntil=function(a,b){return this.prev(b,!0,a)};E.siblings=function(a){return M(F(P(O(this,function(a){return F(a).parent().children().not(a)}))),a)};"undefined"!==typeof exports?module.exports=F:m.cash=m.$=F;
 })();
-/**
- * Push v1.0
- * =========
- * A compact, cross-browser solution for the JavaScript Notifications API
- *
- * Credits
- * -------
- * Tsvetan Tsvetkov (ttsvetko)
- * Alex Gibson (alexgibson)
- *
- * License
- * -------
- *
- * The MIT License (MIT)
- *
- * Copyright (c) 2015-2017 Tyler Nickerson
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-!function(i,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):i.Push=t()}(this,function(){"use strict";function i(t){return(i="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(i){return typeof i}:function(i){return i&&"function"==typeof Symbol&&i.constructor===Symbol&&i!==Symbol.prototype?"symbol":typeof i})(t)}function t(i,t){if(!(i instanceof t))throw new TypeError("Cannot call a class as a function")}function n(i,t){for(var n=0;n<t.length;n++){var e=t[n];e.enumerable=e.enumerable||!1,e.configurable=!0,"value"in e&&(e.writable=!0),Object.defineProperty(i,e.key,e)}}function e(i,t,e){return t&&n(i.prototype,t),e&&n(i,e),i}function o(i,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function");i.prototype=Object.create(t&&t.prototype,{constructor:{value:i,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(i,t):i.__proto__=t)}function r(i,t){if(t&&("object"==typeof t||"function"==typeof t))return t;if(void 0===i)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return i}var s="PushError:",c={errors:{incompatible:"".concat(s," Push.js is incompatible with browser."),invalid_plugin:"".concat(s," plugin class missing from plugin manifest (invalid plugin). Please check the documentation."),invalid_title:"".concat(s," title of notification must be a string"),permission_denied:"".concat(s," permission request declined"),sw_notification_error:"".concat(s," could not show a ServiceWorker notification due to the following reason: "),sw_registration_error:"".concat(s," could not register the ServiceWorker due to the following reason: "),unknown_interface:"".concat(s," unable to create notification: unknown interface")}},a=function(){function i(n){t(this,i),this._win=n,this.GRANTED="granted",this.DEFAULT="default",this.DENIED="denied",this._permissions=[this.GRANTED,this.DEFAULT,this.DENIED]}return e(i,[{key:"request",value:function(i,t){return arguments.length>0?this._requestWithCallback.apply(this,arguments):this._requestAsPromise()}},{key:"_requestWithCallback",value:function(i,t){var n=this,e=this.get(),o=function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:n._win.Notification.permission;void 0===e&&n._win.webkitNotifications&&(e=n._win.webkitNotifications.checkPermission()),e===n.GRANTED||0===e?i&&i():t&&t()};e!==this.DEFAULT?o(e):this._win.webkitNotifications&&this._win.webkitNotifications.checkPermission?this._win.webkitNotifications.requestPermission(o):this._win.Notification&&this._win.Notification.requestPermission?this._win.Notification.requestPermission().then(o).catch(function(){t&&t()}):i&&i()}},{key:"_requestAsPromise",value:function(){var i=this,t=this.get(),n=t!==this.DEFAULT,e=this._win.Notification&&this._win.Notification.requestPermission,o=this._win.webkitNotifications&&this._win.webkitNotifications.checkPermission;return new Promise(function(r,s){var c=function(t){return function(t){return t===i.GRANTED||0===t}(t)?r():s()};n?c(t):o?i._win.webkitNotifications.requestPermission(function(i){c(i)}):e?i._win.Notification.requestPermission().then(function(i){c(i)}).catch(s):r()})}},{key:"has",value:function(){return this.get()===this.GRANTED}},{key:"get",value:function(){return this._win.Notification&&this._win.Notification.permission?this._win.Notification.permission:this._win.webkitNotifications&&this._win.webkitNotifications.checkPermission?this._permissions[this._win.webkitNotifications.checkPermission()]:navigator.mozNotification?this.GRANTED:this._win.external&&this._win.external.msIsSiteMode?this._win.external.msIsSiteMode()?this.GRANTED:this.DEFAULT:this.GRANTED}}]),i}(),u=function(){function n(){t(this,n)}return e(n,null,[{key:"isUndefined",value:function(i){return void 0===i}},{key:"isNull",value:function(i){return null===obj}},{key:"isString",value:function(i){return"string"==typeof i}},{key:"isFunction",value:function(i){return i&&"[object Function]"==={}.toString.call(i)}},{key:"isObject",value:function(t){return"object"===i(t)}},{key:"objectMerge",value:function(i,t){for(var n in t)i.hasOwnProperty(n)&&this.isObject(i[n])&&this.isObject(t[n])?this.objectMerge(i[n],t[n]):i[n]=t[n]}}]),n}(),f=function i(n){t(this,i),this._win=n},l=function(i){function n(){return t(this,n),r(this,(n.__proto__||Object.getPrototypeOf(n)).apply(this,arguments))}return o(n,f),e(n,[{key:"isSupported",value:function(){return void 0!==this._win.Notification}},{key:"create",value:function(i,t){return new this._win.Notification(i,{icon:u.isString(t.icon)||u.isUndefined(t.icon)||u.isNull(t.icon)?t.icon:t.icon.x32,body:t.body,tag:t.tag,requireInteraction:t.requireInteraction})}},{key:"close",value:function(i){i.close()}}]),n}(),h=function(i){function n(){return t(this,n),r(this,(n.__proto__||Object.getPrototypeOf(n)).apply(this,arguments))}return o(n,f),e(n,[{key:"isSupported",value:function(){return void 0!==this._win.navigator&&void 0!==this._win.navigator.serviceWorker}},{key:"getFunctionBody",value:function(i){var t=i.toString().match(/function[^{]+{([\s\S]*)}$/);return void 0!==t&&null!==t&&t.length>1?t[1]:null}},{key:"create",value:function(i,t,n,e,o){var r=this;this._win.navigator.serviceWorker.register(e),this._win.navigator.serviceWorker.ready.then(function(e){var s={id:i,link:n.link,origin:document.location.href,onClick:u.isFunction(n.onClick)?r.getFunctionBody(n.onClick):"",onClose:u.isFunction(n.onClose)?r.getFunctionBody(n.onClose):""};void 0!==n.data&&null!==n.data&&(s=Object.assign(s,n.data)),e.showNotification(t,{icon:n.icon,body:n.body,vibrate:n.vibrate,tag:n.tag,data:s,requireInteraction:n.requireInteraction,silent:n.silent}).then(function(){e.getNotifications().then(function(i){e.active.postMessage(""),o(i)})}).catch(function(i){throw new Error(c.errors.sw_notification_error+i.message)})}).catch(function(i){throw new Error(c.errors.sw_registration_error+i.message)})}},{key:"close",value:function(){}}]),n}(),_=function(i){function n(){return t(this,n),r(this,(n.__proto__||Object.getPrototypeOf(n)).apply(this,arguments))}return o(n,f),e(n,[{key:"isSupported",value:function(){return void 0!==this._win.navigator.mozNotification}},{key:"create",value:function(i,t){var n=this._win.navigator.mozNotification.createNotification(i,t.body,t.icon);return n.show(),n}}]),n}(),v=function(i){function n(){return t(this,n),r(this,(n.__proto__||Object.getPrototypeOf(n)).apply(this,arguments))}return o(n,f),e(n,[{key:"isSupported",value:function(){return void 0!==this._win.external&&void 0!==this._win.external.msIsSiteMode}},{key:"create",value:function(i,t){return this._win.external.msSiteModeClearIconOverlay(),this._win.external.msSiteModeSetIconOverlay(u.isString(t.icon)||u.isUndefined(t.icon)?t.icon:t.icon.x16,i),this._win.external.msSiteModeActivate(),null}},{key:"close",value:function(){this._win.external.msSiteModeClearIconOverlay()}}]),n}(),d=function(i){function n(){return t(this,n),r(this,(n.__proto__||Object.getPrototypeOf(n)).apply(this,arguments))}return o(n,f),e(n,[{key:"isSupported",value:function(){return void 0!==this._win.webkitNotifications}},{key:"create",value:function(i,t){var n=this._win.webkitNotifications.createNotification(t.icon,i,t.body);return n.show(),n}},{key:"close",value:function(i){i.cancel()}}]),n}();return new(function(){function i(n){t(this,i),this._currentId=0,this._notifications={},this._win=n,this.Permission=new a(n),this._agents={desktop:new l(n),chrome:new h(n),firefox:new _(n),ms:new v(n),webkit:new d(n)},this._configuration={serviceWorker:"/serviceWorker.min.js",fallback:function(i){}}}return e(i,[{key:"_closeNotification",value:function(i){var t=!0,n=this._notifications[i];if(void 0!==n){if(t=this._removeNotification(i),this._agents.desktop.isSupported())this._agents.desktop.close(n);else if(this._agents.webkit.isSupported())this._agents.webkit.close(n);else{if(!this._agents.ms.isSupported())throw t=!1,new Error(c.errors.unknown_interface);this._agents.ms.close()}return t}return!1}},{key:"_addNotification",value:function(i){var t=this._currentId;return this._notifications[t]=i,this._currentId++,t}},{key:"_removeNotification",value:function(i){var t=!1;return this._notifications.hasOwnProperty(i)&&(delete this._notifications[i],t=!0),t}},{key:"_prepareNotification",value:function(i,t){var n,e=this;return n={get:function(){return e._notifications[i]},close:function(){e._closeNotification(i)}},t.timeout&&setTimeout(function(){n.close()},t.timeout),n}},{key:"_serviceWorkerCallback",value:function(i,t,n){var e=this,o=this._addNotification(i[i.length-1]);navigator&&navigator.serviceWorker&&(navigator.serviceWorker.addEventListener("message",function(i){var t=JSON.parse(i.data);"close"===t.action&&Number.isInteger(t.id)&&e._removeNotification(t.id)}),n(this._prepareNotification(o,t))),n(null)}},{key:"_createCallback",value:function(i,t,n){var e,o=this,r=null;if(t=t||{},e=function(i){o._removeNotification(i),u.isFunction(t.onClose)&&t.onClose.call(o,r)},this._agents.desktop.isSupported())try{r=this._agents.desktop.create(i,t)}catch(e){var s=this._currentId,c=this.config().serviceWorker,a=function(i){return o._serviceWorkerCallback(i,t,n)};this._agents.chrome.isSupported()&&this._agents.chrome.create(s,i,t,c,a)}else this._agents.webkit.isSupported()?r=this._agents.webkit.create(i,t):this._agents.firefox.isSupported()?this._agents.firefox.create(i,t):this._agents.ms.isSupported()?r=this._agents.ms.create(i,t):(t.title=i,this.config().fallback(t));if(null!==r){var f=this._addNotification(r),l=this._prepareNotification(f,t);u.isFunction(t.onShow)&&r.addEventListener("show",t.onShow),u.isFunction(t.onError)&&r.addEventListener("error",t.onError),u.isFunction(t.onClick)&&r.addEventListener("click",t.onClick),r.addEventListener("close",function(){e(f)}),r.addEventListener("cancel",function(){e(f)}),n(l)}n(null)}},{key:"create",value:function(i,t){var n,e=this;if(!u.isString(i))throw new Error(c.errors.invalid_title);return n=this.Permission.has()?function(n,o){try{e._createCallback(i,t,n)}catch(i){o(i)}}:function(n,o){e.Permission.request().then(function(){e._createCallback(i,t,n)}).catch(function(){o(c.errors.permission_denied)})},new Promise(n)}},{key:"count",value:function(){var i,t=0;for(i in this._notifications)this._notifications.hasOwnProperty(i)&&t++;return t}},{key:"close",value:function(i){var t;for(t in this._notifications)if(this._notifications.hasOwnProperty(t)&&this._notifications[t].tag===i)return this._closeNotification(t)}},{key:"clear",value:function(){var i,t=!0;for(i in this._notifications)this._notifications.hasOwnProperty(i)&&(t=t&&this._closeNotification(i));return t}},{key:"supported",value:function(){var i=!1;for(var t in this._agents)this._agents.hasOwnProperty(t)&&(i=i||this._agents[t].isSupported());return i}},{key:"config",value:function(i){return(void 0!==i||null!==i&&u.isObject(i))&&u.objectMerge(this._configuration,i),this._configuration}},{key:"extend",value:function(i){var t,n={}.hasOwnProperty;if(!n.call(i,"plugin"))throw new Error(c.errors.invalid_plugin);n.call(i,"config")&&u.isObject(i.config)&&null!==i.config&&this.config(i.config),t=new(0,i.plugin)(this.config());for(var e in t)n.call(t,e)&&u.isFunction(t[e])&&(this[e]=t[e])}}]),i}())("undefined"!=typeof window?window:global)});
-//# sourceMappingURL=push.min.js.map
 !function(){"use strict";var e=function(t){if(!(this instanceof e))return new e(t);if(this.version=1,this.support=!("undefined"==typeof File||"undefined"==typeof Blob||"undefined"==typeof FileList||!Blob.prototype.webkitSlice&&!Blob.prototype.mozSlice&&!Blob.prototype.slice),!this.support)return!1;var r=this;r.files=[],r.defaults={chunkSize:1048576,forceChunkSize:!1,simultaneousUploads:3,fileParameterName:"file",chunkNumberParameterName:"resumableChunkNumber",chunkSizeParameterName:"resumableChunkSize",currentChunkSizeParameterName:"resumableCurrentChunkSize",totalSizeParameterName:"resumableTotalSize",typeParameterName:"resumableType",identifierParameterName:"resumableIdentifier",fileNameParameterName:"resumableFilename",relativePathParameterName:"resumableRelativePath",totalChunksParameterName:"resumableTotalChunks",dragOverClass:"dragover",throttleProgressCallbacks:.5,query:{},headers:{},preprocess:null,preprocessFile:null,method:"multipart",uploadMethod:"POST",testMethod:"GET",prioritizeFirstAndLastChunk:!1,target:"/",testTarget:null,parameterNamespace:"",testChunks:!0,generateUniqueIdentifier:null,getTarget:null,maxChunkRetries:100,chunkRetryInterval:void 0,permanentErrors:[400,401,403,404,409,415,500,501],maxFiles:void 0,withCredentials:!1,xhrTimeout:0,clearInput:!0,chunkFormat:"blob",setChunkTypeFromFile:!1,maxFilesErrorCallback:function(e,t){var n=r.getOpt("maxFiles");alert("Please upload no more than "+n+" file"+(1===n?"":"s")+" at a time.")},minFileSize:1,minFileSizeErrorCallback:function(e,t){alert(e.fileName||e.name+" is too small, please upload files larger than "+n.formatSize(r.getOpt("minFileSize"))+".")},maxFileSize:void 0,maxFileSizeErrorCallback:function(e,t){alert(e.fileName||e.name+" is too large, please upload files less than "+n.formatSize(r.getOpt("maxFileSize"))+".")},fileType:[],fileTypeErrorCallback:function(e,t){alert(e.fileName||e.name+" has type not allowed, please upload files of type "+r.getOpt("fileType")+".")}},r.opts=t||{},r.getOpt=function(t){var r=this;if(t instanceof Array){var i={};return n.each(t,function(e){i[e]=r.getOpt(e)}),i}if(r instanceof p){if(void 0!==r.opts[t])return r.opts[t];r=r.fileObj}if(r instanceof c){if(void 0!==r.opts[t])return r.opts[t];r=r.resumableObj}if(r instanceof e)return void 0!==r.opts[t]?r.opts[t]:r.defaults[t]},r.indexOf=function(e,t){if(e.indexOf)return e.indexOf(t);for(var r=0;r<e.length;r++)if(e[r]===t)return r;return-1},r.events=[],r.on=function(e,t){r.events.push(e.toLowerCase(),t)},r.fire=function(){for(var e=[],t=0;t<arguments.length;t++)e.push(arguments[t]);var n=e[0].toLowerCase();for(t=0;t<=r.events.length;t+=2)r.events[t]==n&&r.events[t+1].apply(r,e.slice(1)),"catchall"==r.events[t]&&r.events[t+1].apply(null,e);"fileerror"==n&&r.fire("error",e[2],e[1]),"fileprogress"==n&&r.fire("progress")};var n={stopEvent:function(e){e.stopPropagation(),e.preventDefault()},each:function(e,t){if(void 0!==e.length){for(var r=0;r<e.length;r++)if(!1===t(e[r]))return}else for(r in e)if(!1===t(r,e[r]))return},generateUniqueIdentifier:function(e,t){var n=r.getOpt("generateUniqueIdentifier");if("function"==typeof n)return n(e,t);var i=e.webkitRelativePath||e.relativePath||e.fileName||e.name;return e.size+"-"+i.replace(/[^0-9a-zA-Z_-]/gim,"")},contains:function(e,t){var r=!1;return n.each(e,function(e){return e!=t||(r=!0,!1)}),r},formatSize:function(e){return e<1024?e+" bytes":e<1048576?(e/1024).toFixed(0)+" KB":e<1073741824?(e/1024/1024).toFixed(1)+" MB":(e/1024/1024/1024).toFixed(1)+" GB"},getTarget:function(e,t){var n=r.getOpt("target");if("test"===e&&r.getOpt("testTarget")&&(n="/"===r.getOpt("testTarget")?r.getOpt("target"):r.getOpt("testTarget")),"function"==typeof n)return n(t);var i=n.indexOf("?")<0?"?":"&",a=t.join("&");return a&&(n=n+i+a),n}},i=function(e){e.currentTarget.classList.remove(r.getOpt("dragOverClass")),n.stopEvent(e),e.dataTransfer&&e.dataTransfer.items?u(e.dataTransfer.items,e):e.dataTransfer&&e.dataTransfer.files&&u(e.dataTransfer.files,e)},a=function(e){e.currentTarget.classList.remove(r.getOpt("dragOverClass"))},s=function(e){e.preventDefault();var t=e.dataTransfer;r.indexOf(t.types,"Files")>=0?(e.stopPropagation(),t.dropEffect="copy",t.effectAllowed="copy",e.currentTarget.classList.add(r.getOpt("dragOverClass"))):(t.dropEffect="none",t.effectAllowed="none")};function o(e,t,r,n){var i;return e.isFile?e.file(function(e){e.relativePath=t+e.name,r.push(e),n()}):(e.isDirectory?i=e:e instanceof File&&r.push(e),"function"==typeof e.webkitGetAsEntry&&(i=e.webkitGetAsEntry()),i&&i.isDirectory?function(e,t,r,n){var i=e.createReader(),a=[];!function e(){i.readEntries(function(i){if(i.length)return a=a.concat(i),e();l(a.map(function(e){return o.bind(null,e,t,r)}),n)})}()}(i,t+i.name+"/",r,n):("function"==typeof e.getAsFile&&(e=e.getAsFile())instanceof File&&(e.relativePath=t+e.name,r.push(e)),void n()))}function l(e,t){if(!e||0===e.length)return t();e[0](function(){l(e.slice(1),t)})}function u(e,t){if(e.length){r.fire("beforeAdd");var n=[];l(Array.prototype.map.call(e,function(e){var t=e;return"function"==typeof e.webkitGetAsEntry&&(t=e.webkitGetAsEntry()),o.bind(null,t,"",n)}),function(){n.length&&f(n,t)})}}var f=function(e,t){var i=0,a=r.getOpt(["maxFiles","minFileSize","maxFileSize","maxFilesErrorCallback","minFileSizeErrorCallback","maxFileSizeErrorCallback","fileType","fileTypeErrorCallback"]);if(void 0!==a.maxFiles&&a.maxFiles<e.length+r.files.length){if(1!==a.maxFiles||1!==r.files.length||1!==e.length)return a.maxFilesErrorCallback(e,i++),!1;r.removeFile(r.files[0])}var s=[],o=[],l=e.length,u=function(){if(!--l){if(!s.length&&!o.length)return;window.setTimeout(function(){r.fire("filesAdded",s,o)},0)}};n.each(e,function(e){var l=e.name,f=e.type;if(a.fileType.length>0){var p=!1;for(var d in a.fileType){a.fileType[d]=a.fileType[d].replace(/\s/g,"").toLowerCase();var m=(a.fileType[d].match(/^[^.][^/]+$/)?".":"")+a.fileType[d];if(l.substr(-1*m.length).toLowerCase()===m||-1!==m.indexOf("/")&&(-1!==m.indexOf("*")&&f.substr(0,m.indexOf("*"))===m.substr(0,m.indexOf("*"))||f===m)){p=!0;break}}if(!p)return a.fileTypeErrorCallback(e,i++),!0}if(void 0!==a.minFileSize&&e.size<a.minFileSize)return a.minFileSizeErrorCallback(e,i++),!0;if(void 0!==a.maxFileSize&&e.size>a.maxFileSize)return a.maxFileSizeErrorCallback(e,i++),!0;function h(n){r.getFromUniqueIdentifier(n)?o.push(e):function(){e.uniqueIdentifier=n;var i=new c(r,e,n);r.files.push(i),s.push(i),i.container=void 0!==t?t.srcElement:null,window.setTimeout(function(){r.fire("fileAdded",i,t)},0)}(),u()}var g=n.generateUniqueIdentifier(e,t);g&&"function"==typeof g.then?g.then(function(e){h(e)},function(){u()}):h(g)})};function c(e,t,r){var i=this;i.opts={},i.getOpt=e.getOpt,i._prevProgress=0,i.resumableObj=e,i.file=t,i.fileName=t.fileName||t.name,i.size=t.size,i.relativePath=t.relativePath||t.webkitRelativePath||i.fileName,i.uniqueIdentifier=r,i._pause=!1,i.container="",i.preprocessState=0;var a=void 0!==r,s=function(e,t){switch(e){case"progress":i.resumableObj.fire("fileProgress",i,t);break;case"error":i.abort(),a=!0,i.chunks=[],i.resumableObj.fire("fileError",i,t);break;case"success":if(a)return;i.resumableObj.fire("fileProgress",i,t),i.isComplete()&&i.resumableObj.fire("fileSuccess",i,t);break;case"retry":i.resumableObj.fire("fileRetry",i)}};return i.chunks=[],i.abort=function(){var e=0;n.each(i.chunks,function(t){"uploading"==t.status()&&(t.abort(),e++)}),e>0&&i.resumableObj.fire("fileProgress",i)},i.cancel=function(){var e=i.chunks;i.chunks=[],n.each(e,function(e){"uploading"==e.status()&&(e.abort(),i.resumableObj.uploadNextChunk())}),i.resumableObj.removeFile(i),i.resumableObj.fire("fileProgress",i)},i.retry=function(){i.bootstrap();var e=!1;i.resumableObj.on("chunkingComplete",function(){e||i.resumableObj.upload(),e=!0})},i.bootstrap=function(){i.abort(),a=!1,i.chunks=[],i._prevProgress=0;for(var e=i.getOpt("forceChunkSize")?Math.ceil:Math.floor,t=Math.max(e(i.file.size/i.getOpt("chunkSize")),1),r=0;r<t;r++)!function(e){i.chunks.push(new p(i.resumableObj,i,e,s)),i.resumableObj.fire("chunkingProgress",i,e/t)}(r);window.setTimeout(function(){i.resumableObj.fire("chunkingComplete",i)},0)},i.progress=function(){if(a)return 1;var e=0,t=!1;return n.each(i.chunks,function(r){"error"==r.status()&&(t=!0),e+=r.progress(!0)}),e=t?1:e>.99999?1:e,e=Math.max(i._prevProgress,e),i._prevProgress=e,e},i.isUploading=function(){var e=!1;return n.each(i.chunks,function(t){if("uploading"==t.status())return e=!0,!1}),e},i.isComplete=function(){var e=!1;return 1!==i.preprocessState&&(n.each(i.chunks,function(t){var r=t.status();if("pending"==r||"uploading"==r||1===t.preprocessState)return e=!0,!1}),!e)},i.pause=function(e){i._pause=void 0===e?!i._pause:e},i.isPaused=function(){return i._pause},i.preprocessFinished=function(){i.preprocessState=2,i.upload()},i.upload=function(){var e=!1;if(!1===i.isPaused()){var t=i.getOpt("preprocessFile");if("function"==typeof t)switch(i.preprocessState){case 0:return i.preprocessState=1,t(i),!0;case 1:return!0}n.each(i.chunks,function(t){if("pending"==t.status()&&1!==t.preprocessState)return t.send(),e=!0,!1})}return e},i.markChunksCompleted=function(e){if(i.chunks&&!(i.chunks.length<=e))for(var t=0;t<e;t++)i.chunks[t].markComplete=!0},i.resumableObj.fire("chunkingStart",i),i.bootstrap(),this}function p(e,t,r,i){var a=this;a.opts={},a.getOpt=e.getOpt,a.resumableObj=e,a.fileObj=t,a.fileObjSize=t.size,a.fileObjType=t.file.type,a.offset=r,a.callback=i,a.lastProgressCallback=new Date,a.tested=!1,a.retries=0,a.pendingRetry=!1,a.preprocessState=0,a.markComplete=!1;var s=a.getOpt("chunkSize");return a.loaded=0,a.startByte=a.offset*s,a.endByte=Math.min(a.fileObjSize,(a.offset+1)*s),a.fileObjSize-a.endByte<s&&!a.getOpt("forceChunkSize")&&(a.endByte=a.fileObjSize),a.xhr=null,a.test=function(){a.xhr=new XMLHttpRequest;var e=function(e){a.tested=!0;var t=a.status();"success"==t?(a.callback(t,a.message()),a.resumableObj.uploadNextChunk()):a.send()};a.xhr.addEventListener("load",e,!1),a.xhr.addEventListener("error",e,!1),a.xhr.addEventListener("timeout",e,!1);var t=[],r=a.getOpt("parameterNamespace"),i=a.getOpt("query");"function"==typeof i&&(i=i(a.fileObj,a)),n.each(i,function(e,n){t.push([encodeURIComponent(r+e),encodeURIComponent(n)].join("="))}),t=t.concat([["chunkNumberParameterName",a.offset+1],["chunkSizeParameterName",a.getOpt("chunkSize")],["currentChunkSizeParameterName",a.endByte-a.startByte],["totalSizeParameterName",a.fileObjSize],["typeParameterName",a.fileObjType],["identifierParameterName",a.fileObj.uniqueIdentifier],["fileNameParameterName",a.fileObj.fileName],["relativePathParameterName",a.fileObj.relativePath],["totalChunksParameterName",a.fileObj.chunks.length]].filter(function(e){return a.getOpt(e[0])}).map(function(e){return[r+a.getOpt(e[0]),encodeURIComponent(e[1])].join("=")})),a.xhr.open(a.getOpt("testMethod"),n.getTarget("test",t)),a.xhr.timeout=a.getOpt("xhrTimeout"),a.xhr.withCredentials=a.getOpt("withCredentials");var s=a.getOpt("headers");"function"==typeof s&&(s=s(a.fileObj,a)),n.each(s,function(e,t){a.xhr.setRequestHeader(e,t)}),a.xhr.send(null)},a.preprocessFinished=function(){a.preprocessState=2,a.send()},a.send=function(){var e=a.getOpt("preprocess");if("function"==typeof e)switch(a.preprocessState){case 0:return a.preprocessState=1,void e(a);case 1:return}if(!a.getOpt("testChunks")||a.tested){a.xhr=new XMLHttpRequest,a.xhr.upload.addEventListener("progress",function(e){new Date-a.lastProgressCallback>1e3*a.getOpt("throttleProgressCallbacks")&&(a.callback("progress"),a.lastProgressCallback=new Date),a.loaded=e.loaded||0},!1),a.loaded=0,a.pendingRetry=!1,a.callback("progress");var t=function(e){var t=a.status();if("success"==t||"error"==t)a.callback(t,a.message()),a.resumableObj.uploadNextChunk();else{a.callback("retry",a.message()),a.abort(),a.retries++;var r=a.getOpt("chunkRetryInterval");void 0!==r?(a.pendingRetry=!0,setTimeout(a.send,r)):a.send()}};a.xhr.addEventListener("load",t,!1),a.xhr.addEventListener("error",t,!1),a.xhr.addEventListener("timeout",t,!1);var r=[["chunkNumberParameterName",a.offset+1],["chunkSizeParameterName",a.getOpt("chunkSize")],["currentChunkSizeParameterName",a.endByte-a.startByte],["totalSizeParameterName",a.fileObjSize],["typeParameterName",a.fileObjType],["identifierParameterName",a.fileObj.uniqueIdentifier],["fileNameParameterName",a.fileObj.fileName],["relativePathParameterName",a.fileObj.relativePath],["totalChunksParameterName",a.fileObj.chunks.length]].filter(function(e){return a.getOpt(e[0])}).reduce(function(e,t){return e[a.getOpt(t[0])]=t[1],e},{}),i=a.getOpt("query");"function"==typeof i&&(i=i(a.fileObj,a)),n.each(i,function(e,t){r[e]=t});var s=a.fileObj.file.slice?"slice":a.fileObj.file.mozSlice?"mozSlice":a.fileObj.file.webkitSlice?"webkitSlice":"slice",o=a.fileObj.file[s](a.startByte,a.endByte,a.getOpt("setChunkTypeFromFile")?a.fileObj.file.type:""),l=null,u=[],f=a.getOpt("parameterNamespace");if("octet"===a.getOpt("method"))l=o,n.each(r,function(e,t){u.push([encodeURIComponent(f+e),encodeURIComponent(t)].join("="))});else if(l=new FormData,n.each(r,function(e,t){l.append(f+e,t),u.push([encodeURIComponent(f+e),encodeURIComponent(t)].join("="))}),"blob"==a.getOpt("chunkFormat"))l.append(f+a.getOpt("fileParameterName"),o,a.fileObj.fileName);else if("base64"==a.getOpt("chunkFormat")){var c=new FileReader;c.onload=function(e){l.append(f+a.getOpt("fileParameterName"),c.result),a.xhr.send(l)},c.readAsDataURL(o)}var p=n.getTarget("upload",u),d=a.getOpt("uploadMethod");a.xhr.open(d,p),"octet"===a.getOpt("method")&&a.xhr.setRequestHeader("Content-Type","application/octet-stream"),a.xhr.timeout=a.getOpt("xhrTimeout"),a.xhr.withCredentials=a.getOpt("withCredentials");var m=a.getOpt("headers");"function"==typeof m&&(m=m(a.fileObj,a)),n.each(m,function(e,t){a.xhr.setRequestHeader(e,t)}),"blob"==a.getOpt("chunkFormat")&&a.xhr.send(l)}else a.test()},a.abort=function(){a.xhr&&a.xhr.abort(),a.xhr=null},a.status=function(){return a.pendingRetry?"uploading":a.markComplete?"success":a.xhr?a.xhr.readyState<4?"uploading":200==a.xhr.status||201==a.xhr.status?"success":n.contains(a.getOpt("permanentErrors"),a.xhr.status)||a.retries>=a.getOpt("maxChunkRetries")?"error":(a.abort(),"pending"):"pending"},a.message=function(){return a.xhr?a.xhr.responseText:""},a.progress=function(e){void 0===e&&(e=!1);var t=e?(a.endByte-a.startByte)/a.fileObjSize:1;if(a.pendingRetry)return 0;switch(a.xhr&&a.xhr.status||a.markComplete||(t*=.95),a.status()){case"success":case"error":return 1*t;case"pending":return 0*t;default:return a.loaded/(a.endByte-a.startByte)*t}},this}return r.uploadNextChunk=function(){var e=!1;if(r.getOpt("prioritizeFirstAndLastChunk")&&(n.each(r.files,function(t){return t.chunks.length&&"pending"==t.chunks[0].status()&&0===t.chunks[0].preprocessState?(t.chunks[0].send(),e=!0,!1):t.chunks.length>1&&"pending"==t.chunks[t.chunks.length-1].status()&&0===t.chunks[t.chunks.length-1].preprocessState?(t.chunks[t.chunks.length-1].send(),e=!0,!1):void 0}),e))return!0;if(n.each(r.files,function(t){if(e=t.upload())return!1}),e)return!0;var t=!1;return n.each(r.files,function(e){if(!e.isComplete())return t=!0,!1}),t||r.fire("complete"),!1},r.assignBrowse=function(e,t){void 0===e.length&&(e=[e]),n.each(e,function(e){var n;"INPUT"===e.tagName&&"file"===e.type?n=e:((n=document.createElement("input")).setAttribute("type","file"),n.style.display="none",e.addEventListener("click",function(){n.style.opacity=0,n.style.display="block",n.focus(),n.click(),n.style.display="none"},!1),e.appendChild(n));var i=r.getOpt("maxFiles");void 0===i||1!=i?n.setAttribute("multiple","multiple"):n.removeAttribute("multiple"),t?n.setAttribute("webkitdirectory","webkitdirectory"):n.removeAttribute("webkitdirectory");var a=r.getOpt("fileType");void 0!==a&&a.length>=1?n.setAttribute("accept",a.map(function(e){return(e=e.replace(/\s/g,"").toLowerCase()).match(/^[^.][^/]+$/)&&(e="."+e),e}).join(",")):n.removeAttribute("accept"),n.addEventListener("change",function(e){f(e.target.files,e),r.getOpt("clearInput")&&(e.target.value="")},!1)})},r.assignDrop=function(e){void 0===e.length&&(e=[e]),n.each(e,function(e){e.addEventListener("dragover",s,!1),e.addEventListener("dragenter",s,!1),e.addEventListener("dragleave",a,!1),e.addEventListener("drop",i,!1)})},r.unAssignDrop=function(e){void 0===e.length&&(e=[e]),n.each(e,function(e){e.removeEventListener("dragover",s),e.removeEventListener("dragenter",s),e.removeEventListener("dragleave",a),e.removeEventListener("drop",i)})},r.isUploading=function(){var e=!1;return n.each(r.files,function(t){if(t.isUploading())return e=!0,!1}),e},r.upload=function(){if(!r.isUploading()){r.fire("uploadStart");for(var e=1;e<=r.getOpt("simultaneousUploads");e++)r.uploadNextChunk()}},r.pause=function(){n.each(r.files,function(e){e.abort()}),r.fire("pause")},r.cancel=function(){r.fire("beforeCancel");for(var e=r.files.length-1;e>=0;e--)r.files[e].cancel();r.fire("cancel")},r.progress=function(){var e=0,t=0;return n.each(r.files,function(r){e+=r.progress()*r.size,t+=r.size}),t>0?e/t:0},r.addFile=function(e,t){f([e],t)},r.addFiles=function(e,t){f(e,t)},r.removeFile=function(e){for(var t=r.files.length-1;t>=0;t--)r.files[t]===e&&r.files.splice(t,1)},r.getFromUniqueIdentifier=function(e){var t=!1;return n.each(r.files,function(r){r.uniqueIdentifier==e&&(t=r)}),t},r.getSize=function(){var e=0;return n.each(r.files,function(t){e+=t.size}),e},r.handleDropEvent=function(e){i(e)},r.handleChangeEvent=function(e){f(e.target.files,e),e.target.value=""},r.updateQuery=function(e){r.opts.query=e},this};"undefined"!=typeof module?(module.exports=e,module.exports.Resumable=e):"function"==typeof define&&define.amd?define(function(){return e}):window.Resumable=e}();
 /*!
  * An experimental shim to partially emulate onBeforeUnload on iOS.
@@ -3818,14 +3781,6 @@ var check_cc_exist_in_contacts_list = function() {
 };
 
 
-$(function() {
-    $('.ldap_password_change').on("click", function() {
-        $(this).prev().prop('disabled', false);
-        $(this).prev().attr('placeholder', '');
-    });
-});
-
-
 var feed_test_action = function(event) {
     event.preventDefault();
     Hm_Notices.hide(true);
@@ -6369,41 +6324,6 @@ $(function() {
     Hm_Timer.add_job(Hm_No_Op.update, Hm_No_Op.interval, true);
     $('*').on('click', function() { Hm_No_Op.reset(); });
 });
-
-
-
-$(function() {
-    $('body').on('new_message', function() {
-        var unread_page = false;
-        if (getPageNameParam() == 'message_list' && getListPathParam() == 'unread') {
-            unread_page = true;
-        }
-        if (!document.hidden && unread_page) {
-            return;
-        }
-        var current = $('.total_unread_count').text()*1;
-        var past = Hm_Message_List.past_total;
-        if (current == past || current < past) {
-            return;
-        }
-        var content;
-        if (unread_page) {
-            content = Hm_Message_List.just_inserted.reverse().join("\n\n");
-        }
-        else if (globals.Hm_Background_Unread) {
-            content = globals.Hm_Background_Unread.just_inserted.reverse().join("\n\n");
-        }
-        if (!content) {
-            return;
-        }
-        Push.create(hm_trans("New Message"), {
-            body: content,
-            timeout: 10000,
-            icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAIBJREFUWIXtlkEOgCAMBEdfpj/Hl+FB8GBiWoqEg7sJt7YzTXoAlL9nAfJMgXUmXAJVYAeOCeyjsO9sQOI6ypEvFdZrRomY4FEiJtgqiIp45zY3fAWu9d0Devu6N4mCTYHw9TrBboFWES+4WcASaQWHBZ4iUXAGsv4DEpCABBTlBOkR5VdJRFCfAAAAAElFTkSuQmCC',
-            onClick: function () { window.focus(); this.close(); }
-        });
-    });
-});
 function applyCalendarPageHandlers() {
     $('.event_delete').on("click", function() {
         if (hm_delete_prompt()) {
@@ -6547,6 +6467,679 @@ $('.config_map_page').on("click", function() {
     var target = $(this).data('target');
     $('.'+target).toggle();
 });
+function applyHistoryPageHandlers() {
+    // When Message list style setting is set to news
+    $('.news_cell').removeClass('checkbox_cell');
+    $('.news_cell').attr('colspan', 5);
+}
+
+
+var update_search = function(event) {
+    event.preventDefault();
+    if ($('.search_terms').val().length && $('.search_name').val().length) {
+        Hm_Ajax.request(
+            [{'name': 'hm_ajax_hook', 'value': 'ajax_update_search'},
+            {'name': 'search_name', 'value': $('.search_name').val()},
+            {'name': 'search_terms', 'value': $('.search_terms').val()},
+            {'name': 'search_fld', 'value': $('#search_fld').val()},
+            {'name': 'search_since', 'value': $('#search_since').val()}],
+            search_update_results
+        );
+    }
+    return false;
+};
+
+var delete_search = function(event) {
+    if (!hm_delete_prompt()) {
+        return false;
+    }
+    var name = $('.search_name').val();
+    event.preventDefault();
+    if (name.length) {
+        Hm_Ajax.request(
+            [{'name': 'hm_ajax_hook', 'value': 'ajax_delete_search'},
+            {'name': 'search_name', 'value': name}],
+            search_delete_results
+        );
+    }
+    return false;
+};
+
+var save_search = function(event) {
+    event.preventDefault();
+    if ($('.search_terms').val().length) {
+        Hm_Ajax.request(
+            [{'name': 'hm_ajax_hook', 'value': 'ajax_save_search'},
+            {'name': 'search_name', 'value': $('.search_terms').val()},
+            {'name': 'search_terms', 'value': $('.search_terms').val()},
+            {'name': 'search_fld', 'value': $('#search_fld').val()},
+            {'name': 'search_since', 'value': $('#search_since').val()}],
+            search_save_results
+        );
+    }
+    return false;
+};
+
+
+var update_save_search_label = function(event) {
+    event.preventDefault();
+    if($('.search_label_update').val().length) {
+        Hm_Ajax.request(
+            [{'name': 'hm_ajax_hook', 'value': 'ajax_update_save_search_label'},
+            {'name': 'search_terms_label', 'value': $('.search_terms_label').val()},
+            {'name': 'old_search_terms_label', 'value': $('.old_search_terms_label').val()},
+            {'name': 'search_name', 'value': $('.search_terms').val()}],
+            update_save_search_label_results
+        );
+    }
+    return false;
+}
+
+var search_delete_results = function(res) {
+    if (res.saved_search_result) {
+        Hm_Folders.reload_folders(true, '.search_folders');
+        Hm_Utils.reset_search_form();
+    }
+};
+
+var search_update_results = function(res) {
+    if (res.saved_search_result) {
+        $('.update_search').remove();
+        Hm_Folders.reload_folders(true, '.search_folders');
+    }
+};
+
+var search_save_results = function(res) {
+    if (res.saved_search_result) {
+        $('.search_name').val($('.new_search_name').val());
+        $('.delete_search').show();
+        $('.save_search').hide();
+        Hm_Folders.reload_folders(true, '.search_folders');
+    }
+};
+
+var update_save_search_label_results = function(res) {
+    if(res.saved_search_result) {
+        $('.update_search_label_field').toggle();
+        $('.search_terms_label').val("");
+        $('.old_search_terms_label').val(res.new_saved_search_label);
+        Hm_Folders.reload_folders(true, '.search_folders');
+    }
+}
+
+function savedSearchesSearchPageHandler() {
+    $('.save_search').on("click", save_search);
+    $('.update_search').on("click", update_search);
+    $('.delete_search').on("click", delete_search);
+    $('.update_search_label').on("click", function() { $('.update_search_label_field').toggle(); return false; });
+    $('.search_label_update').on("click", update_save_search_label);
+    if ($('.search_name').val().length) {
+        Hm_Utils.save_to_local_storage('formatted_search_data', '');
+    }
+    else if ($('.search_terms').val().length) {
+        $('.save_search').show();
+        $('.update_search_label').show()
+    }
+}
+function applyAdvancedSearchPageHandlers() {
+    globals.close_html = '<i class="bi bi-x-circle-fill cursor-pointer"></i>';
+
+    $('.settings_subtitle').on("click", function() { return Hm_Utils.toggle_page_section($(this).data('target')); });
+    $('.adv_folder_select').on("click", function() { adv_select_imap_folder(this); });
+    $('.new_time').on("click", function() { add_remove_times(this); });
+    $('.new_target').on("click", function() { add_remove_targets(this); });
+    $('.new_term').on("click", function() { add_remove_terms(this); });
+    $('.adv_expand_all').on("click", function() { adv_expand_sections(); });
+    $('.adv_collapse_all').on("click", function() { adv_collapse(); });
+    $('#adv_search').on("click", function() { process_advanced_search(); });
+    $('.toggle_link').on("click", function() { return Hm_Message_List.toggle_rows(); });
+    $('.adv_reset').on("click", function() { adv_reset_page(); });
+    $('.combined_sort').on("change", function() { Hm_Message_List.sort($(this).val()); });
+
+    apply_saved_search();
+    var data = Hm_Utils.get_from_local_storage('formatted_advanced_search_data');
+    if (data && data.length) {
+        adv_collapse();
+        Hm_Utils.tbody().html(data);
+        $('.adv_controls').show();
+        $('.core_msg_control').off('click');
+        $('.core_msg_control').on("click", function() { return Hm_Message_List.message_action($(this).data('action')); });
+        Hm_Message_List.set_checkbox_callback();
+        if (typeof check_select_for_imap !== 'undefined') {
+            check_select_for_imap();
+        }
+    }
+    Hm_Message_List.check_empty_list();
+}"use strict"
+
+var add_remove_terms = function(el) {
+    var close = $(globals.close_html);
+    var count = $('.adv_terms').length;
+    var term = $('#adv_term').clone(false);
+    var not_chk = $('<span id="adv_term_not" class="adv_term_nots"><input type="checkbox" class="form-check-input" value="not" id="adv_term_not" /> !</span>');
+    var and_or_html = '<div class="andor px-4"><input class="form-check-input" checked="checked" type="radio" name="term_and'
+    and_or_html += '_or'+count+'" value="and">and <input class="form-check-input" type="radio" name="term_and_or'+count;
+    and_or_html += '" value="or">or</div>';
+    var and_or = $(and_or_html);
+    term.attr('id', 'adv_term'+count);
+    close.attr('id', 'term_adv_remove'+count);
+    close.addClass('ms-2');
+    and_or.attr('id', 'term_and_or'+count);
+    not_chk.attr('id', 'adv_term_not'+count);
+    $(el).prev().after(and_or.prop('outerHTML')+not_chk.prop('outerHTML')+term.prop('outerHTML')+close.prop('outerHTML'));
+    $(el).hide();
+    $('#term_adv_remove'+count).on("click", function() {
+        $('#adv_term'+count).remove();
+        $('#adv_term_not'+count).remove();
+        $('#term_and_or'+count).remove();
+        $(this).remove();
+        $(el).show();
+    });
+};
+
+var add_remove_times = function(el) {
+    var close = $(globals.close_html);
+    var count = $('.adv_times').length;
+    var time_html = '<span id="adv_time" class="adv_times d-flex align-items-center gap-2">From <input class="adv_time_fld_from form-control w-auto" ';
+    time_html += 'type="date" value=""> To <input class="adv_time_fld_to form-control w-auto" type="date" value=""></span>';
+    var timeset = $(time_html);
+    var and_or_html = '<div class="timeandor"><input class="form-check-input" type="radio" name="time_and_or'+count;
+    and_or_html += '" checked="checked" value="or">or</div>';
+    var and_or = $(and_or_html);
+    timeset.attr('id', 'adv_time'+count);
+    close.attr('id', 'time_adv_remove'+count);
+    close.addClass('me-2');
+    and_or.attr('id', 'time_and_or'+count);
+    $(el).prev().after(and_or.prop('outerHTML')+timeset.prop('outerHTML')+close.prop('outerHTML'));
+    $('#time_adv_remove'+count).on("click", function() {
+        $('#adv_time'+count).remove();
+        $('#time_and_or'+count).remove();
+        $(this).remove();
+    });
+};
+
+var add_remove_targets = function(el) {
+    var close = $(globals.close_html);
+    var count = $('.adv_targets').length;
+    var target = $('#adv_target').clone(false);
+    var and_or_html = '<div class="andor"><input class="form-check-input" type="radio" name="target_and_or'+count;
+    and_or_html += '" value="and">and <input class="form-check-input" type="radio" name="target_and_or'+count;
+    and_or_html += '" checked="checked" value="or">or</div>';
+    var and_or = $(and_or_html);
+
+    target.attr('id', 'adv_target'+count);
+    $('.target_radio', target).attr('name', 'target_type'+count);
+    $('.target_radio', target).removeAttr('checked');
+    close.attr('id', 'target_adv_remove'+count);
+    close.addClass('ms-2');
+    and_or.attr('id', 'target_and_or'+count);
+    $(el).prev().after(and_or.prop('outerHTML')+target.prop('outerHTML')+close.prop('outerHTML'));
+    $(el).hide();
+    $('#target_adv_remove'+count).on("click", function() {
+        $('#adv_target'+count).remove();
+        $('#target_and_or'+count).remove();
+        $(this).remove();
+        $(el).show();
+    });
+};
+
+var expand_adv_folder = function(res) {
+    if (res.imap_expanded_folder_path) {
+        var list_container = $('.adv_folder_list');
+        var folders = $(res.imap_expanded_folder_formatted);
+        folders.find('.manage_folders_li').remove();
+        $('.'+Hm_Utils.clean_selector(res.imap_expanded_folder_path), $('.adv_folder_list')).append(folders);
+        $('.imap_folder_link', list_container).addClass('adv_folder_link').removeClass('imap_folder_link');
+        $('.adv_folder_link', list_container).off('click');
+        $('.adv_folder_link', list_container).on("click", function() { return expand_adv_folder_list($(this).data('target')); });
+        $('a', list_container).not('.adv_folder_link').off('click');
+        $('a', list_container).not('.adv_folder_link').on("click", function() { adv_folder_select($(this).data('id')); return false; });
+    }
+};
+
+var adv_select_imap_folder = function(el) {
+    var close = $(globals.close_html);
+    close.addClass('close_adv_folders ms-2');
+    var list_container = $('.adv_folder_list');
+    var folders = $('.email_folders').clone(false);
+    folders.find('.manage_folders_li').remove();
+    $('.menu_email', folders).remove();
+    folders.removeClass('email_folders');
+    $(el).after(close);
+    list_container.show();
+    folders.show();
+    $('.imap_folder_link', folders).addClass('adv_folder_link').removeClass('imap_folder_link');
+    $('.adv_folder_list').html(folders.html());
+
+    $('.adv_folder_link', list_container).on("click", function() { return expand_adv_folder_list($(this).data('target')); });
+    $('a', list_container).not('.adv_folder_link').not('.close_adv_folders').off('click');
+    $('a', list_container).not('.adv_folder_link').not('.close_adv_folders').on("click", function() { adv_folder_select($(this).data('id')); return false; });
+    $('.close_adv_folders').on("click", function() {
+        $('.adv_folder_list').html('');
+        $('.adv_folder_list').hide();
+        $(this).remove();
+        return false;
+    });
+};
+
+var adv_folder_select = function(id) {
+    if ($('.'+id, $('.adv_source_list')).length > 0) {
+        $('.adv_folder_list').html('');
+        $('.close_adv_folders').remove();
+        $('.adv_folder_list').hide();
+        return;
+    }
+    var container = $('.adv_folder_list');
+    var list_item = $('.'+Hm_Utils.clean_selector(id));
+    var folder = $('a', list_item).first().text();
+    if (folder == '+' || folder == '-') {
+        folder = $('a', list_item).eq(1).text();
+    }
+    var parts = id.split('_', 3);
+    var parent_class = '.'+parts[0]+'_'+parts[1]+'_';
+    var account = $('a', $(parent_class, container)).first().text();
+    var label = account+' &gt; '+folder;
+    add_source_to_list(id, label);
+    $('.adv_folder_list').html('');
+    $('.close_adv_folders').remove();
+    $('.adv_folder_list').hide();
+};
+
+var add_source_to_list = function(id, label) {
+    var close = $(globals.close_html);
+    close.addClass('adv_remove_source');
+    close.attr('data-target', id);
+    var row = '<div class="'+id+'">'+close.prop('outerHTML')+label;
+    row += '<input type="hidden" value="'+id+'" /></div>';
+    $('.adv_source_list').append(row);
+    $('.adv_remove_source').off('click');
+    $('.adv_remove_source').on("click", function() {
+        $('.'+$(this).data('target'), $('.adv_source_list')).remove();
+    });
+};
+
+var expand_adv_folder_list = function(path) {
+    var detail = Hm_Utils.parse_folder_path(path, 'imap');
+    var list = $('.imap_'+detail.server_id+'_'+Hm_Utils.clean_selector(detail.folder), $('.adv_folder_list'));
+    if ($('li', list).length === 0) {
+        $('.expand_link', list).html('<i class="bi bi-file-minus-fill"></i>');
+        if (detail) {
+            Hm_Ajax.request(
+                [{'name': 'hm_ajax_hook', 'value': 'ajax_imap_folder_expand'},
+                {'name': 'imap_server_id', 'value': detail.server_id},
+                {'name': 'folder', 'value': detail.folder}],
+                function (res) { expand_adv_folder(res); }
+            );
+        }
+    }
+    else {
+        $('.expand_link', list).html('+');
+        $('ul', list).remove();
+    }
+    return false;
+};
+
+var adv_collapse = function() {
+    $('.terms_section').hide();
+    $('.source_section').hide();
+    $('.targets_section').hide();
+    $('.time_section').hide();
+    $('.other_section').hide();
+    $('.adv_expand_all').show();
+    $('.adv_collapse_all').hide();
+}
+
+var adv_expand_sections = function() {
+    $('.terms_section').show();
+    $('.source_section').show();
+    $('.targets_section').show();
+    $('.time_section').show();
+    $('.other_section').show();
+    $('.adv_expand_all').hide();
+    $('.adv_collapse_all').show();
+}
+
+var get_adv_sources = function() {
+    var sources = [];
+    var selected_sources = $('div', $('.adv_source_list'));
+    if (!selected_sources) {
+        return sources;
+    }
+    selected_sources.each(function() {
+        sources.push({'source': this.className, 'label': $(this).text()});
+    });
+    return sources;
+};
+
+var get_adv_terms = function() {
+    var term;
+    var term_id;
+    var condition;
+    var not;
+    var terms = [];
+    var term_flds = $('.adv_terms');
+    term_flds.each(function() {
+        term = $(this).val();
+        if (term && term.trim()) {
+            term_id = this.id.substr(8);
+            if (term_id) {
+                condition = $('input:checked', $('#term_and_or'+term_id)).val();
+            }
+            else {
+                condition = false;
+            }
+            if ($('input:checked', $('#adv_term_not'+term_id)).val() == 'not') {
+                term = 'NOT '+term;
+            }
+            terms.push({'term': term, 'condition': condition});
+        }
+    });
+    return terms;
+};
+
+var get_adv_times = function() {
+    var time;
+    var from;
+    var to;
+    var times = [];
+    var time_flds = $('.adv_times');
+    time_flds.each(function() {
+        from = $('.adv_time_fld_from', $(this)).val();
+        to = $('.adv_time_fld_to', $(this)).val();
+        if (to && from && to.trim() && from.trim()) {
+            times.push({'from': from, 'to': to});
+        }
+    });
+    return times;
+
+};
+
+var get_adv_targets = function() {
+    var target;
+    var value;
+    var target_id;
+    var condition;
+    var targets = [];
+    var target_flds = $('.adv_targets');
+    target_flds.each(function() {
+        target = $('.target_radio:checked', $(this)).val();
+        if (target == 'header') {
+            value = $('.adv_header_select', $(this)).val();
+        }
+        else if (target == 'custom') {
+            value = 'HEADER '+$('.adv_custom_header', $(this)).val();
+        }
+        else {
+            value = target;
+        }
+        if (target) {
+            target_id = this.id.substr(10);
+            if (target_id) {
+                condition = $('input:checked', $('#target_and_or'+target_id)).val();
+            }
+            else {
+                condition = false;
+            }
+            targets.push({'target': value, 'orig': target, 'condition': condition});
+        }
+    });
+    return targets;
+};
+
+var get_adv_other = function() {
+    var charset = $('.charset').val();
+    var flags = [];
+    var flag_flds = $('.adv_flag:checked');
+    if (flag_flds) {
+        flag_flds.each(function() {
+            flags.push($(this).val());
+        });
+    }
+    var limit = $('.adv_source_limit').val();
+    return {'limit': limit, 'flags': flags, 'charset': charset};
+};
+
+var process_advanced_search = function() {
+    Hm_Notices.hide(true);
+    var terms = get_adv_terms();
+    if (terms.length == 0) {
+        Hm_Notices.show([err_msg('You must enter at least one search term')]);
+        return;
+    }
+    var sources = get_adv_sources();
+    if (sources.length == 0) {
+        Hm_Notices.show([err_msg('You must select at least one source')]);
+        return;
+    }
+    var targets = get_adv_targets();
+    if (targets.length == 0) {
+        Hm_Notices.show([err_msg('You must have at least one target')]);
+        return;
+    }
+    var times = get_adv_times();
+    if (times.length == 0) {
+        Hm_Notices.show([err_msg('You must enter at least one time range')]);
+        return;
+    }
+    var other = get_adv_other();
+
+    save_search_details(terms, sources, targets, times, other);
+    search_summary({ 'terms': terms, 'targets': targets, 'sources': sources,
+            'times': times, 'other': other });
+
+    send_requests(build_adv_search_requests(terms, sources, targets, times, other));
+};
+
+var save_search_details = function(terms, sources, targets, times, other) {
+    Hm_Utils.save_to_local_storage('adv_search_params',
+        Hm_Utils.json_encode({
+            'terms': terms,
+            'targets': targets,
+            'sources': sources,
+            'times': times,
+            'other': other
+        })
+    );
+};
+
+var load_search_details = function() {
+    return Hm_Utils.json_decode(Hm_Utils.get_from_local_storage('adv_search_params'));
+};
+
+
+var adv_group_vals = function(data, type) {
+    var groups = [];
+    if (data.length == 2 && data[1]['condition'] == 'or') {
+        groups.push([data[0][type]]);
+        groups.push([data[1][type]]);
+    }
+    else if (data.length == 2) {
+        groups.push([data[0][type], data[1][type]]);
+    }
+    else {
+        groups.push([data[0][type]]);
+    }
+    return groups;
+};
+
+var send_requests = function(requests) {
+    var request;
+    $('tr', Hm_Utils.tbody()).remove();
+    Hm_Utils.save_to_local_storage('formatted_advanced_search_data', '');
+    adv_collapse();
+    $('.adv_controls').hide();
+    $('.empty_list').remove();
+    for (var n=0, rlen=requests.length; n < rlen; n++) {
+        request = requests[n];
+        var params = [
+            {'name': 'hm_ajax_hook', 'value': 'ajax_adv_search'},
+            {'name': 'adv_source', 'value': request['source']},
+            {'name': 'adv_start', 'value': request['time']['from']},
+            {'name': 'adv_end', 'value': request['time']['to']},
+            {'name': 'adv_source_limit', 'value': request['other']['limit']},
+            {'name': 'adv_charset', 'value': request['other']['charset']},
+        ];
+
+        for (var i=0, len=request['terms'].length; i < len; i++) {
+            params.push({'name': 'adv_terms[]', 'value': request['terms'][i]});
+        }
+        for (var i=0, len=request['targets'].length; i < len; i++) {
+            params.push({'name': 'adv_targets[]', 'value': request['targets'][i]});
+        }
+        for (var i=0, len=request['other']['flags'].length; i < len; i++) {
+            params.push({'name': 'adv_flags[]', 'value': request['other']['flags'][i]});
+        }
+        Hm_Ajax.request(
+            params,
+            function(res) {
+                var detail = Hm_Utils.parse_folder_path(request['source'], 'imap');
+                Hm_Message_List.update([detail.server_id+n], res.formatted_message_list, 'imap');
+                if (Hm_Utils.rows().length > 0) {
+                    $('.adv_controls').show();
+                    $('.core_msg_control').off('click');
+                    $('.core_msg_control').on("click", function() { return Hm_Message_List.message_action($(this).data('action')); });
+                    Hm_Message_List.set_checkbox_callback();
+                    if (typeof check_select_for_imap !== 'undefined') {
+                        check_select_for_imap();
+                    }
+                }
+                Hm_Message_List.check_empty_list();
+            },
+            [],
+            false,
+            function() {
+                Hm_Message_List.set_message_list_state('formatted_advanced_search_data');
+            }
+        );
+    }
+};
+
+var build_adv_search_requests = function(terms, sources, targets, times, other) {
+    var source;
+    var time;
+    var term_vals;
+    var target_vals;
+    var requests = []
+    var term_groups = adv_group_vals(terms, 'term');
+    var target_groups = adv_group_vals(targets, 'target');
+
+    for (var tv=0, tvlen=term_groups.length; tv < tvlen; tv++) {
+        term_vals = term_groups[tv];
+        for (var tag=0, taglen=target_groups.length; tag < taglen; tag++) {
+            target_vals = target_groups[tag];
+            for (var s=0, slen=sources.length; s < slen; s++) {
+                source = sources[s]['source'];
+                for (var ti=0, tilen=times.length; ti < tilen; ti++) {
+                    time = times[ti];
+                    requests.push({'source': source, 'time': time, 'other': other,
+                        'targets': target_vals, 'terms': term_vals});
+                }
+            }
+        }
+    }
+    return requests;
+};
+
+var search_summary = function(details) {
+    if (!details) {
+        return;
+    }
+    var charset = 0;
+    if (details['other']['charset']) { charset = 1; }
+    $('.term_count').text($('.term_count').text().replace(/\d+/, details['terms'].length)).show();
+    $('.target_count').text($('.target_count').text().replace(/\d+/, details['targets'].length)).show();
+    $('.source_count').text($('.source_count').text().replace(/\d+/, details['sources'].length)).show();
+    $('.time_count').text($('.time_count').text().replace(/\d+/, details['times'].length)).show();
+    $('.other_count').text($('.other_count').text().replace(/\d+/, (charset + details['other']['flags'].length))).show();
+};
+
+var apply_saved_search = function() {
+    var details = load_search_details();
+    if (!details) {
+        return;
+    }
+    search_summary(details);
+    var target_id;
+    var time_id;
+    var not;
+    for (var i=0, len=details['terms'].length; i < len; i++) {
+        not = false;
+        if (details['terms'][i]['term'].substring(0, 4) == 'NOT ') {
+            details['terms'][i]['term'] = details['terms'][i]['term'].substring(4);
+            not = true;
+        }
+        if (i == 0) {
+            $('#adv_term').val(details['terms'][i]['term']);
+            if (not) {
+                $('input', $('#adv_term_not')).attr('checked', true);
+            }
+        }
+        else {
+            $('.new_term').trigger('click');
+            $('#adv_term'+i).val(details['terms'][i]['term']);
+            $('input[type=radio][value='+details['terms'][i]['condition']+']', $('#term_and_or'+i)).attr('checked', true);
+            if (not) {
+                $('input', $('#adv_term_not'+i)).attr('checked', true);
+            }
+        }
+    }
+    for (var i=0, len=details['sources'].length; i < len; i++) {
+        add_source_to_list(details['sources'][i]['source'], details['sources'][i]['label']);
+    }
+    for (var i=0, len=details['targets'].length; i < len; i++) {
+        if (i == 0) {
+            target_id = '#adv_target';
+        }
+        else {
+            target_id = '#adv_target'+i;
+            $('.new_target').trigger('click');
+            $('input[type=radio][value='+details['targets'][i]['condition']+']', $('#target_and_or'+i)).attr('checked', true);
+        }
+        $('input[type=radio][value='+details['targets'][i]['orig']+']', $(target_id)).attr('checked', true);
+        if (details['targets'][i]['orig'] == 'custom') {
+            $('.adv_custom_header', $(target_id)).val(details['targets'][i]['target'].substring(7));
+        }
+        else if (details['targets'][i]['orig'] == 'header') {
+            $('.adv_header_select', $(target_id)).val(details['targets'][i]['target']);
+        }
+    }
+    for (var i=0, len=details['times'].length; i < len; i++) {
+        if (i == 0) {
+            time_id = '#adv_time';
+        }
+        else {
+            time_id = '#adv_time'+i;
+            $('.new_time').trigger('click');
+        }
+        $('.adv_time_fld_from', $(time_id)).val(details['times'][i]['from']);
+        $('.adv_time_fld_to', $(time_id)).val(details['times'][i]['to']);
+    }
+    $('.charset').val(details['other']['charset']);
+    for (var i=0, len=details['other']['flags'].length; i < len; i++) {
+        $('input[type=checkbox][value='+details['other']['flags'][i]+']', $('.flags')).attr('checked', true);
+    }
+    $('.adv_source_limit').val(details['other']['limit']);
+};
+
+var adv_reset_page = function() {
+    Hm_Utils.save_to_local_storage('formatted_advanced_search_data', '');
+    Hm_Utils.save_to_local_storage('adv_search_params', '');
+    document.location.href = '?page=advanced_search';
+};
+
+
+$(function() {
+    $('.rule_del').on('click', function() {
+        return hm_delete_prompt();
+    });
+    $('.hl_source_type').on('change', function() {
+        $('.imap_row').addClass('d-none');
+        $('.github_row').addClass('d-none');
+        $('.feeds_row').addClass('d-none');
+        var selected = $(this).val();
+        $('.'+selected+'_row').removeClass('d-none');
+    });
+});
 function applyProfilesPageHandler() {
     $('.add_profile').on("click", function() { $('.edit_profile').show(); });
 }
@@ -6585,6 +7178,211 @@ function profilesComposePageHandler() {
         } else {
             Hm_Notices.show(['ERR'+$('#sign_msg').val()]);
         }
+    });
+}
+
+
+var inline_wp_msg = function(uid, list_path, inline_msg_loaded_callback) {
+    clear_open_msg(inline_msg_style());
+    msg_container(inline_msg_style(), '.'+uid);
+    wp_notice_view(uid, inline_msg_loaded_callback);
+    $('div', $('.'+uid)).removeClass('unseen');
+    return false;
+};
+
+var inline_github_msg = function(uid, list_path, inline_msg_loaded_callback) {
+    clear_open_msg(inline_msg_style());
+    msg_container(inline_msg_style(), '.'+uid);
+    github_item_view(list_path, uid, inline_msg_loaded_callback);
+    $('div', $('.'+uid)).removeClass('unseen');
+    return false;
+};
+
+var inline_feed_msg = function(uid, list_path, inline_msg_loaded_callback) {
+    clear_open_msg(inline_msg_style());
+    msg_container(inline_msg_style(), '.'+list_path+'_'+uid);
+    feed_item_view(uid, list_path, inline_msg_loaded_callback);
+    $('div', $('.'+list_path+'_'+uid)).removeClass('unseen');
+    return false;
+};
+
+
+var inline_msg_prep_imap_delete = function(path, uid, details) {
+    $('#'+path).prop('checked', false);
+    Hm_Message_List.remove_after_action('delete', [path]);
+    return imap_delete_message(false, uid, details);
+};
+
+var inline_imap_unread_message = function(uid, details) {
+    return imap_unread_message(uid, details);
+};
+
+var inline_imap_msg = function(details, uid, list_path, inline_msg_loaded_callback) {
+    details['uid'] = uid;
+    var path = '.'+details['type']+'_'+details['server_id']+'_'+uid+'_'+details['folder'];
+    globals['inline_move_uuid'] = path.substr(1);
+    clear_open_msg(inline_msg_style());
+    msg_container(inline_msg_style(), path);
+
+    imap_setup_message_view_page(uid, details, list_path, inline_msg_loaded_callback);
+    $('.part_encoding').hide();
+    $('.part_charset').hide();
+    $('div', $(path)).removeClass('unseen');
+    $(path).removeClass('unseen');
+    update_imap_links(uid, details);
+};
+
+var msg_container = function(type, path) {
+    if (type == 'right') {
+        $('.content_title').after('<div class="inline_right msg_text"></div>');
+        $('.message_table').css('width', '50%');
+    }
+    else {
+        $(path).after('<tr class="inline_msg"><td colspan="6"><div class="msg_text"></div></td></tr>');
+    }
+    $(path).addClass('hl');
+    $(path).removeClass('unseen');
+};
+
+var clear_open_msg = function(type) {
+    if (type == 'right') {
+        $('.msg_text').html('');
+        $('.msg_text').remove();
+        $('tr').removeClass('hl');
+    }
+    else {
+        $('.inline_msg').html('');
+        $('.inline_msg').remove();
+        $('tr').removeClass('hl');
+    }
+};
+
+var get_inline_msg_details = function(link) {
+    var index;
+    var pair;
+    var uid = false;
+    var list_path = false;
+    var pairs = $(link).attr('href').split('&');
+    for (index in pairs) {
+        pair = pairs[index].split('=');
+        if (pair[0] == 'uid') {
+            uid = pair[1];
+        }
+        if (pair[0] == 'list_path') {
+            list_path = pair[1];
+        }
+    }
+    return [uid, list_path];
+};
+
+var msg_inline_close = function() {
+    if (inline_msg_style() == 'right') {
+        $('.msg_text').remove();
+        $('.message_table').css('width', '100%');
+    }
+    else {
+        $('.inline_msg').remove();
+    }
+    $('tr').removeClass('hl');
+};
+
+var update_imap_links = function(uid, details) {
+    var path = details['type']+'_'+details['server_id']+'_'+uid+'_'+details['folder'];
+    $('#unflag_msg').off('click');
+    $('#flag_msg').off('click');
+    $('#delete_message').off('click');
+    $('#unread_message').off('click');
+    $('#delete_message').on("click", function() { return inline_msg_prep_imap_delete(path, uid, details); });
+    $('#flag_msg').on("click", function() { return imap_flag_message($(this).data('state'), uid, details); });
+    $('#unflag_msg').on("click", function() { return imap_flag_message($(this).data('state', uid, details)); });
+    $('#unread_message').on("click", function() { return inline_imap_unread_message(uid, details);});
+};
+
+var capture_subject_click = function() {
+    $('.subject a').off('click');
+    $('.subject a').on("click", function(e) {
+        var msg_details = get_inline_msg_details(this);
+        var uid = msg_details[0];
+        var list_path = msg_details[1];
+        var inline_msg_loaded_callback = function() {
+            $('.header_subject th').append('<i class="bi bi-x-lg close_inline_msg"></i>');
+            $('.close_inline_msg').on("click", function() { msg_inline_close(); });
+            update_imap_links(uid, details);
+        };
+
+        if (list_path && uid) {
+            var details = Hm_Utils.parse_folder_path(list_path);
+            globals.msg_uid = uid;
+            if (details['type'] == 'feeds') {
+                inline_feed_msg(uid, list_path, inline_msg_loaded_callback);
+                return false;
+            }
+            else if (details['type'] == 'imap') {
+                // store the details and uid on the window object for later use when external resources are handled
+                window.inline_msg_details = details;
+                window.inline_msg_uid = uid;
+                inline_imap_msg(details, uid, list_path, inline_msg_loaded_callback);
+                return false;
+            }
+            else if (list_path.substr(0, 6) == 'github') {
+                inline_github_msg(uid, list_path, inline_msg_loaded_callback);
+                return false;
+            }
+            else if (list_path.substr(0, 3) == 'wp_') {
+                inline_wp_msg(uid, list_path, inline_msg_loaded_callback);
+                return false;
+            }
+            return false;
+        }
+        return true;
+    });
+};
+
+function inlineMessageMessageListAndSearchPageHandler(routeParams) {
+    if (window.inline_msg && inline_msg()) {
+        setTimeout(capture_subject_click, 100);
+        $('tr').removeClass('hl');
+        Hm_Ajax.add_callback_hook('*', capture_subject_click);
+        Hm_Ajax.add_callback_hook('ajax_imap_delete_message', msg_inline_close);
+        Hm_Ajax.add_callback_hook('ajax_imap_move_copy_action', msg_inline_close);
+        Hm_Ajax.add_callback_hook('ajax_imap_archive_message', msg_inline_close);
+        if (routeParams.list_path?.substr(0, 4) !== 'imap') {
+            Hm_Ajax.add_callback_hook('ajax_imap_unread', msg_inline_close);
+        }
+        if (routeParams.list_path?.substr(0, 4) === 'imap') {
+            Hm_Ajax.add_callback_hook('ajax_imap_folder_display', capture_subject_click);
+        }
+    }
+}
+
+const messagesListMutation = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+        if (mutation.addedNodes.length > 0) {
+            mutation.addedNodes.forEach(function (node) {
+                if (node.classList.contains('msg_text') || node.classList.contains('inline_msg')) {
+                    observeMessageTextMutationAndHandleExternalResources(true);
+                    if(node.querySelector('.msg_text_inner') && !document.querySelector('.external_notices')) {
+                        handleExternalResources(true);
+                    }
+                }
+            });
+        }
+    });
+});
+
+// for inline-right style, we observe the message_list element
+const messagesList = document.querySelector('.message_list');
+if (messagesList) {
+    messagesListMutation.observe(messagesList, {
+        childList: true
+    });
+}
+
+// for inline style, we observe the message_table_body element
+const messageTableBody = document.querySelector('.message_table_body');
+if (messageTableBody) {
+    messagesListMutation.observe(messageTableBody, {
+        childList: true
     });
 }
 function applyFoldersPageHandlers() {
@@ -6901,1649 +7699,168 @@ function bindFoldersEventHandlers() {
     $('#clear_archive_folder').on("click", function() { clear_special_folder('archive'); return false; });
     $('#clear_draft_folder').on("click", function() { clear_special_folder("draft"); return false; });
 }
-function applyBlockListPageHandlers() {
-    blockListPageHandlers();
+function applyShortcutsPageHandlers() {
+    $('.reset_shortcut').on("click", function() {
+        Hm_Utils.redirect('?page=shortcuts');
+    });
 }
 
-function applySieveFiltersPageHandler() {
-    sieveFiltersPageHandler();
-}/**
- * Possible Sieve fields
- * @type {{Message: [{name: string, options: string[], type: string, selected: boolean},{name: string, options: string[], type: string},{name: string, options: string[], type: string}], Header: [{name: string, options: string[], type: string},{name: string, options: string[], type: string},{name: string, options: string[], type: string},{name: string, options: string[], type: string}]}}
- */
-var hm_sieve_condition_fields = function() {
-    return {
-        'Message': [
-            {
-                name: 'subject',
-                description: 'Subject',
-                type: 'string',
-                selected: true,
-                options: ['Contains', 'Matches', 'Regex']
-            },
-            {
-                name: 'body',
-                description: 'Body',
-                type: 'string',
-                options: ['Contains', 'Matches', 'Regex']
-            },
-            {
-                name: 'size',
-                description: 'Size (KB)',
-                type: 'int',
-                options: ['Over', 'Under']
-            }
-        ],
-        'Header': [
-            {
-                name: 'to',
-                description: 'To',
-                type: 'string',
-                extra_option: false,
-                options: ['Contains', 'Matches', 'Regex']
-            },
-            {
-                name: 'from',
-                description: 'From',
-                type: 'string',
-                extra_option: false,
-                options: ['Contains', 'Matches', 'Regex']
-            },
-            {
-                name: 'cc',
-                description: 'CC',
-                type: 'string',
-                extra_option: false,
-                options: ['Contains', 'Matches', 'Regex']
-            },
-            {
-                name: 'to_or_cc',
-                description: 'To or CC',
-                type: 'string',
-                extra_option: false,
-                options: ['Contains', 'Matches', 'Regex']
-            },
-            {
-                name: 'bcc',
-                description: 'BCC',
-                type: 'string',
-                extra_option: false,
-                options: ['Contains', 'Matches', 'Regex']
-            },
-            {
-                name: 'custom',
-                description: 'Custom',
-                type: 'string',
-                extra_option: true,
-                extra_option_description: 'Field Name',
-                options: ['Contains', 'Matches', 'Regex']
-            }
-        ]
-    };
+
+var ks_follow_link = function(target) {
+    var link = $(target);
+    if (link.length > 0) {
+        document.location.href = link.attr('href');
+    }
 };
 
-/**
- * Possible Sieve actions
- * @type {[{name: string, description: string, placeholder: string, type: string, selected: boolean},{name: string, description: string, placeholder: string, type: string},{name: string, description: string, type: string},{name: string, description: string, type: string},{name: string, description: string, placeholder: string, type: string}]}
- */
-var hm_sieve_possible_actions = function() {
-    return [
-        {
-            name: 'keep',
-            description: 'Deliver (Keep)',
-            type: 'none',
-            extra_field: false
-        },
-        {
-            name: 'copy',
-            description: 'Copy email to mailbox',
-            placeholder: 'Mailbox Name (Folder)',
-            type: 'mailbox',
-            extra_field: false
-        },
-        {
-            name: 'move',
-            description: 'Move email to mailbox',
-            placeholder: 'Mailbox Name (Folder)',
-            type: 'mailbox',
-            extra_field: false
-        },
-        {
-            name: 'flag',
-            description: 'Flag',
-            placeholder: 'Example: SEEN',
-            type: 'select',
-            values: ['Seen', 'Answered', 'Flagged', 'Deleted', 'Draft', 'Recent'],
-            extra_field: false
-        },
-        {
-            name: 'addflag',
-            description: 'Add Flag',
-            placeholder: 'Example: SEEN',
-            type: 'select',
-            values: ['Seen', 'Answered', 'Flagged', 'Deleted', 'Draft', 'Recent'],
-            extra_field: false
-        },
-        {
-            name: 'removeflag',
-            description: 'Remove Flag',
-            placeholder: 'Example: SEEN',
-            type: 'select',
-            values: ['Seen', 'Answered', 'Flagged', 'Deleted', 'Draft', 'Recent'],
-            extra_field: false
-        },
-        {
-            name: 'redirect',
-            description: 'Redirect',
-            placeholder: 'mail@example.org',
-            type: 'string',
-            extra_field: false
-        },
-        {
-            name: 'forward',
-            description: 'Forward',
-            placeholder: 'mail@example.org',
-            type: 'string',
-            extra_field: false
-        },
-        {
-            name: 'reject',
-            description: 'Reject',
-            placeholder: 'Reject message',
-            type: 'string',
-            extra_field: false
-        },
-        {
-            name: 'discard',
-            description: 'Discard',
-            type: 'none',
-            extra_field: false
-        },
-        {
-            name: 'autoreply',
-            placeholder: 'Reply Message',
-            description: 'Reply Message',
-            type: 'text',
-            extra_field: true,
-            extra_field_type: 'string',
-            extra_field_placeholder: 'Subject'
-        }
-    ];
+var ks_redirect = function(target) {
+    document.location.href = target;
 };
 
-function blockListPageHandlers() {
-    $(document).on('change', '.select_default_behaviour', function(e) {
-        if ($(this).val() != 'Reject') {
-            $(this).closest('.filter_subblock')
-                .find('.select_default_reject_message')
-                .remove();
-        } else {
-            $('<input type="text" class="select_default_reject_message form-control" placeholder="'+hm_trans('Reject message')+'" />').insertAfter($(this));
+var ks_select_all = function() {
+    Hm_Message_List.toggle_rows();
+};
+
+var ks_select_msg = function() {
+    var focused = $(document.activeElement);
+    $('input', focused).each(function() {
+        if ($(this).prop('checked')) {
+            $(this).prop('checked', false);
+        }
+        else {
+            $(this).prop('checked', true);
         }
     });
-    $(document).on('click', '.submit_default_behavior', function(e) {
-        let parent = $(this).closest('.filter_subblock');
-        let elem = parent.find('.select_default_behaviour');
-        let submit = $(this);
+    Hm_Message_List.toggle_msg_controls();
+};
 
-        const payload = [
-            {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_block_change_behaviour'},
-            {'name': 'selected_behaviour', 'value': elem.val()},
-            {'name': 'imap_server_id', 'value': elem.attr('imap_account')}
-        ];
-        if (elem.val() == 'Reject') {
-            const reject = parent.find('.select_default_reject_message');
-            payload.push({'name': 'reject_message', 'value': reject.val()});
-        }
-
-        submit.attr('disabled', 1);
-        Hm_Ajax.request(
-            payload,
-            function(res) {
-                submit.removeAttr('disabled');
-            }
-        );
-    });
-
-    $(document).on('click', '.unblock_button', function(e) {
-       e.preventDefault();
-       if (!confirm(hm_trans('Do you want to unblock sender?'))) {
-            return;
-        }
-       let sender = $(this).parent().parent().children().html();
-       let elem = $(this);
-        Hm_Ajax.request(
-            [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_unblock_sender'},
-                {'name': 'imap_server_id', 'value': $(this).attr('mailbox_id')},
-                {'name': 'sender', 'value': sender}
-            ],
-            function(res) {
-                elem.parent().parent().remove();
-                var num_filters = $("#filter_num_" + elem.attr('mailbox_id')).html();
-                num_filters = parseInt(num_filters) - 1;
-                $("#filter_num_" + elem.attr('mailbox_id')).html(num_filters);
-            }
-        );
-    });
-
-    $(document).on('click', '.edit_blocked_behavior', function(e) {
-        e.preventDefault();
-        let parent = $(this).closest('tr');
-        let elem = parent.find('.block_action');
-        let sender = $(this).closest('tr').children().first().html();
-        let scope = sender.startsWith('*@') ? 'domain': 'sender';
-
-        Hm_Ajax.request(
-            [
-                {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_block_unblock'},
-                {'name': 'imap_server_id', 'value': $(this).attr('mailbox_id')},
-                {'name': 'block_action', 'value': elem.val()},
-                {'name': 'scope', 'value': scope},
-                {'name': 'sender', 'value': sender},
-                {'name': 'reject_message', 'value': $('#reject_message_textarea').val() ?? ''},
-                {'name': 'change_behavior', 'value': true}
-            ],
-            function(res) {
-                if (/^(Sender|Domain) Behavior Changed$/.test(res.router_user_msgs[0])) {
-                    window.location = window.location;
-                }
-            }
-        );
-    });
-
-    $(document).on('click', '.toggle-behavior-dropdown', function(e) {
-        e.preventDefault();
-        var default_val = $(this).data('action');
-        $('#block_sender_form').trigger('reset');
-        $('#reject_message').remove();
-        $('#block_action').val(default_val).trigger('change');
-        $('#edit_blocked_behavior').attr('data-mailbox-id', $(this).attr('mailbox_id'));
-        if (default_val == 'reject_with_message') {
-            $('#reject_message_textarea').val($(this).data('reject-message'));
-        }
-    });
-
-    $(document).on('click', '.block_domain_button', function(e) {
-        e.preventDefault();
-        let sender = $(this).parent().parent().children().html();
-        let elem = $(this);
-        Hm_Ajax.request(
-            [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_block_domain'},
-                {'name': 'imap_server_id', 'value': $(this).attr('data-mailbox_id')},
-                {'name': 'sender', 'value': sender}
-            ],
-            function(res) {
-                window.location = window.location;
-            }
-        );
-    });
-
-    $(document).on('click', '.edit_email_behavior_submit', function(e) {
-        e.preventDefault();
-        let sender = $(this).parent().parent().children().html();
-        let elem = $(this);
-        Hm_Ajax.request(
-            [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_block_domain'},
-                {'name': 'imap_server_id', 'value': $(this).attr('mailbox_id')},
-                {'name': 'sender', 'value': sender}
-            ],
-            function(res) {
-                window.location = window.location;
-            }
-        );
-    });
-
-    $('.sievefilters_accounts_title').on("click", function () {
-        $(this).parent().find('.sievefilters_accounts').toggleClass('d-none');
-    });
-}
-
-if (hm_page_name() === 'sieve_filters') {
-    /**************************************************************************************
-     *                             BOOTSTRAP SCRIPT MODAL
-     **************************************************************************************/
-    var edit_script_modal = new Hm_Modal({
-        size: 'xl',
-        modalId: 'myEditScript'
-    });
-
-    // set content
-    edit_script_modal.setContent(document.querySelector('#edit_script_modal').innerHTML);
-    $('#edit_script_modal').remove();
-
-    // add a button
-    edit_script_modal.addFooterBtn('Save', 'btn-primary', async function () {
-        save_script(current_account);
-    });
-
-
-    /**************************************************************************************
-     *                             BOOTSTRAP SIEVE FILTER MODAL
-     **************************************************************************************/
-    var edit_filter_modal = new Hm_Modal({
-        size: 'xl',
-        modalId: 'myEditFilterModal',
-    });
-
-    // set content
-    edit_filter_modal.setContent(document.querySelector('#edit_filter_modal').innerHTML);
-    $('#edit_filter_modal').remove();
-
-    // add a button
-    edit_filter_modal.addFooterBtn('Save', 'btn-primary ms-auto', async function () {
-        let result = save_filter(current_account);
-        if (result) {
-            edit_filter_modal.hide();
-        }
-    });
-
-    // add another button
-    edit_filter_modal.addFooterBtn('Convert to code', 'btn-warning', async function () {
-        let result = save_filter(current_account, true);
-        if (result) {
-            edit_filter_modal.hide();
-        }
-    });
-
-
-    function ordinal_number(n)
-    {
-        let ord = 'th';
-
-        if (n % 10 == 1 && n % 100 != 11) {
-            ord = 'st';
-        } else if (n % 10 == 2 && n % 100 != 12) {
-            ord = 'nd';
-        } else if (n % 10 == 3 && n % 100 != 13) {
-            ord = 'rd';
-        }
-
-        return n + ord;
+var ks_prev_msg_list = function() {
+    var focused = $(document.activeElement);
+    if (focused.prop('tagName').toLowerCase() != 'tr') {
+        var row = $('.message_table tbody tr').last();
+        row.focus();
     }
+    else {
+        focused.prev().focus();
+    }
+};
 
-    /**************************************************************************************
-     *                                    FUNCTIONS
-     **************************************************************************************/
-    function save_filter(imap_account, gen_script = false) {
-        let validation_failed = false
-        let conditions_parsed = []
-        let actions_parsed = []
-        let conditions = $('select[name^=sieve_selected_conditions_field]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-        let conditions_type = $('select[name^=sieve_selected_conditions_options]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-        let conditions_value = $('input[name^=sieve_selected_option_value]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-        let conditions_extra_value = $('input[name^=sieve_selected_extra_option_value]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-        let idx = 0;
-        if (conditions.length === 0) {
-            Hm_Utils.add_sys_message(hm_trans('You must provide at least one condition'), 'danger');
-            return false;
+var ks_load_msg = function() {
+    var focused = $(document.activeElement);
+    var inline;
+    if (focused.prop('tagName').toLowerCase() == 'tr') {
+        try {
+            inline = inline_msg();
         }
+        catch (e) {
+            inline = false;
+        }
+        if (inline) {
+            $('a', focused).trigger('click');
+        }
+        else {
+            document.location.href = $('a', focused).attr('href');
+        }
+    }
+};
 
-        Hm_Utils.clear_sys_messages();
-        conditions.forEach(function (elem, key) {
-            if (conditions_value[idx] === "" && conditions_value[idx] !== 'none') {
-                let order = ordinal_number(key + 1);
-                let previous_messages = $('.sys_messages').html();
-                previous_messages += previous_messages ? '<br>': '';
-                Hm_Utils.add_sys_message('The ' + order + ' condition (' + elem + ') must be provided', 'danger');
-                validation_failed = true;
+var ks_next_msg_list = function() {
+    var focused = $(document.activeElement);
+    if (focused.prop('tagName').toLowerCase() != 'tr') {
+        var row = $('.message_table tbody tr').first();
+        row.focus();
+    }
+    else {
+        focused.next().focus();
+    }
+};
+
+var ks_click_button = function(target) {
+    $(target).trigger('click');
+};
+
+var Keyboard_Shortcuts = {
+
+    unfocus: function() {
+        $('input').blur();
+        $('textarea').blur();
+    },
+
+    check: function(e, shortcuts) {
+        var combo;
+        var index;
+        var matched;
+        var control_keys = {'alt': e.altKey, 'shift': e.shiftKey, 'meta': e.metaKey, 'control': e.ctrlKey};
+        for (index in shortcuts) {
+            combo = shortcuts[index];
+            if (combo['page'] != '*' && combo['page'] != getPageNameParam()) {
+                continue;
             }
-             conditions_parsed.push(
-                 {
-                     'condition': elem,
-                     'type': conditions_type[idx],
-                     'extra_option': conditions[idx].extra_option,
-                     'extra_option_value': conditions_extra_value[idx],
-                     'value': conditions_value[idx]
-                 }
-             )
-            idx = idx + 1;
-        });
-
-        let actions_type = $('select[name^=sieve_selected_actions]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-        let actions_value = $('[name^=sieve_selected_action_value]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-        let actions_field_type = $('[name^=sieve_selected_action_value]').map(function(idx, elem) {
-            return $(elem).attr('type');
-        }).get();
-        let actions_extra_value = $('input[name^=sieve_selected_extra_action_value]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-        if (actions_type.length === 0) {
-            Hm_Utils.add_sys_message(hm_trans('You must provide at least one action'), 'danger');
-            return false;
-        }
-
-        idx = 0;
-        actions_type.forEach(function (elem, key) {
-            console.log(actions_field_type[idx])
-            if (actions_value[idx] === "" && actions_field_type[idx] !== 'hidden') {
-                let order = ordinal_number(key + 1);
-                let previous_messages = $('.sys_messages').html();
-                previous_messages += previous_messages ? '<br>': '';
-                Hm_Utils.add_sys_message('The ' + order + ' action (' + elem + ') must be provided', 'danger');
-                validation_failed = true;
+            if (e.keyCode != combo['char']) {
+                continue;
             }
-            actions_parsed.push(
-                {
-                    'action': elem,
-                    'value': actions_value[idx],
-                    'extra_option': actions_type[idx].extra_option,
-                    'extra_option_value': actions_extra_value[idx],
+            matched = Keyboard_Shortcuts.check_control_chars(combo['control_chars'], control_keys);
+            if (matched) {
+                if (combo['action'] == 'unfocus') {
+                    Keyboard_Shortcuts.unfocus();
+                    return false;
                 }
-            )
-            idx = idx + 1;
-        });
-
-        if ($('#stop_filtering').is(':checked')) {
-            actions_parsed.push(
-                {
-                    'action': "stop",
-                    'value': "",
-                    'extra_option': "",
-                    'extra_option_value': "",
+                if (Keyboard_Shortcuts.in_input_tag(e)) {
+                    return true;
                 }
-            )
-        }
-        if ($('.modal_sieve_filter_name').val() == "") {
-            Hm_Utils.add_sys_message(hm_trans('Filter name is required'), 'danger');
-            return false;
-        }
-
-        if (validation_failed) {
-            return false;
-        }
-
-        Hm_Ajax.request(
-            [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_save_filter'},
-                {'name': 'imap_account', 'value': imap_account},
-                {'name': 'sieve_filter_name', 'value': $('.modal_sieve_filter_name').val()},
-                {'name': 'sieve_filter_priority', 'value': $('.modal_sieve_filter_priority').val()},
-                {'name': 'is_editing_filter', 'value': is_editing_filter},
-                {'name': 'current_editing_filter_name', 'value': current_editing_filter_name},
-                {'name': 'conditions_json', 'value': JSON.stringify(conditions_parsed)},
-                {'name': 'actions_json', 'value': JSON.stringify(actions_parsed)},
-                {'name': 'filter_test_type', 'value': $('.modal_sieve_filter_test').val()},
-                {'name': 'gen_script', 'value': gen_script},
-            ],
-            function(res) {
-                if (Object.keys(res.script_details).length === 0) {
-                    window.location = window.location;
-                } else {
-                    edit_script_modal.open();
-                    $('.modal_sieve_script_textarea').val(res.script_details.gen_script);
-                    $('.modal_sieve_script_name').val(res.script_details.filter_name);
-                    $('.modal_sieve_script_priority').val(res.script_details.filter_priority);
-                }
+                Keyboard_Actions[combo['action']](combo['target']);
+                return false;
             }
-        );
-
+        }
         return true;
+    },
+
+    check_control_char: function(key_type, control_chars, matched, key_status) {
+        if (matched && $.inArray(key_type, control_chars) !== -1 && !key_status) {
+            matched = false;
+        }
+        else if ($.inArray(key_type, control_chars) === -1  && key_status) {
+            matched = false;
+        }
+        return matched
+    },
+
+    in_input_tag: function(e) {
+        var tag = e.target.tagName.toLowerCase();
+        if (tag == 'input' || tag == 'textarea') {
+            return true;
+        }
+        return false;
+    },
+
+    check_control_chars: function(control_chars, control_keys) {
+        var key_type;
+        var key_status;
+        var matched = true;
+        for (key_type in control_keys) {
+            key_status = control_keys[key_type];
+            matched = Keyboard_Shortcuts.check_control_char(key_type, control_chars, matched, key_status);
+        }
+        return matched;
     }
+};
 
-    function save_script(imap_account) {
-        if ($('.modal_sieve_script_name').val() === "") {
-            Hm_Utils.add_sys_message(hm_trans('You must provide a name for your script'), 'danger');
-            return false;
-        }
-        if ($('.modal_sieve_script_textarea').val() === "") {
-            Hm_Utils.add_sys_message(hm_trans('Empty script'), 'danger');
-            return false;
-        }
-        Hm_Ajax.request(
-            [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_save_script'},
-                {'name': 'imap_account', 'value': imap_account},
-                {'name': 'sieve_script_name', 'value': $('.modal_sieve_script_name').val()},
-                {'name': 'sieve_script_priority', 'value': $('.modal_sieve_script_priority').val()},
-                {'name': 'is_editing_script', 'value': is_editing_script},
-                {'name': 'current_editing_script', 'value': current_editing_script_name},
-                {'name': 'script', 'value': $('.modal_sieve_script_textarea').val()}],
-            function(res) {
-                window.location = window.location;
-            }
-        );
+var Keyboard_Actions = {
+    'unfocus': false,
+    'redirect': ks_redirect,
+    'toggle': Hm_Folders.toggle_folder_list,
+    'next': ks_next_msg_list,
+    'prev': ks_prev_msg_list,
+    'load': ks_load_msg,
+    'select': ks_select_msg,
+    'select_all': ks_select_all,
+    'click': ks_click_button,
+    'link': ks_follow_link
+};
+
+$(function() {
+
+    if (typeof shortcuts != 'undefined') {
+        $(document).on('keydown', ':not(input)', function(e) { return Keyboard_Shortcuts.check(e, shortcuts); });
     }
-
-    /**************************************************************************************
-     *                                      MODAL EVENTS
-     **************************************************************************************/
-    $('.sievefilters_accounts_title').on("click", function () {
-        $(this).parent().find('.sievefilters_accounts').toggleClass('d-none');
-    });
-    $('.add_filter').on('click', function () {
-        edit_filter_modal.setTitle('Add Filter');
-        $('.modal_sieve_filter_priority').val('');
-        $('.modal_sieve_filter_test').val('ALLOF');
-        $('#stop_filtering').prop('checked', false);
-        current_account = $(this).attr('account');
-        edit_filter_modal.open();
-
-        // Reset the form fields when opening the modal
-        $(".modal_sieve_filter_name").val('');
-        $(".modal_sieve_script_priority").val('');
-        $(".sieve_list_conditions_modal").empty();
-        $(".filter_actions_modal_table").empty();
-    });
-    $('.add_script').on('click', function () {
-        edit_script_modal.setTitle('Add Script');
-        $('.modal_sieve_script_textarea').val('');
-        $('.modal_sieve_script_name').val('');
-        $('.modal_sieve_script_priority').val('');
-        is_editing_script = false;
-        current_editing_script_name = '';
-        current_account = $(this).attr('account');
-        edit_script_modal.open();
-    });
-    $('.edit_filter').on('click', function (e) {
-        e.preventDefault();
-        let script_name = $(this).parent().parent().children().next().html();
-        edit_filter_modal.setTitle(script_name);
-        edit_filter_modal.open();
-    });
-
-    /**
-     * Delete action Button
-     */
-    $(document).on('click', '.delete_else_action_modal_button', function (e) {
-        e.preventDefault();
-        $(this).parent().parent().remove();
-    });
-
-    /**
-     * Delete action Button
-     */
-    $(document).on('click', '.delete_action_modal_button', function (e) {
-        e.preventDefault();
-        $(this).parent().parent().remove();
-    });
-
-    /**
-     * Delete Condition Button
-     */
-    $(document).on('click', '.delete_condition_modal_button', function (e) {
-        e.preventDefault();
-        $(this).parent().parent().remove();
-    });
-
-    function add_filter_condition() {
-        let header_fields = '';
-        let message_fields = '';
-
-        hm_sieve_condition_fields().Message.forEach(function (value) {
-            if (value.selected === true) {
-                message_fields += '<option selected value="'+value.name+'">' + value.description + '</option>';
-            } else {
-                message_fields += '<option value="'+value.name+'">' + value.description + '</option>';
-            }
-        });
-        hm_sieve_condition_fields().Header.forEach(function (value) {
-            if (value.selected === true) {
-                header_fields += '<option selected value="'+value.name+'">' + value.description + '</option>';
-            } else {
-                header_fields += '<option value="'+value.name+'">' + value.description + '</option>';
-            }
-        });
-        let extra_options = '<td class="col-sm-3"><input type="hidden" class="condition_extra_value form-control form-control-sm" name="sieve_selected_extra_option_value[]" /></td>';
-        $('.sieve_list_conditions_modal').append(
-            '                            <tr>' +
-            '                                <td class="col-sm-2">' +
-            '                                    <select class="add_condition_sieve_filters form-control form-control-sm" name="sieve_selected_conditions_field[]">' +
-            '                                        <optgroup label="Message">' +
-            message_fields +
-            '                                        </optgroup>' +
-            '                                        <optgroup label="Header">' +
-            header_fields +
-            '                                        </optgroup>' +
-            '                                    </select>' +
-            '                                </td>' +
-            extra_options +
-            '                                <td class="col-sm-3">' +
-            '                                    <select class="condition_options form-control form-control-sm" name="sieve_selected_conditions_options[]">' +
-            '                                        <option value="Contains">' +
-            '                                            Contains' +
-            '                                        </option>' +
-            '                                        <option value="!Contains">' +
-            '                                            Not Contains' +
-            '                                        </option>' +
-            '                                        <option value="Matches">' +
-            '                                            Matches' +
-            '                                        </option>' +
-            '                                        <option value="!Matches">' +
-            '                                            Not Matches' +
-            '                                        </option>' +
-            '                                        <option value="Regex">' +
-            '                                            Regex' +
-            '                                        </option>' +
-            '                                        <option value="!Regex">' +
-            '                                            Not Regex' +
-            '                                        </option>' +
-            '                                    </select>' +
-            '                                </td>' +
-            '                                <td class="col-sm-3">' +
-            '                                    <input type="text" name="sieve_selected_option_value[]" class="form-control form-control-sm" />' +
-            '                                </td>' +
-            '                                <td class="col-sm-1 text-end align-middle">' +
-            '                                    <a href="#" class="delete_condition_modal_button btn btn-sm btn-secondary">Delete</a>' +
-            '                                </td>' +
-            '                            </tr>'
-        );
-    }
-
-    /**
-     * Add Condition Button
-     */
-    $(document).on('click', '.sieve_add_condition_modal_button', function () {
-        add_filter_condition();
-    });
-
-    function add_filter_action(default_value = '') {
-        let possible_actions_html = '';
-
-        hm_sieve_possible_actions().forEach(function (value) {
-            if (value.selected === true) {
-                possible_actions_html += '<option selected value="'+value.name+'">' + value.description + '</option>';
-                return;
-            }
-            possible_actions_html += '<option value="'+value.name+'">' + value.description + '</option>';
-        });
-        let extra_options = '<td class="col-sm-3"><input type="hidden" class="condition_extra_action_value form-control form-control-sm" name="sieve_selected_extra_action_value[]" /></td>';
-        $('.filter_actions_modal_table').append(
-            '<tr class="border" default_value="'+default_value+'">' +
-            '   <td class="col-sm-3">' +
-            '       <select class="sieve_actions_select form-control form-control-sm" name="sieve_selected_actions[]">' +
-            '          ' + possible_actions_html +
-            '       </select>' +
-            '    </td>' +
-            extra_options +
-            '    <td class="col-sm-5">' +
-            '    <input type="hidden" name="sieve_selected_action_value[]" value="">' +
-            '    </input>' +
-            '    <td class="col-sm-1 text-end align-middle">' +
-            '           <a href="#" class="delete_action_modal_button btn btn-sm btn-secondary">Delete</a>' +
-            '    </td>' +
-            '</tr>'
-        );
-    }
-
-    /**
-     * Add Action Button
-     */
-    $(document).on('click', '.filter_modal_add_action_btn', function () {
-        add_filter_action();
-    });
-
-    /**
-     * Add Else Action Button
-     */
-    $(document).on('click', '.filter_modal_add_else_action_btn', function () {
-        let possible_actions_html = '';
-
-        hm_sieve_possible_actions().forEach(function (value) {
-            if (value.selected === true) {
-                possible_actions_html += '<option selected value="'+value.name+'">' + value.description + '</option>';
-                return;
-            }
-            possible_actions_html += '<option value="'+value.name+'">' + value.description + '</option>';
-        });
-
-        $('.filter_else_actions_modal_table').append(
-            '<tr class="border">' +
-            '   <td class="col-sm-4">' +
-            '       <select class="sieve_actions_select form-control form-control-sm">' +
-            '          ' + possible_actions_html +
-            '       </select>' +
-            '    </td>' +
-            '    <td>' +
-            '    </td>' +
-            '    <td class="col-sm-1 text-end align-middle">' +
-            '           <a href="#" class="delete_else_action_modal_button">Delete</a>' +
-            '    </td>' +
-            '</tr>'
-        );
-    });
-
-
-    /**
-     * Action change
-     */
-    $(document).on('change', '.sieve_actions_select', function () {
-        let tr_elem = $(this).parent().parent();
-        console.log(tr_elem.attr('default_value'));
-        let elem = $(this).parent().next().next();
-        let elem_extra = $(this).parent().next().find('.condition_extra_action_value');
-        let action_name = $(this).val();
-        let selected_action;
-        hm_sieve_possible_actions().forEach(function (action) {
-           if (action_name === action.name) {
-                selected_action = action;
-           }
-        });
-        if (selected_action) {
-            elem_extra.attr('type', 'hidden');
-            if (selected_action.extra_field) {
-                elem_extra.attr('type', 'text');
-                elem_extra.attr('placeholder', selected_action.extra_field_placeholder)
-            }
-            if (selected_action.type === 'none') {
-                elem.html('<input name="sieve_selected_action_value[]" class="form-control form-control-sm" type="hidden" value="" />');
-            }
-            if (selected_action.type === 'string') {
-                elem.html('<input name="sieve_selected_action_value[]" class="form-control form-control-sm" placeholder="'+selected_action.placeholder+'" type="text" value="" />');
-            }
-            if (selected_action.type === 'int') {
-                elem.html('<input name="sieve_selected_action_value[]" class="form-control form-control-sm" placeholder="'+selected_action.placeholder+'" type="number" />');
-            }
-            if (selected_action.type === 'number') {
-                elem.html('<input name="sieve_selected_action_value[]" class="form-control form-control-sm" placeholder="'+selected_action.placeholder+'" type="number" />');
-            }
-            if (selected_action.type === 'text') {
-                elem.html('<textarea name="sieve_selected_action_value[]" class="form-control form-control-sm" placeholder="'+selected_action.placeholder+'"></textarea>');
-            }
-            if (selected_action.type === 'select') {
-                options = '';
-                selected_action.values.forEach(function(val) {
-                    if (tr_elem.attr('default_value') === val) {
-                        options = options + '<option value="' + val + '" selected>'+ val +'</option>'
-                    } else {
-                        options = options + '<option value="' + val + '">'+ val +'</option>'
-                    }
-                });
-                elem.html('<select name="sieve_selected_action_value[]" class="form-control form-control-sm">'+ options +'</select>');
-            }
-            if (selected_action.type === 'mailbox') {
-                let mailboxes = null;
-                tr_elem.children().eq(2).html(hm_spinner());
-                Hm_Ajax.request(
-                    [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_get_mailboxes'},
-                        {'name': 'imap_account', 'value': current_account} ],
-                    function(res) {
-                        mailboxes = JSON.parse(res.mailboxes);
-                        options = '';
-                        mailboxes.forEach(function(val) {
-                            if (tr_elem.attr('default_value') === val) {
-                                options = options + '<option value="' + val + '" selected>'+ val +'</option>'
-                            } else {
-                                options = options + '<option value="' + val + '">'+ val +'</option>'
-                            }
-                        });
-                        elem.html('<select name="sieve_selected_action_value[]" class="form-control form-control-sm">'+ options +'</select>');
-                        $("[name^=sieve_selected_action_value]").last().val(elem.parent().attr('default_value'));
-                    }
-                );
-            }
-        }
-    })
-
-    /**
-     * Condition type change
-     */
-    $(document).on('change', '.add_condition_sieve_filters', function () {
-        let condition_name = $(this).val();
-        let elem = $(this).parent().next().next().find('.condition_options');
-        let elem_extra = $(this).parent().next().find('.condition_extra_value');
-        let elem_type = $(this).parent().next().next().next();
-        let condition;
-        let options_html = '';
-        let input_type_html = '';
-        hm_sieve_condition_fields().Message.forEach(function (cond) {
-            if (condition_name === cond.name) {
-                condition = cond;
-            }
-        });
-        hm_sieve_condition_fields().Header.forEach(function (cond) {
-            if (condition_name === cond.name) {
-                condition = cond;
-            }
-        });
-        if (condition) {
-            if (condition.extra_option === true) {
-                elem_extra.attr('type', 'text');
-                elem_extra.attr('placeholder', condition.extra_option_description);
-            } else {
-                elem_extra.attr('type', 'hidden');
-            }
-            condition.options.forEach(function (option) {
-                options_html += '<option value="'+option+'">'+option+'</option>';
-                options_html += '<option value="!'+option+'">Not '+option+'</option>';
-            });
-            elem.html(options_html);
-
-            if (condition.type === 'string') {
-                elem_type.html('<input name="sieve_selected_option_value[]" type="text" class="form-control form-control-sm" />')
-            }
-            if (condition.type === 'int') {
-                elem_type.html('<input name="sieve_selected_option_value[]" type="number" class="form-control form-control-sm" />')
-            }
-            if (condition.type === 'none') {
-                elem_type.html('<input name="sieve_selected_option_value[]" type="hidden" value="none" />')
-            }
-        }
-    });
-
-    /**
-     * Delete filter event
-     */
-    $(document).on('click', '.delete_filter', function (e) {
-        e.preventDefault();
-        if (!confirm('Do you want to delete filter?')) {
-            return;
-        }
-        let obj = $(this);
-        Hm_Ajax.request(
-            [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_delete_filter'},
-                {'name': 'imap_account', 'value': $(this).attr('imap_account')},
-                {'name': 'sieve_script_name', 'value': $(this).attr('script_name')}],
-            function(res) {
-                if (res.script_removed == '1') {
-                    obj.parent().parent().remove();
-                }
-            }
-        );
-    });
-
-
-    /**
-     * Delete script event
-     */
-    $(document).on('click', '.delete_script', function (e) {
-        e.preventDefault();
-        if (!confirm('Do you want to delete script?')) {
-            return;
-        }
-        let obj = $(this);
-        Hm_Ajax.request(
-            [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_delete_script'},
-                {'name': 'imap_account', 'value': $(this).attr('imap_account')},
-                {'name': 'sieve_script_name', 'value': $(this).attr('script_name')}],
-            function(res) {
-                if (res.script_removed == '1') {
-                    obj.parent().parent().remove();
-                }
-            }
-        );
-    });
-
-    /**
-     * Edit script event
-     */
-    $(document).on('click', '.edit_script', function (e) {
-        e.preventDefault();
-        let obj = $(this);
-        edit_script_modal.setTitle('Edit Script');
-        current_account = $(this).attr('account');
-        is_editing_script = true;
-        current_editing_script_name = $(this).attr('script_name');
-        current_account = $(this).attr('imap_account');
-        $('.modal_sieve_script_name').val($(this).attr('script_name_parsed'));
-        $('.modal_sieve_script_priority').val($(this).attr('priority'));
-        Hm_Ajax.request(
-            [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_edit_script'},
-                {'name': 'imap_account', 'value': $(this).attr('imap_account')},
-                {'name': 'sieve_script_name', 'value': $(this).attr('script_name')}],
-            function(res) {
-                $('.modal_sieve_script_textarea').html(res.script);
-                edit_script_modal.open();
-            }
-        );
-    });
-
-    /**
-     * Edit filter event
-     */
-    $(document).on('click', '.edit_filter', function (e) {
-        e.preventDefault();
-        let obj = $(this);
-        current_account = $(this).attr('account');
-        is_editing_filter = true;
-        current_editing_filter_name = $(this).attr('script_name');
-        current_account = $(this).attr('imap_account');
-        // $('#stop_filtering').prop('checked', false);
-        $('.modal_sieve_filter_name').val($(this).attr('script_name_parsed'));
-        $('.modal_sieve_filter_priority').val($(this).attr('priority'));
-        $('.sieve_list_conditions_modal').html('');
-        $('.filter_actions_modal_table').html('');
-        Hm_Ajax.request(
-            [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_edit_filter'},
-                {'name': 'imap_account', 'value': $(this).attr('imap_account')},
-                {'name': 'sieve_script_name', 'value': $(this).attr('script_name')}],
-            function(res) {
-                conditions = JSON.parse(JSON.parse(res.conditions));
-                actions = JSON.parse(JSON.parse(res.actions));
-                test_type = res.test_type;
-                $(".modal_sieve_filter_test").val(test_type);
-                conditions.forEach(function (condition) {
-                    add_filter_condition();
-                    $(".add_condition_sieve_filters").last().val(condition.condition);
-                    $(".add_condition_sieve_filters").last().trigger('change');
-                    $(".condition_options").last().val(condition.type);
-                    $("[name^=sieve_selected_extra_option_value]").last().val(condition.extra_option_value);
-                    if ($("[name^=sieve_selected_option_value]").last().is('input')) {
-                        $("[name^=sieve_selected_option_value]").last().val(condition.value);
-                    }
-                });
-
-                actions.forEach(function (action) {
-                    if (action.action === "stop") {
-                        $('#stop_filtering').prop('checked', true);
-                    } else {
-                        add_filter_action(action.value);
-                        $(".sieve_actions_select").last().val(action.action);
-                        $(".sieve_actions_select").last().trigger('change');
-                        $("[name^=sieve_selected_extra_action_value]").last().val(action.extra_option_value);
-                        if ($("[name^=sieve_selected_action_value]").last().is('input')) {
-                            $("[name^=sieve_selected_action_value]").last().val(action.value);
-                        } else if ($("[name^=sieve_selected_action_value]").last().is('textarea')) {
-                            $("[name^=sieve_selected_action_value]").last().text(action.value);
-                        }
-                    }
-                });
-            }
-        );
-    });
-}
-
-function sieveFiltersPageHandler() {
-    let is_editing_script = false;
-    let current_editing_script_name = '';
-    let is_editing_filter = false;
-    let current_editing_filter_name = '';
-    let current_account;
-    /**************************************************************************************
-         *                             BOOTSTRAP SCRIPT MODAL
-         **************************************************************************************/
-    var edit_script_modal = new Hm_Modal({
-        size: 'xl',
-        modalId: 'myEditScript'
-    });
-
-    // set content
-    edit_script_modal.setContent(document.querySelector('#edit_script_modal').innerHTML);
-    $('#edit_script_modal').remove();
-
-    // add a button
-    edit_script_modal.addFooterBtn('Save', 'btn-primary', async function () {
-        save_script(current_account);
-    });
-
-
-    /**************************************************************************************
-     *                             BOOTSTRAP SIEVE FILTER MODAL
-     **************************************************************************************/
-    var edit_filter_modal = new Hm_Modal({
-        size: 'xl',
-        modalId: 'myEditFilterModal',
-    });
-
-    // set content
-    edit_filter_modal.setContent(document.querySelector('#edit_filter_modal').innerHTML);
-    $('#edit_filter_modal').remove();
-
-    // add a button
-    edit_filter_modal.addFooterBtn('Save', 'btn-primary ms-auto', async function () {
-        let result = save_filter(current_account);
-        if (result) {
-            edit_filter_modal.hide();
-        }
-    });
-
-    // add another button
-    edit_filter_modal.addFooterBtn('Convert to code', 'btn-warning', async function () {
-        let result = save_filter(current_account, true);
-        if (result) {
-            edit_filter_modal.hide();
-        }
-    });
-
-
-    function ordinal_number(n)
-    {
-        let ord = 'th';
-
-        if (n % 10 == 1 && n % 100 != 11) {
-            ord = 'st';
-        } else if (n % 10 == 2 && n % 100 != 12) {
-            ord = 'nd';
-        } else if (n % 10 == 3 && n % 100 != 13) {
-            ord = 'rd';
-        }
-
-        return n + ord;
-    }
-
-    /**************************************************************************************
-     *                                    FUNCTIONS
-     **************************************************************************************/
-    function save_filter(imap_account, gen_script = false) {
-        let validation_failed = false
-        let conditions_parsed = []
-        let actions_parsed = []
-        let conditions = $('select[name^=sieve_selected_conditions_field]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-        let conditions_type = $('select[name^=sieve_selected_conditions_options]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-        let conditions_value = $('input[name^=sieve_selected_option_value]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-        let conditions_extra_value = $('input[name^=sieve_selected_extra_option_value]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-        let idx = 0;
-        if (conditions.length === 0) {
-            Hm_Utils.add_sys_message(hm_trans('You must provide at least one condition'), 'danger');
-            return false;
-        }
-
-        Hm_Utils.clear_sys_messages();
-        conditions.forEach(function (elem, key) {
-            if (conditions_value[idx] === "" && conditions_value[idx] !== 'none') {
-                let order = ordinal_number(key + 1);
-                let previous_messages = $('.sys_messages').html();
-                previous_messages += previous_messages ? '<br>': '';
-                Hm_Utils.add_sys_message('The ' + order + ' condition (' + elem + ') must be provided', 'danger');
-                validation_failed = true;
-            }
-             conditions_parsed.push(
-                 {
-                     'condition': elem,
-                     'type': conditions_type[idx],
-                     'extra_option': conditions[idx].extra_option,
-                     'extra_option_value': conditions_extra_value[idx],
-                     'value': conditions_value[idx]
-                 }
-             )
-            idx = idx + 1;
-        });
-
-        let actions_type = $('select[name^=sieve_selected_actions]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-        let actions_value = $('[name^=sieve_selected_action_value]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-        let actions_field_type = $('[name^=sieve_selected_action_value]').map(function(idx, elem) {
-            return $(elem).attr('type');
-        }).get();
-        let actions_extra_value = $('input[name^=sieve_selected_extra_action_value]').map(function(idx, elem) {
-            return $(elem).val();
-        }).get();
-
-        if (actions_type.length === 0) {
-            Hm_Utils.add_sys_message(hm_trans('You must provide at least one action'), 'danger');
-            return false;
-        }
-
-        idx = 0;
-        actions_type.forEach(function (elem, key) {
-            console.log(actions_field_type[idx])
-            if (actions_value[idx] === "" && actions_field_type[idx] !== 'hidden') {
-                let order = ordinal_number(key + 1);
-                let previous_messages = $('.sys_messages').html();
-                previous_messages += previous_messages ? '<br>': '';
-                Hm_Utils.add_sys_message('The ' + order + ' action (' + elem + ') must be provided', 'danger');
-                validation_failed = true;
-            }
-            actions_parsed.push(
-                {
-                    'action': elem,
-                    'value': actions_value[idx],
-                    'extra_option': actions_type[idx].extra_option,
-                    'extra_option_value': actions_extra_value[idx],
-                }
-            )
-            idx = idx + 1;
-        });
-
-        if ($('#stop_filtering').is(':checked')) {
-            actions_parsed.push(
-                {
-                    'action': "stop",
-                    'value': "",
-                    'extra_option': "",
-                    'extra_option_value': "",
-                }
-            )
-        }
-        if ($('.modal_sieve_filter_name').val() == "") {
-            Hm_Utils.add_sys_message(hm_trans('Filter name is required'), 'danger');
-            return false;
-        }
-
-        if (validation_failed) {
-            return false;
-        }
-
-        Hm_Ajax.request(
-            [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_save_filter'},
-                {'name': 'imap_account', 'value': imap_account},
-                {'name': 'sieve_filter_name', 'value': $('.modal_sieve_filter_name').val()},
-                {'name': 'sieve_filter_priority', 'value': $('.modal_sieve_filter_priority').val()},
-                {'name': 'is_editing_filter', 'value': is_editing_filter},
-                {'name': 'current_editing_filter_name', 'value': current_editing_filter_name},
-                {'name': 'conditions_json', 'value': JSON.stringify(conditions_parsed)},
-                {'name': 'actions_json', 'value': JSON.stringify(actions_parsed)},
-                {'name': 'filter_test_type', 'value': $('.modal_sieve_filter_test').val()},
-                {'name': 'gen_script', 'value': gen_script},
-            ],
-            function(res) {
-                if (Object.keys(res.script_details).length === 0) {
-                    window.location = window.location;
-                } else {
-                    edit_script_modal.open();
-                    $('.modal_sieve_script_textarea').val(res.script_details.gen_script);
-                    $('.modal_sieve_script_name').val(res.script_details.filter_name);
-                    $('.modal_sieve_script_priority').val(res.script_details.filter_priority);
-                }
-            }
-        );
-
-        return true;
-    }
-
-    function save_script(imap_account) {
-        if ($('.modal_sieve_script_name').val() === "") {
-            Hm_Utils.add_sys_message(hm_trans('You must provide a name for your script'), 'danger');
-            return false;
-        }
-        if ($('.modal_sieve_script_textarea').val() === "") {
-            Hm_Utils.add_sys_message(hm_trans('Empty script'), 'danger');
-            return false;
-        }
-        Hm_Ajax.request(
-            [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_save_script'},
-                {'name': 'imap_account', 'value': imap_account},
-                {'name': 'sieve_script_name', 'value': $('.modal_sieve_script_name').val()},
-                {'name': 'sieve_script_priority', 'value': $('.modal_sieve_script_priority').val()},
-                {'name': 'is_editing_script', 'value': is_editing_script},
-                {'name': 'current_editing_script', 'value': current_editing_script_name},
-                {'name': 'script', 'value': $('.modal_sieve_script_textarea').val()}],
-            function(res) {
-                window.location = window.location;
-            }
-        );
-    }
-
-    /**************************************************************************************
-     *                                      MODAL EVENTS
-     **************************************************************************************/
-    $('.sievefilters_accounts_title').on("click", function () {
-        $(this).parent().find('.sievefilters_accounts').toggleClass('d-none');
-    });
-    $('.add_filter').on('click', function () {
-        edit_filter_modal.setTitle('Add Filter');
-        $('.modal_sieve_filter_priority').val('');
-        $('.modal_sieve_filter_test').val('ALLOF');
-        $('#stop_filtering').prop('checked', false);
-        current_account = $(this).attr('account');
-        edit_filter_modal.open();
-
-        // Reset the form fields when opening the modal
-        $(".modal_sieve_filter_name").val('');
-        $(".modal_sieve_script_priority").val('');
-        $(".sieve_list_conditions_modal").empty();
-        $(".filter_actions_modal_table").empty();
-    });
-    $('.add_script').on('click', function () {
-        edit_script_modal.setTitle('Add Script');
-        $('.modal_sieve_script_textarea').val('');
-        $('.modal_sieve_script_name').val('');
-        $('.modal_sieve_script_priority').val('');
-        is_editing_script = false;
-        current_editing_script_name = '';
-        current_account = $(this).attr('account');
-        edit_script_modal.open();
-    });
-    $('.edit_filter').on('click', function (e) {
-        e.preventDefault();
-        let script_name = $(this).parent().parent().children().next().html();
-        edit_filter_modal.setTitle(script_name);
-        edit_filter_modal.open();
-    });
-
-    /**
-     * Delete action Button
-     */
-    $(document).on('click', '.delete_else_action_modal_button', function (e) {
-        e.preventDefault();
-        $(this).parent().parent().remove();
-    });
-
-    /**
-     * Delete action Button
-     */
-    $(document).on('click', '.delete_action_modal_button', function (e) {
-        e.preventDefault();
-        $(this).parent().parent().remove();
-    });
-
-    /**
-     * Delete Condition Button
-     */
-    $(document).on('click', '.delete_condition_modal_button', function (e) {
-        e.preventDefault();
-        $(this).parent().parent().remove();
-    });
-
-    function add_filter_condition() {
-        let header_fields = '';
-        let message_fields = '';
-
-        hm_sieve_condition_fields().Message.forEach(function (value) {
-            if (value.selected === true) {
-                message_fields += '<option selected value="'+value.name+'">' + value.description + '</option>';
-            } else {
-                message_fields += '<option value="'+value.name+'">' + value.description + '</option>';
-            }
-        });
-        hm_sieve_condition_fields().Header.forEach(function (value) {
-            if (value.selected === true) {
-                header_fields += '<option selected value="'+value.name+'">' + value.description + '</option>';
-            } else {
-                header_fields += '<option value="'+value.name+'">' + value.description + '</option>';
-            }
-        });
-        let extra_options = '<td class="col-sm-3"><input type="hidden" class="condition_extra_value form-control form-control-sm" name="sieve_selected_extra_option_value[]" /></td>';
-        $('.sieve_list_conditions_modal').append(
-            '                            <tr>' +
-            '                                <td class="col-sm-2">' +
-            '                                    <select class="add_condition_sieve_filters form-control form-control-sm" name="sieve_selected_conditions_field[]">' +
-            '                                        <optgroup label="Message">' +
-            message_fields +
-            '                                        </optgroup>' +
-            '                                        <optgroup label="Header">' +
-            header_fields +
-            '                                        </optgroup>' +
-            '                                    </select>' +
-            '                                </td>' +
-            extra_options +
-            '                                <td class="col-sm-3">' +
-            '                                    <select class="condition_options form-control form-control-sm" name="sieve_selected_conditions_options[]">' +
-            '                                        <option value="Contains">' +
-            '                                            Contains' +
-            '                                        </option>' +
-            '                                        <option value="!Contains">' +
-            '                                            Not Contains' +
-            '                                        </option>' +
-            '                                        <option value="Matches">' +
-            '                                            Matches' +
-            '                                        </option>' +
-            '                                        <option value="!Matches">' +
-            '                                            Not Matches' +
-            '                                        </option>' +
-            '                                        <option value="Regex">' +
-            '                                            Regex' +
-            '                                        </option>' +
-            '                                        <option value="!Regex">' +
-            '                                            Not Regex' +
-            '                                        </option>' +
-            '                                    </select>' +
-            '                                </td>' +
-            '                                <td class="col-sm-3">' +
-            '                                    <input type="text" name="sieve_selected_option_value[]" class="form-control form-control-sm" />' +
-            '                                </td>' +
-            '                                <td class="col-sm-1 text-end align-middle">' +
-            '                                    <a href="#" class="delete_condition_modal_button btn btn-sm btn-secondary">Delete</a>' +
-            '                                </td>' +
-            '                            </tr>'
-        );
-    }
-
-    /**
-     * Add Condition Button
-     */
-    $(document).on('click', '.sieve_add_condition_modal_button', function () {
-        add_filter_condition();
-    });
-
-    function add_filter_action(default_value = '') {
-        let possible_actions_html = '';
-
-        hm_sieve_possible_actions().forEach(function (value) {
-            if (value.selected === true) {
-                possible_actions_html += '<option selected value="'+value.name+'">' + value.description + '</option>';
-                return;
-            }
-            possible_actions_html += '<option value="'+value.name+'">' + value.description + '</option>';
-        });
-        let extra_options = '<td class="col-sm-3"><input type="hidden" class="condition_extra_action_value form-control form-control-sm" name="sieve_selected_extra_action_value[]" /></td>';
-        $('.filter_actions_modal_table').append(
-            '<tr class="border" default_value="'+default_value+'">' +
-            '   <td class="col-sm-3">' +
-            '       <select class="sieve_actions_select form-control form-control-sm" name="sieve_selected_actions[]">' +
-            '          ' + possible_actions_html +
-            '       </select>' +
-            '    </td>' +
-            extra_options +
-            '    <td class="col-sm-5">' +
-            '    <input type="hidden" name="sieve_selected_action_value[]" value="">' +
-            '    </input>' +
-            '    <td class="col-sm-1 text-end align-middle">' +
-            '           <a href="#" class="delete_action_modal_button btn btn-sm btn-secondary">Delete</a>' +
-            '    </td>' +
-            '</tr>'
-        );
-    }
-
-    /**
-     * Add Action Button
-     */
-    $(document).on('click', '.filter_modal_add_action_btn', function () {
-        add_filter_action();
-    });
-
-    /**
-     * Add Else Action Button
-     */
-    $(document).on('click', '.filter_modal_add_else_action_btn', function () {
-        let possible_actions_html = '';
-
-        hm_sieve_possible_actions().forEach(function (value) {
-            if (value.selected === true) {
-                possible_actions_html += '<option selected value="'+value.name+'">' + value.description + '</option>';
-                return;
-            }
-            possible_actions_html += '<option value="'+value.name+'">' + value.description + '</option>';
-        });
-
-        $('.filter_else_actions_modal_table').append(
-            '<tr class="border">' +
-            '   <td class="col-sm-4">' +
-            '       <select class="sieve_actions_select form-control form-control-sm">' +
-            '          ' + possible_actions_html +
-            '       </select>' +
-            '    </td>' +
-            '    <td>' +
-            '    </td>' +
-            '    <td class="col-sm-1 text-end align-middle">' +
-            '           <a href="#" class="delete_else_action_modal_button">Delete</a>' +
-            '    </td>' +
-            '</tr>'
-        );
-    });
-
-
-    /**
-     * Action change
-     */
-    $(document).on('change', '.sieve_actions_select', function () {
-        let tr_elem = $(this).parent().parent();
-        console.log(tr_elem.attr('default_value'));
-        let elem = $(this).parent().next().next();
-        let elem_extra = $(this).parent().next().find('.condition_extra_action_value');
-        let action_name = $(this).val();
-        let selected_action;
-        hm_sieve_possible_actions().forEach(function (action) {
-           if (action_name === action.name) {
-                selected_action = action;
-           }
-        });
-        if (selected_action) {
-            elem_extra.attr('type', 'hidden');
-            if (selected_action.extra_field) {
-                elem_extra.attr('type', 'text');
-                elem_extra.attr('placeholder', selected_action.extra_field_placeholder)
-            }
-            if (selected_action.type === 'none') {
-                elem.html('<input name="sieve_selected_action_value[]" class="form-control form-control-sm" type="hidden" value="" />');
-            }
-            if (selected_action.type === 'string') {
-                elem.html('<input name="sieve_selected_action_value[]" class="form-control form-control-sm" placeholder="'+selected_action.placeholder+'" type="text" value="" />');
-            }
-            if (selected_action.type === 'int') {
-                elem.html('<input name="sieve_selected_action_value[]" class="form-control form-control-sm" placeholder="'+selected_action.placeholder+'" type="number" />');
-            }
-            if (selected_action.type === 'number') {
-                elem.html('<input name="sieve_selected_action_value[]" class="form-control form-control-sm" placeholder="'+selected_action.placeholder+'" type="number" />');
-            }
-            if (selected_action.type === 'text') {
-                elem.html('<textarea name="sieve_selected_action_value[]" class="form-control form-control-sm" placeholder="'+selected_action.placeholder+'"></textarea>');
-            }
-            if (selected_action.type === 'select') {
-                options = '';
-                selected_action.values.forEach(function(val) {
-                    if (tr_elem.attr('default_value') === val) {
-                        options = options + '<option value="' + val + '" selected>'+ val +'</option>'
-                    } else {
-                        options = options + '<option value="' + val + '">'+ val +'</option>'
-                    }
-                });
-                elem.html('<select name="sieve_selected_action_value[]" class="form-control form-control-sm">'+ options +'</select>');
-            }
-            if (selected_action.type === 'mailbox') {
-                let mailboxes = null;
-                tr_elem.children().eq(2).html(hm_spinner());
-                Hm_Ajax.request(
-                    [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_get_mailboxes'},
-                        {'name': 'imap_account', 'value': current_account} ],
-                    function(res) {
-                        mailboxes = JSON.parse(res.mailboxes);
-                        options = '';
-                        mailboxes.forEach(function(val) {
-                            if (tr_elem.attr('default_value') === val) {
-                                options = options + '<option value="' + val + '" selected>'+ val +'</option>'
-                            } else {
-                                options = options + '<option value="' + val + '">'+ val +'</option>'
-                            }
-                        });
-                        elem.html('<select name="sieve_selected_action_value[]" class="form-control form-control-sm">'+ options +'</select>');
-                        $("[name^=sieve_selected_action_value]").last().val(elem.parent().attr('default_value'));
-                    }
-                );
-            }
-        }
-    })
-
-    /**
-     * Condition type change
-     */
-    $(document).on('change', '.add_condition_sieve_filters', function () {
-        let condition_name = $(this).val();
-        let elem = $(this).parent().next().next().find('.condition_options');
-        let elem_extra = $(this).parent().next().find('.condition_extra_value');
-        let elem_type = $(this).parent().next().next().next();
-        let condition;
-        let options_html = '';
-        let input_type_html = '';
-        hm_sieve_condition_fields().Message.forEach(function (cond) {
-            if (condition_name === cond.name) {
-                condition = cond;
-            }
-        });
-        hm_sieve_condition_fields().Header.forEach(function (cond) {
-            if (condition_name === cond.name) {
-                condition = cond;
-            }
-        });
-        if (condition) {
-            if (condition.extra_option === true) {
-                elem_extra.attr('type', 'text');
-                elem_extra.attr('placeholder', condition.extra_option_description);
-            } else {
-                elem_extra.attr('type', 'hidden');
-            }
-            condition.options.forEach(function (option) {
-                options_html += '<option value="'+option+'">'+option+'</option>';
-                options_html += '<option value="!'+option+'">Not '+option+'</option>';
-            });
-            elem.html(options_html);
-
-            if (condition.type === 'string') {
-                elem_type.html('<input name="sieve_selected_option_value[]" type="text" class="form-control form-control-sm" />')
-            }
-            if (condition.type === 'int') {
-                elem_type.html('<input name="sieve_selected_option_value[]" type="number" class="form-control form-control-sm" />')
-            }
-            if (condition.type === 'none') {
-                elem_type.html('<input name="sieve_selected_option_value[]" type="hidden" value="none" />')
-            }
-        }
-    });
-
-    /**
-     * Delete filter event
-     */
-    $(document).on('click', '.delete_filter', function (e) {
-        e.preventDefault();
-        if (!confirm('Do you want to delete filter?')) {
-            return;
-        }
-        let obj = $(this);
-        Hm_Ajax.request(
-            [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_delete_filter'},
-                {'name': 'imap_account', 'value': $(this).attr('imap_account')},
-                {'name': 'sieve_script_name', 'value': $(this).attr('script_name')}],
-            function(res) {
-                if (res.script_removed == '1') {
-                    obj.parent().parent().remove();
-                }
-            }
-        );
-    });
-
-    /**
-     * Toggle Filter
-     */
-    $('.toggle_filter').on('change', function () {
-        const checkbox = $(this);
-        Hm_Ajax.request(
-            [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_toggle_script_state'},
-                {'name': 'imap_account', 'value': checkbox.attr('imap_account')},
-                {'name': 'script_state', 'value': checkbox.prop('checked')},
-                {'name': 'sieve_script_name', 'value': checkbox.attr('script_name')}],
-            function(res) {
-                if (res.success) {
-                    checkbox.prop('checked', !checkbox.prop('checked'));
-                }
-            }
-        );
-    });
-
-    /**
-     * Delete script event
-     */
-    $(document).on('click', '.delete_script', function (e) {
-        e.preventDefault();
-        if (!confirm('Do you want to delete script?')) {
-            return;
-        }
-        let obj = $(this);
-        Hm_Ajax.request(
-            [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_delete_script'},
-                {'name': 'imap_account', 'value': $(this).attr('imap_account')},
-                {'name': 'sieve_script_name', 'value': $(this).attr('script_name')}],
-            function(res) {
-                if (res.script_removed == '1') {
-                    obj.parent().parent().remove();
-                }
-            }
-        );
-    });
-
-    /**
-     * Edit script event
-     */
-    $(document).on('click', '.edit_script', function (e) {
-        e.preventDefault();
-        let obj = $(this);
-        edit_script_modal.setTitle('Edit Script');
-        current_account = $(this).attr('account');
-        is_editing_script = true;
-        current_editing_script_name = $(this).attr('script_name');
-        current_account = $(this).attr('imap_account');
-        $('.modal_sieve_script_name').val($(this).attr('script_name_parsed'));
-        $('.modal_sieve_script_priority').val($(this).attr('priority'));
-        Hm_Ajax.request(
-            [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_edit_script'},
-                {'name': 'imap_account', 'value': $(this).attr('imap_account')},
-                {'name': 'sieve_script_name', 'value': $(this).attr('script_name')}],
-            function(res) {
-                $('.modal_sieve_script_textarea').html(res.script);
-                edit_script_modal.open();
-            }
-        );
-    });
-
-    /**
-     * Edit filter event
-     */
-    $(document).on('click', '.edit_filter', function (e) {
-        e.preventDefault();
-        let obj = $(this);
-        current_account = $(this).attr('account');
-        is_editing_filter = true;
-        current_editing_filter_name = $(this).attr('script_name');
-        current_account = $(this).attr('imap_account');
-        // $('#stop_filtering').prop('checked', false);
-        $('.modal_sieve_filter_name').val($(this).attr('script_name_parsed'));
-        $('.modal_sieve_filter_priority').val($(this).attr('priority'));
-        $('.sieve_list_conditions_modal').html('');
-        $('.filter_actions_modal_table').html('');
-        Hm_Ajax.request(
-            [   {'name': 'hm_ajax_hook', 'value': 'ajax_sieve_edit_filter'},
-                {'name': 'imap_account', 'value': $(this).attr('imap_account')},
-                {'name': 'sieve_script_name', 'value': $(this).attr('script_name')}],
-            function(res) {
-                conditions = JSON.parse(JSON.parse(res.conditions));
-                actions = JSON.parse(JSON.parse(res.actions));
-                test_type = res.test_type;
-                $(".modal_sieve_filter_test").val(test_type);
-                conditions.forEach(function (condition) {
-                    add_filter_condition();
-                    $(".add_condition_sieve_filters").last().val(condition.condition);
-                    $(".add_condition_sieve_filters").last().trigger('change');
-                    $(".condition_options").last().val(condition.type);
-                    $("[name^=sieve_selected_extra_option_value]").last().val(condition.extra_option_value);
-                    if ($("[name^=sieve_selected_option_value]").last().is('input')) {
-                        $("[name^=sieve_selected_option_value]").last().val(condition.value);
-                    }
-                });
-
-                actions.forEach(function (action) {
-                    if (action.action === "stop") {
-                        $('#stop_filtering').prop('checked', true);
-                    } else {
-                        add_filter_action(action.value);
-                        $(".sieve_actions_select").last().val(action.action);
-                        $(".sieve_actions_select").last().trigger('change');
-                        $("[name^=sieve_selected_extra_action_value]").last().val(action.extra_option_value);
-                        if ($("[name^=sieve_selected_action_value]").last().is('input')) {
-                            $("[name^=sieve_selected_action_value]").last().val(action.value);
-                        } else if ($("[name^=sieve_selected_action_value]").last().is('textarea')) {
-                            $("[name^=sieve_selected_action_value]").last().text(action.value);
-                        }
-                    }
-                });
-            }
-        );
-    });
-}
-
-$(function () {
-    $(document).on('change', '#block_action', function(e) {
-        if ($(this).val() == 'reject_with_message') {
-            $('<div id="reject_message"><label>'+hm_trans('Message')+'</label><textarea id="reject_message_textarea"></textarea></div>').insertAfter($(this));
-        } else {
-            $('#reject_message').remove();
-        }
-    });
 });

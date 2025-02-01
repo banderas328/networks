@@ -95,3 +95,15 @@ add_header X-Frame-Options "ALLOW-FROM octopus.local";
 ---
 
 
+Rasberry 5 
+
+After usb rasbery os boot from usb :
+
+By default the PCIe connector is not enabled. To enable it you should add the following option into /boot/firmware/config.txt and reboot:
+
+sudo nano /boot/firmware/config.txt
+Then add the following comment;
+
+# Enable the PCIe External connector.
+dtparam=pciex1
+

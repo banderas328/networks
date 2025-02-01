@@ -12,16 +12,16 @@
  * CACHE_ID   unique string to bust js/css browser caching for a new build
  * SITE_ID    random site id used for page keys
  */
-define('APP_PATH', '/var/www/html/cypht/');
+define('APP_PATH', '/var/www/html/networks/networks/subsystems/mailclient/');
 define('VENDOR_PATH', APP_PATH.'vendor/');
 define('CONFIG_PATH', APP_PATH.'config/');
 define('WEB_ROOT', '');
 define('ASSETS_THEMES_ROOT', '');
 define('DEBUG_MODE', false);
-define('CACHE_ID', 'vrbSrGv2B%2BWGbfz25YG%2Bgz5LWfUQIviaV1t7k0nyL88%3D');
-define('SITE_ID', 'zRULT9r44ahRAWEUyxDH0SBXO1GBUMrPyq4bYUOU7gtmC4BG2wqGSW%2Fkqv%2BN7pGUqdXJ55PPgj%2FRFjjO2HS5UQ%3D%3D');
-define('JS_HASH', 'sha512-k2iiXBAMRyzjTPS9tZ2XILnA7Nw80g+SGMj5nX8GKjcXJYn1q/dK70iY3DNCGK0vwp2WmfLkTPTLXgsK42tlKQ==');
-define('CSS_HASH', 'sha512-Oj0hdvV6EFwv8EPY0Uhut24GmQEMdb3wiUmI5WIc7wcZwOU7RRmct8V3icwiBOHc50zGLhQEF1KNfw1ns5SE5Q==');
+define('CACHE_ID', '2tn2zYBI%2Bm5qJmCLsAnwhfXkY5n54it2WhTokHYLqlI%3D');
+define('SITE_ID', '9LZCa%2Fj2HbVObhLkR4S2e91k6pHcB0aoyPPC9hjooexk0mBvdi0vElpGXhpBfozPyLhTH3dttY5OrUWudTB8dA%3D%3D');
+define('JS_HASH', 'sha512-8ts8ROvY4NQAyYZPy1ukx0ISyeYvtrnaFx/hkTTcnAHlHSfR02A2InfnzwWJxMj5zRlV40FyV1G2RekzTRgIIw==');
+define('CSS_HASH', 'sha512-pDxgWzQrhPe2oGdVth9ydWVE2IuT6g+ivWP2vrJy8AF7SUI5zFMUgheyh0qY0eWikRP8RVcS8/t7RmJhkD1sUg==');
 
 /* show all warnings in debug mode */
 if (DEBUG_MODE) {
