@@ -221,16 +221,17 @@ var JQD = (function($, window, document, undefined) {
           }
         });
 
-        // Focus active window.
-        // d.on('mousedown', 'div.window', function() {
-        //   // Bring window to front.
-        //   JQD.util.window_flat();
-        //   $(this).addClass('window_stack');
-        //
-        // });
+        //Focus active window.
+        d.on('mousedown', 'div.window', function() {
+          // Bring window to front.
+          JQD.util.window_flat();
+          $(this).addClass('window_stack');
+        
+        });
 
         // Make windows draggable.
         d.on('mouseenter', 'div.window', function() {
+
           $(this).off('mouseenter').draggable({
             // Confine to desktop.
             // Movable via top bar only.
