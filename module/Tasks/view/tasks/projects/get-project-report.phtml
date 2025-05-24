@@ -1,6 +1,0 @@
-<?php foreach ($this->data as $data_key => $data_value) {
-    echo "<h1>Project name: ".$data_key."</h1>";
-        foreach ($data_value as $row_key => $row_value) {
-            echo "<p>Task: ".$row_key.". Estimation: ".$row_value["estimate"]." Reported <b style='font-size: 15px;'>".$row_value['hours']."</b> by: ".$row_value["user_name"]."</p>";
-        }
-}
