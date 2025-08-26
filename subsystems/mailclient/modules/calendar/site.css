@@ -1,0 +1,6 @@
+.mobile .calendar_month th { max-width: 30px; overflow: hidden; }
+.calendar_month td { width: 14%; height: 120px; text-align: left; padding: 10px; border-bottom: solid 1px #eee; vertical-align: top; border-right: solid 1px #eee; }
+.calendar_week .offmonth, .calendar_month .offmonth { color: #ccc; }
+.calendar_week td { width: 14%; height: 600px; text-align: left; padding: 10px; border-bottom: solid 1px #eee; vertical-align: top; border-right: solid 1px #eee; }
+.event_details { cursor: pointer; z-index: 100; display: none; position: absolute; width: 300px; border: solid 1px #ddd; background-color: #fff; padding: 10px; }
+.event_details td { padding: 5px; border: none;  height: auto; }

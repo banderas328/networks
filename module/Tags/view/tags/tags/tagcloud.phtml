@@ -1,0 +1,37 @@
+<div id="tagcloud">
+<?php
+if($this->paginator) {
+    if (count($this->paginator)): ?>
+        <ul>
+            <?php foreach ($this->paginator as $item): ?>
+                <?php $vars = get_object_vars($item);?>
+                <li><span class="tag" tag_id='<?php echo $vars['id'];?>'><?php echo $vars['name'];?></span></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif;
+}
+?>
+<?php
+if($this->paginator) {
+    echo $this->paginationControl($this->paginator,'Sliding', array('partial/paginator.phtml','Tags'), array('route' => 'tags' , "div" => $this->div));
+}?>
+    <div id="files_market_list"></div>
+</div>
+
+<script type="text/javascript">
+$(function()
+{
+    $('.tag').bind("click",function(){
+        var tag_id = $(this).attr("tag_id");
+        $.ajax({
+            type: "POST",
+            url: "market/getmarketfilesontags",
+            data: {tag_id : tag_id}
+
+        })
+            .done(function( data ) {
+                $("#files_market_list").html(data);
+            });
+    });
+});
+</script>

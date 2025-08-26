@@ -1,0 +1,50 @@
+.compose_page { width: 100%; height: 100%; min-height: 400px; background-color: #fff; width: 100%; }
+/* .compose_form { position: relative; display: block; padding: 20px; width: 80%; padding-left: 30px; padding-bottom: 0px; } */
+/* .compose_bcc, .compose_cc, .compose_subject, .compose_to { padding: 5px; margin: 5px; width: 95%; } */
+.compose_to, .compose_bcc, .compose_cc { border: unset; outline: none; white-space: nowrap; width: 95%; background-color: var(--bs-form-bg); }
+.compose_to::placeholder, .compose_bcc::placeholder, .compose_cc::placeholder {
+    color: var(--bs-input-placeholder-color) !important;
+    font-family: var(--bs-body-font-family);
+}
+/* .toggle_recipients { background-color: #fff;font-size: 120%; } */
+
+.compose_body { min-height: 300px !important; }
+/* .smtp_send { cursor: pointer; color: #666; font-size: 125%; padding: 10px; margin-top: 10px; }
+.smtp_send_archive { cursor: pointer; color: #666; font-size: 125%; padding: 10px; margin-top: 10px; margin-left: 10px; } */
+.smtp_section { display: none; }
+.smtp_server_setup .content_title { cursor: pointer; }
+/* .compose_server, .compose_server option { width: 100%; padding: 5px; margin: 5px; } */
+/* .compose_attach_button, .smtp_save, .smtp_reset { cursor: pointer; margin-left: 10px; float: right; margin-top: 10px; } */
+.ke-container { border-radius: var(--bs-border-radius); margin-top: 5px !important; margin-bottom: 5px !important; padding-right: 0px !important; width: 100% !important; }
+.recipient_fields { display: none; }
+.compose_attach_file { width: 0px; opacity: 0; }
+.uploaded_files { width: 1%;  margin-left: 5px; margin-top: 5px; margin-bottom: 5px; }
+.uploaded_files td { padding-right: 10px; white-space: nowrap; }
+.uploaded_files img { opacity: .5; }
+.draft_list { z-index: 100; border-left: solid 1px #ede8e6; border-bottom: solid 1px #ede8e6; position: absolute; right: 0px; top: 55px; background-color: #fafafa; font-size: 85%; padding: 30px; padding-top: 10px; display: none;}
+.draft_title { top: 10px; right: 10px; }
+.draft_list a { font-size: 115%; padding-right: 10px; }
+.draft_list img { float: right; opacity: .4; vertical-align: -3px; cursor: pointer; }
+.CodeMirror { border: solid 1px #ddd; border-top: none; border-bottom-left-radius: var(--bs-border-radius); border-bottom-right-radius: var(--bs-border-radius); width: 100%; }
+.editor-toolbar * { border: none !important; }
+.editor-toolbar { z-index: 0; margin-top: 10px; border: solid 1px #ccc; width: 100%; border-top-left-radius: var(--bs-border-radius); border-top-right-radius: var(--bs-border-radius); }
+.editor-statusbar { border-top: none !important; }
+.editor-toolbar:before, .editor-toolbar:after { background: none !important; }
+.meter { height: 5px; position: relative; background: #ede8e6; overflow: hidden;}
+.meter span {display: block; height: 100%; }
+.progress {background-color: #4323f5; animation: progressBar 1s ease-in-out; animation-fill-mode:both; }
+@keyframes progressBar { 0% { width: 0; } 100% { width: 100%; }}
+.compose_container { min-height: calc(3.5rem + calc(var(--bs-border-width) * 2)); padding-left: 3px !important;}
+.bubbles { display: inline-block; background-color: #fff; cursor: pointer; padding: 5px; }
+.bubble { font-size: .9rem; border: 1px solid #ddd; border-radius: 4px; padding: 7px 14px; display: inline-block; margin: 0px 5px 5px 0px; }
+.bubble:hover { background-color: #eee; }
+/* .bubble:not(:first-child) { margin-left: 5px; } */
+.bubble_close { font-size: 1.7em; float: right; margin-top: 9px; line-height: 0; margin-left: 7px; }
+.bubble_dropdown {position: relative;display: inline-block; background-color: var(--bs-form-bg);}
+.bubble_dropdown-toggle {cursor: pointer;}
+.bubble_dropdown-content {display: none;position: absolute;background-color: #f9f9f9;padding: 10px;border: 1px solid #ddd; min-width: 160px; z-index: 1;}
+.bubble_dropdown-content.show {display: block;}
+.bubble_dropdown-content ul {list-style-type: none;padding: 0;margin: 0;}
+.bubble_dropdown-content ul li span, .bubble_dropdown-content ul li a {display: flex; align-items: center; padding: 8px 4px;text-decoration: none;color: #333;}
+.bubble_dropdown-content ul li span:hover, .bubble_dropdown-content ul li a:hover { background-color: #f1f1f1;cursor: pointer;}
+.bubble_dropdown-content ul li img { width: 16px;height: 16px;margin-right: 8px;}

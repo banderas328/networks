@@ -1,0 +1,58 @@
+<div>
+    <?php foreach ($chanels as $chanel) : ?>
+   <div>
+      <button class="delete_chanel alert" chanel_id='<?php echo  $chanel["chanel_id"];?>'>Delete</button>
+    <?php echo $chanel["chanel_name"];?> 
+   </div>
+    <?php endforeach; ?>
+</div>
+<script type="text/javascript">
+
+$(function(){
+
+	$(".delete_chanel").on("click", function(){
+ 		var chanel_id = $(this).attr("chanel_id");
+		 $.post("chanels/deleteChanel", {chanel_id: chanel_id}).done(function (data) {
+			    $.ajax({
+			        type: "GET",
+			        url: "chanels/indexDelete"
+
+			    })
+			        .done(function( data ) {
+			            $("#delete_chanel").html(data);
+			        });
+
+			    $.ajax({
+			        type: "GET",
+			        url: "chanels/indexDelete"
+
+			    })
+			        .done(function( data ) {
+			            $("#delete_chanel").html(data);
+			        });
+			    $.ajax({
+			        type: "GET",
+			        url: "chanels/indexPrivate"
+
+			    })
+			        .done(function( data ) {
+			            $("#private_chanels").html(data);
+			        });
+			    $.ajax({
+			        type: "GET",
+			        url: "chanels/indexPublic"
+
+			    })
+			        .done(function( data ) {
+			            $("#chanels").html(data);
+			        });
+
+	 	       $('#messages_tabs').tabs({
+	 	           active: 5,
+	 	       });
+	 	   });
+	});
+});
+
+
+</script>

@@ -1,0 +1,55 @@
+{
+  "name": "bootstrap-wysiwyg-editor",
+  "description": "Simple WYSIWYG editor plugin for Bootstrap 3",
+  "keywords": [
+    "twitter-bootstrap",
+    "bootstrap",
+    "wysiwyg",
+    "editor"
+  ],
+  "scripts": {
+    "start": "gulp",
+    "dev": "gulp watch"
+  },
+  "version": "1.1.4",
+  "author": {
+    "name": "W.D.M.Group, Ukraine",
+    "email": "office@wdmg.com.ua",
+    "url": "https://wdmg.com.ua/"
+  },
+  "contributors": [
+    {
+      "name": "Alexsander Vyshnyvetskyy",
+      "email": "alex.vyshnyvetskyy@gmail.com",
+      "url": "https://vyshnyvetskyy.com/"
+    }
+  ],
+  "main": "src/js/wysiwyg.js",
+  "homepage": "https://github.com/wdmg/bootstrap-wysiwyg",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wdmg/bootstrap-wysiwyg.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wdmg/bootstrap-wysiwyg/issues"
+  },
+  "dependencies": {
+    "bootstrap": "^3.4.0",
+    "highlightjs": "^9.16.2",
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "cross-env": "^7.0.2",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-include": "^2.4.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-terser": "^2.0.0"
+  }
+}
