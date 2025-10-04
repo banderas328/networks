@@ -78,7 +78,7 @@ server {
     location ~ /\.(?!well-known).* {
         deny all;
     }
-}
+
 ###
 For Frames
 client_max_body_size 20M;
