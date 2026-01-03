@@ -1,26 +1,33 @@
 <?php
 $_SERVER['APPLICATION_ENV'] = "development";
+
 return array(
-   'webhost' => 'http://networks.local/',
+    'webhost' => 'http://localhost:8080/', // порт из docker-compose
     'database' => array(
         'driver' => 'Pdo',
-        'dsn' => 'mysql:dbname=octopus;host=localhost;charset=utf8',
+        'dsn' => sprintf(
+            'mysql:dbname=%s;host=%s;charset=utf8mb4',
+            getenv('DB_NAME') ?: 'networks',
+            getenv('DB_HOST') ?: 'db'
+        ),
         'params' => array(
-            'host' => 'localhost',
-            'username' => 'game',
-            'password' => 'game',
-            'database' => 'octopus'
+            'host'     => getenv('DB_HOST') ?: 'db',       // имя сервиса MariaDB в docker-compose
+            'username' => getenv('DB_USER') ?: 'networks',
+            'password' => getenv('DB_PASS') ?: 'networks',
+            'database' => getenv('DB_NAME') ?: 'networks',
+            'port'     => 3306,
+            'charset'  => 'utf8mb4'
         )
     ),
     'smtp' => array(
         'yandex' => array(
-            'address' => '',
-            'username' => '',   //yandex login
-            'password' => '',            //yandex application password
-            'secure' => 'TLS',
-            'port' => '587',
-            'from_mail' => 'osoctopus.email@gmail.com',   // from email
-            'from_name' => 'admin'                  // from name
+            'address'   => '',
+            'username'  => '',   // Yandex login
+            'password'  => '',   // Yandex app password
+            'secure'    => 'TLS',
+            'port'      => '587',
+            'from_mail' => 'osoctopus.email@gmail.com',
+            'from_name' => 'admin'
         )
     )
 );

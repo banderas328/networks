@@ -1,4 +1,4 @@
-CREATE TABLE networks_08_2022.admins (
+CREATE TABLE admins (
                                          id int auto_increment NOT NULL,
                                          user_id integer NOT NULL
 )

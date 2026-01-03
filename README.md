@@ -107,3 +107,5 @@ Then add the following comment;
 # Enable the PCIe External connector.
 dtparam=pciex1
 
+
+# Legacy Zend Framework compatibility layer. Deprecated notices suppressed by design.”
