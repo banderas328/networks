@@ -3,21 +3,22 @@ return array(
 	'controllers' => array(
 		'invokables' => array(
 			'Files\Controller\Files' => 'Files\Controller\filesController',
+			'Files\Controller\Api\Files' => 'Files\Controller\api\filesControllerApi',
 		),
 	),
 	'router' => array(
 		'routes' => array(
-			'files' => array(
+			'api/v1/files' => array(
 				'type'    => 'segment',
 				'options' => array(
-					'route'    => '/files[/:action][/:param][/:value]',
+					'route'    => 'api/v1/files[/:action][/:param][/:value]',
 					'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
 						'param'     => '[a-zA-Z0-9]*',
                         'value'     => '[a-zA-Z0-9]*',
 					),
 					'defaults' => array(
-						'controller' => 'Files\Controller\Files',
+						'controller' => 'Files\Controller\Api\Files',
 						'action'     => 'uploadfile',
 					),
 				),
