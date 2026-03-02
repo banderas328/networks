@@ -15,6 +15,25 @@ class  preloaderController extends AbstractActionController
         $this->isAuthed();
 
     }
+    private function jsonResponse($data, $status = 200)
+    {
+        http_response_code($status);
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit;
+    }
+    private function authenticateRequest()
+    {
+        $header = $this->getRequest()->getHeader('Authorization');
+
+        if (!$header) {
+            return false;
+        }
+
+        $token = str_replace('Bearer ', '', $header->getFieldValue());
+
+        return $this->getUserTable()->findByAccessToken($token);
+    }
 
     public function isAuthed()
     {

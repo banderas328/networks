@@ -2,232 +2,338 @@
 
 namespace User\Controller\Api;
 
-require 'mailer/Exception.php';
-require 'mailer/PHPMailer.php';
-require 'mailer/SMTP.php';
-
-use User\Controller\PHPMailer\PHPMailer;
-use User\Controller\PHPMailer\Exception;
-use User\Controller\PHPMailer\SMTP;
-
-
-use User\Form\UserRegisterForm;
-use User\Form\UserAuthForm;
-use User\Form\UserResetForm;
-use User\Form\UserRestoreForm;
-use User\Form\UserSearchForm;
-
-//use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Config\Config;
-use Zend\Config\Factory;
-use Zend\View\Model\ViewModel;
-use User\Model\User;
-use User\Form\UserForm;
-use Zend\Mail;
-use Zend\Mail\Message;
-use Zend\Mime\Message as MimeMessage;
-use Zend\Mime\Part as MimePart;
-
-//use Zend\Crypt\Password\Bcrypt;
-use Zend\Session\Container;
-use Preloader;
 use Preloader\Controller;
+use User\Model\User;
 use Settings\Model\Settings;
-use Zend\Stdlib\RequestInterface as Request;
-
+use Zend\View\Model\JsonModel;
 
 class UserControllerApi extends Controller\preloaderController
 {
     protected $userTable;
     protected $settingsTable;
+    protected $memcached;
 
-//method for register user
-    public function registerAction()
-    {
-        $this->layout('layout/layout');
-        $form = new UserRegisterForm();
-        $form->get('submit')->setValue('Register');
-        $request = $this->getRequest();
-        $message = false;
-        if ($request->isPost()) {
-            $user = new User();
-            $form->setInputFilter($user->getInputFilter());
-            $form->setData($request->getPost());
-            $valid = true;
-            if ($request->getPost('password') !== $request->getPost('confirm_password')) {
-                $valid = false;
-                $form->get('password')->setMessages(array('passwords must be equal'));
+    /* ====================================================
+       RATE LIMIT
+    ==================================================== */
+
+        private function rateLimit($key, $limit, $seconds)
+        {
+            $mc = $this->getMemcached();
+
+            $current = $mc->get($key);
+
+            if ($current === false) {
+                $mc->set($key, 1, $seconds);
+                return true;
             }
-//             if ($form->isValid() && $valid) {
-            $data = $request->getPost();
-           //var_dump($data);die();
-                $password = $data['password'];
-                $securePass = md5("octopus" . $password);
-                $data['password'] = $securePass;
-                $data['activated'] = 0;
-                $key = $this->randKey(40);
-                $data["email_key"] = $key;
-                $user->exchangeArray($data);
-                
-                $dbAdapter = $user->getAdapter();
-                $message = $this->getUserTable()->registerUser($user);
-                if($message) {
-                    echo json_encode(['message' => $message]);
-                    return false;
-                }
-                
-                $authResult = $this->getUserTable()->authUser($data['email'], $securePass, $dbAdapter);
-                $user_session = new Container('user');
-                return $this->redirect()->toRoute('user',
-                    array('controller' => "user",
-                        'action' => 'login'
-                    ));
 
+            if ($current >= $limit) {
+                return false;
+            }
+
+            $mc->increment($key);
+            return true;
         }
-        echo json_encode(['message' => $message]);
-        return false;
-    }
 
-    public function restoreAction()
-    {
-        $this->layout('layout/layout');
-        $form = new UserRestoreForm();
-        $form->get('submit')->setValue('Restore');
-        $request = $this->getRequest();
-        $message = false;
-        if ($request->isPost()) {
-            $data["email"] = $request->getPost('email');
-            $data['activated'] = 0;
-            $key = $this->randKey(40);
-            $data["email_key"] = $key;
-            $this->getUserTable()->restoreUser($data);
-            $message = "Please check email";
-            $this->sendRestoreMail($data["email"], $key);
+        private function tooMany()
+        {
+            return $this->jsonResponse(['error' => 'Too many requests'], 429);
         }
-        echo json_encode(['message' => $message]);
-        return false;
-    }
 
-    public function resetAction()
-    {
-        session_start();
-        $this->layout('layout/layout');
-        $form = new UserResetForm();
-        $form->get('submit')->setValue('Reset');
-        $request = $this->getRequest();
-        if(!$_SESSION['email_key'] or !$_SESSION['email_key']) {
+    /* ====================================================
+       REGISTER
+    ==================================================== */
+
+        public function registerAction()
+        {
+            if (!$this->rateLimit('register:' . $_SERVER['REMOTE_ADDR'], 10, 600)) {
+                return $this->tooMany();
+            }
+
+            if (!$this->getRequest()->isPost()) {
+                return $this->jsonResponse(['error' => 'Method not allowed'], 405);
+            }
+
+            $data = $this->getRequest()->getPost();
+
+            $email = trim($data['email'] ?? '');
+            $password = $data['password'] ?? '';
+            $confirm = $data['confirm_password'] ?? '';
+
+            if (!$email || !$password) {
+                return $this->jsonResponse(['error' => 'Email and password required'], 400);
+            }
+
+            if ($password !== $confirm) {
+                return $this->jsonResponse(['error' => 'Passwords do not match'], 400);
+            }
+
+            if ($this->getUserTable()->searchSystemUser(['email' => $email])) {
+                return $this->jsonResponse(['error' => 'User already exists'], 409);
+            }
+
+            $user = new User();
+            $user->exchangeArray([
+                'email' => $email,
+                'password' => password_hash($password, PASSWORD_DEFAULT),
+                'activated' => 0,
+                'email_key' => bin2hex(random_bytes(32))
+            ]);
+
+            $this->getUserTable()->registerUser($user);
+
+            return $this->jsonResponse(['message' => 'User registered']);
+        }
+
+    /* ====================================================
+       RESTORE (SEND RESET KEY)
+    ==================================================== */
+
+        public function restoreAction()
+        {
+            if (!$this->rateLimit('restore:' . $_SERVER['REMOTE_ADDR'], 5, 600)) {
+                return $this->tooMany();
+            }
+
+            if (!$this->getRequest()->isPost()) {
+                return $this->jsonResponse(['error' => 'Method not allowed'], 405);
+            }
+
+            $email = trim($this->getRequest()->getPost('email'));
+
+            if (!$email) {
+                return $this->jsonResponse(['error' => 'Email required'], 400);
+            }
+
+            $key = bin2hex(random_bytes(32));
+
+            $this->getUserTable()->restoreUser([
+                'email' => $email,
+                'email_key' => $key,
+                'activated' => 0
+            ]);
+
+            $this->sendRestoreMail($email, $key);
+
+            return $this->jsonResponse(['message' => 'Reset instructions sent']);
+        }
+
+    /* ====================================================
+       RESET PASSWORD
+    ==================================================== */
+
+        public function resetAction()
+        {
+            if (!$this->getRequest()->isPost()) {
+                return $this->jsonResponse(['error' => 'Method not allowed'], 405);
+            }
+
+            $data = $this->getRequest()->getPost();
+
+            $email = $data['email'] ?? '';
+            $key = $data['email_key'] ?? '';
+            $pass = $data['password'] ?? '';
+            $conf = $data['confirm_password'] ?? '';
+
+            if (!$email || !$key || !$pass) {
+                return $this->jsonResponse(['error' => 'Invalid data'], 400);
+            }
+
+            if ($pass !== $conf) {
+                return $this->jsonResponse(['error' => 'Passwords do not match'], 400);
+            }
+
+            $user = $this->getUserTable()->searchSystemUser([
+                'email' => $email,
+                'email_key' => $key,
+                'activated' => 0
+            ]);
+
+            if (!$user) {
+                return $this->jsonResponse(['error' => 'Invalid reset key'], 400);
+            }
+
+            $this->getUserTable()->resetUser([
+                'email' => $email,
+                'password' => password_hash($pass, PASSWORD_DEFAULT),
+                'activated' => 1
+            ]);
+
+            return $this->jsonResponse(['message' => 'Password updated']);
+        }
+
+    /* ====================================================
+       CONFIRM EMAIL
+    ==================================================== */
+
+        public function confirmAction()
+        {
             $email = $this->params('value1');
             $key = $this->params('value2');
-            $_SESSION['email_key'] = $key;
-            $_SESSION['email'] = $email;
-        }
-        else {
-            $email = $_SESSION['email'];
-            $key = $_SESSION['email_key'];
 
-        }
-        if (!$email || !$key) {
-            die("whoops");
-        }
-        $user = $this->getUserTable()->searchSystemUser(['email' => $email, 'email_key' => $key, 'activated' => 0]);
-        if (!$user) die("error");
-
-        $message = false;
-        $data = [];
-        if ($request->isPost()) {
-            if ($request->getPost('password') !== $request->getPost('confirm_password')) {
-                return array('form' => $form, 'message' => 'passwords must be equal');
+            if (!$email || !$key) {
+                return $this->jsonResponse(['error' => 'Invalid confirmation data'], 400);
             }
-            $data["password"] = $request->getPost('password');
-            $data["password"] = md5("octopus" . $data["password"]);
-            $data["activated"] = 1;
-            $data["email"] = $email;
-            $data["email_key"] = $key;
-            if ($this->getUserTable()->resetUser($data)) {
-                $message = "Please Login with new password";
-                unset($_SESSION['email']);
-                unset($_SESSION['email_key']);
+
+            $result = $this->getUserTable()->activateUser($email, $key);
+
+            if (!$result) {
+                return $this->jsonResponse(['error' => 'Activation failed'], 400);
             }
+
+            return $this->jsonResponse(['message' => 'Account activated']);
         }
-        echo json_encode(['message' => $message]);
-        return false;
 
-    }
+    /* ====================================================
+       LOGIN (ACCESS + REFRESH)
+    ==================================================== */
 
-//method for generate random string to email activation of user accout
-    public function randKey($length, $charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')
-    {
-        $str = '';
-        $count = strlen($charset);
-        while ($length--) {
-            $str .= $charset[mt_rand(0, $count - 1)];
+        public function loginAction()
+        {
+            if (!$this->rateLimit('login:' . $_SERVER['REMOTE_ADDR'], 5, 300)) {
+                return $this->tooMany();
+            }
+
+            if (!$this->getRequest()->isPost()) {
+                return $this->jsonResponse(['error' => 'Method not allowed'], 405);
+            }
+
+            $data = $this->getRequest()->getPost();
+
+            $email = trim($data['email'] ?? '');
+            $password = $data['password'] ?? '';
+
+            if (!$email || !$password) {
+                return $this->jsonResponse(['error' => 'Email and password required'], 400);
+            }
+
+            $user = $this->getUserTable()->searchSystemUser([
+                'email' => $email,
+                'activated' => 1
+            ]);
+
+            if (!$user || !password_verify($password, $user->password)) {
+                return $this->jsonResponse(['error' => 'Invalid credentials'], 401);
+            }
+
+            $accessToken = bin2hex(random_bytes(32));
+            $refreshToken = bin2hex(random_bytes(64));
+
+            $accessHash = password_hash($accessToken, PASSWORD_DEFAULT);
+            $refreshHash = password_hash($refreshToken, PASSWORD_DEFAULT);
+
+            $accessExpires = date('Y-m-d H:i:s', strtotime('+15 minutes'));
+            $refreshExpires = date('Y-m-d H:i:s', strtotime('+30 days'));
+
+            $this->getUserTable()->storeTokens(
+                $user->id,
+                $accessToken,
+                $accessExpires,
+                $refreshToken,
+                $refreshExpires
+            );
+
+            return $this->jsonResponse([
+                'access_token' => $accessToken,
+                'refresh_token' => $refreshToken,
+                'access_expires' => $accessExpires
+            ]);
         }
-        return $str;
+
+    /* ====================================================
+       REFRESH
+    ==================================================== */
+
+    public function refreshAction()
+    {
+        if (!$this->rateLimit('refresh:' . $_SERVER['REMOTE_ADDR'], 10, 300)) {
+            return $this->tooMany();
+        }
+
+        if (!$this->getRequest()->isPost()) {
+            return $this->jsonResponse(['error' => 'Method not allowed'], 405);
+        }
+
+        $refreshToken = $this->getRequest()->getPost('refresh_token');
+
+        if (!$refreshToken) {
+            return $this->jsonResponse(['error' => 'Refresh token required'], 400);
+        }
+
+        $tokenRow = $this->getUserTable()->findByRefreshToken($refreshToken);
+
+        if (!$tokenRow) {
+            return $this->jsonResponse(['error' => 'Invalid or expired refresh token'], 401);
+        }
+
+        // revoke old token
+        $this->getUserTable()->revokeTokenById($tokenRow->id);
+
+        // generate new tokens
+        $newAccess = bin2hex(random_bytes(32));
+        $newRefresh = bin2hex(random_bytes(64));
+
+        $newAccessExpires = date('Y-m-d H:i:s', strtotime('+15 minutes'));
+        $newRefreshExpires = date('Y-m-d H:i:s', strtotime('+30 days'));
+
+        // store new tokens (user_id из tokenRow)
+        $this->getUserTable()->storeTokens(
+            $tokenRow->user_id,
+            $newAccess,
+            $newAccessExpires,
+            $newRefresh,
+            $newRefreshExpires
+        );
+
+        return $this->jsonResponse([
+            'access_token' => $newAccess,
+            'refresh_token' => $newRefresh,
+            'access_expires' => $newAccessExpires
+        ]);
+    }
+    /* ====================================================
+       AUTH BY ACCESS TOKEN
+    ==================================================== */
+
+    public function authByTokenAction()
+    {
+        $header = $this->getRequest()->getHeader('Authorization');
+
+        if (!$header) {
+            return $this->jsonResponse(['error' => 'Authorization header required'], 401);
+        }
+
+        $token = str_replace('Bearer ', '', $header->getFieldValue());
+
+        $user = $this->getUserTable()->findByAccessToken($token);
+
+        if (!$user) {
+            return $this->jsonResponse(['error' => 'Invalid or expired token'], 401);
+        }
+
+        return $this->jsonResponse(['user_id' => $user->user_id]);
     }
 
-//method for sending email to activate user accout after registation
-    public function sendRegistrationMail($email, $key)
+    /* ====================================================
+       LOGOUT
+    ==================================================== */
+
+    public function logoutAction()
     {
-        $uri = $this->getRequest()->getUri();
-        $base = sprintf('%s://%s', $uri->getScheme(), $uri->getHost());
-        $url = $base . "/user/confirm/email/" . $email . "/key/" . $key;
-        $config = new Config(Factory::fromFile('config/autoload/global.php'), true);
-        $mail = new PHPMailer;
-        $mail->isSMTP();
-//         $mail->SMTPOptions = array(
-//             'ssl' => array(
-//                 'verify_peer' => false,
-//                 'verify_peer_name' => false,
-//                 'allow_self_signed' => true
-//             )
-//         );
-//         $mail->Host = $config->smtp["yandex"]->address;
-//         $mail->SMTPAuth = true;
-//         $mail->SMTPSecure = "tls";
-//         // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-//         $mail->Username = $config->smtp["yandex"]->username; // Если почта для домена, то логин это полный адрес почты
-//         $mail->Password = $config->smtp["yandex"]->password;
-//        // $mail->SMTPSecure = $config->smtp["yandex"]->secure;
-//         $mail->Port = $config->smtp["yandex"]->port;
-//         $mail->CharSet = 'UTF-8';
-//         $mail->From = $config->smtp["yandex"]->from_mail;
-//         $mail->FromName = $config->smtp["yandex"]->from_name;
-//         $mail->addAddress($email);
-//         $mail->isHTML(true);
-//         $mail->Subject = 'Octopus Registration';
-//         $mail->Body = "This is the message to activate user account on Octopus service, please follow this link <a href='" . $url . "'>activate</a>";
-//         if (!$mail->send()) {
-//             return false;
-//         } else {
-//             return true;
-//         }
- //       $mail = new PHPMailer(true); //defaults to using php "mail()"; the true param means it will throw exceptions on errors, which we need to catch
-        
-//         try {
-//             die("hello");
-//             //$mail->AddReplyTo('name@yourdomain.com', 'First Last');
-//             $mail->Host = $config->smtp["yandex"]->address;
-//                      $mail->SMTPAuth = true;
-//                      $mail->SMTPSecure = "tls";
-//                      $mail->Username = $config->smtp["yandex"]->username; // Если почта для домена, то логин это полный адрес почты
-//                      $mail->Password = $config->smtp["yandex"]->password;
-//                      $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-//             $mail->AddAddress('anton.zhavrid.minsk@gmail.com', 'Anton Zhavrid');
-//             $mail->SetFrom('banderas328@yandex.ru', 'Anton Zhauryd');
-//             $mail->AddReplyTo('banderas328@yandex.ru', 'test');
-//             $mail->Subject = 'PHPMailer Test Subject via mail(), advanced';
-//             $mail->AltBody = 'To view the message, please use an HTML compatible email viewer!'; // optional - MsgHTML will create an alternate automatically
-//             $mail->MsgHTML("<h1>message</h1>");
-//            // $mail->AddAttachment('images/phpmailer.gif');      // attachment
-//            // $mail->AddAttachment('images/phpmailer_mini.gif'); // attachment
-//             $mail->Send();
-//             echo "Message Sent OK\n";
-//         } catch (phpmailerException $e) {
-//             echo $e->errorMessage(); //Pretty error messages from PHPMailer
-//         } catch (Exception $e) {
-//             echo $e->getMessage(); //Boring error messages from anything else!
-//         }
+        $header = $this->getRequest()->getHeader('Authorization');
+
+        if ($header) {
+            $token = str_replace('Bearer ', '', $header->getFieldValue());
+            $this->getUserTable()->revokeToken($token);
+        }
+
+        return $this->jsonResponse(['message' => 'Logged out']);
     }
+
+    /* ====================================================
+       MAIL HELPERS 
+    ==================================================== */
 
     public function sendRestoreMail($email, $key)
     {
@@ -267,103 +373,25 @@ class UserControllerApi extends Controller\preloaderController
 
 
     }
-
-//method for confirm activation user account from email
-    public function confirmAction()
+    public function sendRegistrationMail($email, $key)
     {
-        $email = $this->params('value1');
-        $key = $this->params('value2');
-        if (!$email || !$key) {
-            die("not so easy ;)");
-        }
-        $result = $this->getUserTable()->activateUser($email, $key);
-        $view = new ViewModel();
-        if ($result) {
-            $view->setTemplate('user/user/activated.phtml');
-        } else {
-            $view->setTemplate('user/user/dont_activated.phtml');
-        }
-        return $view;
+        $uri = $this->getRequest()->getUri();
+        $base = sprintf('%s://%s', $uri->getScheme(), $uri->getHost());
+        $url = $base . "/user/confirm/email/" . $email . "/key/" . $key;
+        $config = new Config(Factory::fromFile('config/autoload/global.php'), true);
+        $mail = new PHPMailer;
+        $mail->isSMTP();
+ 
     }
 
-//method for login action
-    public function loginAction()
-    {
-        $this->layout('layout/layout');
-        $form = new UserAuthForm();
-        $form->get('submit')->setValue('Login');
-        $request = $this->getRequest();
-        $message = false;
-        if ($request->isPost()) {
-            $data = $request->getPost();
-            $password = $data['password'];
-            $securePass = md5("octopus" . $password);
-            $user = new User();
-            $dbAdapter = $user->getAdapter();
-            $user = $this->getUserTable()->searchSystemUser(['email' => $data["email"]]);
-            if (!$user) {
-                $message = "Can't find activated user with such email";
-                return array('form' => $form, "message" => $message);
-            }
-            $authResult = $this->getUserTable()->authUser($data['email'], $securePass, $dbAdapter);
-            $user_session = new Container('user');
-            if ($authResult) {
-                // $user_session->user = $authResult;
-                session_start();
-                $_SESSION['user'] = (array)$authResult;
-                return $this->redirect()->toRoute('main',
-                    array('controller' => "main",
-                        'action' => 'index'
-                    ));
-            }
-        }
-        echo json_encode(["message" => $message]);
-    }
+    /* ====================================================
+       HELPERS
+    ==================================================== */
 
-//user search action
-    public function userSearchAction()
+    private function jsonResponse($data, $status = 200)
     {
-        $this->layout('layout/only_form');
-      //  $form = new UserSearchForm();
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $data = $request->getPost();
-            if(isset($data['submit'])) unset($data['submit']);
-            $user = new User();
-            $dbAdapter = $user->getAdapter();
-            $users = $this->getSettingsTable()->searchUsersOnSettings($data);
-        }
-        if(isset($users)) {
-            
-            $response["users"] = $users;
-        }
-        $response["div"] = "usersearchdiv";
-        echo json_encode ([$response]);
-        return false;
-    }
-
-    public function userPageAction()
-    {
-        $settings = new Settings();
-        $settings->getAdapter();
-        $userSettings = $this->getSettingsTable()->getCurrentUserSettings($settings->getAdapter());
-        echo json_encode (['settings' => $userSettings->toArray()]);
-        return false;
-    }
-
-    public function logoutAction()
-    {
-        unset($_SESSION['user']);
-        if (isset($_SERVER['HTTPS']) &&
-            ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
-            isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
-            $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
-            $protocol = 'https://';
-        } else {
-            $protocol = 'http://';
-        }
-        header("Location: " . $protocol . $_SERVER["HTTP_HOST"] . '/user/logout');
-        die();
+        http_response_code($status);
+        return new JsonModel($data);
     }
 
     public function getUserTable()
@@ -381,6 +409,12 @@ class UserControllerApi extends Controller\preloaderController
         }
         return $this->settingsTable;
     }
-
-
+    private function getMemcached()
+    {
+        if (!$this->memcached) {
+        $mc = new Memcached();
+        $mc->addServer('memcached', 11211);
+        }
+        return $this->memcached;
+    }
 }

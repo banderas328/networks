@@ -10,6 +10,7 @@ services:
       - ./:/var/www/html
     depends_on:
       - db
+      - memcached
     environment:
       APP_ENV: local
       DB_HOST: db
@@ -43,7 +44,7 @@ services:
       MYSQL_PASSWORD: networks
     volumes:
       - db_data:/var/lib/mysql
-      - ./database:/docker-entrypoint-initdb.d   # импорт octopus.sql
+      - ./database:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
     networks:
@@ -61,6 +62,15 @@ services:
       - "8081:80"
     depends_on:
       - db
+    networks:
+      - networks_net
+
+  memcached:
+    image: memcached:latest
+    container_name: networks_memcached
+    restart: unless-stopped
+    ports:
+      - "11211:11211"
     networks:
       - networks_net
 

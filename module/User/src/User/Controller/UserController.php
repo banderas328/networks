@@ -62,7 +62,7 @@ class UserController extends Controller\preloaderController
             $data = $request->getPost();
            //var_dump($data);die();
                 $password = $data['password'];
-                $securePass = md5("octopus" . $password);
+                $securePass = password_hash("octopus" . $password);
                 $data['password'] = $securePass;
                 $data['activated'] = 0;
                 $key = $this->randKey(40);
@@ -169,59 +169,7 @@ class UserController extends Controller\preloaderController
         $config = new Config(Factory::fromFile('config/autoload/global.php'), true);
         $mail = new PHPMailer;
         $mail->isSMTP();
-//         $mail->SMTPOptions = array(
-//             'ssl' => array(
-//                 'verify_peer' => false,
-//                 'verify_peer_name' => false,
-//                 'allow_self_signed' => true
-//             )
-//         );
-//         $mail->Host = $config->smtp["yandex"]->address;
-//         $mail->SMTPAuth = true;
-//         $mail->SMTPSecure = "tls";
-//         // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-//         $mail->Username = $config->smtp["yandex"]->username; // Если почта для домена, то логин это полный адрес почты
-//         $mail->Password = $config->smtp["yandex"]->password;
-//        // $mail->SMTPSecure = $config->smtp["yandex"]->secure;
-//         $mail->Port = $config->smtp["yandex"]->port;
-//         $mail->CharSet = 'UTF-8';
-//         $mail->From = $config->smtp["yandex"]->from_mail;
-//         $mail->FromName = $config->smtp["yandex"]->from_name;
-//         $mail->addAddress($email);
-//         $mail->isHTML(true);
-//         $mail->Subject = 'Octopus Registration';
-//         $mail->Body = "This is the message to activate user account on Octopus service, please follow this link <a href='" . $url . "'>activate</a>";
-//         if (!$mail->send()) {
-//             return false;
-//         } else {
-//             return true;
-//         }
- //       $mail = new PHPMailer(true); //defaults to using php "mail()"; the true param means it will throw exceptions on errors, which we need to catch
-        
-//         try {
-//             die("hello");
-//             //$mail->AddReplyTo('name@yourdomain.com', 'First Last');
-//             $mail->Host = $config->smtp["yandex"]->address;
-//                      $mail->SMTPAuth = true;
-//                      $mail->SMTPSecure = "tls";
-//                      $mail->Username = $config->smtp["yandex"]->username; // Если почта для домена, то логин это полный адрес почты
-//                      $mail->Password = $config->smtp["yandex"]->password;
-//                      $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-//             $mail->AddAddress('anton.zhavrid.minsk@gmail.com', 'Anton Zhavrid');
-//             $mail->SetFrom('banderas328@yandex.ru', 'Anton Zhauryd');
-//             $mail->AddReplyTo('banderas328@yandex.ru', 'test');
-//             $mail->Subject = 'PHPMailer Test Subject via mail(), advanced';
-//             $mail->AltBody = 'To view the message, please use an HTML compatible email viewer!'; // optional - MsgHTML will create an alternate automatically
-//             $mail->MsgHTML("<h1>message</h1>");
-//            // $mail->AddAttachment('images/phpmailer.gif');      // attachment
-//            // $mail->AddAttachment('images/phpmailer_mini.gif'); // attachment
-//             $mail->Send();
-//             echo "Message Sent OK\n";
-//         } catch (phpmailerException $e) {
-//             echo $e->errorMessage(); //Pretty error messages from PHPMailer
-//         } catch (Exception $e) {
-//             echo $e->getMessage(); //Boring error messages from anything else!
-//         }
+
     }
 
     public function sendRestoreMail($email, $key)
@@ -292,7 +240,7 @@ class UserController extends Controller\preloaderController
         if ($request->isPost()) {
             $data = $request->getPost();
             $password = $data['password'];
-            $securePass = md5("octopus" . $password);
+            $securePass = password_hash("octopus" . $password);
             $user = new User();
             $dbAdapter = $user->getAdapter();
             $user = $this->getUserTable()->searchSystemUser(['email' => $data["email"]]);
