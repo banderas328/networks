@@ -19,10 +19,7 @@ class  filesController extends Controller\preloaderController {
     protected $tagsTable;
     protected $filesToTagsTable;
 
-	function __construct() {
-        //not
 
-	}
 
 
     public function getDirAction(){

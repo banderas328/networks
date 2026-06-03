@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: docker/php/Dockerfile
 
-    working_dir: /var/www/html
+    working_dir: /var/www/html/osoctopus/osoctopus/octopusos
 
     volumes:
       - ./:/var/www/html
@@ -50,7 +50,7 @@ services:
 
 
   db:
-    image: mariadb:11.4
+    image: mariadb:10.11
 
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -58,12 +58,11 @@ services:
       MYSQL_USER: networks
       MYSQL_PASSWORD: networks
 
-    volumes:
-      - db_data:/var/lib/mysql
-      - ./database:/docker-entrypoint-initdb.d:ro
-
     ports:
       - "3306:3306"
+
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d:ro
 
     restart: unless-stopped
 
@@ -101,17 +100,14 @@ services:
   memcached:
     image: memcached:1.6-alpine
 
-    restart: unless-stopped
-
     ports:
       - "11211:11211"
+
+    restart: unless-stopped
 
     networks:
       - networks_net
 
-
-volumes:
-  db_data:
 
 networks:
   networks_net:

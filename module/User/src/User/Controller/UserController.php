@@ -59,10 +59,11 @@ class UserController extends Controller\preloaderController
                 $form->get('password')->setMessages(array('passwords must be equal'));
             }
 //             if ($form->isValid() && $valid) {
-            $data = $request->getPost();
+            $data = $request->getPost()->toArray();
            //var_dump($data);die();
+
                 $password = $data['password'];
-                $securePass = password_hash("octopus" . $password);
+                $securePass = md5("octopus" . $password );
                 $data['password'] = $securePass;
                 $data['activated'] = 0;
                 $key = $this->randKey(40);
@@ -238,9 +239,9 @@ class UserController extends Controller\preloaderController
         $request = $this->getRequest();
         $message = false;
         if ($request->isPost()) {
-            $data = $request->getPost();
+            $data = $request->getPost()->toArray();
             $password = $data['password'];
-            $securePass = password_hash("octopus" . $password);
+            $securePass = md5("octopus" . $password );
             $user = new User();
             $dbAdapter = $user->getAdapter();
             $user = $this->getUserTable()->searchSystemUser(['email' => $data["email"]]);

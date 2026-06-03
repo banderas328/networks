@@ -19,15 +19,4 @@ return array(
             'charset'  => 'utf8mb4'
         )
     ),
-    'smtp' => array(
-        'yandex' => array(
-            'address'   => '',
-            'username'  => '',   // Yandex login
-            'password'  => '',   // Yandex app password
-            'secure'    => 'TLS',
-            'port'      => '587',
-            'from_mail' => 'osoctopus.email@gmail.com',
-            'from_name' => 'admin'
-        )
-    )
 );

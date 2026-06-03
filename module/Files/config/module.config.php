@@ -6,8 +6,25 @@ return array(
 			'Files\Controller\Api\Files' => 'Files\Controller\api\filesControllerApi',
 		),
 	),
+
 	'router' => array(
 		'routes' => array(
+			'files' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/files[/:action][/:param][/:value]',
+					'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'param'     => '[a-zA-Z0-9]*',
+                        'value'     => '[a-zA-Z0-9]*',
+					),
+					'defaults' => array(
+						'controller' => 'Files\Controller\Files',
+						'action'     => 'uploadfile',
+					),
+				),
+
+			),
 			'api/v1/files' => array(
 				'type'    => 'segment',
 				'options' => array(
