@@ -23,6 +23,7 @@ class UserTable
 {
     protected $tableGateway;
     protected $adapter;
+    protected $apiTableGateway;
 
     public function __construct()
     {
@@ -35,6 +36,7 @@ class UserTable
             'password' => $config->database["params"]->password,
         ));
         $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("user", $adapter);
+        $this->apiTableGateway = new \Zend\Db\TableGateway\TableGateway("user_tokens", $adapter);
         $this->adapter = $adapter;
     }
 
@@ -108,8 +110,16 @@ class UserTable
         $columnsToReturn = array(
             'id', 'login', 'email','lang'
         );
-        return $authAdapter->getResultRowObject($columnsToReturn);
+        return  $authAdapter->getResultRowObject($columnsToReturn);
 
+    }
+
+    public function apiUserAuth($userAuthData) {
+        $this->apiTableGateway->delete(['user_id' => $userAuthData['user_id'][0]]);
+        $data['user_id'] = $userAuthData['user_id'][0];
+        $data['access_token_sha'] =  hash('sha256', $userAuthData['token']);
+        $this->apiTableGateway->insert($data);
+        return data
 
     }
     public function searchSystemUser($data)
@@ -156,91 +166,17 @@ class UserTable
         $this->tableGateway->update(array("lang" => $lang), array('id' => $userId));
     }
 
-    public function storeTokens($userId, $accessToken, $accessExpires, $refreshToken, $refreshExpires)
-    {
-        // перед вставкой — ревокация старых токенов (чистка)
-        $this->adapter->query(
-            "DELETE FROM user_tokens WHERE user_id = ?",
-            [$userId]
-        );
 
-        $sql = "INSERT INTO user_tokens 
-            (user_id, access_token_sha, access_expires, refresh_token_sha, refresh_expires, created_at)
-            VALUES (?, ?, ?, ?, ?, NOW())";
 
-        $this->adapter->query($sql, [
-            $userId,
-            hash('sha256', $accessToken),
-            $accessExpires,
-            hash('sha256', $refreshToken),
-            $refreshExpires
-        ]);
-    }
-
-    public function findByRefreshToken($refreshToken)
-    {
-        $sha = hash('sha256', $refreshToken);
-
-        $sql = "SELECT * FROM user_tokens 
-               WHERE refresh_token_sha = ?
-                 AND refresh_expires > NOW()
-               LIMIT 1";
-
-        $result = $this->adapter->query($sql, [$sha]);
-
-        foreach ($result as $row) {
-            return (object)$row;
-        }
-
-        return false;
-    }
 
     public function findByAccessToken($accessToken)
     {
-        $sha = hash('sha256', $accessToken);
-
-        $sql = "SELECT * FROM user_tokens 
-               WHERE access_token_sha = ?
-                 AND access_expires > NOW()
-               LIMIT 1";
-
-        $result = $this->adapter->query($sql, [$sha]);
-
-        foreach ($result as $row) {
-            return (object)$row;
-        }
-
-        return false;
+      die("hello");
     }
 
-    public function updateAccessToken($tokenId, $accessToken, $expires)
-    {
-        $sql = "UPDATE user_tokens 
-                SET access_token_sha = ?, access_expires = ?
-                WHERE id = ?";
 
-        $this->adapter->query($sql, [
-            hash('sha256', $accessToken),
-            $expires,
-            $tokenId
-        ]);
-    }
 
-    public function revokeToken($accessToken)
-    {
-        $sha = hash('sha256', $accessToken);
 
-        $this->adapter->query(
-            "DELETE FROM user_tokens WHERE access_token_sha = ?",
-            [$sha]
-        );
-    }
 
-    public function revokeTokenById($id)
-    {
-        $this->adapter->query(
-            "DELETE FROM user_tokens WHERE id = ?",
-            [$id]
-        );
-    }
+
 }

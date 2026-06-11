@@ -1,17 +1,29 @@
 <?php
 
-namespace User\Controller\Api;
+namespace User\Controller;
 
 use Preloader\Controller;
 use User\Model\User;
 use Settings\Model\Settings;
 use Zend\View\Model\JsonModel;
+use Zend\Session\Container;
 
-class UserControllerApi extends Controller\preloaderController
+class UserApiController extends Controller\preloaderController
 {
     protected $userTable;
     protected $settingsTable;
     protected $memcached;
+
+    //method for generate random string to email activation of user accout
+    public function randKey($length, $charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')
+    {
+        $str = '';
+        $count = strlen($charset);
+        while ($length--) {
+            $str .= $charset[mt_rand(0, $count - 1)];
+        }
+        return $str;
+    }
 
     /* ====================================================
        RATE LIMIT
@@ -47,9 +59,8 @@ class UserControllerApi extends Controller\preloaderController
 
         public function registerAction()
         {
-            if (!$this->rateLimit('register:' . $_SERVER['REMOTE_ADDR'], 10, 600)) {
-                return $this->tooMany();
-            }
+
+
 
             if (!$this->getRequest()->isPost()) {
                 return $this->jsonResponse(['error' => 'Method not allowed'], 405);
@@ -74,11 +85,15 @@ class UserControllerApi extends Controller\preloaderController
             }
 
             $user = new User();
+            $password = md5("octopus" . $password );
+            $key = $this->randKey(40);
             $user->exchangeArray([
                 'email' => $email,
-                'password' => password_hash($password, PASSWORD_DEFAULT),
+                'login' => $email,
+                'password' => $password,
                 'activated' => 0,
-                'email_key' => bin2hex(random_bytes(32))
+                'email_key' => $key
+
             ]);
 
             $this->getUserTable()->registerUser($user);
@@ -191,107 +206,40 @@ class UserControllerApi extends Controller\preloaderController
 
         public function loginAction()
         {
-            if (!$this->rateLimit('login:' . $_SERVER['REMOTE_ADDR'], 5, 300)) {
-                return $this->tooMany();
+
+        $request = $this->getRequest();
+        $message = false;
+        if ($request->isPost()) {
+            $data = $request->getPost()->toArray();
+            $password = $data['password'];
+            $securePass = md5("octopus" . $password );
+            $user = new User();
+            $dbAdapter = $user->getAdapter();
+            $user = $this->getUserTable()->searchSystemUser(['email' => $data["email"]]);
+            if (!$user) {
+                $message = "Can't find activated user with such email";
+                echo json_encode("Can't find activated user with such email");
+                die();
             }
-
-            if (!$this->getRequest()->isPost()) {
-                return $this->jsonResponse(['error' => 'Method not allowed'], 405);
+            $authResult = $this->getUserTable()->authUser($data['email'], $securePass, $dbAdapter);
+            $user_session = new Container('user');
+            if ($authResult) {
+                $data['user_id'] = (array)$authResult->id;
+                $data['token'] = $this->randKey(20);
+                $data  = $this->getUserTable()->apiUserAuth($data);
+                session_start();
+                $_SESSION['user'] = (array)$authResult;
+                $dataReturn['token'] = $data['access_token_sha'];
+                $dataReturn['email'] = (array)$authResult->email;
+                echo json_encode($dataReturn);
+                die();
             }
-
-            $data = $this->getRequest()->getPost();
-
-            $email = trim($data['email'] ?? '');
-            $password = $data['password'] ?? '';
-
-            if (!$email || !$password) {
-                return $this->jsonResponse(['error' => 'Email and password required'], 400);
-            }
-
-            $user = $this->getUserTable()->searchSystemUser([
-                'email' => $email,
-                'activated' => 1
-            ]);
-
-            if (!$user || !password_verify($password, $user->password)) {
-                return $this->jsonResponse(['error' => 'Invalid credentials'], 401);
-            }
-
-            $accessToken = bin2hex(random_bytes(32));
-            $refreshToken = bin2hex(random_bytes(64));
-
-            $accessHash = password_hash($accessToken, PASSWORD_DEFAULT);
-            $refreshHash = password_hash($refreshToken, PASSWORD_DEFAULT);
-
-            $accessExpires = date('Y-m-d H:i:s', strtotime('+15 minutes'));
-            $refreshExpires = date('Y-m-d H:i:s', strtotime('+30 days'));
-
-            $this->getUserTable()->storeTokens(
-                $user->id,
-                $accessToken,
-                $accessExpires,
-                $refreshToken,
-                $refreshExpires
-            );
-
-            return $this->jsonResponse([
-                'access_token' => $accessToken,
-                'refresh_token' => $refreshToken,
-                'access_expires' => $accessExpires
-            ]);
+        }
+        echo json_encode($message);
+        die();
         }
 
-    /* ====================================================
-       REFRESH
-    ==================================================== */
 
-    public function refreshAction()
-    {
-        if (!$this->rateLimit('refresh:' . $_SERVER['REMOTE_ADDR'], 10, 300)) {
-            return $this->tooMany();
-        }
-
-        if (!$this->getRequest()->isPost()) {
-            return $this->jsonResponse(['error' => 'Method not allowed'], 405);
-        }
-
-        $refreshToken = $this->getRequest()->getPost('refresh_token');
-
-        if (!$refreshToken) {
-            return $this->jsonResponse(['error' => 'Refresh token required'], 400);
-        }
-
-        $tokenRow = $this->getUserTable()->findByRefreshToken($refreshToken);
-
-        if (!$tokenRow) {
-            return $this->jsonResponse(['error' => 'Invalid or expired refresh token'], 401);
-        }
-
-        // revoke old token
-        $this->getUserTable()->revokeTokenById($tokenRow->id);
-
-        // generate new tokens
-        $newAccess = bin2hex(random_bytes(32));
-        $newRefresh = bin2hex(random_bytes(64));
-
-        $newAccessExpires = date('Y-m-d H:i:s', strtotime('+15 minutes'));
-        $newRefreshExpires = date('Y-m-d H:i:s', strtotime('+30 days'));
-
-        // store new tokens (user_id из tokenRow)
-        $this->getUserTable()->storeTokens(
-            $tokenRow->user_id,
-            $newAccess,
-            $newAccessExpires,
-            $newRefresh,
-            $newRefreshExpires
-        );
-
-        return $this->jsonResponse([
-            'access_token' => $newAccess,
-            'refresh_token' => $newRefresh,
-            'access_expires' => $newAccessExpires
-        ]);
-    }
     /* ====================================================
        AUTH BY ACCESS TOKEN
     ==================================================== */
@@ -391,7 +339,8 @@ class UserControllerApi extends Controller\preloaderController
     private function jsonResponse($data, $status = 200)
     {
         http_response_code($status);
-        return new JsonModel($data);
+        echo json_encode(["data" => $data , "status" => $status]);
+        die();
     }
 
     public function getUserTable()

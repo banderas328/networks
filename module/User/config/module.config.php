@@ -3,7 +3,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'User\Controller\User' => 'User\Controller\UserController',
-            'User\Controller\Api\User' => 'User\Controller\api\UserControllerApi',
+            'User\Controller\UserApi' => 'User\Controller\UserApiController',
         ),
     ),
     'router' => array(
@@ -26,13 +26,13 @@ return array(
             'api/user' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => 'api/v1/user[/:action][/:key1][/:value1][/:key2][/:value2]',
+                    'route'    => '/api/v1/user[/:action][/:key1][/:value1][/:key2][/:value2]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'User\Controller\Api\User',
+                        'controller' => 'User\Controller\UserApi',
                         'action'     => 'login',
                     ),
                 ),
@@ -57,13 +57,13 @@ return array(
             'api/usersearch' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => 'api/v1//user/usersearch',
+                    'route'    => '/api/v1//user/usersearch',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'User\Controller\Api\User',
+                        'controller' => 'User\Controller\UserApi',
                         'action'     => 'usersearch',
                     ),
                 ),
@@ -87,13 +87,13 @@ return array(
             'api/logout' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => 'api/v1/user/logout',
+                    'route'    => '/api/v1/user/logout',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'User\Controller\Api\User',
+                        'controller' => 'User\Controller\UserApi',
                         'action'     => 'logout',
                     ),
                 ),
@@ -117,13 +117,13 @@ return array(
            'api/restore' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => 'api/v1/user/restore',
+                    'route'    => '/api/v1/user/restore',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'User\Controller\Api\User',
+                        'controller' => 'User\Controller\UserApi',
                         'action'     => 'restore',
                     ),
                 ),
@@ -147,13 +147,13 @@ return array(
             'api/reset' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => 'api/v1/user/reset[/:key1][/:value1]',
+                    'route'    => '/api/v1/user/reset[/:key1][/:value1]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'User\Controller\Api\User',
+                        'controller' => 'User\Controller\UserApi',
                         'action'     => 'reset',
                     ),
                 ),

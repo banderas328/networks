@@ -43,13 +43,25 @@ class  preloaderController extends AbstractActionController
         $uri = explode("/", $_SERVER['REQUEST_URI']);
         if (isset($uri[2])) {
             $uri = "/" . $uri[1] . "/" . $uri[2];
-
+         
+            if($uri  == "/api/v1"){
+            $uriApi = explode("/", $_SERVER['REQUEST_URI']);
+             $uri = "/" . $uriApi[1] . "/" . $uriApi[2] ."/" . $uriApi[3] . "/" . $uriApi[4];
+            }
             if (
                 ($uri != "/user/register")
                 && ($uri != "/user/login")
                 && ($uri != "/user/confirm")
                 && ($uri != "/user/restore")
                 && ($uri != "/user/reset")
+
+
+                && ($uri != "/api/v1/user/register")
+                && ($uri != "/api/v1/user/login")
+                && ($uri != "/api/v1/user/confirm")
+                && ($uri != "/api/v1/user/restore")
+                && ($uri != "/api/v1/user/reset")
+
                 && !isset($_SESSION['user'])
             ) {
                 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . '/user/login';

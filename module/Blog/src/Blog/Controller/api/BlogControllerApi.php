@@ -116,6 +116,6 @@ class BlogControllerApi extends Controller\preloaderController
         $data = $this->getRequest()->getPost();
         if($this->getBlogTable()->deleteBlog($userId,$data["blog_id"]))
             die("deleted");
-        die("error on blod delete");
+        die("error on blog delete");
     }
 }
