@@ -6,6 +6,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 //use Zend\Stdlib\RequestInterface as Request;
 use Zend\Session\Container;
+use Zend\Stdlib\RequestInterface as Request;
 
 class  preloaderController extends AbstractActionController
 {
@@ -22,18 +23,7 @@ class  preloaderController extends AbstractActionController
         echo json_encode($data);
         exit;
     }
-    private function authenticateRequest()
-    {
-        $header = $this->getRequest()->getHeader('Authorization');
 
-        if (!$header) {
-            return false;
-        }
-
-        $token = str_replace('Bearer ', '', $header->getFieldValue());
-
-        return $this->getUserTable()->findByAccessToken($token);
-    }
 
     public function isAuthed()
     {
@@ -42,11 +32,9 @@ class  preloaderController extends AbstractActionController
 
         $uri = explode("/", $_SERVER['REQUEST_URI']);
         if (isset($uri[2])) {
-            $uri = "/" . $uri[1] . "/" . $uri[2];
-         
+            $uri = "/" . $uri[1] . "/" . $uri[2];        
             if($uri  == "/api/v1"){
-            $uriApi = explode("/", $_SERVER['REQUEST_URI']);
-             $uri = "/" . $uriApi[1] . "/" . $uriApi[2] ."/" . $uriApi[3] . "/" . $uriApi[4];
+            return true;
             }
             if (
                 ($uri != "/user/register")
@@ -54,14 +42,6 @@ class  preloaderController extends AbstractActionController
                 && ($uri != "/user/confirm")
                 && ($uri != "/user/restore")
                 && ($uri != "/user/reset")
-
-
-                && ($uri != "/api/v1/user/register")
-                && ($uri != "/api/v1/user/login")
-                && ($uri != "/api/v1/user/confirm")
-                && ($uri != "/api/v1/user/restore")
-                && ($uri != "/api/v1/user/reset")
-
                 && !isset($_SESSION['user'])
             ) {
                 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . '/user/login';

@@ -15,6 +15,7 @@ class UserApiController extends Controller\preloaderController
     protected $memcached;
 
     //method for generate random string to email activation of user accout
+
     public function randKey($length, $charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')
     {
         $str = '';
@@ -246,21 +247,14 @@ class UserApiController extends Controller\preloaderController
 
     public function authByTokenAction()
     {
-        $header = $this->getRequest()->getHeader('Authorization');
+        $token  = $this->getRequest()->getPost('token');
 
-        if (!$header) {
-            return $this->jsonResponse(['error' => 'Authorization header required'], 401);
-        }
-
-        $token = str_replace('Bearer ', '', $header->getFieldValue());
-
-        $user = $this->getUserTable()->findByAccessToken($token);
-
-        if (!$user) {
+        $userId = $this->getUserTable()->findByAccessToken($token);
+        if (!$userId) {
             return $this->jsonResponse(['error' => 'Invalid or expired token'], 401);
         }
 
-        return $this->jsonResponse(['user_id' => $user->user_id]);
+        return $this->jsonResponse(['user_id' => $userId]);
     }
 
     /* ====================================================
