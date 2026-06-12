@@ -283,6 +283,8 @@ class Stream extends Response
      */
     public function __destruct()
     {
+
+        return false;
         if (is_resource($this->stream)) {
             $this->stream = null; //Could be listened by others
         }
