@@ -23,7 +23,7 @@ class UserTable
 {
     protected $tableGateway;
     protected $adapter;
-    protected $apiTableGateway;
+    public $apiTableGateway;
 
     public function __construct()
     {
@@ -48,7 +48,7 @@ class UserTable
             'email' => $user->email,
             'password' => $user->password,
             'email_key' => $user->email_key,
-            'activated' => '1',
+            'activated' => '0',
         );
         $id = (int)$user->id;
         if ($id == 0) {
