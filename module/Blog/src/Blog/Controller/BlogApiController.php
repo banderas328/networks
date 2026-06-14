@@ -1,6 +1,6 @@
 <?php
 
-namespace Blog\Controller\Api;
+namespace Blog\Controller;
 
 
 use Blog\Model\BlogComment;
@@ -12,9 +12,10 @@ use Blog\Model\Blog;
 use Blog\Model\BlogTable;
 use Preloader\Controller;
 use Zend\Session\Container;
+use User\Controller\UserApiController;
 
 
-class BlogControllerApi extends Controller\preloaderController
+class BlogApiController extends Controller\preloaderController
 {
     protected $blogTable;
     protected $friendsTable;
@@ -26,6 +27,11 @@ class BlogControllerApi extends Controller\preloaderController
 
     public function saveBlogAction()
     {
+        $token  = $this->getRequest()->getPost('token');
+
+        $userId = $this->getUserTable()->findByAccessToken($token);
+        var_dump($userId);
+        die("hello");
         $request = $this->getRequest();
         $user_session = $_SESSION['user'];
         $userId = $user_session["id"];
@@ -85,7 +91,7 @@ class BlogControllerApi extends Controller\preloaderController
         $data["user_id"] = $userId;
         $blogComment = new BlogCommentTable();
         $blogComment->addComment($data);
-        echo "ok"
+        echo "ok";
         die();
     }
 

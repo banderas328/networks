@@ -10,6 +10,9 @@ use Zend\Stdlib\RequestInterface as Request;
 
 class  preloaderController extends AbstractActionController
 {
+
+    protected $userTable;
+    
     function __construct()
     {
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
@@ -22,6 +25,14 @@ class  preloaderController extends AbstractActionController
         header('Content-Type: application/json');
         echo json_encode($data);
         exit;
+    }
+
+    public function getUserTable()
+    {
+        if (!$this->userTable) {
+            $this->userTable = new \User\Model\UserTable;
+        }
+        return $this->userTable;
     }
 
 

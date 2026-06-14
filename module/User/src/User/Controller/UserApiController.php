@@ -117,7 +117,7 @@ class UserApiController extends Controller\preloaderController
        AUTH BY ACCESS TOKEN
     ==================================================== */
 
-    public function authByTokenAction()
+    public static function authByTokenAction()
     {
         $token  = $this->getRequest()->getPost('token');
 
