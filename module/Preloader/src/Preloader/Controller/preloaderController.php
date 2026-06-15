@@ -27,12 +27,19 @@ class  preloaderController extends AbstractActionController
         exit;
     }
 
-    public function getUserTable()
+    public  function getUserTable()
     {
         if (!$this->userTable) {
             $this->userTable = new \User\Model\UserTable;
         }
         return $this->userTable;
+    }
+
+    public function getApiUser($request){
+     $token  = $request->getPost('token');
+     $userId = $this->getUserTable()->findByAccessToken($token);
+     if(!$userId) die(" invalid user");
+     return $userId;
     }
 
 

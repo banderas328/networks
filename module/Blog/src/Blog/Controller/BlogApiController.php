@@ -27,41 +27,35 @@ class BlogApiController extends Controller\preloaderController
 
     public function saveBlogAction()
     {
-        $token  = $this->getRequest()->getPost('token');
-        $userId = $this->getUserTable()->findByAccessToken($token);
-        if(!$userId) die(" invalid user");
-        $request = $this->getRequest();
-        $user_session = $_SESSION['user'];
+        $userId = $this->getApiUser($this->getRequest());
         $post = array_merge_recursive(
-            $request->getPost()->toArray(),
-            $request->getFiles()->toArray()
+            $this->getRequest()->getPost()->toArray(),
+            $this->getRequest()->getFiles()->toArray()
         );
         $blog = new Blog();
         $this->getBlogTable()->saveBlog($post, $userId, $blog->getAdapter());
-        die();
+        die("created");
     }
 
 
     public function getBlogsAction()
     {
 
-        $token  = $this->getRequest()->getPost('token');
-        $userId = $this->getUserTable()->findByAccessToken($token);
-        if(!$userId) die(" invalid user");
+        $userId = $this->getApiUser($this->getRequest());
         if (isset($this->getRequest()->getPost()->offset)) $offset = (int)$this->getRequest()->getPost()->offset;
         else $offset = 0;
         $blog = new Blog();
         $blogs = $this->getBlogTable()->getBlogs($userId, 'false', $offset, $blog->getAdapter());
         if(!empty($blogs)) {
             echo json_encode (array("blogs" => $blogs, 'user_id' => $userId, 'offset' => $offset));
-            return false;
+            die();
         }
         else {
             echo json_encode (array("blogs" => [], 'user_id' => $userId, 'offset' => $offset));
-            return false;
+            die();
         }
             echo json_encode (array("blogs" => [], 'user_id' => $userId, 'offset' => $offset));
-            return false;
+            die();
     }
 
     public function getBlogTable()
@@ -82,9 +76,7 @@ class BlogApiController extends Controller\preloaderController
 
     public function addCommentToBlogAction()
     {
-        $token  = $this->getRequest()->getPost('token');
-        $userId = $this->getUserTable()->findByAccessToken($token);
-        if(!$userId) die(" invalid user");
+        $userId = $this->getApiUser($this->getRequest());
         $data = $this->getRequest()->getPost()->toArray();
         unset($data['token']);
         $data["user_id"] = $userId;
@@ -105,9 +97,7 @@ class BlogApiController extends Controller\preloaderController
     
     public function deleteBlogsAction(){
         $this->layout('layout/only_form');
-        $request = $this->getRequest();
-        $token  = $this->getRequest()->getPost('token');
-        $userId = $this->getUserTable()->findByAccessToken($token);
+        $userId = $this->getApiUser($this->getRequest());
         if(!$userId) die(" invalid user");
         $blog = new Blog();
         echo json_encode ( array("blogs" => $this->getBlogTable()->getBlogsForDelete($userId),$blog->getAdapter()));
@@ -117,9 +107,7 @@ class BlogApiController extends Controller\preloaderController
     
     public function deleteBlogAction(){
         $request = $this->getRequest();
-        $token  = $this->getRequest()->getPost('token');
-        $userId = $this->getUserTable()->findByAccessToken($token);
-        if(!$userId) die(" invalid user");
+        $userId = $this->getApiUser($this->getRequest());
         $data = $this->getRequest()->getPost();
         if($this->getBlogTable()->deleteBlog($userId,$data["blog_id"]))
             die("deleted");
