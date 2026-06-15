@@ -28,13 +28,10 @@ class BlogApiController extends Controller\preloaderController
     public function saveBlogAction()
     {
         $token  = $this->getRequest()->getPost('token');
-
         $userId = $this->getUserTable()->findByAccessToken($token);
-        var_dump($userId);
-        die("hello");
+        if(!$userId) die(" invalid user");
         $request = $this->getRequest();
         $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
         $post = array_merge_recursive(
             $request->getPost()->toArray(),
             $request->getFiles()->toArray()
@@ -47,9 +44,10 @@ class BlogApiController extends Controller\preloaderController
 
     public function getBlogsAction()
     {
-        $this->layout('layout/only_form');
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+
+        $token  = $this->getRequest()->getPost('token');
+        $userId = $this->getUserTable()->findByAccessToken($token);
+        if(!$userId) die(" invalid user");
         if (isset($this->getRequest()->getPost()->offset)) $offset = (int)$this->getRequest()->getPost()->offset;
         else $offset = 0;
         $blog = new Blog();
@@ -84,10 +82,11 @@ class BlogApiController extends Controller\preloaderController
 
     public function addCommentToBlogAction()
     {
-        $this->layout('layout/only_form');
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $token  = $this->getRequest()->getPost('token');
+        $userId = $this->getUserTable()->findByAccessToken($token);
+        if(!$userId) die(" invalid user");
         $data = $this->getRequest()->getPost()->toArray();
+        unset($data['token']);
         $data["user_id"] = $userId;
         $blogComment = new BlogCommentTable();
         $blogComment->addComment($data);
@@ -107,8 +106,9 @@ class BlogApiController extends Controller\preloaderController
     public function deleteBlogsAction(){
         $this->layout('layout/only_form');
         $request = $this->getRequest();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $token  = $this->getRequest()->getPost('token');
+        $userId = $this->getUserTable()->findByAccessToken($token);
+        if(!$userId) die(" invalid user");
         $blog = new Blog();
         echo json_encode ( array("blogs" => $this->getBlogTable()->getBlogsForDelete($userId),$blog->getAdapter()));
         return false;
@@ -117,8 +117,9 @@ class BlogApiController extends Controller\preloaderController
     
     public function deleteBlogAction(){
         $request = $this->getRequest();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $token  = $this->getRequest()->getPost('token');
+        $userId = $this->getUserTable()->findByAccessToken($token);
+        if(!$userId) die(" invalid user");
         $data = $this->getRequest()->getPost();
         if($this->getBlogTable()->deleteBlog($userId,$data["blog_id"]))
             die("deleted");
