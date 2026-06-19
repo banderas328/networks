@@ -10,8 +10,10 @@ $this->headTitle($title);
         	<input type="file" name="avatar" id="avatar">
         </form>
 		</div>
-		<?php if(is_array($this->user_settings))
-echo "<img src='" . $this->user_settings["avatar"] . "'>";
+		<?php if(is_array($this->user_settings)) {
+		if(isset($this->user_settings["avatar"]))
+	    echo "<img src='" . $this->user_settings["avatar"] . "'>";
+}
 ?>
 
 <script type="text/javascript">

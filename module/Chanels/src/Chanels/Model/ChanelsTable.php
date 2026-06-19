@@ -70,22 +70,29 @@ class ChanelsTable
                     return $resultSet;
     }
 
-    public function fetchAllChanelsInAdminRole()
+    public function fetchAllChanelsInAdminRole($userId =  false)
     {
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
-        $sql = "SELECT * FROM chanels_admins 
+        if(!$userId) {
+            $user_session = $_SESSION['user'];
+            $userId = $user_session["id"];
+        }
+        $sql = "SELECT chanels.id as chanel_id,chanels.chanel_name FROM chanels_admins 
                 left join chanels on chanels.id = chanels_admins.chanel_id
                 where chanels_admins.admins=" . $userId;
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         return $resultSet->toArray();
     }
 
-    public function fetchAllPrivateRequests($adapter)
+    public function fetchAllPrivateRequests($adapter, $userId = false)
     {
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
-        $sql = "SELECT  * FROM chanels
+        if(!$userId) {
+            $user_session = $_SESSION['user'];
+            $userId = $user_session["id"];
+        }
+        $sql = "SELECT  chanels.id,chanels.chanel_name,user_settings.user_id,user_settings.user_id,user_settings.first_name,user_settings.second_name,user_settings.second_name ,
+            private_chanels_requests.pending_response ,private_chanels_requests.is_confirmed, 
+            private_chanels_requests.is_confirmed
+        FROM chanels
         left join private_chanels_requests on chanels.id = private_chanels_requests.chanel_id
         Left join chanels_admins on chanels.id = chanels_admins.chanel_id
         left join user_settings on private_chanels_requests.user_id = user_settings.user_id
@@ -94,10 +101,12 @@ class ChanelsTable
         return $resultSet;
     }
 
-    public function checkIsUserIsChanelAdmin($adapter, $request)
+    public function checkIsUserIsChanelAdmin($adapter, $request , $userId =  false)
     {
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        if(!$userId) {
+            $user_session = $_SESSION['user'];
+            $userId = $user_session["id"];
+        }
         $chanel_id = (int) $request->getPost()->chanel_id;
         $sql = "SELECT * FROM chanels_admins WHERE chanel_id=" . $chanel_id . " AND admins=" . $userId;
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);

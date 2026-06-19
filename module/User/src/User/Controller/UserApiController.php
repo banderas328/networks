@@ -100,8 +100,10 @@ class UserApiController extends Controller\preloaderController
                 $data['user_id'] = (array)$authResult->id;
                 $data['token'] = $this->randKey(20);
                 $data  = $this->getUserTable()->apiUserAuth($data);
-                session_start();
-                $_SESSION['user'] = (array)$authResult;
+                if(!isset( $_SESSION['user'])) {
+                  session_start();
+                  $_SESSION['user'] = (array)$authResult;
+                }                
                 $dataReturn['token'] = $data['access_token_sha'];
                 $dataReturn['email'] = (array)$authResult->email;
                 echo json_encode($dataReturn);

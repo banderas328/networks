@@ -59,9 +59,9 @@ class ChanelsApiController extends Controller\preloaderController
         $request = $this->getRequest();
         $chanels = new  Chanels();
         if ($request->isPost()) {
-           echo  json_encode($this->getChanelsTable()->addRequestToChanel($request, $chanels->getAdapter(), $userId));
+          $this->getChanelsTable()->addRequestToChanel($request, $chanels->getAdapter(), $userId);
         }
-        die();
+        die("ok");
     }
 
     public function addmessagetochanelAction()
@@ -80,29 +80,32 @@ class ChanelsApiController extends Controller\preloaderController
 
     public function getPrivateChanelsRequestsAction()
     {
+        $userId = $this->getApiUser($this->getRequest());
         $chanels = new  Chanels();
         $this->layout('layout/only_form');
         echo json_encode (array(
-            'requests' => $this->getChanelsTable()->fetchAllPrivateRequests($chanels->getAdapter()),
+            'requests' => $this->getChanelsTable()->fetchAllPrivateRequests($chanels->getAdapter(),$userId)->toArray(),
         ));
-        return false;
+        die();
     }
 
     public function denyAccessToChanelAction()
     {
+        $userId = $this->getApiUser($this->getRequest());
         $request = $this->getRequest();
         $chanels = new  Chanels();
-        if(!$this->getChanelsTable()->checkIsUserIsChanelAdmin($chanels->getAdapter(),$request)) die('try more :))');
-        $this->getChanelsTable()->denyAccessUserToChanel($chanels->getAdapter(),$request);
+        if(!$this->getChanelsTable()->checkIsUserIsChanelAdmin($chanels->getAdapter(),$request,$userId)) die('try more :))');
+        $this->getChanelsTable()->denyAccessUserToChanel($chanels->getAdapter(),$request,$userId);
         echo "ok";
         die();
     }
 
     public function allowAccessToChanelAction()
     {
+        $userId = $this->getApiUser($this->getRequest());
         $request = $this->getRequest();
         $chanels = new  Chanels();
-        if(!$this->getChanelsTable()->checkIsUserIsChanelAdmin($chanels->getAdapter(),$request)) die('try more');
+        if(!$this->getChanelsTable()->checkIsUserIsChanelAdmin($chanels->getAdapter(),$request, $userId)) die('try more');
         $this->getChanelsTable()->allowAccessUserToChanel($chanels->getAdapter(),$request);
         echo "ok";
         die();
@@ -110,8 +113,7 @@ class ChanelsApiController extends Controller\preloaderController
     
     public function indexDeleteAction()
     {
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = $this->getApiUser($this->getRequest());
         $chanels = new  Chanels();
         $this->layout('layout/only_form');
         echo  json_encode(array(
@@ -121,8 +123,7 @@ class ChanelsApiController extends Controller\preloaderController
     }
     
     public function deleteChanelAction(){
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = $this->getApiUser($this->getRequest());
         if ($this->getChanelsTable()->deleteChanel($this->getRequest(),$userId))
             die("deleted");
         die("error delete chanel");      
