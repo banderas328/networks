@@ -3,7 +3,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
            'Chanels\Controller\Chanels' => 'Chanels\Controller\ChanelsController',
-           'Chanels\Controller\Api\Chanels' => 'Chanels\Controller\api\ChanelsControllerApi',
+           'Chanels\Controller\ChanelsApi' => 'Chanels\Controller\ChanelsApiController',
         ),
     ),
     'router' => array(
@@ -26,13 +26,13 @@ return array(
             'api/v1/chanels' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => 'api/v1/chanels[/:action][/:id]',
+                    'route'    => '/api/v1/chanels[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Chanels\Controller\Api\Chanels',
+                        'controller' => 'Chanels\Controller\ChanelsApi',
                         'action'     => 'indexPublic',
                     ),
                 ),

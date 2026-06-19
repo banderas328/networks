@@ -41,14 +41,14 @@ if(isset($_SESSION['user']))
 
                         $isConfirmed = false;
                     }
-                    if($chanel->pending_response and ($chanel->user_id == $user_id ) ) {
+                    if($chanel->pending_response  and ($chanel->user_id == $user_id )  ) {
                         $isWaiting = true;
                     }
                     else {
                         $isWaiting = false;
                     }
 
-                    if(!$chanel->pending_response and ($chanel->user_id == $user_id ) ) {
+                    if(!$chanel->pending_response  and !$chanel->is_confirmed  ) {
                         $isClosed = true;
                     }
                     else {

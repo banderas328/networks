@@ -27,11 +27,13 @@ class ChanelsMessagesTable
         $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("chanels_messages",$adapter);
     }
 
-    public function addMessageToChanel($request,$adapter){
+    public function addMessageToChanel($request,$adapter,$userId = false){
         $text =  preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $request->getPost()->text);
         $to_chanel = (int) $request->getPost()->to_chanel;
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        if(!$userId) {
+            $user_session = $_SESSION['user'];
+            $userId = $user_session["id"];
+        }
         $date = date_create();
         $date = date_timestamp_get($date);
         $data = array('to_chanel' => $to_chanel,'from_user' => $userId,'message'=>$text,'date' => $date);

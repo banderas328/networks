@@ -62,14 +62,17 @@ class MessagesTable
 
     }
 
-    public function checkNewMessages($adapter)
+    public function checkNewMessages($adapter,$userId = false)
     {
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
-        $sql = "SELECT *,messages.id as message_id FROM messages
+        if(!$userId) {
+            $user_session = $_SESSION['user'];
+            $userId = $user_session["id"];
+
+        }
+        $sql = "SELECT distinct *,messages.id as message_id FROM messages
         LEFT JOIN deliver_messages on messages.id = deliver_messages.message_id
         LEFT JOIN user_settings on messages.from_user = user_settings.user_id
-        WHERE to_user = '".$userId."' AND dilivered <=> NULL";
+        WHERE to_user = '".$userId."' AND dilivered <=> NULL ";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet;
 
@@ -89,8 +92,13 @@ class MessagesTable
         return $resultSet;
     }
 
-    public function markMessagesAsDileverd($messages, $adapter)
+    public function markMessagesAsDileverd($messages, $adapter,$userId =false)
     {
+        if(!$userId) {
+            $user_session = $_SESSION['user'];
+            $userId = $user_session["id"];
+
+        }
 
         $needMark = array();
         foreach ($messages->buffer() as $message) {

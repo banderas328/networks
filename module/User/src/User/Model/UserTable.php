@@ -172,7 +172,10 @@ class UserTable
     public function findByAccessToken($accessToken)
     {
       $data = $this->apiTableGateway->select(['access_token_sha'=>$accessToken]);
-      return $data->toArray()[0]['user_id'];
+      $data =  $data->toArray();
+      if(isset($data[0]['user_id']))
+      return $data[0]['user_id'];
+      else die("invalid user");
     }
 
 

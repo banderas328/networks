@@ -1,5 +1,5 @@
 <?php
-namespace Chanels\Controller\Api;
+namespace Chanels\Controller;
 
 
 use Zend\Mvc\Controller\AbstractActionController;
@@ -15,66 +15,66 @@ use Zend\Config\Config;
 use Zend\Config\Factory;
 
 
-class ChanelsControllerApi extends Controller\preloaderController
+class ChanelsApiController extends Controller\preloaderController
 {
     protected $chanelsTable;
     protected $chanelsMessagesTable;
 
 
     public function createChanelAction(){
-        $this->layout('layout/only_form');
+        $userId = $this->getApiUser($this->getRequest());
         $request = $this->getRequest();
         $chanels = new  Chanels();
         if ($request->isPost()) {
-            $this->getChanelsTable()->createChanel($request, $chanels->getAdapter());
+            $this->getChanelsTable()->createChanel($request, $chanels->getAdapter(),$userId);
         }
-        echo "ok"
+        echo "ok";
         return false;
     }
 
     public function indexPublicAction()
     {
-        $this->layout('layout/only_form');
-        echo json_encode (array(
-            'chanels' => $this->getChanelsTable()->fetchAllPublic(),
-        ));
-        return false;
+        $userId = $this->getApiUser($this->getRequest());
+        $chanels =  $this->getChanelsTable()->fetchAllPublic()->toArray();
+        echo json_encode ([
+            'chanels' => $chanels
+        ]);
+        die();
     }
 
     public function indexPrivateAction()
     {
-        $user_session = $_SESSION['user'];
-        $user_id = $user_session["id"];
+        $userId = $this->getApiUser($this->getRequest());
         $chanels = new  Chanels();
-        $this->layout('layout/only_form');
-        echo json_encode(array(
-            'chanels' => $this->getChanelsTable()->fetchAllPrivate($chanels->getAdapter(),$user_id),'user_id' => $user_id
-        ));
-        return false;
+        $chanelsArray = $this->getChanelsTable()->fetchAllPrivate($chanels->getAdapter(),$userId)->toArray();
+        echo json_encode([
+            'chanels' => $chanelsArray]);
+        die();
+       
     }
 
     public function chanelRequestAction()
     {
-        $this->layout('layout/only_form');
+        $userId = $this->getApiUser($this->getRequest());
         $request = $this->getRequest();
         $chanels = new  Chanels();
         if ($request->isPost()) {
-           echo  json_encode($this->getChanelsTable()->addRequestToChanel($request, $chanels->getAdapter()));
+           echo  json_encode($this->getChanelsTable()->addRequestToChanel($request, $chanels->getAdapter(), $userId));
         }
-        return false;
+        die();
     }
 
     public function addmessagetochanelAction()
     {
 
-        $this->layout('layout/only_form');
+        $userId = $this->getApiUser($this->getRequest());
         $request = $this->getRequest();
         $chanelsMessages = new  ChanelsMessages();
         if ($request->isPost()) {
-            $this->getChanelsMessagesTable()->addMessageToChanel($request, $chanelsMessages->getAdapter());
+            $this->getChanelsMessagesTable()->addMessageToChanel($request, $chanelsMessages->getAdapter(),$userId);
         }
         echo "ok";
-        return false;
+        die();
     }
 
 
