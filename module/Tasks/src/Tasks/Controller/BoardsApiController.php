@@ -1,5 +1,5 @@
 <?php
-namespace Tasks\Api\Controller;
+namespace Tasks\Controller;
 
 use Zend\View\Model\ViewModel;
 use Tasks\Model\Boards;
@@ -10,19 +10,19 @@ use Zend\Config\Factory;
 
 
 
-class BoardsControllerApi extends Controller\preloaderController
+class BoardsApiController extends Controller\preloaderController
 {
     
     protected $boardsTable;
     
     public function indexAction(){
-        $this->layout('layout/only_form');
+        $userId = $this->getApiUser($this->getRequest());
         $request = $this->getRequest();
         if ($request->isPost()) {
             $boards =  $this->getBoardsTable()->getProjectBoards($request);
             echo json_encode(array('boards' => $boards,'project_id' => (int)$request->getPost()->project_id));
         }
-        return false;
+        die();
     }
 
     public function createBoardAction(){

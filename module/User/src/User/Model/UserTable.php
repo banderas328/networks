@@ -118,6 +118,7 @@ class UserTable
         $this->apiTableGateway->delete(['user_id' => $userAuthData['user_id'][0]]);
         $data['user_id'] = $userAuthData['user_id'][0];
         $data['access_token_sha'] =  hash('sha256', $userAuthData['token']);
+        $this->apiTableGateway->delete(['user_id' => $data['user_id']]);
         $this->apiTableGateway->insert($data);
         return $data;
 

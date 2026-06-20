@@ -5,9 +5,9 @@ return array(
            'Tasks\Controller\Notifications' => 'Tasks\Controller\TasksController',
            'Tasks\Controller\Boards' => 'Tasks\Controller\BoardsController',
            'Tasks\Controller\Projects' => 'Tasks\Controller\ProjectsController',
-           'Tasks\Controller\Api\Notifications' => 'Tasks\Controller\api\TasksControllerApi',
-           'Tasks\Controller\Api\Boards' => 'Tasks\Controller\api\BoardsControllerApi',
-           'Tasks\Controller\Api\Projects' => 'Tasks\Controller\api\ProjectsControllerApi',
+           'Tasks\Controller\NotificationsApi' => 'Tasks\Controller\TasksApiController',
+           'Tasks\Controller\BoardsApi' => 'Tasks\Controller\BoardsApiController',
+           'Tasks\Controller\ProjectsApi' => 'Tasks\Controller\ProjectsApiController',
         ),
     ),
     'router' => array(
@@ -29,13 +29,13 @@ return array(
             'api/v1/projects' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => 'api/v1/projects[/:action][/:id]',
+                    'route'    => '/api/v1/projects[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Tasks\Controller\Api\Projects',
+                        'controller' => 'Tasks\Controller\ProjectsApi',
                         'action'     => 'index',
                     ),
                 ),
@@ -57,13 +57,13 @@ return array(
             'api/v1/boards' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => 'api/v1/boards[/:action][/:id]',
+                    'route'    => '/api/v1/boards[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Tasks\Controller\Api\Boards',
+                        'controller' => 'Tasks\Controller\BoardsApi',
                         'action'     => 'index',
                     ),
                 ),
@@ -86,13 +86,13 @@ return array(
             'api/v1/tasks' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => 'api/v1/tasks[/:action][/:id]',
+                    'route'    => '/api/v1/tasks[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Tasks\Controller\Api\Notifications',
+                        'controller' => 'Tasks\Controller\NotificationsApi',
                         'action'     => 'index',
                     ),
                 ),

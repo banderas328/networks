@@ -10,7 +10,7 @@ use Zend\Config\Factory;
 
 
 
-class TasksControllerApi extends Controller\preloaderController
+class TasksApiController extends Controller\preloaderController
 {
 
     protected $tasksTable;
