@@ -1,4 +1,6 @@
 I would like to express my deepest gratitude to my muse, Victoria, whose inspiration illuminated this journey and whose belief in me never faded. To my daughter Anna, whose presence gives meaning to every achievement and every step forward. And to all my friends who believed in this project, supported it through its evolution, and encouraged me to keep moving forward when the path was uncertain. Your trust, friendship, and faith have become an inseparable part of this story.
+
+---
 🐙 Octopus OS
 docker run -d -p 80:80 antonzhavridminsk/octopusos
 🛠 Manual Installation
