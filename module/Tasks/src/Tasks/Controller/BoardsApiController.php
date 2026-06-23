@@ -26,17 +26,17 @@ class BoardsApiController extends Controller\preloaderController
     }
 
     public function createBoardAction(){
-        $this->layout('layout/only_form');
+        $userId = $this->getApiUser($this->getRequest());//just for test
         $request = $this->getRequest();
         if ($request->isPost()) {
             $this->getBoardsTable()->createBoard($request);
             $project_id =  $request->getPost()->project_id;
-            $boards =  $this->getBoardsTable()->getProjectBoards($request);
+            $boards =  $this->getBoardsTable()->getProjectBoards($request,$userId);
             echo json_encode(array(
                 'boards' => $boards,
                 "project_id" => $request->getPost()->project_id
             ));
-            return false;
+            die();
         }
     }
 

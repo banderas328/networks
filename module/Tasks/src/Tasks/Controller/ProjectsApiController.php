@@ -1,6 +1,6 @@
 <?php
 
-namespace Tasks\Api\Controller;
+namespace Tasks\Controller;
 
 use Tasks\Model\Projects;
 use Zend\View\Model\ViewModel;
@@ -11,7 +11,7 @@ use Zend\Config\Config;
 use Zend\Config\Factory;
 
 
-class ProjectsControllerApi extends Controller\preloaderController
+class ProjectsApiController extends Controller\preloaderController
 {
 
     protected $projectsTable;
@@ -59,7 +59,7 @@ class ProjectsControllerApi extends Controller\preloaderController
 
     public function createProjectAction()
     {
-        $this->layout('layout/only_form');
+        $userId = $this->getApiUser($this->getRequest());
         $request = $this->getRequest();
         if ($request->isPost()) {
             $this->getProjectsTable()->createProject($request);
@@ -82,20 +82,20 @@ class ProjectsControllerApi extends Controller\preloaderController
 
     public function updateProjectsInBoardAction()
     {
-        $this->layout('layout/only_form');
+        $userId = $this->getApiUser($this->getRequest());//just for check auth
         $request = $this->getRequest();
         $this->getProjectsTable()->updateProjectsInBoard($request);
-        echo "ok"
-        return false;
+        echo "ok";
+        die();
     }
 
     public function deleteProjectAction()
     {
-        $this->layout('layout/only_form');
+        $userId = $this->getApiUser($this->getRequest());//just for check auth
         $request = $this->getRequest();
-        $this->getProjectsTable()->daleteProject($request);
-        echo "ok"
-        return false;
+        $this->getProjectsTable()->daleteProject($request,$userId);
+        echo "ok";
+        die();
     }
 
     public function updateProjectAction()
@@ -103,7 +103,7 @@ class ProjectsControllerApi extends Controller\preloaderController
         $this->layout('layout/only_form');
         $request = $this->getRequest()->getPost()->toArray();
         $this->getProjectsTable()->updateProject($request);
-        echo "ok"
+        echo "ok";
         return false;
     }
 

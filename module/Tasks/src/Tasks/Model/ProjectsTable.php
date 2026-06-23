@@ -107,11 +107,11 @@ class ProjectsTable
 
     }
 
-    public function daleteProject($request)
+    public function daleteProject($request,$userId = false)
     {
         $project_id = $request->getPost()->id;
         $tasksTable = new TasksTable();
-        $tasks = $tasksTable->getTasksForProject($project_id);
+        $tasks = $tasksTable->getTasksForProject($project_id,$userId);
         foreach ($tasks as $task_key => $task_value) {
             foreach ($task_value as $task_body) {
                 $tasksTable->deleteTask($task_body["id"]);

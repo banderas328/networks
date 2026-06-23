@@ -147,12 +147,15 @@ class TasksTable
         return $task;
     }
 
-    public function getTasksForProject($project_id)
+    public function getTasksForProject($project_id,$userId = false)
     {
         $project_id = (int) $project_id;
+        if(!$userId) {
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+            $user_session = $_SESSION['user'];
+            $userId = $user_session["id"];
+        }
+
         // $sql = "SELECT tasks.name,tasks.sort_order,tasks.board_id,tasks.id FROM tasks
         // left join boards on boards.id = tasks.board_id
         // left join projects on boards.project_id = projects.id
