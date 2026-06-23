@@ -256,7 +256,7 @@ class UserController extends Controller\preloaderController
             if(session_status() !== PHP_SESSION_ACTIVE) session_start();
                 $user_session = $_SESSION['user'];
                 $userId = $user_session["id"];
-            }
+            
                 return $this->redirect()->toRoute('main',
                     array('controller' => "main",
                         'action' => 'index'
