@@ -7,6 +7,8 @@ use Tasks\Model\BoardsTable;
 use Preloader\Controller;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Preloader\Model;
+
 
 
 
@@ -26,7 +28,7 @@ class BoardsApiController extends Controller\preloaderController
     }
 
     public function createBoardAction(){
-        $userId = $this->getApiUser($this->getRequest());//just for test
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));//just for test
         $request = $this->getRequest();
         if ($request->isPost()) {
             $this->getBoardsTable()->createBoard($request);

@@ -7,8 +7,9 @@ use Zend\InputFilter\InputFilterInterface;
 use Zend\Session\Container;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Preloader\Model;
 
-class BoardsTable
+class BoardsTable extends Model\preloaderModel
 {
 
     protected $tableGateway;
@@ -50,6 +51,7 @@ class BoardsTable
 //    }
     public function getProjectBoards($request,$userId =  false){
         $project_id =  (int)$request->getPost()->project_id;
+        $userId = self::getUserId($userId);
         if(!$userId) {
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
             $user_session = $_SESSION['user'];
