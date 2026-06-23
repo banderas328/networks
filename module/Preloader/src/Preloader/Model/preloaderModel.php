@@ -20,7 +20,7 @@ class preloaderModel
 
     }
     //Colonel Tokarev idea. - move auth method to top level model
-    public static function getUserId($userId) {
+    public static function getUserId($userId) : int /* another one remote idea */ {
         if(!$userId) {
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
             $user_session = $_SESSION['user'];
