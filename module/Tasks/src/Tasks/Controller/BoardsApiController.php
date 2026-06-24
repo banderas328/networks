@@ -18,7 +18,7 @@ class BoardsApiController extends Controller\preloaderController
     protected $boardsTable;
     
     public function indexAction(){
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         if ($request->isPost()) {
             $boards =  $this->getBoardsTable()->getProjectBoards($request);
@@ -43,10 +43,11 @@ class BoardsApiController extends Controller\preloaderController
     }
 
     public function deleteBoardAction(){
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $this->getBoardsTable()->deleteBoard($request);
+            $this->getBoardsTable()->deleteBoard($request,$userId);
         }
         return false;
     }

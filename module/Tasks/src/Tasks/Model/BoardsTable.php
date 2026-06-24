@@ -67,10 +67,8 @@ class BoardsTable extends Model\preloaderModel
         $boards =   $resultSet->toArray();
         return $boards;
     }
-    public function deleteBoard($request) {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+    public function deleteBoard($request,$userId = false) {
+        $userId = self::getUserId($userId);
         $board_id =  (int)$request->getPost()->board_id;
         $project_id=  (int)$request->getPost()->project_id;
         $sql = "SELECT min(boards.id) as board_id FROM `boards` 
