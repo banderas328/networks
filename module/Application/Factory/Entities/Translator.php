@@ -6,6 +6,7 @@ class Translator
 
     protected function __construct()
     {
+
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         if(isset($_SESSION['user'])){
             $user_session = $_SESSION['user'];

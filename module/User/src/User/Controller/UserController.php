@@ -231,40 +231,125 @@ class UserController extends Controller\preloaderController
     }
 
 //method for login action
+
     public function loginAction()
     {
         $this->layout('layout/layout');
+
         $form = new UserAuthForm();
         $form->get('submit')->setValue('Login');
-        $request = $this->getRequest();
+
         $message = false;
+        $request = $this->getRequest();
+
         if ($request->isPost()) {
+
             $data = $request->getPost()->toArray();
-            $password = $data['password'];
-            $securePass = md5("octopus" . $password );
-            $user = new User();
-            $dbAdapter = $user->getAdapter();
-            $user = $this->getUserTable()->searchSystemUser(['email' => $data["email"]]);
+
+            if (empty($data['email']) || empty($data['password'])) {
+                return [
+                    'form'    => $form,
+                    'message' => 'Email and password are required'
+                ];
+            }
+
+            $securePass = md5('octopus' . $data['password']);
+
+            $userModel = new User();
+            $dbAdapter = $userModel->getAdapter();
+
+            $user = $this->getUserTable()->searchSystemUser([
+                'email' => $data['email']
+            ]);
+
             if (!$user) {
-                $message = "Can't find activated user with such email";
-                return array('form' => $form, "message" => $message);
+                return [
+                    'form'    => $form,
+                    'message' => "Can't find activated user with such email"
+                ];
             }
-            $authResult = $this->getUserTable()->authUser($data['email'], $securePass, $dbAdapter);
-            $user_session = new Container('user');
-            if ($authResult) {
-                // $user_session->user = $authResult;
-            if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-                $user_session = $_SESSION['user'];
-                $userId = $user_session["id"];
-            
-                return $this->redirect()->toRoute('main',
-                    array('controller' => "main",
-                        'action' => 'index'
-                    ));
+
+            $authResult = $this->getUserTable()->authUser(
+                $data['email'],
+                $securePass,
+                $dbAdapter
+            );
+
+            if (!$authResult) {
+                return [
+                    'form'    => $form,
+                    'message' => 'Invalid email or password'
+                ];
             }
+            $userSession = new Container('user');
+
+            if (is_array($authResult)) {
+                foreach ($authResult as $key => $value) {
+                    $userSession->$key = $value;
+                     var_dump($key);
+                    var_dump($value);die();
+                    $_SESSION['user'][$key] = $value;
+                }
+            } else {
+                $_SESSION['user']['id'] = $authResult->id;
+                $_SESSION['user']['login'] = $authResult->login;
+                $_SESSION['user']['email'] = $authResult->email;
+                $_SESSION['user']['lang'] = $authResult->lang;
+                $userSession->user = $authResult;
+            }
+
+            return $this->redirect()->toRoute(
+                'main',
+                [
+                    'controller' => 'main',
+                    'action'     => 'index'
+                ]
+            );
         }
-        return array('form' => $form, "message" => $message);
+
+        return [
+            'form'    => $form,
+            'message' => $message
+        ];
     }
+
+
+    // public function loginAction()
+    // {
+    //     $this->layout('layout/layout');
+    //     $form = new UserAuthForm();
+    //     $form->get('submit')->setValue('Login');
+    //     $request = $this->getRequest();
+    //     $message = false;
+    //     if ($request->isPost()) {
+    //         $data = $request->getPost()->toArray();
+    //         $password = $data['password'];
+    //         $securePass = md5("octopus" . $password );
+    //         $user = new User();
+    //         $dbAdapter = $user->getAdapter();
+    //         $user = $this->getUserTable()->searchSystemUser(['email' => $data["email"]]);
+    //         if (!$user) {
+    //             $message = "Can't find activated user with such email";
+    //             return array('form' => $form, "message" => $message);
+    //         }
+    //         $authResult = $this->getUserTable()->authUser($data['email'], $securePass, $dbAdapter);
+    //         $user_session = new Container('user');
+    //         if ($authResult) {
+    //             // $user_session->user = $authResult;
+    //         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+
+
+    //             $user_session = $_SESSION['user'];
+    //             $userId = $user_session["id"];
+            
+    //             return $this->redirect()->toRoute('main',
+    //                 array('controller' => "main",
+    //                     'action' => 'index'
+    //                 ));
+    //         }
+    //     }
+    //     return array('form' => $form, "message" => $message);
+    // }
 
 //user search action
     public function userSearchAction()
