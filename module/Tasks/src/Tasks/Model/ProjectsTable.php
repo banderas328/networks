@@ -9,8 +9,9 @@ use Zend\InputFilter\InputFilterInterface;
 use Zend\Session\Container;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Preloader\Model;
 
-class ProjectsTable
+class ProjectsTable extends Model\preloaderModel
 {
 
     protected $tableGateway;
@@ -94,13 +95,12 @@ class ProjectsTable
         return $projects;
     }
 
-    public function getArchiveProjects()
+    public function getArchiveProjects($userId = false)
     {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-        $user_session = $_SESSION['user'];
-        $user_id = $user_session["id"];
-        $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id
-                WHERE projects_members.user_id='" . $user_id . "' and is_archive = '1' order by projects.sort_order";
+        $userId = self::getUserId($userId);
+        // $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id
+        //         WHERE projects_members.user_id='" . $userId . "' and is_archive = '1' order by projects.sort_order";
+        $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id WHERE  is_archive = '1' order by projects.sort_order";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $projects = $resultSet->toArray();
         return $projects;

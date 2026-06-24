@@ -9,6 +9,7 @@ use Tasks\Model\BoardsTable;
 use Preloader\Controller;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Preloader\Model;
 
 
 class ProjectsApiController extends Controller\preloaderController
@@ -27,9 +28,9 @@ class ProjectsApiController extends Controller\preloaderController
 
     public function loadProjectsArchiveAction()
     {
-        $this->layout('layout/only_form');
-        echo json_encode($this->getProjectsTable()->getArchiveProjects());
-        return false;
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
+        echo json_encode($this->getProjectsTable()->getArchiveProjects($userId));
+        die();
     }
 
     public function addUserToProjectAction(){
