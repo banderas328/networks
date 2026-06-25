@@ -37,7 +37,7 @@ class ProjectsTable extends Model\preloaderModel
         $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $sql = "insert into projects_members (user_id,project_id) values (" . $user_id . "," . $project_id . ")";
         $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
-        die();
+        
     }
 
     public function createProject($request)

@@ -35,6 +35,7 @@ class ProjectsController extends Controller\preloaderController
         $project_id = (int)$this->getRequest()->getPost()->project_id;
         $user_id = (int)$this->getRequest()->getPost()->user_id;
         $this->getProjectsTable()->addUserToProject($project_id,$user_id);
+        die();
 
     }
 

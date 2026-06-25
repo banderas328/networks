@@ -34,19 +34,21 @@ class ProjectsApiController extends Controller\preloaderController
     }
 
     public function addUserToProjectAction(){
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));// just for api check
         $project_id = (int)$this->getRequest()->getPost()->project_id;
         $user_id = (int)$this->getRequest()->getPost()->user_id;
         $this->getProjectsTable()->addUserToProject($project_id,$user_id);
+        die("ok");
 
     }
 
     public function getProjectMemberlistAction()
     {
-        $this->layout('layout/only_form');
+         $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));// just for api check
         $project_id = (int)$this->getRequest()->getPost()->project_id;
         $members = $this->getProjectsTable()->getProjectMembers($project_id);
         echo json_encode(@array('members' => $members));
-        return false;
+        die();
     }
 
     public function deleteUserFromProjectAction(){
