@@ -8,6 +8,7 @@ use Zend\InputFilter\InputFilterInterface;
 use Zend\Db\Adapter;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Preloader\Model;
 
 
 class Tasks

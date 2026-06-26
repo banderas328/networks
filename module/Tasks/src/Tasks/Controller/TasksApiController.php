@@ -1,5 +1,5 @@
 <?php
-namespace Tasks\Api\Controller;
+namespace Tasks\Controller;
 
 use Zend\View\Model\ViewModel;
 use Tasks\Model\Tasks;
@@ -7,6 +7,7 @@ use Tasks\Model\TasksTable;
 use Preloader\Controller;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Preloader\Model;
 
 
 
@@ -16,15 +17,17 @@ class TasksApiController extends Controller\preloaderController
     protected $tasksTable;
 
     public function indexAction(){
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $project_id = $this->getRequest()->getPost()->project_id;
         $this->layout('layout/only_form');
-        echo json_encode($this->getTasksTable()->getTasksForProject($project_id));
+        echo json_encode($this->getTasksTable()->getTasksForProject($project_id,$userId));
         return false;
         //return @array('tasks' => $tasks);
 
     }
 
     public function createTaskAction(){
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $this->layout('layout/only_form');
         $request = $this->getRequest();
 
@@ -32,7 +35,7 @@ class TasksApiController extends Controller\preloaderController
             $request->getPost()->toArray(),
             $_FILES
         );
-        $this->getTasksTable()->createTask($request);
+        $this->getTasksTable()->createTask($request,$userId);
         return false;
     }
 

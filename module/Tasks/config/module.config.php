@@ -2,10 +2,10 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-           'Tasks\Controller\Notifications' => 'Tasks\Controller\TasksController',
+           'Tasks\Controller\Tasks' => 'Tasks\Controller\TasksController',
            'Tasks\Controller\Boards' => 'Tasks\Controller\BoardsController',
            'Tasks\Controller\Projects' => 'Tasks\Controller\ProjectsController',
-           'Tasks\Controller\NotificationsApi' => 'Tasks\Controller\TasksApiController',
+           'Tasks\Controller\TasksApi' => 'Tasks\Controller\TasksApiController',
            'Tasks\Controller\BoardsApi' => 'Tasks\Controller\BoardsApiController',
            'Tasks\Controller\ProjectsApi' => 'Tasks\Controller\ProjectsApiController',
         ),
@@ -78,7 +78,7 @@ return array(
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Tasks\Controller\Notifications',
+                        'controller' => 'Tasks\Controller\Tasks',
                         'action'     => 'index',
                     ),
                 ),
@@ -92,7 +92,7 @@ return array(
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Tasks\Controller\NotificationsApi',
+                        'controller' => 'Tasks\Controller\TasksApi',
                         'action'     => 'index',
                     ),
                 ),

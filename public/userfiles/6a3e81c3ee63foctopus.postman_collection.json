@@ -1,0 +1,1057 @@
+{
+	"info": {
+		"_postman_id": "8df9e216-ca8f-4f2d-a2b8-7134429d259e",
+		"name": "octopus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5043870"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "test@test.comh",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "confirm_password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/user/register",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "test@test.comh",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/user/login",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "token",
+							"value": "773de0f1901b2fd50531e9bdf467a7a8ce4162aabccf851e6089b7eb5ce4f9a4",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/user/authByToken",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"authByToken"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "token:773de0f1901b2fd50531e9bdf467a7a8ce4162aabccf851e6089b7eb5ce4f9a4",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "773de0f1901b2fd50531e9bdf467a7a8ce4162aabccf851e6089b7eb5ce4f9a4",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/user/logout",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "saveblog",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/barnaki/Pictures/Screenshot (1).png"
+						},
+						{
+							"key": "text",
+							"value": "blog_content",
+							"type": "text"
+						},
+						{
+							"key": "blog_title",
+							"value": "blog_title",
+							"type": "text"
+						},
+						{
+							"key": "token",
+							"value": "65c1bf459571fe77f628cdff775f195b599737b04541dbe87f5f84796a1f9327",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/blog/saveblog",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"blog",
+						"saveblog"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getblogs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "65c1bf459571fe77f628cdff775f195b599737b04541dbe87f5f84796a1f9327",
+							"type": "text"
+						},
+						{
+							"key": "offset",
+							"value": "3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/blog/getBlogs",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"blog",
+						"getBlogs"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "65c1bf459571fe77f628cdff775f195b599737b04541dbe87f5f84796a1f9327",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_comment_to_blog",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "65c1bf459571fe77f628cdff775f195b599737b04541dbe87f5f84796a1f9327",
+							"type": "text"
+						},
+						{
+							"key": "comment",
+							"value": "comment",
+							"type": "text"
+						},
+						{
+							"key": "blog_id",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/blog/addCommentToBlog",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"blog",
+						"addCommentToBlog"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_blog_comments",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "65c1bf459571fe77f628cdff775f195b599737b04541dbe87f5f84796a1f9327",
+							"type": "text"
+						},
+						{
+							"key": "blog_id",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "comment_count",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/blog/getComments",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"blog",
+						"getComments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_blog",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "65c1bf459571fe77f628cdff775f195b599737b04541dbe87f5f84796a1f9327",
+							"type": "text"
+						},
+						{
+							"key": "blog_id",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/blog/getComments",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"blog",
+						"getComments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getChanels",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "65c1bf459571fe77f628cdff775f195b599737b04541dbe87f5f84796a1f9327",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/chanels/indexPublic",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"chanels",
+						"indexPublic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPrivate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/chanels/indexPrivate?token=65c1bf459571fe77f628cdff775f195b599737b04541dbe87f5f84796a1f9327",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"chanels",
+						"indexPrivate"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "65c1bf459571fe77f628cdff775f195b599737b04541dbe87f5f84796a1f9327"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create chanel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/chanels/createChanel?token=65c1bf459571fe77f628cdff775f195b599737b04541dbe87f5f84796a1f9327",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"chanels",
+						"createChanel"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "65c1bf459571fe77f628cdff775f195b599737b04541dbe87f5f84796a1f9327"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "65c1bf459571fe77f628cdff775f195b599737b04541dbe87f5f84796a1f9327",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "wwwwwwwggggdddgggg4555",
+							"type": "text"
+						},
+						{
+							"key": "to_chanel",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/chanels/addmessagetochanel",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"chanels",
+						"addmessagetochanel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getchanelsmessages",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "65c1bf459571fe77f628cdff775f195b599737b04541dbe87f5f84796a1f9327",
+							"type": "text"
+						},
+						{
+							"key": "to_chanel",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "date",
+							"value": "1781774066",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/sync/syncchanel",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"sync",
+						"syncchanel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "chanelRequest",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "65c1bf459571fe77f628cdff775f195b599737b04541dbe87f5f84796a1f9327",
+							"type": "text"
+						},
+						{
+							"key": "to_chanel",
+							"value": "18",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/chanels/chanelRequest",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"chanels",
+						"chanelRequest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPrivateChanelsRequests",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "088d65fea8788654fca60e8add027424685c91b00331824939ef8946fc3b12e6",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/chanels/getPrivateChanelsRequests",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"chanels",
+						"getPrivateChanelsRequests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "denyAccessToChanel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "088d65fea8788654fca60e8add027424685c91b00331824939ef8946fc3b12e6",
+							"type": "text"
+						},
+						{
+							"key": "chanel_id",
+							"value": "19",
+							"type": "text"
+						},
+						{
+							"key": "user_id",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/chanels/denyAccessToChanel",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"chanels",
+						"denyAccessToChanel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "allowAccessToChanel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "token",
+							"value": "088d65fea8788654fca60e8add027424685c91b00331824939ef8946fc3b12e6",
+							"type": "text"
+						},
+						{
+							"key": "chanel_id",
+							"value": "19",
+							"type": "text"
+						},
+						{
+							"key": "user_id",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/chanels/allowAccessToChanel",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"chanels",
+						"allowAccessToChanel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "indexDelete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "088d65fea8788654fca60e8add027424685c91b00331824939ef8946fc3b12e6",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/chanels/indexDelete",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"chanels",
+						"indexDelete"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletechanel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "088d65fea8788654fca60e8add027424685c91b00331824939ef8946fc3b12e6",
+							"type": "text"
+						},
+						{
+							"key": "chanel_id",
+							"value": "7",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/chanels/deleteChanel",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"chanels",
+						"deleteChanel"
+					],
+					"query": [
+						{
+							"key": null,
+							"value": "088d65fea8788654fca60e8add027424685c91b00331824939ef8946fc3b12e6",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "indexboards",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "chanel_id",
+							"value": "088d65fea8788654fca60e8add027424685c91b00331824939ef8946fc3b12e6",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/chanels/deleteChanel",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"chanels",
+						"deleteChanel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createProject",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "6c5b519591a03be9ee13c870f6461727671cf99f65a49f89ac1ca295a7921fb5",
+							"type": "text"
+						},
+						{
+							"key": "project_name",
+							"value": "project_name",
+							"type": "text"
+						},
+						{
+							"key": "project_description",
+							"value": "project_description",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/boards/index",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"boards",
+						"index"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProject",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/projects/deleteProject",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"projects",
+						"deleteProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createBoard",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "6c5b519591a03be9ee13c870f6461727671cf99f65a49f89ac1ca295a7921fb5",
+							"type": "text"
+						},
+						{
+							"key": "board_name",
+							"value": "7777",
+							"type": "text"
+						},
+						{
+							"key": "project_id",
+							"value": "4",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/boards/createBoard",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"boards",
+						"createBoard"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteBoard",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "6c5b519591a03be9ee13c870f6461727671cf99f65a49f89ac1ca295a7921fb5",
+							"type": "text"
+						},
+						{
+							"key": "project_id",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "board_id",
+							"value": "14",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/boards/deleteBoard",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"boards",
+						"deleteBoard"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "loadProjectsArchive",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "6c5b519591a03be9ee13c870f6461727671cf99f65a49f89ac1ca295a7921fb5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/projects/loadProjectsArchive",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"projects",
+						"loadProjectsArchive"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

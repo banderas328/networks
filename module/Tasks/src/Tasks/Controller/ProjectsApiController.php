@@ -20,6 +20,7 @@ class ProjectsApiController extends Controller\preloaderController
 
     public function indexAction()
     {
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));// just for api check
         $this->layout('layout/only_form');
         echo json_encode(@array('projects' => $this->getProjectsTable()->getProjects()));
         return false;
@@ -62,7 +63,7 @@ class ProjectsApiController extends Controller\preloaderController
 
     public function createProjectAction()
     {
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));// just for api check
         $request = $this->getRequest();
         if ($request->isPost()) {
             $this->getProjectsTable()->createProject($request);

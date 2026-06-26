@@ -6,8 +6,9 @@ use Zend\Session\Container;
 use Notifications\Model\NotificationsTable;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Preloader\Model;
 
-class TasksTable
+class TasksTable extends Model\preloaderModel
 {
 
     protected $tableGateway;
@@ -28,12 +29,11 @@ class TasksTable
         $this->adapter = $adapter;
     }
 
-    public function createTask(array $data)
+    public function createTask(array $data, $userId = false)
     {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
-        $memberList = $data["members_list"];
+        $userId = self::getUserId($userId);
+        if(isset($data["members_list"])) $memberList = $data["members_list"];
+        
         $estimate = (int) $data["estimate"];
         $memberList .= "," . $userId;
         $data["to_directory"] = 0;
@@ -49,7 +49,7 @@ class TasksTable
                         "type" => $data['files']["type"][$i]
                     ]
                 ]
-            ]);
+            ],$userId);
             $fileIDs['file'][] = [
                 "file_id" => $fileId
             ];
@@ -87,7 +87,7 @@ class TasksTable
                 $dataFile["task_id"] = $taskID;
                 
                 // var_dump($dataFile);
-                $fileTable->saveFileToTask($dataFile);
+                $fileTable->saveFileToTask($dataFile,$userId);
             }
         }
         $memberList = explode(",", $memberList);

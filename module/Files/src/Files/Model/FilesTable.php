@@ -6,13 +6,14 @@ use Zend\Session\Container;
 use Zend\Db\Sql\Sql;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Preloader\Model;
 
 
 //use Zend\Db\Adapter\Driver\ResultInterface;
 //use Zend\Db\ResultSet\ResultSet;
 
 
-class FilesTable
+class FilesTable extends Model\preloaderModel
 {
     protected $tableGateway;
     protected $adapter;
@@ -31,10 +32,9 @@ class FilesTable
         $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("files",$adapter);
     }
 
-    public function saveUserFile($data)
+    public function saveUserFile($data,$userId = false)
     {
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = self::getUserId($userId);
         $path = "userfiles/".$userId;
         $fileName = uniqid();
         if(isset($data[0])) $data = $data[0];
