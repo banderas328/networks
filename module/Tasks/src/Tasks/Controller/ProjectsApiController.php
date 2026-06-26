@@ -52,11 +52,11 @@ class ProjectsApiController extends Controller\preloaderController
     }
 
     public function deleteUserFromProjectAction(){
-        $this->layout('layout/only_form');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));// just for api check
         $project_id = (int)$this->getRequest()->getPost()->project_id;
         $user_id = (int)$this->getRequest()->getPost()->user_id;
         $this->getProjectsTable()->deleteUserFromProjectMembers($project_id,$user_id);
-        return false;
+        die("ok");
 
     }
 
