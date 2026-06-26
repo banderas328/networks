@@ -103,11 +103,13 @@ class ProjectsApiController extends Controller\preloaderController
 
     public function updateProjectAction()
     {
-        $this->layout('layout/only_form');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));// just for api check
+
         $request = $this->getRequest()->getPost()->toArray();
+        unset($request['token']);
         $this->getProjectsTable()->updateProject($request);
         echo "ok";
-        return false;
+        die();
     }
 
 
