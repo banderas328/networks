@@ -8,9 +8,10 @@ use Zend\InputFilter\InputFilterInterface;
 use Zend\Session\Container;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Preloader\Model;
 
 
-class TasksFilesTable
+class TasksFilesTable extends Model\preloaderModel
 {
     
     protected $tableGateway;
@@ -30,7 +31,8 @@ class TasksFilesTable
         $this->adapter = $adapter;
     }
     
-    public function saveFileToTask($data) {
+    public function saveFileToTask($data,$userId =  false) {
+        $userId = self::getUserId($userId);
         $this->tableGateway->insert($data);
         return  $this->tableGateway->lastInsertValue;
     }

@@ -227,11 +227,10 @@ class TasksTable extends Model\preloaderModel
     }
 
     // TODO if in future it will be required to make some more logic with time , it should be moved to special TaskTimeTable model class
-    public function addTimeToTask($data)
+    public function addTimeToTask($data,$userId = false)
     {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        //var_dump($data);die();
+        $userId = self::getUserId($userId);
         $hours = (int) $data["hours"];
         $task_id = (int) $data["task_id"];
         $date = strtotime($data["date"]);
@@ -239,8 +238,9 @@ class TasksTable extends Model\preloaderModel
         return $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
     }
 
-    public function updateTask($data)
+    public function updateTask($data,$userId = false)
     {
+        $userId = self::getUserId($userId);
         if (isset($data["data"]))
             $data = $data["data"];
         $fileTable = new \Files\Model\FilesTable();
@@ -257,7 +257,7 @@ class TasksTable extends Model\preloaderModel
                             "type" => $data['files']["type"][$i]
                         ]
                     ]
-                ]);
+                ],$userId);
                 $fileIDs['file'][] = [
                     "file_id" => $fileId
                 ];
@@ -282,12 +282,21 @@ class TasksTable extends Model\preloaderModel
                 $dataFile = [];
                 $dataFile["file_id"] = $fileId["file_id"];
                 $dataFile["task_id"] = $taskID;
-                $fileTable->saveFileToTask($dataFile);
+                $fileTable->saveFileToTask($dataFile,$userId);
             }
         }
+        if(!isset($data["id"]))  {
+        $this->tableGateway->insert($data);
+
+
+        }
+        else {
         $this->tableGateway->update($data, [
                         "id = " . (int) $data["id"]
                     ]);
+
+        }
+
         return $data;
     }
 

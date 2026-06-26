@@ -1052,6 +1052,484 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "projects/addUserToProject",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "6c5b519591a03be9ee13c870f6461727671cf99f65a49f89ac1ca295a7921fb5",
+							"type": "text"
+						},
+						{
+							"key": "project_id",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "user_id",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/projects/addUserToProject",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"projects",
+						"addUserToProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUserFromProject",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "6c5b519591a03be9ee13c870f6461727671cf99f65a49f89ac1ca295a7921fb5",
+							"type": "text"
+						},
+						{
+							"key": "project_id",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "user_id",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "project_id",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/projects/deleteUserFromProject",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"projects",
+						"deleteUserFromProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProjectMemberlist",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "6c5b519591a03be9ee13c870f6461727671cf99f65a49f89ac1ca295a7921fb5",
+							"type": "text"
+						},
+						{
+							"key": "project_id",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "user_id",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "project_id",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/projects/getProjectMemberlist",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"projects",
+						"getProjectMemberlist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProject",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "6c5b519591a03be9ee13c870f6461727671cf99f65a49f89ac1ca295a7921fb5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/projects/updateProject",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"projects",
+						"updateProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProject",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/projects/deleteProject",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"projects",
+						"deleteProject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProjects",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "6c5b519591a03be9ee13c870f6461727671cf99f65a49f89ac1ca295a7921fb5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/projects/index",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"projects",
+						"index"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTasks",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "6c5b519591a03be9ee13c870f6461727671cf99f65a49f89ac1ca295a7921fb5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/tasks/index",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"tasks",
+						"index"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createTask",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/tasks/index",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"tasks",
+						"index"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTask",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "6c5b519591a03be9ee13c870f6461727671cf99f65a49f89ac1ca295a7921fb5",
+							"type": "text"
+						},
+						{
+							"key": "task_id",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/tasks/getTask",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"tasks",
+						"getTask"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addTimeToTask",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "6c5b519591a03be9ee13c870f6461727671cf99f65a49f89ac1ca295a7921fb5",
+							"type": "text"
+						},
+						{
+							"key": "data[hours]",
+							"value": "5",
+							"type": "text"
+						},
+						{
+							"key": "data[task_id]",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "data[date]",
+							"value": "06/22/2026",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/tasks/addTimeToTask",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"tasks",
+						"addTimeToTask"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateTask",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "6c5b519591a03be9ee13c870f6461727671cf99f65a49f89ac1ca295a7921fb5",
+							"type": "text"
+						},
+						{
+							"key": "data[description]",
+							"value": "уууууппп",
+							"type": "text"
+						},
+						{
+							"key": "data[id]",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/tasks/updateTask",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"tasks",
+						"updateTask"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_cmment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "token",
+							"value": "6c5b519591a03be9ee13c870f6461727671cf99f65a49f89ac1ca295a7921fb5",
+							"type": "text"
+						},
+						{
+							"key": "parent_task",
+							"value": "11",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "ffffffffgggjjkkhj666",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "edit",
+							"type": "text"
+						},
+						{
+							"key": "files[]",
+							"type": "file",
+							"src": "/home/barnaki/snap/postman/360/octopus.postman_collection.json"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/api/v1/tasks/updateTask",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"tasks",
+						"updateTask"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

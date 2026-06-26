@@ -47,29 +47,33 @@ class TasksApiController extends Controller\preloaderController
     }
 
     public function getTaskAction(){
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));//just for api check
         $request = $this->getRequest();
         $this->layout('layout/only_form');
         $task_id = (int) $this->getRequest()->getPost()->task_id;
         $task = $this->getTasksTable()->getTask($task_id);
-        return @array('task' => $task);
+        echo json_encode(['task' => $task]);
+        die();
     }
 
     public function addTimeToTaskAction(){
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));//just for api check
         $request = $this->getRequest();
-        if ($this->getTasksTable()->addTimeToTask($request->getPost()->toArray()["data"])) die("time added");
+        if ($this->getTasksTable()->addTimeToTask($request->getPost()->toArray()["data"],$userId)) die("time added");
         die("something wrong");
 
     }
 
     public function updateTaskAction(){
-        $this->layout('layout/only_form');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));//just for api check
         $request = $this->getRequest();
         $request = array_merge_recursive(
             $request->getPost()->toArray(),
             $_FILES
         );
-        echo json_encode($this->getTasksTable()->updateTask($request));
-        return false;
+        unset($request['token']);
+        echo json_encode($this->getTasksTable()->updateTask($request,$userId));
+        die();
     }
     
 
