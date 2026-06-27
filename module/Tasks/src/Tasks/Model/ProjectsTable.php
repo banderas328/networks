@@ -136,10 +136,9 @@ class ProjectsTable extends Model\preloaderModel
         $this->tableGateway->update($data, ['id' => $data["id"]]);
     }
 
-    public function getProjectReport($data)
+    public function getProjectReport($data,$userId = false)
     {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-        if(!$_SESSION['user']) die("only for logged in users"); //TODO possibly personal info ?
+        $userId = self::getUserId($userId);
         $project_id = (int)$data["project_id"];
         $start_date = strtotime($data["start_date"]);
         $end_date = strtotime($data["end_date"]);
@@ -159,10 +158,15 @@ class ProjectsTable extends Model\preloaderModel
             $estimate = $data_value["estimate"];
             $name = $data_value["first_name"] . " " . $data_value["second_name"];
             $user_id = $data_value["user_id"];
-            $report_array[$project_name][$task_name]["hours"] += (int)$data_value["hours"];
-            $report_array[$project_name][$task_name]["estimate"] = $estimate;
-            $report_array[$project_name][$task_name]["user_name"] = $name;
-            $report_array[$project_name][$task_name]["project_name"] = $project_name;
+            if(isset($data_value["hours"] )) {
+                if(!(isset($report_array[$project_name][$task_name]["hours"]))) {
+                        $report_array[$project_name][$task_name]["hours"] = 0;
+                }
+                $report_array[$project_name][$task_name]["hours"] += (int)$data_value["hours"];
+                $report_array[$project_name][$task_name]["estimate"] = $estimate;
+                $report_array[$project_name][$task_name]["user_name"] = $name;
+                $report_array[$project_name][$task_name]["project_name"] = $project_name;
+            }
         }
         $final_report = [];
 //        foreach ($report_array as $report_task_key => $report_task_value) {

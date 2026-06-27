@@ -74,14 +74,13 @@ class ProjectsApiController extends Controller\preloaderController
 
     public function getProjectReportAction(){
 
-        $this->layout('layout/only_form');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
+        // just for api check
         $request = $this->getRequest();
         $data = [];
-   //     if ($request->isPost()) {
-            $data = $this->getProjectsTable()->getProjectReport($this->getRequest()->getQuery()->toArray());
-    //    }
+            $data = $this->getProjectsTable()->getProjectReport($this->getRequest()->getPost()->toArray(),$userId);
         echo json_encode(@array('data' => $data));
-        return false;
+        die();
     }
 
     public function updateProjectsInBoardAction()
@@ -105,7 +104,7 @@ class ProjectsApiController extends Controller\preloaderController
     public function updateProjectAction()
     {
         $userId = $this->getApiUser($this->getRequest());//just for check auth
-
+        // just for api check
         $request = $this->getRequest()->getPost()->toArray();
         unset($request['token']);
         $this->getProjectsTable()->updateProject($request);
