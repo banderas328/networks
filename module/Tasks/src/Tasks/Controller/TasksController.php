@@ -7,6 +7,7 @@ use Tasks\Model\TasksTable;
 use Preloader\Controller;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Preloader\Model;
 
 
 

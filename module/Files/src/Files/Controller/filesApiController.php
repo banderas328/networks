@@ -1,5 +1,5 @@
 <?php
-namespace Files\Controller\Api;
+namespace Files\Controller;
 
 use Files\Model\Files;
 use Files\Model\FileSystem;
@@ -11,7 +11,7 @@ use Preloader\Controller;
 use Zend\View\Model\ViewModel;
 
 
-class  filesControllerApi extends Controller\preloaderController {
+class  filesApiController extends Controller\preloaderController {
 	protected $filesTable;
     protected $filesystemTable;
     protected $networkTable;
@@ -53,15 +53,13 @@ class  filesControllerApi extends Controller\preloaderController {
         return false;
     }
     public function saveTextFileAction(){
-        $this->layout('layout/only_form');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $file_name =  $request->getPost()->file_name;
         $file_id =  $request->getPost()->file_id;
         $current_directory =  $request->getPost()->current_directory;
         $data =  $request->getPost()->data;
         $data =  preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data);
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
         $this->getFilesTable()->saveTextFile($file_name,$data,$current_directory,$userId,$file_id);
         die("file created");
 
@@ -120,7 +118,7 @@ class  filesControllerApi extends Controller\preloaderController {
         $request = $this->getRequest();
         $filesystem = new FileSystem();
         $this->getFileSystemTable()->createUserDir($filesystem->getAdapter(),$request);
-        echo "ok"
+        echo "ok";
         die();
 
     }
@@ -184,7 +182,7 @@ class  filesControllerApi extends Controller\preloaderController {
         $dir = (int) $request->getPost()->dir;
         $dirName =  $request->getPost()->directory_name;
         $this->getFileSystemTable()->renameDir($dir,$dirName);
-        echo "ok"
+        echo "ok";
         die();
 
     }
@@ -195,7 +193,7 @@ class  filesControllerApi extends Controller\preloaderController {
         $file = (int) $request->getPost()->file;
         $fileName =  $request->getPost()->file_name;
         $this->getFilesTable()->renameFile($file,$fileName,$userId);
-        echo "ok"
+        echo "ok";
         die();
 
     }
@@ -217,7 +215,7 @@ class  filesControllerApi extends Controller\preloaderController {
                 }
         }
         $this->getFileSystemTable()->deleteDirWithChilds($fileSystem->getAdapter(),$dirs);
-        echo "ok"
+        echo "ok";
         die();
     }
 
