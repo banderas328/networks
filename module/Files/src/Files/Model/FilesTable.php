@@ -125,7 +125,8 @@ class FilesTable extends Model\preloaderModel
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         if(!empty($resultSet->buffer())) {
             //var_dump($resultSet->buffer()->toArray());die();
-            $file = $resultSet->buffer()->toArray()[0];
+            $file = $resultSet->buffer()->toArray();
+            if(isset($file[0]))$file = $file[0]; else return false;
             $fileName  = $_SERVER['DOCUMENT_ROOT'].$file["file_name"];
             @ unlink($fileName);
             $sql = "DELETE FROM files  where id=".$fileId." and user_id=".$userId;

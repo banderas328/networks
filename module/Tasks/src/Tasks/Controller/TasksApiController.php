@@ -40,10 +40,10 @@ class TasksApiController extends Controller\preloaderController
     }
 
     public function updateTasksInBoardAction(){
-        $this->layout('layout/only_form');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));//just for api check
         $request = $this->getRequest();
         $this->getTasksTable()->updateATasksInBoard($request);
-        return false;
+        die("ok");
     }
 
     public function getTaskAction(){
@@ -78,15 +78,16 @@ class TasksApiController extends Controller\preloaderController
     
 
     public function loadProjectArchiveAction(){
-        $this->layout('layout/only_form');
-        return @array('tasks' => $this->getTasksTable()->getArhiveForProject($this->getRequest()->getPost()->project_id));
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));//just for api check
+        echo json_encode(@array('tasks' => $this->getTasksTable()->getArhiveForProject($this->getRequest()->getPost()->project_id)));
+        die();
     }
 
     public function deleteTaskAction(){
-        $this->layout('layout/only_form');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));//just for api check
         $request = $this->getRequest();
-        $this->getTasksTable()->deleteTask($request->getPost()->data["task_id"]);
-        return false;
+        $this->getTasksTable()->deleteTask($request->getPost()->data["task_id"],$userId);
+        die('ok');
     }
 
 

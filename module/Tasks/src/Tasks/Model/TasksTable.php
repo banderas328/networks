@@ -300,14 +300,12 @@ class TasksTable extends Model\preloaderModel
         return $data;
     }
 
-    public function deleteTask(int $task_id)
+    public function deleteTask(int $task_id,$userId = false)
     {
         $files_task_sql = "SELECT  * FROM tasks_files where task_id=" . $task_id;
         $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
         $files = $resultSet->toArray();
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = self::getUserId($userId);
         foreach ($files as $file) {
             $files_task_sql = "SELECT  * FROM files where id=" . $file["file_id"];
             $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);

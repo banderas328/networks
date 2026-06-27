@@ -173,6 +173,7 @@
     });
     $(".create_task_button").on("click", function () {
         $( "#task_popup" ).show();
+        $("#task_popup").css('z-index', 99);
         refresh_project_members_list();
     });
     $('#task_popup #save_task').unbind('click');
