@@ -28,8 +28,7 @@ class  filesApiController extends Controller\preloaderController {
     public function getDirAction(){
         $this->layout('layout/only_form');
         $request = $this->getRequest();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         if(!$request->isPost()){
           $dirs = array( 0 => array('id' => 0, 'path' => "Home" ));
             $isRoot  = true;
@@ -68,8 +67,7 @@ class  filesApiController extends Controller\preloaderController {
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $fileId = (int) $request->getPost()->file_id;
-        $userSession = $_SESSION['user'];
-        $userId = $userSession["id"];
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         echo json_encode($this->getFilesTable()->getTextFile($fileId,$userId));
         die();
 
@@ -81,12 +79,11 @@ class  filesApiController extends Controller\preloaderController {
         $request = $this->getRequest();
         $dirKey = (int) $request->getPost()->dir_key;
         $filesystem = new FileSystem();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $parentDir = $this->getFileSystemTable()->getUserParentDir($filesystem->getAdapter(),$dirKey,$userId);
         $files = new Files();
         if($parentDir !== false && $dirKey != 0 ) {
-             $dirs = $this->getUserDirs($parentDir,$userId);
+            $dirs = $this->getUserDirs($parentDir,$userId);
             $isRoot  = false;
             $currentDirectory = $parentDir;
             $filesInDir = $this->getFilesTable()->getDirFiles($files->getAdapter(),$currentDirectory,$userId);

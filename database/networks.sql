@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: db
--- Время создания: Янв 03 2026 г., 14:41
--- Версия сервера: 10.6.24-MariaDB-ubu2204
--- Версия PHP: 8.3.26
+-- Время создания: Июн 30 2026 г., 06:34
+-- Версия сервера: 10.11.18-MariaDB-ubu2204
+-- Версия PHP: 8.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -543,7 +543,8 @@ CREATE TABLE `users_filesystem` (
 
 INSERT INTO `users_filesystem` (`id`, `path`, `parent_path`, `user_id`) VALUES
 (1, 'docs', '0', 1),
-(2, 'test', '0', 1);
+(2, 'test', '0', 1),
+(3, 'docs', '0', 2);
 
 -- --------------------------------------------------------
 
@@ -571,6 +572,18 @@ CREATE TABLE `user_settings` (
 
 INSERT INTO `user_settings` (`id`, `user_id`, `avatar`, `first_name`, `second_name`, `job`, `country`, `city`, `about`, `phone`, `visibility`) VALUES
 (1, 1, 'img/avatars/69592a263da1eglobal-connectivity-network-concept-fsk3ka0hcs2233io.jpg', ' Anton', 'Zhavrid', '', '', '', '', '', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `user_tokens`
+--
+
+CREATE TABLE `user_tokens` (
+  `id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `access_token_sha` char(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -775,6 +788,14 @@ ALTER TABLE `user_settings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `user_tokens`
+--
+ALTER TABLE `user_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_user_tokens_access_sha` (`access_token_sha`),
+  ADD KEY `idx_user_tokens_user` (`user_id`);
+
+--
 -- Индексы таблицы `wallet`
 --
 ALTER TABLE `wallet`
@@ -956,19 +977,25 @@ ALTER TABLE `task_time`
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `users_filesystem`
 --
 ALTER TABLE `users_filesystem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `user_settings`
 --
 ALTER TABLE `user_settings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT для таблицы `user_tokens`
+--
+ALTER TABLE `user_tokens`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `wallet`

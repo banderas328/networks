@@ -23,6 +23,7 @@ class preloaderModel
     public static function getUserId($userId) : int /* another one remote idea */ {
         if(!$userId) {
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+        if(!isset($_SESSION['user'])) die("invalid user");
             $user_session = $_SESSION['user'];
             $userId = $user_session["id"];
             if(!$userId) die("invalid user");

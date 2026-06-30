@@ -13,21 +13,21 @@ if (! $is_root) {
 	</div>
 	<div>
 		<div id="create_dir_block" title="Create Directory"
-			dir="<?php echo $dir_value['id']; ?>">
+			dir="<?php if (isset($current_directory)) echo $current_directory ?>">
 			<input type="text" id="directory_name" placeholder="Directory Name">
 			<button value="Create" class='action_btn' id="create_dir">
                     <?php echo  $this->translator["Create_Directory"]; ?>
                 </button>
 		</div>
 		<div id="rename_file_block" title="Rename File"
-			dir="<?php echo $dir_value['id']; ?>">
+			dir="<?php if (isset($current_directory)) echo $current_directory ?>">
 			<input type="text" id="rename_file_name" placeholder="New File Name">
 			<button value="Rename" class='action_btn' id="rename_file">
                     <?php echo $this->translator["Rename"]; ?>
                 </button>
 		</div>
 		<div id="rename_dir_block" title="Rename Directory"
-			dir="<?php echo $dir_value['id']; ?>">
+			dir="<?php if (isset($current_directory)) echo $current_directory ?>">
 			<input type="text" id="rename_directory_name"
 				placeholder="New Directory Name">
 			<button value="Rename" class='action_btn' id="rename_dir">
@@ -45,7 +45,7 @@ if (! $is_root) {
 	</div>
 	<input type="hidden"
 		value="<?php if (isset($current_directory)) echo $current_directory ?>"
-		id="current_directory">
+		id="current_directory" />
 </div>
 
 <?php

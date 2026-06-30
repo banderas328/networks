@@ -34,6 +34,7 @@ class FilesTable extends Model\preloaderModel
 
     public function saveUserFile($data,$userId = false)
     {
+        var_dump($data);
         $userId = self::getUserId($userId);
         $path = "userfiles/".$userId;
         $fileName = uniqid();
@@ -42,7 +43,7 @@ class FilesTable extends Model\preloaderModel
             $file = $path . '/' . $userId . $fileName . $data['file']['name'];
             if(move_uploaded_file($data['file']['tmp_name'], getcwd() . "/public/" . $file)) {
                 $fileDb['user_id'] = $userId;
-                if(isset($data['file']["to_directory"]))
+                if(isset($data["to_directory"]))
                     $fileDb['directory'] = $data["to_directory"];
                     else $fileDb['directory']  = 0;
                     $fileDb['file_title'] = $data['file']['name'];
