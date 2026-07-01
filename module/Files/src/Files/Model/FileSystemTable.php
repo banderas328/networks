@@ -8,13 +8,14 @@ use Zend\Db\Sql\Sql;
 use Files\Model\FileSystem;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Preloader\Model;
 
 
 //use Zend\Db\Adapter\Driver\ResultInterface;
 //use Zend\Db\ResultSet\ResultSet;
 
 
-class FileSystemTable
+class FileSystemTable extends Model\preloaderModel
 {
     protected $tableGateway;
     public $adapter;
@@ -64,13 +65,12 @@ class FileSystemTable
         else return false;
     }
 
-    public function createUserDir($adapter, $request)
+    public function createUserDir($adapter, $request , $userId = false)
     {
-        $user_session = $_SESSION['user'];
-        $user_id = $user_session["id"];
+        $userId = self::getUserId($userId);
         $current_directory = (int)$request->getPost()->current_directory;
         $directory_name = $request->getPost()->directory_name;
-        $data = array('parent_path' => $current_directory, 'path' => $directory_name, 'user_id' => $user_id);
+        $data = array('parent_path' => $current_directory, 'path' => $directory_name, 'user_id' => $userId);
         $this->tableGateway->insert($data);
     }
     public function renameDir($dir,$dirName)

@@ -9,6 +9,7 @@ use Network\Model\Network;
 use Zend\Stdlib\RequestInterface as Request;
 use Preloader\Controller;
 use Zend\View\Model\ViewModel;
+use Preloader\Model;
 
 
 class  filesApiController extends Controller\preloaderController {
@@ -64,7 +65,8 @@ class  filesApiController extends Controller\preloaderController {
 
     }
     public function getContentTextFileAction(){
-        $this->layout('layout/only_form');
+  
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $fileId = (int) $request->getPost()->file_id;
         $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
@@ -75,7 +77,7 @@ class  filesApiController extends Controller\preloaderController {
 
     }
     public function getParentDirAction(){
-        $this->layout('layout/only_form');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $dirKey = (int) $request->getPost()->dir_key;
         $filesystem = new FileSystem();
@@ -106,48 +108,59 @@ class  filesApiController extends Controller\preloaderController {
             'current_directory' => $currentDirectory,
             'filesInDir' => $filesInDir
         ));
-        return false;
+        die();
 
     }
 
     public function createDirAction(){
-        $this->layout('layout/only_form');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $filesystem = new FileSystem();
-        $this->getFileSystemTable()->createUserDir($filesystem->getAdapter(),$request);
+        $this->getFileSystemTable()->createUserDir($filesystem->getAdapter(),$request,$userId);
         echo "ok";
         die();
 
     }
 
-	public function getUserDirs($dirKey,$userId){
+
+    public function getUserDirsAction(){
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
+        $dir_key = (int)$this->getRequest()->getPost("dir_key");
+        $filesystem = new FileSystem();
+        echo json_encode ([$this->getFileSystemTable()->getUserDirs($filesystem->getAdapter(),$dir_key,$userId)]);
+        die();
+    }
+
+	public function getUserDirs($dirKey,$userId = false){
+        if(!$userId)   $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $filesystem = new FileSystem();
         echo json_encode ([$this->getFileSystemTable()->getUserDirs($filesystem->getAdapter(),$dirKey,$userId)]);
         return false;
     }
 
     public function saveFileAction(){
-        $this->layout('layout/only_form');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $post = array_merge_recursive(
             $request->getPost()->toArray(),
             $request->getFiles()->toArray()
         );
-        $this->getFilesTable()->saveUserFile($post);
-        echo "ok";
+        echo json_encode(["file_id" => $this->getFilesTable()->saveUserFile($post,$userId)]);
         die();
     }
 
 
     public function downloadFileAction() {
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
-        $fileId = $this->getEvent()->getRouteMatch()->getParam('value');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
+        if(!$userId) die("ivalid user");
+        $fileId = $this->getEvent()->getRequest()->getPost('file_id');
         $files = new Files();
         $file = $this->getFilesTable()->getFile($files->getAdapter(),$fileId,$userId)[0];
         $path  = $_SERVER['DOCUMENT_ROOT']."/".$file['file_name'];
         $fileName = $path;
-        ob_clean();
+        if (ob_get_level() > 0) {
+            ob_clean();
+        }
         if (file_exists($fileName)) {
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
@@ -163,15 +176,13 @@ class  filesApiController extends Controller\preloaderController {
     }
 
     public function deleteFileAction() {
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $file_id = (int) $request->getPost()->file_id;
         $files = new Files();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
-       if($this->getFilesTable()->deleteFile($file_id,$userId)){
-           $this->getFilesToTagsTable()->deleteFileTags($file_id);
-       }
-          die(json_encode($file_id));
+        $filesData = json_encode(['file_deleted' => $this->getFilesTable()->deleteFile($file_id,$userId)]);
+        echo $filesData;
+        die();
     }
 
     public function renameDirAction() {

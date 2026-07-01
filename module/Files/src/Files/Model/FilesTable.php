@@ -34,7 +34,6 @@ class FilesTable extends Model\preloaderModel
 
     public function saveUserFile($data,$userId = false)
     {
-        var_dump($data);
         $userId = self::getUserId($userId);
         $path = "userfiles/".$userId;
         $fileName = uniqid();
@@ -119,7 +118,8 @@ class FilesTable extends Model\preloaderModel
        else return false;
    }
 
-    public function deleteFile($fileId,$userId) {
+    public function deleteFile($fileId,$userId = false) {
+        $userId = self::getUserId($userId);
         $fileId =  (int) $fileId;
         $sql = "SELECT * FROM files where id=".$fileId." and user_id=".$userId;
         $adapter = $this->adapter;

@@ -9,7 +9,7 @@ use Zend\Db\Sql\Sql;
 //use Zend\Db\ResultSet\ResultSet;
 
 
-class PayedFilesTable
+class PayedFilesTable extends Model\preloaderModel
 {
     protected $tableGateway;
 
