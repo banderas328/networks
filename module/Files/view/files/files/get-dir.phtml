@@ -14,10 +14,10 @@ if (! $is_root) {
 	<div>
 		<div id="create_dir_block" title="Create Directory"
 			dir="<?php if (isset($current_directory)) echo $current_directory ?>">
-			<input type="text" id="directory_name" placeholder="Directory Name">
+			<input type="text" id="directory_name" placeholder="Directory Name" value=''/>
 			<button value="Create" class='action_btn' id="create_dir">
                     <?php echo  $this->translator["Create_Directory"]; ?>
-                </button>
+            </button>
 		</div>
 		<div id="rename_file_block" title="Rename File"
 			dir="<?php if (isset($current_directory)) echo $current_directory ?>">
@@ -169,6 +169,15 @@ if (! $is_root) {
         }, 1000 );
       };
     $(function () {
+    // глобальная переменная
+    window.current_directory_name = "";
+
+    // слушаем ввод
+    $(document).on("input", "#directory_name", function () {
+        window.current_directory_name = this.value;
+
+    //  console.log("LIVE VALUE:", window.current_directory_name);
+    });
         if (window.need_to_paste_file == true) {
             $("#paste").addClass("required_btn");
             $("#paste").bind("click", function () {
@@ -332,12 +341,22 @@ if (! $is_root) {
         });
         $("#show_directory_creation").on("click", function () {
 
-            $("#create_dir_block").dialog({
-                resizable: false,
-                height: "auto",
-                width: 400,
-                modal: true,
-            });
+            // $("#create_dir_block").dialog({
+            //     resizable: false,
+            //     height: "auto",
+            //     width: 400,
+            //     modal: true,
+            // });
+                $("#create_dir_block").dialog({
+        resizable: false,
+        height: "auto",
+        width: 400,
+        modal: true,
+        open: function () {
+            console.log("dialog input", $(this).find("#directory_name")[0]);
+            console.log("global input", $("#directory_name")[0]);
+        }
+    });
 
         });
         $(".parent_directory").bind("click", function () {
@@ -355,11 +374,10 @@ if (! $is_root) {
             var dir_key = $(this).attr('dir_key');
             show_directory(dir_key);
         });
-        $("#create_dir").bind("click", function () {
-            var directory_name = $("#directory_name").val();
-
-            var current_directory = $("#current_directory").val();
-
+        let first = document.getElementById("directory_name");
+        $("#create_dir").bind("click", function (e) {
+         var directory_name = window.current_directory_name;
+         var current_directory = $("#current_directory").val();
             $.ajax({
                 type: "POST",
                 url: "files/createDir",

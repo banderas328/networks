@@ -76,10 +76,7 @@ class FilesTable extends Model\preloaderModel
     }
     public function renameFile($fileId,$fileName, $userId = false)
     {
-        if(!$userId) {
-            $user_session = $_SESSION['user'];
-            $userId = $user_session["id"];
-        }
+        $userId = self::getUserId($userId);
         $fileId= (int)$fileId;
         $data = array('file_title' => $fileName);
         $this->tableGateway->update($data,['user_id' => $userId,'id' => $fileId] );

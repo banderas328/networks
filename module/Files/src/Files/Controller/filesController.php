@@ -208,7 +208,7 @@ class  filesController extends Controller\preloaderController {
             $filesInDir = $this->getFilesTable()->getDirFiles($files->getAdapter(), $dir , $userId);
             if(count($filesInDir) > 0)
                 foreach ($filesInDir as $file) {
-                    $this->getFilesTable()->deleteFile($files->getAdapter(), $file['id'], $userId);
+                    $this->getFilesTable()->deleteFile($file['id'], $userId);
                 }
         }
         $this->getFileSystemTable()->deleteDirWithChilds($fileSystem->getAdapter(),$dirs);

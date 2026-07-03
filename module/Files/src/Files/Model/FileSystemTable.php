@@ -73,10 +73,9 @@ class FileSystemTable extends Model\preloaderModel
         $data = array('parent_path' => $current_directory, 'path' => $directory_name, 'user_id' => $userId);
         $this->tableGateway->insert($data);
     }
-    public function renameDir($dir,$dirName)
+    public function renameDir($dir,$dirName,$userId = false)
     {
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = self::getUserId($userId);
         $dir= (int)$dir;
         $directoryName = $dirName;
         $data = array('path' => $directoryName);

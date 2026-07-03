@@ -186,17 +186,16 @@ class  filesApiController extends Controller\preloaderController {
     }
 
     public function renameDirAction() {
-        $request = $this->getRequest();
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $dir = (int) $request->getPost()->dir;
         $dirName =  $request->getPost()->directory_name;
-        $this->getFileSystemTable()->renameDir($dir,$dirName);
+        $this->getFileSystemTable()->renameDir($dir,$dirName,$userId);
         echo "ok";
         die();
 
     }
     public function renameFileAction() {
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $file = (int) $request->getPost()->file;
         $fileName =  $request->getPost()->file_name;
@@ -211,15 +210,14 @@ class  filesApiController extends Controller\preloaderController {
         $request = $this->getRequest();
         $dirId = (int)$request->getPost()->dir;
         $fileSystem = new FileSystem();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $dirs = $this->getFileSystemTable()->getChildDirs( $dirId, $userId);
         $files = new Files();
         foreach ($dirs as $dir) {
             $filesInDir = $this->getFilesTable()->getDirFiles($files->getAdapter(), $dir , $userId);
             if(count($filesInDir) > 0)
                 foreach ($filesInDir as $file) {
-                    $this->getFilesTable()->deleteFile($files->getAdapter(), $file['id'], $userId);
+                    $this->getFilesTable()->deleteFile( $file['id'], $userId);
                 }
         }
         $this->getFileSystemTable()->deleteDirWithChilds($fileSystem->getAdapter(),$dirs);
