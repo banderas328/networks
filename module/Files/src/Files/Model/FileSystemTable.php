@@ -36,10 +36,11 @@ class FileSystemTable extends Model\preloaderModel
 
     public function getUserDirs($adapter, $dirKey, $userId)
     {
-
         $dirKey = (int)$dirKey;
         $userId = (int)$userId;
-        $sql = "SELECT  *,users_filesystem.id as id FROM users_filesystem left join network on `users_filesystem`.`id` = `network`.`path_id` WHERE users_filesystem.user_id='" . $userId . "' and users_filesystem.parent_path = '" . $dirKey . "'";
+        $sql = "SELECT  *,users_filesystem.id as id FROM users_filesystem 
+        left join network on `users_filesystem`.`id` = `network`.`path_id` WHERE users_filesystem.user_id='" . $userId . "' 
+        and users_filesystem.parent_path = '" . $dirKey . "'";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet->buffer()->toArray();
     }
@@ -48,7 +49,7 @@ class FileSystemTable extends Model\preloaderModel
     public function getDir($dir, $userId, $adapter)
     {
         $dir = (int)$dir;
-        $sql = "SELECT  * FROM users_filesystem left join network
+        $sql = "SELECT  * , network.path_id as path_id FROM users_filesystem left join network
                     on users_filesystem.id = network.path_id
                     WHERE user_id='" . $userId . "' and users_filesystem.id = '" . $dir . "'";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
@@ -161,7 +162,8 @@ class FileSystemTable extends Model\preloaderModel
             $i++;
         }
         $sqlIn .= ")";
-        $sql = "SELECT * FROM users_filesystem left join network on users_filesystem.id = network.path_id where users_filesystem.id  " . $sqlIn;
+        $sql = "SELECT users_filesystem.id ,users_filesystem.path,users_filesystem.parent_path,users_filesystem.user_id,network.path_id
+          FROM users_filesystem left join network on users_filesystem.id = network.path_id where users_filesystem.id  " . $sqlIn;
         $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         return $result;
     }

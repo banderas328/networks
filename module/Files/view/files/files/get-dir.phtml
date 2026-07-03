@@ -55,6 +55,7 @@ if (! $is_root) {
     <?php
     if (isset($dirs) and count($dirs)) {
         foreach ($dirs as $dir_key => $dir_value) {
+
             echo "<div class='dir_wraper hard-drive-dir-wrapper'>
                         <div class='directory_wrapper hard-drive-directory-inner'>
                         <img src='assets/images/icons/folder.png' width='50px' height='50px' dir=" . $dir_value['id'] . " class='folder_action'/>

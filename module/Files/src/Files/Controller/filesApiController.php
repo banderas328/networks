@@ -27,9 +27,8 @@ class  filesApiController extends Controller\preloaderController {
 
 
     public function getDirAction(){
-        $this->layout('layout/only_form');
-        $request = $this->getRequest();
         $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
+        $request = $this->getRequest();
         if(!$request->isPost()){
           $dirs = array( 0 => array('id' => 0, 'path' => "Home" ));
             $isRoot  = true;
@@ -207,6 +206,7 @@ class  filesApiController extends Controller\preloaderController {
 
     public function deleteDirectoryAction()
     {
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $dirId = (int)$request->getPost()->dir;
         $fileSystem = new FileSystem();
@@ -227,12 +227,11 @@ class  filesApiController extends Controller\preloaderController {
 
     public function moveDirectoryAction()
     {
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $dirId = (int)$request->getPost()->dir_id;
         $dirIdCurrent = (int)$request->getPost()->current_directory;
         $fileSystem = new FileSystem();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
         $this->getFileSystemTable()->moveDir($fileSystem->getAdapter(),$dirId,$dirIdCurrent,$userId);
         echo "ok";
         die();
@@ -240,10 +239,9 @@ class  filesApiController extends Controller\preloaderController {
 
 
     public function closeDirectoryAction(){
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $dir = (int)$request->getPost()->dir;
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
         $this->getNetworkTable()->closeDir($dir,$userId);
         echo "ok";
         die();
@@ -251,11 +249,11 @@ class  filesApiController extends Controller\preloaderController {
     }
 
     public function shareDirAction(){
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $dirId = (int)$request->getPost()->dir;
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $files = new FileSystem();
         $dir  = $this->getFileSystemTable()->getDir($dirId,$userId,$files->getAdapter());
         $result = "error in share folder";
@@ -268,18 +266,16 @@ class  filesApiController extends Controller\preloaderController {
     }
 
     public function shareDirWithPasswordAction(){
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $this->layout('layout/only_form');
         $request = $this->getRequest();
         $dirId = (int)$request->getPost()->dir;
-
         $password = $request->getPost()->password;
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
         $files = new FileSystem();
         $dir  = $this->getFileSystemTable()->getDir($dirId,$userId,$files->getAdapter());
         $result = "error in share folder";
         if(!empty($dir)) {
-            $this->getNetworkTable()->shareDirWithPassword($dirId,$password);
+            $this->getNetworkTable()->shareDirWithPassword($dirId,$password,$userId);
             $result = "folder shared";
         }
         echo  json_encode($result);

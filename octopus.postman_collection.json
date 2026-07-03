@@ -1852,13 +1852,13 @@
             },
             {
               "key": "file_name",
-              "value": "file_name",
+              "value": "file_namegg",
               "type": "text",
               "uuid": "596c8fc9-120d-4eef-9a48-27eae141cc33"
             },
             {
               "key": "data",
-              "value": "<p>аааааааааа</p>",
+              "value": "<p>ааfffffаааааааа</p>",
               "type": "text",
               "uuid": "f816efd7-3310-4b48-aeca-a27810da1121"
             },
@@ -1870,7 +1870,7 @@
             },
             {
               "key": "file_id",
-              "value": "null",
+              "value": "10",
               "type": "text",
               "uuid": "8d35e2f8-6be3-4865-abe2-a91d4a1b396a"
             }
@@ -1959,7 +1959,7 @@
             },
             {
               "key": "file_id",
-              "value": "12",
+              "value": "25",
               "type": "text",
               "uuid": "2c28fbb7-dcb6-45d2-b7a1-c82e9c95c399"
             }
@@ -2202,7 +2202,7 @@
       "response": []
     },
     {
-      "name": "deleteFile",
+      "name": "renameFile",
       "request": {
         "method": "POST",
         "header": [],
@@ -2217,14 +2217,20 @@
             },
             {
               "key": "file_id",
-              "value": "25",
+              "value": "24",
               "type": "text",
               "uuid": "2f727733-1ad4-41ef-9e8a-51a64942c815"
+            },
+            {
+              "key": "file_name",
+              "value": "gggffff",
+              "type": "text",
+              "uuid": "036d871f-1d7b-4ce0-9104-06aaa5dc10a8"
             }
           ]
         },
         "url": {
-          "raw": "127.0.0.1:8080/api/v1/files/deleteFile",
+          "raw": "127.0.0.1:8080/api/v1/files/renameFile",
           "host": [
             "127",
             "0",
@@ -2236,9 +2242,277 @@
             "api",
             "v1",
             "files",
-            "deleteFile"
+            "renameFile"
           ]
         }
+      },
+      "response": []
+    },
+    {
+      "name": "renameDir",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "c3baead3-f80b-4bb7-b57c-e8d90b5939cf"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/files/renameDir",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "files",
+            "renameDir"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deleteDirectory",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "e63ee9e7-c5c4-4bc6-9f01-c1f00a719e90"
+            },
+            {
+              "key": "dir",
+              "value": "104",
+              "type": "text",
+              "uuid": "49908002-7c9a-4eff-9a86-685560f6c1b2"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/files/deleteDirectory",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "files",
+            "deleteDirectory"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "moveDirectory",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "2e639c32-79a2-488f-9f55-2a6388fd7386"
+            },
+            {
+              "key": "dir_id",
+              "value": "106",
+              "type": "text",
+              "uuid": "1274466e-4000-49f4-ae5d-28e878ec52eb"
+            },
+            {
+              "key": "current_directory",
+              "value": "103",
+              "type": "text",
+              "uuid": "b1b9c1a8-7324-4c0f-9fc6-7436d9dfab61"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/files/moveDirectory",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "files",
+            "moveDirectory"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "shareDir",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "8fd9d28a-9057-401a-a48e-ab6b9a4a2fe9"
+            },
+            {
+              "key": "dir",
+              "value": "106",
+              "type": "text",
+              "uuid": "0d9e0441-67b6-42cc-846f-c1757a8c8e5d"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/files/shareDir",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "files",
+            "shareDir"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "shareDirWithPassword",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "92e808c9-9bd0-4d33-aad3-d17db69a0d91"
+            },
+            {
+              "key": "dir",
+              "value": "106",
+              "type": "text",
+              "uuid": "a2fc6220-c8d4-4094-ae96-198244d7ae51"
+            },
+            {
+              "key": "password",
+              "value": "password",
+              "type": "text",
+              "uuid": "b0c69132-bad5-4c57-b23f-460e34ef91e5"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/files/shareDirWithPassword",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "files",
+            "shareDirWithPassword"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "closeDir",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "adf322f2-7990-4c92-ac2b-f3f9894a08ba"
+            },
+            {
+              "key": "dir",
+              "value": "106",
+              "type": "text",
+              "uuid": "6aef7893-f852-46d5-be0e-23ab6d1e875b"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/files/closeDirectory",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "files",
+            "closeDirectory"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": []
       },
       "response": []
     }
