@@ -284,12 +284,10 @@ class  filesApiController extends Controller\preloaderController {
 
     public function moveFileAction(){
 
-        $this->layout('layout/only_form');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $fileId = (int)$request->getPost()->file_id;
         $requiredDirId = (int)$request->getPost()->current_directory;
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
         $files = new Files();
         $dir  = $this->getFilesTable()->moveFileToSystem($fileId,$requiredDirId,$userId,$files->getAdapter());
         echo "ok";
