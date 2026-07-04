@@ -1,18 +1,3 @@
-<?php
-// $form = $this->form;
-// $form->setAttribute('action', $this->url('user', array('action' => 'usersearch')));
-// $form->prepare();
-
-// echo $this->form()->openTag($form);
-// echo $this->formRow($form->get('first_name'));
-// echo $this->formRow($form->get('second_name'));
-// echo $this->formRow($form->get('job'));
-// echo $this->formRow($form->get('country'));
-// echo $this->formRow($form->get('city'));
-// echo $this->formRow($form->get('phone'));
-// echo $this->formSubmit($form->get('submit'));
-// echo $this->form()->closeTag();
-?>
 	<div class="col user_search_half_block" >
 		<form action="/user/usersearch" method="post" id="user_search_form">
 			<input type="text" name="first_name" placeholder="First name" /> <br />
@@ -26,7 +11,7 @@
 	</div>
 	<div class="col user_search_half_block">
 		<div id="usersearchdiv" >
-    users with handled "Setting"
+
 <?php
 
 if (isset($this->users[0])) {

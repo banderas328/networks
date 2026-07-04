@@ -8,7 +8,7 @@ use Zend\Config\Config;
 use Zend\Config\Factory;
 use Preloader\Model; 
 
-class FriendsTable extends Controller\preloaderController {
+class FriendsTable extends Model\preloaderModel {
 	protected $tableGateway;
 
 	public function __construct() {
