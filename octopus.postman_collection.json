@@ -2501,18 +2501,168 @@
       "response": []
     },
     {
-      "name": "New Request",
+      "name": "moveFile",
       "request": {
-        "method": "GET",
-        "header": []
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "0c221bff-8c06-49c1-a6e3-02fc08a32c02"
+            },
+            {
+              "key": "file_id",
+              "value": "27",
+              "type": "text",
+              "uuid": "0ab9ff02-2146-4817-b8e8-3db3efc417c2"
+            },
+            {
+              "key": "current_directory",
+              "value": "0",
+              "type": "text",
+              "uuid": "07da880b-0a12-4da5-8f19-e6f770d274d5"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/files/moveFile",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "files",
+            "moveFile"
+          ]
+        }
       },
       "response": []
     },
     {
-      "name": "New Request",
+      "name": "getUserSettings",
       "request": {
-        "method": "GET",
-        "header": []
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "7b770647-d1bc-43ec-b377-ed79df46c47b"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/settings/getUserSettings",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "settings",
+            "getUserSettings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "saveUserSettings",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "8d8c1ca8-84d4-4693-ae3b-b8d6b1714481"
+            },
+            {
+              "key": "first_name",
+              "value": "first_name",
+              "type": "text",
+              "uuid": "0d53a692-e934-4e01-aa44-88dd8026d1c5"
+            },
+            {
+              "key": "second_name",
+              "value": "second_name",
+              "type": "text",
+              "uuid": "cf537f96-3e74-4352-ae12-bb178b697446"
+            },
+            {
+              "key": "about",
+              "value": "about",
+              "type": "text",
+              "uuid": "7ad48f0f-4f59-4a1c-b038-3440a2818ccf"
+            },
+            {
+              "key": "job",
+              "value": "job",
+              "type": "text",
+              "uuid": "205b6e84-2908-4e95-bf94-aafc23d6cd5a"
+            },
+            {
+              "key": "country",
+              "value": "countryh",
+              "type": "text",
+              "uuid": "01c63411-1613-4886-8d9f-d4d1a6a26b5e"
+            },
+            {
+              "key": "city",
+              "value": "city",
+              "type": "text",
+              "uuid": "427260d4-bde5-4eb2-a374-d0cec9815821"
+            },
+            {
+              "key": "phone",
+              "value": "phone",
+              "type": "text",
+              "uuid": "3eafc175-e469-447c-8323-1101423b0afc"
+            },
+            {
+              "key": "file",
+              "description": "GIF,JPEG,PNG,BMP",
+              "type": "file",
+              "uuid": "c2fe5e26-9e00-4290-83d8-1862a1bc378b",
+              "src": "/C:/Users/barnaki/Pictures/14786.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/settings/savesettings",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "settings",
+            "savesettings"
+          ]
+        }
       },
       "response": []
     }

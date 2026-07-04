@@ -13,9 +13,10 @@ use Zend\Db\Sql\Sql;
 use Zend\Config\Config;
 use Zend\Config\Factory;
 use Zend\Db\Sql\Select;
+use Preloader\Model;
 
 
-class SettingsTable
+class SettingsTable extends Model\preloaderModel
 {
     protected $tableGateway;
     protected $adapter;
@@ -35,8 +36,10 @@ class SettingsTable
     }
 
 
-    public function saveGeneralSettings($settings)
+    public function saveGeneralSettings($settings ,$userId = false)
     {
+        $userId = self::getUserId($userId);
+        unset($settings['token']);
         if(isset($settings["file"])){
             $files = $settings["file"];
         }
@@ -48,9 +51,7 @@ class SettingsTable
         if (is_array($settings["city"])) $settings["city"] = $settings["city"][1];
         if (is_array($settings["about"])) $settings["about"] = $settings["about"][1];
         if (is_array($settings["phone"])) $settings["phone"] = $settings["phone"][1];
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = self::getUserId($userId);
         if (isset($settings['file']['tmp_name'])) {
             $sql = "SELECT  * FROM user_settings where user_id = " . $userId;
             $results = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
@@ -62,8 +63,10 @@ class SettingsTable
             $path = "img/avatars";
             $fileName = uniqid();
             $file = $path . '/' . $fileName;
+            //be carefull , file name should be with out spaces
+            $settings['file']['name'] = str_replace(' ', '', $settings['file']['name']);
             move_uploaded_file($settings['file']['tmp_name'], getcwd() . "/public/" . $file . $settings['file']['name']);
-            if ($this->is_image(getcwd() . "/public/" . $file . $settings['file']['name'])) {
+            if ($this->is_image(getcwd() . "/public/" . $file . $settings['file']['name'])) {//
                 $settings['avatar'] = $file . $settings['file']['name'];
             } else {
                 @unlink(getcwd() . "/public/" . $file . $settings['file']['name']);
@@ -82,18 +85,18 @@ class SettingsTable
         return true;
     }
 
-    public function getCurrentUserSettings()
+    public function getCurrentUserSettings($userId = false)
     {
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = self::getUserId($userId);
         $sql = "SELECT  * FROM user_settings where user_id=" . $userId;
         $results = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         return $results;
     }
 
-    public function getUserSettings(int $userID)
+    public function getUserSettings($userId = false)
     {
-        $sql = "SELECT  * FROM user_settings where user_id=" . $userID;
+        $userId = self::getUserId($userId);
+        $sql = "SELECT  * FROM user_settings where user_id=" . $userId;
         return $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE)->toArray()[0];
     }
 

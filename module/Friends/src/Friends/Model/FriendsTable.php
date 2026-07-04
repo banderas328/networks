@@ -6,8 +6,9 @@ use Zend\Session\Container;
 use Zend\Db\Sql\Sql;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Preloader\Model; 
 
-class FriendsTable {
+class FriendsTable extends Controller\preloaderController {
 	protected $tableGateway;
 
 	public function __construct() {
