@@ -3103,9 +3103,15 @@ height: 30px;
 	display:inline-block;
 	width: 15%;
 }
-.friend_request {
-	position: relative;
-	bottom: 15px;
+#friends_requets .friend_request {
+position: relative;
+  bottom: 0px;
+  left: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .user_name_block{
 	width: 500px;
@@ -3114,4 +3120,7 @@ height: 30px;
 #window_admins {
 
     width: 1000px;
+}
+#friends_requets img {
+    margin-left:20px;
 }

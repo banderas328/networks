@@ -1,11 +1,12 @@
 <?php
-namespace Friends\Controller\Api;
+namespace Friends\Controller;
 
 //use Friends\Form\FriendsForm;
 use Preloader;
 use Preloader\Controller;
 use Zend\Session\Container;
 use Friends\Model\Friends;
+use Preloader\Model;
 
 
 class  friendsApiController extends Controller\preloaderController
@@ -23,66 +24,57 @@ class  friendsApiController extends Controller\preloaderController
 
     public function addFriendRequestAction()
     {
-        $friendId = $this->getEvent()->getRouteMatch()->getParam('user_id');
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
+        $friendId = $this->getRequest()->getPost('friend_user_id');
         $friends = new Friends();
         $this->getFriendsTable()->addFriendRequest($userId, $friendId, $friends->getAdapter());
-        echo "have";
+        echo "ok";
         die();
     }
 
     public function requestsAction()
     {
-        $this->layout('layout/only_form');
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $friends = new Friends();
         $requests = $this->getFriendsTable()->getRequests($userId, $friends->getAdapter());
         if($requests) $requests = $requests->toArray();
         else $requests = false;
         echo json_encode  (@array('friends' => $requests));
-        return false;
+        die();
     }
 
 
     public function addFriendAction()
     {
-        $friendId = $this->getEvent()->getRouteMatch()->getParam('user_id');
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
+        $friendId = $this->getRequest()->getPost('friend_id');
         $friends = new Friends();
         $this->getFriendsTable()->addFriend($userId, $friendId, $friends->getAdapter());
         echo "ok";
-        return false;
+        die();
     }
 
     public function cancelFriendAction()
     {
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $friendId = $this->getEvent()->getRouteMatch()->getParam('user_id');
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
         $friends = new Friends();
         $this->getFriendsTable()->cancelFriend($userId, $friendId, $friends->getAdapter());
-        echo "ok"
+        echo "ok";
         return false;
     }
 
     public function getFriendListAction(){
-        $this->layout('layout/only_form');
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $friends = new Friends();
         $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
         if($friends) $friends = $friends->toArray();
         else $friends = false;
         echo json_encode(@array('friends' => $friends));
-        return false;
+        die();
     }
     public function getfriendForMemberlistAction(){
-        $this->layout('layout/only_form');
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $friends = new Friends();
         $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
         if($friends) $friends = $friends->toArray();
@@ -91,27 +83,22 @@ class  friendsApiController extends Controller\preloaderController
     }
 
     public function addfriendForMemberlistAction(){
-        $this->layout('layout/only_form');
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $friends = new Friends();
         $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
         if($friends) $friends = $friends->toArray();
         else $friends = false;
         echo json_encode (@array('friends' => $friends));
-        return false;
+        die();
     }
 
     public function getfriendForProjectMemberlistAction(){
-
-        $this->layout('layout/only_form');
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $friends = new Friends();
         $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
         if($friends) $friends = $friends->toArray();
         else $friends = false;
         echo json_encode (@array('friends' => $friends));
-        return false;
+        die();
     }
 }
