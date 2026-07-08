@@ -15,6 +15,7 @@ use Zend\Config\Config;
 use Zend\Config\Factory;
 
 
+
 class ChanelsApiController extends Controller\preloaderController
 {
     protected $chanelsTable;
@@ -22,7 +23,7 @@ class ChanelsApiController extends Controller\preloaderController
 
 
     public function createChanelAction(){
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $chanels = new  Chanels();
         if ($request->isPost()) {
@@ -34,7 +35,7 @@ class ChanelsApiController extends Controller\preloaderController
 
     public function indexPublicAction()
     {
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $chanels =  $this->getChanelsTable()->fetchAllPublic()->toArray();
         echo json_encode ([
             'chanels' => $chanels
@@ -44,7 +45,7 @@ class ChanelsApiController extends Controller\preloaderController
 
     public function indexPrivateAction()
     {
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $chanels = new  Chanels();
         $chanelsArray = $this->getChanelsTable()->fetchAllPrivate($chanels->getAdapter(),$userId)->toArray();
         echo json_encode([
@@ -55,7 +56,7 @@ class ChanelsApiController extends Controller\preloaderController
 
     public function chanelRequestAction()
     {
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $chanels = new  Chanels();
         if ($request->isPost()) {
@@ -67,7 +68,7 @@ class ChanelsApiController extends Controller\preloaderController
     public function addmessagetochanelAction()
     {
 
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $chanelsMessages = new  ChanelsMessages();
         if ($request->isPost()) {
@@ -80,7 +81,7 @@ class ChanelsApiController extends Controller\preloaderController
 
     public function getPrivateChanelsRequestsAction()
     {
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $chanels = new  Chanels();
         $this->layout('layout/only_form');
         echo json_encode (array(
@@ -91,7 +92,7 @@ class ChanelsApiController extends Controller\preloaderController
 
     public function denyAccessToChanelAction()
     {
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $chanels = new  Chanels();
         if(!$this->getChanelsTable()->checkIsUserIsChanelAdmin($chanels->getAdapter(),$request,$userId)) die('try more :))');
@@ -102,7 +103,7 @@ class ChanelsApiController extends Controller\preloaderController
 
     public function allowAccessToChanelAction()
     {
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $chanels = new  Chanels();
         if(!$this->getChanelsTable()->checkIsUserIsChanelAdmin($chanels->getAdapter(),$request, $userId)) die('try more');
@@ -113,7 +114,7 @@ class ChanelsApiController extends Controller\preloaderController
     
     public function indexDeleteAction()
     {
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $chanels = new  Chanels();
         $this->layout('layout/only_form');
         echo  json_encode(array(
@@ -123,7 +124,7 @@ class ChanelsApiController extends Controller\preloaderController
     }
     
     public function deleteChanelAction(){
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         if ($this->getChanelsTable()->deleteChanel($this->getRequest(),$userId))
             die("deleted");
         die("error delete chanel");      
