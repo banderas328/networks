@@ -231,12 +231,12 @@
           "urlencoded": [
             {
               "key": "token",
-              "value": "65c1bf459571fe77f628cdff775f195b599737b04541dbe87f5f84796a1f9327",
+              "value": "dc5016f1e02b1cb1ad0836e475971bb1f48bbf054c9f263a0917abf936b396b7",
               "type": "text"
             },
             {
               "key": "offset",
-              "value": "3",
+              "value": "0",
               "type": "text"
             }
           ]
@@ -259,7 +259,7 @@
           "query": [
             {
               "key": "token",
-              "value": "65c1bf459571fe77f628cdff775f195b599737b04541dbe87f5f84796a1f9327",
+              "value": "dc5016f1e02b1cb1ad0836e475971bb1f48bbf054c9f263a0917abf936b396b7",
               "disabled": true
             }
           ]
@@ -2661,6 +2661,606 @@
             "v1",
             "settings",
             "savesettings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "addFriendRequest",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "7a1ad8c9-7432-4cfc-b2a0-879b3f19656d"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/friends/addfriendrequest",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "friends",
+            "addfriendrequest"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "friends_request",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "cc95f35e-99f2-4c20-9a33-13e754780295"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/friends/requests",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "friends",
+            "requests"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "addFriend",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "e7320ea7-ef0c-4bb6-bdd7-cf1a4fafef79"
+            },
+            {
+              "key": "friend_id",
+              "value": "5",
+              "type": "text",
+              "uuid": "cf69e189-2491-41e1-9da1-ffa0b06a3b09"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/friends/addFriend",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "friends",
+            "addFriend"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getFriendList",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "b34be704-2336-409d-b740-8f4a49ce3770"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/friends/getFriendList",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "friends",
+            "getFriendList"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "addfriendForMemberlist",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "9ddd48f5-0b78-4d70-881f-07368ae48893"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/friends/addfriendForMemberlist",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "friends",
+            "addfriendForMemberlist"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getfriendForProjectMemberlist",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "c1063e05-20ff-4557-8fb7-a6786b19ed29"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/friends/getfriendForProjectMemberlist",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "friends",
+            "getfriendForProjectMemberlist"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "addmessage",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/messages/addmessage",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "messages",
+            "addmessage"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "sync",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "936ea430-e8d3-47e5-907c-8751de4b6740"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/sync/sync",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "sync",
+            "sync"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "syncChanel",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "f61c6ed3-41f6-4e09-9ac2-c443eec55836"
+            },
+            {
+              "key": "to_chanel",
+              "value": "1",
+              "type": "text",
+              "uuid": "e45b0285-21b8-4064-9559-a82618735274"
+            },
+            {
+              "key": "date",
+              "value": "1767451129",
+              "type": "text",
+              "uuid": "918b47ae-ec45-4b51-918c-6faa4a79f238"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/sync/syncchanel",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "sync",
+            "syncchanel"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "syncChanelPrivate",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "4778050eafd180237890f124c0d9de1d5d1212416f321e8d593a97fd4033031a",
+              "type": "text",
+              "uuid": "940f49b8-5bee-4438-a5b6-b452fe0f9622"
+            },
+            {
+              "key": "to_chanel",
+              "value": "2",
+              "type": "text",
+              "uuid": "897c54fc-aef9-41fc-b429-32262b49d621"
+            },
+            {
+              "key": "date",
+              "value": "1783514385",
+              "type": "text",
+              "uuid": "8456e357-b237-4606-8f40-b3fe7c17500b"
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/sync/syncChanelPrivate",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "sync",
+            "syncChanelPrivate"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "usersSearch",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "32027fb780ab5d82cf382a48e2563097e9d27ff6b882774526759e17bd2d2608",
+              "type": "text",
+              "uuid": "67863f8a-e1b1-428d-841d-83c207fc5378"
+            },
+            {
+              "key": "first_name",
+              "value": "firstfff",
+              "type": "text",
+              "uuid": "be913076-a18f-44ed-be14-12c6405b4800"
+            },
+            {
+              "key": "second_name",
+              "value": "second_name",
+              "type": "text",
+              "uuid": "50050e37-d896-45fb-ad35-f6834a776be6",
+              "disabled": true
+            },
+            {
+              "key": "job",
+              "value": "job",
+              "type": "text",
+              "uuid": "0bd27c56-3be6-4a44-80bd-518e220c548a",
+              "disabled": true
+            },
+            {
+              "key": "country",
+              "value": "country",
+              "type": "text",
+              "uuid": "f798caa4-b00c-4a4e-9dca-c6eaaab6b90a",
+              "disabled": true
+            },
+            {
+              "key": "city",
+              "value": "city",
+              "type": "text",
+              "uuid": "cee073bd-7232-4b29-bdc7-61e237fff399",
+              "disabled": true
+            },
+            {
+              "key": "phone",
+              "value": "phone",
+              "type": "text",
+              "uuid": "d06a465e-404b-4c77-910f-afc119f50ac2",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "127.0.0.1:8080/api/v1/user/usersearch",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "user",
+            "usersearch"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "networkIndex",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "32027fb780ab5d82cf382a48e2563097e9d27ff6b882774526759e17bd2d2608",
+              "type": "text",
+              "uuid": "417023a8-effb-414f-a7f4-ffd4b337fa5d"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8080/api/v1/network/networkindex",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "network",
+            "networkindex"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getNetworkPoint",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "32027fb780ab5d82cf382a48e2563097e9d27ff6b882774526759e17bd2d2608",
+              "type": "text",
+              "uuid": "f31313ca-7c30-4a4c-8661-ce7c1a77bb3a"
+            },
+            {
+              "key": "user_id",
+              "value": "5",
+              "type": "text",
+              "uuid": "16b6f2ae-baf5-4476-ba5e-bfdcf8753a76"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8080/api/v1/network/getNetworkPoint",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "network",
+            "getNetworkPoint"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getnetworkfolder",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "32027fb780ab5d82cf382a48e2563097e9d27ff6b882774526759e17bd2d2608",
+              "type": "text",
+              "uuid": "6e777bcd-dd34-4ce0-8bbb-2b8da321cadc"
+            },
+            {
+              "key": "user_id",
+              "value": "3",
+              "type": "text",
+              "uuid": "9e6ebc16-635c-4573-9719-2fe1bae233e6"
+            },
+            {
+              "key": "dir_key",
+              "value": "111",
+              "type": "text",
+              "uuid": "04a0d724-3ed6-4b66-ae60-051689f8fa5e"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8080/api/v1/network/getnetworkfolder",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "network",
+            "getnetworkfolder"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getnetworkdirectory",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": []
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8080/api/v1/network/getnetworkfolder",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "network",
+            "getnetworkfolder"
           ]
         }
       },

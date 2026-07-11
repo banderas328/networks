@@ -100,10 +100,9 @@ class SettingsTable extends Model\preloaderModel
         return $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE)->toArray()[0];
     }
 
-    public function searchUsersOnSettings($data)
+    public function searchUsersOnSettings($data, $userId =  false)
     {
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = self::getUserId($userId);
         $select = new Select();
         $select->from('user_settings');
         $select->columns(array("user_id", "first_name", "second_name", 'avatar', 'job', 'country', 'city', 'phone', 'about'));

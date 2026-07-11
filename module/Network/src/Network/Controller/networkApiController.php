@@ -1,5 +1,5 @@
 <?php
-namespace Network\Controller\Api;
+namespace Network\Controller;
 use Network\Model\Network;
 use Preloader;
 use Preloader\Controller;
@@ -8,6 +8,7 @@ use Friends\Model\Friends;
 use Files\Model\Files;
 use Files\Model\FileSystem;
 use Zend\View\Model\ViewModel;
+use Preloader\Model;
 
 
 
@@ -51,103 +52,85 @@ class  networkApiController extends Controller\preloaderController
     }
 
     public function networkIndexAction(){
-        $this->layout('layout/only_form');
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $friends = new Friends();
         $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
         if($friends) $friends = $friends->toArray();
         else $friends = false;
         echo json_encode ( @array('friends' => $friends));
-        return false;
+        die();
     }
 
     public function getNetworkPointAction(){
-        $user_session = $_SESSION['user'];
-        $this->layout('layout/only_form');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $friends = new Friends();
-        $userId = $user_session["id"];
         $network = new Network();
         $dirs = $this->getNetworkTable()->getUserSharedDirs($request,$network->getAdapter());
+        $dirs['result'] = $dirs['result']->toArray();
         $alredyShared = $dirs['already_shared'];
         $authedDirs = implode(",",$alredyShared);
-        $user_session['authedDirs'] = $authedDirs;
-        $dirs = $dirs['result'];
+        //$user_session['authedDirs'] = $authedDirs;
+       // var_dump($dirs);
         if($dirs)
         echo json_encode ( array("dirs" => $dirs,'current_directory' => 0));
         else 
         echo json_encode (array("dirs" => false,"error" => true,'current_directory' => 0));
-    return false;
+        die();
     }
 
     public function getNetworkDirectoryAction(){
-        $this->layout('layout/only_form');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
         $friends = new Friends();
         $fileSystem = new FileSystem();
+        $network = new Network();
         $dirOptions = $this->getFileSystemTable()->getDirOptions((int) $request->getPost()->dir_key,$fileSystem->getAdapter());
         if ($dirOptions->buffer()->toArray()[0]["is_public"]) {
             $childDirs = $this->getFileSystemTable()->getChildDirs((int) $request->getPost()->dir_key,(int) $request->getPost()->user_id);
-                    $childDirs[] = (int) $request->getPost()->dir_key;
-                if(isset($user_session['authedDirs'])) {
-                    $authedDirs  =   $user_session['authedDirs'];
-                }
-
-                foreach($childDirs as $dir) {
-                    if(!isset($authedDirs)) $authedDirs = $dir;
-                    else   $authedDirs .= ",".$dir;
-                }
-                $dirs = explode(",", $authedDirs);
-                if(!in_array($childDirs[0],$dirs)) {
-
-                    $dirs[] =  $childDirs[0];
-                }
-                $authedDirs = implode(",",$dirs);
-                $user_session['authedDirs'] = $authedDirs;
-                echo json_encode (array('dir_key'=>(int) $request->getPost()->dir_key,'user_id' => $request->getPost()->user_id));
-                return false;
+                $childDirs[] = (int) $request->getPost()->dir_key;
+                $dirs = $this->getNetworkTable()->getUserSharedDirs($request,$network->getAdapter());
+                echo json_encode (array('auth_required' => false ,'dir_key'=>(int) $request->getPost()->dir_key,'user_id' => $request->getPost()->user_id));
+                die();
             }
-            elseif($dirOptions->buffer()->toArray()[0]["is_password"]) {
+        elseif($dirOptions->buffer()->toArray()[0]["is_password"]) {
                 if($this->isUserLogedInDirectory((int) $request->getPost()->dir_key)) {
-                    $view = new ViewModel(array('dir_key'=>(int) $request->getPost()->dir_key,'user_id' => $request->getPost()->user_id));
-                    $view->setTemplate('network/network/networkdirectorylogin.phtml'); // path to phtml file under view folder
-                    return $view;
-                }
-               echo json_encode(array('dir_key'=>(int) $request->getPost()->dir_key,'user_id' =>  (int) $request->getPost()->user_id));
+                echo json_encode(array('auth_required' => true ,'dir_key'=>(int) $request->getPost()->dir_key,'user_id' => $request->getPost()->user_id));                    
+                 die();
+        }
+               echo json_encode(array('auth_required' => true,'dir_key'=>(int) $request->getPost()->dir_key,'user_id' =>  (int) $request->getPost()->user_id));
                 
-                return false;
+                die();
             }
     }
 
     public function getNetworkFolderAction()
     {
-        $this->layout('layout/only_form');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $dirId = (int)$request->getPost()->dir_key;
-        $userId = (int)$request->getPost()->user_id;
+        $user_Id_folder = (int)$request->getPost()->user_id;
         $fileSystem = new FileSystem();
         $dirs = $this->getFileSystemTable()->getUserDirs($fileSystem->getAdapter(), $dirId, $userId);
         if (!$this->isUserLogedInDirectory($dirId)) {
             $filesystem = new FileSystem();
             $check_dir = $this->getFileSystemTable()->getUserDirsDetails($filesystem->getAdapter(), array(0 => $dirId));
-            if ($check_dir->toArray()[0]["is_password"] == "1") {
+            if (isset($check_dir->toArray()[0]["is_password"]) and  $check_dir->toArray()[0]["is_password"] == "1") {
                 echo json_encode(array('dir_key' => (int)$request->getPost()->dir_key, 'user_id' => (int)$request->getPost()->user_id));
 
-                return false;
+                die('password');
             }
              else {
                  $files = new Files();
-                 $files = $this->getFilesTable()->getDirFiles($files->getAdapter(), $dirId, $userId);
+                 $files = $this->getFilesTable()->getDirFiles($files->getAdapter(), $dirId, $user_Id_folder);
+                 $files = $files->toArray();
                  echo json_encode(array(
-                     'user_id' => $userId,
+                     'user_id' => $user_Id_folder,
                      'dirs' => $dirs,
                      'current_directory' => $dirId,
                      'filesInDir' => $files
                  ));
-                 return false;
+                die();
 
             }
         }
@@ -156,10 +139,8 @@ class  networkApiController extends Controller\preloaderController
 
     public function networkDirectoryLoginAction (){
 
-        $this->layout('layout/only_form');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
         $friends = new Friends();
         $isUsersFriends = $this->getFriendsTable()->isUsersFriends($userId,$request->getPost()->user_id,$friends->getAdapter());
         if(!empty($isUsersFriends->buffer()->toArray()))
@@ -194,12 +175,12 @@ class  networkApiController extends Controller\preloaderController
 
 
     public function isUserLogedInDirectory($dir) {
-        $user_session = $_SESSION['user'];
-        if(!isset($user_session['authedDirs'])) return false;
-        $authedDirs  =   $user_session['authedDirs'];
-        $dirs = explode(",", $authedDirs);
-        if(in_array($dir,$dirs))
-            return true;
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
+       // if(!isset($user_session['authedDirs'])) return false;
+        //$authedDirs  =   $user_session['authedDirs'];
+        // $dirs = explode(",", $authedDirs);
+        // if(in_array($dir,$dirs))
+        //     return true;
         return false;
     }
 
@@ -231,7 +212,6 @@ class  networkApiController extends Controller\preloaderController
     }
 
     public function getNetworkParentFolderAction(){
-        $this->layout('layout/only_form');
         $request = $this->getRequest();
         $dirKey = (int) $request->getPost()->dir_key;
         $userId = $request->getPost()->user_id;
@@ -261,7 +241,7 @@ class  networkApiController extends Controller\preloaderController
                     $user_session = $_SESSION['user'];
                     $user_session['authedDirs'] = $authedDirs;
                     $dirs = $dirs['result'];
-                    echo json_encode (["dirs" => $dirs , 'current_directory' => 0])
+                    echo json_encode (["dirs" => $dirs , 'current_directory' => 0]);
                     return false;
                 }
             }

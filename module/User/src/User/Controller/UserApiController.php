@@ -7,6 +7,7 @@ use User\Model\User;
 use Settings\Model\Settings;
 use Zend\View\Model\JsonModel;
 use Zend\Session\Container;
+use Preloader\Model;
 
 class UserApiController extends Controller\preloaderController
 {
@@ -132,6 +133,21 @@ class UserApiController extends Controller\preloaderController
         }
 
         return $this->jsonResponse(['user_id' => $userId]);
+    }
+
+    public function userSearchAction()
+    {
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
+        $request = $this->getRequest();
+        $data = $request->getPost();
+        unset($data['token']);
+        $users = $this->getSettingsTable()->searchUsersOnSettings($data,$userId);    
+        if(isset($users)) {
+            
+            $response["users"] = $users;
+        }
+        echo json_encode($response);
+        die();
     }
 
     /* ====================================================

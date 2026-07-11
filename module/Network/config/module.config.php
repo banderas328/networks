@@ -3,7 +3,7 @@ return array(
 	'controllers' => array(
 		'invokables' => array(
 			'Network\Controller\Network' => 'Network\Controller\networkController',
-			'Network\Controller\Api\Network' => 'Network\Controller\api\networkControllerApi',
+			'Network\Controller\NetworkApi' => 'Network\Controller\networkApiController',
 		),
 	),
 	'router' => array(
@@ -26,13 +26,13 @@ return array(
 			'api/v1/network' => array(
 				'type'    => 'segment',
 				'options' => array(
-					'route'    => 'api/v1/network[/:action][/:param][/:value]',
+					'route'    => '/api/v1/network[/:action][/:param][/:value]',
 					'constraints' => array(
 						'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
 						'id'     => '[0-9]+',
 					),
 					'defaults' => array(
-						'controller' => 'Network\Controller\Api\Network',
+						'controller' => 'Network\Controller\NetworkApi',
 						'action'     => 'index',
 					),
 				),
