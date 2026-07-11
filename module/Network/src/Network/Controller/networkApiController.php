@@ -150,7 +150,7 @@ class  networkApiController extends Controller\preloaderController
             if ($dirOptions->buffer()->toArray()[0]["is_password"]) {
                 $logedDirectory = $this->getNetworkTable()->networkDirectoryLogin($request,$fileSystem->getAdapter());
                 if($logedDirectory) {
-                    $childDirs = $this->getFileSystemTable()->getChildDirs($fileSystem->getAdapter(), $logedDirectory,$request->getPost()->user_id);
+                    $childDirs = $this->getFileSystemTable()->getChildDirs($logedDirectory,$request->getPost()->user_id);
                     if(isset($user_session->user['authedDirs'])) {
                         $authedDirs  =   $user_session->user['authedDirs'];
                         $dirs = explode(",", $authedDirs);
@@ -162,13 +162,13 @@ class  networkApiController extends Controller\preloaderController
                         }
                     }
                     $authedDirs = implode(",",$dirs);
-                    $user_session->user['authedDirs'] = $authedDirs;
+              
                 }
             }
 
         }
-        echo json_encode (array("dir_key" => (int) $request->getPost()->dir_key,'user_id' => $request->getPost()->user_id));
-        return false;
+        echo json_encode(array("dir_key" => (int) $request->getPost()->dir_key,'user_id' => $request->getPost()->user_id));
+        die();
 
     }
 

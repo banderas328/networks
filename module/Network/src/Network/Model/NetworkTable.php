@@ -82,18 +82,13 @@ class NetworkTable extends Model\preloaderModel
     }
 
     public function networkDirectoryLogin($request,$adapter){
-        $dir_key = (int)$request->getPost()->dir_key;
-        $password = $request->getPost()->password;
-        $sql = new Sql($adapter);
-        $select = $sql->select();
-        $select->from('network');
-        $select->where(array('path_id' => $dir_key,'password' => $password , 'is_password' => 1));
-        $statement = $sql->prepareStatementForSqlObject($select);
-        $results = $statement->execute();
-        $result = \Zend\Stdlib\ArrayUtils::iteratorToArray($results);
-        if(isset($result[0]['path_id']))
-        return $result[0]['path_id'];
-        else return false;
+         $dir_key = (int)$request->getPost()->dir_key;
+         $password = $request->getPost()->password;
+         $result = $this->tableGateway->select(['path_id' => $dir_key,'password' => $password , 'is_password' => 1]);
+         $result = $result->toArray();
+         if(isset($result[0]['path_id']))
+         return $result[0]['path_id'];
+         else return false;
     }
 
 }
