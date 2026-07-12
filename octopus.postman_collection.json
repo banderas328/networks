@@ -3265,6 +3265,138 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "networkDirectoryLogin",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "32027fb780ab5d82cf382a48e2563097e9d27ff6b882774526759e17bd2d2608",
+              "type": "text",
+              "uuid": "0bc7746f-227f-477e-97bc-4b2fb8858a92"
+            },
+            {
+              "key": "dir_key",
+              "value": "111",
+              "type": "text",
+              "uuid": "1a2542ef-e507-4575-9e35-85e8c6f73d0e"
+            },
+            {
+              "key": "user_id",
+              "value": "3",
+              "type": "text",
+              "uuid": "5a5809b1-1501-4bc5-b7b6-731e88ade952"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8080/api/v1/network/networkDirectoryLogin",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "network",
+            "networkDirectoryLogin"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getNetworkParentFolder",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "32027fb780ab5d82cf382a48e2563097e9d27ff6b882774526759e17bd2d2608",
+              "type": "text",
+              "uuid": "7f433ee5-c743-4ae9-8ef5-5ce6f0806aff"
+            },
+            {
+              "key": "dir_key",
+              "value": "107",
+              "type": "text",
+              "uuid": "1115d8d0-c3bb-47fb-8578-07714ccb395e"
+            },
+            {
+              "key": "user_id",
+              "value": "3",
+              "type": "text",
+              "uuid": "9d058df6-eeec-4306-b3f6-09f237c69185"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8080/api/v1/network/getNetworkParentFolder",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "network",
+            "getNetworkParentFolder"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getUserSettings",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "token",
+              "value": "32027fb780ab5d82cf382a48e2563097e9d27ff6b882774526759e17bd2d2608",
+              "type": "text",
+              "uuid": "c3d4f762-f023-45ad-8e38-29556a158247"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8080/api/v1/settings/getUserSettings",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "settings",
+            "getUserSettings"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
