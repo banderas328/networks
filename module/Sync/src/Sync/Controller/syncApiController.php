@@ -34,9 +34,8 @@ class  syncApiController extends Controller\preloaderController {
 
     public function syncChanelAction(){
     	$userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
-        $messages = new Messages();
         $resultData = [];
-        $data  = $this->checkNewMessages($messages->getAdapter(),$userId);
+        $data  = $this->checkNewMessages($userId);
         $resultData["simple_messages"] = $data;
         $resultData = $this->checkNewChanelsMessages($userId);
         $resultData["chanels_messages"] = $data;
@@ -57,6 +56,7 @@ class  syncApiController extends Controller\preloaderController {
     }
 
     public function isUserCanAccessToChanel($userId = false){
+ 
         $chanels = new Chanels();
         return $this->getChanelsTable()->checkUserHaveAccessToChanel($chanels->getAdapter(),$this->getRequest() ,$userId);
     }
@@ -66,8 +66,8 @@ class  syncApiController extends Controller\preloaderController {
         return $this->getChanelsTable()->checkIsChanelPrivate($chanels->getAdapter(),$this->getRequest());
     }
 
-    public function checkNewMessages(){
-    	$userId = $this->getApiUser($this->getRequest());
+    public function checkNewMessages($userId =  false){
+    	// $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $messages = new Messages();
         $freshMessages = $this->getMessagesTable()->checkNewMessages($messages->getAdapter(),$userId);
         $this->getMessagesTable()->markMessagesAsDileverd($freshMessages,$messages->getAdapter(),$userId);

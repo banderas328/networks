@@ -175,12 +175,7 @@ class  networkApiController extends Controller\preloaderController
 
 
     public function isUserLogedInDirectory($dir) {
-        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
-       // if(!isset($user_session['authedDirs'])) return false;
-        //$authedDirs  =   $user_session['authedDirs'];
-        // $dirs = explode(",", $authedDirs);
-        // if(in_array($dir,$dirs))
-        //     return true;
+        //for api need to be authed every time
         return false;
     }
 
@@ -220,8 +215,7 @@ class  networkApiController extends Controller\preloaderController
         $files = new Files();
         $frinendId = $this->getRequest()->getPost()->user_id;
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $friends = new Friends();
         $network = new Network();
         $dirs = $this->getNetworkTable()->getUserSharedDirs($request,$network->getAdapter())['result'];
@@ -229,7 +223,7 @@ class  networkApiController extends Controller\preloaderController
         foreach($dirs as $dir) {
             $dirsIds[] = $dir["id"];
             if($dir["parent_path"] == "0") {
-                $view = new ViewModel();
+                
                 $friends = new Friends();
                 $isUsersFriends = $this->getFriendsTable()->isUsersFriends($userId,$dir["user_id"],$friends->getAdapter());
                 if(!empty($isUsersFriends->buffer()->toArray())){
@@ -237,12 +231,12 @@ class  networkApiController extends Controller\preloaderController
                     $dirs = $this->getNetworkTable()->getUserSharedDirs($request,$network->getAdapter());
 
                     $alredyShared = $dirs['already_shared'];
-                    $authedDirs = implode(",",$alredyShared);
-                    $user_session = $_SESSION['user'];
-                    $user_session['authedDirs'] = $authedDirs;
+                  //  $authedDirs = implode(",",$alredyShared);
+                 //   $user_session = $_SESSION['user'];
+                  //  $user_session['authedDirs'] = $authedDirs;
                     $dirs = $dirs['result'];
                     echo json_encode (["dirs" => $dirs , 'current_directory' => 0]);
-                    return false;
+                    die();
                 }
             }
         }
@@ -254,14 +248,13 @@ class  networkApiController extends Controller\preloaderController
         }
           elseif(!$this->isUserLogedInDirectory($dirKey))    {
               $this->layout('layout/only_form');
-              $user_session = $_SESSION['user'];
-              $userId = $user_session["id"];
+              $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
               $friends = new Friends();
               $friends = $this->getFriendsTable()->getFriends($userId, $friends->getAdapter());
               if($friends) $friends = $friends->toArray();
               else $friends = false;
               echo json_encode(array( 'friends' => $friends));          
-              return false;
+              die();
           }
         $isUsersFriends = $this->getFriendsTable()->isUsersFriends($userId,$frinendId,$friends->getAdapter());
         if(!empty($isUsersFriends->toArray())) {
@@ -306,24 +299,8 @@ class  networkApiController extends Controller\preloaderController
     }
 
     public function nonAuthedFoldersFilter ($dirs) {
-        $user_session = $_SESSION['user'];
-        if(!isset($user_session['authedDirs'])) return false;
-        $authedDirs  =   $user_session['authedDirs'];
-        $authedDirs = explode(",", $authedDirs);
-        $dirs = $dirs->toArray();
-        $newDirs = [];
-        foreach($dirs as $dir) {
-            $newDirs[] = $dir["path_id"];
-        }
-        $sharedDirs  =  array_intersect($newDirs,$authedDirs);
-        foreach($dirs as $dir) {
-            if($dir['is_password']) {
-                $sharedDirs[] =  $dir["path_id"];
-
-            }
-
-        }
-        return $sharedDirs;
+        //for api need to be authed every time
+        return false;
     }
 
 

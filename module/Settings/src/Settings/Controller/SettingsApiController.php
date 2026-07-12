@@ -48,11 +48,10 @@ class SettingsApiController extends Controller\preloaderController
 
     public function getUserSettingsAction()
     {
-        $this->layout('layout/only_form');
         $request = $this->getRequest();
         $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         echo json_encode (["settings" => $this->getSettingsTable()->getUserSettings($userId)]);
-        return false;
+        die();
     }
 
 
