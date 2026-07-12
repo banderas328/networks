@@ -41,7 +41,7 @@ You run everything locally.
 
 📬 Feedback / Contact
 
-anton.zhavrid.misnk@gmail.com
+anton.zhavrid.minsk@gmail.com
 
 If you use Octopus — reach out.
 Feedback = faster evolution.
