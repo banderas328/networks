@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: db
--- Время создания: Июн 30 2026 г., 06:34
+-- Время создания: Июл 13 2026 г., 16:48
 -- Версия сервера: 10.11.18-MariaDB-ubu2204
 -- Версия PHP: 8.3.31
 
@@ -46,14 +46,6 @@ CREATE TABLE `blogs` (
   `blog_title` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
---
--- Дамп данных таблицы `blogs`
---
-
-INSERT INTO `blogs` (`id`, `blog_content`, `user_id`, `date`, `blog_title`) VALUES
-(1, '<p>First BlogFirst BlogFirst BlogFirst BlogFirst BlogFirst BlogFirst BlogFirst BlogFirst BlogFirst Blog</p>\r\n\r\n<div class=\"host-lopnbnfpjmgpbppclhclehhgafnifija\" style=\"position: relative; z-index: 2147483647;\">&nbsp;</div>\r\n', 1, '1767451232', 'First Blog'),
-(2, '<p>hhhhhhhhh</p>\r\n', 1, '1767451264', 'hhhh');
-
 -- --------------------------------------------------------
 
 --
@@ -65,13 +57,6 @@ CREATE TABLE `blog_attachment` (
   `file_name` varchar(250) NOT NULL,
   `blog_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
-
---
--- Дамп данных таблицы `blog_attachment`
---
-
-INSERT INTO `blog_attachment` (`id`, `file_name`, `blog_id`) VALUES
-(1, '/img/blog_images/69592a8099cf42298145318_preview_Сохраненное изображение 2020-11-23_15-10-36.394.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -86,14 +71,6 @@ CREATE TABLE `blog_comment` (
   `blog_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
---
--- Дамп данных таблицы `blog_comment`
---
-
-INSERT INTO `blog_comment` (`id`, `user_id`, `comment`, `blog_id`) VALUES
-(1, 1, 'ggg', 1),
-(2, 1, '', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -106,15 +83,6 @@ CREATE TABLE `boards` (
   `project_id` int(11) NOT NULL,
   `is_deleted` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Дамп данных таблицы `boards`
---
-
-INSERT INTO `boards` (`id`, `name`, `project_id`, `is_deleted`) VALUES
-(1, 'todo', 1, NULL),
-(2, 'in progress', 1, NULL),
-(3, 'done', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -129,13 +97,6 @@ CREATE TABLE `chanels` (
   `password` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
---
--- Дамп данных таблицы `chanels`
---
-
-INSERT INTO `chanels` (`id`, `chanel_name`, `private`, `password`) VALUES
-(1, 'main', 0, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -148,13 +109,6 @@ CREATE TABLE `chanels_admins` (
   `chanel_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
---
--- Дамп данных таблицы `chanels_admins`
---
-
-INSERT INTO `chanels_admins` (`id`, `admins`, `chanel_id`) VALUES
-(1, 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -166,13 +120,6 @@ CREATE TABLE `chanels_deliver_messages` (
   `message_id` varchar(250) DEFAULT NULL,
   `delivered` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
-
---
--- Дамп данных таблицы `chanels_deliver_messages`
---
-
-INSERT INTO `chanels_deliver_messages` (`id`, `message_id`, `delivered`) VALUES
-(1, '1', NULL);
 
 -- --------------------------------------------------------
 
@@ -187,13 +134,6 @@ CREATE TABLE `chanels_messages` (
   `to_chanel` int(11) DEFAULT NULL,
   `date` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
-
---
--- Дамп данных таблицы `chanels_messages`
---
-
-INSERT INTO `chanels_messages` (`id`, `message`, `from_user`, `to_chanel`, `date`) VALUES
-(1, '<p>test</p>\n', 1, 1, '1767451129');
 
 -- --------------------------------------------------------
 
@@ -222,13 +162,6 @@ CREATE TABLE `files` (
   `type` varchar(50) NOT NULL,
   `shared` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
-
---
--- Дамп данных таблицы `files`
---
-
-INSERT INTO `files` (`id`, `file_name`, `file_title`, `user_id`, `directory`, `type`, `shared`) VALUES
-(1, 'userfiles/1/1695923bdc04b3text file.html', 'text file', 1, 2, 'text_file', 0);
 
 -- --------------------------------------------------------
 
@@ -315,9 +248,17 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`id`, `text`, `html_id`, `user_id`) VALUES
-(1, 'you have new project:  octopus', 'test', 1),
-(2, 'you have new task: Docker in project :octopus', 'test', 1),
-(3, 'you have new task: Docker in project :octopus', 'test', 1);
+(26, 'you have new message from firstfff firstfff', 'test', 3),
+(27, 'you have new message from firstfff firstfff', 'test', 5),
+(28, 'you have new message from first_name second_name', 'test', 3),
+(29, 'you have new message from first_name second_name', 'test', 3),
+(30, 'you have new message from first_name second_name', 'test', 4),
+(31, 'you have new message from firstfff firstfff', 'test', 3),
+(32, 'you have new message from firstfff firstfff', 'test', 3),
+(33, 'you have new message from first_name second_name', 'test', 3),
+(34, 'you have new message from first_name second_name', 'test', 3),
+(35, 'you have new message from first_name second_name', 'test', 3),
+(36, 'you have new message from first_name second_name', 'test', 3);
 
 -- --------------------------------------------------------
 
@@ -372,13 +313,6 @@ CREATE TABLE `private_chanels_requests` (
   `pending_response` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
---
--- Дамп данных таблицы `private_chanels_requests`
---
-
-INSERT INTO `private_chanels_requests` (`id`, `chanel_id`, `user_id`, `is_confirmed`, `pending_response`) VALUES
-(1, 1, 1, 1, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -393,13 +327,6 @@ CREATE TABLE `projects` (
   `is_archive` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
---
--- Дамп данных таблицы `projects`
---
-
-INSERT INTO `projects` (`id`, `project_name`, `project_description`, `sort_order`, `is_archive`) VALUES
-(1, 'octopus', '', 0, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -411,13 +338,6 @@ CREATE TABLE `projects_members` (
   `user_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
-
---
--- Дамп данных таблицы `projects_members`
---
-
-INSERT INTO `projects_members` (`id`, `user_id`, `project_id`) VALUES
-(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -448,13 +368,6 @@ CREATE TABLE `tasks` (
   `estimate` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
---
--- Дамп данных таблицы `tasks`
---
-
-INSERT INTO `tasks` (`id`, `board_id`, `description`, `status`, `name`, `parent_task`, `is_archive`, `sort_order`, `estimate`) VALUES
-(1, 1, '<p>add docker to project</p>\r\n\r\n<div class=\"host-lopnbnfpjmgpbppclhclehhgafnifija\" style=\"position: relative; z-index: 2147483647;\">&nbsp;</div>\r\n', 'new', 'Docker', 0, 0, 1, 8);
-
 -- --------------------------------------------------------
 
 --
@@ -478,14 +391,6 @@ CREATE TABLE `tasks_users` (
   `task_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
-
---
--- Дамп данных таблицы `tasks_users`
---
-
-INSERT INTO `tasks_users` (`id`, `task_id`, `user_id`) VALUES
-(1, 1, 0),
-(2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -517,13 +422,6 @@ CREATE TABLE `user` (
   `lang` varchar(2) DEFAULT 'en'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
---
--- Дамп данных таблицы `user`
---
-
-INSERT INTO `user` (`id`, `login`, `email`, `password`, `email_key`, `activated`, `lang`) VALUES
-(1, 'banderas', 'banderas328@yandex.ru', '50009c349b89056fffa4adca4187dc2a', 'JS4DpxACLVvfkNNnLnn6CbVvzOFPc4yBVZwy4AAb', 1, 'en');
-
 -- --------------------------------------------------------
 
 --
@@ -536,15 +434,6 @@ CREATE TABLE `users_filesystem` (
   `parent_path` varchar(45) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
-
---
--- Дамп данных таблицы `users_filesystem`
---
-
-INSERT INTO `users_filesystem` (`id`, `path`, `parent_path`, `user_id`) VALUES
-(1, 'docs', '0', 1),
-(2, 'test', '0', 1),
-(3, 'docs', '0', 2);
 
 -- --------------------------------------------------------
 
@@ -565,13 +454,6 @@ CREATE TABLE `user_settings` (
   `phone` varchar(250) DEFAULT NULL,
   `visibility` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
-
---
--- Дамп данных таблицы `user_settings`
---
-
-INSERT INTO `user_settings` (`id`, `user_id`, `avatar`, `first_name`, `second_name`, `job`, `country`, `city`, `about`, `phone`, `visibility`) VALUES
-(1, 1, 'img/avatars/69592a263da1eglobal-connectivity-network-concept-fsk3ka0hcs2233io.jpg', ' Anton', 'Zhavrid', '', '', '', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -833,43 +715,43 @@ ALTER TABLE `blog_comment`
 -- AUTO_INCREMENT для таблицы `boards`
 --
 ALTER TABLE `boards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `chanels`
 --
 ALTER TABLE `chanels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `chanels_admins`
 --
 ALTER TABLE `chanels_admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `chanels_deliver_messages`
 --
 ALTER TABLE `chanels_deliver_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `chanels_messages`
 --
 ALTER TABLE `chanels_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `deliver_messages`
 --
 ALTER TABLE `deliver_messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT для таблицы `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT для таблицы `files_to_tags`
@@ -887,25 +769,25 @@ ALTER TABLE `frames`
 -- AUTO_INCREMENT для таблицы `friends`
 --
 ALTER TABLE `friends`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT для таблицы `network`
 --
 ALTER TABLE `network`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT для таблицы `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT для таблицы `payed_files`
@@ -929,7 +811,7 @@ ALTER TABLE `paypal`
 -- AUTO_INCREMENT для таблицы `private_chanels_requests`
 --
 ALTER TABLE `private_chanels_requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `projects`
@@ -953,49 +835,49 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT для таблицы `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT для таблицы `tasks_files`
 --
 ALTER TABLE `tasks_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `tasks_users`
 --
 ALTER TABLE `tasks_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT для таблицы `task_time`
 --
 ALTER TABLE `task_time`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `users_filesystem`
 --
 ALTER TABLE `users_filesystem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT для таблицы `user_settings`
 --
 ALTER TABLE `user_settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `user_tokens`
 --
 ALTER TABLE `user_tokens`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `wallet`
