@@ -42,7 +42,7 @@ class FilesTable extends Model\preloaderModel
             $file = $path . '/' . $userId . $fileName . $data['file']['name'];
             if(move_uploaded_file($data['file']['tmp_name'], getcwd() . "/public/" . $file)) {
                 $fileDb['user_id'] = $userId;
-                if(isset($data['file']["to_directory"]))
+                if(isset($data["to_directory"]))
                     $fileDb['directory'] = $data["to_directory"];
                     else $fileDb['directory']  = 0;
                     $fileDb['file_title'] = $data['file']['name'];
@@ -76,10 +76,7 @@ class FilesTable extends Model\preloaderModel
     }
     public function renameFile($fileId,$fileName, $userId = false)
     {
-        if(!$userId) {
-            $user_session = $_SESSION['user'];
-            $userId = $user_session["id"];
-        }
+        $userId = self::getUserId($userId);
         $fileId= (int)$fileId;
         $data = array('file_title' => $fileName);
         $this->tableGateway->update($data,['user_id' => $userId,'id' => $fileId] );
@@ -118,7 +115,8 @@ class FilesTable extends Model\preloaderModel
        else return false;
    }
 
-    public function deleteFile($fileId,$userId) {
+    public function deleteFile($fileId,$userId = false) {
+        $userId = self::getUserId($userId);
         $fileId =  (int) $fileId;
         $sql = "SELECT * FROM files where id=".$fileId." and user_id=".$userId;
         $adapter = $this->adapter;
@@ -136,37 +134,31 @@ class FilesTable extends Model\preloaderModel
         return false;
     }
     public function moveFileToSystem($fileId,$requiredDirId,$userId,$adapter){
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
+        $userId = self::getUserId($userId);
         $sql  = "select * from files  WHERE id=".$fileId;
         $result = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE)->toArray();
-        $filename = explode("/",$result[0]['file_name'])[2];
-                   var_dump($filename);
-                $filenameExt = explode('.',$filename)[1];
-                $newFileName = uniqid();
-                $newFileName .= ".".$filenameExt;
-                $newPath = "userfiles/".$userId."/".$newFileName;
-                $oldPath = $_SERVER['DOCUMENT_ROOT']."/userfiles/".$result[0]['user_id']."/".$filename;
-               // $filename = "userfiles/".$userId."/".$newFileName;
-                var_dump($newFileName);
-                var_dump($filenameExt);
-                var_dump($newPath);
-                var_dump($oldPath);
-                copy($oldPath,$_SERVER['DOCUMENT_ROOT']."/".$newPath);
-                $data = [
-                    "file_name" => $newPath,
-                    "file_title" => $result[0]["file_title"],
-                    "type" => $result[0]["type"],
-                    "shared" => 0,
-                    "user_id" => $userId,
-                    "directory" => $requiredDirId,
-                ];
-                return $this->tableGateway->insert($data);
-               die("file error");
-        }
-     
+        if(isset($result[0])) {
+                    $oldId = $result[0]['id'];
+                    $filename = explode("/",$result[0]['file_name'])[2];
+                    $filenameExt = explode('.',$filename)[1];
+                    $newFileName = uniqid();
+                    $newFileName .= ".".$filenameExt;
+                    $newPath = "userfiles/".$userId."/".$newFileName;
+                    $oldPath = $_SERVER['DOCUMENT_ROOT']."/userfiles/".$result[0]['user_id']."/".$filename;
+                    copy($oldPath,$_SERVER['DOCUMENT_ROOT']."/".$newPath);
+                    $data = [
+                        "file_name" => $newPath,
+                        "file_title" => $result[0]["file_title"],
+                        "type" => $result[0]["type"],
+                        "shared" => 0,
+                        "user_id" => $userId,
+                        "directory" => $requiredDirId,
+                    ];
+                    return  $this->tableGateway->update($data,['id' => $oldId]);
 
-    }
+        }
+      }
+     }
 
 
 

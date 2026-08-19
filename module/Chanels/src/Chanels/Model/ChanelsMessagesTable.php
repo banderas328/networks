@@ -8,8 +8,9 @@ use Zend\InputFilter\InputFilterInterface;
 use Zend\Session\Container;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Preloader\Model;
 
-class ChanelsMessagesTable
+class ChanelsMessagesTable extends Model\preloaderModel
 {
 
     protected $tableGateway;
@@ -43,7 +44,7 @@ class ChanelsMessagesTable
         $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
     }
 
-    public function checkNewMessages($adapter,$request){
+    public function checkNewMessages($adapter,$request , $userId = false){
         $to_chanel =  $request->getPost()->to_chanel;
         $date =   $request->getPost()->date;
         $sql = "SELECT *,chanels_messages.id as message_id FROM chanels_messages

@@ -13,6 +13,7 @@ use Blog\Model\BlogTable;
 use Preloader\Controller;
 use Zend\Session\Container;
 use User\Controller\UserApiController;
+use Preloader\Model;
 
 
 class BlogApiController extends Controller\preloaderController
@@ -27,7 +28,7 @@ class BlogApiController extends Controller\preloaderController
 
     public function saveBlogAction()
     {
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $post = array_merge_recursive(
             $this->getRequest()->getPost()->toArray(),
             $this->getRequest()->getFiles()->toArray()
@@ -41,7 +42,7 @@ class BlogApiController extends Controller\preloaderController
     public function getBlogsAction()
     {
 
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         if (isset($this->getRequest()->getPost()->offset)) $offset = (int)$this->getRequest()->getPost()->offset;
         else $offset = 0;
         $blog = new Blog();
@@ -76,7 +77,7 @@ class BlogApiController extends Controller\preloaderController
 
     public function addCommentToBlogAction()
     {
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $data = $this->getRequest()->getPost()->toArray();
         unset($data['token']);
         $data["user_id"] = $userId;
@@ -87,7 +88,6 @@ class BlogApiController extends Controller\preloaderController
     }
 
     public function getCommentsAction(){
-        $this->layout('layout/only_form');
         $data = $this->getRequest()->getPost()->toArray();
         $blogComment = new BlogCommentTable();
         echo json_encode($blogComment->getComments($data));
@@ -96,8 +96,7 @@ class BlogApiController extends Controller\preloaderController
     }
     
     public function deleteBlogsAction(){
-        $this->layout('layout/only_form');
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         if(!$userId) die(" invalid user");
         $blog = new Blog();
         echo json_encode ( array("blogs" => $this->getBlogTable()->getBlogsForDelete($userId),$blog->getAdapter()));
@@ -107,7 +106,7 @@ class BlogApiController extends Controller\preloaderController
     
     public function deleteBlogAction(){
         $request = $this->getRequest();
-        $userId = $this->getApiUser($this->getRequest());
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $data = $this->getRequest()->getPost();
         if($this->getBlogTable()->deleteBlog($userId,$data["blog_id"]))
             die("deleted");

@@ -147,7 +147,9 @@ class  filesController extends Controller\preloaderController {
         $file = $this->getFilesTable()->getFile($files->getAdapter(),$fileId,$userId)[0];
         $path  = $_SERVER['DOCUMENT_ROOT']."/".$file['file_name'];
         $fileName = $path;
-        ob_clean();
+        if (ob_get_level() > 0) {
+            ob_clean();
+        }
         if (file_exists($fileName)) {
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
@@ -206,7 +208,7 @@ class  filesController extends Controller\preloaderController {
             $filesInDir = $this->getFilesTable()->getDirFiles($files->getAdapter(), $dir , $userId);
             if(count($filesInDir) > 0)
                 foreach ($filesInDir as $file) {
-                    $this->getFilesTable()->deleteFile($files->getAdapter(), $file['id'], $userId);
+                    $this->getFilesTable()->deleteFile($file['id'], $userId);
                 }
         }
         $this->getFileSystemTable()->deleteDirWithChilds($fileSystem->getAdapter(),$dirs);

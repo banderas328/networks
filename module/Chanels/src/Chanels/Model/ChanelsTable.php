@@ -6,8 +6,9 @@ use Zend\Session\Container;
 use Zend\Config\Config;
 use Zend\Config\Factory;
 use Zend\Db\Sql\Sql;
+use Preloader\Model; 
 
-class ChanelsTable
+class ChanelsTable extends Model\preloaderModel
 {
 
     protected $tableGateway;
@@ -72,10 +73,7 @@ class ChanelsTable
 
     public function fetchAllChanelsInAdminRole($userId =  false)
     {
-        if(!$userId) {
-            $user_session = $_SESSION['user'];
-            $userId = $user_session["id"];
-        }
+        $userId = self::getUserId($userId);
         $sql = "SELECT chanels.id as chanel_id,chanels.chanel_name FROM chanels_admins 
                 left join chanels on chanels.id = chanels_admins.chanel_id
                 where chanels_admins.admins=" . $userId;
@@ -85,10 +83,7 @@ class ChanelsTable
 
     public function fetchAllPrivateRequests($adapter, $userId = false)
     {
-        if(!$userId) {
-            $user_session = $_SESSION['user'];
-            $userId = $user_session["id"];
-        }
+        $userId = self::getUserId($userId);
         $sql = "SELECT  chanels.id,chanels.chanel_name,user_settings.user_id,user_settings.user_id,user_settings.first_name,user_settings.second_name,user_settings.second_name ,
             private_chanels_requests.pending_response ,private_chanels_requests.is_confirmed, 
             private_chanels_requests.is_confirmed
@@ -103,10 +98,7 @@ class ChanelsTable
 
     public function checkIsUserIsChanelAdmin($adapter, $request , $userId =  false)
     {
-        if(!$userId) {
-            $user_session = $_SESSION['user'];
-            $userId = $user_session["id"];
-        }
+        $userId = self::getUserId($userId);
         $chanel_id = (int) $request->getPost()->chanel_id;
         $sql = "SELECT * FROM chanels_admins WHERE chanel_id=" . $chanel_id . " AND admins=" . $userId;
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
@@ -141,12 +133,10 @@ class ChanelsTable
         return true;
     }
 
-    public function checkUserHaveAccessToChanel($adapter, $request)
+    public function checkUserHaveAccessToChanel($adapter, $request , $userId = false)
     {
+        $userId = self::getUserId($userId);
         $chanel_id = (int) $request->getPost()->to_chanel;
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
-        
         $sql = "SELECT * FROM private_chanels_requests WHERE chanel_id=" . $chanel_id . " and user_id=" . $userId . " and is_confirmed=1";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         if (! $resultSet->buffer()->toArray()) {

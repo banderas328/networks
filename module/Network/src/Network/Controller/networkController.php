@@ -132,7 +132,7 @@ class  networkController extends Controller\preloaderController
         if (!$this->isUserLogedInDirectory($dirId)) {
             $filesystem = new FileSystem();
             $check_dir = $this->getFileSystemTable()->getUserDirsDetails($filesystem->getAdapter(), array(0 => $dirId));
-            if ($check_dir->toArray()[0]["is_password"] == "1") {
+            if (isset($check_dir->toArray()[0]["is_password"]) and  $check_dir->toArray()[0]["is_password"] == "1") {
                 $view = new ViewModel(array('dir_key' => (int)$request->getPost()->dir_key, 'user_id' => (int)$request->getPost()->user_id));
                 $view->setTemplate('network/network/password.phtml'); // path to phtml file under view folder
                 return $view;
@@ -167,7 +167,7 @@ class  networkController extends Controller\preloaderController
             if ($dirOptions->buffer()->toArray()[0]["is_password"]) {
                 $logedDirectory = $this->getNetworkTable()->networkDirectoryLogin($request,$fileSystem->getAdapter());
                 if($logedDirectory) {
-                    $childDirs = $this->getFileSystemTable()->getChildDirs($fileSystem->getAdapter(), $logedDirectory,$request->getPost()->user_id);
+                    $childDirs = $this->getFileSystemTable()->getChildDirs($logedDirectory,$request->getPost()->user_id);
                     if(isset($user_session->user['authedDirs'])) {
                         $authedDirs  =   $user_session->user['authedDirs'];
                         $dirs = explode(",", $authedDirs);
@@ -179,7 +179,7 @@ class  networkController extends Controller\preloaderController
                         }
                     }
                     $authedDirs = implode(",",$dirs);
-                    $user_session->user['authedDirs'] = $authedDirs;
+                    $_SESSION['user']['authedDirs'] = $authedDirs;
                 }
             }
 

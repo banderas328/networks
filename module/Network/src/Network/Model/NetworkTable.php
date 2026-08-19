@@ -9,16 +9,18 @@ use Zend\Config\Factory;
 use Files\Model\FileSystemTable;
 //use Zend\Db\Adapter\Driver\ResultInterface;
 //use Zend\Db\ResultSet\ResultSet;
+use Preloader\Model;
 
 
-class NetworkTable
+class NetworkTable extends Model\preloaderModel
 {
+
     protected $tableGateway;
+    public $adapter;
 
     public function __construct()
-
     {
-        $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
+        $config = new Config(Factory::fromFile('config/autoload/global.php'), true);
         $adapter = new \Zend\Db\Adapter\Adapter (array(
             'driver' => $config->database->driver,
             'dsn' => $config->database->dsn,
@@ -26,8 +28,10 @@ class NetworkTable
             'username' => $config->database["params"]->username,
             'password' => $config->database["params"]->password,
         ));
-        $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("network",$adapter);
+        $this->adapter = $adapter;
+        $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("network", $adapter);
     }
+
 
     public function shareDir($dir) {
         $data = array (
@@ -41,19 +45,11 @@ class NetworkTable
         $this->tableGateway->insert($data);
     }
     //CLOSE directory with deleting share row in network table
-    public function closeDir($dir,$userId){
+    public function closeDir($dir,$userId = false){
+        $userId = self::getUserId($userId);
         $fileSystem = new FileSystemTable();
-        $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
-        $adapter = new \Zend\Db\Adapter\Adapter (array(
-            'driver' => $config->database->driver,
-            'dsn' => $config->database->dsn,
-            'database' => $config->database["params"]->database,
-            'username' => $config->database["params"]->username,
-            'password' => $config->database["params"]->password,
-        ));
-        $dir = ($fileSystem->getDir($dir,$userId,$adapter))[0]['id'];
-        var_dump($dir);
-        $this->tableGateway->delete(array ('id' => $dir));
+        $dir = ($fileSystem->getDir($dir,$userId,$fileSystem->adapter))[0]['path_id'];
+        $this->tableGateway->delete(['path_id' => $dir]);
     }
 
     public function getUserSharedDirs($request,$adapter) {
@@ -71,7 +67,8 @@ class NetworkTable
 
     }
 
-    public function shareDirWithPassword($dir,$password) {
+    public function shareDirWithPassword($dir,$password,$userId =  false) {
+        $userId = self::getUserId($userId);
         $data = array (
             'path_id' => $dir,
             'is_public' => 0,
@@ -85,18 +82,13 @@ class NetworkTable
     }
 
     public function networkDirectoryLogin($request,$adapter){
-        $dir_key = (int)$request->getPost()->dir_key;
-        $password = $request->getPost()->password;
-        $sql = new Sql($adapter);
-        $select = $sql->select();
-        $select->from('network');
-        $select->where(array('path_id' => $dir_key,'password' => $password , 'is_password' => 1));
-        $statement = $sql->prepareStatementForSqlObject($select);
-        $results = $statement->execute();
-        $result = \Zend\Stdlib\ArrayUtils::iteratorToArray($results);
-        if(isset($result[0]['path_id']))
-        return $result[0]['path_id'];
-        else return false;
+         $dir_key = (int)$request->getPost()->dir_key;
+         $password = $request->getPost()->password;
+         $result = $this->tableGateway->select(['path_id' => $dir_key,'password' => $password , 'is_password' => 1]);
+         $result = $result->toArray();
+         if(isset($result[0]['path_id']))
+         return $result[0]['path_id'];
+         else return false;
     }
 
 }

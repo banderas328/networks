@@ -6,22 +6,25 @@ use Zend\Session\Container;
 use Zend\Db\Sql\Sql;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Preloader\Model; 
 
-class FriendsTable {
-	protected $tableGateway;
+class FriendsTable extends Model\preloaderModel {
+    protected $tableGateway;
+    protected $adapter;
 
-	public function __construct() {
-	    $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
-	    $adapter = new \Zend\Db\Adapter\Adapter (array(
-	        'driver' => $config->database->driver,
-	        'dsn' => $config->database->dsn,
-	        'database' => $config->database["params"]->database,
-	        'username' => $config->database["params"]->username,
-	        'password' => $config->database["params"]->password,
-	    ));
-	    $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("friends",$adapter);
-
-	}
+    public function __construct()
+    {
+        $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
+        $adapter = new \Zend\Db\Adapter\Adapter (array(
+            'driver' => $config->database->driver,
+            'dsn' => $config->database->dsn,
+            'database' => $config->database["params"]->database,
+            'username' => $config->database["params"]->username,
+            'password' => $config->database["params"]->password,
+        ));
+        $this->adapter = $adapter;
+        $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("friends",$adapter);
+    }
 
 	public function addFriendRequest($userId,$friendId,$adapter) {
         $sql = new Sql($adapter);
@@ -73,8 +76,8 @@ class FriendsTable {
     }
 
 
-    public function getRequests($userId,$adapter){
-
+    public function getRequests($userId = false,$adapter){
+        $userId = self::getUserId($userId);
         $sql = new Sql($adapter);
         $select = $sql->select();
         $select->from('friends')
@@ -86,8 +89,9 @@ class FriendsTable {
         return $results;
     }
 
-    public function getFriends($userId,$adapter,$onlyIds = false){
-        $requestUser = $userId;
+    public function getFriends($userId = false,$adapter,$onlyIds = false){
+        $userId = self::getUserId($userId);
+
         $sql = "SELECT * FROM friends WHERE status = 1";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         $userIds = array();

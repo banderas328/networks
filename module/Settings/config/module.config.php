@@ -3,7 +3,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Settings\Controller\Settings' => 'Settings\Controller\SettingsController',
-            'Settings\Controller\Api\Settings' => 'Settings\Controller\api\SettingsControllerApi',
+            'Settings\Controller\SettingsApi' => 'Settings\Controller\SettingsApiController',
         ),
     ),
     'router' => array(
@@ -25,13 +25,13 @@ return array(
             'api/v1/settings' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => 'api/v1/settings[/:action][/:key1][/:value1][/:key2][/:value2]',
+                    'route'    => '/api/v1/settings[/:action][/:key1][/:value1][/:key2][/:value2]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Settings\Controller\Api\Settings',
+                        'controller' => 'Settings\Controller\SettingsApi',
                         'action'     => 'index',
                     ),
                 ),

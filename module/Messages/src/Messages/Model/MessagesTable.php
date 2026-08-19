@@ -9,18 +9,20 @@ use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Select;
 use Zend\Config\Config;
 use Zend\Config\Factory;
+use Preloader\Model;
 
 //use Zend\Db\Adapter\Driver\ResultInterface;
 //use Zend\Db\ResultSet\ResultSet;
 
 
-class MessagesTable
+class MessagesTable extends Model\preloaderModel
 {
     protected $tableGateway;
+    protected $adapter;
 
     public function __construct()
     {
-        $config = new Config(Factory::fromFile('config/autoload/global.php'), true);
+        $config  =  new Config(Factory::fromFile('config/autoload/global.php'), true);
         $adapter = new \Zend\Db\Adapter\Adapter (array(
             'driver' => $config->database->driver,
             'dsn' => $config->database->dsn,
@@ -28,16 +30,16 @@ class MessagesTable
             'username' => $config->database["params"]->username,
             'password' => $config->database["params"]->password,
         ));
-        $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("messages", $adapter);
+        $this->tableGateway = new \Zend\Db\TableGateway\TableGateway("messages",$adapter);
+        $this->adapter = $adapter;
     }
 
-    public function addMessage($request, $adapter)
+    public function addMessage($request, $adapter, $userId = false)
     {
+        $userId = self::getUserId($userId);
         $text =  preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $request->getPost()->text);
         $text = substr($text, 0, 250);
         $to_user = $request->getPost()->to_user;
-        $user_session = $_SESSION['user'];
-        $userId = $user_session["id"];
         $sql = "SELECT  first_name,second_name FROM user_settings WHERE user_id = '" . $userId . "'";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         $user_info = $resultSet->toArray()[0];
@@ -53,9 +55,9 @@ class MessagesTable
         $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
     }
 
-    public function getMessagesCounts($userId, $adapter)
+    public function getMessagesCounts($userId = false, $adapter)
     {
-        $userId = (int)$userId;
+        $userId = self::getUserId($userId);
         $sql = "SELECT COUNT(to_user),to_user as user,from_user FROM messages WHERE from_user = '" . $userId . "'  GROUP BY (to_user)";
         $resultSet = $adapter->query($sql, $adapter::QUERY_MODE_EXECUTE);
         return $resultSet;
@@ -64,11 +66,7 @@ class MessagesTable
 
     public function checkNewMessages($adapter,$userId = false)
     {
-        if(!$userId) {
-            $user_session = $_SESSION['user'];
-            $userId = $user_session["id"];
-
-        }
+        $userId = self::getUserId($userId);
         $sql = "SELECT distinct *,messages.id as message_id FROM messages
         LEFT JOIN deliver_messages on messages.id = deliver_messages.message_id
         LEFT JOIN user_settings on messages.from_user = user_settings.user_id

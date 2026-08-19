@@ -13,6 +13,7 @@ use Chanels\Model\ChanelsTable;
 use User\Model\UserTable;
 use User\Model\User;
 use Preloader\Controller;
+use Preloader\Model;
 
 
 
@@ -25,17 +26,16 @@ class  syncApiController extends Controller\preloaderController {
     protected $chanelsMessagesTable;
     protected $usersTable;
     public function syncAction(){
-    	$userId = $this->getApiUser($this->getRequest());
+    	$userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $messages['simple_messages'] = $messages = $this->checkNewMessages($userId);
         echo json_encode($messages);
         die();
     }
 
     public function syncChanelAction(){
-    	$userId = $this->getApiUser($this->getRequest());
-        $messages = new Messages();
+    	$userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $resultData = [];
-        $data  = $this->checkNewMessages($messages->getAdapter(),$userId);
+        $data  = $this->checkNewMessages($userId);
         $resultData["simple_messages"] = $data;
         $resultData = $this->checkNewChanelsMessages($userId);
         $resultData["chanels_messages"] = $data;
@@ -44,18 +44,21 @@ class  syncApiController extends Controller\preloaderController {
     }
 
     public function syncChanelPrivateAction(){
-        if(!$this->isUserCanAccessToChanel()) {
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
+        if(!$this->isUserCanAccessToChanel($userId)) {
             die("try more :)");
         }
-        $messages = $this->checkNewChanelsMessages();
+        
+        $messages = $this->checkNewChanelsMessages($userId);
         $messages["chanels_messages_private"] = $messages;
         echo json_encode($messages);
         die();
     }
 
-    public function isUserCanAccessToChanel(){
+    public function isUserCanAccessToChanel($userId = false){
+ 
         $chanels = new Chanels();
-        return $this->getChanelsTable()->checkUserHaveAccessToChanel($chanels->getAdapter(),$this->getRequest());
+        return $this->getChanelsTable()->checkUserHaveAccessToChanel($chanels->getAdapter(),$this->getRequest() ,$userId);
     }
 
     public function isPrivateChanel(){
@@ -63,20 +66,21 @@ class  syncApiController extends Controller\preloaderController {
         return $this->getChanelsTable()->checkIsChanelPrivate($chanels->getAdapter(),$this->getRequest());
     }
 
-    public function checkNewMessages(){
-    	$userId = $this->getApiUser($this->getRequest());
+    public function checkNewMessages($userId =  false){
+    	// $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $messages = new Messages();
         $freshMessages = $this->getMessagesTable()->checkNewMessages($messages->getAdapter(),$userId);
         $this->getMessagesTable()->markMessagesAsDileverd($freshMessages,$messages->getAdapter(),$userId);
         return $freshMessages->buffer()->toArray();
     }
 
-    public function checkNewChanelsMessages(){
-    	$userId = $this->getApiUser($this->getRequest());
+    public function checkNewChanelsMessages($userId = false){
+    	if(!$userId ) $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $messages = new ChanelsMessages();
         $request = $this->getRequest();
         $freshMessages =  $this->getChanelsMessagesTable()->checkNewMessages($messages->getAdapter(),$request,$userId);
-        return $freshMessages->buffer()->toArray();
+        echo json_encode($freshMessages->buffer()->toArray());
+        die();
     }
     public function checkNewPrivateChanelsMessages(){
     	$userId = $this->getApiUser($this->getRequest());
