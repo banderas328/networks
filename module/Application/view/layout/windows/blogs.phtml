@@ -2,7 +2,7 @@
     <div class="c-window__inner _abs window_inner">
         <div class="c-window__title-bar window_top">
             <div class="c-window__title float_left">
-                Blogs
+                <?php  echo $this->translator["Blogs"]; ?>
             </div>
             <div class="float_right">
                 <a href="#" class="window_min"></a>
@@ -22,9 +22,18 @@
             <div class="c-window__tabs-wrap is-vertical-navigation _abs _window_content" id="notes_tabs">
                 <div class="c-window__tabs window_main user-tabs">
                     <ul class="c-window__tabs-inner">
-                        <li class="c-window__tab"><a class="users-tab-link" href="#list_blogs">Posts</a></li>
-                        <li class="c-window__tab"><a class="users-tab-link" href="#new_blog">Create Post</a></li>
-                        <li class="c-window__tab"><a class="users-tab-link" href="#delete_blog">Delete Post</a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#list_blogs"> <?php  echo $this->translator["Blogs"]; ?></a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#new_blog">
+
+
+
+                        
+ <?php  echo $this->translator["Create_Post"]; ?>
+
+                    </a></li>
+                        <li class="c-window__tab"><a class="users-tab-link" href="#delete_blog">
+
+ <?php  echo $this->translator["Delete_Post"]; ?></a></li>
                     </ul>
                 </div>
 
@@ -47,7 +56,7 @@
 
         <div class="c-window__status-bar _abs _window_bottom">
             <div class="c-window__status-text">
-                Blogs
+               <?php  echo $this->translator["Blogs"]; ?>
             </div>
         </div>
     </div>

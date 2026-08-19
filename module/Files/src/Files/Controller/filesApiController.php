@@ -57,11 +57,13 @@ class  filesApiController extends Controller\preloaderController {
         $request = $this->getRequest();
         $file_name =  $request->getPost()->file_name;
         $file_id =  $request->getPost()->file_id;
+        var_dump($file_id);die();
         $current_directory =  $request->getPost()->current_directory;
         $data =  $request->getPost()->data;
         $data =  preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $data);
-        $this->getFilesTable()->saveTextFile($file_name,$data,$current_directory,$userId,$file_id);
-        die("file created");
+        $fileId = $this->getFilesTable()->saveTextFile($file_name,$data,$current_directory,$userId,$file_id);
+        echo json_encode(["file created" => true, 'file_id' => $fileId]);
+        die();
 
     }
     public function getContentTextFileAction(){
@@ -114,10 +116,10 @@ class  filesApiController extends Controller\preloaderController {
     }
 
     public function createDirAction(){
-        $this->layout('layout/only_form');
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $filesystem = new FileSystem();
-        $this->getFileSystemTable()->createUserDir($filesystem->getAdapter(),$request);
+        $this->getFileSystemTable()->createUserDir($filesystem->getAdapter(),$request,$userId);
         echo "ok";
         die();
 
@@ -178,10 +180,11 @@ class  filesApiController extends Controller\preloaderController {
     }
 
     public function renameDirAction() {
+        $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         $request = $this->getRequest();
         $dir = (int) $request->getPost()->dir;
         $dirName =  $request->getPost()->directory_name;
-        $this->getFileSystemTable()->renameDir($dir,$dirName);
+        $this->getFileSystemTable()->renameDir($dir,$dirName,$userId);
         echo "ok";
         die();
 

@@ -27,4 +27,8 @@ return array(
     "Share_Directory" => "Открыть доступ",
     "Share_With_Password" => "Открыть доступ - пароль",
     "Email" => "Почта",
+    "Notifications" => "Уведомления",
+    "Blogs" => "Блоги",
+    "Delete_Post" => "Удалить Пост",
+    "Create_Post" => "Создать Пост"
 );

@@ -4,12 +4,13 @@ namespace Files\Model;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Session\Container;
 use Zend\Db\Sql\Sql;
+use Preloader\Model;
 
 //use Zend\Db\Adapter\Driver\ResultInterface;
 //use Zend\Db\ResultSet\ResultSet;
 
 
-class PayedFilesTable
+class PayedFilesTable extends Model\preloaderModel
 {
     protected $tableGateway;
 

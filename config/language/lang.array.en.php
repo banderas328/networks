@@ -28,4 +28,9 @@ return array(
     "Share_Directory" => "Share Directory",
     "Share_With_Password" => "Share with password",
     "Email" => "Email",
+    "Notifications" => "Notifications",
+    "Blogs" => "Blogs",
+    "Delete_Post" => "Delete Post",
+    "Create_Post" => "Create Post"
+
 );
