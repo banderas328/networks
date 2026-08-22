@@ -8,7 +8,7 @@ if (! $is_root) {
 	<div>
 		<form id="file_directory_form" method="post">
 			<input type="file" name="file" id="file_to_directory">
-			<p class='action_btn' id="upload_file">upload file</p>
+			<p class='action_btn' id="upload_file"><?php echo  $this->translator["upload_file"]; ?></p>
 		</form>
 	</div>
 	<div>
@@ -38,10 +38,10 @@ if (! $is_root) {
 			class='action_btn'><?php echo $this->translator["Create_Directory"];?></button>
 	</div>
 	<div>
-		<button id="paste" class='action_btn'>paste</button>
+		<button id="paste" class='action_btn'><?php echo $this->translator["paste"];?></button>
 	</div>
 	<div>
-		<button id="create_txt_file" class='action_btn'>create text file</button>
+		<button id="create_txt_file" class='action_btn'><?php echo $this->translator["create_text_file"];?></button>
 	</div>
 	<input type="hidden"
 		value="<?php if (isset($current_directory)) echo $current_directory ?>"
@@ -64,10 +64,22 @@ if (! $is_root) {
             if (! $is_root) {
                 echo "<div class='directory_actions hard-dropdown ' dir=" . $dir_value['id'] . ">
                            <p class='delete_directory hard-dropdown-items' dir=" . $dir_value['id'] . ">" . $this->translator['Delete_Directory'] . "</p>
-                           <p class='move_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Move Directory</p>
-                           <p class='rename_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Rename Directory</p>
-                           <p class='share_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">Share Directory</p>
-                           <p class='share_dir_with_password hard-dropdown-items ' dir=" . $dir_value['id'] . ">Share With Password</p>
+                           <p class='move_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">";
+              echo $this->translator["Move_Directory"];
+              echo "</p>
+                           <p class='rename_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">";
+
+              echo $this->translator["Rename_Directory"];           
+
+              echo "</p>
+                           <p class='share_dir hard-dropdown-items ' dir=" . $dir_value['id'] . ">";
+              echo $this->translator["Share_Directory"];   
+              echo "</p>
+                           <p class='share_dir_with_password hard-dropdown-items ' dir=" . $dir_value['id'] . ">";
+
+                   echo $this->translator["Share_With_Password"];       
+
+            echo "</p>
                       </div>";
             }
             echo "</div>";
@@ -149,7 +161,7 @@ if (! $is_root) {
             echo "<p class='hard-dropdown-items'><a href='/files/downloadFile/id/" . $file['id'] . "' class='download_file ' fileId=" . $file['id'] . ">" . $this->translator['Download_File'] . "</a></p>";
             
             // if ($type[0] == 'image') {
-            echo "<p class='image_url hard-dropdown-items' url='/" . $file["file_name"] . "'><a href='#'>Copy url</a></p>";
+            echo "<p class='image_url hard-dropdown-items' url='/" . $file["file_name"] . "'><a href='#'>".$this->translator['Copy_Url'] ."</a></p>";
             // }
             echo "</div>";
             echo "</div>";
@@ -449,7 +461,9 @@ if (! $is_root) {
         if (file_title) {
             file_html = file_html + '<span class="float_left"><span id="text_file_name" file_id="' + file_id + '">' + file_title + '</span></span>';
         } else {
-            file_html = file_html + '<span class="float_left"><span id="text_file_name" file_id="' + file_id + '">text file</span></span>';
+            file_html = file_html + '<span class="float_left"><span id="text_file_name" file_id="' + file_id + '">'
+        + '<?php   echo    $this->translator["text_file"]; ?>' + '</span></span>';
+  
         }
 
         file_html = file_html + '<span class="float_right">' +
@@ -459,11 +473,11 @@ if (! $is_root) {
             '</span></div>' +
             '<div class="abs window_content" id="file_content">' +
             '<span id="edit_file_name">&nbsp;&nbsp;edit filename</span>' +
-            '<span id="save_text_file">&nbsp;&nbsp;save</span>';
+            '<span id="save_text_file">&nbsp;&nbsp;'+'<?php   echo    $this->translator["save"]; ?>'+'</span>';
         if (content) {
             file_html = file_html + '<div id="editor">' + content + '</div></div><div class="abs window_bottom">text file</div></div>';
         } else {
-            file_html = file_html + '<div id="editor"></div></div><div class="abs window_bottom">text file</div></div>';
+            file_html = file_html + '<div id="editor"></div></div><div class="abs window_bottom">' + '<?php   echo    $this->translator["text_file"]; ?>' + '</div></div>';
         }
 
         file_html = file_html + '<span class="abs ui-resizable-handle ui-resizable-se"></span></div>';

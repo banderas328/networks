@@ -8,5 +8,9 @@ $form->prepare();
 echo $this->form()->openTag($form);
 
 echo $this->formRow($form->get('text'));
-echo "<button value='save' name='save' id='save_general_settings'>save</button>";
+echo "<button value='";
+echo $this->translator["save"];
+echo "name='save' id='save_general_settings'>";
+echo $this->translator["Save"];
+echo "</button>";
 echo $this->form()->closeTag();

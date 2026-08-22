@@ -2,7 +2,7 @@
 	<div class="abs window_inner">
 		<div class="window_top">
 			<span class="float_left"> <img src="assets/images/icons/3.png" />
-				Tasks
+				 <?php   echo $this->translator["Tasks"]; ?>
 			</span> <span class="float_right"> <a href="#" class="window_min"></a>
 				<a href="#" class="window_resize"></a> <a href="#icon_dock_drive"
 				class="window_close"></a>
@@ -10,7 +10,7 @@
 		</div>
 		<div class="window_content abs" id="tasks_content">
 			<div id="tasks_tabs" class="window_main">
-				<span id="go_to_projects">Go To Projects</span>
+				<span id="go_to_projects"> <?php   echo $this->translator["Go_To_Projects"]; ?></span>
 
 				<script type="text/javascript">
 
@@ -24,7 +24,7 @@
 
 			</div>
 		</div>
-		<div class="abs window_bottom">Task Manager</div>
+		<div class="abs window_bottom"><?php echo $this->translator["Task_Manager"]; ?></div>
 	</div>
 	<span class="abs ui-resizable-handle ui-resizable-se"></span>
 </div>
@@ -32,7 +32,7 @@
 	<div class="abs window_inner">
 		<div class="window_top">
 			<span class="float_left"> <img src="assets/images/icons/3.png" />
-				Tasks
+				 <?php   echo $this->translator["Tasks"]; ?>
 			</span> <span class="float_right"> <a href="#" class="window_min"></a>
 				<a href="#" class="window_resize"></a> <a href="#icon_dock_drive"
 				class="window_close"></a>
@@ -40,31 +40,31 @@
 		</div>
 		<div class="window_content abs" id="task_create">
 			<hr>
-			<h4>Create Task</h4>
-			<h5>Members List</h5>
+			<h4> <?php  echo $this->translator["Create_Task"]; ?></h4>
+			<h5> <?php  echo $this->translator["Members_List"]; ?></h5>
 			<div id="members_list"></div>
 			<div id="task_members_list"></div>
 
 			<div id="task_name_container">
-				<h5>Task Name</h5>
+				<h5><?php  echo $this->translator["Task_Name"]; ?></h5>
 				<input type="text" name="task_name" placeholder="Task name"
 					id="task_name">
 			</div>
 			<div>
-				<h5>Estimation in hours</h5>
+				<h5><?php  echo $this->translator["estimation_in_hours"]; ?></h5>
 				<input type="text" name="task_estimation"
 					placeholder="Estimation in hours" id="task_estimate">
 			</div>
 			<div>
 				<input type="hidden" name="task_members" placeholder="task members"
 					id="task_members">
-				<h5>Task Description</h5>
+				<h5><?php  echo $this->translator["task_description"]; ?></h5>
 				<div class="description">
 					<div id="task_description_field"></div>
 				</div>
 			</div>
 			<div>
-				<h5>Attach Files</h5>
+				<h5><?php  echo $this->translator["Attach_Files"]; ?></h5>
 				<svg class="icon-nw icon-nw-attach-file-16" viewBox="0 0 16 16"
 					id="task_file_ocon">
             <path fill-rule="evenodd" clip-rule="evenodd"

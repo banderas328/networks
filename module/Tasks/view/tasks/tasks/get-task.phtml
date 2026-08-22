@@ -1,33 +1,36 @@
+<?php
+$this->translator = $GLOBALS["HELPERS"]["TRANSLATOR"];
+?>
 <div id="task_block">
 	<input type="hidden" value="<?php echo $task["id"]; ?>" name="task_id"
 		id="task_id_popup">
 	<div id="task_name_block">
 		<span class="edit_task_name"><img src="\assets\images\icons\edit.png"></span>
-		Task name: <span class="task_name_value"><?php echo $task["name"]; ?></span>
+		<?php   echo $this->translator["Task_name"]; ?> <span class="task_name_value"><?php echo $task["name"]; ?></span>
 	</div>
 	<div id="task_description_block">
 	<?php echo $task["description"];?>
 	</div>
 	<span class="edit_task_description"><button value='save'
-			class="action_btn">Save</button> </span> 
+			class="action_btn"><?php   echo $this->translator["Save"]; ?></button> </span> 
 
-	<div id="task_description">Status: <?php echo $task["status"]; ?>
+	<div id="task_description"><?php   echo $this->translator["Status"]; ?>: <?php echo $task["status"]; ?>
         <select id="task_status">
-			<option value="edit">Edit</option>
-			<option value="new">New</option>
-			<option value="urgent">Urgent</option>
-			<option value="major">Major</option>
-			<option value="normal">Normal</option>
-			<option value="low">Low</option>
-			<option value="hold">Hold</option>
+			<option value="edit"><?php   echo $this->translator["Edit"]; ?></option>
+			<option value="new"><?php   echo $this->translator["New"]; ?></option>
+			<option value="urgent"><?php   echo $this->translator["Urgent"]; ?></option>
+			<option value="major"><?php   echo $this->translator["Major"]; ?></option>
+			<option value="normal"><?php   echo $this->translator["Normal"]; ?></option>
+			<option value="low"><?php   echo $this->translator["Low"]; ?></option>
+			<option value="hold"><?php   echo $this->translator["Hold"]; ?></option>
 		</select>
 	</div>
 	<div id="log_work_block">
 		<div>
-			<button id="add_hours_button" class="action_btn">Add</button>
+			<button id="add_hours_button" class="action_btn"><?php   echo $this->translator["Add"]; ?></button>
 			<input type="text" name="log_hours" id="log_hours_input"	placeholder="1" task_id="
 			     <?php echo $task["id"]; ?>">
-			     &nbsp hours to	task on Date : 
+			     &nbsp <?php   echo $this->translator["hours_to_task"]; ?> 
 			<input type="text" id="datepicker">
 		</div>
 		<div class="task_members">
@@ -41,7 +44,7 @@
             ?>
         </div>
 		<div>
-			<h5>Attached Files</h5>
+			<h5><?php   echo $this->translator["Attached_Files"]; ?> </h5>
             <?php
             if (isset($task["files"]))
                 foreach ($task["files"] as $file_key => $file_value) {
@@ -50,14 +53,17 @@
                     echo "<a href='" . $file_value[0]["file_name"] . "'>" . $file_value[0]["file_title"] . "</a><br/>";
                 }
             ?>
-            <h5>Comments</h5>
+            <h5><?php   echo $this->translator["Comments"]; ?></h5>
             <?php
             if (isset($task["sub_tasks"]))
                 foreach ($task["sub_tasks"] as $sub_task) {
                     
                     echo "<p style='border-bottom: 1px solid #f5f5f5'>" . $sub_task["description"] . "</p>";
                     if ($sub_task["status"] != "edit")
-                        echo "<p>status : " . $sub_task["status"] . "</p>";
+                        echo "<p>" ; 
+                        echo $this->translator["status"]; 
+                        echo  $sub_task["status"] ;
+                        echo "</p>";
                 }
             ?>
 <div id="sub_task"></div>
@@ -75,11 +81,11 @@
 					multiple id="task_file_update" />
 			</p>
 			<p>
-				<input type="button" name="update task" value="Update task"
+				<input type="button" name="update task" value=" <?php   echo $this->translator["Update_Task"]; ?>; "
 					id="update_task" task_id="<?php echo $task["id"]; ?>" />
 			</p>
 			<p>
-				<input type="button" name="archive_task" value="Archive task"
+				<input type="button" name="archive_task" value="<?php   echo $this->translator["Archive_Task"]; ?>"
 					id="archive_task" task_id="<?php echo $task["id"]; ?>" />
 			</p>
 			<p>

@@ -10,7 +10,10 @@ foreach($friends as $friend){
     echo "<img src=".$friend['avatar'].">";
     echo "</div>";
     echo "<p>".$friend['first_name']." ".$friend['second_name']." ".$friend['job'];
-    echo "<button class='show_profile action_btn' user_id='".$friend['user_id']."' >show profile</button>";
+    echo "<button class='show_profile action_btn' user_id='".$friend['user_id']."' >";
+    
+    echo $this->translator["show_profile"];
+    echo "</button>";
     echo "</p>";
     echo "</div>";
 
@@ -19,7 +22,7 @@ foreach($friends as $friend){
 </div>
 <div id="message_to_user_from_user_list" title="Enter message">
 <textarea class="message_to_user_area" style="width: 400px;height: 120px" maxlength="500"></textarea>
-<button class="submit action_btn" id="message_to_user_from_user_list_button" >send</button>
+<button class="submit action_btn" id="message_to_user_from_user_list_button" >   <?php echo  $this->translator["send"]; ?></button>
 </div>
 <script type="text/javascript">
     $(function() {

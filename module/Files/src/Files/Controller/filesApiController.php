@@ -188,10 +188,6 @@ class  filesApiController extends Controller\preloaderController {
 
     public function renameDirAction() {
         $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
-<<<<<<< HEAD
-        $request = $this->getRequest();
-=======
->>>>>>> b4b4d7d9c46cda6b33c813fc42fe1774447d506d
         $dir = (int) $request->getPost()->dir;
         $dirName =  $request->getPost()->directory_name;
         $this->getFileSystemTable()->renameDir($dir,$dirName,$userId);

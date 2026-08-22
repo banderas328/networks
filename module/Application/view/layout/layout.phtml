@@ -27,9 +27,9 @@ $this->translator = $GLOBALS["HELPERS"]["TRANSLATOR"];
 
             <div class="container">
                 <ul class="nav navbar-nav">
-                    <li><a class="menu_link" href="/user/login">Login</a></li>
-                    <li><a class="menu_link" href="/user/register">Register</a></li>
-                    <li><a class="menu_link" href="/user/logout">Logout</a></li>
+                    <li><a class="menu_link" href="/user/login">   <?php   echo $this->translator["Login"]; ?></a></li>
+                    <li><a class="menu_link" href="/user/register">  <?php   echo $this->translator["Register"]; ?></a></li>
+                    <li><a class="menu_link" href="/user/logout"><?php   echo $this->translator["Logout"]; ?></a></li>
                 </ul>
             </div>
         </nav>

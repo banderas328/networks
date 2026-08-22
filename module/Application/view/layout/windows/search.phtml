@@ -2,7 +2,7 @@
     <div class="abs window_inner">
         <div class="window_top">
           <span class="float_left">
-            Search
+                <?php   echo $this->translator["Search"]; ?>
           </span>
             <span class="float_right">
                 <a href="#" class="window_min"></a>
@@ -14,13 +14,13 @@
             <div id="search_tabs" class="abs window_content">
                 <div class="window_main user-tabs" >
                 <ul>
-                    <li><a class="users-tab-link" href="#google_search">Google Search</a></li>
-                    <li><a class="users-tab-link" href="#user_search_div">User Search</a></li>
+                    <li><a class="users-tab-link" href="#google_search"><?php   echo $this->translator["Google_Search"]; ?></a></li>
+                    <li><a class="users-tab-link" href="#user_search_div">  <?php   echo $this->translator["User_Search"]; ?></a></li>
                 </ul>
                 </div>
                 <div id="google_search">
                         <input type="text" id="google_search_input"/>
-                        <button value="search" id="google_search_button" class="action_btn">search</button>
+                        <button value="search" id="google_search_button" class="action_btn">  <?php   echo $this->translator["Search"]; ?></button>
                 </div>
                 <div id="user_search_div">
                     <script type="text/javascript" src="js/pages/main/search.js"></script>
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="abs window_bottom">
-            Search
+                <?php   echo $this->translator["Search"]; ?>
         </div>
     </div>
     <span class="abs ui-resizable-handle ui-resizable-se"></span>

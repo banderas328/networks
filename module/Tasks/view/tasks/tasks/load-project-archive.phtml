@@ -1,10 +1,17 @@
 <div>
 <?php
+$this->translator = $GLOBALS["HELPERS"]["TRANSLATOR"];
+?>
+<?php
 if(isset($tasks)){
     foreach ($tasks as $task_key => $task_value){
         echo "<p class='arcihe_task_block' task_id='".$task_value[0]["id"]."'>".$task_value[0]["name"].
-            "<span class='restore_task action_btn' task_id='".$task_value[0]["id"]."'> restore</span>&nbsp".
-            "<span class='delete_task action_btn' task_id='".$task_value[0]["id"]."'> delete</span></p>";
+            "<span class='restore_task action_btn' task_id='".$task_value[0]["id"]."'> "; 
+        echo $this->translator["restore"]; 
+        echo "</span>&nbsp<span class='delete_task action_btn' task_id='".$task_value[0]["id"]."'>";
+
+        echo  $this->translator["delete"];
+        echo "</span></p>";
     }
 }
 ?>

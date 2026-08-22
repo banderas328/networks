@@ -1,10 +1,11 @@
 <?php
-$title = 'General user Settings';
+$this->translator = $GLOBALS["HELPERS"]["TRANSLATOR"];
+$title = $this->translator["General_user_Settings"];
 $this->headTitle($title);
 ?>
 
 		<div class="col">
-        <h1 class="load-avatar">Load avatar</h1>
+        <h1 class="load-avatar"><?php   echo $this->translator["load_avatar"]; ?></h1>
         <form id="avatar_form" class="form-horizontal"
         	action="settings/savesettings" method="post">
         	<input type="file" name="avatar" id="avatar">
@@ -66,7 +67,7 @@ $(function () {
 				<br />
 				<input name="phone" type="text" / placeholder="Phone" <?php if(is_array($this->user_settings) and isset($this->user_settings['phone'])) echo "value='".$this->user_settings['phone']."'";?>  />
 				<br /> 
-				<input type="submit" value="Save" class='action_btn' id="save_general_settings" />
+				<input type="submit" value="<?php   echo $this->translator["Save"]; ?>" class='action_btn' id="save_general_settings" />
 			</form>
 		</div>
 

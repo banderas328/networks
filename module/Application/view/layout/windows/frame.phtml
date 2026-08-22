@@ -3,7 +3,7 @@
         <div class="window_top">
             <span class="float_left">
                 <img src="assets/images/icons/iframe50.png"/>
-                Фреймы
+                 <?php   echo $this->translator["Frames"]; ?>
             </span>
             <span class="float_right">
                 <a href="#" class="window_min"></a>
@@ -13,13 +13,13 @@
         </div>
         <div class="abs window_content">
             <div class="container">
-                <p class="frame_string">Window IFRAME Url <input class="frame_input" type="text" name="frame_url"
+                <p class="frame_string"> <?php   echo $this->translator["Window_IFRAME_Url"]; ?> <input class="frame_input" type="text" name="frame_url"
                                                           id="frame_url"/></p>
-                <p class="frame_string">Window name<input class="frame_input" type="text" name="frame_name"
+                <p class="frame_string"><?php   echo $this->translator["Window_name"]; ?><input class="frame_input" type="text" name="frame_name"
                                                            id="frame_name"/></p>
-                <p class="frame_string">Window Image<input class="frame_input" type="file" name="frame_image"
+                <p class="frame_string"><?php   echo $this->translator["Window_Image"]; ?><input class="frame_input" type="file" name="frame_image"
                                                             id="frame_image"/></p>
-                <p class="frame_string"><input type="button" value="save" id="save_frame" class="frame_input"
+                <p class="frame_string"><input type="button" value="<?php   echo $this->translator["save"]; ?>" id="save_frame" class="frame_input"
                                                style="float: left;"></p>
             </div>
             <div class="frame_container">

@@ -1,10 +1,17 @@
+<?php
+$this->translator = $GLOBALS["HELPERS"]["TRANSLATOR"];
+?>
 <div id="projects_div">
 	<div class="col col-3">
 		<ul class="projects_list">
 <?php
 if (isset($projects)) {
     foreach ($projects as $project) {
-        echo '<li class="open_project" projectId="' . $project["id"] . '">' . $project["project_name"] . '<div class="open_project" projectId="' . $project["id"] . '">open</span><span class="archive_project" projectId="' . $project["id"] . '">archive</div></li>';
+        echo '<li class="open_project" projectId="' . $project["id"] . '">' . $project["project_name"] . '<div class="open_project" projectId="' . $project["id"] . '">';
+        echo $this->translator["open"]; 
+        echo '</span><span class="archive_project" projectId="' . $project["id"] . '">';
+        echo $this->translator["archive"]; 
+        echo "</div></li>";
     }
 }
 ?>
@@ -12,12 +19,12 @@ if (isset($projects)) {
 	</div>
 </div>
 <div class="projects_archive">
-	<span id="load_projects_archive">load projects archive</span>
+	<span id="load_projects_archive">   <?php   echo $this->translator["load_projects_archive"]; ?></span>
 	<div id="projects_archive_block"></div>
 
 </div>
 <div class="col col-12">
-	<div id="create_project_button">+ create project</div>
+	<div id="create_project_button"> + <?php   echo $this->translator["create_project"]; ?> </div>
 
 
 <div id="project_popup" style="display: block;">
@@ -27,7 +34,7 @@ if (isset($projects)) {
 		<textarea name="project_description" placeholder="project description"
 			id="project_description"></textarea>
 		</br> <input type="button" name="project_save" class="action_btn"
-			value="save project" id="create_project">
+			value="<?php   echo $this->translator["save_project"]; ?>" id="create_project">
 	</div>
 	<div style="display: block;" id="project_members"></div>
 </div>

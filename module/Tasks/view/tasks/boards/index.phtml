@@ -1,27 +1,31 @@
+<?php
+if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+if(isset($_SESSION['user']))$user = $_SESSION['user'];
+$this->translator = $GLOBALS["HELPERS"]["TRANSLATOR"];
+?>
 
 
 
 
-<div id="edit_project_member" class="action_btn">Remove members</div>
+<div id="edit_project_member" class="action_btn"><?php   echo $this->translator["Remove_members"]; ?></div>
 
-<div id="add_project_member" class="action_btn">Add members</div>
+<div id="add_project_member" class="action_btn"><?php   echo $this->translator["Add_members"]; ?></div>
 <!--<div id="create_board" class="">-->
 <input type="text" id="board_name_input" placeholder="column name">
 <div id="create_board_button" class='action_btn'
-	project_id='<?php if (isset($project_id)) echo $project_id; ?>'>Create
-	Column</div>
+	project_id='<?php if (isset($project_id)) echo $project_id; ?>'><?php   echo $this->translator["Create_Column"]; ?></div>
 <!--</div>-->
 
 <!--<div>-->
-<div id="project_report" class="action_btn">Report</div>
-<div id="create_task" class="create_task_button action_btn">Create Task</div>
-<div id="load_archive" class='red_alert'>Load Archive</div>
+<div id="project_report" class="action_btn"><?php   echo $this->translator["Show_Report"]; ?></div>
+<div id="create_task" class="create_task_button action_btn"><?php   echo $this->translator["Create_Task"]; ?></div>
+<div id="load_archive" class='red_alert'><?php   echo $this->translator["Load_Archive"]; ?></div>
 <!--</div>-->
 <div id="report_date_block">
-	Start Date : <input type="text" name="start_date"
-		id="start_report_date"> End Date : <input type="text" name="end_date"
+	    <?php  echo $this->translator["Start_Date"]; ?>: <input type="text" name="start_date"
+		id="start_report_date"> <?php   echo $this->translator["End_Date"]; ?>: <input type="text" name="end_date"
 		id="end_report_date"> <input type="button" id="show_report"
-		value="Show Report" class="action_btn">
+		value="<?php   echo $this->translator["Show_Report"]; ?>" class="action_btn">
 
 </div>
 <div class="project_active_members"></div>
@@ -40,8 +44,9 @@
     if (isset($boards)) {
         foreach ($boards as $board) {
             echo '<div  class="board_div" project_id="' . $board["project_id"] . '" board_id="' . $board["id"] . '"><span>' . $board["name"] . '</span></span><ul class="connected board"></ul>
-                  <span class="delete_board" project_id="' . $board["project_id"] . '" board_id="' . $board["id"] . '">delete</span>
-          </div>';
+                  <span class="delete_board" project_id="' . $board["project_id"] . '" board_id="' . $board["id"] . '">';
+            echo $this->translator["delete"];
+            echo '</span></div>';
         }
     }
     ?>
