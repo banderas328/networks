@@ -1,6 +1,9 @@
+<?php
+$this->translator = $GLOBALS["HELPERS"]["TRANSLATOR"];
+?>
 <div id="user_profile"></div>
 
-<button value="refresh" class="friends_refresh action_btn">refresh</button>
+<button value="refresh" class="friends_refresh action_btn"><?php echo  $this->translator["Refresh"]; ?></button>
 <div>
 <?php
 if($friends)
@@ -20,7 +23,7 @@ foreach($friends as $friend){
 }
 ?>
 </div>
-<div id="message_to_user_from_user_list" title="Enter message">
+<div id="message_to_user_from_user_list" title="<?php echo  $this->translator["Enter_message"]; ?>">
 <textarea class="message_to_user_area" style="width: 400px;height: 120px" maxlength="500"></textarea>
 <button class="submit action_btn" id="message_to_user_from_user_list_button" >   <?php echo  $this->translator["send"]; ?></button>
 </div>

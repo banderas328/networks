@@ -1,7 +1,10 @@
 <div>
+<?php
+$this->translator = $GLOBALS["HELPERS"]["TRANSLATOR"];
+?>
     <?php foreach ($chanels as $chanel) : ?>
    <div>
-      <button class="delete_chanel alert" chanel_id='<?php echo  $chanel["chanel_id"];?>'>Delete</button>
+      <button class="delete_chanel alert" chanel_id='<?php echo  $chanel["chanel_id"];?>'><?php echo  $this->translator["Delete"]; ?></button>
     <?php echo $chanel["chanel_name"];?> 
    </div>
     <?php endforeach; ?>

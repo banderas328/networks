@@ -65,7 +65,7 @@ if (isset($this->users[0])) {
                 })
                     .done(function (data) {
                         if (data == 'have') {
-                            var have = '<div id="have_request" title="Friend request"><p>request already sent</p></div>';
+                            var have = '<div id="have_request" title="Friend request"><p><?php   echo $this->translator["request_already_sent"]; ?></p></div>';
                             $('body').append(have);
                             $('#have_request').dialog();
                         }

@@ -472,7 +472,7 @@ if (! $is_root) {
             '<a href="#window_text_file" class="window_close"></a>' +
             '</span></div>' +
             '<div class="abs window_content" id="file_content">' +
-            '<span id="edit_file_name">&nbsp;&nbsp;edit filename</span>' +
+            '<span id="edit_file_name">&nbsp;&nbsp;<?php echo  $this->translator["edit_filename"]; ?></span>' +
             '<span id="save_text_file">&nbsp;&nbsp;'+'<?php   echo    $this->translator["save"]; ?>'+'</span>';
         if (content) {
             file_html = file_html + '<div id="editor">' + content + '</div></div><div class="abs window_bottom">text file</div></div>';

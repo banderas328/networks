@@ -124,5 +124,22 @@ return array(
     "Show_Report" => "Отчет",
     "load_avatar" => "Аватар",
     "chanels" => "Каналы",
-    "chats" => "Чаты"
+    "chats" => "Чаты",
+    "edit_filename" => " Редактировать Имя",
+    "First_Name" => "Имя",
+    "Second_Name" => "Фамилия",
+    "About" => "О Себе",
+    "Job" => "Должность",
+    "Country" => "Страна",
+    "City" => "Минск",
+    "Phone" => "Телефон",
+    "Enter_message" => "Введите сообщение",
+    "request_already_sent" => "Запрос уже отправлен",
+    "Refresh" => "Обновить",
+    "Refresh" => "Refresh",
+    "channel_name" => "Название Канала",
+    "Delete" => "Удалить",
+    "Open" => "Открыть",
+    "Waiting" => "Ожидание...",
+    "Request_access" => "Запросить Доступ"
 );

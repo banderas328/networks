@@ -125,6 +125,22 @@ return array(
     "Show_Report" => "Show Report",
     "load_avatar" => "Load Avatar",
     "chanels" => "Chanels",
-    "chats" => "Chats"
+    "chats" => "Chats",
+    "edit_filename" => "Edit Filename",
+    "First_Name" => "First Name",
+    "Second_Name" => "Second Name",
+    "About" => "About",
+    "Job" => "Job",
+    "Country" => "Country",
+    "City" => "City",
+    "Phone" => "Phone",
+    "Enter_message" => "Enter Message",
+    "request_already_sent" => "Request Already Sent",
+    "Refresh" => "Refresh",
+    "channel_name" => "Channel Name",
+    "Delete" => "Delete",
+    "Open" => "Open",
+    "Waiting" => "Waiting...",
+    "Request_access" => "Request_access"
 
 );
