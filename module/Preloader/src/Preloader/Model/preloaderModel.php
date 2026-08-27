@@ -19,8 +19,8 @@ class preloaderModel
         return $adapter;
 
     }
-    //Colonel Tokarev idea. - move auth method to top level model
-    public static function getUserId($userId) : int /* another one remote idea */ {
+    
+    public static function getUserId($userId) : int  {
         if(!$userId) {
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         if(!isset($_SESSION['user'])) die("invalid user");
