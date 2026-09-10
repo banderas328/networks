@@ -77,41 +77,7 @@ class Module
                         $resultSetPrototype = new ResultSet();
                         $resultSetPrototype->setArrayObjectPrototype(new Network());
                         return new TableGateway('network', $dbAdapter, null, $resultSetPrototype);
-                    },
-                'Files\Model\PayedFilesTable' =>  function($sm) {
-                    $tableGateway = $sm->get('PayedFilesTableGateway');
-                    $table = new PayedFilesTable($tableGateway);
-                    return $table;
-                },
-                'PayedFilesTableGateway' => function ($sm) {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new PayedFiles());
-                    return new TableGateway('payed_files', $dbAdapter, null, $resultSetPrototype);
-                },
-                'Files\Model\FilesToTagsTable' =>  function($sm) {
-                    $tableGateway = $sm->get('FilesToTagsTableGateway');
-                    $table = new FilesToTagsTable($tableGateway);
-                    return $table;
-                },
-                'FilesToTagsTableGateway' => function ($sm) {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new FilesToTags());
-                    return new TableGateway('files_to_tags', $dbAdapter, null, $resultSetPrototype);
-                },
-                'Tags\Model\TagsTable' =>  function($sm) {
-                    $tableGateway = $sm->get('TagsTableGateway');
-                    $table = new TagsTable($tableGateway);
-                    return $table;
-                },
-                'TagsTableGateway' => function ($sm) {
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Tags());
-                    return new TableGateway('tags', $dbAdapter, null, $resultSetPrototype);
-                },
-
+                 },
 
             ),
 		);

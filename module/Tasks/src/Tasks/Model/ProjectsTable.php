@@ -84,12 +84,7 @@ class ProjectsTable extends Model\preloaderModel
 
     public function getProjects()
     {
-//         session_start();
-//         $user_session = $_SESSION['user'];
-//         $userId = $user_session["id"];
-//         $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id
-//                 WHERE projects_members.user_id='" . $userId . "' and is_archive = '0' order by projects.sort_order";
-         $sql = "SELECT * FROM  projects WHERE  is_archive = '0' order by projects.sort_order";
+        $sql = "SELECT * FROM  projects WHERE  is_archive = '0' order by projects.sort_order";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $projects = $resultSet->toArray();
         return $projects;
@@ -98,8 +93,6 @@ class ProjectsTable extends Model\preloaderModel
     public function getArchiveProjects($userId = false)
     {
         $userId = self::getUserId($userId);
-        // $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id
-        //         WHERE projects_members.user_id='" . $userId . "' and is_archive = '1' order by projects.sort_order";
         $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id WHERE  is_archive = '1' order by projects.sort_order";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $projects = $resultSet->toArray();
@@ -169,18 +162,6 @@ class ProjectsTable extends Model\preloaderModel
             }
         }
         $final_report = [];
-//        foreach ($report_array as $report_task_key => $report_task_value) {
-//            foreach ($report_task_value as $task_key => $task_value) {
-//                foreach ($task_value as $task_name =>$task_detail) {
-//                    $final_report[] = ["value" => [$task_detail["estimate"], $task_detail['hours']],
-//                        'color' => ['#05e1a3', '#059669'],
-//                        'labelColor' => ['black', 'black'],
-//                        'barLabel' => $task_name,
-//                    ];
-//                }
-//            }
-//        }
-
         return $report_array;
     }
 }

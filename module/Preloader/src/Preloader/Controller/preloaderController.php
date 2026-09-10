@@ -3,8 +3,6 @@
 namespace Preloader\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-
-//use Zend\Stdlib\RequestInterface as Request;
 use Zend\Session\Container;
 use Zend\Stdlib\RequestInterface as Request;
 
@@ -45,9 +43,6 @@ class  preloaderController extends AbstractActionController
 
     public function isAuthed()
     {
-
-        //  $uri = $_SERVER['REQUEST_URI'];
-
         $uri = explode("/", $_SERVER['REQUEST_URI']);
         if (isset($uri[2])) {
             $uri = "/" . $uri[1] . "/" . $uri[2];        

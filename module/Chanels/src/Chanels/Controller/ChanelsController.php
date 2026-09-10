@@ -120,10 +120,7 @@ class ChanelsController extends Controller\preloaderController
         if ($this->getChanelsTable()->deleteChanel($this->getRequest(),$userId))
             die("deleted");
         die("error delete chanel");
-        
-        
-        
-        
+      
     }
 
     public function getChanelsTable()

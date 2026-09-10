@@ -207,7 +207,6 @@ class  networkController extends Controller\preloaderController
         $frinendId = $this->getEvent()->getRouteMatch()->getParam('param');
         $friends = new Friends();
         $isUsersFriends = $this->getFriendsTable()->isUsersFriends($userId,$frinendId,$friends->getAdapter());
-      //  if(!empty($isUsersFriends->toArray())) {
             $files = new Files();
             $file = $this->getFilesTable()->getFile($files->getAdapter(),$fileId,$frinendId)[0];
             var_dump($file);die();
@@ -223,7 +222,6 @@ class  networkController extends Controller\preloaderController
                 readfile($path);
                 exit;
             }
-      //  }
         die();
     }
 

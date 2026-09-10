@@ -41,14 +41,6 @@ class BoardsTable extends Model\preloaderModel
         return $this->tableGateway->lastInsertValue;
     }
 
-//    public function getBoards(){
-//        $user_session = new Container('user');
-//        $user_id = $user_session->user->id;
-//        $sql = "SELECT  * FROM board_users left join boards on board_users.board_id = boards.id   WHERE user_id='".$user_id."'";
-//        $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
-//        $boards =   $resultSet->toArray();
-//        return $boards;
-//    }
     public function getProjectBoards($request,$userId =  false){
         $project_id =  (int)$request->getPost()->project_id;
         $userId = self::getUserId($userId);
@@ -57,10 +49,7 @@ class BoardsTable extends Model\preloaderModel
             $user_session = $_SESSION['user'];
             $userId = $user_session["id"];
         }
-//         $sql = "SELECT * FROM `projects_members` left join projects on projects_members.project_id = projects.id
-//                 left join boards on projects.id = boards.project_id
-//                 WHERE projects_members.user_id='".$userId."' and boards.project_id = '".$project_id."'";
-         $sql = "SELECT * FROM  projects 
+        $sql = "SELECT * FROM  projects 
                  left join boards on projects.id = boards.project_id
                  WHERE  boards.project_id = '".$project_id."' and boards.is_deleted IS NULL";
         $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
@@ -79,7 +68,6 @@ class BoardsTable extends Model\preloaderModel
         $sql = "update tasks set is_archive = 1 where board_id=".$board_id;
         $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
         $data = ["id" => $board_id];
-        //$this->tableGateway->delete($data);
         $this->tableGateway->update(["is_deleted" => 1],$data);
     }
 }

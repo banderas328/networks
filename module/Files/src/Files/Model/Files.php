@@ -58,9 +58,6 @@ class Files
                     )))
             ));
 
-
-
-
             $inputFilter->add($factory->createInput(array(
                 'name' => 'title',
                 'required' => false,

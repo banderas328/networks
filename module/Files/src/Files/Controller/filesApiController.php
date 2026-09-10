@@ -20,10 +20,6 @@ class  filesApiController extends Controller\preloaderController {
     protected $tagsTable;
     protected $filesToTagsTable;
 
-	function __construct() {
-        //not
-
-	}
 
 
     public function getDirAction(){
@@ -73,9 +69,6 @@ class  filesApiController extends Controller\preloaderController {
         $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));
         echo json_encode($this->getFilesTable()->getTextFile($fileId,$userId));
         die();
-
-
-
     }
     public function getParentDirAction(){
         $userId = \Preloader\Model\preloaderModel::getUserId($this->getApiUser($this->getRequest()));

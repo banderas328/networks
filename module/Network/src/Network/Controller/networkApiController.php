@@ -70,8 +70,6 @@ class  networkApiController extends Controller\preloaderController
         $dirs['result'] = $dirs['result']->toArray();
         $alredyShared = $dirs['already_shared'];
         $authedDirs = implode(",",$alredyShared);
-        //$user_session['authedDirs'] = $authedDirs;
-       // var_dump($dirs);
         if($dirs)
         echo json_encode ( array("dirs" => $dirs,'current_directory' => 0));
         else 
@@ -186,7 +184,6 @@ class  networkApiController extends Controller\preloaderController
         $frinendId = $this->getEvent()->getRouteMatch()->getParam('param');
         $friends = new Friends();
         $isUsersFriends = $this->getFriendsTable()->isUsersFriends($userId,$frinendId,$friends->getAdapter());
-      //  if(!empty($isUsersFriends->toArray())) {
             $files = new Files();
             $file = $this->getFilesTable()->getFile($files->getAdapter(),$fileId,$frinendId)[0];
             var_dump($file);die();
@@ -202,7 +199,6 @@ class  networkApiController extends Controller\preloaderController
                 readfile($path);
                 exit;
             }
-      //  }
         die();
     }
 
@@ -231,9 +227,6 @@ class  networkApiController extends Controller\preloaderController
                     $dirs = $this->getNetworkTable()->getUserSharedDirs($request,$network->getAdapter());
 
                     $alredyShared = $dirs['already_shared'];
-                  //  $authedDirs = implode(",",$alredyShared);
-                 //   $user_session = $_SESSION['user'];
-                  //  $user_session['authedDirs'] = $authedDirs;
                     $dirs = $dirs['result'];
                     echo json_encode (["dirs" => $dirs , 'current_directory' => 0]);
                     die();

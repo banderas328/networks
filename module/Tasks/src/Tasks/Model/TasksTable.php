@@ -132,18 +132,6 @@ class TasksTable extends Model\preloaderModel
             $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
             $task["files"][] = $resultSet->toArray();
         }
-        
-        // foreach ($task["sub_tasks"] as $sub_task) {
-        // $files_task_sql = "SELECT * FROM tasks_files where task_id=" . $sub_task['id'];
-        // $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
-        // $files = $resultSet->toArray();
-        // var_dump($files);
-        // foreach ($files as $file) {
-        // $files_task_sql = "SELECT * FROM files where id=" . $file["file_id"];
-        // $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
-        // $task["files"][] = $resultSet->toArray();
-        // }
-        // }
         return $task;
     }
 
@@ -156,11 +144,6 @@ class TasksTable extends Model\preloaderModel
             $userId = $user_session["id"];
         }
 
-        // $sql = "SELECT tasks.name,tasks.sort_order,tasks.board_id,tasks.id FROM tasks
-        // left join boards on boards.id = tasks.board_id
-        // left join projects on boards.project_id = projects.id
-        // left join projects_members on projects_members.project_id = projects.id
-        // WHERE tasks.is_archive = '0' and projects_members.project_id='" . $project_id . "' and projects_members.user_id = " . $userId;
         $sql = "SELECT  tasks.name,tasks.sort_order,tasks.board_id,tasks.id FROM tasks
                 left join boards on boards.id = tasks.board_id
                 left join projects on boards.project_id = projects.id
@@ -227,7 +210,6 @@ class TasksTable extends Model\preloaderModel
     // TODO if in future it will be required to make some more logic with time , it should be moved to special TaskTimeTable model class
     public function addTimeToTask($data,$userId = false)
     {
-        //var_dump($data);die();
         $userId = self::getUserId($userId);
         $hours = (int) $data["hours"];
         $task_id = (int) $data["task_id"];
@@ -310,9 +292,7 @@ class TasksTable extends Model\preloaderModel
             $task["files"][] = $resultSet->toArray()[0];
             $filesTable = new FilesTable();
             $filesTable->deleteFile(false, $file["file_id"], $userId);
-        }
-        // ///////////////////////
-        
+        }       
         $files_subtask_sql = "SELECT  * FROM tasks where parent_task=" . $task_id;
         $resultSet = $this->adapter->query($files_task_sql, $this->adapter::QUERY_MODE_EXECUTE);
         $subTasks = $resultSet->toArray();
@@ -330,8 +310,6 @@ class TasksTable extends Model\preloaderModel
             $delete_sql = "DELETE FROM tasks_files where task_id=" . $subTask['id'];
             $this->adapter->query($delete_sql, $this->adapter::QUERY_MODE_EXECUTE);
         }
-        
-        // /////////////////////
         $delete_sql = "DELETE FROM tasks_files where task_id=" . $task_id;
         $this->adapter->query($delete_sql, $this->adapter::QUERY_MODE_EXECUTE);
         
@@ -344,17 +322,6 @@ class TasksTable extends Model\preloaderModel
         $delete_sql = "DELETE FROM tasks_users where task_id=" . $task_id;
         $this->adapter->query($delete_sql, $this->adapter::QUERY_MODE_EXECUTE);
     }
-
-//    public function isUserHaveAccessToTask($task_id,$user_id){
-//
-//        $sql = "SELECT  tasks.id FROM tasks
-//                left join boards on boards.id = tasks.board_id
-//                left join projects on boards.project_id = projects.id
-//                left join projects_members on projects_members.project_id = projects.id
-//                WHERE projects_members.user_id = " . $user_id . " and tasks.id = ".$task_id;
-//        $resultSet = $this->adapter->query($sql, $this->adapter::QUERY_MODE_EXECUTE);
-//
-//    } TODO ADD SECURITY CHECK WITH ACL
 
 
 }
