@@ -14,9 +14,6 @@ $this->translator = $GLOBALS["HELPERS"]["TRANSLATOR"];
 <input type="text" id="board_name_input" placeholder="column name">
 <div id="create_board_button" class='action_btn'
 	project_id='<?php if (isset($project_id)) echo $project_id; ?>'><?php   echo $this->translator["Create_Column"]; ?></div>
-<!--</div>-->
-
-<!--<div>-->
 <div id="project_report" class="action_btn"><?php   echo $this->translator["Show_Report"]; ?></div>
 <div id="create_task" class="create_task_button action_btn"><?php   echo $this->translator["Create_Task"]; ?></div>
 <div id="load_archive" class='red_alert'><?php   echo $this->translator["Load_Archive"]; ?></div>
@@ -194,10 +191,6 @@ $this->translator = $GLOBALS["HELPERS"]["TRANSLATOR"];
             console.info(k);
             console.info(v);
         });
-//         if(members_list.length == 0) {
-//      		  alert("Add members to task")
-//         	return false;
-//             }
         var task_description = CKEDITOR.instances.task_description_field.getData();
         var estimate = $("#task_estimate").val();
         var project_id = $("#create_board_button").attr("project_id");
@@ -239,7 +232,6 @@ $this->translator = $GLOBALS["HELPERS"]["TRANSLATOR"];
         })
             .done(function (data) {
                 data = JSON.parse(data);
-//                 console.info(data);
                 for (const [key, value] of Object.entries(data)) {
                     for (const [key_task, value_task] of Object.entries(value)) {
                         var board_id = value_task.board_id;

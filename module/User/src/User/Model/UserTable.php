@@ -8,7 +8,6 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Authentication\Adapter\DbTable as AuthAdapter;
 use Zend\Db\Sql\Select;
 
-//use Zend\Db\Sql\Sql;
 use Zend\Paginator\Paginator;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Paginator\Adapter\DbSelect;

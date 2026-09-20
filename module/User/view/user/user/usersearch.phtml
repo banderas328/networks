@@ -35,27 +35,7 @@ if (isset($this->users[0])) {
   <?php  }   ?>
     <script type="text/javascript">
         $(function () {
-
-//         	$("#user_search_submit").on("click", function (){
-//                 var data = {};
-//                 data.first_name = $('#user_search_form input[name="first_name"]').val();
-//                 data.second_name = $('#user_search_form input[name="second_name"]').val();
-//                 data.job = $('#user_search_form input[name="job"]').val();
-//                 data.country = $('#user_search_form input[name="country"]').val();
-//                 data.city = $('#user_search_form input[name="city"]').val();
-//                 data.phone = $('#user_search_form input[name="phone"]').val();
-//                 $.ajax({
-//                     type: "POST",
-//                     url: "/user/usersearch",
-//                     dataType: "json",
-//                     data : data
-//                 }).done(function (data){
-//                     $("#user_search_div").html(data);
-//                     });
-// 				return false;
-
-//             	});
-            
+    
             $('.friend_request').bind('click', function () {
                 var url = $(this).attr('href');
                 $.ajax({

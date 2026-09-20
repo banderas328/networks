@@ -141,14 +141,9 @@
     }
 
     function formatPostDates($rootElement = document) {
-        // $rootElement.querySelectorAll('.js-publication-date-value')
-        //     .forEach(replaceDate);
     }
 
     $(function () {
-        // replace date string
-    //    formatPostDates()
-
         $(".show_comments").off().on("click",function(){
             var blog_id = $(this).attr("blog_id");
             load_comments(blog_id);

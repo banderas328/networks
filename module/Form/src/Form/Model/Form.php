@@ -1,9 +1,9 @@
 <?php
 namespace  Form\Model;
 
-use Zend\InputFilter\Factory as InputFactory;     // <-- Add this import
-use Zend\InputFilter\InputFilter;                 // <-- Add this import
-use Zend\InputFilter\InputFilterAwareInterface;   // <-- Add this import
+use Zend\InputFilter\Factory as InputFactory;     
+use Zend\InputFilter\InputFilter;                 
+use Zend\InputFilter\InputFilterAwareInterface;   
 use Zend\InputFilter\InputFilterInterface;
 
 class Form

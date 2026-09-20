@@ -8,8 +8,6 @@ use Zend\Paginator\Adapter\DbSelect;
 use Zend\Session\Container;
 use Zend\Db\Sql\Sql;
 
-//use Zend\Db\Adapter\Driver\ResultInterface;
-//use Zend\Db\ResultSet\ResultSet;
 use Zend\Config\Config;
 use Zend\Config\Factory;
 use Zend\Db\Sql\Select;

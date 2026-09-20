@@ -11,8 +11,6 @@ use Zend\Config\Factory;
 use Preloader\Model;
 
 
-//use Zend\Db\Adapter\Driver\ResultInterface;
-//use Zend\Db\ResultSet\ResultSet;
 
 
 class FileSystemTable extends Model\preloaderModel

@@ -48,24 +48,19 @@
 		</div>
 	</div>
 
-	<!-- <p>only jpg and png</p> -->
-	<!-- <input type="file" value="attach_file" id="blog_attach_file"> -->
+
 </div>
 
 <script type="text/javascript">
     $(function(){
-    //    $.getScript("./node_modules/ckeditor/ckeditor.js", function () {
             CKEDITOR.replace('new_blog_text',{
                 width: "100%",
                 height:300,
                resize_enabled:true
             });
-   //     });
-
 
         $("#blog_save").bind("click",function () {
             var text = CKEDITOR.instances.new_blog_text.getData();
-          //  var text = $("#new_blog_text").val();
             var blog_title = $("#blog_title").val();
             var $file = document.getElementById("blog_attach_file");
             var files= $file.files;

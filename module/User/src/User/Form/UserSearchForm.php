@@ -13,18 +13,6 @@ class UserSearchForm extends Form
         // we want to ignore the name passed
         parent::__construct('user_search_form');
         $this->setAttribute('method', 'post');
-
-//        $selectSex = new Element\Select('sex');
-//        $selectSex->setLabel('Sex');
-//        $selectSex->setValueOptions(array(
-//            '0' => 'Male',
-//            '1' => 'Female',
-//
-//        ));
-//        $this->add($selectSex);
-
-
-
         $this->add(array(
             'name' => 'first_name',
             'attributes' => array(

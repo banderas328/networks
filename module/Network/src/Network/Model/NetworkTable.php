@@ -7,8 +7,6 @@ use Zend\Db\Sql\Sql;
 use Zend\Config\Config;
 use Zend\Config\Factory;
 use Files\Model\FileSystemTable;
-//use Zend\Db\Adapter\Driver\ResultInterface;
-//use Zend\Db\ResultSet\ResultSet;
 use Preloader\Model;
 
 

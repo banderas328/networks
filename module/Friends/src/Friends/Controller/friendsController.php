@@ -1,7 +1,6 @@
 <?php
 namespace Friends\Controller;
 
-//use Friends\Form\FriendsForm;
 use Preloader;
 use Preloader\Controller;
 use Zend\Session\Container;

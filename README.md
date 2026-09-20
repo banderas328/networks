@@ -11,11 +11,15 @@ docker compose up -d
 🧩 IFrame / External Services Setup
 
 If you use iframe integrations:
-
+---
 client_max_body_size 20M;
+---
 proxy_hide_header X-Frame-Options;
+---
 add_header 'Access-Control-Allow-Origin' '*';
+---
 add_header X-Frame-Options "ALLOW-FROM octopus.local";
+---
 
 
 🧠 Concept
@@ -26,14 +30,7 @@ It’s:
 
 Your internal digital infrastructure in one system
 
-Instead of using:
-
-Slack
-Google Drive
-Notion
-Trello
-
-You run everything locally.
+You run everything locally, intranet .
 
 📬 Feedback / Contact
 

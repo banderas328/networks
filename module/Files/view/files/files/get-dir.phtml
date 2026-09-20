@@ -3,7 +3,6 @@ $user = $_SESSION['user'];
 $this->translator = $GLOBALS["HELPERS"]["TRANSLATOR"];
 if (! $is_root) {
     ?>
-<!--    <span id="paste">paste</span>-->
 <div class="hard-drive-form-wrapper">
 	<div>
 		<form id="file_directory_form" method="post">
@@ -353,14 +352,7 @@ if (! $is_root) {
             $("#rename_file").attr('file',$(this).attr("file"))
         });
         $("#show_directory_creation").on("click", function () {
-
-            // $("#create_dir_block").dialog({
-            //     resizable: false,
-            //     height: "auto",
-            //     width: 400,
-            //     modal: true,
-            // });
-                $("#create_dir_block").dialog({
+        $("#create_dir_block").dialog({
         resizable: false,
         height: "auto",
         width: 400,
@@ -406,20 +398,6 @@ if (! $is_root) {
         });
 
     });
-
-    //     function sell_file(file_id) {
-    //        var cost = $('.file_cost[file='+file_id+']').val();
-    //        var description = $('textarea[file='+file_id+']').val();
-    //        var tags = $(".tags[file="+file_id+"]").val();
-    //         $.ajax({
-    //             type: "POST",
-    //             url: "files/sellFile",
-    //             data: {file_id : file_id,cost: cost,description: description,tags:tags}
-    //         })
-    //             .done(function( data ) {
-    //                 alert(data);
-    //             });
-    //     }
 
     function edit_text_file() {
         var file_id = $(this).attr("file");
