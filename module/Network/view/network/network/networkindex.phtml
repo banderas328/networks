@@ -1,4 +1,9 @@
 <?php
+$user = $_SESSION['user'];
+$this->translator = $GLOBALS["HELPERS"]["TRANSLATOR"];
+if (! $is_root) {
+?>
+<?php
 if (isset($friends) and $friends)
     foreach ($friends as $friend) {
         if(isset($friend['first_name']) or isset($friend['second_name'])) {

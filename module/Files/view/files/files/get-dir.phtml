@@ -181,14 +181,13 @@ if (! $is_root) {
         }, 1000 );
       };
     $(function () {
-    // глобальная переменная
+
     window.current_directory_name = "";
 
-    // слушаем ввод
+
     $(document).on("input", "#directory_name", function () {
         window.current_directory_name = this.value;
 
-    //  console.log("LIVE VALUE:", window.current_directory_name);
     });
         if (window.need_to_paste_file == true) {
             $("#paste").addClass("required_btn");
@@ -434,7 +433,7 @@ if (! $is_root) {
 
 
         var file_html = '' +
-            '<div id="window_text_file" class="abs window text_window"><div class="abs window_inner">' +
+            '<div id="window_text_file" class="abs window text_window" style="z-index:15000"><div class="abs window_inner" >' +
             '<div class="window_top">';
         if (file_title) {
             file_html = file_html + '<span class="float_left"><span id="text_file_name" file_id="' + file_id + '">' + file_title + '</span></span>';
