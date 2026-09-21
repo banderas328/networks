@@ -32,7 +32,6 @@ return array(
         'Files',
         'Network',
         'Blog',
-       // 'Form',
         'Notifications',
         'Frames',
         'Tasks',

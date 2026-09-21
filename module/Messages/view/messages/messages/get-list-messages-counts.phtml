@@ -1,3 +1,8 @@
+<?php
+$user = $_SESSION['user'];
+$this->translator = $GLOBALS["HELPERS"]["TRANSLATOR"];
+if (! $is_root) {
+?>
 <div class="c-window__scrollable-space">
     <?php if ($data): ?>
         <?php foreach ($data as $friend): ?>
